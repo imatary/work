@@ -1,0 +1,923 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QUANLYSANXUATModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="All_Process_Repair">
+          <Key>
+            <PropertyRef Name="ID_Repair" />
+          </Key>
+          <Property Name="ID_Repair" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name_Repair" Type="nvarchar" MaxLength="20" />
+          <Property Name="Process_NG" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Process_Return" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="All_Processes">
+          <Key>
+            <PropertyRef Name="Id_process" />
+          </Key>
+          <Property Name="Id_process" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name_process" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Parent_Id" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id_customer" />
+          </Key>
+          <Property Name="Id_customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name_customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Information_NG">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Serial_NG" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Process_NG" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Comment_NG" Type="nvarchar" MaxLength="500" />
+          <Property Name="Time_ng" Type="datetime" />
+          <Property Name="User_ng" Type="nvarchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Line_status">
+          <Key>
+            <PropertyRef Name="Id_customer" />
+            <PropertyRef Name="Id_Line" />
+            <PropertyRef Name="Current_model" />
+          </Key>
+          <Property Name="Id_customer" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Id_Line" Type="int" Nullable="false" />
+          <Property Name="Current_model" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Shift" Type="int" />
+        </EntityType>
+        <EntityType Name="Lines">
+          <Key>
+            <PropertyRef Name="Id_line" />
+          </Key>
+          <Property Name="Id_line" Type="int" Nullable="false" />
+          <Property Name="Name_line" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Id_customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lines_models">
+          <Key>
+            <PropertyRef Name="Id_line" />
+            <PropertyRef Name="Id_model" />
+          </Key>
+          <Property Name="Id_line" Type="int" Nullable="false" />
+          <Property Name="Id_model" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lines_processes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_line" Type="int" Nullable="false" />
+          <Property Name="Id_process" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Position_process_in_line" Type="int" Nullable="false" />
+          <Property Name="lever_of_process" Type="int" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="Id_model" />
+          </Key>
+          <Property Name="Id_model" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name_model" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Model_code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Label_length" Type="int" Nullable="false" />
+          <Property Name="Start_position_label" Type="int" />
+          <Property Name="Set_plan" Type="int" />
+        </EntityType>
+        <EntityType Name="PCB">
+          <Key>
+            <PropertyRef Name="Id_PCB" />
+          </Key>
+          <Property Name="Id_PCB" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name_PCB" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date_time_check" Type="datetime" Nullable="false" />
+          <Property Name="Status_PCB" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="Id_process" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sheet_productions">
+          <Key>
+            <PropertyRef Name="Id_sheet_production" />
+          </Key>
+          <Property Name="Id_sheet_production" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_sheet_production" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Show_Result">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_process" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Id_Sheet_production" Type="int" Nullable="false" />
+          <Property Name="Total" Type="int" Nullable="false" />
+          <Property Name="Pass" Type="int" Nullable="false" />
+          <Property Name="NG" Type="int" Nullable="false" />
+          <Property Name="Time_check" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Operator_code" Type="nvarchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Timing">
+          <Key>
+            <PropertyRef Name="Id_time_test" />
+          </Key>
+          <Property Name="Id_time_test" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
+          <Property Name="SetPlan" Type="int" />
+          <Property Name="Products_current_hour" Type="int" />
+          <Property Name="Id_sheet_production" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id_user" />
+          </Key>
+          <Property Name="Id_user" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Setup_client" Type="bit" Nullable="false" />
+          <Property Name="manage" Type="bit" />
+        </EntityType>
+        <EntityType Name="Users_processes">
+          <Key>
+            <PropertyRef Name="Id_user" />
+            <PropertyRef Name="Id_process" />
+            <PropertyRef Name="Id_line" />
+          </Key>
+          <Property Name="Id_user" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Id_process" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Id_line" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_All_Process_Repair_All_Processes">
+          <End Role="All_Processes" Type="Self.All_Processes" Multiplicity="1" />
+          <End Role="All_Process_Repair" Type="Self.All_Process_Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Processes">
+              <PropertyRef Name="Id_process" />
+            </Principal>
+            <Dependent Role="All_Process_Repair">
+              <PropertyRef Name="Process_Return" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lines_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Lines" Type="Self.Lines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id_customer" />
+            </Principal>
+            <Dependent Role="Lines">
+              <PropertyRef Name="Id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lines_models_Lines">
+          <End Role="Lines" Type="Self.Lines" Multiplicity="1" />
+          <End Role="Lines_models" Type="Self.Lines_models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lines">
+              <PropertyRef Name="Id_line" />
+            </Principal>
+            <Dependent Role="Lines_models">
+              <PropertyRef Name="Id_line" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lines_models_Model">
+          <End Role="Model" Type="Self.Model" Multiplicity="1" />
+          <End Role="Lines_models" Type="Self.Lines_models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="Id_model" />
+            </Principal>
+            <Dependent Role="Lines_models">
+              <PropertyRef Name="Id_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lines_processes_Lines">
+          <End Role="Lines" Type="Self.Lines" Multiplicity="1" />
+          <End Role="Lines_processes" Type="Self.Lines_processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lines">
+              <PropertyRef Name="Id_line" />
+            </Principal>
+            <Dependent Role="Lines_processes">
+              <PropertyRef Name="Id_line" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lines_processes_Processes">
+          <End Role="All_Processes" Type="Self.All_Processes" Multiplicity="1" />
+          <End Role="Lines_processes" Type="Self.Lines_processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Processes">
+              <PropertyRef Name="Id_process" />
+            </Principal>
+            <Dependent Role="Lines_processes">
+              <PropertyRef Name="Id_process" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PCB_All_Processes">
+          <End Role="All_Processes" Type="Self.All_Processes" Multiplicity="1" />
+          <End Role="PCB" Type="Self.PCB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Processes">
+              <PropertyRef Name="Id_process" />
+            </Principal>
+            <Dependent Role="PCB">
+              <PropertyRef Name="Id_process" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Show_Result_Sheet_productions">
+          <End Role="Sheet_productions" Type="Self.Sheet_productions" Multiplicity="1" />
+          <End Role="Show_Result" Type="Self.Show_Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sheet_productions">
+              <PropertyRef Name="Id_sheet_production" />
+            </Principal>
+            <Dependent Role="Show_Result">
+              <PropertyRef Name="Id_Sheet_production" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Timing_Sheet_productions">
+          <End Role="Sheet_productions" Type="Self.Sheet_productions" Multiplicity="0..1" />
+          <End Role="Timing" Type="Self.Timing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sheet_productions">
+              <PropertyRef Name="Id_sheet_production" />
+            </Principal>
+            <Dependent Role="Timing">
+              <PropertyRef Name="Id_sheet_production" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_processes_Lines">
+          <End Role="Lines" Type="Self.Lines" Multiplicity="1" />
+          <End Role="Users_processes" Type="Self.Users_processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lines">
+              <PropertyRef Name="Id_line" />
+            </Principal>
+            <Dependent Role="Users_processes">
+              <PropertyRef Name="Id_line" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_processes_Processes">
+          <End Role="All_Processes" Type="Self.All_Processes" Multiplicity="1" />
+          <End Role="Users_processes" Type="Self.Users_processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Processes">
+              <PropertyRef Name="Id_process" />
+            </Principal>
+            <Dependent Role="Users_processes">
+              <PropertyRef Name="Id_process" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_processes_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users_processes" Type="Self.Users_processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Users_processes">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QUANLYSANXUATModelStoreContainer">
+          <EntitySet Name="All_Process_Repair" EntityType="Self.All_Process_Repair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="All_Processes" EntityType="Self.All_Processes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Information_NG" EntityType="Self.Information_NG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Line_status" EntityType="Self.Line_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lines" EntityType="Self.Lines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lines_models" EntityType="Self.Lines_models" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lines_processes" EntityType="Self.Lines_processes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PCB" EntityType="Self.PCB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sheet_productions" EntityType="Self.Sheet_productions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Show_Result" EntityType="Self.Show_Result" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Timing" EntityType="Self.Timing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users_processes" EntityType="Self.Users_processes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_All_Process_Repair_All_Processes" Association="Self.FK_All_Process_Repair_All_Processes">
+            <End Role="All_Processes" EntitySet="All_Processes" />
+            <End Role="All_Process_Repair" EntitySet="All_Process_Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lines_Customer" Association="Self.FK_Lines_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Lines" EntitySet="Lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lines_models_Lines" Association="Self.FK_Lines_models_Lines">
+            <End Role="Lines" EntitySet="Lines" />
+            <End Role="Lines_models" EntitySet="Lines_models" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lines_models_Model" Association="Self.FK_Lines_models_Model">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="Lines_models" EntitySet="Lines_models" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lines_processes_Lines" Association="Self.FK_Lines_processes_Lines">
+            <End Role="Lines" EntitySet="Lines" />
+            <End Role="Lines_processes" EntitySet="Lines_processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lines_processes_Processes" Association="Self.FK_Lines_processes_Processes">
+            <End Role="All_Processes" EntitySet="All_Processes" />
+            <End Role="Lines_processes" EntitySet="Lines_processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PCB_All_Processes" Association="Self.FK_PCB_All_Processes">
+            <End Role="All_Processes" EntitySet="All_Processes" />
+            <End Role="PCB" EntitySet="PCB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Show_Result_Sheet_productions" Association="Self.FK_Show_Result_Sheet_productions">
+            <End Role="Sheet_productions" EntitySet="Sheet_productions" />
+            <End Role="Show_Result" EntitySet="Show_Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timing_Sheet_productions" Association="Self.FK_Timing_Sheet_productions">
+            <End Role="Sheet_productions" EntitySet="Sheet_productions" />
+            <End Role="Timing" EntitySet="Timing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_processes_Lines" Association="Self.FK_Users_processes_Lines">
+            <End Role="Lines" EntitySet="Lines" />
+            <End Role="Users_processes" EntitySet="Users_processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_processes_Processes" Association="Self.FK_Users_processes_Processes">
+            <End Role="All_Processes" EntitySet="All_Processes" />
+            <End Role="Users_processes" EntitySet="Users_processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_processes_Users" Association="Self.FK_Users_processes_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users_processes" EntitySet="Users_processes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QUANLYSANXUATModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QUANLYSANXUATEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="All_Process_Repair" EntityType="QUANLYSANXUATModel.All_Process_Repair" />
+          <EntitySet Name="All_Processes" EntityType="QUANLYSANXUATModel.All_Processes" />
+          <EntitySet Name="Customers" EntityType="QUANLYSANXUATModel.Customer" />
+          <EntitySet Name="Information_NG" EntityType="QUANLYSANXUATModel.Information_NG" />
+          <EntitySet Name="Lines" EntityType="QUANLYSANXUATModel.Line" />
+          <EntitySet Name="Lines_processes" EntityType="QUANLYSANXUATModel.Lines_processes" />
+          <EntitySet Name="Models" EntityType="QUANLYSANXUATModel.Model" />
+          <EntitySet Name="PCBs" EntityType="QUANLYSANXUATModel.PCB" />
+          <EntitySet Name="Sheet_productions" EntityType="QUANLYSANXUATModel.Sheet_productions" />
+          <EntitySet Name="Show_Result" EntityType="QUANLYSANXUATModel.Show_Result" />
+          <EntitySet Name="Timings" EntityType="QUANLYSANXUATModel.Timing" />
+          <EntitySet Name="Users" EntityType="QUANLYSANXUATModel.User" />
+          <EntitySet Name="Users_processes" EntityType="QUANLYSANXUATModel.Users_processes" />
+          <AssociationSet Name="FK_All_Process_Repair_All_Processes" Association="QUANLYSANXUATModel.FK_All_Process_Repair_All_Processes">
+            <End Role="All_Processes" EntitySet="All_Processes" />
+            <End Role="All_Process_Repair" EntitySet="All_Process_Repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lines_processes_Processes" Association="QUANLYSANXUATModel.FK_Lines_processes_Processes">
+            <End Role="All_Processes" EntitySet="All_Processes" />
+            <End Role="Lines_processes" EntitySet="Lines_processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PCB_All_Processes" Association="QUANLYSANXUATModel.FK_PCB_All_Processes">
+            <End Role="All_Processes" EntitySet="All_Processes" />
+            <End Role="PCB" EntitySet="PCBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_processes_Processes" Association="QUANLYSANXUATModel.FK_Users_processes_Processes">
+            <End Role="All_Processes" EntitySet="All_Processes" />
+            <End Role="Users_processes" EntitySet="Users_processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lines_Customer" Association="QUANLYSANXUATModel.FK_Lines_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Line" EntitySet="Lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lines_processes_Lines" Association="QUANLYSANXUATModel.FK_Lines_processes_Lines">
+            <End Role="Line" EntitySet="Lines" />
+            <End Role="Lines_processes" EntitySet="Lines_processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_processes_Lines" Association="QUANLYSANXUATModel.FK_Users_processes_Lines">
+            <End Role="Line" EntitySet="Lines" />
+            <End Role="Users_processes" EntitySet="Users_processes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Show_Result_Sheet_productions" Association="QUANLYSANXUATModel.FK_Show_Result_Sheet_productions">
+            <End Role="Sheet_productions" EntitySet="Sheet_productions" />
+            <End Role="Show_Result" EntitySet="Show_Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timing_Sheet_productions" Association="QUANLYSANXUATModel.FK_Timing_Sheet_productions">
+            <End Role="Sheet_productions" EntitySet="Sheet_productions" />
+            <End Role="Timing" EntitySet="Timings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_processes_Users" Association="QUANLYSANXUATModel.FK_Users_processes_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Users_processes" EntitySet="Users_processes" />
+          </AssociationSet>
+          <AssociationSet Name="Lines_models" Association="QUANLYSANXUATModel.Lines_models">
+            <End Role="Line" EntitySet="Lines" />
+            <End Role="Model" EntitySet="Models" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="QUANLYSANXUATModel.sysdiagram" />
+          <EntitySet Name="Line_status" EntityType="QUANLYSANXUATModel.Line_status" />
+        </EntityContainer>
+        <EntityType Name="All_Process_Repair">
+          <Key>
+            <PropertyRef Name="ID_Repair" />
+          </Key>
+          <Property Name="ID_Repair" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name_Repair" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Process_NG" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Process_Return" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="All_Processes" Relationship="QUANLYSANXUATModel.FK_All_Process_Repair_All_Processes" FromRole="All_Process_Repair" ToRole="All_Processes" />
+        </EntityType>
+        <EntityType Name="All_Processes">
+          <Key>
+            <PropertyRef Name="Id_process" />
+          </Key>
+          <Property Name="Id_process" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name_process" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Parent_Id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="All_Process_Repair" Relationship="QUANLYSANXUATModel.FK_All_Process_Repair_All_Processes" FromRole="All_Processes" ToRole="All_Process_Repair" />
+          <NavigationProperty Name="Lines_processes" Relationship="QUANLYSANXUATModel.FK_Lines_processes_Processes" FromRole="All_Processes" ToRole="Lines_processes" />
+          <NavigationProperty Name="PCBs" Relationship="QUANLYSANXUATModel.FK_PCB_All_Processes" FromRole="All_Processes" ToRole="PCB" />
+          <NavigationProperty Name="Users_processes" Relationship="QUANLYSANXUATModel.FK_Users_processes_Processes" FromRole="All_Processes" ToRole="Users_processes" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id_customer" />
+          </Key>
+          <Property Name="Id_customer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name_customer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Lines" Relationship="QUANLYSANXUATModel.FK_Lines_Customer" FromRole="Customer" ToRole="Line" />
+        </EntityType>
+        <EntityType Name="Information_NG">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Serial_NG" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Process_NG" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Comment_NG" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Time_ng" Type="DateTime" Precision="3" />
+          <Property Name="User_ng" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Line">
+          <Key>
+            <PropertyRef Name="Id_line" />
+          </Key>
+          <Property Name="Id_line" Type="Int32" Nullable="false" />
+          <Property Name="Name_line" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Id_customer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="QUANLYSANXUATModel.FK_Lines_Customer" FromRole="Line" ToRole="Customer" />
+          <NavigationProperty Name="Lines_processes" Relationship="QUANLYSANXUATModel.FK_Lines_processes_Lines" FromRole="Line" ToRole="Lines_processes" />
+          <NavigationProperty Name="Users_processes" Relationship="QUANLYSANXUATModel.FK_Users_processes_Lines" FromRole="Line" ToRole="Users_processes" />
+          <NavigationProperty Name="Models" Relationship="QUANLYSANXUATModel.Lines_models" FromRole="Line" ToRole="Model" />
+        </EntityType>
+        <EntityType Name="Lines_processes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_line" Type="Int32" Nullable="false" />
+          <Property Name="Id_process" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Position_process_in_line" Type="Int32" Nullable="false" />
+          <Property Name="lever_of_process" Type="Int32" />
+          <NavigationProperty Name="All_Processes" Relationship="QUANLYSANXUATModel.FK_Lines_processes_Processes" FromRole="Lines_processes" ToRole="All_Processes" />
+          <NavigationProperty Name="Line" Relationship="QUANLYSANXUATModel.FK_Lines_processes_Lines" FromRole="Lines_processes" ToRole="Line" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="Id_model" />
+          </Key>
+          <Property Name="Id_model" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name_model" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Model_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Label_length" Type="Int32" Nullable="false" />
+          <Property Name="Start_position_label" Type="Int32" />
+          <Property Name="Set_plan" Type="Int32" />
+          <NavigationProperty Name="Lines" Relationship="QUANLYSANXUATModel.Lines_models" FromRole="Model" ToRole="Line" />
+        </EntityType>
+        <EntityType Name="PCB">
+          <Key>
+            <PropertyRef Name="Id_PCB" />
+          </Key>
+          <Property Name="Id_PCB" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Name_PCB" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date_time_check" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status_PCB" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="Id_process" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="All_Processes" Relationship="QUANLYSANXUATModel.FK_PCB_All_Processes" FromRole="PCB" ToRole="All_Processes" />
+        </EntityType>
+        <EntityType Name="Sheet_productions">
+          <Key>
+            <PropertyRef Name="Id_sheet_production" />
+          </Key>
+          <Property Name="Id_sheet_production" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_sheet_production" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Show_Result" Relationship="QUANLYSANXUATModel.FK_Show_Result_Sheet_productions" FromRole="Sheet_productions" ToRole="Show_Result" />
+          <NavigationProperty Name="Timings" Relationship="QUANLYSANXUATModel.FK_Timing_Sheet_productions" FromRole="Sheet_productions" ToRole="Timing" />
+        </EntityType>
+        <EntityType Name="Show_Result">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_process" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Id_Sheet_production" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Int32" Nullable="false" />
+          <Property Name="Pass" Type="Int32" Nullable="false" />
+          <Property Name="NG" Type="Int32" Nullable="false" />
+          <Property Name="Time_check" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Operator_code" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sheet_productions" Relationship="QUANLYSANXUATModel.FK_Show_Result_Sheet_productions" FromRole="Show_Result" ToRole="Sheet_productions" />
+        </EntityType>
+        <EntityType Name="Timing">
+          <Key>
+            <PropertyRef Name="Id_time_test" />
+          </Key>
+          <Property Name="Id_time_test" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="SetPlan" Type="Int32" />
+          <Property Name="Id_sheet_production" Type="Int32" />
+          <NavigationProperty Name="Sheet_productions" Relationship="QUANLYSANXUATModel.FK_Timing_Sheet_productions" FromRole="Timing" ToRole="Sheet_productions" />
+          <Property Name="Products_current_hour" Type="Int32" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id_user" />
+          </Key>
+          <Property Name="Id_user" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Setup_client" Type="Boolean" Nullable="false" />
+          <Property Name="manage" Type="Boolean" />
+          <NavigationProperty Name="Users_processes" Relationship="QUANLYSANXUATModel.FK_Users_processes_Users" FromRole="User" ToRole="Users_processes" />
+        </EntityType>
+        <EntityType Name="Users_processes">
+          <Key>
+            <PropertyRef Name="Id_user" />
+            <PropertyRef Name="Id_process" />
+            <PropertyRef Name="Id_line" />
+          </Key>
+          <Property Name="Id_user" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Id_process" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Id_line" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="All_Processes" Relationship="QUANLYSANXUATModel.FK_Users_processes_Processes" FromRole="Users_processes" ToRole="All_Processes" />
+          <NavigationProperty Name="Line" Relationship="QUANLYSANXUATModel.FK_Users_processes_Lines" FromRole="Users_processes" ToRole="Line" />
+          <NavigationProperty Name="User" Relationship="QUANLYSANXUATModel.FK_Users_processes_Users" FromRole="Users_processes" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_All_Process_Repair_All_Processes">
+          <End Type="QUANLYSANXUATModel.All_Processes" Role="All_Processes" Multiplicity="1" />
+          <End Type="QUANLYSANXUATModel.All_Process_Repair" Role="All_Process_Repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Processes">
+              <PropertyRef Name="Id_process" />
+            </Principal>
+            <Dependent Role="All_Process_Repair">
+              <PropertyRef Name="Process_Return" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lines_processes_Processes">
+          <End Type="QUANLYSANXUATModel.All_Processes" Role="All_Processes" Multiplicity="1" />
+          <End Type="QUANLYSANXUATModel.Lines_processes" Role="Lines_processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Processes">
+              <PropertyRef Name="Id_process" />
+            </Principal>
+            <Dependent Role="Lines_processes">
+              <PropertyRef Name="Id_process" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PCB_All_Processes">
+          <End Type="QUANLYSANXUATModel.All_Processes" Role="All_Processes" Multiplicity="1" />
+          <End Type="QUANLYSANXUATModel.PCB" Role="PCB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Processes">
+              <PropertyRef Name="Id_process" />
+            </Principal>
+            <Dependent Role="PCB">
+              <PropertyRef Name="Id_process" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_processes_Processes">
+          <End Type="QUANLYSANXUATModel.All_Processes" Role="All_Processes" Multiplicity="1" />
+          <End Type="QUANLYSANXUATModel.Users_processes" Role="Users_processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Processes">
+              <PropertyRef Name="Id_process" />
+            </Principal>
+            <Dependent Role="Users_processes">
+              <PropertyRef Name="Id_process" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lines_Customer">
+          <End Type="QUANLYSANXUATModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="QUANLYSANXUATModel.Line" Role="Line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id_customer" />
+            </Principal>
+            <Dependent Role="Line">
+              <PropertyRef Name="Id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lines_processes_Lines">
+          <End Type="QUANLYSANXUATModel.Line" Role="Line" Multiplicity="1" />
+          <End Type="QUANLYSANXUATModel.Lines_processes" Role="Lines_processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Line">
+              <PropertyRef Name="Id_line" />
+            </Principal>
+            <Dependent Role="Lines_processes">
+              <PropertyRef Name="Id_line" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_processes_Lines">
+          <End Type="QUANLYSANXUATModel.Line" Role="Line" Multiplicity="1" />
+          <End Type="QUANLYSANXUATModel.Users_processes" Role="Users_processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Line">
+              <PropertyRef Name="Id_line" />
+            </Principal>
+            <Dependent Role="Users_processes">
+              <PropertyRef Name="Id_line" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Show_Result_Sheet_productions">
+          <End Type="QUANLYSANXUATModel.Sheet_productions" Role="Sheet_productions" Multiplicity="1" />
+          <End Type="QUANLYSANXUATModel.Show_Result" Role="Show_Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sheet_productions">
+              <PropertyRef Name="Id_sheet_production" />
+            </Principal>
+            <Dependent Role="Show_Result">
+              <PropertyRef Name="Id_Sheet_production" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Timing_Sheet_productions">
+          <End Type="QUANLYSANXUATModel.Sheet_productions" Role="Sheet_productions" Multiplicity="0..1" />
+          <End Type="QUANLYSANXUATModel.Timing" Role="Timing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sheet_productions">
+              <PropertyRef Name="Id_sheet_production" />
+            </Principal>
+            <Dependent Role="Timing">
+              <PropertyRef Name="Id_sheet_production" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_processes_Users">
+          <End Type="QUANLYSANXUATModel.User" Role="User" Multiplicity="1" />
+          <End Type="QUANLYSANXUATModel.Users_processes" Role="Users_processes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="Users_processes">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Lines_models">
+          <End Type="QUANLYSANXUATModel.Line" Role="Line" Multiplicity="*" />
+          <End Type="QUANLYSANXUATModel.Model" Role="Model" Multiplicity="*" />
+        </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Line_status">
+          <Key>
+            <PropertyRef Name="Id_customer" />
+            <PropertyRef Name="Id_Line" />
+            <PropertyRef Name="Current_model" />
+          </Key>
+          <Property Name="Id_customer" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Id_Line" Type="Int32" Nullable="false" />
+          <Property Name="Current_model" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Shift" Type="Int32" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QUANLYSANXUATModelStoreContainer" CdmEntityContainer="QUANLYSANXUATEntities">
+          <EntitySetMapping Name="All_Process_Repair">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.All_Process_Repair">
+              <MappingFragment StoreEntitySet="All_Process_Repair">
+                <ScalarProperty Name="Process_Return" ColumnName="Process_Return" />
+                <ScalarProperty Name="Process_NG" ColumnName="Process_NG" />
+                <ScalarProperty Name="Name_Repair" ColumnName="Name_Repair" />
+                <ScalarProperty Name="ID_Repair" ColumnName="ID_Repair" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="All_Processes">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.All_Processes">
+              <MappingFragment StoreEntitySet="All_Processes">
+                <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+                <ScalarProperty Name="Name_process" ColumnName="Name_process" />
+                <ScalarProperty Name="Id_process" ColumnName="Id_process" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Name_customer" ColumnName="Name_customer" />
+                <ScalarProperty Name="Id_customer" ColumnName="Id_customer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Information_NG">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.Information_NG">
+              <MappingFragment StoreEntitySet="Information_NG">
+                <ScalarProperty Name="User_ng" ColumnName="User_ng" />
+                <ScalarProperty Name="Time_ng" ColumnName="Time_ng" />
+                <ScalarProperty Name="Comment_NG" ColumnName="Comment_NG" />
+                <ScalarProperty Name="Process_NG" ColumnName="Process_NG" />
+                <ScalarProperty Name="Serial_NG" ColumnName="Serial_NG" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lines">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.Line">
+              <MappingFragment StoreEntitySet="Lines">
+                <ScalarProperty Name="Id_customer" ColumnName="Id_customer" />
+                <ScalarProperty Name="Name_line" ColumnName="Name_line" />
+                <ScalarProperty Name="Id_line" ColumnName="Id_line" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lines_processes">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.Lines_processes">
+              <MappingFragment StoreEntitySet="Lines_processes">
+                <ScalarProperty Name="lever_of_process" ColumnName="lever_of_process" />
+                <ScalarProperty Name="Position_process_in_line" ColumnName="Position_process_in_line" />
+                <ScalarProperty Name="Id_process" ColumnName="Id_process" />
+                <ScalarProperty Name="Id_line" ColumnName="Id_line" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Models">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.Model">
+              <MappingFragment StoreEntitySet="Model">
+                <ScalarProperty Name="Set_plan" ColumnName="Set_plan" />
+                <ScalarProperty Name="Start_position_label" ColumnName="Start_position_label" />
+                <ScalarProperty Name="Label_length" ColumnName="Label_length" />
+                <ScalarProperty Name="Model_code" ColumnName="Model_code" />
+                <ScalarProperty Name="Name_model" ColumnName="Name_model" />
+                <ScalarProperty Name="Id_model" ColumnName="Id_model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PCBs">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.PCB">
+              <MappingFragment StoreEntitySet="PCB">
+                <ScalarProperty Name="Id_process" ColumnName="Id_process" />
+                <ScalarProperty Name="Status_PCB" ColumnName="Status_PCB" />
+                <ScalarProperty Name="Date_time_check" ColumnName="Date_time_check" />
+                <ScalarProperty Name="Name_PCB" ColumnName="Name_PCB" />
+                <ScalarProperty Name="Id_PCB" ColumnName="Id_PCB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sheet_productions">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.Sheet_productions">
+              <MappingFragment StoreEntitySet="Sheet_productions">
+                <ScalarProperty Name="Name_sheet_production" ColumnName="Name_sheet_production" />
+                <ScalarProperty Name="Id_sheet_production" ColumnName="Id_sheet_production" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Show_Result">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.Show_Result">
+              <MappingFragment StoreEntitySet="Show_Result">
+                <ScalarProperty Name="Operator_code" ColumnName="Operator_code" />
+                <ScalarProperty Name="Time_check" ColumnName="Time_check" />
+                <ScalarProperty Name="NG" ColumnName="NG" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Id_Sheet_production" ColumnName="Id_Sheet_production" />
+                <ScalarProperty Name="Id_process" ColumnName="Id_process" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timings">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.Timing">
+              <MappingFragment StoreEntitySet="Timing">
+                <ScalarProperty Name="Products_current_hour" ColumnName="Products_current_hour" />
+                <ScalarProperty Name="Id_sheet_production" ColumnName="Id_sheet_production" />
+                <ScalarProperty Name="SetPlan" ColumnName="SetPlan" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Id_time_test" ColumnName="Id_time_test" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="manage" ColumnName="manage" />
+                <ScalarProperty Name="Setup_client" ColumnName="Setup_client" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users_processes">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.Users_processes">
+              <MappingFragment StoreEntitySet="Users_processes">
+                <ScalarProperty Name="Id_line" ColumnName="Id_line" />
+                <ScalarProperty Name="Id_process" ColumnName="Id_process" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Lines_models" TypeName="QUANLYSANXUATModel.Lines_models" StoreEntitySet="Lines_models">
+            <EndProperty Name="Model">
+              <ScalarProperty Name="Id_model" ColumnName="Id_model" />
+            </EndProperty>
+            <EndProperty Name="Line">
+              <ScalarProperty Name="Id_line" ColumnName="Id_line" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Line_status">
+            <EntityTypeMapping TypeName="QUANLYSANXUATModel.Line_status">
+              <MappingFragment StoreEntitySet="Line_status">
+                <ScalarProperty Name="Shift" ColumnName="Shift" />
+                <ScalarProperty Name="Current_model" ColumnName="Current_model" />
+                <ScalarProperty Name="Id_Line" ColumnName="Id_Line" />
+                <ScalarProperty Name="Id_customer" ColumnName="Id_customer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

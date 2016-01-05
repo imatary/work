@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InvoicePurchase.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CUST_CODE" />
+          </Key>
+          <Property Name="CUST_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CUST_NAME" Type="nvarchar" MaxLength="400" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="400" />
+          <Property Name="CODE_TAX" Type="nvarchar" MaxLength="50" />
+          <Property Name="TEL" Type="varchar" MaxLength="20" />
+          <Property Name="FAX" Type="varchar" MaxLength="20" />
+          <Property Name="NAME_PART" Type="nvarchar" MaxLength="200" />
+          <Property Name="NAME_CUS" Type="nvarchar" MaxLength="200" />
+          <Property Name="PAY_TYPE" Type="nvarchar" MaxLength="200" />
+          <Property Name="PAY_TERM" Type="nvarchar" MaxLength="200" />
+          <Property Name="CURRENCY" Type="nvarchar" MaxLength="200" />
+          <Property Name="TAX_CODE" Type="nvarchar" MaxLength="200" />
+          <Property Name="DEL_TERM" Type="nvarchar" MaxLength="200" />
+          <Property Name="DEL_PLACE" Type="nvarchar" MaxLength="200" />
+          <Property Name="BUYER" Type="nvarchar" MaxLength="200" />
+          <Property Name="NAME_PART1" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityContainer Name="InvoicePurchaseModelsStoreContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InvoicePurchase.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="InvoicePurchaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="InvoicePurchase.Models.Customer" />
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CUST_CODE" />
+          </Key>
+          <Property Name="CUST_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_NAME" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_TAX" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TEL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FAX" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NAME_PART" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NAME_CUS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PAY_TYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PAY_TERM" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CURRENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TAX_CODE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DEL_TERM" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DEL_PLACE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BUYER" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NAME_PART1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InvoicePurchaseModelsStoreContainer" CdmEntityContainer="InvoicePurchaseEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="InvoicePurchase.Models.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="NAME_PART1" ColumnName="NAME_PART1" />
+                <ScalarProperty Name="BUYER" ColumnName="BUYER" />
+                <ScalarProperty Name="DEL_PLACE" ColumnName="DEL_PLACE" />
+                <ScalarProperty Name="DEL_TERM" ColumnName="DEL_TERM" />
+                <ScalarProperty Name="TAX_CODE" ColumnName="TAX_CODE" />
+                <ScalarProperty Name="CURRENCY" ColumnName="CURRENCY" />
+                <ScalarProperty Name="PAY_TERM" ColumnName="PAY_TERM" />
+                <ScalarProperty Name="PAY_TYPE" ColumnName="PAY_TYPE" />
+                <ScalarProperty Name="NAME_CUS" ColumnName="NAME_CUS" />
+                <ScalarProperty Name="NAME_PART" ColumnName="NAME_PART" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="CODE_TAX" ColumnName="CODE_TAX" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CUST_NAME" ColumnName="CUST_NAME" />
+                <ScalarProperty Name="CUST_CODE" ColumnName="CUST_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

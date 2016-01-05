@@ -1,0 +1,26 @@
+﻿@model IEnumerable<MeetingRoom.Web.Models.Room>
+<div class="col-lg-8">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                List phone in room
+            </div>
+            <div class="panel-body">
+                @foreach (var item in Model)
+                {
+                    <div class="col-xs-4 border-buttom">
+                        <span>
+                            <i class="glyphicon glyphicon-home"></i>
+                            @item.label
+                        </span>
+                        <span>
+                            <i class="glyphicon glyphicon-phone"></i>
+                            <strong>@item.phone</strong>
+                        </span>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

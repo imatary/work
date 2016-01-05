@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IndicateReportMasterModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="IndicateReportMasterModelStoreContainer">
+          <EntitySet Name="Customers" EntityType="IndicateReportMasterModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Lines" EntityType="IndicateReportMasterModel.Store.Lines" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Models" EntityType="IndicateReportMasterModel.Store.Models" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ReportDetails" EntityType="IndicateReportMasterModel.Store.ReportDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ReportMaster" EntityType="IndicateReportMasterModel.Store.ReportMaster" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ReportDetails_ReportMaster" Association="IndicateReportMasterModel.Store.FK_ReportDetails_ReportMaster">
+            <End Role="ReportMaster" EntitySet="ReportMaster" />
+            <End Role="ReportDetails" EntitySet="ReportDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CusID" />
+            <PropertyRef Name="CusCode" />
+          </Key>
+          <Property Name="CusID" Type="int" Nullable="false" />
+          <Property Name="CusCode" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="CusName" Type="nvarchar" Nullable="false" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Lines">
+          <Key>
+            <PropertyRef Name="LineID" />
+          </Key>
+          <Property Name="LineID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LineName" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Models">
+          <Key>
+            <PropertyRef Name="ModelID" />
+            <PropertyRef Name="ModelCode" />
+          </Key>
+          <Property Name="ModelID" Type="int" Nullable="false" />
+          <Property Name="ModelCode" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="ModelName" Type="nvarchar" Nullable="false" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="ReportDetails">
+          <Key>
+            <PropertyRef Name="ReportDetailID" />
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportDetailID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReportID" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Total" Type="int" />
+          <Property Name="Pass" Type="int" />
+          <Property Name="DateReport" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportMaster">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportID" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="OperatorCode" Type="varchar" MaxLength="10" />
+          <Property Name="ProcessName" Type="varchar" MaxLength="100" />
+          <Property Name="ModelName" Type="varchar" MaxLength="100" />
+          <Property Name="Total" Type="int" />
+          <Property Name="Pass" Type="int" />
+          <Property Name="DateReport" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_ReportDetails_ReportMaster">
+          <End Role="ReportMaster" Type="IndicateReportMasterModel.Store.ReportMaster" Multiplicity="1" />
+          <End Role="ReportDetails" Type="IndicateReportMasterModel.Store.ReportDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportMaster">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="ReportDetails">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IndicateReportMasterModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="IndicateReportMasterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="IndicateReportMasterModel.Customer" />
+          <EntitySet Name="Lines" EntityType="IndicateReportMasterModel.Line" />
+          <EntitySet Name="Models" EntityType="IndicateReportMasterModel.Model" />
+          <EntitySet Name="ReportMasters" EntityType="IndicateReportMasterModel.ReportMaster" />
+          <EntitySet Name="ReportDetails" EntityType="IndicateReportMasterModel.ReportDetail" />
+          <AssociationSet Name="FK_ReportDetails_ReportMaster" Association="IndicateReportMasterModel.FK_ReportDetails_ReportMaster">
+            <End Role="ReportMaster" EntitySet="ReportMasters" />
+            <End Role="ReportDetail" EntitySet="ReportDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CusID" />
+            <PropertyRef Name="CusCode" />
+          </Key>
+          <Property Name="CusID" Type="Int32" Nullable="false" />
+          <Property Name="CusCode" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="CusName" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Line">
+          <Key>
+            <PropertyRef Name="LineID" />
+          </Key>
+          <Property Name="LineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LineName" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="ModelID" />
+            <PropertyRef Name="ModelCode" />
+          </Key>
+          <Property Name="ModelID" Type="Int32" Nullable="false" />
+          <Property Name="ModelCode" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="ModelName" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ReportMaster">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Type="String" Name="ReportID" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OperatorCode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProcessName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ModelName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Total" />
+          <Property Type="Int32" Name="Pass" />
+          <Property Type="DateTime" Name="DateReport" />
+          <NavigationProperty Name="ReportDetails" Relationship="IndicateReportMasterModel.FK_ReportDetails_ReportMaster" FromRole="ReportMaster" ToRole="ReportDetail" />
+        </EntityType>
+        <EntityType Name="ReportDetail">
+          <Key>
+            <PropertyRef Name="ReportDetailID" />
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Type="Guid" Name="ReportDetailID" Nullable="false" />
+          <Property Type="String" Name="ReportID" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Total" />
+          <Property Type="Int32" Name="Pass" />
+          <Property Type="DateTime" Name="DateReport" Nullable="false" />
+          <NavigationProperty Name="ReportMaster" Relationship="IndicateReportMasterModel.FK_ReportDetails_ReportMaster" FromRole="ReportDetail" ToRole="ReportMaster" />
+        </EntityType>
+        <Association Name="FK_ReportDetails_ReportMaster">
+          <End Type="IndicateReportMasterModel.ReportMaster" Role="ReportMaster" Multiplicity="1" />
+          <End Type="IndicateReportMasterModel.ReportDetail" Role="ReportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportMaster">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="ReportDetail">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IndicateReportMasterModelStoreContainer" CdmEntityContainer="IndicateReportMasterEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="IndicateReportMasterModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CusID" ColumnName="CusID" />
+                <ScalarProperty Name="CusCode" ColumnName="CusCode" />
+                <ScalarProperty Name="CusName" ColumnName="CusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lines">
+            <EntityTypeMapping TypeName="IndicateReportMasterModel.Line">
+              <MappingFragment StoreEntitySet="Lines">
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+                <ScalarProperty Name="LineName" ColumnName="LineName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Models">
+            <EntityTypeMapping TypeName="IndicateReportMasterModel.Model">
+              <MappingFragment StoreEntitySet="Models">
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="ModelCode" ColumnName="ModelCode" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportMasters">
+            <EntityTypeMapping TypeName="IndicateReportMasterModel.ReportMaster">
+              <MappingFragment StoreEntitySet="ReportMaster">
+                <ScalarProperty Name="DateReport" ColumnName="DateReport" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
+                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportDetails">
+            <EntityTypeMapping TypeName="IndicateReportMasterModel.ReportDetail">
+              <MappingFragment StoreEntitySet="ReportDetails">
+                <ScalarProperty Name="DateReport" ColumnName="DateReport" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="ReportDetailID" ColumnName="ReportDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="IndicateReport">
+        <EntityTypeShape EntityType="IndicateReportMasterModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndicateReportMasterModel.Line" Width="1.5" PointX="2.75" PointY="0.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndicateReportMasterModel.Model" Width="1.5" PointX="2.75" PointY="3" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndicateReportMasterModel.ReportMaster" Width="1.5" PointX="5.375" PointY="0.75" Height="2.3648893229166656" />
+        <EntityTypeShape EntityType="IndicateReportMasterModel.ReportDetail" Width="1.5" PointX="7.625" PointY="1" Height="2.1725878906249996" />
+        <AssociationConnector Association="IndicateReportMasterModel.FK_ReportDetails_ReportMaster" >
+          <ConnectorPoint PointX="6.875" PointY="2.0862939453125" />
+          <ConnectorPoint PointX="7.625" PointY="2.0862939453125" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

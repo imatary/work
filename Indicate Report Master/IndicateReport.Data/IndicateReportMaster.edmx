@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IndicateReport.Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="IndicateReportModelsStoreContainer">
+          <EntitySet Name="Actual_model" EntityType="IndicateReport.Models.Store.Actual_model" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ID_model" EntityType="IndicateReport.Models.Store.ID_model" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ID_process" EntityType="IndicateReport.Models.Store.ID_process" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="IndicateReports" EntityType="IndicateReport.Models.Store.IndicateReports" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PCB_info" EntityType="IndicateReport.Models.Store.PCB_info" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Report_detail" EntityType="IndicateReport.Models.Store.Report_detail" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_PCB_info_ID_process" Association="IndicateReport.Models.Store.FK_PCB_info_ID_process">
+            <End Role="ID_process" EntitySet="ID_process" />
+            <End Role="PCB_info" EntitySet="PCB_info" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Actual_model">
+          <Key>
+            <PropertyRef Name="Id_model" />
+          </Key>
+          <Property Name="Id_model" Type="int" Nullable="false" />
+          <Property Name="Name_actual_model" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ID_model">
+          <Key>
+            <PropertyRef Name="ID_model" />
+          </Key>
+          <Property Name="ID_model" Type="int" Nullable="false" />
+          <Property Name="Name_model" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ID_process">
+          <Key>
+            <PropertyRef Name="ID_process" />
+          </Key>
+          <Property Name="ID_process" Type="int" Nullable="false" />
+          <Property Name="Name_process" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="IndicateReports">
+          <Key>
+            <PropertyRef Name="ReportID" />
+            <PropertyRef Name="DateRerport" />
+          </Key>
+          <Property Name="ReportID" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="DateRerport" Type="date" Nullable="false" />
+          <Property Name="ProcessID" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="OperatorCode" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="ModelID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Total" Type="int" Nullable="false" />
+          <Property Name="Pass" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PCB_info">
+          <Key>
+            <PropertyRef Name="ID_pcb" />
+          </Key>
+          <Property Name="ID_pcb" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID_model" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Status_pcb" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Timecheck" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID_process" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Report_detail">
+          <Key>
+            <PropertyRef Name="ID_timecheck_pcb" />
+          </Key>
+          <Property Name="ID_timecheck_pcb" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReportID" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="Date_check" Type="datetime" Nullable="false" />
+          <Property Name="Time_check" Type="time" />
+          <Property Name="count_actual_pcb" Type="int" />
+        </EntityType>
+        <Association Name="FK_PCB_info_ID_process">
+          <End Role="ID_process" Type="IndicateReport.Models.Store.ID_process" Multiplicity="1" />
+          <End Role="PCB_info" Type="IndicateReport.Models.Store.PCB_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ID_process">
+              <PropertyRef Name="ID_process" />
+            </Principal>
+            <Dependent Role="PCB_info">
+              <PropertyRef Name="ID_process" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IndicateReport.Models" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="IndicateReportEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ID_model" EntityType="IndicateReport.Models.ID_model" />
+          <EntitySet Name="ID_process" EntityType="IndicateReport.Models.ID_process" />
+          <EntitySet Name="PCB_info" EntityType="IndicateReport.Models.PCB_info" />
+          <EntitySet Name="Report_detail" EntityType="IndicateReport.Models.Report_detail" />
+          <AssociationSet Name="FK_PCB_info_ID_process" Association="IndicateReport.Models.FK_PCB_info_ID_process">
+            <End Role="ID_process" EntitySet="ID_process" />
+            <End Role="PCB_info" EntitySet="PCB_info" />
+          </AssociationSet>
+          <EntitySet Name="Actual_model" EntityType="IndicateReport.Models.Actual_model" />
+          <EntitySet Name="IndicateReports" EntityType="IndicateReport.Models.IndicateReport" />
+        </EntityContainer>
+        <EntityType Name="ID_model">
+          <Key>
+            <PropertyRef Name="ID_model1" />
+          </Key>
+          <Property Name="ID_model1" Type="Int32" Nullable="false" />
+          <Property Name="Name_model" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ID_process">
+          <Key>
+            <PropertyRef Name="ID_process1" />
+          </Key>
+          <Property Name="ID_process1" Type="Int32" Nullable="false" />
+          <Property Name="Name_process" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="PCB_info" Relationship="IndicateReport.Models.FK_PCB_info_ID_process" FromRole="ID_process" ToRole="PCB_info" />
+        </EntityType>
+        <EntityType Name="PCB_info">
+          <Key>
+            <PropertyRef Name="ID_pcb" />
+          </Key>
+          <Property Name="ID_pcb" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ID_model" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Status_pcb" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Timecheck" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ID_process" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ID_process1" Relationship="IndicateReport.Models.FK_PCB_info_ID_process" FromRole="PCB_info" ToRole="ID_process" />
+        </EntityType>
+        <EntityType Name="Report_detail">
+          <Key>
+            <PropertyRef Name="ID_timecheck_pcb" />
+          </Key>
+          <Property Name="ID_timecheck_pcb" Type="Guid" Nullable="false" />
+          <Property Name="ReportID" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Date_check" Type="DateTime" Nullable="false" />
+          <Property Name="Time_check" Type="Time" />
+          <Property Name="count_actual_pcb" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_PCB_info_ID_process">
+          <End Role="ID_process" Type="IndicateReport.Models.ID_process" Multiplicity="1" />
+          <End Role="PCB_info" Type="IndicateReport.Models.PCB_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ID_process">
+              <PropertyRef Name="ID_process1" />
+            </Principal>
+            <Dependent Role="PCB_info">
+              <PropertyRef Name="ID_process" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Actual_model">
+          <Key>
+            <PropertyRef Name="Id_model" />
+          </Key>
+          <Property Type="Int32" Name="Id_model" Nullable="false" />
+          <Property Type="String" Name="Name_actual_model" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="IndicateReport">
+          <Key>
+            <PropertyRef Name="ReportID" />
+            <PropertyRef Name="DateRerport" />
+          </Key>
+          <Property Type="String" Name="ReportID" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DateRerport" Nullable="false" />
+          <Property Type="String" Name="ProcessID" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OperatorCode" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ModelID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Total" Nullable="false" />
+          <Property Type="Int32" Name="Pass" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IndicateReportModelsStoreContainer" CdmEntityContainer="IndicateReportEntities">
+          <EntitySetMapping Name="ID_model">
+            <EntityTypeMapping TypeName="IndicateReport.Models.ID_model">
+              <MappingFragment StoreEntitySet="ID_model">
+                <ScalarProperty Name="ID_model1" ColumnName="ID_model" />
+                <ScalarProperty Name="Name_model" ColumnName="Name_model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ID_process">
+            <EntityTypeMapping TypeName="IndicateReport.Models.ID_process">
+              <MappingFragment StoreEntitySet="ID_process">
+                <ScalarProperty Name="ID_process1" ColumnName="ID_process" />
+                <ScalarProperty Name="Name_process" ColumnName="Name_process" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PCB_info">
+            <EntityTypeMapping TypeName="IndicateReport.Models.PCB_info">
+              <MappingFragment StoreEntitySet="PCB_info">
+                <ScalarProperty Name="ID_pcb" ColumnName="ID_pcb" />
+                <ScalarProperty Name="ID_model" ColumnName="ID_model" />
+                <ScalarProperty Name="Status_pcb" ColumnName="Status_pcb" />
+                <ScalarProperty Name="Timecheck" ColumnName="Timecheck" />
+                <ScalarProperty Name="ID_process" ColumnName="ID_process" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report_detail">
+            <EntityTypeMapping TypeName="IndicateReport.Models.Report_detail">
+              <MappingFragment StoreEntitySet="Report_detail">
+                <ScalarProperty Name="ID_timecheck_pcb" ColumnName="ID_timecheck_pcb" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="Date_check" ColumnName="Date_check" />
+                <ScalarProperty Name="Time_check" ColumnName="Time_check" />
+                <ScalarProperty Name="count_actual_pcb" ColumnName="count_actual_pcb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Actual_model">
+            <EntityTypeMapping TypeName="IndicateReport.Models.Actual_model">
+              <MappingFragment StoreEntitySet="Actual_model">
+                <ScalarProperty Name="Name_actual_model" ColumnName="Name_actual_model" />
+                <ScalarProperty Name="Id_model" ColumnName="Id_model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndicateReports">
+            <EntityTypeMapping TypeName="IndicateReport.Models.IndicateReport">
+              <MappingFragment StoreEntitySet="IndicateReports">
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+                <ScalarProperty Name="DateRerport" ColumnName="DateRerport" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="IndicateReportMaster">
+        <EntityTypeShape EntityType="IndicateReport.Models.ID_model" Width="1.5" PointX="1" PointY="4" Height="1.4033821614583335" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndicateReport.Models.ID_process" Width="1.5" PointX="0.75" PointY="1.25" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndicateReport.Models.PCB_info" Width="1.5" PointX="3" PointY="0.875" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndicateReport.Models.Report_detail" Width="1.5" PointX="6.75" PointY="4.25" Height="2.1725878906249996" IsExpanded="true" />
+        <AssociationConnector Association="IndicateReport.Models.FK_PCB_info_ID_process" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.047841796875" />
+          <ConnectorPoint PointX="3" PointY="2.047841796875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="IndicateReport.Models.Actual_model" Width="1.5" PointX="4.875" PointY="2.375" Height="1.4033821614583326" />
+        <EntityTypeShape EntityType="IndicateReport.Models.IndicateReport" Width="1.5" PointX="3.375" PointY="4.75" Height="2.3648893229166674" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

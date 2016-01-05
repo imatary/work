@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{32152D4B-FC15-4ACC-B9C0-67723103B999}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BarcodeShipping.GUI</RootNamespace>
+    <AssemblyName>BarcodeShipping.GUI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\Dev\Publish WinForm\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>DDCE14BAC40104B58026514480A3A750C9F4E4A7</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>BarcodeShipping.GUI_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExportToExel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportToExel.Designer.cs">
+      <DependentUpon>ExportToExel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddModel.Designer.cs">
+      <DependentUpon>FormAddModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddPO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddPO.Designer.cs">
+      <DependentUpon>FormAddPO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQA.Designer.cs">
+      <DependentUpon>FormQA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQALogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQALogin.Designer.cs">
+      <DependentUpon>FormQALogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSearchDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSearchDate.Designer.cs">
+      <DependentUpon>FormSearchDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSearchPCB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSearchPCB.Designer.cs">
+      <DependentUpon>FormSearchPCB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\MessageBoxHelper.cs" />
+    <Compile Include="Helper\Ultils.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RetailProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RetailProducts.Designer.cs">
+      <DependentUpon>RetailProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Search.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Search.Designer.cs">
+      <DependentUpon>Search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WaitFormSearchPCBQA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitFormSearchPCBQA.Designer.cs">
+      <DependentUpon>WaitFormSearchPCBQA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WaitFormSaveData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitFormSaveData.Designer.cs">
+      <DependentUpon>WaitFormSaveData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WaitFormSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitFormSearch.Designer.cs">
+      <DependentUpon>WaitFormSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WaitLoadData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitLoadData.Designer.cs">
+      <DependentUpon>WaitLoadData.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ExportToExel.resx">
+      <DependentUpon>ExportToExel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddModel.resx">
+      <DependentUpon>FormAddModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddPO.resx">
+      <DependentUpon>FormAddPO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQA.resx">
+      <DependentUpon>FormQA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQALogin.resx">
+      <DependentUpon>FormQALogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSearchDate.resx">
+      <DependentUpon>FormSearchDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSearchPCB.resx">
+      <DependentUpon>FormSearchPCB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="RetailProducts.resx">
+      <DependentUpon>RetailProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Search.resx">
+      <DependentUpon>Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaitFormSearchPCBQA.resx">
+      <DependentUpon>WaitFormSearchPCBQA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaitFormSaveData.resx">
+      <DependentUpon>WaitFormSaveData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaitFormSearch.resx">
+      <DependentUpon>WaitFormSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaitLoadData.resx">
+      <DependentUpon>WaitLoadData.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.Config" />
+    <None Include="BarcodeShipping.GUI_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\umc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BarcodeShipping.Data\BarcodeShipping.Data.csproj">
+      <Project>{5583026A-91DF-4C3D-A3BB-15B9977DC8A6}</Project>
+      <Name>BarcodeShipping.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BarcodeShipping.Services\BarcodeShipping.Services.csproj">
+      <Project>{F0BBFE23-75D4-4D95-AF43-8CEAF86ABA56}</Project>
+      <Name>BarcodeShipping.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
