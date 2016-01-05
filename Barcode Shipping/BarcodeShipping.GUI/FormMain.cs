@@ -597,8 +597,10 @@ namespace BarcodeShipping.GUI
 
         private void btnExportCurrentBox_Click(object sender, EventArgs e)
         {
+            var date = DateTime.Now;
             var saveFileDialog1 = new SaveFileDialog
             {
+                FileName = string.Format("{3}-{0}-{1}-{2}", date.Day, date.Month, date.Year, txtBoxID.Text),
                 Filter = @"Exel|*.xls",
                 Title = @"Save exel file",
                 OverwritePrompt = true,

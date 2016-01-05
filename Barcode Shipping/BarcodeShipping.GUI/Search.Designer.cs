@@ -162,6 +162,7 @@
             this.comboBoxEditSearchByKey.Name = "comboBoxEditSearchByKey";
             this.comboBoxEditSearchByKey.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.comboBoxEditSearchByKey.Properties.Appearance.Options.UseFont = true;
+            this.comboBoxEditSearchByKey.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.comboBoxEditSearchByKey.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.comboBoxEditSearchByKey.Properties.Items.AddRange(new object[] {
@@ -169,7 +170,7 @@
             "PO NO",
             "Box ID"});
             this.comboBoxEditSearchByKey.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEditSearchByKey.Size = new System.Drawing.Size(148, 26);
+            this.comboBoxEditSearchByKey.Size = new System.Drawing.Size(148, 28);
             this.comboBoxEditSearchByKey.TabIndex = 2;
             // 
             // txtSearch
@@ -178,7 +179,8 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtSearch.Properties.Appearance.Options.UseFont = true;
-            this.txtSearch.Size = new System.Drawing.Size(293, 26);
+            this.txtSearch.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtSearch.Size = new System.Drawing.Size(293, 28);
             this.txtSearch.TabIndex = 1;
             // 
             // gridControlData
@@ -208,6 +210,11 @@
             this.gridColumnDateCheck});
             this.gridView1.GridControl = this.gridControlData;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.CheckBoxSelectorColumnWidth = 28;
+            this.gridView1.OptionsSelection.MultiSelect = true;
+            this.gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            this.gridView1.OptionsSelection.ResetSelectionClickOutsideCheckboxSelector = true;
+            this.gridView1.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 

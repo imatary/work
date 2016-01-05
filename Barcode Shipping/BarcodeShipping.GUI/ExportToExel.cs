@@ -37,8 +37,10 @@ namespace BarcodeShipping.GUI
 
         private void btnExportToExel_Click(object sender, EventArgs e)
         {
+            var date = DateTime.Now;
             var saveFileDialog1 = new SaveFileDialog
             {
+                FileName = string.Format("{0}-{1}-{2}", date.Day, date.Month, date.Year),
                 Filter = "Exel|*.xls",
                 Title = "Save exel file",
                 OverwritePrompt = true, 
@@ -47,7 +49,8 @@ namespace BarcodeShipping.GUI
             if (saveFileDialog1.FileName != "")
             {
                 gridControlData.ExportToXls(saveFileDialog1.FileName);
-            }}
+            }
+        }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
