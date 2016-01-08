@@ -46,7 +46,7 @@
                 <p>&copy; <strong>@DateTime.Now.Year - UMC Electronics VietNam Ltd's</strong></p>
                 <p><span class="glyphicon glyphicon-phone-alt">&nbsp;</span>Phone: <strong>(+84) 0320.3570.001</strong></p>
                 <p><span class="glyphicon glyphicon-print">&nbsp;</span>Fax: <strong>(+84) 0320.3570.011</strong></p>
-                <p>Support:<strong>&nbsp;PE-IT</strong></p>
+                <p><span class="glyphicon glyphicon-hand-right">&nbsp;</span>Support:<strong>&nbsp;PE-IT</strong></p>
             </div>
             @{ Html.RenderAction("PhoneInRooms", "Helper");}
         </footer>
@@ -54,5 +54,16 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script language="javascript">
+        scheduler.dataProcessor.attachEvent("onAfterUpdate", function (sid, action, tid, tag) {
+            if (action === "error") {
+                dhtmlx.alert(
+                {
+                    text: "Faild! " + tag.textContent
+                });
+            }
+            
+        });
+    </script>
 </body>
 </html>

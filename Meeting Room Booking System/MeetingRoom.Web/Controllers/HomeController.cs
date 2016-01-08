@@ -233,8 +233,10 @@ namespace MeetingRoom.Web.Controllers
 
         public ActionResult LightboxCustomControl(CalendarEvent calendarEvent)
         {
-            var current = Repository.GetAll<CalendarEvent>().FirstOrDefault(e => e.id == calendarEvent.id);
-            var events = Repository.GetAll<CalendarEvent>().Where(ev => ev.start_date.Day == DateTime.Now.Day).ToList();
+            var calendarEvents = Repository.GetAll<CalendarEvent>().ToList();
+            var current = calendarEvents.FirstOrDefault(e => e.id == calendarEvent.id);
+            var events = calendarEvents.Where(ev => ev.start_date.Day == DateTime.Now.Day).ToList();
+            //if()
             var laptops = Repository.GetAll<Laptop>().Where(l => l.is_empty == false).OrderBy(l => l.position).ToList();
             var projectors = Repository.GetAll<Projector>().Where(p => p.is_empty == false).OrderBy(p => p.position).ToList();
             var phones = Repository.GetAll<Phone>().Where(p => p.is_empty == false).OrderBy(p => p.position).ToList();
@@ -324,26 +326,30 @@ namespace MeetingRoom.Web.Controllers
                                 if (!CheckTimeCurrent(changedEvent.start_date))
                                 {
                                     action.Type = DataActionTypes.Error;
-                                    return JavaScript("Please check start time!");
+                                    //action.Message = "Please check start time!";
+                                    //return JavaScript("Please check start time!");
                                 }
                                 try
                                 {
                                     if (!Repository.UpdateEvents(changedEvent))
                                     {
                                         action.Type = DataActionTypes.Error;
+                                        //action.Message = "Update faild!";
                                     }
                                     DHXEventsHelper.Update(eventToUpdate, changedEvent, new List<string>() { "id" });
                                 }
                                 catch (Exception ex)
                                 {
                                     action.Type = DataActionTypes.Error;
-                                    return JavaScript(ex.Message);
+                                    //action.Message = ex.Message;
+                                    //return JavaScript(ex.Message);
                                 }
                             }
                             else
                             {
                                 action.Type = DataActionTypes.Error;
-                                return JavaScript("You can not fix, only the creator can edit!");
+                                //action.Message = "You can not fix, only the creator can edit!";
+                                //return JavaScript("You can not fix, only the creator can edit!");
                             }
 
                         }
@@ -353,14 +359,16 @@ namespace MeetingRoom.Web.Controllers
                             if (!CheckStartDateAndEndDateInRoom(changedEvent.room_id, changedEvent.start_date, changedEvent.end_date))
                             {
                                 action.Type = DataActionTypes.Delete;
-                                return JavaScript("Please check start time!");
+                                //action.Message = "Please check start time!";
+                                //return JavaScript("Please check start time!");
                             }
                             else
                             {
                                 if (!CheckTimeCurrent(changedEvent.start_date))
                                 {
-                                    action.Type = DataActionTypes.Delete;
-                                    return JavaScript("Please check start time!");
+                                    action.Type = DataActionTypes.Error;
+                                    //action.Message = "Please check start time!";
+                                    //return JavaScript("Please check start time!");
                                 }
                                 try
                                 {
@@ -377,6 +385,7 @@ namespace MeetingRoom.Web.Controllers
                                         if (!CheckProjectorExitsInRoom(changedEvent.room_id))
                                         {
                                             action.Type = DataActionTypes.Error;
+                                            //action.Message = "Create faild!";
                                         }
                                     }
 
@@ -385,11 +394,13 @@ namespace MeetingRoom.Web.Controllers
                                     if (!Repository.Insert(changedEvent))
                                     {
                                         action.Type = DataActionTypes.Error;
+                                        //action.Message = "Create faild!";
                                     }
                                 }
-                                catch (Exception)
-                                {
+                                catch (Exception ex)
+                                { 
                                     action.Type = DataActionTypes.Error;
+                                    //action.Message = ex.Message;
                                 }
                             }
                         }
@@ -405,19 +416,22 @@ namespace MeetingRoom.Web.Controllers
                                 if (!Repository.Delete(changedEvent))
                                 {
                                     action.Type = DataActionTypes.Error;
-                                    return JavaScript("Delete faild!");
+                                    //action.Message = "Delete faild!";
+                                    //return JavaScript("Delete faild!");
                                 }
                             }
                             catch (Exception ex)
                             {
                                 action.Type = DataActionTypes.Error;
-                                return JavaScript("Delete faild! " + ex.Message);
+                                //action.Message = "Delete faild! " + ex.Message;
+                                ////return JavaScript("Delete faild! " + ex.Message);
                             }
                         }
                         else
                         {
                             action.Type = DataActionTypes.Error;
-                            return JavaScript("You can not delete, only the creator can delete!");
+                            //action.Message = "You can not delete, only the creator can delete! ";
+                            ////return JavaScript("You can not delete, only the creator can delete!");
                         }
                     }
                 }
@@ -425,12 +439,14 @@ namespace MeetingRoom.Web.Controllers
                 catch (Exception ex)
                 {
                     action.Type = DataActionTypes.Error;
-                    return JavaScript("Faild! " + ex.Message);
+                    //action.Message = "Faild! " + ex.Message;
+                    //return JavaScript("Faild! " + ex.Message);
                 }
             }
             else
             {
                 action.Type = DataActionTypes.Error;
+                action.Message = "Faild! ";
             }
 
 
@@ -446,7 +462,6 @@ namespace MeetingRoom.Web.Controllers
         /// <returns></returns>
         public ContentResult NativeSave(CalendarEvent changedEvent, FormCollection actionValues)
         {
-
             var action = new DataAction(actionValues);
             string currentUser = HttpContext.User.Identity.Name;
             try
@@ -598,20 +613,25 @@ namespace MeetingRoom.Web.Controllers
         {
             var startTime = new TimeSpan(start_date.Hour, start_date.Minute, 0);
             var currentTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
+
+            // Nếu thời gian là tương lai thì trả về TRUE
             if (start_date >= DateTime.Now)
             {
+                // Nếu thời gian là ngày hiện tại thì thực hiện kiểm tra
+                // còn lớn hơn thì trả về TRUE
                 if (start_date.Day <= DateTime.Now.Day)
                 {
+                    // Nếu thời gian bắt đầu nhỏ hơn thời gian hiện tại thì trả về FALSE
+                    // ngược lại trả về TRUE
                     if (startTime < currentTime)
                     {
                         return false;
                     }
+                    return true;
                 }
                 
                 return true;
             }
-
-
             return false;
         }
 
