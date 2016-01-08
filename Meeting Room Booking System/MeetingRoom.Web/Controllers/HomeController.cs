@@ -23,7 +23,10 @@ namespace MeetingRoom.Web.Controllers
         {
             get { return _repository ?? (_repository = new Repository()); }
         }
-
+        /// <summary>
+        /// Index
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             _scheduler = new DHXScheduler(this)
@@ -154,32 +157,40 @@ namespace MeetingRoom.Web.Controllers
             _scheduler.Views.Add(new MonthView()); // adds a tab with the Month view
             _scheduler.InitialView = units.Name; // makes the units view selected initially
             _scheduler.Config.active_link_view = units.Name;
-
+            string viewName = "meetingRoom/Home/LightboxCustomControl";
+            //string viewName = "Home/LightboxCustomControl";
+            var box = _scheduler.Lightbox.SetExternalLightbox(viewName, 730, 530);
+            box.ClassName = "custom_lightbox";
             #endregion
 
 
-            #region lightbox configuration
+            //#region lightbox configuration
 
-            _scheduler.Lightbox.Add(new LightboxText("text", "Title") { Height = 28, Focus = true }); // adds the control to the lightbox
-            _scheduler.Lightbox.Add(new LightboxText("details", "Content") { Height = 60 });
-            var selectRoom = new LightboxSelect("room_id", "Select Room");
-            selectRoom.AddOptions(listRooms);
-            _scheduler.Lightbox.Add(selectRoom);
+            //_scheduler.Lightbox.Add(new LightboxText("text", "Title") { Height = 28, Focus = true }); // adds the control to the lightbox
+            //_scheduler.Lightbox.Add(new LightboxText("details", "Content") { Height = 60 });
+            //var selectRoom = new LightboxSelect("room_id", "Select Room");
+            //selectRoom.AddOptions(listRooms);
+            //_scheduler.Lightbox.Add(selectRoom);
 
-            AddSelectLaptopAndProject();
+            //AddSelectLaptopAndProject();
 
-            _scheduler.Lightbox.Add(new LightboxText("other_devices", "Other Devices") { Height = 60 });
-            _scheduler.Lightbox.Add(new LightboxMiniCalendar("time", "Time"));
-            #endregion
+            //_scheduler.Lightbox.Add(new LightboxText("other_devices", "Other Devices") { Height = 50 });
+            //_scheduler.Lightbox.Add(new LightboxMiniCalendar("time", "Time"));
+            //#endregion
 
             #region data
 
             // enables dataprocessor
             if (Request.IsAuthenticated)
+            {
                 _scheduler.EnableDataprocessor = true;
+            } 
             else
+            {
                 _scheduler.Config.isReadonly = true;
-
+                //JavaScript("Please log in!");
+                //RedirectToAction("Login", "Account");
+            }
             _scheduler.LoadData = true; //'says' to send data request after scheduler initialization 
             _scheduler.Data.DataProcessor.UpdateFieldsAfterSave = true;
 
@@ -190,8 +201,10 @@ namespace MeetingRoom.Web.Controllers
 
             return View(_scheduler);
         }
-
-        [OutputCache(Duration = 0, VaryByParam = "*")]
+        /// <summary>
+        /// Load Data
+        /// </summary>
+        /// <returns></returns>
         public ContentResult Data()
         {
             var events = Repository.GetAll<CalendarEvent>()
@@ -217,88 +230,109 @@ namespace MeetingRoom.Web.Controllers
 
             return (ContentResult) data;
         }
+
+        public ActionResult LightboxCustomControl(CalendarEvent calendarEvent)
+        {
+            var current = Repository.GetAll<CalendarEvent>().FirstOrDefault(e => e.id == calendarEvent.id);
+            var events = Repository.GetAll<CalendarEvent>().Where(ev => ev.start_date.Day == DateTime.Now.Day).ToList();
+            var laptops = Repository.GetAll<Laptop>().Where(l => l.is_empty == false).OrderBy(l => l.position).ToList();
+            var projectors = Repository.GetAll<Projector>().Where(p => p.is_empty == false).OrderBy(p => p.position).ToList();
+            var phones = Repository.GetAll<Phone>().Where(p => p.is_empty == false).OrderBy(p => p.position).ToList();
+            var rooms = Repository.GetAll<Room>().OrderBy(p => p.position).ToList();
+            // List laptop
+            List<Laptop> listlaptops = (from lap in laptops
+                                        where events.All(ev => lap.laptop_id != ev.laptop_id)
+                                        select lap).ToList();
+
+            // List projector
+            List<Projector> listprojectors = (from project in projectors
+                                              where events.All(ev => project.projector_id != ev.projector_id)
+                                              select project).ToList();
+
+            // List Phone
+
+            List<Phone> listphones = (from phone in phones
+                                      where events.All(ev => phone.phone_id != ev.phone_id)
+                                      select phone).ToList();
+            if (current == null)
+            {
+                ViewBag.laptop_id = new SelectList(listlaptops, "laptop_id", "laptop_name");
+                ViewBag.phone_id = new SelectList(listphones, "phone_id", "phone_name");
+                ViewBag.projector_id = new SelectList(listprojectors, "projector_id", "projector_name");
+                ViewBag.room_id = new SelectList(rooms, "key", "label");
+
+                current = calendarEvent;
+            }
+            else
+            {
+                ViewBag.laptop_id = new SelectList(laptops, "laptop_id", "laptop_name", current.laptop_id);
+                ViewBag.phone_id = new SelectList(phones, "phone_id", "phone_name", current.phone_id);
+                ViewBag.projector_id = new SelectList(projectors, "projector_id", "projector_name", current.projector_id);
+                ViewBag.room_id = new SelectList(rooms, "key", "label", current.room_id);
+            }
+            return View(current);
+        }
+
+        /// <summary>
+        /// Save Action
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="actionValues"></param>
+        /// <returns></returns>
         public ActionResult Save(int? id, FormCollection actionValues)
         {
             if (Request.IsAuthenticated)
             {
                 // an action against particular task (updated/deleted/created) 
                 var action = new DataAction(actionValues);
+                var changedEvent = (CalendarEvent)DHXEventsHelper.Bind(typeof(CalendarEvent), actionValues);
+                if (action.Type != DataActionTypes.Error)
+                {
+                    //process resize, d'n'd operations...
+                    return NativeSave(changedEvent, actionValues);
+                }
+                //custom form operation
+                return CustomSave(changedEvent, actionValues);
+            }
+            return JavaScript("Please log in");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="changedEvent"></param>
+        /// <param name="actionValues"></param>
+        /// <returns></returns>
+        public ActionResult CustomSave(CalendarEvent changedEvent, FormCollection actionValues)
+        {
+
+            var action = new DataAction(DataActionTypes.Update, changedEvent.id, changedEvent.id);
+            string currentUser = HttpContext.User.Identity.Name;
+            if (actionValues["actionButton"] != null)
+            {
                 try
                 {
-                    var changedEvent = (CalendarEvent) DHXEventsHelper.Bind(typeof (CalendarEvent), actionValues);
-                    string currentUser = HttpContext.User.Identity.Name;
-                    switch (action.Type)
+                    string actionButton = actionValues["actionButton"];
+                    if (actionButton == "Save")
                     {
-                            // Insert Event
-                        case DataActionTypes.Insert:
-                            if (!CheckStartDateAndEndDateInRoom(changedEvent.room_id, changedEvent.start_date, changedEvent.end_date))
-                            {
-                                action.Type = DataActionTypes.Delete;
-                            }
-                            else
+                        var eventToUpdate = Repository.GetAll<CalendarEvent>().FirstOrDefault(ev => ev.id == action.SourceId);
+
+                        if (eventToUpdate != null)
+                        {
+                            if (changedEvent.user_name == currentUser)
                             {
                                 if (!CheckTimeCurrent(changedEvent.start_date))
                                 {
-                                    action.Type = DataActionTypes.Delete;
+                                    action.Type = DataActionTypes.Error;
+                                    return JavaScript("Please check start time!");
                                 }
-                                else       
-                                {
-                                    try
-                                    {
-                                        if (changedEvent.laptop_id == "NotUse")
-                                            changedEvent.laptop_id = null;
-                                        if (changedEvent.phone_id == "NotUse")
-                                            changedEvent.phone_id = null;
-                                        if (changedEvent.projector_id == "NotUse")
-                                        {
-                                            changedEvent.projector_id = null;
-                                        }
-                                        else
-                                        {
-                                            if (!CheckProjectorExitsInRoom(changedEvent.room_id))
-                                            {
-                                                action.Type = DataActionTypes.Error;
-                                                return JavaScript("Create failed! This room has a projector and then, long clear projector parts when creating!");
-                                            }
-                                        }
-
-                                        changedEvent.user_name = HttpContext.User.Identity.Name;
-                                        changedEvent.creator_id = Guid.Parse(HttpContext.User.Identity.GetUserId());
-                                        if (Request.HttpMethod == "POST")
-                                        {
-                                            if (!Repository.Insert(changedEvent))
-                                            {
-                                                action.Type = DataActionTypes.Error;
-                                            }
-                                            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        action.Type = DataActionTypes.Error;
-                                        
-                                        return JavaScript(ex.Message);
-                                    }
-                                }
-                                
-                            }
-                            break;
-                            // Delete Event
-                        case DataActionTypes.Delete:
-                            changedEvent = Repository.GetAll<CalendarEvent>().SingleOrDefault(ev => ev.id == action.SourceId);
-                            if (changedEvent != null && changedEvent.user_name == currentUser)
-                            {
                                 try
                                 {
-                                    if (Request.HttpMethod == "POST")
+                                    if (!Repository.UpdateEvents(changedEvent))
                                     {
-                                        if (!Repository.Delete(changedEvent))
-                                        {
-                                            action.Type = DataActionTypes.Error;
-                                        }
-                                        action.Message = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize("location.reload();");
-                                        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                                        action.Type = DataActionTypes.Error;
                                     }
+                                    DHXEventsHelper.Update(eventToUpdate, changedEvent, new List<string>() { "id" });
                                 }
                                 catch (Exception ex)
                                 {
@@ -309,56 +343,223 @@ namespace MeetingRoom.Web.Controllers
                             else
                             {
                                 action.Type = DataActionTypes.Error;
-                                return JavaScript("You can not delete, only the owner has the right to delete");
+                                return JavaScript("You can not fix, only the creator can edit!");
                             }
-                            break;
-                        case DataActionTypes.Update:
-                            var eventToUpdate = Repository.GetAll<CalendarEvent>().FirstOrDefault(ev => ev.id == action.SourceId);
-                            if (changedEvent.user_name == currentUser)
+
+                        }
+                        else
+                        {
+                            action.Type = DataActionTypes.Insert;
+                            if (!CheckStartDateAndEndDateInRoom(changedEvent.room_id, changedEvent.start_date, changedEvent.end_date))
                             {
-                                if (!CheckTimeCurrent(changedEvent.start_date))
-                                {
-                                    action.Type = DataActionTypes.Error;
-                                    return JavaScript("Time error!");
-                                }
-                                else
-                                {
-                                    try
-                                    {
-                                        if (!Repository.UpdateEvents(changedEvent))
-                                        {
-                                            action.Type = DataActionTypes.Error;
-                                        }
-                                        DHXEventsHelper.Update(eventToUpdate, changedEvent, new List<string>() { "id" });
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        action.Type = DataActionTypes.Error;
-                                        return JavaScript(ex.Message);
-                                    }
-                                }                              
+                                action.Type = DataActionTypes.Delete;
+                                return JavaScript("Please check start time!");
                             }
                             else
                             {
-                                action.Type = DataActionTypes.Delete;
-                                return JavaScript("You can not modify, only the owner has the right to modify");
+                                if (!CheckTimeCurrent(changedEvent.start_date))
+                                {
+                                    action.Type = DataActionTypes.Delete;
+                                    return JavaScript("Please check start time!");
+                                }
+                                try
+                                {
+                                    if (changedEvent.laptop_id == "NotUse")
+                                        changedEvent.laptop_id = null;
+                                    if (changedEvent.phone_id == "NotUse")
+                                        changedEvent.phone_id = null;
+                                    if (changedEvent.projector_id == "NotUse")
+                                    {
+                                        changedEvent.projector_id = null;
+                                    }
+                                    else
+                                    {
+                                        if (!CheckProjectorExitsInRoom(changedEvent.room_id))
+                                        {
+                                            action.Type = DataActionTypes.Error;
+                                        }
+                                    }
+
+                                    changedEvent.user_name = HttpContext.User.Identity.Name;
+                                    changedEvent.creator_id = Guid.Parse(HttpContext.User.Identity.GetUserId());
+                                    if (!Repository.Insert(changedEvent))
+                                    {
+                                        action.Type = DataActionTypes.Error;
+                                    }
+                                }
+                                catch (Exception)
+                                {
+                                    action.Type = DataActionTypes.Error;
+                                }
                             }
-                            break;
+                        }
                     }
-                    action.TargetId = changedEvent.id;
+                    else if (actionButton == "Delete")
+                    {
+                        action.Type = DataActionTypes.Delete;
+                        changedEvent = Repository.GetAll<CalendarEvent>().SingleOrDefault(ev => ev.id == action.SourceId);
+                        if (changedEvent != null && changedEvent.user_name == currentUser)
+                        {
+                            try
+                            {
+                                if (!Repository.Delete(changedEvent))
+                                {
+                                    action.Type = DataActionTypes.Error;
+                                    return JavaScript("Delete faild!");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                action.Type = DataActionTypes.Error;
+                                return JavaScript("Delete faild! " + ex.Message);
+                            }
+                        }
+                        else
+                        {
+                            action.Type = DataActionTypes.Error;
+                            return JavaScript("You can not delete, only the creator can delete!");
+                        }
+                    }
                 }
-                catch (Exception)
+
+                catch (Exception ex)
                 {
                     action.Type = DataActionTypes.Error;
+                    return JavaScript("Faild! " + ex.Message);
                 }
-
-                //var color = Repository.GetAll<Status>().SingleOrDefault(s => s.id == calendarEvent.status_id);
-                //result.UpdateField("phone_id", phones);
-
-                var result = new AjaxSaveResponse(action);
-                return result;
             }
-            return JavaScript("Please log in");
+            else
+            {
+                action.Type = DataActionTypes.Error;
+            }
+
+
+            return (new SchedulerFormResponseScript(action, changedEvent));
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="changedEvent"></param>
+        /// <param name="actionValues"></param>
+        /// <returns></returns>
+        public ContentResult NativeSave(CalendarEvent changedEvent, FormCollection actionValues)
+        {
+
+            var action = new DataAction(actionValues);
+            string currentUser = HttpContext.User.Identity.Name;
+            try
+            {
+                switch (action.Type)
+                {
+                    case DataActionTypes.Insert:
+                        if (!CheckStartDateAndEndDateInRoom(changedEvent.room_id, changedEvent.start_date, changedEvent.end_date))
+                        {
+                            action.Type = DataActionTypes.Delete;
+                        }
+                        else
+                        {
+                            if (!CheckTimeCurrent(changedEvent.start_date))
+                            {
+                                action.Type = DataActionTypes.Delete;
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    if (changedEvent.laptop_id == "NotUse")
+                                        changedEvent.laptop_id = null;
+                                    if (changedEvent.phone_id == "NotUse")
+                                        changedEvent.phone_id = null;
+                                    if (changedEvent.projector_id == "NotUse")
+                                    {
+                                        changedEvent.projector_id = null;
+                                    }
+                                    else
+                                    {
+                                        if (!CheckProjectorExitsInRoom(changedEvent.room_id))
+                                        {
+                                            action.Type = DataActionTypes.Error;
+                                        }
+                                    }
+
+                                    changedEvent.user_name = HttpContext.User.Identity.Name;
+                                    changedEvent.creator_id = Guid.Parse(HttpContext.User.Identity.GetUserId());
+                                    if (!Repository.Insert(changedEvent))
+                                    {
+                                        action.Type = DataActionTypes.Error;
+                                    }
+
+                                }
+                                catch (Exception)
+                                {
+                                    action.Type = DataActionTypes.Error;
+                                }
+                            }
+
+                        }
+                        break;
+                    case DataActionTypes.Delete:
+                        changedEvent = Repository.GetAll<CalendarEvent>().SingleOrDefault(ev => ev.id == action.SourceId);
+                        if (changedEvent != null && changedEvent.user_name == currentUser)
+                        {
+                            try
+                            {
+                                if (!Repository.Delete(changedEvent))
+                                {
+                                    action.Type = DataActionTypes.Error;
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                action.Type = DataActionTypes.Error;
+                            }
+                        }
+                        else
+                        {
+                            action.Type = DataActionTypes.Error;
+                        }
+                        break;
+                    default:// "update"                          
+                        var eventToUpdate = Repository.GetAll<CalendarEvent>().FirstOrDefault(ev => ev.id == action.SourceId);
+                        if (changedEvent.user_name == currentUser)
+                        {
+                            if (!CheckTimeCurrent(changedEvent.start_date))
+                            {
+                                action.Type = DataActionTypes.Error;
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    if (!Repository.UpdateEvents(changedEvent))
+                                    {
+                                        action.Type = DataActionTypes.Error;
+                                    }
+                                    DHXEventsHelper.Update(eventToUpdate, changedEvent, new List<string>() { "id" });
+                                }
+                                catch (Exception)
+                                {
+                                    action.Type = DataActionTypes.Error;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            action.Type = DataActionTypes.Delete;
+                        }
+                        break;
+                }
+                if (changedEvent != null)
+                    action.TargetId = changedEvent.id;
+            }
+            catch
+            {
+                action.Type = DataActionTypes.Error;
+            }
+
+            return (new AjaxSaveResponse(action));
         }
 
         /// <summary>
@@ -399,12 +600,17 @@ namespace MeetingRoom.Web.Controllers
             var currentTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
             if (start_date >= DateTime.Now)
             {
-                if (startTime < currentTime)
+                if (start_date.Day <= DateTime.Now.Day)
                 {
-                    return false;
+                    if (startTime < currentTime)
+                    {
+                        return false;
+                    }
                 }
+                
                 return true;
             }
+
 
             return false;
         }

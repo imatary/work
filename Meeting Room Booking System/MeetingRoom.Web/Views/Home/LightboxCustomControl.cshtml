@@ -1,0 +1,176 @@
+﻿@using MeetingRoom.Repositories
+@using MeetingRoom.Web.Models
+@model MeetingRoom.Web.Models.CalendarEvent
+@{
+    Layout = null;
+}
+<html>
+<head>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style type="text/css">
+        .input-group-addon-custom {
+            width: 120px;
+            background-color: white;
+            border: none;
+        }
+        .td-width-120 {
+            width: 100px;
+        }
+        .float-right {
+            float: right;
+        }
+        .border-none {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm("Save", "Home", new { id = "schedulerForm", @class = "row" }))
+    {
+        @Html.HiddenFor(m => m.id)
+        @*@Html.HiddenFor(m => m.room_id)*@
+        <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td class="td-width-120">&nbsp;</td>
+                                <td colspan="3">
+                                    <label style="text-align: center; font-weight: bold; font-size: 20px; text-transform: uppercase; margin-left: 15px;">
+                                        Room @Html.DisplayFor(m => m.room_id)
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-width-120">@Html.LabelFor(m => m.text, new {@class = "control-label float-right"})</td>
+                                <td colspan="3">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            @Html.TextBoxFor(m => m.text, new {@class = "form-control", @placeholder = "Title"})
+                                            @Html.ValidationMessageFor(m => m.text, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-width-120">@Html.LabelFor(m => m.details, new {@class = "control-label float-right"})</td>
+                                <td colspan="3">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            @Html.TextAreaFor(m => m.details, 3, 42, new {@class = "form-control", @placeholder = "Content"})
+                                            @Html.ValidationMessageFor(m => m.details, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-width-120">@Html.LabelFor(m => m.room_id, new {@class = "control-label float-right"})</td>
+                                <td colspan="3">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            @Html.DropDownList("room_id", null, htmlAttributes: new {@class = "form-control"})
+                                            @Html.ValidationMessageFor(model => model.room_id, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-width-120">@Html.LabelFor(m => m.start_date, new {@class = "control-label float-right"})</td>
+                                <td>
+                                    <div class="col-sm-12">
+                                        <div class="input-group form-group">
+                                            @Html.TextBoxFor(m => m.start_date, new {@class = "form-control", @placeholder = "Form"})
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </span>
+                                        </div>
+                                        @Html.ValidationMessageFor(m => m.start_date, "", new {@class = "text-danger"})
+                                    </div>
+                                </td>
+                                <td class="td-width-120">@Html.LabelFor(m => m.end_date, new {@class = "control-label float-right"})</td>
+                                <td>
+                                    <div class="col-sm-12">
+                                        <div class="input-group form-group">
+                                            @Html.TextBoxFor(m => m.end_date, new {@class = "form-control", @placeholder = "To"})
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </span>
+                                        </div>
+                                        @Html.ValidationMessageFor(m => m.end_date, "", new {@class = "text-danger"})
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-width-120">@Html.LabelFor(m => m.laptop_id, new {@class = "control-label float-right"})</td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            @Html.DropDownList("laptop_id", null, htmlAttributes: new {@class = "form-control"})
+                                            @Html.ValidationMessageFor(model => model.laptop_id, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td-width-120">@Html.LabelFor(m => m.projector_id, new {@class = "control-label float-right"})</td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            @Html.DropDownList("projector_id", null, htmlAttributes: new {@class = "form-control"})
+                                            @Html.ValidationMessageFor(model => model.projector_id, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-width-120">&nbsp;</td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            @Html.CheckBoxFor(m => m.is_charging)@Html.LabelFor(m => m.is_charging, new {style = "font-weight: normal; margin-left: 3px; font-size: 14px;"})
+                                            @Html.ValidationMessageFor(m => m.is_charging, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td-width-120">@Html.LabelFor(m => m.phone_id, new {@class = "control-label float-right"})</td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            @Html.DropDownList("phone_id", null, htmlAttributes: new {@class = "form-control"})
+                                            @Html.ValidationMessageFor(model => model.phone_id, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-width-120">@Html.LabelFor(m => m.other_devices, new {@class = "control-label float-right"})</td>
+                                <td colspan="3">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            @Html.TextAreaFor(m => m.other_devices, 1, 42, new {@class = "form-control", @placeholder = "Other Devices"})
+                                            @Html.ValidationMessageFor(m => m.other_devices, "", new {@class = "text-danger"})
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            <div style="margin-left: 115px;">
+                    <input type="submit" class="btn-primary btn-sm btn" name="actionButton" value="Save"/>
+                    <input type="submit" class="btn-danger btn-sm btn" name="actionButton" value="Delete" />
+                <button type="button" class="btn btn-warning btn-sm pull-right" onclick="lightbox.close() /* helper-method, only available in custom lightbox */">
+                    <i class="glyphicon glyphicon-remove">&nbsp;</i>Close
+                </button>
+            </div> 
+        </div>
+    }
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>
+
