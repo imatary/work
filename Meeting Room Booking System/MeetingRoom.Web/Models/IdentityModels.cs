@@ -77,6 +77,22 @@ namespace MeetingRoom.Web.Models
                 manager.Create(role);
             }
 
+            if (!context.Roles.Any(r => r.Name == "Employee"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole() { Name = "Employee" };
+                manager.Create(role);
+            }
+
+            if (!context.Roles.Any(r => r.Name == "GA"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole() { Name = "GA" };
+                manager.Create(role);
+            }
+
             if (!context.Users.Any(u => u.UserName == "cuongpv"))
             {
                 var store = new UserStore<ApplicationUser>(context);

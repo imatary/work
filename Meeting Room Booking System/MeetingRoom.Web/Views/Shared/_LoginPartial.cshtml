@@ -21,6 +21,13 @@
                             Admin
                         </a>
                     </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Manager")">
+                            <i class="glyphicon glyphicon-user"></i>
+                            Add new user
+                        </a>
+                    </li>
+                    @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
                 }
                 <li>
                     <a href="@Url.Action("ChangePassword", "Manage")">
@@ -44,7 +51,6 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

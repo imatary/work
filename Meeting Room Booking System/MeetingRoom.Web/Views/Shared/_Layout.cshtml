@@ -39,8 +39,8 @@
         </div>
     </div>
     <div class="container">
-        @RenderBody()
-        <hr />
+        @RenderBody() 
+        @*<hr />*@
         <footer>
             <div class="col-lg-4">
                 <p>&copy; <strong>@DateTime.Now.Year - UMC Electronics VietNam Ltd's</strong></p>
@@ -54,16 +54,18 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script language="javascript">
-        scheduler.dataProcessor.attachEvent("onAfterUpdate", function (sid, action, tid, tag) {
-            if (action === "error") {
-                dhtmlx.alert(
-                {
-                    text: "Faild! " + tag.textContent
-                });
+<script language="javascript">
+    scheduler.dataProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag) {
+        if (action === "error") {
+            var actionBox = dhtmlx.alert({ text: "Faild! " + tag.textContent });
+            if (actionBox === true) {
+                window.location.href = window.location.href;
             }
-            
-        });
-    </script>
+
+            //window.location.href = window.location.href;
+        }
+
+    });
+</script>
 </body>
 </html>

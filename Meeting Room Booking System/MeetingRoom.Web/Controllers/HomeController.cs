@@ -54,7 +54,7 @@ namespace MeetingRoom.Web.Controllers
                 {
                     scroll_width = 0,
                 },
-                Height = 660,
+                Height = 600,
                 //AjaxMode = TransactionModes.REST,
                 
                 
@@ -67,6 +67,7 @@ namespace MeetingRoom.Web.Controllers
             {
                 CssClass = _scheduler.Templates.event_class = "my_event",
                 //<span class='event_date'>{start_date:date(%H:%i)} - {end_date:date(%H:%i)}</span><br/>
+
                 Template = @"<div class='my_event_body'>
                     <span>by: <strong style='color: red; font-weight: bold; text-decoration: underline; text-transform: uppercase;'>
                                 {user_name}</strong></span><br>
@@ -78,7 +79,7 @@ namespace MeetingRoom.Web.Controllers
                     <% } %>                  
                     <span>{text}</span><br>
                     <div style=""padding-top:5px;"">
-                        Duration: <b><%= Math.ceil((ev.end_date - ev.start_date) / (60 * 60 * 1000)) %></b> hours
+                        Duration: <b><%= (ev.end_date - ev.start_date) / (60 * 60 * 1000) %></b> hours
                     </div>
                   </div>"
             };
@@ -107,7 +108,7 @@ namespace MeetingRoom.Web.Controllers
                             <span>Projector: <strong>{projector_id}</strong></span><br>
                         <% } %> 
                         <div style=""padding-top:5px;"">
-                            Duration: <b><%= Math.ceil((ev.end_date - ev.start_date) / (60 * 60 * 1000)) %></b> hours
+                            Duration: <b><%= (ev.end_date - ev.start_date) / (60 * 60 * 1000) %></b> hours
                         </div>
                     </div>";
             
@@ -283,11 +284,12 @@ namespace MeetingRoom.Web.Controllers
         /// <returns></returns>
         public ActionResult Save(int? id, FormCollection actionValues)
         {
+            var action = new DataAction(actionValues);
             if (Request.IsAuthenticated)
             {
                 // an action against particular task (updated/deleted/created) 
-                var action = new DataAction(actionValues);
-                var changedEvent = (CalendarEvent)DHXEventsHelper.Bind(typeof(CalendarEvent), actionValues);
+                
+                var changedEvent = (CalendarEvent) DHXEventsHelper.Bind(typeof (CalendarEvent), actionValues);
                 if (action.Type != DataActionTypes.Error)
                 {
                     //process resize, d'n'd operations...
@@ -296,7 +298,9 @@ namespace MeetingRoom.Web.Controllers
                 //custom form operation
                 return CustomSave(changedEvent, actionValues);
             }
-            return JavaScript("Please log in");
+            action.Type = DataActionTypes.Error;
+            action.Message = "Please log in!";
+            return null;
         }
 
         /// <summary>
@@ -318,15 +322,14 @@ namespace MeetingRoom.Web.Controllers
                     if (actionButton == "Save")
                     {
                         var eventToUpdate = Repository.GetAll<CalendarEvent>().FirstOrDefault(ev => ev.id == action.SourceId);
-
                         if (eventToUpdate != null)
                         {
-                            if (changedEvent.user_name == currentUser)
+                            if (eventToUpdate.user_name == currentUser)
                             {
                                 if (!CheckTimeCurrent(changedEvent.start_date))
                                 {
                                     action.Type = DataActionTypes.Error;
-                                    //action.Message = "Please check start time!";
+                                    action.Message = "Please check start time!";
                                     //return JavaScript("Please check start time!");
                                 }
                                 try
@@ -334,22 +337,20 @@ namespace MeetingRoom.Web.Controllers
                                     if (!Repository.UpdateEvents(changedEvent))
                                     {
                                         action.Type = DataActionTypes.Error;
-                                        //action.Message = "Update faild!";
+                                        action.Message = "Update faild!";
                                     }
                                     DHXEventsHelper.Update(eventToUpdate, changedEvent, new List<string>() { "id" });
                                 }
                                 catch (Exception ex)
                                 {
                                     action.Type = DataActionTypes.Error;
-                                    //action.Message = ex.Message;
-                                    //return JavaScript(ex.Message);
+                                    action.Message = ex.Message;
                                 }
                             }
                             else
                             {
                                 action.Type = DataActionTypes.Error;
-                                //action.Message = "You can not fix, only the creator can edit!";
-                                //return JavaScript("You can not fix, only the creator can edit!");
+                                action.Message = "You can not fix, only the creator can edit!";
                             }
 
                         }
@@ -359,16 +360,14 @@ namespace MeetingRoom.Web.Controllers
                             if (!CheckStartDateAndEndDateInRoom(changedEvent.room_id, changedEvent.start_date, changedEvent.end_date))
                             {
                                 action.Type = DataActionTypes.Delete;
-                                //action.Message = "Please check start time!";
-                                //return JavaScript("Please check start time!");
+                                action.Message = "Please check start time!";
                             }
                             else
                             {
                                 if (!CheckTimeCurrent(changedEvent.start_date))
                                 {
                                     action.Type = DataActionTypes.Error;
-                                    //action.Message = "Please check start time!";
-                                    //return JavaScript("Please check start time!");
+                                    action.Message = "Please check start time!";
                                 }
                                 try
                                 {
@@ -385,7 +384,7 @@ namespace MeetingRoom.Web.Controllers
                                         if (!CheckProjectorExitsInRoom(changedEvent.room_id))
                                         {
                                             action.Type = DataActionTypes.Error;
-                                            //action.Message = "Create faild!";
+                                            action.Message = "Create faild!";
                                         }
                                     }
 
@@ -394,13 +393,13 @@ namespace MeetingRoom.Web.Controllers
                                     if (!Repository.Insert(changedEvent))
                                     {
                                         action.Type = DataActionTypes.Error;
-                                        //action.Message = "Create faild!";
+                                        action.Message = "Create faild!";
                                     }
                                 }
                                 catch (Exception ex)
                                 { 
                                     action.Type = DataActionTypes.Error;
-                                    //action.Message = ex.Message;
+                                    action.Message = ex.Message;
                                 }
                             }
                         }
@@ -416,22 +415,19 @@ namespace MeetingRoom.Web.Controllers
                                 if (!Repository.Delete(changedEvent))
                                 {
                                     action.Type = DataActionTypes.Error;
-                                    //action.Message = "Delete faild!";
-                                    //return JavaScript("Delete faild!");
+                                    action.Message = "Delete faild!";
                                 }
                             }
                             catch (Exception ex)
                             {
                                 action.Type = DataActionTypes.Error;
-                                //action.Message = "Delete faild! " + ex.Message;
-                                ////return JavaScript("Delete faild! " + ex.Message);
+                                action.Message = "Delete faild! " + ex.Message;
                             }
                         }
                         else
                         {
                             action.Type = DataActionTypes.Error;
-                            //action.Message = "You can not delete, only the creator can delete! ";
-                            ////return JavaScript("You can not delete, only the creator can delete!");
+                            action.Message = "You can not delete, only the creator can delete! ";
                         }
                     }
                 }
@@ -439,14 +435,13 @@ namespace MeetingRoom.Web.Controllers
                 catch (Exception ex)
                 {
                     action.Type = DataActionTypes.Error;
-                    //action.Message = "Faild! " + ex.Message;
-                    //return JavaScript("Faild! " + ex.Message);
+                    action.Message = "Faild! " + ex.Message;
                 }
             }
             else
             {
                 action.Type = DataActionTypes.Error;
-                action.Message = "Faild! ";
+                action.Message = "action notfound! ";
             }
 
 
@@ -472,12 +467,14 @@ namespace MeetingRoom.Web.Controllers
                         if (!CheckStartDateAndEndDateInRoom(changedEvent.room_id, changedEvent.start_date, changedEvent.end_date))
                         {
                             action.Type = DataActionTypes.Delete;
+                            action.Message = "Time check faild!";
                         }
                         else
                         {
                             if (!CheckTimeCurrent(changedEvent.start_date))
                             {
                                 action.Type = DataActionTypes.Delete;
+                                action.Message = "Time check faild!";
                             }
                             else
                             {
@@ -496,6 +493,7 @@ namespace MeetingRoom.Web.Controllers
                                         if (!CheckProjectorExitsInRoom(changedEvent.room_id))
                                         {
                                             action.Type = DataActionTypes.Error;
+                                            action.Message = "Room current is use projector!";
                                         }
                                     }
 
@@ -504,12 +502,14 @@ namespace MeetingRoom.Web.Controllers
                                     if (!Repository.Insert(changedEvent))
                                     {
                                         action.Type = DataActionTypes.Error;
+                                        action.Message = "Inrest";
                                     }
 
                                 }
-                                catch (Exception)
+                                catch (Exception ex)
                                 {
                                     action.Type = DataActionTypes.Error;
+                                    action.Message = ex.Message;
                                 }
                             }
 
@@ -517,61 +517,83 @@ namespace MeetingRoom.Web.Controllers
                         break;
                     case DataActionTypes.Delete:
                         changedEvent = Repository.GetAll<CalendarEvent>().SingleOrDefault(ev => ev.id == action.SourceId);
-                        if (changedEvent != null && changedEvent.user_name == currentUser)
+                        if (changedEvent != null)
                         {
-                            try
+                            if (changedEvent.user_name == currentUser)
                             {
-                                if (!Repository.Delete(changedEvent))
+                                try
+                                {
+                                    if (!Repository.Delete(changedEvent))
+                                    {
+                                        action.Type = DataActionTypes.Error;
+                                        action.Message = "Delete";
+                                    }
+                                }
+                                catch (Exception ex)
                                 {
                                     action.Type = DataActionTypes.Error;
+                                    action.Message = ex.Message;
                                 }
                             }
-                            catch (Exception)
+                            else
                             {
-                                action.Type = DataActionTypes.Error;
+                                action.Type=DataActionTypes.Error;
+                                action.Message = "You can not delete, only the creator can delete!";
                             }
+                            
                         }
                         else
                         {
                             action.Type = DataActionTypes.Error;
+                            action.Message = "Event id notfound!";
                         }
                         break;
                     default:// "update"                          
-                        var eventToUpdate = Repository.GetAll<CalendarEvent>().FirstOrDefault(ev => ev.id == action.SourceId);
-                        if (changedEvent.user_name == currentUser)
+                        var eventToUpdate = Repository.GetAll<CalendarEvent>().SingleOrDefault(ev => ev.id == action.SourceId);
+                        if (eventToUpdate != null)
                         {
-                            if (!CheckTimeCurrent(changedEvent.start_date))
+                            if (eventToUpdate.user_name == currentUser)
                             {
-                                action.Type = DataActionTypes.Error;
+                                if (!CheckTimeCurrent(changedEvent.start_date))
+                                {
+                                    action.Type = DataActionTypes.Error;
+                                    action.Message = "Time check!";
+                                }
+                                else
+                                {
+                                    try
+                                    {
+                                        changedEvent.creator_id = Guid.Parse(HttpContext.User.Identity.GetUserId());
+                                        changedEvent.user_name = HttpContext.User.Identity.Name;
+                                        if (!Repository.UpdateEvents(changedEvent))
+                                        {
+                                            action.Type = DataActionTypes.Error;
+                                            action.Message = "Update";
+                                        }
+                                        DHXEventsHelper.Update(eventToUpdate, changedEvent, new List<string>() { "id" });
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        action.Type = DataActionTypes.Error;
+                                        action.Message = ex.Message;
+                                    }
+                                }
                             }
                             else
                             {
-                                try
-                                {
-                                    if (!Repository.UpdateEvents(changedEvent))
-                                    {
-                                        action.Type = DataActionTypes.Error;
-                                    }
-                                    DHXEventsHelper.Update(eventToUpdate, changedEvent, new List<string>() { "id" });
-                                }
-                                catch (Exception)
-                                {
-                                    action.Type = DataActionTypes.Error;
-                                }
+                                action.Type = DataActionTypes.Error;
+                                action.Message = "You can not fix, only the creator can edit!";
                             }
-                        }
-                        else
-                        {
-                            action.Type = DataActionTypes.Delete;
                         }
                         break;
                 }
                 if (changedEvent != null)
                     action.TargetId = changedEvent.id;
             }
-            catch
+            catch(Exception ex)
             {
                 action.Type = DataActionTypes.Error;
+                action.Message = ex.Message;
             }
 
             return (new AjaxSaveResponse(action));
