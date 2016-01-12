@@ -126,7 +126,7 @@
                                 <td>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            @Html.CheckBoxFor(m => m.is_charging)@Html.LabelFor(m => m.is_charging, new {style = "font-weight: normal; margin-left: 3px; font-size: 14px;"})
+                                            @Html.CheckBoxFor(m => m.is_charging, new {@checked = "checked"})@Html.LabelFor(m => m.is_charging, new {style = "font-weight: normal; margin-left: 3px; font-size: 14px;"})
                                             @Html.ValidationMessageFor(m => m.is_charging, "", new {@class = "text-danger"})
                                         </div>
                                     </div>

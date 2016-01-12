@@ -22,5 +22,9 @@ namespace MeetingRoom.Web.Models
         public string phone { get; set; }
 
         public int? position { get; set; }
+
+        [Display(Name = "For Dept")]
+        [StringLength(20)]
+        public string for_dept { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using DHTMLX.Common;
 using DHTMLX.Scheduler;
@@ -54,7 +53,7 @@ namespace MeetingRoom.Web.Controllers
                 {
                     scroll_width = 0,
                 },
-                Height = 600,
+                Height = 650,
                 //AjaxMode = TransactionModes.REST,
                 
                 
@@ -135,24 +134,50 @@ namespace MeetingRoom.Web.Controllers
             _scheduler.UpdateFieldsAfterSave();
             _scheduler.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Day);
             _scheduler.Extensions.Add(SchedulerExtensions.Extension.Limit);
+            _scheduler.Extensions.Add(SchedulerExtensions.Extension.PDF);
             _scheduler.Views.Clear(); //removes all views from the scheduler
             _scheduler.Views.Add(new WeekView()); // adds a tab with the week view
             var units = new UnitsView("rooms", "room_id")
             {
                 Label = "Rooms",
-            }; 
-            var rooms = Repository.GetAll<Room>().OrderBy(r=>r.position).ToList();
+            };
+            List<Room> rooms = null;
+            if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("Manager") || User.IsInRole("General Director"))
+                {
+                    rooms = Repository.GetAll<Room>().OrderBy(r => r.position).ToList();
+                }
+                else if (User.IsInRole("GA"))
+                {
+                    rooms = Repository.GetAll<Room>().Where(r => r.for_dept == "GA").OrderBy(r => r.position).ToList();
+                }
+                else if (User.IsInRole("Employee"))
+                {
+                    rooms =
+                        Repository.GetAll<Room>().Where(r => r.for_dept == "Employee").OrderBy(r => r.position).ToList();
+                }
+            }
+            else
+            {
+                rooms = Repository.GetAll<Room>().OrderBy(r => r.position).ToList();
+            }
+            
+
             var listRooms = new List<object>();
 
-            foreach (var room in rooms)
+            if (rooms != null)
             {
-                listRooms.Add(new
+                foreach (var room in rooms)
                 {
-                    key = room.key,
-                    label = room.label
-                });
+                    listRooms.Add(new
+                    {
+                        key = room.key,
+                        label = room.label
+                    });
+                }
+                units.AddOptions(rooms); // sets X-Axis items to names of employees  
             }
-            units.AddOptions(rooms); // sets X-Axis items to names of employees  
             _scheduler.Views.Add(units); //adds a tab with the units view
             _scheduler.PreventCache();
             _scheduler.Views.Add(new MonthView()); // adds a tab with the Month view
@@ -241,7 +266,21 @@ namespace MeetingRoom.Web.Controllers
             var laptops = Repository.GetAll<Laptop>().Where(l => l.is_empty == false).OrderBy(l => l.position).ToList();
             var projectors = Repository.GetAll<Projector>().Where(p => p.is_empty == false).OrderBy(p => p.position).ToList();
             var phones = Repository.GetAll<Phone>().Where(p => p.is_empty == false).OrderBy(p => p.position).ToList();
-            var rooms = Repository.GetAll<Room>().OrderBy(p => p.position).ToList();
+            List<Room> rooms = null;
+
+            if (User.IsInRole("Manager") || User.IsInRole("General Director"))
+            {
+                rooms = Repository.GetAll<Room>().OrderBy(r => r.position).ToList();
+            }
+            else if (User.IsInRole("GA"))
+            {
+                rooms = Repository.GetAll<Room>().Where(r => r.for_dept == "GA").OrderBy(r => r.position).ToList();
+            }
+            else if (User.IsInRole("Employee"))
+            {
+                rooms = Repository.GetAll<Room>().Where(r => r.for_dept == "Employee").OrderBy(r => r.position).ToList();
+            }
+
             // List laptop
             List<Laptop> listlaptops = (from lap in laptops
                                         where events.All(ev => lap.laptop_id != ev.laptop_id)
@@ -330,7 +369,6 @@ namespace MeetingRoom.Web.Controllers
                                 {
                                     action.Type = DataActionTypes.Error;
                                     action.Message = "Please check start time!";
-                                    //return JavaScript("Please check start time!");
                                 }
                                 try
                                 {
@@ -408,26 +446,34 @@ namespace MeetingRoom.Web.Controllers
                     {
                         action.Type = DataActionTypes.Delete;
                         changedEvent = Repository.GetAll<CalendarEvent>().SingleOrDefault(ev => ev.id == action.SourceId);
-                        if (changedEvent != null && changedEvent.user_name == currentUser)
+                        if (changedEvent != null)
                         {
-                            try
+                            if (changedEvent.user_name == currentUser)
                             {
-                                if (!Repository.Delete(changedEvent))
+                                try
+                                {
+                                    if (!Repository.Delete(changedEvent))
+                                    {
+                                        action.Type = DataActionTypes.Error;
+                                        action.Message = "Delete faild!";
+                                    }
+                                }
+                                catch (Exception ex)
                                 {
                                     action.Type = DataActionTypes.Error;
-                                    action.Message = "Delete faild!";
+                                    action.Message = "Delete faild! " + ex.Message;
                                 }
                             }
-                            catch (Exception ex)
+                            else
                             {
                                 action.Type = DataActionTypes.Error;
-                                action.Message = "Delete faild! " + ex.Message;
+                                action.Message = "You can not delete, only the creator can delete! ";
                             }
                         }
                         else
                         {
                             action.Type = DataActionTypes.Error;
-                            action.Message = "You can not delete, only the creator can delete! ";
+                            action.Message = "Event id notfound!";
                         }
                     }
                 }
@@ -441,7 +487,7 @@ namespace MeetingRoom.Web.Controllers
             else
             {
                 action.Type = DataActionTypes.Error;
-                action.Message = "action notfound! ";
+                action.Message = "action notfound!";
             }
 
 

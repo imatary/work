@@ -93,6 +93,14 @@ namespace MeetingRoom.Web.Models
                 manager.Create(role);
             }
 
+            if (!context.Roles.Any(r => r.Name == "General Director"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole() { Name = "General Director" };
+                manager.Create(role);
+            }
+
             if (!context.Users.Any(u => u.UserName == "cuongpv"))
             {
                 var store = new UserStore<ApplicationUser>(context);
@@ -193,17 +201,17 @@ namespace MeetingRoom.Web.Models
             context.Rooms.AddRange(
                 new[]
                 {
-                    new Room {key = 1, label = "Meeting Room 1", is_projector = false, phone = "2011", position = 2, },
-                    new Room {key = 2, label = "Meeting Room 2", is_projector = false, phone = "2400", position = 3, },
-                    new Room {key = 3, label = "Meeting Room 3", is_projector = false, phone = "2401", position = 4,  },
-                    new Room {key = 4, label = "Meeting Room 4", is_projector = false, phone = "2402", position = 5, },
-                    new Room {key = 5, label = "Meeting Room 5", is_projector = false, phone = "2346", position = 6, },
-                    new Room {key = 6, label = "Meeting Room 6", is_projector = false, phone = "2333", position = 7,},
-                    new Room {key = 7, label = "Meeting Room 7", is_projector = true, phone = "2010", position = 8,},
-                    new Room {key = 8, label = "Meeting Room 8", is_projector = false, phone = "2001", position = 9,},
-                    new Room {key = 9, label = "Meeting Room 9", is_projector = false, phone = "2102", position = 10,},
-                    new Room {key = 10, label = "Meeting Room B", is_projector = false, phone = "2304", position = 11,},
-                    new Room {key = 11, label = "General Director", is_projector = false, phone = "2222", position = 1,},
+                    new Room {key = 1, label = "Meeting Room 1", is_projector = false, phone = "2011", position = 2, for_dept = "GA"},
+                    new Room {key = 2, label = "Meeting Room 2", is_projector = false, phone = "2400", position = 3, for_dept = "GA" },
+                    new Room {key = 3, label = "Meeting Room 3", is_projector = false, phone = "2401", position = 4, for_dept = "GA"},
+                    new Room {key = 4, label = "Meeting Room 4", is_projector = false, phone = "2402", position = 5,  for_dept = "GA"},
+                    new Room {key = 5, label = "Meeting Room 5", is_projector = false, phone = "2346", position = 6,  for_dept = "GA"},
+                    new Room {key = 6, label = "Meeting Room 6", is_projector = false, phone = "2333", position = 7, for_dept = "GA"},
+                    new Room {key = 7, label = "Meeting Room 7", is_projector = true, phone = "2010", position = 8, for_dept = "Employee"},
+                    new Room {key = 8, label = "Meeting Room 8", is_projector = false, phone = "2001", position = 9, for_dept = "Employee"},
+                    new Room {key = 9, label = "Meeting Room 9", is_projector = false, phone = "2102", position = 10, for_dept = "Employee"},
+                    new Room {key = 10, label = "Meeting Room B", is_projector = false, phone = "2304", position = 11, for_dept = "Employee"},
+                    new Room {key = 11, label = "General Director", is_projector = false, phone = "2222", position = 1, for_dept = "General Director"},
                 });
 
             context.Laptops.AddRange(new[]
