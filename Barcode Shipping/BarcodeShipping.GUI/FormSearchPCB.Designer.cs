@@ -204,6 +204,7 @@
             this.txtSearchPCB.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtSearchPCB.Properties.Appearance.Options.UseFont = true;
             this.txtSearchPCB.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtSearchPCB.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtSearchPCB.Size = new System.Drawing.Size(312, 28);
             this.txtSearchPCB.TabIndex = 0;
             this.txtSearchPCB.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtSearchPCB_PreviewKeyDown);

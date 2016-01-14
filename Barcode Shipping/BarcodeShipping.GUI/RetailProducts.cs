@@ -257,7 +257,8 @@ namespace BarcodeShipping.GUI
         {
             if (modelId != null)
             {
-                if (modelId.Contains(_currentModel.SerialNo))
+                string key = string.Format("{0}_{1}", _currentModel.SerialNo, _currentModel.ModelID);
+                if (modelId.Contains(key))
                 {
                     return true;
                 }
@@ -536,20 +537,13 @@ namespace BarcodeShipping.GUI
                         }
                         else
                         {
-                            if (CheckModels(txtAddPCB.Text))
-                            {
-                                _shippings.Add(shipping);
-                                gridControlData.DataSource = _shippings;
-                                lblCountPCB.Text = _shippings.Count.ToString(CultureInfo.InvariantCulture);
-                                lblRemains.Text = (int.Parse(lblRemains.Text) - 1).ToString(CultureInfo.InvariantCulture);
-                                EnabledButonSave(true);
-                                splashScreenLoadData.CloseWaitForm();
-                                txtAddPCB.Text = string.Empty;
-                            }
-                            else
-                            {
-                                Ultils.EditTextErrorMessage(txtAddPCB, string.Format("PCB[{0}] sai Model", txtAddPCB.Text));
-                            }
+                            _shippings.Add(shipping);
+                            gridControlData.DataSource = _shippings;
+                            lblCountPCB.Text = _shippings.Count.ToString(CultureInfo.InvariantCulture);
+                            lblRemains.Text = (int.Parse(lblRemains.Text) - 1).ToString(CultureInfo.InvariantCulture);
+                            EnabledButonSave(true);
+                            splashScreenLoadData.CloseWaitForm();
+                            txtAddPCB.Text = string.Empty;
                         }
                     }
                     else

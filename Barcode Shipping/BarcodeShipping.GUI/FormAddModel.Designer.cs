@@ -185,8 +185,6 @@
             this.txtOperatorCode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
             this.txtOperatorCode.Properties.Appearance.Options.UseFont = true;
             this.txtOperatorCode.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtOperatorCode.Properties.Mask.EditMask = "n";
-            this.txtOperatorCode.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtOperatorCode.Size = new System.Drawing.Size(224, 26);
             this.txtOperatorCode.TabIndex = 2;
             this.txtOperatorCode.EditValueChanged += new System.EventHandler(this.txtOperatorCode_EditValueChanged);
