@@ -38,6 +38,9 @@ namespace MeetingRoom.Web.Models
         [Display(Name = "Use charging")]
         public bool is_charging { get; set; }
 
+        [StringLength(20)]
+        public string for_dept { get; set; }
+
         public Guid? owner_id { get; set; }
 
         [Required]

@@ -144,18 +144,17 @@ namespace MeetingRoom.Web.Controllers
             List<Room> rooms = null;
             if (Request.IsAuthenticated)
             {
-                if (User.IsInRole("Manager") || User.IsInRole("General Director"))
+                if (User.IsInRole("Manager") || User.IsInRole("General Director") || User.IsInRole("GA"))
                 {
                     rooms = Repository.GetAll<Room>().OrderBy(r => r.position).ToList();
                 }
-                else if (User.IsInRole("GA"))
-                {
-                    rooms = Repository.GetAll<Room>().Where(r => r.for_dept == "GA").OrderBy(r => r.position).ToList();
-                }
+                //else if (User.IsInRole("GA"))
+                //{
+                //    rooms = Repository.GetAll<Room>().Where(r => r.for_dept == "GA").OrderBy(r => r.position).ToList();
+                //}
                 else if (User.IsInRole("Employee"))
                 {
-                    rooms =
-                        Repository.GetAll<Room>().Where(r => r.for_dept == "Employee").OrderBy(r => r.position).ToList();
+                    rooms = Repository.GetAll<Room>().Where(r => r.for_dept == "Employee").OrderBy(r => r.position).ToList();
                 }
             }
             else
@@ -214,8 +213,6 @@ namespace MeetingRoom.Web.Controllers
             else
             {
                 _scheduler.Config.isReadonly = true;
-                //JavaScript("Please log in!");
-                //RedirectToAction("Login", "Account");
             }
             _scheduler.LoadData = true; //'says' to send data request after scheduler initialization 
             _scheduler.Data.DataProcessor.UpdateFieldsAfterSave = true;
@@ -250,10 +247,28 @@ namespace MeetingRoom.Web.Controllers
                     e.Even.projector_id,
                     e.Even.laptop_id,
                     e.Even.user_name,
-                });
-
-            var data = new SchedulerAjaxData(events);
-
+                    e.Even.for_dept,
+                }).ToList();
+            SchedulerAjaxData data = null;
+            if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("Manager") || User.IsInRole("General Director") || User.IsInRole("GA"))
+                {
+                    data = new SchedulerAjaxData(events);
+                }
+                //else if (User.IsInRole("GA"))
+                //{
+                //    data = new SchedulerAjaxData(events.Where(ev => ev.for_dept == "GA"));
+                //}
+                else if (User.IsInRole("Employee"))
+                {
+                    data = new SchedulerAjaxData(events.Where(ev => ev.for_dept == "Employee"));
+                }
+            }
+            else
+            {
+                data = new SchedulerAjaxData(events);
+            }
             return (ContentResult) data;
         }
 
@@ -268,14 +283,14 @@ namespace MeetingRoom.Web.Controllers
             var phones = Repository.GetAll<Phone>().Where(p => p.is_empty == false).OrderBy(p => p.position).ToList();
             List<Room> rooms = null;
 
-            if (User.IsInRole("Manager") || User.IsInRole("General Director"))
+            if (User.IsInRole("Manager") || User.IsInRole("General Director") || User.IsInRole("GA"))
             {
                 rooms = Repository.GetAll<Room>().OrderBy(r => r.position).ToList();
             }
-            else if (User.IsInRole("GA"))
-            {
-                rooms = Repository.GetAll<Room>().Where(r => r.for_dept == "GA").OrderBy(r => r.position).ToList();
-            }
+            //else if (User.IsInRole("GA"))
+            //{
+            //    rooms = Repository.GetAll<Room>().Where(r => r.for_dept == "GA").OrderBy(r => r.position).ToList();
+            //}
             else if (User.IsInRole("Employee"))
             {
                 rooms = Repository.GetAll<Room>().Where(r => r.for_dept == "Employee").OrderBy(r => r.position).ToList();
@@ -411,28 +426,47 @@ namespace MeetingRoom.Web.Controllers
                                 {
                                     if (changedEvent.laptop_id == "NotUse")
                                         changedEvent.laptop_id = null;
+
                                     if (changedEvent.phone_id == "NotUse")
                                         changedEvent.phone_id = null;
+                                     
                                     if (changedEvent.projector_id == "NotUse")
-                                    {
                                         changedEvent.projector_id = null;
+                                    
+                                    if (User.IsInRole("GA"))
+                                        changedEvent.for_dept = "GA";
+
+                                    if (User.IsInRole("Employee"))
+                                        changedEvent.for_dept = "Employee";
+
+                                    changedEvent.user_name = HttpContext.User.Identity.Name;
+                                    changedEvent.creator_id = Guid.Parse(HttpContext.User.Identity.GetUserId());
+
+                                    if (changedEvent.projector_id != null)
+                                    {
+                                        if (!CheckProjectorExitsInRoom(changedEvent.room_id))
+                                        {
+                                            action.Type = DataActionTypes.Error;
+                                            action.Message = "Current rooms were installed the projector!";
+                                        }
+                                        else
+                                        {
+                                            if (!Repository.Insert(changedEvent))
+                                            {
+                                                action.Type = DataActionTypes.Error;
+                                                action.Message = "Create faild!";
+                                            }
+                                        }
                                     }
                                     else
                                     {
-                                        if (!CheckProjectorExitsInRoom(changedEvent.room_id))
+                                        if (!Repository.Insert(changedEvent))
                                         {
                                             action.Type = DataActionTypes.Error;
                                             action.Message = "Create faild!";
                                         }
                                     }
-
-                                    changedEvent.user_name = HttpContext.User.Identity.Name;
-                                    changedEvent.creator_id = Guid.Parse(HttpContext.User.Identity.GetUserId());
-                                    if (!Repository.Insert(changedEvent))
-                                    {
-                                        action.Type = DataActionTypes.Error;
-                                        action.Message = "Create faild!";
-                                    }
+                                    
                                 }
                                 catch (Exception ex)
                                 { 
@@ -528,27 +562,46 @@ namespace MeetingRoom.Web.Controllers
                                 {
                                     if (changedEvent.laptop_id == "NotUse")
                                         changedEvent.laptop_id = null;
+
                                     if (changedEvent.phone_id == "NotUse")
                                         changedEvent.phone_id = null;
+
                                     if (changedEvent.projector_id == "NotUse")
-                                    {
                                         changedEvent.projector_id = null;
-                                    }
-                                    else
+
+                                    if (User.IsInRole("GA"))
+                                        changedEvent.for_dept = "GA";
+
+                                    if (User.IsInRole("Employee"))
+                                        changedEvent.for_dept = "Employee";
+
+
+                                    changedEvent.user_name = HttpContext.User.Identity.Name;
+                                    changedEvent.creator_id = Guid.Parse(HttpContext.User.Identity.GetUserId());
+
+                                    if (changedEvent.projector_id != null)
                                     {
                                         if (!CheckProjectorExitsInRoom(changedEvent.room_id))
                                         {
                                             action.Type = DataActionTypes.Error;
-                                            action.Message = "Room current is use projector!";
+                                            action.Message = "Current rooms were installed the projector!";
+                                        }
+                                        else
+                                        {
+                                            if (!Repository.Insert(changedEvent))
+                                            {
+                                                action.Type = DataActionTypes.Error;
+                                                action.Message = "Create faild!";
+                                            }
                                         }
                                     }
-
-                                    changedEvent.user_name = HttpContext.User.Identity.Name;
-                                    changedEvent.creator_id = Guid.Parse(HttpContext.User.Identity.GetUserId());
-                                    if (!Repository.Insert(changedEvent))
+                                    else
                                     {
-                                        action.Type = DataActionTypes.Error;
-                                        action.Message = "Inrest";
+                                        if (!Repository.Insert(changedEvent))
+                                        {
+                                            action.Type = DataActionTypes.Error;
+                                            action.Message = "Create faild!";
+                                        }
                                     }
 
                                 }
@@ -607,10 +660,22 @@ namespace MeetingRoom.Web.Controllers
                                 }
                                 else
                                 {
+                                    if (changedEvent.projector_id == "null")
+                                    {
+                                        changedEvent.projector_id = null;
+                                    }
+                                    if (changedEvent.laptop_id == "null")
+                                    {
+                                        changedEvent.laptop_id = null;
+                                    }
+                                    if (changedEvent.phone_id == "null")
+                                    {
+                                        changedEvent.phone_id = null;
+                                    }
+                                    changedEvent.creator_id = Guid.Parse(HttpContext.User.Identity.GetUserId());
+                                    changedEvent.user_name = HttpContext.User.Identity.Name;
                                     try
                                     {
-                                        changedEvent.creator_id = Guid.Parse(HttpContext.User.Identity.GetUserId());
-                                        changedEvent.user_name = HttpContext.User.Identity.Name;
                                         if (!Repository.UpdateEvents(changedEvent))
                                         {
                                             action.Type = DataActionTypes.Error;
