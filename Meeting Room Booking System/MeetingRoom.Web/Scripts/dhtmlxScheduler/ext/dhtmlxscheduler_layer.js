@@ -1,6 +1,6 @@
 /*
 @license
-dhtmlxScheduler.Net v.3.3.12 
+dhtmlxScheduler.Net v.3.3.14 
 
 This software is covered by DHTMLX Evaluation License. Contact sales@dhtmlx.com to get Commercial or Enterprise license. Usage without proper license is prohibited.
 
