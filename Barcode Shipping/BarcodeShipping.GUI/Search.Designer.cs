@@ -98,8 +98,8 @@
             // toolStripStatusLabelDessignBy
             // 
             this.toolStripStatusLabelDessignBy.Name = "toolStripStatusLabelDessignBy";
-            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(62, 19);
-            this.toolStripStatusLabelDessignBy.Text = "Design by:";
+            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(67, 19);
+            this.toolStripStatusLabelDessignBy.Text = "Dessign by:";
             // 
             // toolStripStatusLabelName
             // 
@@ -162,7 +162,6 @@
             this.comboBoxEditSearchByKey.Name = "comboBoxEditSearchByKey";
             this.comboBoxEditSearchByKey.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.comboBoxEditSearchByKey.Properties.Appearance.Options.UseFont = true;
-            this.comboBoxEditSearchByKey.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.comboBoxEditSearchByKey.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.comboBoxEditSearchByKey.Properties.Items.AddRange(new object[] {
@@ -170,7 +169,7 @@
             "PO NO",
             "Box ID"});
             this.comboBoxEditSearchByKey.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEditSearchByKey.Size = new System.Drawing.Size(148, 28);
+            this.comboBoxEditSearchByKey.Size = new System.Drawing.Size(148, 26);
             this.comboBoxEditSearchByKey.TabIndex = 2;
             // 
             // txtSearch
@@ -179,9 +178,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtSearch.Properties.Appearance.Options.UseFont = true;
-            this.txtSearch.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtSearch.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtSearch.Size = new System.Drawing.Size(293, 28);
+            this.txtSearch.Size = new System.Drawing.Size(293, 26);
             this.txtSearch.TabIndex = 1;
             // 
             // gridControlData
@@ -211,11 +208,6 @@
             this.gridColumnDateCheck});
             this.gridView1.GridControl = this.gridControlData;
             this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.CheckBoxSelectorColumnWidth = 28;
-            this.gridView1.OptionsSelection.MultiSelect = true;
-            this.gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
-            this.gridView1.OptionsSelection.ResetSelectionClickOutsideCheckboxSelector = true;
-            this.gridView1.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
@@ -232,7 +224,7 @@
             this.gridColumnCounter.MinWidth = 28;
             this.gridColumnCounter.Name = "gridColumnCounter";
             this.gridColumnCounter.Visible = true;
-            this.gridColumnCounter.VisibleIndex = 1;
+            this.gridColumnCounter.VisibleIndex = 0;
             this.gridColumnCounter.Width = 28;
             // 
             // gridColumnOperatorCode
@@ -246,7 +238,7 @@
             this.gridColumnOperatorCode.MinWidth = 70;
             this.gridColumnOperatorCode.Name = "gridColumnOperatorCode";
             this.gridColumnOperatorCode.Visible = true;
-            this.gridColumnOperatorCode.VisibleIndex = 2;
+            this.gridColumnOperatorCode.VisibleIndex = 1;
             this.gridColumnOperatorCode.Width = 70;
             // 
             // gridColumnModel
@@ -260,7 +252,7 @@
             this.gridColumnModel.MinWidth = 95;
             this.gridColumnModel.Name = "gridColumnModel";
             this.gridColumnModel.Visible = true;
-            this.gridColumnModel.VisibleIndex = 3;
+            this.gridColumnModel.VisibleIndex = 2;
             this.gridColumnModel.Width = 95;
             // 
             // gridColumnWorkingOder
@@ -274,7 +266,7 @@
             this.gridColumnWorkingOder.MinWidth = 100;
             this.gridColumnWorkingOder.Name = "gridColumnWorkingOder";
             this.gridColumnWorkingOder.Visible = true;
-            this.gridColumnWorkingOder.VisibleIndex = 4;
+            this.gridColumnWorkingOder.VisibleIndex = 3;
             this.gridColumnWorkingOder.Width = 100;
             // 
             // gridColumnBox
@@ -288,7 +280,7 @@
             this.gridColumnBox.MinWidth = 100;
             this.gridColumnBox.Name = "gridColumnBox";
             this.gridColumnBox.Visible = true;
-            this.gridColumnBox.VisibleIndex = 5;
+            this.gridColumnBox.VisibleIndex = 4;
             this.gridColumnBox.Width = 100;
             // 
             // gridColumnProductID
@@ -302,7 +294,7 @@
             this.gridColumnProductID.MinWidth = 220;
             this.gridColumnProductID.Name = "gridColumnProductID";
             this.gridColumnProductID.Visible = true;
-            this.gridColumnProductID.VisibleIndex = 6;
+            this.gridColumnProductID.VisibleIndex = 5;
             this.gridColumnProductID.Width = 220;
             // 
             // gridColumnPO_NO
@@ -316,7 +308,7 @@
             this.gridColumnPO_NO.MinWidth = 90;
             this.gridColumnPO_NO.Name = "gridColumnPO_NO";
             this.gridColumnPO_NO.Visible = true;
-            this.gridColumnPO_NO.VisibleIndex = 7;
+            this.gridColumnPO_NO.VisibleIndex = 6;
             this.gridColumnPO_NO.Width = 90;
             // 
             // gridColumnQuantity
@@ -332,7 +324,7 @@
             this.gridColumnQuantity.MinWidth = 65;
             this.gridColumnQuantity.Name = "gridColumnQuantity";
             this.gridColumnQuantity.Visible = true;
-            this.gridColumnQuantity.VisibleIndex = 8;
+            this.gridColumnQuantity.VisibleIndex = 7;
             this.gridColumnQuantity.Width = 65;
             // 
             // gridColumnDateCheck
@@ -346,7 +338,7 @@
             this.gridColumnDateCheck.MinWidth = 100;
             this.gridColumnDateCheck.Name = "gridColumnDateCheck";
             this.gridColumnDateCheck.Visible = true;
-            this.gridColumnDateCheck.VisibleIndex = 9;
+            this.gridColumnDateCheck.VisibleIndex = 8;
             this.gridColumnDateCheck.Width = 100;
             // 
             // Search

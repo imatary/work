@@ -16,9 +16,9 @@ namespace BarcodeShipping.Data
     {
         public Model()
         {
-            this.tbl_test_log = new HashSet<tbl_test_log>();
             this.PackingPOes = new HashSet<PackingPO>();
             this.Shippings = new HashSet<Shipping>();
+            this.tbl_test_log = new HashSet<tbl_test_log>();
         }
     
         public string ModelID { get; set; }
@@ -28,8 +28,8 @@ namespace BarcodeShipping.Data
         public int Quantity { get; set; }
         public string SerialNo { get; set; }
     
-        public virtual ICollection<tbl_test_log> tbl_test_log { get; set; }
         public virtual ICollection<PackingPO> PackingPOes { get; set; }
         public virtual ICollection<Shipping> Shippings { get; set; }
+        public virtual ICollection<tbl_test_log> tbl_test_log { get; set; }
     }
 }

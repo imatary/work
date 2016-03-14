@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\u16354%28cuongpv%29\Works\Dev\Publish\</PublishUrl>
+    <PublishUrl>D:\Dev\Publish WinForm\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -22,7 +22,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -131,6 +131,12 @@
     <Compile Include="FormAddPO.Designer.cs">
       <DependentUpon>FormAddPO.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormForQACheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormForQACheck.Designer.cs">
+      <DependentUpon>FormForQACheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +216,9 @@
     <EmbeddedResource Include="FormAddPO.resx">
       <DependentUpon>FormAddPO.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormForQACheck.resx">
+      <DependentUpon>FormForQACheck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,6 +264,7 @@
       <DependentUpon>WaitLoadData.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.Config" />
+    <None Include="BarcodeShipping.GUI_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -131,6 +131,7 @@ namespace BarcodeShipping.GUI
                 {
                     Ultils.TextControlNotNull(txtOperatorCode, "Operator");
                 }
+                txtSerialNo.Focus();
             }
         }
 
@@ -152,8 +153,8 @@ namespace BarcodeShipping.GUI
                 if (string.IsNullOrEmpty(txtSerialNo.Text))
                 {
                     Ultils.TextControlNotNull(txtSerialNo, "Serial No");
-                    txtSerialNo.Focus();
                 }
+                btnSave.Focus();
             }
         }
         private void txtModelID_Validating(object sender, System.ComponentModel.CancelEventArgs e)

@@ -66,6 +66,7 @@
           <Property Name="TimeCheck" Type="time" Precision="7" />
           <Property Name="Quantity" Type="int" />
           <Property Name="OperatorCode" Type="varchar" MaxLength="10" />
+          <Property Name="QACheck" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_test_result">
           <Key>
@@ -160,11 +161,6 @@
           <EntitySet Name="mst_operator" EntityType="Self.mst_operator" />
           <EntitySet Name="tbl_test_result" EntityType="Self.tbl_test_result" />
           <EntitySet Name="Models" EntityType="barcode_dbModel.Model" />
-          <EntitySet Name="tbl_test_log" EntityType="barcode_dbModel.tbl_test_log" />
-          <AssociationSet Name="FK_tbl_test_log_Models" Association="barcode_dbModel.FK_tbl_test_log_Models">
-            <End Role="Model" EntitySet="Models" />
-            <End Role="tbl_test_log" EntitySet="tbl_test_log" />
-          </AssociationSet>
           <EntitySet Name="PackingPOes" EntityType="barcode_dbModel.PackingPO" />
           <AssociationSet Name="FK_PO_Models" Association="barcode_dbModel.FK_PO_Models">
             <End Role="Model" EntitySet="Models" />
@@ -174,6 +170,11 @@
           <AssociationSet Name="FK_Shipping_Models" Association="barcode_dbModel.FK_Shipping_Models">
             <End Role="Model" EntitySet="Models" />
             <End Role="Shipping" EntitySet="Shippings" />
+          </AssociationSet>
+          <EntitySet Name="tbl_test_log" EntityType="barcode_dbModel.tbl_test_log" />
+          <AssociationSet Name="FK_tbl_test_log_Models" Association="barcode_dbModel.FK_tbl_test_log_Models">
+            <End Role="Model" EntitySet="Models" />
+            <End Role="tbl_test_log" EntitySet="tbl_test_log" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Model">
@@ -186,38 +187,10 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="SerialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tbl_test_log" Relationship="barcode_dbModel.FK_tbl_test_log_Models" FromRole="Model" ToRole="tbl_test_log" />
           <NavigationProperty Name="PackingPOes" Relationship="barcode_dbModel.FK_PO_Models" FromRole="Model" ToRole="PackingPO" />
           <NavigationProperty Name="Shippings" Relationship="barcode_dbModel.FK_Shipping_Models" FromRole="Model" ToRole="Shipping" />
+          <NavigationProperty Name="tbl_test_log" Relationship="barcode_dbModel.FK_tbl_test_log_Models" FromRole="Model" ToRole="tbl_test_log" />
         </EntityType>
-        <EntityType Name="tbl_test_log">
-          <Key>
-            <PropertyRef Name="ProductionID" />
-          </Key>
-          <Property Name="ProductionID" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="LineID" Type="Int32" Nullable="false" />
-          <Property Name="MacAddress" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="false" />
-          <Property Name="BoxID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="ModelID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="WorkingOder" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DateCheck" Type="DateTime" Precision="0" />
-          <Property Name="TimeCheck" Type="Time" Precision="7" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="OperatorCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Model" Relationship="barcode_dbModel.FK_tbl_test_log_Models" FromRole="tbl_test_log" ToRole="Model" />
-        </EntityType>
-        <Association Name="FK_tbl_test_log_Models">
-          <End Type="barcode_dbModel.Model" Role="Model" Multiplicity="0..1" />
-          <End Type="barcode_dbModel.tbl_test_log" Role="tbl_test_log" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Model">
-              <PropertyRef Name="ModelID" />
-            </Principal>
-            <Dependent Role="tbl_test_log">
-              <PropertyRef Name="ModelID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="PackingPO">
           <Key>
             <PropertyRef Name="ModelID" />
@@ -273,6 +246,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tbl_test_log">
+          <Key>
+            <PropertyRef Name="ProductionID" />
+          </Key>
+          <Property Name="ProductionID" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LineID" Type="Int32" Nullable="false" />
+          <Property Name="MacAddress" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Name="BoxID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ModelID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="WorkingOder" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateCheck" Type="DateTime" Precision="0" />
+          <Property Name="TimeCheck" Type="Time" Precision="7" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="OperatorCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="QACheck" Type="Boolean" />
+          <NavigationProperty Name="Model" Relationship="barcode_dbModel.FK_tbl_test_log_Models" FromRole="tbl_test_log" ToRole="Model" />
+        </EntityType>
+        <Association Name="FK_tbl_test_log_Models">
+          <End Type="barcode_dbModel.Model" Role="Model" Multiplicity="0..1" />
+          <End Type="barcode_dbModel.tbl_test_log" Role="tbl_test_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="ModelID" />
+            </Principal>
+            <Dependent Role="tbl_test_log">
+              <PropertyRef Name="ModelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -310,22 +312,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_test_log">
-            <EntityTypeMapping TypeName="barcode_dbModel.tbl_test_log">
-              <MappingFragment StoreEntitySet="tbl_test_log">
-                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
-                <ScalarProperty Name="DateCheck" ColumnName="DateCheck" />
-                <ScalarProperty Name="WorkingOder" ColumnName="WorkingOder" />
-                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
-                <ScalarProperty Name="BoxID" ColumnName="BoxID" />
-                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
-                <ScalarProperty Name="LineID" ColumnName="LineID" />
-                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PackingPOes">
             <EntityTypeMapping TypeName="barcode_dbModel.PackingPO">
               <MappingFragment StoreEntitySet="PackingPO">
@@ -352,6 +338,23 @@
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="Operator" ColumnName="Operator" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_test_log">
+            <EntityTypeMapping TypeName="barcode_dbModel.tbl_test_log">
+              <MappingFragment StoreEntitySet="tbl_test_log">
+                <ScalarProperty Name="QACheck" ColumnName="QACheck" />
+                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
+                <ScalarProperty Name="DateCheck" ColumnName="DateCheck" />
+                <ScalarProperty Name="WorkingOder" ColumnName="WorkingOder" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="BoxID" ColumnName="BoxID" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

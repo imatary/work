@@ -46,12 +46,12 @@
             this.toolStripStatusLabelSupport = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelPEIT = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelDessignBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelName = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitLoadData), true, true);
-            this.toolStripStatusLabelDessignBy = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -260,6 +260,12 @@
             this.toolStripStatusLabel3.Size = new System.Drawing.Size(10, 19);
             this.toolStripStatusLabel3.Text = "|";
             // 
+            // toolStripStatusLabelDessignBy
+            // 
+            this.toolStripStatusLabelDessignBy.Name = "toolStripStatusLabelDessignBy";
+            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(67, 19);
+            this.toolStripStatusLabelDessignBy.Text = "Dessign by:";
+            // 
             // toolStripStatusLabelName
             // 
             this.toolStripStatusLabelName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -301,12 +307,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // toolStripStatusLabelDessignBy
-            // 
-            this.toolStripStatusLabelDessignBy.Name = "toolStripStatusLabelDessignBy";
-            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(62, 19);
-            this.toolStripStatusLabelDessignBy.Text = "Design by:";
             // 
             // FormSearchDate
             // 
@@ -354,11 +354,11 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSupport;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelPEIT;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelDessignBy;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelName;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelDessignBy;
     }
 }

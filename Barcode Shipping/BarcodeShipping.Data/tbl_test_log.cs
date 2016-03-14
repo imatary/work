@@ -24,6 +24,7 @@ namespace BarcodeShipping.Data
         public Nullable<System.TimeSpan> TimeCheck { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string OperatorCode { get; set; }
+        public Nullable<bool> QACheck { get; set; }
     
         public virtual Model Model { get; set; }
     }

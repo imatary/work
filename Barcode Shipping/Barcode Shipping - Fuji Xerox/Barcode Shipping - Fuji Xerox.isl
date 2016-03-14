@@ -339,8 +339,8 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>BarcodeShipping.GUI.Primary_output</td><td>{A1C55ADD-8C3F-4E7D-9C7A-5D55E43612B7}</td><td>INSTALLDIR</td><td>2</td><td/><td>barcodeshipping.gui.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>BarcodeShipping.GUI.exe</td><td>{D5D9D925-F888-4629-B90B-A7D0EC1515FD}</td><td>INSTALLDIR</td><td>2</td><td/><td>barcodeshipping.gui.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>BarcodeShipping.GUI.exe</td><td>{BDC934AE-7637-425D-A551-A1F044BCC7D4}</td><td>INSTALLDIR</td><td>2</td><td/><td>barcodeshipping.gui.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>EntityFramework.SqlServer.dll</td><td>{A4724945-7F17-47F3-AC49-B1E832AA81E6}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.sqlserver.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>IS_ININSTALL_SHORTCUT</td><td>{31AFCBF0-24AB-4D9C-B41B-B00D3434ADB2}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1050,8 +1050,8 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
-		<row><td>INSTALLDIR</td><td>BarcodeShipping.GUI.Primary_output</td></row>
 		<row><td>INSTALLDIR</td><td>BarcodeShipping.GUI.exe</td></row>
+		<row><td>INSTALLDIR</td><td>EntityFramework.SqlServer.dll</td></row>
 		<row><td>INSTALLDIR</td><td>IS_ININSTALL_SHORTCUT</td></row>
 	</table>
 
@@ -1866,8 +1866,8 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
-		<row><td>AlwaysInstall</td><td>BarcodeShipping.GUI.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>BarcodeShipping.GUI.exe</td></row>
+		<row><td>AlwaysInstall</td><td>EntityFramework.SqlServer.dll</td></row>
 		<row><td>AlwaysInstall</td><td>IS_ININSTALL_SHORTCUT</td></row>
 	</table>
 
@@ -1883,8 +1883,8 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>barcodeshipping.gui.exe</td><td>BarcodeShipping.GUI.exe</td><td>BARCOD~1.EXE|BarcodeShipping.GUI.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\u16354(cuongpv)\Works\Dev\Projects\Barcode Shipping\BarcodeShipping.GUI\bin\Debug\BarcodeShipping.GUI.exe</td><td>1</td><td/></row>
-		<row><td>barcodeshipping.gui.primary_</td><td>BarcodeShipping.GUI.Primary_output</td><td>BarcodeShipping.GUI.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;BarcodeShipping.GUI&gt;|Built</td><td>3</td><td/></row>
+		<row><td>barcodeshipping.gui.exe</td><td>BarcodeShipping.GUI.exe</td><td>BARCOD~1.EXE|BarcodeShipping.GUI.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\cuongpv\Source\Repos\work\Barcode Shipping\BarcodeShipping.GUI\bin\Debug\BarcodeShipping.GUI.exe</td><td>1</td><td/></row>
+		<row><td>entityframework.sqlserver.dl</td><td>EntityFramework.SqlServer.dll</td><td>ENTITY~1.DLL|EntityFramework.SqlServer.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\cuongpv\Source\Repos\work\Barcode Shipping\BarcodeShipping.GUI\bin\Debug\EntityFramework.SqlServer.dll</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -1902,6 +1902,7 @@
 		<col def="S255">Data</col>
 		<row><td>BarcodeShipping.GUI.exe</td><td/></row>
 		<row><td>PROJECT_ASSISTANT_DEFAULT_FEATURE</td><td>AlwaysInstall</td></row>
+		<row><td>RegistryPageEnabled</td><td>No</td></row>
 	</table>
 
 	<table name="ISBillBoard">
@@ -2028,8 +2029,8 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>BarcodeShipping.GUI.Primary_output</td><td/><td/><td>_CCF1BBB4_53A7_4041_A799_B60112EB2F6A_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>BarcodeShipping.GUI.exe</td><td/><td/><td>_ABF749ED_450E_4257_A007_6F0BE6F1559D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>BarcodeShipping.GUI.exe</td><td/><td/><td>_8BE6DF5E_A108_4F48_A4C4_BDFDE3580077_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>EntityFramework.SqlServer.dll</td><td/><td/><td>_861642DE_D5AF_417C_81F2_F72E8D2268BE_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>IS_ININSTALL_SHORTCUT</td><td/><td/><td>_3A888585_5B87_4183_838D_7C576385DCD9_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -2619,7 +2620,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>UMC Electronics VIETNAM Ltd's</td><td>0</td><td/><td>-836514288</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>UMC Electronics VIETNAM Ltd's</td><td>0</td><td/><td>1906618411</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-1641822004</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-1641822004</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>-1641822004</td></row>
@@ -3432,7 +3433,7 @@
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1033</td><td>This setup works until %s. The setup will now exit.</td><td>0</td><td/><td>-1641822004</td></row>
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>-1641822004</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>Barcode Shipping Fuji Xerox.exe</td><td>0</td><td/><td>-1641821780</td></row>
-		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>Barcode Shipping Fuji Xerox.exe</td><td>0</td><td/><td>-702299285</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch BarcodeShipping.GUI.exe</td><td>0</td><td/><td>-1197199793</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>-1641822004</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>-1641822004</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>-1641822004</td></row>
@@ -3721,14 +3722,14 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-1641822004</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-1641822004</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-1641822004</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.umcvn.com</td><td>0</td><td/><td>-836526544</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>UMC Electronics VIETNAM Ltd's</td><td>0</td><td/><td>-836514288</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.umc.com</td><td>0</td><td/><td>1906592299</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>UMC Electronics VIETNAM Ltd's</td><td>0</td><td/><td>1906618411</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Contact:  PE-IT</td><td>0</td><td/><td>-1641846516</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>PE-IT</td><td>0</td><td/><td>-1641858772</td></row>
-		<row><td>ID_STRING5</td><td>1033</td><td>cuongpham@umcvn.com</td><td>0</td><td/><td>-836526544</td></row>
+		<row><td>ID_STRING5</td><td>1033</td><td>cuongpham@umcvn.com</td><td>0</td><td/><td>1906592299</td></row>
 		<row><td>ID_STRING6</td><td>1033</td><td>Ext: 2998 or 3731</td><td>0</td><td/><td>-1641815764</td></row>
 		<row><td>ID_STRING7</td><td>1033</td><td>LAUNCH~1.EXE|Launch BarcodeShipping.GUI.exe</td><td>0</td><td/><td>-1641848436</td></row>
-		<row><td>ID_STRING8</td><td>1033</td><td>LAUNCH~1.EXE|Launch BarcodeShipping.GUI.exe</td><td>0</td><td/><td>-836508048</td></row>
+		<row><td>ID_STRING8</td><td>1033</td><td>LAUNCH~1.EXE|Launch BarcodeShipping.GUI.exe</td><td>0</td><td/><td>-1197185457</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-1641822004</td></row>
 	</table>
 
@@ -3842,12 +3843,12 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>D:\u16354(cuongpv)\Works\Ico\favicon.ico</td><td>0</td></row>
-		<row><td>BarcodeShipping.GU_756DD71449C44651A7FA78FD1E688980.exe</td><td/><td>D:\u16354(cuongpv)\Works\Ico\favicon.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>D:\Dev\Resources\favicon.ico</td><td>0</td></row>
+		<row><td>BarcodeShipping.GU_2B5724B0F975427592C0EC38DC4B5FDF.exe</td><td/><td>D:\Dev\Resources\favicon.ico</td><td>0</td></row>
 		<row><td>BarcodeShipping.GU_B305BC7FC043463CA70F953E75DC76F2.exe</td><td/><td>D:\Dev\Resources\favicon.ico</td><td>0</td></row>
-		<row><td>BarcodeShipping.GU_E7A16E9F8ED5495E90177FDEA1969D82.exe</td><td/><td>D:\u16354(cuongpv)\Works\Ico\favicon.ico</td><td>0</td></row>
+		<row><td>BarcodeShipping.GU_CDDBA4D8F1EB4EAD82332B8A2CFA313D.exe</td><td/><td>D:\Dev\Resources\favicon.ico</td><td>0</td></row>
 		<row><td>BarcodeShipping.GU_EAB75AE9318C4EFEA538DB4DB27A9475.exe</td><td/><td>D:\Dev\Resources\favicon.ico</td><td>0</td></row>
-		<row><td>UNINST_Uninstall_B_64C522410FE64C408A70021A649322BC.exe</td><td/><td>C:\Program Files (x86)\InstallShield\2015LE\Redist\Language Independent\OS Independent\uninstall.ico</td><td>0</td></row>
+		<row><td>UNINST_Uninstall_B_C3C20A58FD9E4166AB15538B590031EF.exe</td><td/><td>C:\Program Files (x86)\InstallShield\2015LE\Redist\Language Independent\OS Independent\uninstall.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -3981,7 +3982,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{17FFB0C0-90D7-4262-B479-EA2EEE607972}</td></row>
 		<row><td>ISUSSignature</td><td>{9FD8D5B0-18D3-440C-A165-3BA8D12CA471}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewISToday</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4522,9 +4523,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>BarcodeShipping.GUI.exe</td><td>barcode_shipping___fuji_xerox</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>BarcodeShipping.GUI.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>BarcodeShipping.GU_E7A16E9F8ED5495E90177FDEA1969D82.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>BarcodeShipping.GUI.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>BarcodeShipping.GUI.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>BarcodeShipping.GU_756DD71449C44651A7FA78FD1E688980.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>UNINST_Uninstall_Barcode_Shipping___Fuji_Xerox</td><td>barcode_shipping___fuji_xerox</td><td>UNINST|Uninstall Barcode Shipping - Fuji Xerox</td><td>IS_ININSTALL_SHORTCUT</td><td>[SystemFolder]msiexec.exe</td><td>/x {9A37851E-0CF4-4CA6-959B-95DC3C91C2EF}</td><td/><td/><td>UNINST_Uninstall_B_64C522410FE64C408A70021A649322BC.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>BarcodeShipping.GUI.exe</td><td>barcode_shipping___fuji_xerox</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>BarcodeShipping.GUI.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>BarcodeShipping.GU_2B5724B0F975427592C0EC38DC4B5FDF.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>BarcodeShipping.GUI.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>BarcodeShipping.GUI.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>BarcodeShipping.GU_CDDBA4D8F1EB4EAD82332B8A2CFA313D.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>UNINST_Uninstall_Barcode_Shipping___Fuji_Xerox</td><td>barcode_shipping___fuji_xerox</td><td>UNINST|Uninstall Barcode Shipping - Fuji Xerox</td><td>IS_ININSTALL_SHORTCUT</td><td>[SystemFolder]msiexec.exe</td><td>/x {9A37851E-0CF4-4CA6-959B-95DC3C91C2EF}</td><td/><td/><td>UNINST_Uninstall_B_C3C20A58FD9E4166AB15538B590031EF.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

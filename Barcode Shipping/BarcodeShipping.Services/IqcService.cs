@@ -12,7 +12,10 @@ namespace BarcodeShipping.Services
     {
         private IRepository _repository;
 
-        public IRepository Repository => _repository ?? (_repository = new IqcRepository());
+        public IRepository Repository
+        {
+            get { return _repository ?? (_repository = new IqcRepository()); }
+        }
 
         /// <summary>
         /// get logs by boxid
@@ -276,6 +279,7 @@ namespace BarcodeShipping.Services
         /// <param name="workingOder"></param>
         /// <param name="quantity"></param>
         /// <param name="operatorCode"></param>
+        /// <param name="qaCheck"></param>
         public void InsertLogs(
             string productionId,
             int lineId,
@@ -283,7 +287,8 @@ namespace BarcodeShipping.Services
             string boxId,
             string modelId,
             string workingOder,
-            int quantity, string operatorCode)
+            int quantity, 
+            string operatorCode)
         {
             var log = new tbl_test_log()
             {
@@ -350,7 +355,53 @@ namespace BarcodeShipping.Services
             }
         }
         #endregion
-        
+
+        #region Update QA Check
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productionId"></param>
+        /// <param name="lineId"></param>
+        /// <param name="macAddress"></param>
+        /// <param name="boxId"></param>
+        /// <param name="modelId"></param>
+        /// <param name="workingOder"></param>
+        /// <param name="quantity"></param>
+        /// <param name="operatorCode"></param>
+        public void UpdateQaCheckLogs(
+            string productionId,
+            int lineId,
+            string macAddress,
+            string boxId,
+            string modelId,
+            string workingOder,
+            int quantity, string operatorCode)
+        {
+            var log = GetPcbById(productionId);
+
+            log.LineID = lineId;
+            log.MacAddress = macAddress;
+            log.BoxID = boxId;
+            log.ModelID = modelId;
+            log.WorkingOder = workingOder;
+            log.DateCheck = DateTime.Now;
+            log.TimeCheck = DateTime.Now.TimeOfDay;
+            log.Quantity = quantity;
+            log.OperatorCode = operatorCode;
+
+            try
+            {
+                Repository.Update(log);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+
+
         #region Log Result
 
         /// <summary>

@@ -36,7 +36,7 @@ namespace BarcodeShipping.GUI.Helper
         /// <param name="title"></param>
         public static void ShowMessageBoxEditWaringNotSelectId(string title)
         {
-            MessageBox.Show(string.Format("Bạn chưa chọn {0} cần sửa!", title), Resources.WaringMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Question);
+            MessageBox.Show($"Bạn chưa chọn {title} cần sửa!", Resources.WaringMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace BarcodeShipping.GUI.Helper
         /// <param name="title"></param>
         public static void ShowMessageBoxDeleteWaringNotSelectId(string title)
         {
-            MessageBox.Show(string.Format("Bạn chưa chọn {0} cần xóa!", title), Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Question);
+            MessageBox.Show($"Bạn chưa chọn {title} cần xóa!", Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
     }
 }

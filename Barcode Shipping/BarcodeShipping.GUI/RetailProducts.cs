@@ -257,8 +257,7 @@ namespace BarcodeShipping.GUI
         {
             if (modelId != null)
             {
-                string key = string.Format("{0}_{1}", _currentModel.SerialNo, _currentModel.ModelID);
-                if (modelId.Contains(key))
+                if (modelId.Contains(_currentModel.SerialNo))
                 {
                     return true;
                 }
@@ -554,9 +553,9 @@ namespace BarcodeShipping.GUI
                         splashScreenLoadData.CloseWaitForm();
                         if (shipping != null)
                         {
-                            MessageBoxHelper.ShowMessageBoxError(string.Format("PCB {0} đã được xuất trước đó.\n" +
-                                                                 "Box: {1}\n" +
-                                                                 "Ngày xuất: {2}", txtAddPCB.Text, shipping.BoxID, shipping.DateCheck));
+                            MessageBoxHelper.ShowMessageBoxError($"PCB {txtAddPCB.Text} đã được xuất trước đó.\n" +
+                                                                 $"Box: {shipping.BoxID}\nN" +
+                                                                 $"Ngày xuất: {shipping.DateCheck}");
                         }
                         txtAddPCB.SelectAll();
                     }
@@ -566,7 +565,7 @@ namespace BarcodeShipping.GUI
                     gridControlData.Refresh();
                     gridControlData.DataSource = _shippings;
                     splashScreenLoadData.CloseWaitForm();
-                    MessageBoxHelper.ShowMessageBoxError(string.Format("PCB {0} đã được nhập trong Box rồi. Vui lòng kiểm tra lại!", txtAddPCB.Text));
+                    MessageBoxHelper.ShowMessageBoxError($"PCB {txtAddPCB.Text} đã được nhập trong Box rồi. Vui lòng kiểm tra lại!");
                     txtAddPCB.SelectAll();
                 }
             }

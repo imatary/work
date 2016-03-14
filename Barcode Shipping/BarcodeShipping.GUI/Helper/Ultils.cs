@@ -9,7 +9,7 @@ namespace BarcodeShipping.GUI.Helper
         public static void TextControlNotNull(TextEdit textEdit, string title)
         {
             textEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red; 
-            XtraMessageBox.Show(string.Format("{0} không được để trống!", title), Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(string.Format("{0} không được để trống!", title), Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             textEdit.Focus();
             textEdit.SelectAll();
         }
@@ -17,7 +17,7 @@ namespace BarcodeShipping.GUI.Helper
         public static void EditTextErrorMessage(TextEdit textEdit, string title)
         {
             textEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red;
-            XtraMessageBox.Show(string.Format("Error! {0}", title), Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(string.Format("Error! {0}", title), Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             textEdit.Focus();
             textEdit.SelectAll();
         }
@@ -27,7 +27,7 @@ namespace BarcodeShipping.GUI.Helper
             gridLookUpEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red;
             gridLookUpEdit.Focus();
             gridLookUpEdit.SelectAll();
-            XtraMessageBox.Show(string.Format("Vui lòng chọn {0}!", title), Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(string.Format("Vui lòng chọn {0}!", title), Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
 
@@ -35,7 +35,7 @@ namespace BarcodeShipping.GUI.Helper
         {
             gridLookUpEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red;
             gridLookUpEdit.Focus();
-            XtraMessageBox.Show(string.Format("Error!\n{0}!", title), Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(string.Format("Error!\n{0}!", title), Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         public static void GridLookUpEditNoMessage(GridLookUpEdit gridLookUpEdit)
         {
@@ -54,7 +54,7 @@ namespace BarcodeShipping.GUI.Helper
             textEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red;
             textEdit.Focus();
             textEdit.SelectAll();
-            XtraMessageBox.Show(title, Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(title, Resources.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public static void SetColorDefaultTextControl(TextEdit textEdit)

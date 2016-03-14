@@ -1,6 +1,6 @@
 ﻿namespace BarcodeShipping.GUI
 {
-    partial class FormQA
+    partial class FormForQACheck
     {
         /// <summary>
         /// Required designer variable.
@@ -20,7 +20,6 @@
             base.Dispose(disposing);
         }
 
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -29,22 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormQA));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForQACheck));
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtBoxID = new DevExpress.XtraEditors.TextEdit();
             this.txtJudge = new DevExpress.XtraEditors.TextEdit();
-            this.txtMacAddress = new DevExpress.XtraEditors.TextEdit();
-            this.txtProductionID = new DevExpress.XtraEditors.TextEdit();
-            this.lblBoxID = new DevExpress.XtraEditors.LabelControl();
             this.lblJudge = new DevExpress.XtraEditors.LabelControl();
-            this.lblMacAddress = new DevExpress.XtraEditors.LabelControl();
-            this.lblProductionID = new DevExpress.XtraEditors.LabelControl();
             this.lblOperatorName = new DevExpress.XtraEditors.LabelControl();
             this.lblLineID = new DevExpress.XtraEditors.LabelControl();
+            this.txtProductionID = new DevExpress.XtraEditors.TextEdit();
+            this.txtBoxID = new DevExpress.XtraEditors.TextEdit();
+            this.lblBoxID = new DevExpress.XtraEditors.LabelControl();
+            this.lblProductionID = new DevExpress.XtraEditors.LabelControl();
+            this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -62,7 +60,6 @@
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.btnSearchPCB = new DevExpress.XtraEditors.SimpleButton();
             this.btnLogOut = new DevExpress.XtraEditors.SimpleButton();
             this.splashScreenLoadData = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitLoadData), true, true);
             this.gridControlData = new DevExpress.XtraGrid.GridControl();
@@ -79,10 +76,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtJudge.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -118,7 +114,7 @@
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(646, 94);
             this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "QA";
+            this.labelControl1.Text = "QA Checking";
             // 
             // pictureBox1
             // 
@@ -151,16 +147,15 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64F));
-            this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 5);
             this.tableLayoutPanel2.Controls.Add(this.txtJudge, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.txtMacAddress, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.txtProductionID, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblBoxID, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.lblJudge, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.lblMacAddress, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lblProductionID, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblOperatorName, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblLineID, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txtProductionID, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblBoxID, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblProductionID, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.btnFinish, 1, 5);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -175,22 +170,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(373, 192);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // txtBoxID
-            // 
-            this.txtBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBoxID.Location = new System.Drawing.Point(137, 158);
-            this.txtBoxID.Name = "txtBoxID";
-            this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxID.Properties.Appearance.Options.UseFont = true;
-            this.txtBoxID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtBoxID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtBoxID.Properties.NullValuePrompt = "Box ID";
-            this.txtBoxID.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtBoxID.Size = new System.Drawing.Size(233, 26);
-            this.txtBoxID.TabIndex = 9;
-            this.txtBoxID.EditValueChanged += new System.EventHandler(this.txtBoxID_EditValueChanged);
-            this.txtBoxID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBoxID_PreviewKeyDown);
-            // 
             // txtJudge
             // 
             this.txtJudge.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -203,52 +182,9 @@
             this.txtJudge.Properties.NullValuePrompt = "Judge";
             this.txtJudge.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtJudge.Size = new System.Drawing.Size(233, 26);
-            this.txtJudge.TabIndex = 8;
+            this.txtJudge.TabIndex = 9;
             this.txtJudge.EditValueChanged += new System.EventHandler(this.txtJudge_EditValueChanged);
             this.txtJudge.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtJudge_PreviewKeyDown);
-            // 
-            // txtMacAddress
-            // 
-            this.txtMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMacAddress.Location = new System.Drawing.Point(137, 96);
-            this.txtMacAddress.Name = "txtMacAddress";
-            this.txtMacAddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMacAddress.Properties.Appearance.Options.UseFont = true;
-            this.txtMacAddress.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtMacAddress.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtMacAddress.Properties.NullValuePrompt = "Mac Address";
-            this.txtMacAddress.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtMacAddress.Size = new System.Drawing.Size(233, 26);
-            this.txtMacAddress.TabIndex = 7;
-            this.txtMacAddress.EditValueChanged += new System.EventHandler(this.txtMacAddress_EditValueChanged);
-            this.txtMacAddress.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtMacAddress_PreviewKeyDown);
-            // 
-            // txtProductionID
-            // 
-            this.txtProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProductionID.Location = new System.Drawing.Point(137, 65);
-            this.txtProductionID.Name = "txtProductionID";
-            this.txtProductionID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
-            this.txtProductionID.Properties.Appearance.Options.UseFont = true;
-            this.txtProductionID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtProductionID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtProductionID.Properties.NullValuePrompt = "Production ID";
-            this.txtProductionID.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtProductionID.Size = new System.Drawing.Size(233, 26);
-            this.txtProductionID.TabIndex = 6;
-            this.txtProductionID.EditValueChanged += new System.EventHandler(this.txtProductionID_EditValueChanged);
-            this.txtProductionID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtProductionID_PreviewKeyDown);
-            // 
-            // lblBoxID
-            // 
-            this.lblBoxID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBoxID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblBoxID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblBoxID.Location = new System.Drawing.Point(3, 158);
-            this.lblBoxID.Name = "lblBoxID";
-            this.lblBoxID.Size = new System.Drawing.Size(128, 25);
-            this.lblBoxID.TabIndex = 4;
-            this.lblBoxID.Text = "Box ID:";
             // 
             // lblJudge
             // 
@@ -261,30 +197,6 @@
             this.lblJudge.Size = new System.Drawing.Size(128, 25);
             this.lblJudge.TabIndex = 2;
             this.lblJudge.Text = "Judge:";
-            // 
-            // lblMacAddress
-            // 
-            this.lblMacAddress.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMacAddress.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblMacAddress.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMacAddress.Location = new System.Drawing.Point(3, 96);
-            this.lblMacAddress.Name = "lblMacAddress";
-            this.lblMacAddress.Size = new System.Drawing.Size(128, 25);
-            this.lblMacAddress.TabIndex = 1;
-            this.lblMacAddress.Text = "Mac Address:";
-            // 
-            // lblProductionID
-            // 
-            this.lblProductionID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductionID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblProductionID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblProductionID.Location = new System.Drawing.Point(3, 65);
-            this.lblProductionID.Name = "lblProductionID";
-            this.lblProductionID.Size = new System.Drawing.Size(128, 25);
-            this.lblProductionID.TabIndex = 12;
-            this.lblProductionID.Text = "Production ID:";
             // 
             // lblOperatorName
             // 
@@ -308,6 +220,74 @@
             this.lblLineID.Size = new System.Drawing.Size(233, 25);
             this.lblLineID.TabIndex = 15;
             this.lblLineID.Text = "Line ID";
+            // 
+            // txtProductionID
+            // 
+            this.txtProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtProductionID.Location = new System.Drawing.Point(137, 96);
+            this.txtProductionID.Name = "txtProductionID";
+            this.txtProductionID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
+            this.txtProductionID.Properties.Appearance.Options.UseFont = true;
+            this.txtProductionID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtProductionID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtProductionID.Properties.NullValuePrompt = "Production ID";
+            this.txtProductionID.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtProductionID.Size = new System.Drawing.Size(233, 26);
+            this.txtProductionID.TabIndex = 8;
+            this.txtProductionID.EditValueChanged += new System.EventHandler(this.txtProductionID_EditValueChanged);
+            this.txtProductionID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtProductionID_PreviewKeyDown);
+            // 
+            // txtBoxID
+            // 
+            this.txtBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxID.Location = new System.Drawing.Point(137, 65);
+            this.txtBoxID.Name = "txtBoxID";
+            this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxID.Properties.Appearance.Options.UseFont = true;
+            this.txtBoxID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtBoxID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtBoxID.Properties.NullValuePrompt = "Box ID";
+            this.txtBoxID.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtBoxID.Size = new System.Drawing.Size(233, 26);
+            this.txtBoxID.TabIndex = 6;
+            this.txtBoxID.EditValueChanged += new System.EventHandler(this.txtBoxID_EditValueChanged);
+            this.txtBoxID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBoxID_PreviewKeyDown);
+            // 
+            // lblBoxID
+            // 
+            this.lblBoxID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBoxID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblBoxID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBoxID.Location = new System.Drawing.Point(3, 65);
+            this.lblBoxID.Name = "lblBoxID";
+            this.lblBoxID.Size = new System.Drawing.Size(128, 25);
+            this.lblBoxID.TabIndex = 4;
+            this.lblBoxID.Text = "Box ID:";
+            // 
+            // lblProductionID
+            // 
+            this.lblProductionID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductionID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblProductionID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblProductionID.Location = new System.Drawing.Point(3, 96);
+            this.lblProductionID.Name = "lblProductionID";
+            this.lblProductionID.Size = new System.Drawing.Size(128, 25);
+            this.lblProductionID.TabIndex = 12;
+            this.lblProductionID.Text = "Production ID:";
+            // 
+            // btnFinish
+            // 
+            this.btnFinish.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.btnFinish.Appearance.Options.UseFont = true;
+            this.btnFinish.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnFinish.Image = ((System.Drawing.Image)(resources.GetObject("btnFinish.Image")));
+            this.btnFinish.Location = new System.Drawing.Point(254, 158);
+            this.btnFinish.Name = "btnFinish";
+            this.btnFinish.Size = new System.Drawing.Size(116, 31);
+            this.btnFinish.TabIndex = 16;
+            this.btnFinish.Text = "Finish";
             // 
             // tableLayoutPanel3
             // 
@@ -364,7 +344,6 @@
             this.lblQuantityModel.Size = new System.Drawing.Size(240, 99);
             this.lblQuantityModel.TabIndex = 1;
             this.lblQuantityModel.Text = "/0";
-            this.lblQuantityModel.Visible = false;
             // 
             // lblCountPCB
             // 
@@ -489,44 +468,32 @@
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
             this.labelControl2.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.labelControl2.LineVisible = true;
             this.labelControl2.Location = new System.Drawing.Point(2, 2);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.labelControl2.Size = new System.Drawing.Size(389, 41);
+            this.labelControl2.Size = new System.Drawing.Size(636, 41);
             this.labelControl2.TabIndex = 1;
-            this.labelControl2.Text = "Production list in Box";
+            this.labelControl2.Text = "Pcb list in Box";
             // 
             // panelControl3
             // 
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl3.Controls.Add(this.btnSearchPCB);
             this.panelControl3.Controls.Add(this.btnLogOut);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelControl3.Location = new System.Drawing.Point(461, 2);
+            this.panelControl3.Location = new System.Drawing.Point(641, 2);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(381, 41);
+            this.panelControl3.Size = new System.Drawing.Size(201, 41);
             this.panelControl3.TabIndex = 0;
-            // 
-            // btnSearchPCB
-            // 
-            this.btnSearchPCB.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnSearchPCB.Appearance.Options.UseFont = true;
-            this.btnSearchPCB.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchPCB.Image")));
-            this.btnSearchPCB.Location = new System.Drawing.Point(199, 5);
-            this.btnSearchPCB.Name = "btnSearchPCB";
-            this.btnSearchPCB.Size = new System.Drawing.Size(172, 32);
-            this.btnSearchPCB.TabIndex = 1;
-            this.btnSearchPCB.Text = "Search PCB (Ctrl+F)";
-            this.btnSearchPCB.Click += new System.EventHandler(this.btnSearchPCB_Click);
             // 
             // btnLogOut
             // 
             this.btnLogOut.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.btnLogOut.Appearance.Options.UseFont = true;
             this.btnLogOut.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.Image")));
-            this.btnLogOut.Location = new System.Drawing.Point(3, 5);
+            this.btnLogOut.Location = new System.Drawing.Point(3, 4);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(189, 32);
+            this.btnLogOut.Size = new System.Drawing.Size(193, 32);
             this.btnLogOut.TabIndex = 0;
             this.btnLogOut.Text = "Log Out (Ctrl+Shift+L)";
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
@@ -653,7 +620,7 @@
             this.gridColumnDateCheck.VisibleIndex = 6;
             this.gridColumnDateCheck.Width = 98;
             // 
-            // FormQA
+            // FormForQACheck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -667,20 +634,19 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(860, 640);
-            this.Name = "FormQA";
+            this.Name = "FormForQACheck";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "QA";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormQA_FormClosing);
-            this.Load += new System.EventHandler(this.FormQA_Load);
+            this.Text = "QA Checking";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormForQACheck_FormClosing);
+            this.Load += new System.EventHandler(this.FormForQACheck_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtJudge.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
@@ -705,11 +671,9 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private DevExpress.XtraEditors.LabelControl lblMacAddress;
         private DevExpress.XtraEditors.LabelControl lblJudge;
         private DevExpress.XtraEditors.LabelControl lblBoxID;
         private DevExpress.XtraEditors.TextEdit txtBoxID;
-        private DevExpress.XtraEditors.TextEdit txtMacAddress;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSupport;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelPEIT;
@@ -742,7 +706,7 @@
         private DevExpress.XtraEditors.LabelControl lblOperatorName;
         private DevExpress.XtraEditors.LabelControl lblLineID;
         private DevExpress.XtraEditors.SimpleButton btnLogOut;
-        private DevExpress.XtraEditors.SimpleButton btnSearchPCB;
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenLoadData;
+        private DevExpress.XtraEditors.SimpleButton btnFinish;
     }
 }

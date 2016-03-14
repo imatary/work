@@ -157,6 +157,7 @@ namespace BarcodeShipping.GUI
                 Hide();
                 if (Program.CurrentUser != null)
                 {
+                    //var qa = new FormQA();
                     var qa = new FormQA();
                     qa.ShowDialog();
                 }

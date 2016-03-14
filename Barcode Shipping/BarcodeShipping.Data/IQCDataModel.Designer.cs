@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Dev\Projects\Barcode Shipping\BarcodeShipping.Data\IQCDataModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\cuongpv\Source\Repos\work\Barcode Shipping\BarcodeShipping.Data\IQCDataModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -28,10 +28,5 @@
 		</TaggedOutputs> -->
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2015Limited\InstallShield.targets"/>
-	<ItemGroup>
-		<ProjectReference Include="..\BarcodeShipping.GUI\BarcodeShipping.GUI.csproj">
-			<Name>BarcodeShipping.GUI</Name>
-			<Project>{32152D4B-FC15-4ACC-B9C0-67723103B999}</Project>
-		</ProjectReference>
-	</ItemGroup>
+	<ItemGroup/>
 </Project>

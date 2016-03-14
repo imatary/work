@@ -138,10 +138,8 @@ namespace BarcodeShipping.GUI
         /// <param name="e"></param>
         private void btnExports_Click(object sender, EventArgs e)
         {
-            var date = DateTime.Now;
             var saveFileDialog1 = new SaveFileDialog
             {
-                FileName = string.Format("{0}-{1}-{2}", date.Day, date.Month, date.Year),
                 Filter = @"Exel|*.xls",
                 Title = @"Save exel file",
                 OverwritePrompt = true,

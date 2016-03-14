@@ -40,7 +40,6 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.comboBoxEditSearchByKey = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtSearchPCB = new DevExpress.XtraEditors.TextEdit();
@@ -53,16 +52,17 @@
             this.gridColumnMacAddress = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnDateCheck = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.comboBoxEditSearchByKey = new DevExpress.XtraEditors.ComboBoxEdit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchByKey.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSearchPCB.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchByKey.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -101,8 +101,8 @@
             // toolStripStatusLabelDessignBy
             // 
             this.toolStripStatusLabelDessignBy.Name = "toolStripStatusLabelDessignBy";
-            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(62, 19);
-            this.toolStripStatusLabelDessignBy.Text = "Design by:";
+            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(67, 19);
+            this.toolStripStatusLabelDessignBy.Text = "Dessign by:";
             // 
             // toolStripStatusLabelName
             // 
@@ -156,32 +156,15 @@
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(0, 94);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(844, 59);
+            this.panelControl2.Size = new System.Drawing.Size(844, 114);
             this.panelControl2.TabIndex = 5;
-            // 
-            // comboBoxEditSearchByKey
-            // 
-            this.comboBoxEditSearchByKey.EditValue = "Production ID";
-            this.comboBoxEditSearchByKey.Location = new System.Drawing.Point(516, 15);
-            this.comboBoxEditSearchByKey.Name = "comboBoxEditSearchByKey";
-            this.comboBoxEditSearchByKey.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.comboBoxEditSearchByKey.Properties.Appearance.Options.UseFont = true;
-            this.comboBoxEditSearchByKey.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.comboBoxEditSearchByKey.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEditSearchByKey.Properties.Items.AddRange(new object[] {
-            "Production ID",
-            "Box ID"});
-            this.comboBoxEditSearchByKey.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEditSearchByKey.Size = new System.Drawing.Size(148, 28);
-            this.comboBoxEditSearchByKey.TabIndex = 3;
             // 
             // btnSearch
             // 
             this.btnSearch.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.btnSearch.Appearance.Options.UseFont = true;
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.Location = new System.Drawing.Point(670, 15);
+            this.btnSearch.Location = new System.Drawing.Point(679, 13);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(108, 28);
             this.btnSearch.TabIndex = 2;
@@ -199,12 +182,11 @@
             // 
             // txtSearchPCB
             // 
-            this.txtSearchPCB.Location = new System.Drawing.Point(198, 15);
+            this.txtSearchPCB.Location = new System.Drawing.Point(361, 15);
             this.txtSearchPCB.Name = "txtSearchPCB";
             this.txtSearchPCB.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtSearchPCB.Properties.Appearance.Options.UseFont = true;
             this.txtSearchPCB.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtSearchPCB.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtSearchPCB.Size = new System.Drawing.Size(312, 28);
             this.txtSearchPCB.TabIndex = 0;
             this.txtSearchPCB.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtSearchPCB_PreviewKeyDown);
@@ -213,12 +195,11 @@
             // 
             this.gridControlData.Cursor = System.Windows.Forms.Cursors.Default;
             this.gridControlData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlData.Location = new System.Drawing.Point(0, 153);
+            this.gridControlData.Location = new System.Drawing.Point(0, 208);
             this.gridControlData.MainView = this.gridView1;
             this.gridControlData.Name = "gridControlData";
-            this.gridControlData.Size = new System.Drawing.Size(844, 424);
+            this.gridControlData.Size = new System.Drawing.Size(844, 369);
             this.gridControlData.TabIndex = 8;
-            this.gridControlData.UseEmbeddedNavigator = true;
             this.gridControlData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
@@ -246,11 +227,10 @@
             this.gridColumnCounter.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumnCounter.Caption = "#";
             this.gridColumnCounter.FieldName = "Counter";
-            this.gridColumnCounter.MinWidth = 36;
             this.gridColumnCounter.Name = "gridColumnCounter";
             this.gridColumnCounter.Visible = true;
             this.gridColumnCounter.VisibleIndex = 0;
-            this.gridColumnCounter.Width = 36;
+            this.gridColumnCounter.Width = 27;
             // 
             // gridColumnOperatorCode
             // 
@@ -260,11 +240,10 @@
             this.gridColumnOperatorCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumnOperatorCode.Caption = "Operator";
             this.gridColumnOperatorCode.FieldName = "OperatorCode";
-            this.gridColumnOperatorCode.MinWidth = 65;
             this.gridColumnOperatorCode.Name = "gridColumnOperatorCode";
             this.gridColumnOperatorCode.Visible = true;
             this.gridColumnOperatorCode.VisibleIndex = 1;
-            this.gridColumnOperatorCode.Width = 65;
+            this.gridColumnOperatorCode.Width = 100;
             // 
             // gridColumnBox
             // 
@@ -274,11 +253,10 @@
             this.gridColumnBox.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumnBox.Caption = "Box";
             this.gridColumnBox.FieldName = "BoxID";
-            this.gridColumnBox.MinWidth = 95;
             this.gridColumnBox.Name = "gridColumnBox";
             this.gridColumnBox.Visible = true;
             this.gridColumnBox.VisibleIndex = 2;
-            this.gridColumnBox.Width = 95;
+            this.gridColumnBox.Width = 120;
             // 
             // gridColumnProductID
             // 
@@ -288,11 +266,10 @@
             this.gridColumnProductID.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumnProductID.Caption = "Production ID";
             this.gridColumnProductID.FieldName = "ProductionID";
-            this.gridColumnProductID.MinWidth = 310;
             this.gridColumnProductID.Name = "gridColumnProductID";
             this.gridColumnProductID.Visible = true;
             this.gridColumnProductID.VisibleIndex = 3;
-            this.gridColumnProductID.Width = 310;
+            this.gridColumnProductID.Width = 100;
             // 
             // gridColumnMacAddress
             // 
@@ -302,11 +279,9 @@
             this.gridColumnMacAddress.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumnMacAddress.Caption = "Mac Address";
             this.gridColumnMacAddress.FieldName = "MacAddress";
-            this.gridColumnMacAddress.MinWidth = 130;
             this.gridColumnMacAddress.Name = "gridColumnMacAddress";
             this.gridColumnMacAddress.Visible = true;
             this.gridColumnMacAddress.VisibleIndex = 4;
-            this.gridColumnMacAddress.Width = 130;
             // 
             // gridColumnQuantity
             // 
@@ -318,10 +293,10 @@
             this.gridColumnQuantity.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumnQuantity.Caption = "Quantity";
             this.gridColumnQuantity.FieldName = "Quantity";
-            this.gridColumnQuantity.MinWidth = 75;
             this.gridColumnQuantity.Name = "gridColumnQuantity";
             this.gridColumnQuantity.Visible = true;
             this.gridColumnQuantity.VisibleIndex = 5;
+            this.gridColumnQuantity.Width = 65;
             // 
             // gridColumnDateCheck
             // 
@@ -331,11 +306,27 @@
             this.gridColumnDateCheck.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumnDateCheck.Caption = "Date Check";
             this.gridColumnDateCheck.FieldName = "DateCheck";
-            this.gridColumnDateCheck.MinWidth = 120;
             this.gridColumnDateCheck.Name = "gridColumnDateCheck";
             this.gridColumnDateCheck.Visible = true;
             this.gridColumnDateCheck.VisibleIndex = 6;
             this.gridColumnDateCheck.Width = 120;
+            // 
+            // comboBoxEditSearchByKey
+            // 
+            this.comboBoxEditSearchByKey.EditValue = "Production ID";
+            this.comboBoxEditSearchByKey.Location = new System.Drawing.Point(207, 15);
+            this.comboBoxEditSearchByKey.Name = "comboBoxEditSearchByKey";
+            this.comboBoxEditSearchByKey.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.comboBoxEditSearchByKey.Properties.Appearance.Options.UseFont = true;
+            this.comboBoxEditSearchByKey.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEditSearchByKey.Properties.Items.AddRange(new object[] {
+            "Production ID",
+            "PO NO",
+            "Box ID"});
+            this.comboBoxEditSearchByKey.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.comboBoxEditSearchByKey.Size = new System.Drawing.Size(148, 26);
+            this.comboBoxEditSearchByKey.TabIndex = 3;
             // 
             // FormSearchPCB
             // 
@@ -350,7 +341,6 @@
             this.MinimumSize = new System.Drawing.Size(860, 640);
             this.Name = "FormSearchPCB";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormSearchPCB";
             this.Load += new System.EventHandler(this.FormSearchPCB_Load);
             this.statusStrip1.ResumeLayout(false);
@@ -361,10 +351,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchByKey.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSearchPCB.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchByKey.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

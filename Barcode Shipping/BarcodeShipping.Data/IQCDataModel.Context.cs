@@ -28,8 +28,8 @@ namespace BarcodeShipping.Data
         public virtual DbSet<mst_operator> mst_operator { get; set; }
         public virtual DbSet<tbl_test_result> tbl_test_result { get; set; }
         public virtual DbSet<Model> Models { get; set; }
-        public virtual DbSet<tbl_test_log> tbl_test_log { get; set; }
         public virtual DbSet<PackingPO> PackingPOes { get; set; }
         public virtual DbSet<Shipping> Shippings { get; set; }
+        public virtual DbSet<tbl_test_log> tbl_test_log { get; set; }
     }
 }
