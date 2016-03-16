@@ -43,6 +43,7 @@ namespace BarcodeShipping.GUI
                         splashScreenManager1.CloseWaitForm();
                         txtSearch.SelectAll();
                         txtSearch.Focus();
+                        btnExports.Enabled = true;
                     }
                     else
                     {
@@ -73,6 +74,7 @@ namespace BarcodeShipping.GUI
                                 splashScreenManager1.CloseWaitForm();
                                 txtSearch.SelectAll();
                                 txtSearch.Focus();
+                                btnExports.Enabled = true;
                             }
                             else
                             {
@@ -108,6 +110,8 @@ namespace BarcodeShipping.GUI
                                 splashScreenManager1.CloseWaitForm();
                                 txtSearch.SelectAll();
                                 txtSearch.Focus();
+                                btnDelBox.Enabled = true;
+                                btnExports.Enabled = true;
                             }
                             else
                             {
@@ -148,6 +152,31 @@ namespace BarcodeShipping.GUI
             if (saveFileDialog1.FileName != "")
             {
                 gridControlData.ExportToXls(saveFileDialog1.FileName);
+            }
+        }
+
+        private void btnDelBox_Click(object sender, EventArgs e)
+        {
+            foreach (var shipping in _shippings)
+            {
+                _iqcService.DeletePcbById(shipping.ID);
+            }
+            _shippings = new List<Shipping>();
+            gridControlData.Refresh();
+            gridControlData.DataSource = null;
+            MessageBox.Show($"Xóa thành công Box {txtSearch.Text}");
+            txtSearch.SelectAll();
+            txtSearch.Focus();
+            btnDelBox.Enabled = false;
+            btnExports.Enabled = false;
+
+        }
+
+        private void comboBoxEditSearchByKey_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (gridControlData.DataSource != null)
+            {
+                btnDelBox.Enabled = comboBoxEditSearchByKey.EditValue.Equals("Box ID");
             }
         }
     }

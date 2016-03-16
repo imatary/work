@@ -263,8 +263,8 @@
             // toolStripStatusLabelDessignBy
             // 
             this.toolStripStatusLabelDessignBy.Name = "toolStripStatusLabelDessignBy";
-            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(67, 19);
-            this.toolStripStatusLabelDessignBy.Text = "Dessign by:";
+            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(62, 19);
+            this.toolStripStatusLabelDessignBy.Text = "Design by:";
             // 
             // toolStripStatusLabelName
             // 

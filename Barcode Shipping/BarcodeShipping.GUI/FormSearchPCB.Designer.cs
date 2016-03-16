@@ -40,6 +40,7 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.comboBoxEditSearchByKey = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtSearchPCB = new DevExpress.XtraEditors.TextEdit();
@@ -52,17 +53,16 @@
             this.gridColumnMacAddress = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnDateCheck = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.comboBoxEditSearchByKey = new DevExpress.XtraEditors.ComboBoxEdit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchByKey.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSearchPCB.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchByKey.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -101,8 +101,8 @@
             // toolStripStatusLabelDessignBy
             // 
             this.toolStripStatusLabelDessignBy.Name = "toolStripStatusLabelDessignBy";
-            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(67, 19);
-            this.toolStripStatusLabelDessignBy.Text = "Dessign by:";
+            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(62, 19);
+            this.toolStripStatusLabelDessignBy.Text = "Design by:";
             // 
             // toolStripStatusLabelName
             // 
@@ -158,6 +158,23 @@
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(844, 114);
             this.panelControl2.TabIndex = 5;
+            // 
+            // comboBoxEditSearchByKey
+            // 
+            this.comboBoxEditSearchByKey.EditValue = "Production ID";
+            this.comboBoxEditSearchByKey.Location = new System.Drawing.Point(207, 15);
+            this.comboBoxEditSearchByKey.Name = "comboBoxEditSearchByKey";
+            this.comboBoxEditSearchByKey.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.comboBoxEditSearchByKey.Properties.Appearance.Options.UseFont = true;
+            this.comboBoxEditSearchByKey.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEditSearchByKey.Properties.Items.AddRange(new object[] {
+            "Production ID",
+            "PO NO",
+            "Box ID"});
+            this.comboBoxEditSearchByKey.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.comboBoxEditSearchByKey.Size = new System.Drawing.Size(148, 26);
+            this.comboBoxEditSearchByKey.TabIndex = 3;
             // 
             // btnSearch
             // 
@@ -311,23 +328,6 @@
             this.gridColumnDateCheck.VisibleIndex = 6;
             this.gridColumnDateCheck.Width = 120;
             // 
-            // comboBoxEditSearchByKey
-            // 
-            this.comboBoxEditSearchByKey.EditValue = "Production ID";
-            this.comboBoxEditSearchByKey.Location = new System.Drawing.Point(207, 15);
-            this.comboBoxEditSearchByKey.Name = "comboBoxEditSearchByKey";
-            this.comboBoxEditSearchByKey.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.comboBoxEditSearchByKey.Properties.Appearance.Options.UseFont = true;
-            this.comboBoxEditSearchByKey.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEditSearchByKey.Properties.Items.AddRange(new object[] {
-            "Production ID",
-            "PO NO",
-            "Box ID"});
-            this.comboBoxEditSearchByKey.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEditSearchByKey.Size = new System.Drawing.Size(148, 26);
-            this.comboBoxEditSearchByKey.TabIndex = 3;
-            // 
             // FormSearchPCB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -351,10 +351,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchByKey.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSearchPCB.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSearchByKey.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

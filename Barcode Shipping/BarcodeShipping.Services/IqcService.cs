@@ -71,6 +71,11 @@ namespace BarcodeShipping.Services
             return Repository.GetAll<Shipping>().FirstOrDefault(p => p.ProductID == productionId);
         }
 
+        public Shipping GetShippingByGuiId(Guid id)
+        {
+            return Repository.GetAll<Shipping>().FirstOrDefault(p => p.ID == id);
+        }
+
         /// <summary>
         /// Kiểm tra sự tồn tại của PCb vừa nhập đã có trong BOX hiện tại hay chưa
         /// Nếu có thì không cho làm việc
@@ -598,6 +603,23 @@ namespace BarcodeShipping.Services
                 }
             }
         }
+
+        public void DeletePcbById(Guid id)
+        {
+            var shipping = GetShippingByGuiId(id);
+            if (shipping != null)
+            {
+                try
+                {
+                    Repository.Delete(shipping);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>

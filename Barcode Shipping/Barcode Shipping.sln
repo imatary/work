@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeShipping.Services", 
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Barcode Shipping - Fuji Xerox", "Barcode Shipping - Fuji Xerox\Barcode Shipping - Fuji Xerox.isproj", "{35E518ED-268C-4AE6-9C9A-769B05F3FD23}"
 EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "PC - Fuji Xerox", "PC - Fuji Xerox\PC - Fuji Xerox.isproj", "{442E8091-369B-4305-8176-DD68F72F4E24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -146,6 +148,36 @@ Global
 		{35E518ED-268C-4AE6-9C9A-769B05F3FD23}.SingleImage|Mixed Platforms.Build.0 = SingleImage
 		{35E518ED-268C-4AE6-9C9A-769B05F3FD23}.SingleImage|x86.ActiveCfg = SingleImage
 		{35E518ED-268C-4AE6-9C9A-769B05F3FD23}.SingleImage|x86.Build.0 = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{442E8091-369B-4305-8176-DD68F72F4E24}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{442E8091-369B-4305-8176-DD68F72F4E24}.CD_ROM|Mixed Platforms.ActiveCfg = CD_ROM
+		{442E8091-369B-4305-8176-DD68F72F4E24}.CD_ROM|Mixed Platforms.Build.0 = CD_ROM
+		{442E8091-369B-4305-8176-DD68F72F4E24}.CD_ROM|x86.ActiveCfg = CD_ROM
+		{442E8091-369B-4305-8176-DD68F72F4E24}.CD_ROM|x86.Build.0 = CD_ROM
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Debug|Any CPU.ActiveCfg = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Debug|Any CPU.Build.0 = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Debug|Mixed Platforms.ActiveCfg = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Debug|Mixed Platforms.Build.0 = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Debug|x86.ActiveCfg = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Debug|x86.Build.0 = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.DVD-5|Any CPU.Build.0 = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.DVD-5|Mixed Platforms.ActiveCfg = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.DVD-5|Mixed Platforms.Build.0 = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.DVD-5|x86.ActiveCfg = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.DVD-5|x86.Build.0 = DVD-5
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Release|Any CPU.ActiveCfg = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Release|Any CPU.Build.0 = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Release|Mixed Platforms.ActiveCfg = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Release|Mixed Platforms.Build.0 = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Release|x86.ActiveCfg = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.Release|x86.Build.0 = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.SingleImage|Any CPU.Build.0 = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.SingleImage|Mixed Platforms.ActiveCfg = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.SingleImage|Mixed Platforms.Build.0 = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.SingleImage|x86.ActiveCfg = SingleImage
+		{442E8091-369B-4305-8176-DD68F72F4E24}.SingleImage|x86.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

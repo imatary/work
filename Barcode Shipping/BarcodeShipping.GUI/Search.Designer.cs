@@ -38,6 +38,7 @@
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitLoadData), true, true);
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.btnDelBox = new DevExpress.XtraEditors.SimpleButton();
             this.btnExports = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.comboBoxEditSearchByKey = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -98,8 +99,8 @@
             // toolStripStatusLabelDessignBy
             // 
             this.toolStripStatusLabelDessignBy.Name = "toolStripStatusLabelDessignBy";
-            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(67, 19);
-            this.toolStripStatusLabelDessignBy.Text = "Dessign by:";
+            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(62, 19);
+            this.toolStripStatusLabelDessignBy.Text = "Design by:";
             // 
             // toolStripStatusLabelName
             // 
@@ -111,7 +112,7 @@
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 20F, System.Drawing.FontStyle.Bold);
-            this.labelControl1.Location = new System.Drawing.Point(57, 12);
+            this.labelControl1.Location = new System.Drawing.Point(12, 15);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(92, 33);
             this.labelControl1.TabIndex = 0;
@@ -120,6 +121,7 @@
             // panelControl2
             // 
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Office2003;
+            this.panelControl2.Controls.Add(this.btnDelBox);
             this.panelControl2.Controls.Add(this.btnExports);
             this.panelControl2.Controls.Add(this.btnSearch);
             this.panelControl2.Controls.Add(this.comboBoxEditSearchByKey);
@@ -131,14 +133,28 @@
             this.panelControl2.Size = new System.Drawing.Size(884, 63);
             this.panelControl2.TabIndex = 7;
             // 
+            // btnDelBox
+            // 
+            this.btnDelBox.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnDelBox.Appearance.Options.UseFont = true;
+            this.btnDelBox.Enabled = false;
+            this.btnDelBox.Image = ((System.Drawing.Image)(resources.GetObject("btnDelBox.Image")));
+            this.btnDelBox.Location = new System.Drawing.Point(746, 22);
+            this.btnDelBox.Name = "btnDelBox";
+            this.btnDelBox.Size = new System.Drawing.Size(97, 27);
+            this.btnDelBox.TabIndex = 5;
+            this.btnDelBox.Text = "Del Box";
+            this.btnDelBox.Click += new System.EventHandler(this.btnDelBox_Click);
+            // 
             // btnExports
             // 
             this.btnExports.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnExports.Appearance.Options.UseFont = true;
+            this.btnExports.Enabled = false;
             this.btnExports.Image = ((System.Drawing.Image)(resources.GetObject("btnExports.Image")));
-            this.btnExports.Location = new System.Drawing.Point(717, 18);
+            this.btnExports.Location = new System.Drawing.Point(619, 22);
             this.btnExports.Name = "btnExports";
-            this.btnExports.Size = new System.Drawing.Size(120, 30);
+            this.btnExports.Size = new System.Drawing.Size(120, 27);
             this.btnExports.TabIndex = 4;
             this.btnExports.Text = "Export Exels";
             this.btnExports.Click += new System.EventHandler(this.btnExports_Click);
@@ -148,9 +164,9 @@
             this.btnSearch.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnSearch.Appearance.Options.UseFont = true;
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.Location = new System.Drawing.Point(608, 18);
+            this.btnSearch.Location = new System.Drawing.Point(511, 22);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(102, 30);
+            this.btnSearch.Size = new System.Drawing.Size(102, 27);
             this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "Search";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -158,7 +174,7 @@
             // comboBoxEditSearchByKey
             // 
             this.comboBoxEditSearchByKey.EditValue = "Production ID";
-            this.comboBoxEditSearchByKey.Location = new System.Drawing.Point(454, 20);
+            this.comboBoxEditSearchByKey.Location = new System.Drawing.Point(366, 22);
             this.comboBoxEditSearchByKey.Name = "comboBoxEditSearchByKey";
             this.comboBoxEditSearchByKey.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.comboBoxEditSearchByKey.Properties.Appearance.Options.UseFont = true;
@@ -169,16 +185,17 @@
             "PO NO",
             "Box ID"});
             this.comboBoxEditSearchByKey.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEditSearchByKey.Size = new System.Drawing.Size(148, 26);
+            this.comboBoxEditSearchByKey.Size = new System.Drawing.Size(139, 26);
             this.comboBoxEditSearchByKey.TabIndex = 2;
+            this.comboBoxEditSearchByKey.SelectedValueChanged += new System.EventHandler(this.comboBoxEditSearchByKey_SelectedValueChanged);
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(155, 20);
+            this.txtSearch.Location = new System.Drawing.Point(110, 22);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtSearch.Properties.Appearance.Options.UseFont = true;
-            this.txtSearch.Size = new System.Drawing.Size(293, 26);
+            this.txtSearch.Size = new System.Drawing.Size(250, 26);
             this.txtSearch.TabIndex = 1;
             // 
             // gridControlData
@@ -397,5 +414,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.GridControl gridControlData;
         private DevExpress.XtraEditors.SimpleButton btnExports;
+        private DevExpress.XtraEditors.SimpleButton btnDelBox;
     }
 }
