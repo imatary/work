@@ -162,7 +162,7 @@
             // comboBoxEditSearchByKey
             // 
             this.comboBoxEditSearchByKey.EditValue = "Production ID";
-            this.comboBoxEditSearchByKey.Location = new System.Drawing.Point(207, 15);
+            this.comboBoxEditSearchByKey.Location = new System.Drawing.Point(207, 16);
             this.comboBoxEditSearchByKey.Name = "comboBoxEditSearchByKey";
             this.comboBoxEditSearchByKey.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.comboBoxEditSearchByKey.Properties.Appearance.Options.UseFont = true;
@@ -191,7 +191,7 @@
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
-            this.labelControl2.Location = new System.Drawing.Point(104, 19);
+            this.labelControl2.Location = new System.Drawing.Point(110, 20);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(88, 18);
             this.labelControl2.TabIndex = 1;
