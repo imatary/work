@@ -12,6 +12,8 @@ namespace BarcodeShipping.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class IQCDataEntities : DbContext
     {
@@ -31,5 +33,64 @@ namespace BarcodeShipping.Data
         public virtual DbSet<PackingPO> PackingPOes { get; set; }
         public virtual DbSet<Shipping> Shippings { get; set; }
         public virtual DbSet<tbl_test_log> tbl_test_log { get; set; }
+    
+        public virtual int sp_DeleteLogByBoxId(string boxId)
+        {
+            var boxIdParameter = boxId != null ?
+                new ObjectParameter("boxId", boxId) :
+                new ObjectParameter("boxId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteLogByBoxId", boxIdParameter);
+        }
+    
+        public virtual int sp_DeleteLogByProductionId(string productionId)
+        {
+            var productionIdParameter = productionId != null ?
+                new ObjectParameter("productionId", productionId) :
+                new ObjectParameter("productionId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteLogByProductionId", productionIdParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetLogByProductionId_Result> sp_GetLogByProductionId(string productionId)
+        {
+            var productionIdParameter = productionId != null ?
+                new ObjectParameter("productionId", productionId) :
+                new ObjectParameter("productionId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLogByProductionId_Result>("sp_GetLogByProductionId", productionIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetLogsByBoxId_Result> sp_GetLogsByBoxId(string boxId)
+        {
+            var boxIdParameter = boxId != null ?
+                new ObjectParameter("boxId", boxId) :
+                new ObjectParameter("boxId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLogsByBoxId_Result>("sp_GetLogsByBoxId", boxIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_SelectAllLogs_Result> sp_SelectAllLogs()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SelectAllLogs_Result>("sp_SelectAllLogs");
+        }
+    
+        public virtual ObjectResult<sp_SelectAllModels_Result> sp_SelectAllModels()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SelectAllModels_Result>("sp_SelectAllModels");
+        }
     }
 }

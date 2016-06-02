@@ -115,6 +115,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_DeleteLogByBoxId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="boxId" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteLogByProductionId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productionId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetLogByProductionId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productionId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetLogsByBoxId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="boxId" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_SelectAllLogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_SelectAllModels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="barcode_dbModelStoreContainer">
           <EntitySet Name="Models" EntityType="Self.Models" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_operator" EntityType="Self.mst_operator" Schema="dbo" store:Type="Tables" />
@@ -176,6 +194,24 @@
             <End Role="Model" EntitySet="Models" />
             <End Role="tbl_test_log" EntitySet="tbl_test_log" />
           </AssociationSet>
+          <FunctionImport Name="sp_DeleteLogByBoxId">
+            <Parameter Name="boxId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteLogByProductionId">
+            <Parameter Name="productionId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetLogByProductionId" ReturnType="Collection(barcode_dbModel.sp_GetLogByProductionId_Result)">
+            <Parameter Name="productionId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetLogsByBoxId" ReturnType="Collection(barcode_dbModel.sp_GetLogsByBoxId_Result)">
+            <Parameter Name="boxId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SelectAllLogs" ReturnType="Collection(barcode_dbModel.sp_SelectAllLogs_Result)" />
+          <FunctionImport Name="sp_SelectAllModels" ReturnType="Collection(barcode_dbModel.sp_SelectAllModels_Result)" />
         </EntityContainer>
         <EntityType Name="Model">
           <Key>
@@ -275,6 +311,53 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_GetLogByProductionId_Result">
+          <Property Type="String" Name="ProductionID" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="LineID" Nullable="false" />
+          <Property Type="String" Name="MacAddress" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="BoxID" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="ModelID" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="WorkingOder" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateCheck" Nullable="true" />
+          <Property Type="Time" Name="TimeCheck" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="OperatorCode" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="QACheck" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetLogsByBoxId_Result">
+          <Property Type="String" Name="ProductionID" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="LineID" Nullable="false" />
+          <Property Type="String" Name="MacAddress" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="BoxID" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="ModelID" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="WorkingOder" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateCheck" Nullable="true" />
+          <Property Type="Time" Name="TimeCheck" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="OperatorCode" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="QACheck" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_SelectAllLogs_Result">
+          <Property Type="String" Name="ProductionID" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="LineID" Nullable="false" />
+          <Property Type="String" Name="MacAddress" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="BoxID" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="ModelID" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="WorkingOder" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateCheck" Nullable="true" />
+          <Property Type="Time" Name="TimeCheck" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="OperatorCode" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="QACheck" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_SelectAllModels_Result">
+          <Property Type="String" Name="ModelID" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="ModelName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="15" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="String" Name="SerialNo" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -358,6 +441,72 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_DeleteLogByBoxId" FunctionName="barcode_dbModel.Store.sp_DeleteLogByBoxId" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteLogByProductionId" FunctionName="barcode_dbModel.Store.sp_DeleteLogByProductionId" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="barcode_dbModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_GetLogByProductionId" FunctionName="barcode_dbModel.Store.sp_GetLogByProductionId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="barcode_dbModel.sp_GetLogByProductionId_Result">
+                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="BoxID" ColumnName="BoxID" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="WorkingOder" ColumnName="WorkingOder" />
+                <ScalarProperty Name="DateCheck" ColumnName="DateCheck" />
+                <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
+                <ScalarProperty Name="QACheck" ColumnName="QACheck" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetLogsByBoxId" FunctionName="barcode_dbModel.Store.sp_GetLogsByBoxId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="barcode_dbModel.sp_GetLogsByBoxId_Result">
+                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="BoxID" ColumnName="BoxID" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="WorkingOder" ColumnName="WorkingOder" />
+                <ScalarProperty Name="DateCheck" ColumnName="DateCheck" />
+                <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
+                <ScalarProperty Name="QACheck" ColumnName="QACheck" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SelectAllLogs" FunctionName="barcode_dbModel.Store.sp_SelectAllLogs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="barcode_dbModel.sp_SelectAllLogs_Result">
+                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="BoxID" ColumnName="BoxID" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="WorkingOder" ColumnName="WorkingOder" />
+                <ScalarProperty Name="DateCheck" ColumnName="DateCheck" />
+                <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />
+                <ScalarProperty Name="QACheck" ColumnName="QACheck" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SelectAllModels" FunctionName="barcode_dbModel.Store.sp_SelectAllModels">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="barcode_dbModel.sp_SelectAllModels_Result">
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -98,6 +98,18 @@
     <Compile Include="Shipping.cs">
       <DependentUpon>IQCDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_GetLogByProductionId_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetLogsByBoxId_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_SelectAllLogs_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_SelectAllModels_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbl_test_log.cs">
       <DependentUpon>IQCDataModel.tt</DependentUpon>
     </Compile>
