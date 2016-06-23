@@ -24,6 +24,7 @@ namespace BarcodeShipping.GUI
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            _shippings = new List<Shipping>();
             splashScreenManager1.ShowWaitForm();
             if (string.IsNullOrEmpty(txtSearch.Text))
             {
@@ -66,7 +67,7 @@ namespace BarcodeShipping.GUI
                         }
                         else
                         {
-                            _shippings = _iqcService.GetShippings().Where(p => p.PO_NO == txtSearch.Text).ToList();
+                            _shippings = _iqcService.GetShippingsByPo(txtSearch.Text).ToList();
 
                             if (_shippings.Any())
                             {
@@ -102,7 +103,7 @@ namespace BarcodeShipping.GUI
                         }
                         else
                         {
-                            _shippings = _iqcService.GetShippings().Where(p => p.BoxID == txtSearch.Text).ToList();
+                            _shippings = _iqcService.GetShippingsByBoxId(txtSearch.Text).ToList();
 
                             if (_shippings.Any())
                             {

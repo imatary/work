@@ -2,18 +2,19 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using BarcodeShipping.Data;
-using BarcodeShipping.GUI.Helper;
 using BarcodeShipping.Services;
+using OQC.Helper;
 
-namespace BarcodeShipping.GUI
+namespace OQC
 {
     public partial class FormQALogin : Form
     {
-        private readonly IqcService _iqcService = new IqcService();
+        private readonly OQCService _oqcService;
         private mst_operator _operator;
         public FormQALogin()
         {
             InitializeComponent();
+            _oqcService = new OQCService();
         }
 
         private void txtOperatorID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -118,13 +119,14 @@ namespace BarcodeShipping.GUI
             }
             else
             {
-                if (!_iqcService.CheckOperatorExits(operatorCode))
+                _operator = _oqcService.GetOperatorByCode(operatorCode);
+                if (_operator == null)
                 {
                     Ultils.EditTextErrorMessage(txtOperatorID, "Opeator code không tồn tại trong hệ thống!");
                 }
                 else
                 {
-                    _operator = _iqcService.GetOperatorByCode(operatorCode);
+                    txtLineID.Focus();
                 }
             }
         }

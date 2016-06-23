@@ -3,18 +3,18 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using BarcodeShipping.Data;
 using BarcodeShipping.Services;
-using PEBarcode;
 using PEBarcode.Helper;
 
 namespace PEBarcode
 {
     public partial class FormQALogin : Form
     {
-        private readonly IqcService _iqcService = new IqcService();
         private mst_operator _operator;
+        private readonly OQCService _oqcService;
         public FormQALogin()
         {
             InitializeComponent();
+            _oqcService = new OQCService();
         }
 
         private void txtOperatorID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -119,13 +119,14 @@ namespace PEBarcode
             }
             else
             {
-                if (!_iqcService.CheckOperatorExits(operatorCode))
+                var operators = _oqcService.GetOperatorByCode(operatorCode);
+                if (operators==null)
                 {
                     Ultils.EditTextErrorMessage(txtOperatorID, "Opeator code không tồn tại trong hệ thống!");
                 }
                 else
                 {
-                    _operator = _iqcService.GetOperatorByCode(operatorCode);
+                    _operator = operators;
                 }
             }
         }

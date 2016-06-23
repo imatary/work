@@ -9,9 +9,9 @@ namespace BarcodeShipping.Services
     public interface IOQCService
     {
         IEnumerable<tbl_test_log> GetLogs();
-        IEnumerable<tbl_test_log> GetLogsById(string productionId);
+        tbl_test_log GetLogsById(string productionId);
         IEnumerable<Model> GetModels();
-        Model GetModelById(string id);
+        Model GetModelById(string modelid);
         mst_operator GetOperatorByCode(string operatorCode);
 
 
@@ -69,14 +69,26 @@ namespace BarcodeShipping.Services
             }
         }
 
-        public IEnumerable<tbl_test_log> GetLogsById(string productionId)
+        public tbl_test_log GetLogsById(string productionId)
         {
-            return GetLogs().Where(p => p.ProductionID == productionId).ToList();
+            var param = new SqlParameter()
+            {
+                ParameterName = "@productionId",
+                SqlDbType = SqlDbType.VarChar,
+                Value = productionId,
+            };
+            return _context.Database.SqlQuery<tbl_test_log>("EXEC [sp_GetLogsById] @productionId", param).FirstOrDefault();
         }
 
-        public Model GetModelById(string id)
+        public Model GetModelById(string modelId)
         {
-            return GetModels().FirstOrDefault(p => p.ModelID == id);
+            var param = new SqlParameter()
+            {
+                ParameterName = "@modelId",
+                SqlDbType = SqlDbType.VarChar,
+                Value = modelId,
+            };
+            return _context.Database.SqlQuery<Model>("EXEC [sp_GetModelById] @modelId", param).FirstOrDefault();
         }
 
         public mst_operator GetOperatorByCode(string operatorCode)

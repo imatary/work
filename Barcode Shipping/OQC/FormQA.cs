@@ -3,17 +3,19 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using BarcodeShipping.GUI.Helper;
 using BarcodeShipping.Services;
 using DevExpress.XtraEditors;
+using OQC.Helper;
 
-namespace BarcodeShipping.GUI
+namespace OQC
 {
     public partial class FormQA : Form
     {
         private readonly IqcService _iqcService = new IqcService();
+        private readonly OQCService _oqcService;
         public FormQA()
         {
+            _oqcService = new OQCService();
             InitializeComponent();
         }
 
@@ -32,7 +34,35 @@ namespace BarcodeShipping.GUI
                 }
                 else
                 {
-                    txtMacAddress.Focus();
+                    foreach (var item in _oqcService.GetModels())
+                    {
+                        if (txtProductionID.Text.Trim().Contains(item.SerialNo) && txtProductionID.Text.Contains(item.ModelID))
+                        {
+                            lblQuantityModel.Visible = true;
+                            lblQuantityModel.Text = $"/{item.Quantity}";
+                            tableLayoutPanelModel.Visible = true;
+                            lblCurentModel.Text = item.ModelID;
+                            lblSerialNo.Text = item.SerialNo;
+                            break;
+                        }
+                    }
+                    var production = _oqcService.GetLogByProductionId(txtProductionID.Text.Trim());
+                    if (production != null)
+                    {
+                        //SetErrorStatus(true, "NG", $"Error!\nProduction ID[{txtProductionID.Text.Trim()}]\nĐã có trong hệ thống.\nVui lòng kiểm tra lại!");
+                        SetErrorStatus(true, "NG",
+                            $"PCB [{txtProductionID.Text}] đã có trong hệ thống.\nVui lòng kiểm tra lại\n" +
+                            $"Box ID: {production.BoxID} \n" +
+                            $"Operator: {production.OperatorCode} \n" +
+                            $"Date Check: {production.DateCheck} \n");
+                        txtProductionID.SelectAll();
+                        Ultils.EditTextErrorNoMessage(txtProductionID);
+                    }
+                    else
+                    {
+                        txtMacAddress.Focus();
+                        SetErrorStatus(false, "OK", null);
+                    }
                 }
             }
             if (e.KeyCode == Keys.Tab)
@@ -53,7 +83,18 @@ namespace BarcodeShipping.GUI
                 }
                 else
                 {
-                    txtJudge.Focus();
+                    if (txtMacAddress.Text.Length <= 2)
+                    {
+                        SetErrorStatus(true, "NG", "Mac Address Error!\nKhông đúng định dạng.\nVui lòng thử lại!");
+                        txtMacAddress.SelectAll();
+                        Ultils.EditTextErrorNoMessage(txtMacAddress);
+                    }
+                    else
+                    {
+                        txtJudge.Focus();
+                        SetErrorStatus(false, "OK", null);
+                    }
+                    
                 }
             }
             if (e.KeyCode == Keys.Tab)
@@ -157,9 +198,9 @@ namespace BarcodeShipping.GUI
         /// <param name="boxId"></param>
         private void InsertLog(string boxId)
         {
-            if (!string.IsNullOrEmpty(txtProductionID.Text)
-                || !string.IsNullOrEmpty(txtMacAddress.Text)
-                || !string.IsNullOrEmpty(txtJudge.Text))
+            if (!string.IsNullOrEmpty(txtProductionID.Text.Trim())
+                || !string.IsNullOrEmpty(txtMacAddress.Text.Trim())
+                || !string.IsNullOrEmpty(txtJudge.Text.Trim()))
             {
                 int lineId = Program.CurrentUser.LineID;
                 int operationId = Program.CurrentUser.OperationID;
@@ -168,10 +209,7 @@ namespace BarcodeShipping.GUI
 
                 if (operationId == 1)
                 {
-                    // Nếu PCB chưa tồn tại
-                    if (!_iqcService.CheckPcbExits(txtProductionID.Text))
-                    {
-                        var logs = _iqcService.GetLogs(boxId).ToList();
+                        var logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                         // Nếu Box có dữ liệu của PCB
                         if (logs.Any())
                         {
@@ -179,59 +217,9 @@ namespace BarcodeShipping.GUI
                             // Nếu PCB mới bắn vào chưa có trong Box
                             if (log == null)
                             {
-                                var firstPcbInBox = logs.FirstOrDefault();
-                                if (firstPcbInBox != null)
-                                {
-                                    int index = firstPcbInBox.ProductionID.IndexOf('_');
-                                    string str1;
-                                    string str2 = null;
-                                    if (firstPcbInBox.ProductionID.Contains('_'))
+                                    if (!CheckProductionId(txtProductionID.Text, lblCurentModel.Text, lblSerialNo.Text))
                                     {
-                                        str1 = firstPcbInBox.ProductionID.Substring(index - 4);
-                                        if (str1.Contains('.'))
-                                        {
-                                            int indexDot = str1.IndexOf('.');
-                                            str2 = str1.Remove(indexDot);
-                                        }
-                                        else
-                                        {
-                                            str2 = str1;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (firstPcbInBox.ProductionID.Contains('K'))
-                                        {
-                                            int index2 = firstPcbInBox.ProductionID.IndexOf('K');
-                                            str1 = firstPcbInBox.ProductionID.Substring(index2 - 7);
-                                            if (str1.Contains('.'))
-                                            {
-                                                int indexDot = str1.IndexOf('.');
-                                                str2 = str1.Remove(indexDot);
-                                            }
-                                            else
-                                            {
-                                                str2 = str1;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            str1 = firstPcbInBox.ProductionID;
-                                            if (str1.Contains('.'))
-                                            {
-                                                int indexDot = str1.IndexOf('.');
-                                                str2 = str1.Remove(indexDot);
-                                            }
-                                            else
-                                            {
-                                                str2 = str1;
-                                            }
-                                        }
-
-                                    }
-                                    if (!CheckProductionId(txtProductionID.Text, str2))
-                                    {
-                                        SetErrorStatus(true, "NG", $"Error {str2} !\nPCB [{txtProductionID.Text}]\nnày khác với các PCB trong Box [{boxId}].\nVui lòng kiểm tra lại!");
+                                        SetErrorStatus(true, "NG", $"Error {lblCurentModel.Text} !\nPCB [{txtProductionID.Text}]\nnày khác với các PCB trong Box [{boxId}].\nVui lòng kiểm tra lại!");
                                         txtProductionID.SelectAll();
                                         Ultils.EditTextErrorNoMessage(txtProductionID);
                                         txtJudge.ResetText();
@@ -240,40 +228,51 @@ namespace BarcodeShipping.GUI
                                     }
                                     else
                                     {
-                                        try
+                                        string tmp = lblQuantityModel.Text.Replace("/", "");
+                                        int countPcbInBox = int.Parse(lblCountPCB.Text);
+                                        int quantity = int.Parse(tmp);
+
+                                        if (countPcbInBox == quantity)
                                         {
-                                            _iqcService.InsertLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
-
-                                            if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
-                                            {
-                                                _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
-                                            }
-                                            else
-                                            {
-                                                _iqcService.UpdateResult(txtProductionID.Text, operationId, judge, operatorId);
-                                            }
-                                            var refeshData = _iqcService.GetLogs(boxId).ToList();
-                                            gridControlData.Refresh();
-                                            gridControlData.DataSource = refeshData;
-                                            lblCountPCB.Text = refeshData.Count.ToString(CultureInfo.InvariantCulture);
-
-                                            SetSuccessStatus(true, "PASS", string.Format("Thêm thành công!\nPCB [{0}]", txtProductionID.Text));
+                                            SetErrorStatus(true, "OK", "Thùng đã đủ số lượng, vui lòng kiểm tra lại!");
                                             ResetControls();
                                         }
-                                        catch (Exception ex)
+                                        else
                                         {
-                                            SetErrorStatus(true, "NG", "Error Insert! \n" + ex.Message);
-                                            ResetControls();
+                                            try
+                                            {
+                                                _iqcService.InsertLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
+
+                                                if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
+                                                {
+                                                    _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
+                                                }
+                                                else
+                                                {
+                                                    _iqcService.UpdateResult(txtProductionID.Text, operationId, judge, operatorId);
+                                                }
+                                                var refeshData = _iqcService.GetLogs(boxId).ToList();
+                                                gridControlData.Refresh();
+                                                gridControlData.DataSource = refeshData;
+                                                lblCountPCB.Text = refeshData.Count.ToString(CultureInfo.InvariantCulture);
+
+                                                SetSuccessStatus(true, "PASS", string.Format("Thêm thành công!\nPCB [{0}]", txtProductionID.Text));
+                                                ResetControls();
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                SetErrorStatus(true, "NG", "Error Insert! \n" + ex.Message);
+                                                ResetControls();
+                                            }
                                         }
                                     }
-                                }
                             }
                             // Nếu có rồi thì thống báo lỗi
                             else
                             {
                                 SetErrorStatus(true, "NG", $"PCB [{txtProductionID.Text}] này đã có trong Box rồi.\nVui lòng kiểm tra lại");
                                 ResetControls();
-                                var refeshData = _iqcService.GetLogs(boxId).ToList();
+                                var refeshData = _oqcService.GetLogsByBoxId(boxId);
                                 gridControlData.Refresh();
                                 gridControlData.DataSource = refeshData;
                             }
@@ -307,18 +306,6 @@ namespace BarcodeShipping.GUI
                                 ResetControls();
                             }
                         }
-                    }
-                    // Nếu PCB này đã tồn tại
-                    else
-                    {
-                        var log = _iqcService.GetPcbById(txtProductionID.Text);
-                        SetErrorStatus(true, "NG",
-                            $"PCB [{txtProductionID.Text}] đã được bắn trước đó.\nVui lòng kiểm tra lại\n" +
-                            $"Box ID: {log.BoxID} " +
-                            $"Operator: {log.OperatorCode} " +
-                            $"Date Check: {log.DateCheck}");
-                        ResetControls();
-                    }
                 }
                 else if (operationId >= 2)
                 {
@@ -373,13 +360,14 @@ namespace BarcodeShipping.GUI
         /// Kiểm tra key Model
         /// </summary>
         /// <param name="productionId"></param>
-        /// <param name="key"></param>
+        /// <param name="model"></param>
+        /// <param name="serialNo"></param>
         /// <returns></returns>
-        private bool CheckProductionId(string productionId, string key)
+        private bool CheckProductionId(string productionId, string model, string serialNo)
         {
             if (productionId != null)
             {
-                if (productionId.Contains(key))
+                if (productionId.Contains(model) && productionId.Contains(serialNo))
                 {
                     return true;
                 }
@@ -467,5 +455,19 @@ namespace BarcodeShipping.GUI
             var search = new FormSearchPCB();
             search.ShowDialog();
         }
+
+        private void btnAction_Click(object sender, EventArgs e)
+        {
+            var action=new FormAction();
+            action.ShowDialog();
+        }
+
+        //private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        //{
+        //    if (e.Column.Caption == "#")
+        //    {
+        //        e.DisplayText = (e.ListSourceRowIndex + 1).ToString(CultureInfo.InvariantCulture);
+        //    }
+        //}
     }
 }

@@ -58,7 +58,7 @@ namespace BarcodeShipping.GUI
                 try
                 {
                     _iqcService.InsertModel(txtModelID.Text, txtModelID.Text, txtOperatorCode.Text, int.Parse(txtQuantity.Text), txtSerialNo.Text);
-                    MessageBoxHelper.ShowMessageBoxSuccess("Thêm thành công!");
+                    MessageBoxHelper.ShowMessageBoxSuccess("Thành công!");
                     this.Close();
                 }
                 catch (Exception ex)

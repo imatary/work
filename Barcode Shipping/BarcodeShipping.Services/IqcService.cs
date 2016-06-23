@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using BarcodeShipping.Data;
 using BarcodeShipping.Data.Repositories;
@@ -9,6 +11,11 @@ namespace BarcodeShipping.Services
 
     public class IqcService
     {
+        private readonly IQCDataEntities _context;
+        public IqcService()
+        {
+            _context = new IQCDataEntities();
+        }
         private IRepository _repository;
 
         public IRepository Repository
@@ -52,12 +59,38 @@ namespace BarcodeShipping.Services
         }
 
         /// <summary>
-        /// all shipping
+        /// 
         /// </summary>
+        /// <param name="poNo"></param>
         /// <returns></returns>
-        public List<Shipping> GetShippings()
+        public List<Shipping> GetShippingsByPo(string poNo)
         {
-            return Repository.GetAll<Shipping>().ToList();
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@poNo", Value = poNo, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+            return _context.Database.SqlQuery<Shipping>("EXEC [sp_GetShippingsByPo] @poNo", param).ToList();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="boxId"></param>
+        /// <returns></returns>
+        public List<Shipping> GetShippingsByBoxId(string boxId)
+        {
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@boxId", Value = boxId, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+            return _context.Database.SqlQuery<Shipping>("EXEC [sp_GetShippingsByBoxId] @boxId", param).ToList();
         }
 
         /// <summary>
@@ -67,12 +100,30 @@ namespace BarcodeShipping.Services
         /// <returns></returns>
         public Shipping GetShippingById(string productionId)
         {
-            return Repository.GetAll<Shipping>().FirstOrDefault(p => p.ProductID == productionId);
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@productionId", Value = productionId, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            return _context.Database.SqlQuery<Shipping>("EXEC [sp_GetShippingById] @productionId", param).FirstOrDefault();
         }
 
         public Shipping GetShippingByGuiId(Guid id)
         {
-            return Repository.GetAll<Shipping>().FirstOrDefault(p => p.ID == id);
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@Id", Value = id, SqlDbType = SqlDbType.UniqueIdentifier},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            return _context.Database.SqlQuery<Shipping>("EXEC [sp_GetShippingByGuiId] @Id", param).FirstOrDefault();
         }
 
         /// <summary>
@@ -135,26 +186,31 @@ namespace BarcodeShipping.Services
             string productId,
             string macAddress)
         {
-            var shipping = new Shipping()
+            object[] param =
             {
-                ID = Guid.NewGuid(),
-                Operator = operatorCode,
-                Model = modelId,
-                WorkingOder = workingOder,
-                Quantity = 1,
-                PO_NO = poNo,
-                BoxID = boxId,
-                ProductID = productId,
-                MacAddress = macAddress,
-                DateCheck = DateTime.Now,
+                new SqlParameter() { ParameterName = "@Id", Value = Guid.NewGuid(), SqlDbType = SqlDbType.UniqueIdentifier},
+                new SqlParameter() { ParameterName = "@Operator", Value = operatorCode, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@Model", Value = modelId, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@WorkingOder", Value = workingOder, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@Quantity", Value = quantity, SqlDbType = SqlDbType.Int},
+                new SqlParameter() { ParameterName = "@BoxID", Value = boxId, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@ProductID", Value = productId, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@DateCheck", Value = DateTime.Now, SqlDbType = SqlDbType.DateTime},
+                new SqlParameter() { ParameterName = "@MacAddress", Value = macAddress, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@PO_NO", Value = poNo, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
             };
+
             try
             {
-                Repository.Insert(shipping);
+                _context.Database.ExecuteSqlCommand("EXEC [sp_InsertShipping] @Id, @Operator, @Model, @WorkingOder, @Quantity, @BoxID, @ProductID, @DateCheck, @MacAddress, @PO_NO", param);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
             
         }
@@ -234,23 +290,6 @@ namespace BarcodeShipping.Services
 
 
         #region Logs
-
-        /// <summary>
-        /// Toàn bộ danh sách QA
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<tbl_test_log> GetAllLogs()
-        {
-            return Repository.GetAll<tbl_test_log>().ToList();
-        }
-
-        public IEnumerable<tbl_test_log> GetLogsByMonths(DateTime startDate, DateTime endDate)
-        {
-            //DateTime start= startDate.
-            //return Repository.GetAll<tbl_test_log>().Where()
-
-            return null;
-        } 
 
         /// <summary>
         /// Kiểm tra sự tồn tại của PCb vừa nhập đã có trong BOX hiện tại hay chưa
@@ -416,8 +455,18 @@ namespace BarcodeShipping.Services
         /// <returns></returns>
         public tbl_test_result GetResultById(string productionId, int operationId)
         {
-            return
-                Repository.GetAll<tbl_test_result>().FirstOrDefault(op => op.ProductionID == productionId && op.OperationID == operationId);
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@productionId", Value = productionId, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@operationId", Value = operationId, SqlDbType = SqlDbType.Int},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            return _context.Database.SqlQuery<tbl_test_result>("EXEC [sp_GetLogResultsById] @productionId, @operationId", param).FirstOrDefault();
+
         }
 
         /// <summary>
@@ -524,12 +573,17 @@ namespace BarcodeShipping.Services
         /// <param name="poNo">PO</param>
         public PackingPO GetPackingPoModelAndPoNo(string modelNo, string poNo)
         {
-            var po = Repository.GetAll<PackingPO>().FirstOrDefault(p => (p.ModelID == modelNo) && (p.PO_NO == poNo));
-            if (po != null)
+            object[] param =
             {
-                return po;
-            }
-            return null;
+                new SqlParameter() { ParameterName = "@modelNo", Value = modelNo, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@poNo", Value = poNo, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            return _context.Database.SqlQuery<PackingPO>("EXEC [sp_GetPackingPoModelAndPoNo] @modelNo, @poNo", param).FirstOrDefault();
         }
 
         /// <summary>
@@ -540,7 +594,18 @@ namespace BarcodeShipping.Services
         /// <returns></returns>
         public PackingPO GetPoByModelAndPoNo(string modelNo, string poNo)
         {
-            return Repository.GetAll<PackingPO>().FirstOrDefault(p => (p.ModelID == modelNo) && (p.PO_NO == poNo));
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@modelNo", Value = modelNo, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@poNo", Value = poNo, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            return _context.Database.SqlQuery<PackingPO>("EXEC [sp_GetPackingPoModelAndPoNo] @modelNo, @poNo", param).FirstOrDefault();
+
         }
 
         /// <summary>
@@ -628,56 +693,30 @@ namespace BarcodeShipping.Services
         public void UpdateRemainsForPo(string poId, string modelNo, int remains)
         {
             PackingPO po = GetPoByModelAndPoNo(modelNo, poId);
-            po.QuantityRemain = remains;
-            try
+            if(po!=null)
             {
-                Repository.Update(po);
+                object[] param =
+                {
+                    new SqlParameter() {ParameterName = "@ModelID", Value = modelNo, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@PO_NO", Value = poId, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@QuantityRemain", Value = remains, SqlDbType = SqlDbType.Int},
+                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    }
+                };
+                try
+                {
+                    _context.Database.ExecuteSqlCommand("EXEC [sp_UpdateRemainsForPo] @ModelID, @PO_NO, @QuantityRemain", param);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
         }
 
         #endregion
-
-
-        #region Operator
-
-        /// <summary>
-        /// Get all Operator
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<mst_operator> GetOperators()
-        {
-            return Repository.GetAll<mst_operator>().ToList();
-        }
-
-        /// <summary>
-        /// Trả về Operator theo code
-        /// </summary>
-        /// <param name="operatorCode"></param>
-        /// <returns></returns>
-        public mst_operator GetOperatorByCode(string operatorCode)
-        {
-            return Repository.GetAll<mst_operator>().FirstOrDefault(op => op.OperatorID == operatorCode);
-        }
-
-        /// <summary>
-        /// Kiểm tra sự tồn tại của Operator
-        /// </summary>
-        /// <param name="operatorCode"></param>
-        /// <returns></returns>
-        public bool CheckOperatorExits(string operatorCode)
-        {
-            var op = GetOperatorByCode(operatorCode);
-            if (op != null)
-            {
-                return true;
-            }
-            return false;
-        }
-        #endregion
-
     }
 }

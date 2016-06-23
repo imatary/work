@@ -8,23 +8,26 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BarcodeShipping.GUI</RootNamespace>
-    <AssemblyName>Barcode QA</AssemblyName>
+    <AssemblyName>Barcode FUJI XEROX</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Barcode Shipping\QAPublish\</PublishUrl>
+    <PublishUrl>Y:\Dev\Barcode Shipping\PC Barcode\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Unc</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <UpdateUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Barcode Shipping\PC Barcode\</UpdateUrl>
+    <ProductName>Barcode Fuji Xerox</ProductName>
+    <PublisherName>cuongpham%40umcvn.com</PublisherName>
+    <SuiteName>UMC Electronics VietNam Ltd%27s</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>22</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -118,12 +121,6 @@
     <Compile Include="ExportToExel.Designer.cs">
       <DependentUpon>ExportToExel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormAddModel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,41 +133,11 @@
     <Compile Include="FormAddPO.Designer.cs">
       <DependentUpon>FormAddPO.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormForQACheck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormForQACheck.Designer.cs">
-      <DependentUpon>FormForQACheck.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormQA.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormQA.Designer.cs">
-      <DependentUpon>FormQA.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormQALogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormQALogin.Designer.cs">
-      <DependentUpon>FormQALogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormSearchDate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSearchDate.Designer.cs">
-      <DependentUpon>FormSearchDate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormSearchPCB.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSearchPCB.Designer.cs">
-      <DependentUpon>FormSearchPCB.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\MessageBoxHelper.cs" />
     <Compile Include="Helper\Ultils.cs" />
@@ -187,12 +154,6 @@
     </Compile>
     <Compile Include="Search.Designer.cs">
       <DependentUpon>Search.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WaitFormSearchPCBQA.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WaitFormSearchPCBQA.Designer.cs">
-      <DependentUpon>WaitFormSearchPCBQA.cs</DependentUpon>
     </Compile>
     <Compile Include="WaitFormSaveData.cs">
       <SubType>Form</SubType>
@@ -215,32 +176,14 @@
     <EmbeddedResource Include="ExportToExel.resx">
       <DependentUpon>ExportToExel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormAddModel.resx">
       <DependentUpon>FormAddModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAddPO.resx">
       <DependentUpon>FormAddPO.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormForQACheck.resx">
-      <DependentUpon>FormForQACheck.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormQA.resx">
-      <DependentUpon>FormQA.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormQALogin.resx">
-      <DependentUpon>FormQALogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSearchDate.resx">
-      <DependentUpon>FormSearchDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSearchPCB.resx">
-      <DependentUpon>FormSearchPCB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -258,9 +201,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WaitFormSearchPCBQA.resx">
-      <DependentUpon>WaitFormSearchPCBQA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WaitFormSaveData.resx">
       <DependentUpon>WaitFormSaveData.cs</DependentUpon>

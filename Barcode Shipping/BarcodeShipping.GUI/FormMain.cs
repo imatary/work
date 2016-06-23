@@ -14,12 +14,14 @@ namespace BarcodeShipping.GUI
     {
         private IqcService _iqcService = new IqcService();
         private List<Shipping> _shippings = new List<Shipping>();
-        private readonly List<Shipping> _pcbError = new List<Shipping>(); 
+        private readonly List<Shipping> _pcbError = new List<Shipping>();
+        private readonly OQCService _oqcService;
         private Model _currentModel;
         private PackingPO _currentPo = new PackingPO();
         public FormMain()
         {
             InitializeComponent();
+            _oqcService = new OQCService();
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -35,7 +37,7 @@ namespace BarcodeShipping.GUI
             if (!_iqcService.CheckBoxExits(boxId))
             {
                 splashScreenManager1.ShowWaitForm();
-                var logs = _iqcService.GetLogs(boxId).ToList();
+                var logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                 if (logs.Any())
                 { 
                     foreach (var log in logs)
@@ -62,10 +64,6 @@ namespace BarcodeShipping.GUI
                             _pcbError.Add(shipping);
                         }
                     }
-
-                    lblCountPCB.Text = _shippings.Count.ToString(CultureInfo.InvariantCulture);
-                    lblRemains.Text = (_currentPo.QuantityRemain - _shippings.Count).ToString(CultureInfo.InvariantCulture);
-
                     if (_pcbError.Any())
                     {
                         gridControlData.DataSource = _shippings;
@@ -78,12 +76,15 @@ namespace BarcodeShipping.GUI
                     }
                     else
                     {
+                        GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.EditValue.ToString(), txtPO.EditValue.ToString());
+                        lblCountPCB.Text = _shippings.Count.ToString(CultureInfo.InvariantCulture);
+                        lblRemains.Text = (_currentPo.QuantityRemain - _shippings.Count).ToString(CultureInfo.InvariantCulture);
+
                         // Nếu số lượng đủ thì thực hiện lưu vào csdl
                         if (_shippings.Count == _currentModel.Quantity)
                         {
                             gridControlData.DataSource = _shippings;
                             splashScreenManager1.CloseWaitForm();
-                            //MessageBox.Show($"Thùng [{boxId}] đã đủ số lượng. Click 'OK' để lưu dữ liệu.", @"Message!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             splashScreenManager2.ShowWaitForm();
                             foreach (var log in _shippings)
                             {
@@ -154,14 +155,13 @@ namespace BarcodeShipping.GUI
         /// <param name="boxid"></param>
         private void AddPcbToBox(string boxid)
         {
-            splashScreenManager1.ShowWaitForm();
             gridControlData.DataSource = null;
             if (!string.IsNullOrEmpty(txtAddPCB.Text))
             {
-                if (_iqcService.CheckPcbExitsOnBoxOrShip(txtAddPCB.Text, _shippings))
+                if (_iqcService.CheckPcbExitsOnBoxOrShip(txtAddPCB.Text.Trim(), _shippings))
                 {
-                    var shippings = _iqcService.GetShippings();
-                    if (_iqcService.CheckPcbExitsOnBoxOrShip(txtAddPCB.Text, shippings))
+                    var ship = _iqcService.GetShippingById(txtAddPCB.Text.Trim());
+                    if (ship == null)
                     {
                         var shipping = new Shipping()
                         {
@@ -177,19 +177,17 @@ namespace BarcodeShipping.GUI
                             DateCheck = DateTime.Now,
                         };
                         _shippings.Add(shipping);
-                        //gridControlData.Refresh();
+
                         gridControlData.DataSource = _shippings;
                         lblCountPCB.Text = _shippings.Count.ToString(CultureInfo.InvariantCulture);
                         lblRemains.Text = (int.Parse(lblRemains.Text) - 1).ToString(CultureInfo.InvariantCulture);
 
-                        splashScreenManager1.CloseWaitForm();
                         txtAddPCB.Text = string.Empty;
 
                         if (_shippings.Count == _currentModel.Quantity)
                         {
                             gridControlData.DataSource = _shippings;
-                            splashScreenManager1.CloseWaitForm();
-                            //MessageBox.Show($"Thùng [{boxid}] đã đủ số lượng. Click 'OK' để lưu dữ liệu.", @"Message!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            InsertOrUpdatePo(gridLookUpEditModelID.Text, txtPO.Text);
                             splashScreenManager2.ShowWaitForm();
                             foreach (var log in _shippings)
                             {
@@ -205,31 +203,22 @@ namespace BarcodeShipping.GUI
                             lblCountPCB.Text = @"0";
                             gridControlData.DataSource = null;
                             _shippings = new List<Shipping>();
-
-                            InsertOrUpdatePo(gridLookUpEditModelID.Text, txtPO.Text);
                         }
                     }
                     else
                     {
-                        var shipping = shippings.FirstOrDefault(s => s.ProductID == txtAddPCB.Text);
                         gridControlData.Refresh();
                         gridControlData.DataSource = _shippings;
-                        splashScreenManager1.CloseWaitForm();
-                        if (shipping != null)
-                        {
-                            MessageBoxHelper.ShowMessageBoxError($"PCB {txtAddPCB.Text} đã được xuất trước đó.\n" +
-                                                                 $"Box: {shipping.BoxID}\n" +
-                                                                 $"Ngày xuất: {shipping.DateCheck}");
-                            txtAddPCB.SelectAll();
-                        }
-                        
+                        MessageBoxHelper.ShowMessageBoxError($"PCB {txtAddPCB.Text} đã được xuất trước đó.\n" +
+                                                             $"Box: {ship.BoxID}\n" +
+                                                             $"Ngày xuất: {ship.DateCheck}");
+                        txtAddPCB.SelectAll();
                     }
                 }
                 else
                 {
                     gridControlData.Refresh();
                     gridControlData.DataSource = _shippings;
-                    splashScreenManager1.CloseWaitForm();
                     MessageBoxHelper.ShowMessageBoxError($"PCB {txtAddPCB.Text} đã được nhập trong Box rồi. Vui lòng kiểm tra lại!");
                     txtAddPCB.SelectAll();
                 }
@@ -256,10 +245,6 @@ namespace BarcodeShipping.GUI
                 }
                 else
                 {
-                    //gridLookUpEditModelID.Focus();
-                    //txtPO.ResetText();
-                    //lblQtyPO.Text = @"0";
-                    //lblRemains.Text = @"0";
                     txtBoxID.Focus();
                     txtBoxID.SelectAll();
                 }
@@ -297,7 +282,7 @@ namespace BarcodeShipping.GUI
         {
             gridLookUpEditModelID.Properties.View.OptionsBehavior.AutoPopulateColumns = false;
             gridLookUpEditModelID.Properties.View.BestFitColumns();
-            gridLookUpEditModelID.Properties.DataSource = _iqcService.GetModels();
+            gridLookUpEditModelID.Properties.DataSource = _oqcService.GetModels();
         }
 
         /// <summary>
@@ -347,13 +332,13 @@ namespace BarcodeShipping.GUI
         /// <summary>
         /// Kiểm tra
         /// </summary>
-        /// <param name="modelId"></param>
+        /// <param name="productionId"></param>
         /// <returns></returns>
-        private bool CheckModels(string modelId)
+        private bool CheckModels(string productionId)
         {
-            if (modelId != null)
+            if (productionId != null)
             {
-                if (modelId.Contains(_currentModel.SerialNo))
+                if (productionId.Contains(_currentModel.SerialNo) && productionId.Contains(_currentModel.ModelID))
                 {
                     return true;
                 }
@@ -622,11 +607,6 @@ namespace BarcodeShipping.GUI
             }
         }
 
-        //private void panelControlStatus_Paint(object sender, PaintEventArgs e)
-        //{
-        //    ControlPaint.DrawBorder(e.Graphics, panelControlStatus.ClientRectangle, Color.DarkOrange,ButtonBorderStyle.Dotted);
-        //}
-
         #region Control validate
         /// <summary>
         /// Model
@@ -639,13 +619,10 @@ namespace BarcodeShipping.GUI
             }
             else
             {
-                if (_iqcService.CheckModelIdExits(gridLookUpEditModelID.Text))
+                _currentModel = _oqcService.GetModelById(gridLookUpEditModelID.EditValue.ToString());
+                if (_currentModel != null)
                 {
-                    _currentModel = _iqcService.GetModels().FirstOrDefault(c => c.ModelID == gridLookUpEditModelID.Text);
-                    if (_currentModel != null)
-                    {
-                        lblQuantityModel.Text = $"/{_currentModel.Quantity}";
-                    }
+                    lblQuantityModel.Text = $"/{_currentModel.Quantity}";    
                     txtWorkingOrder.Focus();
                 }
                 else
@@ -784,8 +761,8 @@ namespace BarcodeShipping.GUI
             }
             else
             {
-                string modelId = txtAddPCB.Text;
-                if (CheckModels(modelId))
+                string productionId = txtAddPCB.Text;
+                if (CheckModels(productionId))
                 {
                     AddPcbToBox(txtBoxID.Text);
                 }

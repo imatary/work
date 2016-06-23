@@ -27,7 +27,7 @@ namespace BarcodeShipping.GUI
                 // nếu không, ứng dụng sẽ thoát.
                 if (ownmutex)
                 {
-                    Application.Run(new FormQALogin());
+                    Application.Run(new FormMain());
                     //giai phong Mutex;
                     mutex.ReleaseMutex();
                 }
