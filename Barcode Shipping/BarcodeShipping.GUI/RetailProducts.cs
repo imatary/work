@@ -512,8 +512,8 @@ namespace BarcodeShipping.GUI
             {
                 if (_iqcService.CheckPcbExitsOnBoxOrShip(txtAddPCB.Text, _shippings))
                 {
-                    var shippings = _iqcService.GetShippings();
-                    if (_iqcService.CheckPcbExitsOnBoxOrShip(txtAddPCB.Text, shippings))
+                    var shippings = _iqcService.GetShippingById(txtAddPCB.Text.Trim());
+                    if (shippings == null)
                     {
                         var shipping = new Shipping()
                         {
@@ -547,16 +547,12 @@ namespace BarcodeShipping.GUI
                     }
                     else
                     {
-                        var shipping = shippings.FirstOrDefault(s => s.ProductID == txtAddPCB.Text);
                         gridControlData.Refresh();
                         gridControlData.DataSource = _shippings;
                         splashScreenLoadData.CloseWaitForm();
-                        if (shipping != null)
-                        {
-                            MessageBoxHelper.ShowMessageBoxError($"PCB {txtAddPCB.Text} đã được xuất trước đó.\n" +
-                                                                 $"Box: {shipping.BoxID}\nN" +
-                                                                 $"Ngày xuất: {shipping.DateCheck}");
-                        }
+                        MessageBoxHelper.ShowMessageBoxError($"PCB {txtAddPCB.Text} đã được xuất trước đó.\n" +
+                                                             $"Box: {shippings.BoxID}\nN" +
+                                                             $"Ngày xuất: {shippings.DateCheck}");
                         txtAddPCB.SelectAll();
                     }
                 }

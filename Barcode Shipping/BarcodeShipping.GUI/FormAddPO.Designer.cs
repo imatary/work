@@ -75,7 +75,7 @@
             this.txtQtyPO.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
             this.txtQtyPO.Properties.Appearance.Options.UseFont = true;
             this.txtQtyPO.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtQtyPO.Properties.Mask.EditMask = "n";
+            this.txtQtyPO.Properties.Mask.EditMask = "d";
             this.txtQtyPO.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtQtyPO.Size = new System.Drawing.Size(203, 26);
             this.txtQtyPO.TabIndex = 10;

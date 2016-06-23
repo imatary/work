@@ -200,7 +200,7 @@
             this.txtQuantity.Properties.Appearance.Options.UseFont = true;
             this.txtQuantity.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtQuantity.Properties.Mask.BeepOnError = true;
-            this.txtQuantity.Properties.Mask.EditMask = "n";
+            this.txtQuantity.Properties.Mask.EditMask = "d";
             this.txtQuantity.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtQuantity.Size = new System.Drawing.Size(224, 26);
             this.txtQuantity.TabIndex = 1;
