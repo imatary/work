@@ -1,0 +1,80 @@
+﻿@model OverTime.Models.EmployeesLog
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>EmployeesLog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCheck)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCheck)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeaderApproved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeaderApproved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManagerApproved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManagerApproved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GaComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GaComplete)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

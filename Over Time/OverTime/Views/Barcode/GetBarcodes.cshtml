@@ -1,0 +1,48 @@
+﻿@model IEnumerable<OverTime.Models.Employess>
+
+<div class="clearfix" style="margin-bottom: 20px;"></div>
+<div class="col-md-12 col-lg-12 col-xs-12">
+    <table id="example" class="table table-striped table-responsive table-hover dataTable no-footer" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th class="no-sort">#</th>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Department</th>
+            <th>Date</th>
+            <th>End Time</th>
+            <th class="no-sort">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model.Any())
+        {
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.FullName</td>
+                    <td>@item.StaffCode</td>
+                    <td>@item.DepartmentID</td>
+                    <td>@item.DateCheck.ToShortDateString()</td>
+                    <td>@item.DateCheck.ToShortTimeString()</td>
+                    <td class="center">
+                        @if (User.IsInRole("Leader") || User.IsInRole("IsDelete") || User.IsInRole("Admin"))
+                        {
+                            using (Html.BeginForm("Delete", "Barcode", new { id = item.Id, code = item.StaffCode }, FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to delete this?');" }))
+                            {
+                                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button type="submit" class="btn btn-danger btn-xs">
+                                    <i class="glyphicon glyphicon-trash">&nbsp;</i>Delete
+                                </button>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>

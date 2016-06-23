@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - UMC Electronics VietNam Ltd's</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet"/>
+    @RenderSection("styles", required: false)
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <!--[if lt IE 9]>
+        <script src="~/Scripts/html5shiv.js"></script>
+        <script src="~/Scripts/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="row clearfix header-banner" style="height: 100px;">
+            <div class="col-md-12 col-lg-12 column">
+                <a class="title-logo" href="@Url.Action("Index", "Home", new {area = ""})" style="text-decoration: none; margin-right: 10px;">
+                    <img src="~/Content/img/umc-logo.png" class="img-logo" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid darkgreen">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="navbar-header">
+                            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <div class="col-md-8">
+                                <ul class="nav navbar-nav">
+                                    <li>@Html.ActionLink("Confirm Overtime", "Index", "Home")</li>
+                                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        <li>@Html.ActionLink("Roles ", "Index", "RolesAdmin")</li>
+                                        <li>@Html.ActionLink("Users ", "Index", "UsersAdmin")</li>
+                                        <li>@Html.ActionLink("Groups", "Index", "GroupsAdmin")</li>
+                                        <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
+                                    }
+                                    @if (Request.IsAuthenticated && (User.IsInRole("Leader") || User.IsInRole("Admin")))
+                                    {
+                                        <li>@Html.ActionLink("Shoot Barcode ", "Index", "Barcode")</li>
+                                    }
+                                    @if (Request.IsAuthenticated && (User.IsInRole("Leader") || User.IsInRole("ManageDepartmentShift") || User.IsInRole("Admin")))
+                                    {
+                                        <li>@Html.ActionLink("Report Barcode ", "Index", "ReportLogs")</li>
+                                    }
+                                    @*<li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            Barcode
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            @if (User.IsInRole("Leader") || User.IsInRole("Admin"))
+                                            {
+                                                <li>@Html.ActionLink("Shoot Barcode ", "Index", "Barcode")</li>
+                                            }
+                                            @if (Request.IsAuthenticated && (User.IsInRole("Leader") || User.IsInRole("ManageDepartmentShift") || User.IsInRole("Admin")))
+                                            {
+                                                <li>@Html.ActionLink("Report Barcode ", "Index", "ReportLogs")</li>
+                                            }
+                                        </ul>
+                                    </li>*@
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.Partial("_LoginPartial")
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="container margintop10">
+    <div class="row min-hieght-350">
+        @RenderBody()
+    </div>
+    <hr/>
+    <div class="row clearfix margintop20">
+        @{
+            var leader = User.IsInRole("Leader") ? "service-box-active" : "service-box";
+            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 @leader">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <i class="glyphicon glyphicon-user service-box-icon"></i>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="center-block service-box-text">
+                            <p>リーダー</p>
+                            <p>Trưởng nhóm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 center-block service-box-icon-16">
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+        </div>
+        @{
+            var shift = User.IsInRole("ManageDepartmentShift") ? "service-box-active" : "service-box";
+            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 @shift">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <i class="glyphicon glyphicon-user service-box-icon"></i>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="center-block service-box-text">
+                            <p>勤怠管理者</p>
+                            <p>Quản lý ca bộ phận</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 no-padding center-block service-box-icon-16">
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+        </div>
+        @{
+            var manager = User.IsInRole("Manager") ? "service-box-active" : "service-box";
+            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 @manager">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <i class="glyphicon glyphicon-user service-box-icon"></i>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="center-block service-box-text">
+                            <p>部門長</p>
+                            <p>Trưởng bộ phận</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 no-padding center-block service-box-icon-16">
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+        </div>
+        @{
+            var ga = User.IsInRole("GA") ? "service-box-active" : "service-box";
+            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 @ga">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <i class="glyphicon glyphicon-user service-box-icon"></i>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="center-block service-box-text">
+                            <p>総務</p>
+                            <p>Hành chính</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+    <div class="container-fluid bottomback margintop10">
+        <div class="container"> </div>
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-4 column">
+                <p>
+                    &copy; <strong>@DateTime.Now.Year - UMC Electronics VietNam Ltd's</strong>
+                </p>
+                <p>
+                    <span class="glyphicon glyphicon-phone-alt">&nbsp;</span>Ext: <strong>2998 - 3721 - 3140</strong>
+                </p>
+                <p>
+                    <span class="glyphicon glyphicon-hand-right">&nbsp;</span>Support:<strong>&nbsp;PD-IT</strong>
+                </p>
+                <p>
+                    <span class="glyphicon glyphicon-send">&nbsp;</span>Contact:<strong>&nbsp;cuongpham@umcvn.com</strong>
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <p style="font-style: italic;">
+                    <b>Lưu ý</b> : Trường hợp có thai từ tháng thứ 7 hoặc nuôi con dưới 12 tháng tuổi không được đăng ký làm thêm giờ.
+                    <br/>Bản thỏa thuận làm thêm giờ:&nbsp;
+                    <b>Trưởng nhóm </b>&rArr;
+                    <b>Quản lý ca bộ phận</b>&rArr;<b>Trưởng bộ phận</b>&rArr;
+                    <b>Hành chính </b> ký xác nhận trước 10:00 hôm sau
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bottomfooter">
+        <div class="container"> &copy; UMC Electronics VietNam Ltd's @DateTime.Now.Year </div>
+    </div>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/respond.min.js"></script>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(function() {
+            $.each($('.navbar-nav').find('li'),
+                function() {
+                    $(this)
+                        .toggleClass('active_nav', $(this).find('a').attr('href') === window.location.pathname);
+                });
+        });
+    </script>
+</body>
+</html>

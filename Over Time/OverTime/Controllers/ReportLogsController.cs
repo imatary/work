@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using OverTime.Models;
+using OverTime.Services;
+
+namespace OverTime.Controllers
+{
+    [Authorize]
+    public class ReportLogsController : Controller
+    {
+        private readonly IEmployeesService _employeesService;
+        private readonly IUserDepartmentsService _userDepartmentsService;
+        public ReportLogsController(IEmployeesService employeesService, 
+            IUserDepartmentsService userDepartmentsService)
+        {
+            _employeesService = employeesService;
+            _userDepartmentsService = userDepartmentsService;
+        }
+
+        // GET: ReportLogs
+        public async Task<ActionResult> Index(string searchKey)
+        {
+            var userDepartment = await _userDepartmentsService.GetUserDepartmentsAsync(User.Identity.GetUserId());
+            var departments = userDepartment as IList<Department> ?? userDepartment.ToList();
+            var employess = await _employeesService.FindEmployessesByDateAsync(DateTime.Now, departments.First().DepartmentID);
+
+            if(!string.IsNullOrEmpty(searchKey))
+            {
+                try
+                {
+                    DateTime dateSearch = DateTime.ParseExact(searchKey, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    employess = await _employeesService.FindEmployessesByDateAsync(dateSearch, departments.First().DepartmentID);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = $"Invalid date {searchKey}." + ex.Message;
+                }
+            }
+            return View(employess);
+        }
+    }
+}

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25029.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OverTime", "OverTime\OverTime.csproj", "{70385C57-DB1B-4380-955A-3CC3DA29E539}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Web.Core", "Lib.Web.Core\Lib.Web.Core.csproj", "{98B6DD0C-61F3-4B46-A05B-5A9198DEC230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Models", "Lib.Models\Lib.Models.csproj", "{4576B669-075E-49A1-AFEB-5C46512624E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70385C57-DB1B-4380-955A-3CC3DA29E539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70385C57-DB1B-4380-955A-3CC3DA29E539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70385C57-DB1B-4380-955A-3CC3DA29E539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70385C57-DB1B-4380-955A-3CC3DA29E539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B6DD0C-61F3-4B46-A05B-5A9198DEC230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B6DD0C-61F3-4B46-A05B-5A9198DEC230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B6DD0C-61F3-4B46-A05B-5A9198DEC230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B6DD0C-61F3-4B46-A05B-5A9198DEC230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4576B669-075E-49A1-AFEB-5C46512624E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4576B669-075E-49A1-AFEB-5C46512624E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4576B669-075E-49A1-AFEB-5C46512624E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4576B669-075E-49A1-AFEB-5C46512624E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

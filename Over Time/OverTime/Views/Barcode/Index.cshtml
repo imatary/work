@@ -1,0 +1,101 @@
+﻿@model OverTime.Models.SearchBarcode
+@{
+    ViewBag.Title = "Index";
+}
+@section styles
+{
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+<div class="col-md-12 col-xs-12 col-lg-12 col-md-12">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-home"></i></a></li>
+        <li class="active">
+            Shoot barcode
+        </li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Barcode</h2>
+    </div>
+    @using (Html.BeginForm("Index", "Barcode", FormMethod.Post, new {role = "form"}))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-lg-4 col-lg-offset-4">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.SearchKey, new {@class = "form-control", placeholder = "Enter your code?", autocomplete = "off"})
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-barcode" style="font-size: 18px; font-weight: bold;"></i>
+                </span>
+            </div><!-- /input-group -->
+            @Html.ValidationMessageFor(model => model.SearchKey, null, new {@class = "text-danger", style = "font-weight: bold;"})
+            <p>
+                <strong>Note:</strong>
+                <i>Enter your code. Ext: 16354</i>
+            </p>
+        </div>
+        <!-- /.col-lg-6 -->
+    }
+    @{Html.RenderAction("GetBarcodes", "Barcode");}
+</div><!-- /.row -->
+@section scripts
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#SearchKey').focus();
+            $('#example')
+                .dataTable({
+                    responsive: true,
+                    "order": [],
+                    "columnDefs": [
+                        {
+                            "targets": 'no-sort',
+                            "orderable": false
+                        }
+                    ]
+                });
+        });
+    </script>
+    <script type="text/javascript">
+        $('#SearchKey')
+            .keypress(function(event) {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode == '13') {
+                    $.ajax({
+                        url: "@Url.Action("Index", "Barcode")",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    });
+                }
+                event.stopPropagation();
+            });
+    </script>
+@*<script type="text/javascript">
+        $('#SearchKey')
+            .keypress(function(event) {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode == '13') {
+                    $.ajax({
+                        url: "@Url.Action("Index", "Barcode")",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        error: function(response) {
+                            alert(response.responseText);
+                        },
+                        success: function(response) {
+                            alert(response.responseText);
+                            $('#SearchKey').focus();
+                        }
+                    });
+                }
+                event.stopPropagation();
+            });
+</script>*@
+}

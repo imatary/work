@@ -1,0 +1,74 @@
+﻿@model OverTime.Models.EmployeesLog
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmployeesLog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCheck)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCheck)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeaderApproved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeaderApproved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManagerApproved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManagerApproved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GaComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GaComplete)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
