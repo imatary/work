@@ -19,6 +19,7 @@ namespace OverTime.Services
         Task<IEnumerable<Employess>> FindEmployessesByDateAsync(DateTime date, string departmentId);
         Task<Employess> GetEmployesByIdAsync(Guid id, string staffCode);
         Employess GetEmployessByIdAndDate(string staffCode, DateTime dateCheck);
+        Task<IEnumerable<Employess>> GetEmployessYesterDayByIdAndDateAsync(DateTime date, string departmentId);
         Task<Employess> GetEmployessByIdAndDateAsync(string staffCode, DateTime date, string departmentId);
         Task<IEnumerable<Employess>> GetEmployeesYesterdayAsync(string staffCode, DateTime dateCheck, string departmentId);
         Task<IEnumerable<Employess>> GetEmployeesYesterdayAsync(DateTime dateCheck, string departmentId);
@@ -74,6 +75,13 @@ namespace OverTime.Services
         public Employess GetEmployessByIdAndDate(string staffCode, DateTime dateCheck)
         {
             return _applicationDbContext.Employesses.FirstOrDefault(item => item.StaffCode == staffCode && item.DateCheck.ToString("d") == dateCheck.ToString("d"));
+        }
+
+        public async Task<IEnumerable<Employess>> GetEmployessYesterDayByIdAndDateAsync(DateTime date, string departmentId)
+        {
+            return await _applicationDbContext.Employesses.Where(
+                item => item.DepartmentID == departmentId &&
+                        EntityFunctions.TruncateTime(item.DateCheck) == date.Date).ToListAsync();
         }
 
         public async Task<Employess> GetEmployessByIdAndDateAsync(string staffCode, DateTime date, string departmentId)

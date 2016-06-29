@@ -65,7 +65,6 @@ namespace MeetingRoom.Web.Models
         /// <param name="context"></param>
         private void SampleData(ApplicationDbContext context)
         {
-
             /*
             if you need to create data tables
              */

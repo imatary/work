@@ -13,14 +13,44 @@ namespace OverTime.Controllers
     public class DepartmentsController : Controller
     {
         private readonly IDepartmentService _departmentService;
+        private readonly IGAService _gaService;
 
-        public DepartmentsController(IDepartmentService departmentService)
+        public DepartmentsController(
+            IDepartmentService departmentService, 
+            IGAService gaService)
         {
             _departmentService = departmentService;
+            _gaService = gaService;
         }
+
         // GET: Departments
         public async Task<ActionResult> Index()
         {
+            //var departments = await _gaService.GetGaDepartments();
+            //foreach (var department in departments)
+            //{
+            //    var currentDeptpartment = await _departmentService.GetDepartmentByIdAsync(department.DeptCode);
+            //    if (currentDeptpartment == null)
+            //    {
+            //        var addDepartment = new Department()
+            //        {
+            //            DepartmentID = department.DeptCode,
+            //            Name = department.DeptName,
+            //            ParentID = "Root",
+            //            Description = "Dept " + department.DeptName,
+            //            Sort = await _departmentService.MaxSortAsync()
+            //        };
+            //        try
+            //        {
+            //            await _departmentService.CreateAsync(addDepartment);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            throw new Exception(ex.Message);
+            //        }
+
+            //    }
+            //}
             return View(await _departmentService.GetDepartmentsAsync());
         }
 

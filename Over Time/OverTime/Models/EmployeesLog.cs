@@ -45,5 +45,11 @@ namespace OverTime.Models
 
         public bool IsDelete { get; set; }
 
+        [Required, StringLength(256), Display(Name = "Leader")]
+        public string CreateBy { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] StaffPicture { get; set; }
+
     }
 }

@@ -103,6 +103,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -215,8 +216,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BarcodeController.cs" />
+    <Compile Include="Controllers\ConfirmController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EmployeesLogsController.cs" />
+    <Compile Include="Controllers\ExportsController.cs" />
     <Compile Include="Controllers\GroupsAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -255,6 +258,18 @@
     <Compile Include="Migrations\201606211057156_AddTimeCheckLog.Designer.cs">
       <DependentUpon>201606211057156_AddTimeCheckLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606270810485_AddCreateByEmployess.cs" />
+    <Compile Include="Migrations\201606270810485_AddCreateByEmployess.Designer.cs">
+      <DependentUpon>201606270810485_AddCreateByEmployess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606270814221_AddImageEmployess.cs" />
+    <Compile Include="Migrations\201606270814221_AddImageEmployess.Designer.cs">
+      <DependentUpon>201606270814221_AddImageEmployess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606280149059_AddPictureEmpLog.cs" />
+    <Compile Include="Migrations\201606280149059_AddPictureEmpLog.Designer.cs">
+      <DependentUpon>201606280149059_AddPictureEmpLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -284,6 +299,7 @@
     <Compile Include="Services\EmployeesLogService.cs" />
     <Compile Include="Services\EmployeesService.cs" />
     <Compile Include="Services\EventLogService.cs" />
+    <Compile Include="Services\GAService.cs" />
     <Compile Include="Services\UserDepartmentsService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -660,6 +676,10 @@
     <Content Include="Views\Departments\Index.cshtml" />
     <Content Include="Views\ReportLogs\Index.cshtml" />
     <Content Include="Views\Shared\_html5shiv.cshtml" />
+    <Content Include="Views\Confirm\Index.cshtml" />
+    <Content Include="Views\Confirm\ShowBarcodes.cshtml" />
+    <Content Include="Views\Confirm\InputBarcode.cshtml" />
+    <Content Include="Views\Exports\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -668,6 +688,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lib.GA.Data\Lib.GA.Data.csproj">
+      <Project>{F8C1471A-E97E-43FD-98FA-2D913404E4F5}</Project>
+      <Name>Lib.GA.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lib.Models\Lib.Models.csproj">
       <Project>{4576b669-075e-49a1-afeb-5c46512624e6}</Project>
       <Name>Lib.Models</Name>
@@ -692,6 +716,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606211057156_AddTimeCheckLog.resx">
       <DependentUpon>201606211057156_AddTimeCheckLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606270810485_AddCreateByEmployess.resx">
+      <DependentUpon>201606270810485_AddCreateByEmployess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606270814221_AddImageEmployess.resx">
+      <DependentUpon>201606270814221_AddImageEmployess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606280149059_AddPictureEmpLog.resx">
+      <DependentUpon>201606280149059_AddPictureEmpLog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

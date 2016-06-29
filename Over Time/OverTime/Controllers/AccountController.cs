@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -38,6 +39,7 @@ namespace OverTime.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -382,7 +384,8 @@ namespace OverTime.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Confirm");
+            //return RedirectToAction("Index", "Home");
         }
 
         //
@@ -419,7 +422,8 @@ namespace OverTime.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Confirm");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

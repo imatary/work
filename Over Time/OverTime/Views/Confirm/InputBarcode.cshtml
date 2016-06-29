@@ -1,0 +1,89 @@
+﻿@model OverTime.Models.SearchBarcode
+@{
+    ViewBag.Title = "Index";
+}
+@section styles
+{
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+<div class="col-md-12 col-xs-12 col-lg-12 col-md-12">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Confirm")"><i class="glyphicon glyphicon-home"></i></a></li>
+        <li class="active">
+            Input barcode
+        </li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Barcode</h2>
+    </div>
+    @using (Html.BeginForm("InputBarcode", "Confirm", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-lg-4 col-lg-offset-4">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.SearchKey, new { @class = "form-control", placeholder = "Enter your code?", autocomplete = "off" })
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-barcode" style="font-size: 18px; font-weight: bold;"></i>
+                </span>
+            </div><!-- /input-group -->
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <p class="alert alert-danger alert-dismissible margintop10" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    @Html.ValidationMessageFor(u => u.SearchKey)
+                </p>
+            }
+            
+            <p>
+                <strong>Note:</strong>
+                <i>Enter your code. Ext: 16354</i>
+            </p>
+        </div>
+        <!-- /.col-lg-6 -->
+    }
+    @{Html.RenderAction("ShowBarcodes", "Confirm");}
+</div><!-- /.row -->
+@section scripts
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#SearchKey').focus();
+            $('#example')
+                .dataTable({
+                    responsive: true,
+                    "order": [],
+                    "columnDefs": [
+                        {
+                            "targets": 'no-sort',
+                            "orderable": false
+                        }
+                    ]
+                });
+        });
+    </script>
+    <script type="text/javascript">
+        $('#SearchKey')
+            .keypress(function(event) {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode == '13') {
+                    $.ajax({
+                        url: "@Url.Action("InputBarcode", "Confirm")",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    });
+                }
+                event.stopPropagation();
+            });
+    </script>
+}

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<OverTime.Models.Employess>
+﻿@using Lib.Web.Core.Helpers
+@model IEnumerable<OverTime.Models.Employess>
 @{
     ViewBag.Title = "Find by Date";
 }
@@ -46,11 +47,13 @@
         <thead>
         <tr>
             <th class="no-sort">#</th>
+            <th class="no-sort">Image</th>
             <th>Name</th>
             <th>Code</th>
             <th>Department</th>
             <th>Date</th>
             <th>End Time</th>
+            <th>@Html.DisplayNameFor(model=>model.CreateBy)</th>
         </tr>
         </thead>
         <tbody>
@@ -61,11 +64,13 @@
                 count++;
                 <tr>
                     <td>@count</td>
+                    <td>@Html.Image(item.StaffPicture, "img-responsive img-thumbnail staff-img", null)</td>
                     <td>@item.FullName</td>
                     <td>@item.StaffCode</td>
                     <td>@item.DepartmentID</td>
                     <td>@item.DateCheck.ToShortDateString()</td>
                     <td>@item.DateCheck.ToShortTimeString()</td>
+                    <td>@item.CreateBy</td>
                 </tr>
             }
         }

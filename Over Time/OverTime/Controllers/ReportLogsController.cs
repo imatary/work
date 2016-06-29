@@ -34,7 +34,10 @@ namespace OverTime.Controllers
                 try
                 {
                     DateTime dateSearch = DateTime.ParseExact(searchKey, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                    employess = await _employeesService.FindEmployessesByDateAsync(dateSearch, departments.First().DepartmentID);
+                    foreach (var department in departments)
+                    {
+                        employess = await _employeesService.FindEmployessesByDateAsync(dateSearch, department.DepartmentID);
+                    }  
                 }
                 catch (Exception ex)
                 {

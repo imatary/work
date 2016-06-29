@@ -13,9 +13,11 @@ namespace OQC
     {
         private readonly IqcService _iqcService = new IqcService();
         private readonly OQCService _oqcService;
+        private readonly ModelService _modelService;
         public FormQA()
         {
             _oqcService = new OQCService();
+            _modelService = new ModelService();
             InitializeComponent();
         }
 
@@ -34,7 +36,7 @@ namespace OQC
                 }
                 else
                 {
-                    foreach (var item in _oqcService.GetModels())
+                    foreach (var item in _modelService.GetModels())
                     {
                         if (txtProductionID.Text.Trim().Contains(item.SerialNo) && txtProductionID.Text.Contains(item.ModelID))
                         {
@@ -251,7 +253,7 @@ namespace OQC
                                                 {
                                                     _iqcService.UpdateResult(txtProductionID.Text, operationId, judge, operatorId);
                                                 }
-                                                var refeshData = _iqcService.GetLogs(boxId).ToList();
+                                                var refeshData = _oqcService.GetLogsByBoxId(boxId).ToList();
                                                 gridControlData.Refresh();
                                                 gridControlData.DataSource = refeshData;
                                                 lblCountPCB.Text = refeshData.Count.ToString(CultureInfo.InvariantCulture);
@@ -292,7 +294,7 @@ namespace OQC
                                 {
                                     _iqcService.UpdateResult(txtProductionID.Text, operationId, judge, operatorId);
                                 }
-                                var refeshData = _iqcService.GetLogs(boxId).ToList();
+                                var refeshData = _oqcService.GetLogsByBoxId(boxId).ToList();
                                 gridControlData.Refresh();
                                 gridControlData.DataSource = refeshData;
                                 lblCountPCB.Text = refeshData.Count.ToString(CultureInfo.InvariantCulture);
@@ -312,7 +314,7 @@ namespace OQC
                     _iqcService.UpdateLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
                     _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
 
-                    var refeshData = _iqcService.GetLogs(boxId).ToList();
+                    var refeshData = _oqcService.GetLogsByBoxId(boxId).ToList();
                     gridControlData.Refresh();
                     gridControlData.DataSource = refeshData;
                     lblCountPCB.Text = refeshData.Count.ToString(CultureInfo.InvariantCulture);

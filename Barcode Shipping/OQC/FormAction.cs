@@ -169,7 +169,7 @@ namespace OQC
 
         private void txtDeleteId_EditValueChanged(object sender, EventArgs e)
         {
-            VisibleDeleteMessage(false, null);
+            VisibleDeleteMessage(true, null);
         }
 
         private void VisibleDeleteMessage(bool visible, string message)

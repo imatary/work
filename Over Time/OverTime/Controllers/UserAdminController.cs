@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using OverTime.Models;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
@@ -143,8 +142,7 @@ namespace OverTime.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            ViewBag.Groups = new SelectList(
-                await RoleManager.Roles.ToListAsync(), "Id", "Name");
+            ViewBag.Groups = new SelectList(await RoleManager.Roles.ToListAsync(), "Id", "Name");
             return View();
         }
 

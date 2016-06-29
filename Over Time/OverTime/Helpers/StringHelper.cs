@@ -106,5 +106,34 @@ namespace OverTime.Helpers
         Replace("</body></html>", string.Empty);
         }
 
+
+        public static string LengthStaffCode(string staffCode)
+        {
+            string prefix = null;
+            if (staffCode.Length == 1)
+            {
+                prefix = "0000" + staffCode;
+            }
+            else if (staffCode.Length == 2)
+            {
+                prefix = "000" + staffCode;
+            }
+            else if (staffCode.Length == 3)
+            {
+                prefix = "00" + staffCode;
+            }
+            else if (staffCode.Length == 4)
+            {
+                prefix = "0" + staffCode;
+            }
+            else if (staffCode.Length == 2)
+            {
+                prefix = staffCode;
+            }
+            if (prefix != null)
+                return prefix;
+
+            return staffCode;
+        }
     }
 }

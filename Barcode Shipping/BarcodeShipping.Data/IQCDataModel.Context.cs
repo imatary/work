@@ -32,6 +32,7 @@ namespace BarcodeShipping.Data
         public virtual DbSet<Model> Models { get; set; }
         public virtual DbSet<PackingPO> PackingPOes { get; set; }
         public virtual DbSet<Shipping> Shippings { get; set; }
+        public virtual DbSet<QACheck> QAChecks { get; set; }
         public virtual DbSet<tbl_test_log> tbl_test_log { get; set; }
     
         public virtual int sp_DeleteLogByBoxId(string boxId)
@@ -91,6 +92,256 @@ namespace BarcodeShipping.Data
         public virtual ObjectResult<sp_SelectAllModels_Result> sp_SelectAllModels()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SelectAllModels_Result>("sp_SelectAllModels");
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetLogResultsById_Result> sp_GetLogResultsById(string productionId, Nullable<int> operationId)
+        {
+            var productionIdParameter = productionId != null ?
+                new ObjectParameter("productionId", productionId) :
+                new ObjectParameter("productionId", typeof(string));
+    
+            var operationIdParameter = operationId.HasValue ?
+                new ObjectParameter("operationId", operationId) :
+                new ObjectParameter("operationId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLogResultsById_Result>("sp_GetLogResultsById", productionIdParameter, operationIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetLogsById_Result> sp_GetLogsById(string productionId)
+        {
+            var productionIdParameter = productionId != null ?
+                new ObjectParameter("productionId", productionId) :
+                new ObjectParameter("productionId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLogsById_Result>("sp_GetLogsById", productionIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetModelById_Result> sp_GetModelById(string modelId)
+        {
+            var modelIdParameter = modelId != null ?
+                new ObjectParameter("modelId", modelId) :
+                new ObjectParameter("modelId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetModelById_Result>("sp_GetModelById", modelIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetOperatorByCode_Result> sp_GetOperatorByCode(string operatorCode)
+        {
+            var operatorCodeParameter = operatorCode != null ?
+                new ObjectParameter("operatorCode", operatorCode) :
+                new ObjectParameter("operatorCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetOperatorByCode_Result>("sp_GetOperatorByCode", operatorCodeParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetPackingPoModelAndPoNo_Result> sp_GetPackingPoModelAndPoNo(string modelNo, string poNo)
+        {
+            var modelNoParameter = modelNo != null ?
+                new ObjectParameter("modelNo", modelNo) :
+                new ObjectParameter("modelNo", typeof(string));
+    
+            var poNoParameter = poNo != null ?
+                new ObjectParameter("poNo", poNo) :
+                new ObjectParameter("poNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetPackingPoModelAndPoNo_Result>("sp_GetPackingPoModelAndPoNo", modelNoParameter, poNoParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetShippingByGuiId_Result> sp_GetShippingByGuiId(Nullable<System.Guid> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetShippingByGuiId_Result>("sp_GetShippingByGuiId", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetShippingById_Result> sp_GetShippingById(string productionId)
+        {
+            var productionIdParameter = productionId != null ?
+                new ObjectParameter("productionId", productionId) :
+                new ObjectParameter("productionId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetShippingById_Result>("sp_GetShippingById", productionIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetShippingsByBoxId_Result> sp_GetShippingsByBoxId(string boxId)
+        {
+            var boxIdParameter = boxId != null ?
+                new ObjectParameter("boxId", boxId) :
+                new ObjectParameter("boxId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetShippingsByBoxId_Result>("sp_GetShippingsByBoxId", boxIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetShippingsByPo_Result> sp_GetShippingsByPo(string poNo)
+        {
+            var poNoParameter = poNo != null ?
+                new ObjectParameter("poNo", poNo) :
+                new ObjectParameter("poNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetShippingsByPo_Result>("sp_GetShippingsByPo", poNoParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_InsertShipping(Nullable<System.Guid> id, string @operator, string model, string workingOder, Nullable<int> quantity, string boxID, string productID, Nullable<System.DateTime> dateCheck, string macAddress, string pO_NO)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            var operatorParameter = @operator != null ?
+                new ObjectParameter("Operator", @operator) :
+                new ObjectParameter("Operator", typeof(string));
+    
+            var modelParameter = model != null ?
+                new ObjectParameter("Model", model) :
+                new ObjectParameter("Model", typeof(string));
+    
+            var workingOderParameter = workingOder != null ?
+                new ObjectParameter("WorkingOder", workingOder) :
+                new ObjectParameter("WorkingOder", typeof(string));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("Quantity", quantity) :
+                new ObjectParameter("Quantity", typeof(int));
+    
+            var boxIDParameter = boxID != null ?
+                new ObjectParameter("BoxID", boxID) :
+                new ObjectParameter("BoxID", typeof(string));
+    
+            var productIDParameter = productID != null ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(string));
+    
+            var dateCheckParameter = dateCheck.HasValue ?
+                new ObjectParameter("DateCheck", dateCheck) :
+                new ObjectParameter("DateCheck", typeof(System.DateTime));
+    
+            var macAddressParameter = macAddress != null ?
+                new ObjectParameter("MacAddress", macAddress) :
+                new ObjectParameter("MacAddress", typeof(string));
+    
+            var pO_NOParameter = pO_NO != null ?
+                new ObjectParameter("PO_NO", pO_NO) :
+                new ObjectParameter("PO_NO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertShipping", idParameter, operatorParameter, modelParameter, workingOderParameter, quantityParameter, boxIDParameter, productIDParameter, dateCheckParameter, macAddressParameter, pO_NOParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_UpdateRemainsForPo(string modelID, string pO_NO, Nullable<int> quantityRemain)
+        {
+            var modelIDParameter = modelID != null ?
+                new ObjectParameter("ModelID", modelID) :
+                new ObjectParameter("ModelID", typeof(string));
+    
+            var pO_NOParameter = pO_NO != null ?
+                new ObjectParameter("PO_NO", pO_NO) :
+                new ObjectParameter("PO_NO", typeof(string));
+    
+            var quantityRemainParameter = quantityRemain.HasValue ?
+                new ObjectParameter("QuantityRemain", quantityRemain) :
+                new ObjectParameter("QuantityRemain", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateRemainsForPo", modelIDParameter, pO_NOParameter, quantityRemainParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<string> sp_CheckBoxIdExits(string boxId)
+        {
+            var boxIdParameter = boxId != null ?
+                new ObjectParameter("boxId", boxId) :
+                new ObjectParameter("boxId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_CheckBoxIdExits", boxIdParameter);
         }
     }
 }

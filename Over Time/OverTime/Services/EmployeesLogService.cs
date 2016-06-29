@@ -13,6 +13,7 @@ namespace OverTime.Services
         Task<IEnumerable<EmployeesLog>> GetEmployeesLogsAsync();
         Task<IEnumerable<EmployeesLog>> GetEmployeesLogsYesterdayAsync(string staffCode, DateTime dateCheck);
         Task<IEnumerable<EmployeesLog>> GetEmployeesLogsByApprovedAsync(string roleName, DateTime dateCheck);
+        Task<IEnumerable<EmployeesLog>> GetEmployeesLogsByApprovedAsync(string roleName, DateTime dateCheck, string departmentId);
         Task<IEnumerable<EmployeesLog>> GetEmployeesLogsByApprovedAsync(string roleName, DateTime dateCheck, IEnumerable<Department> departments);
         Task<IEnumerable<EmployeesLog>> GetEmployeesLogsByDeptIdAsync(string departmentId);
         Task<EmployeesLog> GetEmployeesLogsByIdAsync(Guid id);
@@ -32,9 +33,9 @@ namespace OverTime.Services
             _applicationDbContext = new ApplicationDbContext();
         }
 
-        public Task<IEnumerable<EmployeesLog>> GetEmployeesLogsAsync()
+        public async Task<IEnumerable<EmployeesLog>> GetEmployeesLogsAsync()
         {
-            throw new NotImplementedException();
+            return await _applicationDbContext.EmployeesLogs.ToListAsync();
         }
 
         public async Task<IEnumerable<EmployeesLog>> GetEmployeesLogsYesterdayAsync(string staffCode, DateTime dateCheck)
@@ -71,6 +72,54 @@ namespace OverTime.Services
             }
             return employeesLogs;
         }
+
+        public async Task<IEnumerable<EmployeesLog>> GetEmployeesLogsByApprovedAsync(string roleName, DateTime dateCheck, string departmentId)
+        {
+            IEnumerable<EmployeesLog> employeesLogs = await _applicationDbContext.EmployeesLogs.ToListAsync();
+            if (roleName == "Leader")
+            {
+                return employeesLogs.Where(
+                    item => item.LeaderApproved == false &&
+                            item.IsDelete == false &&
+                            item.DateCheck.Date == dateCheck.Date &&
+                            item.DepartmentID == departmentId);
+            }
+            if (roleName == "ManageDepartmentShift")
+            {
+                return employeesLogs.Where(
+                    item =>
+                        item.LeaderApproved &&
+                        item.ManageDepartmentShiftApproved == false &&
+                        item.DateCheck.Date == dateCheck.Date &&
+                        item.DepartmentID == departmentId);
+            }
+            if (roleName == "Manager")
+            {
+                employeesLogs = employeesLogs.Where(
+                    item =>
+                        item.LeaderApproved &&
+                        item.ManageDepartmentShiftApproved &&
+                        item.ManagerApproved == false &&
+                        item.DateCheck.Date == dateCheck.Date &&
+                        item.DepartmentID == departmentId);
+
+                return employeesLogs;
+            }
+            if (roleName == "GA")
+            {
+                return
+                    employeesLogs.Where(
+                        item =>
+                            item.LeaderApproved &&
+                            item.ManageDepartmentShiftApproved &&
+                            item.ManagerApproved &&
+                            item.GaComplete == false &&
+                            item.IsDelete == false &&
+                            item.DateCheck.Date == dateCheck.Date);
+            }
+            return employeesLogs;
+        }
+
         public async Task<IEnumerable<EmployeesLog>> GetEmployeesLogsByApprovedAsync(string roleName, DateTime dateCheck, IEnumerable<Department> departments)
         {
             IEnumerable<EmployeesLog> employeesLogs = await _applicationDbContext.EmployeesLogs.ToListAsync();

@@ -46,6 +46,10 @@ body {
     font-weight: bold;
     margin-top: 20px;
 }
+.staff-img {
+    max-height: 80px;
+    max-width: 60px;
+}
 .min-hieght-280 {
     min-height: 280px;
 }

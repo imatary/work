@@ -16,12 +16,14 @@ namespace BarcodeShipping.GUI
         private List<Shipping> _shippings = new List<Shipping>();
         private readonly List<Shipping> _pcbError = new List<Shipping>();
         private readonly OQCService _oqcService;
+        private readonly ModelService _modelService;
         private Model _currentModel;
         private PackingPO _currentPo = new PackingPO();
         public FormMain()
         {
             InitializeComponent();
             _oqcService = new OQCService();
+            _modelService = new ModelService();
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -282,7 +284,7 @@ namespace BarcodeShipping.GUI
         {
             gridLookUpEditModelID.Properties.View.OptionsBehavior.AutoPopulateColumns = false;
             gridLookUpEditModelID.Properties.View.BestFitColumns();
-            gridLookUpEditModelID.Properties.DataSource = _oqcService.GetModels();
+            gridLookUpEditModelID.Properties.DataSource = _modelService.GetModels();
         }
 
         /// <summary>
@@ -619,7 +621,7 @@ namespace BarcodeShipping.GUI
             }
             else
             {
-                _currentModel = _oqcService.GetModelById(gridLookUpEditModelID.EditValue.ToString());
+                _currentModel = _modelService.GetModelById(gridLookUpEditModelID.EditValue.ToString());
                 if (_currentModel != null)
                 {
                     lblQuantityModel.Text = $"/{_currentModel.Quantity}";    

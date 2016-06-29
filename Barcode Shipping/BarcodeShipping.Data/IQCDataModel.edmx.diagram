@@ -12,6 +12,7 @@
         <AssociationConnector Association="barcode_dbModel.FK_PO_Models" />
         <EntityTypeShape EntityType="barcode_dbModel.Shipping" Width="1.5" PointX="5.625" PointY="4.75" />
         <AssociationConnector Association="barcode_dbModel.FK_Shipping_Models" />
+        <EntityTypeShape EntityType="barcode_dbModel.QACheck" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="barcode_dbModel.tbl_test_log" Width="1.5" PointX="5.625" PointY="0.75" />
         <AssociationConnector Association="barcode_dbModel.FK_tbl_test_log_Models" />
       </Diagram>

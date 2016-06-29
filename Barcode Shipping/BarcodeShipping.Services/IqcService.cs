@@ -23,15 +23,7 @@ namespace BarcodeShipping.Services
             get { return _repository ?? (_repository = new IqcRepository()); }
         }
 
-        /// <summary>
-        /// get logs by boxid
-        /// </summary>
-        /// <param name="boxId"></param>
-        /// <returns></returns>
-        public IEnumerable<tbl_test_log> GetLogs(string boxId)
-        {
-            return Repository.GetAll<tbl_test_log>().Where(log => log.BoxID == boxId).ToList();
-        }
+ 
 
         /// <summary>
         /// Get PCB
@@ -40,7 +32,13 @@ namespace BarcodeShipping.Services
         /// <returns></returns>
         public tbl_test_log GetPcbById(string productionId)
         {
-            return Repository.GetAll<tbl_test_log>().FirstOrDefault(op => op.ProductionID == productionId);
+            var param = new SqlParameter()
+            {
+                ParameterName = "@productionId",
+                SqlDbType = SqlDbType.VarChar,
+                Value = productionId,
+            };
+            return _context.Database.SqlQuery<tbl_test_log>("EXEC sp_GetLogByProductionId @productionId", param).FirstOrDefault();
         }
 
         /// <summary>
@@ -155,7 +153,7 @@ namespace BarcodeShipping.Services
         {
             if (boxId != null)
             {
-                var shippings = Repository.GetAll<Shipping>().ToList();
+                var shippings = GetShippingsByBoxId(boxId).ToList();
                 if (shippings.Any(c => c.BoxID == boxId))
                 {
                     return true;
@@ -215,79 +213,6 @@ namespace BarcodeShipping.Services
             
         }
 
-        #region Models
-
-        /// <summary>
-        /// Trả về tất cả Model
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Model> GetModels()
-        {
-            return Repository.GetAll<Model>().ToList();
-        }
-
-        /// <summary>
-        /// Kiểm tra sự tồn tại của Model ID
-        /// </summary>
-        /// <param name="modelId"></param>
-        /// <returns></returns>
-        public bool CheckModelIdExits(string modelId)
-        {
-            if (modelId != null)
-            {
-                var model = GetModels().FirstOrDefault(m => m.ModelID == modelId);
-                if (model != null)
-                {
-                    return true;
-                }
-                return false;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Thêm mới Model
-        /// </summary>
-        /// <param name="modelId"></param>
-        /// <param name="modelName"></param>
-        /// <param name="createdBy"></param>
-        /// <param name="quantity"></param>
-        /// <param name="serialNo"></param>
-        public void InsertModel(string modelId, string modelName, string createdBy, int quantity, string serialNo)
-        {
-            var model = new Model()
-            {
-                ModelID = modelId,
-                ModelName = modelName,
-                CreatedBy = createdBy,
-                DateCreated = DateTime.Now,
-                Quantity = quantity,
-                SerialNo = serialNo,
-            };
-            Repository.Insert(model);
-        }
-
-        /// <summary>
-        /// Update Model
-        /// </summary>
-        /// <param name="modelId"></param>
-        /// <param name="createdBy"></param>
-        /// <param name="quantity"></param>
-        /// <param name="serialNo"></param>
-        public void UpdateModel(string modelId,string createdBy, int quantity, string serialNo)
-        {
-            var model = GetModels().FirstOrDefault(m => m.ModelID == modelId);
-            if (model != null)
-            {
-                model.CreatedBy = createdBy;
-                model.Quantity = quantity;
-                model.SerialNo = serialNo;
-                Repository.Update(model);
-            }
-        }
-
-        #endregion
-
 
         #region Logs
 
@@ -345,6 +270,7 @@ namespace BarcodeShipping.Services
                 TimeCheck = DateTime.Now.TimeOfDay,
                 Quantity = quantity,
                 OperatorCode = operatorCode,
+                QA_Check = false,
             };
 
             try

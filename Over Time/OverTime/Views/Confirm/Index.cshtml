@@ -1,0 +1,313 @@
+﻿@using Lib.Web.Core.Helpers
+@model IEnumerable<OverTime.Models.EmployeesLog>
+@{
+    ViewBag.Title = "Over time";
+}
+@section styles
+{
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+}
+<div class="clearfix">
+    <div class="col-md-12 col-xs-12 col-lg-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-home"></i></a></li>
+            <li class="active">
+                List Approveds
+            </li>
+        </ol>
+    </div>
+    @if (User.IsInRole("GA"))
+    {
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { role = "form" }))
+            {
+                <div class="col-lg-4 col-lg-offset-4">
+                    <div class="input-group">
+                        <input type="text" id="searchDate" name="searchDate" class="form-control" placeholder="Enter date?" autocomplete="off" />
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="glyphicon glyphicon-search" style="font-size: 15px; font-weight: bold;"></i>
+                            </button>
+                        </span>
+                    </div><!-- /input-group -->
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <div class="alert alert-danger margintop10">
+                            <strong>Error Date!</strong> @ViewBag.ErrorMessage.
+                        </div>
+                    }
+                    <p>
+                        <strong>Note:</strong>
+                        <i>Enter date. Ext: 20/06/2016</i>
+                    </p>
+                </div><!-- /.col-lg-6 -->
+            }
+        </div><!-- /.row -->
+    }
+    <div class="col-md-12 col-xs-12 col-lg-12 col-md-12">
+        <div class="pull-right ">
+            @if (!User.IsInRole("GA"))
+            {
+                <button class="btn btn-sm btn-success approvredAllLog">
+                    <i class="glyphicon glyphicon-check"></i>Approved All
+                </button>
+            }
+            @if (User.IsInRole("Leader") || User.IsInRole("Admin"))
+            {
+                <button class="btn btn-sm btn-info">
+                    <i class="glyphicon glyphicon-plus"></i>Add
+                </button>
+            }
+            @if (User.IsInRole("GA"))
+            {
+                <button class="btn btn-sm btn-primary exportCsv">
+                    <i class="glyphicon glyphicon-export"></i>Export CSV
+                </button>
+            }
+
+        </div>
+    </div>
+    <div class="clearfix" style="margin-bottom: 20px;"></div>
+    <div class="col-md-12 col-lg-12 col-xs-12">
+        <table id="example" class="table table-striped table-responsive table-hover dataTable no-footer" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="no-sort">#</th>
+                    <th class="no-sort">Image</th>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Department</th>
+                    <th>Date</th>
+                    <th>End Time</th>
+                    @if (User.IsInRole("ManageDepartmentShift"))
+                    {
+                        <th>@Html.DisplayNameFor(model=>model.CreateBy)</th>
+                    }
+                    @if (!User.IsInRole("Admin"))
+                    {
+                        <th>Status</th>
+                    }
+                    @if (!User.IsInRole("GA"))
+                    {
+                        <th class="no-sort">&nbsp;</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int count = 0;
+                    foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@Html.Image(item.StaffPicture, "img-responsive img-thumbnail staff-img", null)</td>
+                            <td>@item.FullName</td>
+                            <td>@item.StaffCode</td>
+                            <td>@item.DepartmentID</td>
+                            <td>@item.TimeCheck.ToShortDateString()</td>
+                            <td>@item.TimeCheck.ToShortTimeString()</td>
+                            @if (User.IsInRole("Leader"))
+                            {
+                                <td>
+                                    @if (item.LeaderApproved == false)
+                                    {
+                                        <span class="label label-warning">Pending</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-success">Approved</span>
+                                    }
+                                </td>
+                            }
+                            else if (User.IsInRole("ManageDepartmentShift"))
+                            {
+                                <td>@item.CreateBy</td>
+                                <td>
+                                    @if (item.ManageDepartmentShiftApproved == false)
+                                    {
+                                        <span class="label label-warning">Pending</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-success">Approved</span>
+                                    }
+                                </td>
+                            }
+                            else if (User.IsInRole("Manager"))
+                            {
+                                <td>
+                                    @if (item.ManagerApproved == false)
+                                    {
+                                        <span class="label label-warning">Pending</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-success">Approved</span>
+                                    }
+                                </td>
+                            }
+                            else if (User.IsInRole("GA"))
+                            {
+                                <td>
+                                    @if (item.LeaderApproved && item.ManageDepartmentShiftApproved && item.ManagerApproved)
+                                    {
+                                        <span class="label label-success">Approved</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-warning">Pending</span>
+                                    }
+                                </td>
+                            }
+                            @if (User.IsInRole("Leader") || User.IsInRole("IsDelete") || User.IsInRole("Admin") || User.IsInRole("Manager"))
+                            {
+                                <td class="center" style="width: 200px;">
+                                    @if (User.IsInRole("Leader") || User.IsInRole("IsDelete"))
+                                    {
+                                        <button class="btn btn-danger btn-xs deleteLog" name="Delete" data-id="@item.Id">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                            Delete
+                                        </button>
+                                    }
+                                    @if (User.IsInRole("Approved"))
+                                    {
+                                        <button class="btn btn-success btn-xs approvedLog" name="Approved" data-id="@item.Id">
+                                            <i class="glyphicon glyphicon-check"></i>
+                                            Approved
+                                        </button>
+                                    }
+                                </td>
+                            }
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.min.js"></script>
+
+    <script type="text/javascript">
+        $(document)
+            .ready(function() {
+                $('#example')
+                    .dataTable({
+                        responsive: true,
+                        "order": [],
+                        "columnDefs": [
+                            {
+                                "targets": 'no-sort',
+                                "orderable": false
+                            }
+                        ]
+                    });
+                $('#searchDate').focus();
+                $("[name='searchDate']").mask("99/99/9999");
+                $("[name='searchDate']")
+                    .datepicker({
+                        format: "dd/mm/yyyy",
+                        forceParse: false,
+                        allowInputToggle: true,
+                        sideBySide: true,
+                        showClose: true
+                    });
+            });
+
+    </script>
+    <script type="text/javascript">
+        $(document)
+            .ready(function () {
+                $('table tbody').on('click', "button.deleteLog", null, OnDeleteClick);
+                $('table tbody').on('click', "button.approvedLog", null, OnApprovedClick);
+                $('button.approvredAllLog').click(OnApprovedAllClick);
+                $('button.exportCsv').click(OnExportCSVAllClick);
+            });
+        function OnApprovedClick() {
+            var pid = $(this).attr("data-id");
+            var flag = confirm('You are about to Approved ID. Are you sure you want to Approved this record?');
+            if (flag) {
+                $.ajax({
+                    url: '@Url.Action("Approved", "Confirm")',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: '{id:' + JSON.stringify(pid) + '}',
+                    error: function (err, result) {
+                        alert(err.responseText + " " + pid);
+                    },
+                    success: function (id) {
+                        location.reload();
+                    },
+                    async: false,
+                    cache: false,
+                    processData: false,
+                    traditional: true
+                });
+            }
+            return false;
+        }
+        function OnApprovedAllClick() {
+            var flag = confirm('You are about to Approved ALl ID. Are you sure you want to Approved All record?');
+            if (flag) {
+                $.ajax({
+                    url: '@Url.Action("Approveds", "Confirm")',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    error: function (err, result) {
+                        alert(err.responseText);
+                    },
+                    success: function (id) {
+                        location.reload();
+                    },
+                    async: false,
+                    cache: false,
+                    processData: false,
+                    traditional: true
+                });
+            }
+            return false;
+        }
+        function OnDeleteClick() {
+            var pid = $(this).attr("data-id");
+            var flag = confirm('You are about to delete ID permanently. Are you sure you want to delete this record?');
+            if (flag) {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Confirm")',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: '{id:' + JSON.stringify(pid) + '}',
+                    error: function (err, result) {
+                        alert(err.responseText + " " + pid);
+                    },
+                    success: function (id) {
+                        location.reload();
+                    },
+                    async: false,
+                    cache: false,
+                    processData: false,
+                    traditional: true
+                });
+            }
+            return false;
+        }
+
+        function OnExportCSVAllClick() {
+            var flag = confirm('Are you sure you want to Export All record?');
+            if (flag) {
+                window.location = '@Url.Action("ExportToCSV", "Confirm")';
+            }
+            return false;
+        }
+    </script>
+}

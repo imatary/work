@@ -93,6 +93,9 @@
       <DependentUpon>IQCDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QACheck.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IQCRepository.cs" />
     <Compile Include="Shipping.cs">
@@ -101,7 +104,40 @@
     <Compile Include="sp_GetLogByProductionId_Result.cs">
       <DependentUpon>IQCDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_GetLogResultsById_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_GetLogsByBoxId_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetLogsById_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetModelById_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetOperatorByCode_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetPackingPoModelAndPoNo_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetShippingByGuiId_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetShippingById_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetShippingsByBoxId_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetShippingsByPo_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>IQCDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>IQCDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_SelectAllLogs_Result.cs">

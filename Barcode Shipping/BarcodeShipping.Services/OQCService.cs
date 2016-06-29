@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
 using System.Linq;
 using BarcodeShipping.Data;
@@ -10,8 +13,6 @@ namespace BarcodeShipping.Services
     {
         IEnumerable<tbl_test_log> GetLogs();
         tbl_test_log GetLogsById(string productionId);
-        IEnumerable<Model> GetModels();
-        Model GetModelById(string modelid);
         mst_operator GetOperatorByCode(string operatorCode);
 
 
@@ -28,8 +29,21 @@ namespace BarcodeShipping.Services
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="productionId"></param>
+        /// <param name="boxId"></param>
         /// <returns></returns>
+        public string CheckBoxIdExits(string boxId)
+        {
+            //var param = new SqlParameter()
+            //{
+            //    ParameterName = "@boxId",
+            //    SqlDbType = SqlDbType.Char,
+            //    Value = boxId,
+            //};
+            //return _context.Database.SqlQuery<tbl_test_log>("EXEC [sp_CheckBoxIdExits] @boxId", param).First();
+
+            return _context.sp_CheckBoxIdExits(boxId).FirstOrDefault();
+        }
+
         public tbl_test_log GetLogByProductionId(string productionId)
         {
             var param = new SqlParameter()
@@ -80,15 +94,23 @@ namespace BarcodeShipping.Services
             return _context.Database.SqlQuery<tbl_test_log>("EXEC [sp_GetLogsById] @productionId", param).FirstOrDefault();
         }
 
-        public Model GetModelById(string modelId)
+        public void UpdateOQCCheck(tbl_test_log production, string operatorCode)
         {
-            var param = new SqlParameter()
+            if (production != null)
             {
-                ParameterName = "@modelId",
-                SqlDbType = SqlDbType.VarChar,
-                Value = modelId,
-            };
-            return _context.Database.SqlQuery<Model>("EXEC [sp_GetModelById] @modelId", param).FirstOrDefault();
+                production.QA_Check = true;
+                production.CheckBy = operatorCode;
+                production.DateCheck = DateTime.Now;
+                try
+                {
+                    _context.Entry(production).State = EntityState.Modified;
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
         }
 
         public mst_operator GetOperatorByCode(string operatorCode)
@@ -102,10 +124,7 @@ namespace BarcodeShipping.Services
             return _context.Database.SqlQuery<mst_operator>("EXEC [sp_GetOperatorByCode] @operatorCode", param).FirstOrDefault();
         }
 
-        public IEnumerable<Model> GetModels()
-        {
-            return _context.Database.SqlQuery<Model>("EXEC sp_SelectAllModels").ToList();
-        }
+        
         public void UpdateBoxIdByProductionId(string boxId, string productionId)
         {
             var log = GetLogByProductionId(productionId);

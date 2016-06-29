@@ -12,6 +12,7 @@ namespace OverTime.Models
         }
         
         [Key, StringLength(30)]
+        [Display(Name = "ID")]
         public string DepartmentID { get; set; }
 
         [Required, StringLength(150)]

@@ -13,6 +13,7 @@ namespace OverTime.Services
     {
         Task<IEnumerable<Department>> GetDepartmentsAsync();
         Task<Department> GetDepartmentByIdAsync(string id);
+        Task<IEnumerable<Department>> GetUserDepartmentsAsync(string userId);
         Task CreateAsync(Department department);
         Task UpdateAsync(Department department);
         Task DeleteAsync(string id);
@@ -37,12 +38,26 @@ namespace OverTime.Services
 
         public async Task<IEnumerable<Department>> GetDepartmentsAsync()
         {
-            return await _applicationDbContext.Departments.ToListAsync();
+            return await _applicationDbContext.Departments.OrderBy(d => d.DepartmentID).ToListAsync();
         }
 
         public async Task<Department> GetDepartmentByIdAsync(string id)
         {
             return await _applicationDbContext.Departments.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Department>> GetUserDepartmentsAsync(string userId)
+        {
+            //var userDepartments = (from g in this._context.Departments
+            //                       join ud in _context.UserDepartmentses on g.DepartmentID equals ud.DepartmentId
+            //                       where ud.ApplicationUserId == userId
+            //                       //where g.UserDepartmentses.Where(u => u.ApplicationUserId == userId)
+            //                       select g).ToListAsync();
+
+            var userDepartments = (from g in _applicationDbContext.Departments
+                                   where g.UserDepartmentses.Any(u => u.ApplicationUserId == userId)
+                                   select g).ToListAsync();
+            return await userDepartments;
         }
 
         public async Task CreateAsync(Department department)

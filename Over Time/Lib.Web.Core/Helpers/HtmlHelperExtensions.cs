@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
@@ -71,6 +72,27 @@ namespace Lib.Web.Core.Helpers
 
             return MvcHtmlString.Create(builder.ToString());
         }
+
+        public static IHtmlString Image(this HtmlHelper helper, byte[] image, string imgclass,
+                                     object htmlAttributes = null)
+        {
+            var builder = new TagBuilder("img");
+            builder.MergeAttribute("class", imgclass);
+            builder.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+
+            var imageString = image != null ? Convert.ToBase64String(image) : "";
+            var img = string.Format("data:image/jpg;base64,{0}", imageString);
+            builder.MergeAttribute("src", img);
+
+            return MvcHtmlString.Create(builder.ToString(TagRenderMode.SelfClosing));
+        }
+
+        public static MvcHtmlString Image(this HtmlHelper html, byte[] image)
+        {
+            var img = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(image));
+            return new MvcHtmlString("<img src='" + img + "' />");
+        }
+
     }
 
 }

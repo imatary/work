@@ -20,12 +20,18 @@ namespace OverTime.Models
         [Required, StringLength(200)]
         public string FullName { get; set; }
 
+        [Column(TypeName = "image")]
+        public byte[] StaffPicture { get; set; }
+
         public DateTime DateCheck { get; set; }
 
         [Required, StringLength(30)]
         public string DepartmentID { get; set; }
         [ForeignKey("DepartmentID")]
         public Department Department { get; set; }
+
+        [Required, StringLength(256), Display(Name = "Leader")]
+        public string CreateBy { get; set; }
 
         public string Note { get; set; }
 

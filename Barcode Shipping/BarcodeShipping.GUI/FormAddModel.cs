@@ -7,11 +7,11 @@ namespace BarcodeShipping.GUI
 {
     public partial class FormAddModel : Form
     {
-
-        private readonly IqcService _iqcService = new IqcService();
+        private readonly ModelService _modelService;
         public FormAddModel(string modelId, string operatorCode)
         {
             InitializeComponent();
+            _modelService = new ModelService();
             if (!string.IsNullOrEmpty(modelId) && !string.IsNullOrEmpty(operatorCode))
             {
                 txtModelID.Text = modelId;
@@ -57,7 +57,7 @@ namespace BarcodeShipping.GUI
             {
                 try
                 {
-                    _iqcService.InsertModel(txtModelID.Text, txtModelID.Text, txtOperatorCode.Text, int.Parse(txtQuantity.Text), txtSerialNo.Text);
+                    _modelService.InsertModel(txtModelID.Text, txtModelID.Text, txtOperatorCode.Text, int.Parse(txtQuantity.Text), txtSerialNo.Text);
                     MessageBoxHelper.ShowMessageBoxSuccess("Thành công!");
                     this.Close();
                 }
