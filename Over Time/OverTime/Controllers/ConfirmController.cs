@@ -40,11 +40,11 @@ namespace OverTime.Controllers
         {
             IEnumerable<EmployeesLog> employeesLogs = null;
             var userDepartment = await _departmentService.GetUserDepartmentsAsync(User.Identity.GetUserId());
+            var departments = userDepartment as IList<Department> ?? userDepartment.ToList();
             if (User.IsInRole("Leader"))
             {
                 DateTime startDate = DateTime.Today;
                 TimeSpan startTime = new TimeSpan(08, 00, 00);
-                var departments = userDepartment as IList<Department> ?? userDepartment.ToList();
                 foreach (var department in departments)
                 {
                     var employesses = await _employeesService.GetEmployessYesterDayByIdAndDateAsync(startDate.Subtract(startTime), department.DepartmentID);
@@ -87,17 +87,15 @@ namespace OverTime.Controllers
             }
             else if (User.IsInRole("ManageDepartmentShift"))
             {
-                foreach (var department in userDepartment)
+                foreach (var department in departments)
                 {
                     employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("ManageDepartmentShift", DateTime.Today, department.DepartmentID);
                 }
+                
             }
             else if (User.IsInRole("Manager"))
             {
-                foreach (var department in userDepartment)
-                {
-                    employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("Manager", DateTime.Today, department.DepartmentID);
-                }
+                employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("Manager", DateTime.Today, departments);
             }
             else if (User.IsInRole("GA"))
             {
@@ -273,7 +271,7 @@ namespace OverTime.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Leader, ManageDepartmentShift, Manager, Admin")]
+        [Authorize]
         public async Task<ActionResult> Approveds()
         {
             var userDepartment = await _departmentService.GetUserDepartmentsAsync(User.Identity.GetUserId());
@@ -309,7 +307,10 @@ namespace OverTime.Controllers
             {
                 foreach (var department in departments)
                 {
-                    employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("Manager", DateTime.Now, department.DepartmentID);
+                    employeesLogs =
+                        await
+                            _employeesLogService.GetEmployeesLogsByApprovedAsync("Manager", DateTime.Now,
+                                department.DepartmentID);
                     foreach (var log in employeesLogs)
                     {
                         log.ManagerApproved = true;

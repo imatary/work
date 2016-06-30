@@ -11,7 +11,7 @@
 <div class="clearfix">
     <div class="col-md-12 col-xs-12 col-lg-12 col-md-12">
         <ol class="breadcrumb">
-            <li><a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-home"></i></a></li>
+            <li><a href="@Url.Action("Index", "Confirm")"><i class="glyphicon glyphicon-home"></i></a></li>
             <li class="active">
                 List Approveds
             </li>
@@ -20,7 +20,7 @@
     @if (User.IsInRole("GA"))
     {
         <div class="row">
-            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { role = "form" }))
+            @using (Html.BeginForm("Index", "Confirm", FormMethod.Post, new { role = "form" }))
             {
                 <div class="col-lg-4 col-lg-offset-4">
                     <div class="input-group">
@@ -46,26 +46,29 @@
         </div><!-- /.row -->
     }
     <div class="col-md-12 col-xs-12 col-lg-12 col-md-12">
-        <div class="pull-right ">
+        <div class="pull-right">
             @if (!User.IsInRole("GA"))
             {
-                <button class="btn btn-sm btn-success approvredAllLog">
-                    <i class="glyphicon glyphicon-check"></i>Approved All
-                </button>
+                if (Model.Any())
+                {
+                    <button class="btn btn-sm btn-success approvredAllLog" @*onclick="OnApprovedAllClick()"*@>
+                        <i class="glyphicon glyphicon-check"></i>Approved All
+                    </button>
+                }
+                @*@Html.ActionLink("Approved All", "Approveds", "Confirm", new {@class="btn btn-sm btn-success"})*@
             }
-            @if (User.IsInRole("Leader") || User.IsInRole("Admin"))
+            else if (User.IsInRole("Leader") || User.IsInRole("Admin"))
             {
                 <button class="btn btn-sm btn-info">
                     <i class="glyphicon glyphicon-plus"></i>Add
                 </button>
             }
-            @if (User.IsInRole("GA"))
+            else if (User.IsInRole("GA"))
             {
                 <button class="btn btn-sm btn-primary exportCsv">
                     <i class="glyphicon glyphicon-export"></i>Export CSV
                 </button>
             }
-
         </div>
     </div>
     <div class="clearfix" style="margin-bottom: 20px;"></div>
@@ -82,13 +85,14 @@
                     <th>End Time</th>
                     @if (User.IsInRole("ManageDepartmentShift"))
                     {
+                        <th>Status</th>
                         <th>@Html.DisplayNameFor(model=>model.CreateBy)</th>
                     }
-                    @if (!User.IsInRole("Admin"))
+                    else if (!User.IsInRole("Admin"))
                     {
                         <th>Status</th>
                     }
-                    @if (!User.IsInRole("GA"))
+                    else if (!User.IsInRole("GA"))
                     {
                         <th class="no-sort">&nbsp;</th>
                     }
@@ -161,7 +165,7 @@
                                     }
                                 </td>
                             }
-                            @if (User.IsInRole("Leader") || User.IsInRole("IsDelete") || User.IsInRole("Admin") || User.IsInRole("Manager"))
+                            else if (@User.IsInRole("GA") || !User.IsInRole("ManageDepartmentShift"))
                             {
                                 <td class="center" style="width: 200px;">
                                     @if (User.IsInRole("Leader") || User.IsInRole("IsDelete"))
@@ -171,7 +175,7 @@
                                             Delete
                                         </button>
                                     }
-                                    @if (User.IsInRole("Approved"))
+                                    else if (User.IsInRole("Approved"))
                                     {
                                         <button class="btn btn-success btn-xs approvedLog" name="Approved" data-id="@item.Id">
                                             <i class="glyphicon glyphicon-check"></i>
@@ -220,17 +224,12 @@
                         sideBySide: true,
                         showClose: true
                     });
-            });
-
-    </script>
-    <script type="text/javascript">
-        $(document)
-            .ready(function () {
-                $('table tbody').on('click', "button.deleteLog", null, OnDeleteClick);
-                $('table tbody').on('click', "button.approvedLog", null, OnApprovedClick);
                 $('button.approvredAllLog').click(OnApprovedAllClick);
                 $('button.exportCsv').click(OnExportCSVAllClick);
+                $('table tbody').on('click', "button.deleteLog", null, OnDeleteClick);
+                $('table tbody').on('click', "button.approvedLog", null, OnApprovedClick);
             });
+
         function OnApprovedClick() {
             var pid = $(this).attr("data-id");
             var flag = confirm('You are about to Approved ID. Are you sure you want to Approved this record?');
@@ -255,8 +254,9 @@
             }
             return false;
         }
+
         function OnApprovedAllClick() {
-            var flag = confirm('You are about to Approved ALl ID. Are you sure you want to Approved All record?');
+            var flag = confirm('You are about to Approved all ID. Are you sure you want to Approved all record?');
             if (flag) {
                 $.ajax({
                     url: '@Url.Action("Approveds", "Confirm")',
@@ -277,6 +277,7 @@
             }
             return false;
         }
+
         function OnDeleteClick() {
             var pid = $(this).attr("data-id");
             var flag = confirm('You are about to delete ID permanently. Are you sure you want to delete this record?');
@@ -309,5 +310,6 @@
             }
             return false;
         }
+        
     </script>
 }

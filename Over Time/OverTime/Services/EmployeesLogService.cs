@@ -64,7 +64,14 @@ namespace OverTime.Services
             }
             if (roleName == "GA")
             {
-                return employeesLogs.Where(item => item.GaComplete == false && item.LeaderApproved && item.ManageDepartmentShiftApproved && item.ManagerApproved && item.IsDelete == false && item.DateCheck.Date == dateCheck.Date);
+                return employeesLogs.Where(
+                    item =>
+                        item.GaComplete == false &&
+                        item.LeaderApproved &&
+                        item.ManageDepartmentShiftApproved &&
+                        item.ManagerApproved &&
+                        item.IsDelete == false &&
+                        item.DateCheck.Date == dateCheck.Date);
             }
             if(roleName == "Admin")
             {
@@ -90,6 +97,7 @@ namespace OverTime.Services
                     item =>
                         item.LeaderApproved &&
                         item.ManageDepartmentShiftApproved == false &&
+                        item.IsDelete == false &&
                         item.DateCheck.Date == dateCheck.Date &&
                         item.DepartmentID == departmentId);
             }
@@ -100,6 +108,7 @@ namespace OverTime.Services
                         item.LeaderApproved &&
                         item.ManageDepartmentShiftApproved &&
                         item.ManagerApproved == false &&
+                        item.IsDelete == false &&
                         item.DateCheck.Date == dateCheck.Date &&
                         item.DepartmentID == departmentId);
 
@@ -133,12 +142,26 @@ namespace OverTime.Services
             }
             if (roleName == "ManageDepartmentShift")
             {
-                return employeesLogs.Where(
+                IEnumerable<EmployeesLog> employeesLogsIds = employeesLogs.Where(
                     item =>
-                        item.ManageDepartmentShiftApproved == false &&
                         item.LeaderApproved &&
-                        item.DateCheck.Date == dateCheck.Date &&
-                        item.DepartmentID == departments.First().DepartmentID);
+                        item.ManageDepartmentShiftApproved == false &&
+                        item.IsDelete == false &&
+                        item.DateCheck.Date == dateCheck.Date);
+                List<EmployeesLog> employeesLogsByDeptIds = new List<EmployeesLog>();
+                foreach (var department in departments)
+                {
+                    foreach (var log in employeesLogsIds)
+                    {
+                        if (log.DepartmentID == department.DepartmentID)
+                        {
+                            employeesLogsByDeptIds.Add(log);
+                        }
+                    }
+                }
+                employeesLogs = employeesLogsByDeptIds;
+
+                return employeesLogs;
             }
             if (roleName == "Manager")
             {
