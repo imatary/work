@@ -236,7 +236,7 @@ namespace OQC
 
                                         if (countPcbInBox == quantity)
                                         {
-                                            SetErrorStatus(true, "OK", "Thùng đã đủ số lượng, vui lòng kiểm tra lại!");
+                                            SetErrorStatus(true, "NG", "Thùng đã đủ số lượng, vui lòng kiểm tra lại!");
                                             ResetControls();
                                         }
                                         else

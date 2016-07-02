@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using BarcodeShipping.Data;
@@ -458,7 +459,7 @@ namespace BarcodeShipping.Services
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
         }
         /// <summary>
@@ -481,11 +482,12 @@ namespace BarcodeShipping.Services
             
             try
             {
-                Repository.Update(result);
+                _context.Entry(result).State = EntityState.Modified;
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
         }
         #endregion

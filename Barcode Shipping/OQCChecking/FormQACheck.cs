@@ -13,8 +13,10 @@ namespace OQCChecking
     {
         private readonly OQCService _oqcService;
         private readonly ModelService _modelService;
+        private readonly IqcService _iqcService;
         public FormQACheck()
         {
+            _iqcService = new IqcService();
             _oqcService = new OQCService();
             _modelService = new ModelService();
             InitializeComponent();
@@ -52,7 +54,7 @@ namespace OQCChecking
                     {
                         if (production.QA_Check == false)
                         {
-                            txtBoxID.Focus();
+                            txtJudge.Focus();
                             SetErrorStatus(false, "OK", null);
                         }
                         else
@@ -155,6 +157,7 @@ namespace OQCChecking
                 else
                 {
                     string strBoxId = txtBoxID.Text;
+                    bool judge = txtJudge.Text.Trim() == "1";
                     if (strBoxId.Length >= 3)
                     {
                         if (strBoxId.Substring(0, 3).ToUpper() != "F00")
@@ -185,6 +188,10 @@ namespace OQCChecking
                                         try
                                         {
                                             _oqcService.UpdateOQCCheck(production, Program.CurrentUser.OperatorCode);
+                                            if (txtJudge.Text.Trim() == "0")
+                                            {
+                                                _iqcService.UpdateResult(production.ProductionID, Program.CurrentUser.OperationID, judge, Program.CurrentUser.OperatorCode);
+                                            }
                                             var logs = _oqcService.GetLogsByBoxId(txtBoxID.Text.Trim()).Where(l => l.QA_Check);
                                             gridControlData.DataSource = logs;
                                             lblCountPCB.Text = logs.Count().ToString();
