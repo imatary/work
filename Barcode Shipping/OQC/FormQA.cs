@@ -36,22 +36,32 @@ namespace OQC
                 }
                 else
                 {
-                    foreach (var item in _modelService.GetModels())
+                    if(txtProductionID.Text.Length <= 10)
                     {
-                        if (txtProductionID.Text.Trim().Contains(item.SerialNo) && txtProductionID.Text.Contains(item.ModelID))
-                        {
-                            lblQuantityModel.Visible = true;
-                            lblQuantityModel.Text = $"/{item.Quantity}";
-                            tableLayoutPanelModel.Visible = true;
-                            lblCurentModel.Text = item.ModelID;
-                            lblSerialNo.Text = item.SerialNo;
-                            break;
-                        }
+                        SetErrorStatus(true, "NG", $"Error!\nPCB không đúng định dạng!");
+                        txtProductionID.SelectAll();
+                        Ultils.EditTextErrorNoMessage(txtProductionID);
                     }
-                    var production = _oqcService.GetLogByProductionId(txtProductionID.Text.Trim());
+                    else
+                    {
+                        foreach (var item in _modelService.GetModels())
+                        {
+                            string modelName = txtProductionID.Text.Trim().Substring(0, item.ModelName.Length);
+                            if (modelName == item.ModelName)
+                            {
+                                lblQuantityModel.Visible = true;
+                                lblQuantityModel.Text = $"/{item.Quantity}";
+                                tableLayoutPanelModel.Visible = true;
+                                lblCurentModel.Text = item.ModelID;
+                                lblSerialNo.Text = item.SerialNo;
+                                lblCustomerName.Text = $"Barcode {item.CustomerName}";
+                                break;
+                            }
+                        }
+
+                        var production = _oqcService.GetLogByProductionId(txtProductionID.Text.Trim());
                     if (production != null)
                     {
-                        //SetErrorStatus(true, "NG", $"Error!\nProduction ID[{txtProductionID.Text.Trim()}]\nĐã có trong hệ thống.\nVui lòng kiểm tra lại!");
                         SetErrorStatus(true, "NG",
                             $"PCB [{txtProductionID.Text}] đã có trong hệ thống.\nVui lòng kiểm tra lại\n" +
                             $"Box ID: {production.BoxID} \n" +
@@ -64,6 +74,7 @@ namespace OQC
                     {
                         txtMacAddress.Focus();
                         SetErrorStatus(false, "OK", null);
+                    }
                     }
                 }
             }
@@ -96,7 +107,7 @@ namespace OQC
                         txtJudge.Focus();
                         SetErrorStatus(false, "OK", null);
                     }
-                    
+
                 }
             }
             if (e.KeyCode == Keys.Tab)
@@ -208,116 +219,114 @@ namespace OQC
                 int operationId = Program.CurrentUser.OperationID;
                 string operatorId = Program.CurrentUser.OperatorCode;
                 bool judge = txtJudge.Text.Trim() == "1";
-
+                var logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                 if (operationId == 1)
                 {
-                        var logs = _oqcService.GetLogsByBoxId(boxId).ToList();
-                        // Nếu Box có dữ liệu của PCB
-                        if (logs.Any())
+                    // Nếu Box có dữ liệu của PCB
+                    if (logs.Any())
+                    {
+                        var log = logs.FirstOrDefault(l => l.ProductionID == txtProductionID.Text);
+                        // Nếu PCB mới bắn vào chưa có trong Box
+                        if (log == null)
                         {
-                            var log = logs.FirstOrDefault(l => l.ProductionID == txtProductionID.Text);
-                            // Nếu PCB mới bắn vào chưa có trong Box
-                            if (log == null)
+                            if (!CheckProductionId(txtProductionID.Text, lblCurentModel.Text, lblSerialNo.Text))
                             {
-                                    if (!CheckProductionId(txtProductionID.Text, lblCurentModel.Text, lblSerialNo.Text))
-                                    {
-                                        SetErrorStatus(true, "NG", $"Error {lblCurentModel.Text} !\nPCB [{txtProductionID.Text}]\nnày khác với các PCB trong Box [{boxId}].\nVui lòng kiểm tra lại!");
-                                        txtProductionID.SelectAll();
-                                        Ultils.EditTextErrorNoMessage(txtProductionID);
-                                        txtJudge.ResetText();
-                                        txtMacAddress.ResetText();
-                                        txtBoxID.ResetText();
-                                    }
-                                    else
-                                    {
-                                        string tmp = lblQuantityModel.Text.Replace("/", "");
-                                        int countPcbInBox = int.Parse(lblCountPCB.Text);
-                                        int quantity = int.Parse(tmp);
-
-                                        if (countPcbInBox == quantity)
-                                        {
-                                            SetErrorStatus(true, "NG", "Thùng đã đủ số lượng, vui lòng kiểm tra lại!");
-                                            ResetControls();
-                                        }
-                                        else
-                                        {
-                                            try
-                                            {
-                                                _iqcService.InsertLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
-
-                                                if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
-                                                {
-                                                    _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
-                                                }
-                                                else
-                                                {
-                                                    _iqcService.UpdateResult(txtProductionID.Text, operationId, judge, operatorId);
-                                                }
-                                                var refeshData = _oqcService.GetLogsByBoxId(boxId).ToList();
-                                                gridControlData.Refresh();
-                                                gridControlData.DataSource = refeshData;
-                                                lblCountPCB.Text = refeshData.Count.ToString(CultureInfo.InvariantCulture);
-
-                                                SetSuccessStatus(true, "PASS", string.Format("Thêm thành công!\nPCB [{0}]", txtProductionID.Text));
-                                                ResetControls();
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                SetErrorStatus(true, "NG", "Error Insert! \n" + ex.Message);
-                                                ResetControls();
-                                            }
-                                        }
-                                    }
+                                SetErrorStatus(true, "NG", $"Error {lblCurentModel.Text} !\nPCB [{txtProductionID.Text}]\nnày khác với các PCB trong Box [{boxId}].\nVui lòng kiểm tra lại!");
+                                txtProductionID.SelectAll();
+                                Ultils.EditTextErrorNoMessage(txtProductionID);
+                                txtJudge.ResetText();
+                                txtMacAddress.ResetText();
+                                txtBoxID.ResetText();
                             }
-                            // Nếu có rồi thì thống báo lỗi
                             else
                             {
-                                SetErrorStatus(true, "NG", $"PCB [{txtProductionID.Text}] này đã có trong Box rồi.\nVui lòng kiểm tra lại");
-                                ResetControls();
-                                var refeshData = _oqcService.GetLogsByBoxId(boxId);
-                                gridControlData.Refresh();
-                                gridControlData.DataSource = refeshData;
-                            }
-                        }
-                        // Nếu Box chưa có dữ liệu gì, thực hiện insert
-                        else
-                        {
-                            try
-                            {
-                                _iqcService.InsertLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
+                                string tmp = lblQuantityModel.Text.Replace("/", "");
+                                int countPcbInBox = int.Parse(lblCountPCB.Text);
+                                int quantity = int.Parse(tmp);
 
-                                if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
+                                if (logs.Count == quantity)
                                 {
-                                    _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
+                                    SetErrorStatus(true, "NG", "Thùng đã đủ số lượng, vui lòng kiểm tra lại!");
+                                    //ResetControls();
+                                    Ultils.EditTextErrorNoMessage(txtBoxID);
+                                    txtBoxID.SelectAll();
                                 }
                                 else
                                 {
-                                    _iqcService.UpdateResult(txtProductionID.Text, operationId, judge, operatorId);
-                                }
-                                var refeshData = _oqcService.GetLogsByBoxId(boxId).ToList();
-                                gridControlData.Refresh();
-                                gridControlData.DataSource = refeshData;
-                                lblCountPCB.Text = refeshData.Count.ToString(CultureInfo.InvariantCulture);
+                                    try
+                                    {
+                                        _iqcService.InsertLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
 
-                                SetSuccessStatus(true, "PASS", string.Format("Thêm thành công!\nPCB [{0}]", txtProductionID.Text));
-                                ResetControls();
-                            }
-                            catch (Exception ex)
-                            {
-                                SetErrorStatus(true, "NG", "Error Insert! \n" + ex.Message);
-                                ResetControls();
+                                        if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
+                                        {
+                                            _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
+                                        }
+                                        else
+                                        {
+                                            _iqcService.UpdateResult(txtProductionID.Text, operationId, judge, operatorId);
+                                        }
+                                        var refeshData = _oqcService.GetLogsByBoxId(boxId).ToList();
+                                        gridControlData.Refresh();
+                                        gridControlData.DataSource = refeshData;
+                                        lblCountPCB.Text = refeshData.Count.ToString(CultureInfo.InvariantCulture);
+
+                                        SetSuccessStatus(true, "PASS", string.Format("Thêm thành công!\nPCB [{0}]", txtProductionID.Text));
+                                        ResetControls();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        SetErrorStatus(true, "NG", "Error Insert! \n" + ex.Message);
+                                        ResetControls();
+                                    }
+                                }
                             }
                         }
+                        // Nếu có rồi thì thống báo lỗi
+                        else
+                        {
+                            SetErrorStatus(true, "NG", $"PCB [{txtProductionID.Text}] này đã có trong Box rồi.\nVui lòng kiểm tra lại");
+                            ResetControls();
+                            gridControlData.Refresh();
+                            gridControlData.DataSource = logs;
+                        }
+                    }
+                    // Nếu Box chưa có dữ liệu gì, thực hiện insert
+                    else
+                    {
+                        try
+                        {
+                            _iqcService.InsertLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
+
+                            if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
+                            {
+                                _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
+                            }
+                            else
+                            {
+                                _iqcService.UpdateResult(txtProductionID.Text, operationId, judge, operatorId);
+                            }
+                            var refeshData = _oqcService.GetLogsByBoxId(boxId).ToList();
+                            gridControlData.Refresh();
+                            gridControlData.DataSource = refeshData;
+                            lblCountPCB.Text = refeshData.Count.ToString(CultureInfo.InvariantCulture);
+
+                            SetSuccessStatus(true, "PASS", string.Format("Thêm thành công!\nPCB [{0}]", txtProductionID.Text));
+                            ResetControls();
+                        }
+                        catch (Exception ex)
+                        {
+                            SetErrorStatus(true, "NG", "Error Insert! \n" + ex.Message);
+                            ResetControls();
+                        }
+                    }
                 }
                 else if (operationId >= 2)
                 {
                     _iqcService.UpdateLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
                     _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
-
-                    var refeshData = _oqcService.GetLogsByBoxId(boxId).ToList();
                     gridControlData.Refresh();
-                    gridControlData.DataSource = refeshData;
-                    lblCountPCB.Text = refeshData.Count.ToString(CultureInfo.InvariantCulture);
+                    gridControlData.DataSource = logs;
+                    lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
 
                     SetSuccessStatus(true, "PASS", string.Format("Thành công!\nPCB [{0}] vừa được bắn lại lần {1}", txtProductionID.Text, operationId));
                     ResetControls();
@@ -367,13 +376,10 @@ namespace OQC
         /// <returns></returns>
         private bool CheckProductionId(string productionId, string model, string serialNo)
         {
-            if (productionId != null)
+            string tmpProductionId = productionId.Substring(0, model.Length);
+            if (tmpProductionId.Contains(model) && productionId.Contains(serialNo))
             {
-                if (productionId.Contains(model) && productionId.Contains(serialNo))
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
             return false;
         }
@@ -460,7 +466,7 @@ namespace OQC
 
         private void btnAction_Click(object sender, EventArgs e)
         {
-            var action=new FormAction();
+            var action = new FormAction();
             action.ShowDialog();
         }
 

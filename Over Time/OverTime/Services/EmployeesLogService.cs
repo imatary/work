@@ -95,7 +95,7 @@ namespace OverTime.Services
             {
                 return employeesLogs.Where(
                     item =>
-                        item.LeaderApproved &&
+                        item.LeaderApproved == false &&
                         item.ManageDepartmentShiftApproved == false &&
                         item.IsDelete == false &&
                         item.DateCheck.Date == dateCheck.Date &&
@@ -105,7 +105,7 @@ namespace OverTime.Services
             {
                 employeesLogs = employeesLogs.Where(
                     item =>
-                        item.LeaderApproved &&
+                        item.LeaderApproved == false &&
                         item.ManageDepartmentShiftApproved &&
                         item.ManagerApproved == false &&
                         item.IsDelete == false &&
@@ -119,7 +119,7 @@ namespace OverTime.Services
                 return
                     employeesLogs.Where(
                         item =>
-                            item.LeaderApproved &&
+                            item.LeaderApproved == false &&
                             item.ManageDepartmentShiftApproved &&
                             item.ManagerApproved &&
                             item.GaComplete == false &&

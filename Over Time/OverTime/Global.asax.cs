@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using OverTime.Models;
-
 namespace OverTime
 {
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
+            //GlobalFilters.Filters.Add(new SqlExceptionFilter());
+            //Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
 
             Bootstrapper.Run();
             AreaRegistration.RegisterAllAreas();
@@ -43,5 +43,26 @@ namespace OverTime
                 }
             }
         }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+            if (exception == null)
+                return;
+            //var mail = new MailMessage { From = new MailAddress("automated@contoso.com") };
+            //mail.To.Add(new MailAddress("administrator@contoso.com"));
+            //mail.Subject = "Site Error at " + DateTime.Now;
+            //mail.Body = "Error Description: " + exception.Message;
+            //var server = new SmtpClient { Host = "your.smtp.server"};
+            //server.Send(mail);
+
+            // Clear the error
+            Server.ClearError();
+
+            // Redirect to
+            Response.Redirect("Error/Index");
+
+        }
+
     }
 }

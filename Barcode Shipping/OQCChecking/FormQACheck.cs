@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using BarcodeShipping.Data;
 using BarcodeShipping.Services;
 using DevExpress.XtraEditors;
 using OQCChecking.Helper;
@@ -14,6 +15,7 @@ namespace OQCChecking
         private readonly OQCService _oqcService;
         private readonly ModelService _modelService;
         private readonly IqcService _iqcService;
+        private tbl_test_log _log;
         public FormQACheck()
         {
             _iqcService = new IqcService();
@@ -49,10 +51,10 @@ namespace OQCChecking
                             break;
                         }
                     }
-                    var production = _oqcService.GetLogByProductionId(txtProductionID.Text);
-                    if (production != null)
+                    _log = _oqcService.GetLogByProductionId(txtProductionID.Text);
+                    if (_log != null)
                     {
-                        if (production.QA_Check == false)
+                        if (_log.QA_Check == false)
                         {
                             txtJudge.Focus();
                             SetErrorStatus(false, "OK", null);
@@ -61,9 +63,9 @@ namespace OQCChecking
                         {
                             SetSuccessStatus(true, "OK",
                             $"PCB [{txtProductionID.Text}] đã được kiểm tra rồi.\n" +
-                            $"Box ID: {production.BoxID} \n" +
-                            $"Operator: {production.OperatorCode} \n" +
-                            $"Date Check: {production.DateCheck} \n");
+                            $"Box ID: {_log.BoxID} \n" +
+                            $"Operator: {_log.OperatorCode} \n" +
+                            $"Date Check: {_log.DateCheck} \n");
                             txtProductionID.SelectAll();
                             Ultils.EditTextErrorNoMessage(txtProductionID);
                         }
@@ -170,27 +172,27 @@ namespace OQCChecking
                             var currentBox = _oqcService.CheckBoxIdExits(txtBoxID.Text.Trim());
                             if (currentBox != null)
                             {
-                                var production = _oqcService.GetLogByProductionId(txtProductionID.Text);
-                                if (production.BoxID == txtBoxID.Text.Trim())
+                                //var production = _oqcService.GetLogByProductionId(txtProductionID.Text);
+                                if (_log.BoxID == txtBoxID.Text.Trim())
                                 {
                                     string tmp = lblQuantityModel.Text.Replace("/", "");
                                     int countPcbInBox = int.Parse(lblCountPCB.Text);
                                     int quantity = int.Parse(tmp);
 
-                                    if (countPcbInBox == quantity)
-                                    {
-                                        SetErrorStatus(true, "OK", "Thùng đã được kiểm tra xong. Vui lòng\nkiểm tra thùng khác!");
-                                        txtProductionID.Focus();
-                                        ResetControls();
-                                    }
-                                    else
-                                    {
+                                    //if (countPcbInBox == quantity)
+                                    //{
+                                    //    SetErrorStatus(true, "OK", "Thùng đã được kiểm tra xong. Vui lòng\nkiểm tra thùng khác!");
+                                    //    txtProductionID.Focus();
+                                    //    ResetControls();
+                                    //}
+                                    //else
+                                    //{
                                         try
                                         {
-                                            _oqcService.UpdateOQCCheck(production, Program.CurrentUser.OperatorCode);
+                                            _oqcService.UpdateOQCCheck(_log, Program.CurrentUser.OperatorCode);
                                             if (txtJudge.Text.Trim() == "0")
                                             {
-                                                _iqcService.UpdateResult(production.ProductionID, Program.CurrentUser.OperationID, judge, Program.CurrentUser.OperatorCode);
+                                                _iqcService.UpdateResult(_log.ProductionID, Program.CurrentUser.OperationID, judge, Program.CurrentUser.OperatorCode);
                                             }
                                             var logs = _oqcService.GetLogsByBoxId(txtBoxID.Text.Trim()).Where(l => l.QA_Check);
                                             gridControlData.DataSource = logs;
@@ -204,7 +206,7 @@ namespace OQCChecking
                                             txtBoxID.SelectAll();
                                             Ultils.EditTextErrorNoMessage(txtBoxID);
                                         }
-                                    }  
+                                    //}  
                                 }
                                 else
                                 {

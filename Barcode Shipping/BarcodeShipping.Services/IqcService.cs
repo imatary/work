@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using BarcodeShipping.Data;
 using BarcodeShipping.Data.Repositories;
+using Lib.Core.Helper;
 
 namespace BarcodeShipping.Services
 {
@@ -272,6 +273,8 @@ namespace BarcodeShipping.Services
                 Quantity = quantity,
                 OperatorCode = operatorCode,
                 QA_Check = false,
+                CheckBy = operatorCode,
+                ClinetInput=StringHelper.GetInfo(),
             };
 
             try

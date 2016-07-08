@@ -8,12 +8,12 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OQC</RootNamespace>
-    <AssemblyName>Barcode FujiXerox</AssemblyName>
+    <AssemblyName>OQC System</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>Y:\Dev\Barcode Shipping\QA Check\</PublishUrl>
+    <PublishUrl>Y:\Dev\Barcode Shipping\PE Barcode\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -23,19 +23,21 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>\\VN-FILE2\Share\18 IT\U16354 %28cuongpv%29\Dev\Barcode Shipping\QA Check\</UpdateUrl>
-    <ProductName>Barcode FujiXerox</ProductName>
+    <UpdateUrl>\\VN-FILE2\Share\18 IT\U16354 %28cuongpv%29\Dev\Barcode Shipping\PE Barcode\</UpdateUrl>
+    <ProductName>OQC System</ProductName>
     <PublisherName>UMC Electronics VietNam Ltd%27s</PublisherName>
     <SuiteName>cuongpham%40umcvn.com</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>24</ApplicationRevision>
+    <ApplicationRevision>38</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Absolute</BootstrapperComponentsLocation>
+    <BootstrapperComponentsUrl>\\VN-FILE2\Share\18 IT\U16354 %28cuongpv%29\NetFramework</BootstrapperComponentsUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

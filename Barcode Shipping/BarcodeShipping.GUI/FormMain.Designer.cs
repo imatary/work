@@ -138,7 +138,7 @@
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(686, 94);
             this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "Fuji Xerox";
+            this.labelControl1.Text = "Barcode Shipping FujiXerox";
             // 
             // pictureBox1
             // 

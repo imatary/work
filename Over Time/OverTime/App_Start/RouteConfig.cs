@@ -24,7 +24,7 @@ namespace OverTime
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Confirm", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Confirm", action = "InputBarcode", id = UrlParameter.Optional }
             );
         }
     }

@@ -26,6 +26,7 @@ namespace BarcodeShipping.Data
         public string OperatorCode { get; set; }
         public bool QA_Check { get; set; }
         public string CheckBy { get; set; }
+        public string ClinetInput { get; set; }
     
         public virtual Model Model { get; set; }
     }

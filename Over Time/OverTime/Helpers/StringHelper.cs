@@ -13,6 +13,7 @@ namespace OverTime.Helpers
             //System.Environment.MachineName
             //HttpContext.Current.Server.MachineName
             //System.Net.Dns.GetHostName()
+            string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             String pcName = Dns.GetHostEntry(HttpContext.Current.Request.ServerVariables["remote_addr"]).HostName;
             string info = $"{username} - {pcName} - {GetComputerLanIp()} - {DateTime.Now}";
             return info;
@@ -126,7 +127,7 @@ namespace OverTime.Helpers
             {
                 prefix = "0" + staffCode;
             }
-            else if (staffCode.Length == 2)
+            else if (staffCode.Length == 5)
             {
                 prefix = staffCode;
             }

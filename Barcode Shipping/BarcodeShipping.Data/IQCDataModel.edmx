@@ -15,6 +15,7 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="SerialNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="mst_operator">
           <Key>
@@ -82,6 +83,7 @@
           <Property Name="OperatorCode" Type="varchar" MaxLength="10" />
           <Property Name="QA_Check" Type="bit" Nullable="false" />
           <Property Name="CheckBy" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClinetInput" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="tbl_test_result">
           <Key>
@@ -394,6 +396,7 @@
           <NavigationProperty Name="PackingPOes" Relationship="barcode_dbModel.FK_PO_Models" FromRole="Model" ToRole="PackingPO" />
           <NavigationProperty Name="Shippings" Relationship="barcode_dbModel.FK_Shipping_Models" FromRole="Model" ToRole="Shipping" />
           <NavigationProperty Name="tbl_test_log" Relationship="barcode_dbModel.FK_tbl_test_log_Models" FromRole="Model" ToRole="tbl_test_log" />
+          <Property Name="CustomerName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PackingPO">
           <Key>
@@ -628,6 +631,7 @@
           <Property Name="QA_Check" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Model" Relationship="barcode_dbModel.FK_tbl_test_log_Models" FromRole="tbl_test_log" ToRole="Model" />
           <Property Name="CheckBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClinetInput" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tbl_test_log_Models">
           <End Type="barcode_dbModel.Model" Role="Model" Multiplicity="0..1" />
@@ -669,6 +673,7 @@
           <EntitySetMapping Name="Models">
             <EntityTypeMapping TypeName="barcode_dbModel.Model">
               <MappingFragment StoreEntitySet="Models">
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -940,6 +945,7 @@
           <EntitySetMapping Name="tbl_test_log">
             <EntityTypeMapping TypeName="barcode_dbModel.tbl_test_log">
               <MappingFragment StoreEntitySet="tbl_test_log">
+                <ScalarProperty Name="ClinetInput" ColumnName="ClinetInput" />
                 <ScalarProperty Name="CheckBy" ColumnName="CheckBy" />
                 <ScalarProperty Name="QA_Check" ColumnName="QA_Check" />
                 <ScalarProperty Name="OperatorCode" ColumnName="OperatorCode" />

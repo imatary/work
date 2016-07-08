@@ -3,6 +3,7 @@ using OverTime.Models;
 using OverTime.Services;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -12,7 +13,8 @@ using OverTime.Helpers;
 
 namespace OverTime.Controllers
 {
-    [Authorize]
+    [HandleError(ExceptionType = typeof(SqlException), View = "DatabaseError")]
+    [HandleError(ExceptionType = typeof(NullReferenceException), View = "LameErrorHandling")]
     public class ConfirmController : Controller
     {
         private readonly IEmployeesService _employeesService;
@@ -36,12 +38,13 @@ namespace OverTime.Controllers
         }
 
         // GET: Confirm
+        [Authorize]
         public async Task<ActionResult> Index(string searchDate)
         {
             IEnumerable<EmployeesLog> employeesLogs = null;
             var userDepartment = await _departmentService.GetUserDepartmentsAsync(User.Identity.GetUserId());
             var departments = userDepartment as IList<Department> ?? userDepartment.ToList();
-            if (User.IsInRole("Leader"))
+            if (User.IsInRole("ManageDepartmentShift"))
             {
                 DateTime startDate = DateTime.Today;
                 TimeSpan startTime = new TimeSpan(08, 00, 00);
@@ -82,17 +85,17 @@ namespace OverTime.Controllers
 
                 foreach (var department in departments)
                 {
-                    employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("Leader", DateTime.Today, department.DepartmentID);
+                    employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("ManageDepartmentShift", DateTime.Today, department.DepartmentID);
                 } 
             }
-            else if (User.IsInRole("ManageDepartmentShift"))
-            {
-                foreach (var department in departments)
-                {
-                    employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("ManageDepartmentShift", DateTime.Today, department.DepartmentID);
-                }
+            //else if (User.IsInRole("ManageDepartmentShift"))
+            //{
+            //    foreach (var department in departments)
+            //    {
+            //        employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("ManageDepartmentShift", DateTime.Today, department.DepartmentID);
+            //    }
                 
-            }
+            //}
             else if (User.IsInRole("Manager"))
             {
                 employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("Manager", DateTime.Today, departments);
@@ -126,6 +129,7 @@ namespace OverTime.Controllers
 
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult InputBarcode()
         {
             return View();
@@ -137,99 +141,175 @@ namespace OverTime.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userDepartment = await _userDepartmentsService.GetUserDepartmentsAsync(User.Identity.GetUserId());
                 string staffCode = StringHelper.LengthStaffCode(model.SearchKey);
-                Employess employess = null;
                 var staff = await _gaService.GetStaffByCode(staffCode);
                 if (staff != null)
                 {
-                    foreach (var department in userDepartment)
+                    Employess employess = new Employess()
                     {
-                        if (staff.DeptCode == department.DepartmentID)
+                        StaffCode = staff.StaffCode,
+                        FullName = staff.FullName,
+                        DepartmentID = staff.DeptCode,
+                        CreateBy = staffCode,
+                        StaffPicture = staff.StaffPicture,
+                        DateCheck = DateTime.Now,
+                        LeaderApproved = false,
+                        ManagerApproved = false,
+                        GaComplete = false,
+                        Note = StringHelper.GetInfo(staffCode),
+                    };
+
+                    try
+                    {
+                        var employesCheck = await _employeesService.GetEmployessByIdAndDateAsync(model.SearchKey, DateTime.Now);
+                        if (employesCheck == null)
                         {
-                            employess = new Employess()
+                            await _employeesService.CreateAsync(employess);
+                            ViewBag.SuccessMessage = $"Input user {staffCode} successful!";
+                            model = new SearchBarcode()
                             {
-                                StaffCode = staff.StaffCode,
-                                FullName = staff.FullName,
-                                DepartmentID = staff.DeptCode,
-                                CreateBy = User.Identity.GetUserName(),
-                                StaffPicture = staff.StaffPicture,
-                                DateCheck = DateTime.Now,
-                                LeaderApproved = false,
-                                ManagerApproved = false,
-                                GaComplete = false,
-                                Note = StringHelper.GetInfo(User.Identity.GetUserName()),
+                                SearchKey = string.Empty,
                             };
-
-                            try
-                            {
-                                var employesCheck = await _employeesService.GetEmployessByIdAndDateAsync(model.SearchKey, DateTime.Now, department.DepartmentID);
-                                if (employesCheck == null)
-                                {
-                                    await _employeesService.CreateAsync(employess);
-
-                                    model = new SearchBarcode()
-                                    {
-                                        SearchKey = string.Empty,
-                                    };
-                                    ModelState.Clear();
-                                    return View(model);
-                                }
-                                model = new SearchBarcode()
-                                {
-                                    SearchKey = string.Empty,
-                                };
-                                ModelState.Clear();
-                                ModelState.AddModelError("SearchKey", $"Error! User {staffCode} already exists");
-                                return View(model);
-                            }
-                            catch (Exception ex)
-                            {
-                                model = new SearchBarcode()
-                                {
-                                    SearchKey = string.Empty,
-                                };
-                                ModelState.Clear();
-                                ModelState.AddModelError("SearchKey", ex.Message);
-                                return View(model);
-                            }
+                            ModelState.Clear();
+                            return View(model);
                         }
+                        model = new SearchBarcode()
+                        {
+                            SearchKey = string.Empty,
+                        };
+                        ModelState.Clear();
+                        ModelState.AddModelError("SearchKey", $"Error! User {staffCode} already exists.\n" +
+                                                              $"Tên: {employesCheck.FullName} \n" +
+                                                              $"Input time: {employesCheck.DateCheck.ToShortTimeString()}");
+                        return View(model);
                     }
-                    if (employess == null)
+                    catch (Exception ex)
                     {
                         model = new SearchBarcode()
                         {
                             SearchKey = string.Empty,
                         };
                         ModelState.Clear();
-                        ModelState.AddModelError("SearchKey", $"Error! User {staffCode} not management of your department.");
+                        ModelState.AddModelError("SearchKey", ex.Message);
                         return View(model);
                     }
                 }
-                else
+                model = new SearchBarcode()
                 {
-                    model = new SearchBarcode()
-                    {
-                        SearchKey = string.Empty,
-                    };
-                    ModelState.Clear();
-                    ModelState.AddModelError("SearchKey", $"Error! User {staffCode} not exits in database.");
-                    return View(model);
-                }
+                    SearchKey = string.Empty,
+                };
+                ModelState.Clear();
+                ModelState.AddModelError("SearchKey", $"Error! User {staffCode} not exits in database.");
+                return View(model);
             }
             return View(model);
         }
 
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> InputBarcode(SearchBarcode model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var userDepartment = await _userDepartmentsService.GetUserDepartmentsAsync(User.Identity.GetUserId());
+        //        string staffCode = StringHelper.LengthStaffCode(model.SearchKey);
+        //        Employess employess = null;
+        //        var staff = await _gaService.GetStaffByCode(staffCode);
+        //        if (staff != null)
+        //        {
+        //            foreach (var department in userDepartment)
+        //            {
+        //                if (staff.DeptCode == department.DepartmentID)
+        //                {
+        //                    employess = new Employess()
+        //                    {
+        //                        StaffCode = staff.StaffCode,
+        //                        FullName = staff.FullName,
+        //                        DepartmentID = staff.DeptCode,
+        //                        CreateBy = User.Identity.GetUserName(),
+        //                        StaffPicture = staff.StaffPicture,
+        //                        DateCheck = DateTime.Now,
+        //                        LeaderApproved = false,
+        //                        ManagerApproved = false,
+        //                        GaComplete = false,
+        //                        Note = StringHelper.GetInfo(User.Identity.GetUserName()),
+        //                    };
+
+        //                    try
+        //                    {
+        //                        var employesCheck = await _employeesService.GetEmployessByIdAndDateAsync(model.SearchKey, DateTime.Now, department.DepartmentID);
+        //                        if (employesCheck == null)
+        //                        {
+        //                            await _employeesService.CreateAsync(employess);
+
+        //                            model = new SearchBarcode()
+        //                            {
+        //                                SearchKey = string.Empty,
+        //                            };
+        //                            ModelState.Clear();
+        //                            return View(model);
+        //                        }
+        //                        model = new SearchBarcode()
+        //                        {
+        //                            SearchKey = string.Empty,
+        //                        };
+        //                        ModelState.Clear();
+        //                        ModelState.AddModelError("SearchKey", $"Error! User {staffCode} already exists");
+        //                        return View(model);
+        //                    }
+        //                    catch (Exception ex)
+        //                    {
+        //                        model = new SearchBarcode()
+        //                        {
+        //                            SearchKey = string.Empty,
+        //                        };
+        //                        ModelState.Clear();
+        //                        ModelState.AddModelError("SearchKey", ex.Message);
+        //                        return View(model);
+        //                    }
+        //                }
+        //            }
+        //            if (employess == null)
+        //            {
+        //                model = new SearchBarcode()
+        //                {
+        //                    SearchKey = string.Empty,
+        //                };
+        //                ModelState.Clear();
+        //                ModelState.AddModelError("SearchKey", $"Error! User {staffCode} not management of your department.");
+        //                return View(model);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            model = new SearchBarcode()
+        //            {
+        //                SearchKey = string.Empty,
+        //            };
+        //            ModelState.Clear();
+        //            ModelState.AddModelError("SearchKey", $"Error! User {staffCode} not exits in database.");
+        //            return View(model);
+        //        }
+        //    }
+        //    return View(model);
+        //}
+
         [ChildActionOnly]
         public PartialViewResult ShowBarcodes()
         {
-            var userDepartment = _userDepartmentsService.GetUserDepartments(User.Identity.GetUserId());
-            IEnumerable<Employess> employesses = _employeesService.GetEmployesses();
-            foreach (var department in userDepartment)
-            {
-                employesses = _employeesService.GetEmployeesYesterday(DateTime.Today, department.DepartmentID);
+            //var userDepartment = _userDepartmentsService.GetUserDepartments(User.Identity.GetUserId());
+            //IEnumerable<Employess> employesses = _employeesService.GetEmployesses();
+            //foreach (var department in userDepartment)
+            //{
+            //    employesses = _employeesService.GetEmployeesYesterday(DateTime.Today, department.DepartmentID);
 
-            }
+            //}
+
+            IEnumerable<Employess> employesses =
+                _employeesService.GetEmployeesYesterday(DateTime.Today)
+                .OrderByDescending(item => item.DateCheck);
             return PartialView(employesses);
         }
 

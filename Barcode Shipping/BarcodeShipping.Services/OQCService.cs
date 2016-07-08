@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
 using System.Linq;
 using BarcodeShipping.Data;
@@ -14,9 +13,6 @@ namespace BarcodeShipping.Services
         IEnumerable<tbl_test_log> GetLogs();
         tbl_test_log GetLogsById(string productionId);
         mst_operator GetOperatorByCode(string operatorCode);
-
-
-
     }
     public class OQCService : IOQCService
     {
@@ -76,10 +72,22 @@ namespace BarcodeShipping.Services
         }
         public void DeleteLogByBoxId(string boxId)
         {
-            foreach (var item in GetLogsByBoxId(boxId))
+            object[] param =
             {
-                _context.tbl_test_log.Remove(item);
-                _context.SaveChanges();
+                new SqlParameter() { ParameterName = "@boxId", Value = boxId, SqlDbType = SqlDbType.Char},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            try
+            {
+                _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_DeleteLogByBoxId] @boxId", param);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 

@@ -20,9 +20,11 @@ namespace OverTime.Services
         Task<Employess> GetEmployesByIdAsync(Guid id, string staffCode);
         Employess GetEmployessByIdAndDate(string staffCode, DateTime dateCheck);
         Task<IEnumerable<Employess>> GetEmployessYesterDayByIdAndDateAsync(DateTime date, string departmentId);
+        Task<Employess> GetEmployessByIdAndDateAsync(string staffCode, DateTime date);
         Task<Employess> GetEmployessByIdAndDateAsync(string staffCode, DateTime date, string departmentId);
         Task<IEnumerable<Employess>> GetEmployeesYesterdayAsync(string staffCode, DateTime dateCheck, string departmentId);
         Task<IEnumerable<Employess>> GetEmployeesYesterdayAsync(DateTime dateCheck, string departmentId);
+        IEnumerable<Employess> GetEmployeesYesterday(DateTime dateCheck);
         IEnumerable<Employess> GetEmployeesYesterday(DateTime dateCheck, string departmentId);
         Task<Employess> ApprovedAllByUserIdAsync(Guid id, string staffcode, DateTime date, string departmentId);
         Task<Employess> ApprovedByUserIdAsync(Guid id, string staffcode, string roleName);
@@ -84,6 +86,13 @@ namespace OverTime.Services
                         EntityFunctions.TruncateTime(item.DateCheck) == date.Date).ToListAsync();
         }
 
+        public async Task<Employess> GetEmployessByIdAndDateAsync(string staffCode, DateTime date)
+        {
+            return await _applicationDbContext.Employesses.Where(
+                item => item.StaffCode == staffCode &&
+                        EntityFunctions.TruncateTime(item.DateCheck) == date.Date).FirstOrDefaultAsync();
+        }
+
         public async Task<Employess> GetEmployessByIdAndDateAsync(string staffCode, DateTime date, string departmentId)
         {
             return await _applicationDbContext.Employesses.Where(
@@ -109,6 +118,14 @@ namespace OverTime.Services
                     item.DepartmentID == departmentId &&
                     EntityFunctions.TruncateTime(item.DateCheck) == dateCheck.Date)
                 .ToListAsync();
+        }
+
+        public IEnumerable<Employess> GetEmployeesYesterday(DateTime dateCheck)
+        {
+            return _applicationDbContext.Employesses.Where(
+                item =>
+                    EntityFunctions.TruncateTime(item.DateCheck) == dateCheck.Date)
+                .ToList();
         }
 
         public IEnumerable<Employess> GetEmployeesYesterday(DateTime dateCheck, string departmentId)

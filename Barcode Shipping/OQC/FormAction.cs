@@ -97,6 +97,7 @@ namespace OQC
                     {
                         _oqcService.DeleteLogByProductionId(txtDeleteId.Text);
                         VisibleDeleteMessage(true, "Delete production success!");
+                        MessageBox.Show($"Delete [{txtDeleteId.Text}] success!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtDeleteId.ResetText();
                         txtDeleteId.Focus();
                     }
@@ -111,6 +112,7 @@ namespace OQC
                     {
                         _oqcService.DeleteLogByBoxId(txtDeleteId.Text);
                         VisibleDeleteMessage(true, "Delete Box success!");
+                        MessageBox.Show($"Delete [{txtDeleteId.Text}] success!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtDeleteId.ResetText();
                         txtDeleteId.Focus();
                     }

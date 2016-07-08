@@ -650,7 +650,7 @@
             this.gridColumnOperatorCode.AppearanceHeader.Options.UseFont = true;
             this.gridColumnOperatorCode.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumnOperatorCode.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnOperatorCode.Caption = "Operator";
+            this.gridColumnOperatorCode.Caption = "Check By";
             this.gridColumnOperatorCode.FieldName = "CheckBy";
             this.gridColumnOperatorCode.Name = "gridColumnOperatorCode";
             this.gridColumnOperatorCode.Visible = true;
@@ -722,8 +722,8 @@
             this.gridColumnQuantity.AppearanceHeader.Options.UseFont = true;
             this.gridColumnQuantity.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumnQuantity.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnQuantity.Caption = "Quantity";
-            this.gridColumnQuantity.FieldName = "Quantity";
+            this.gridColumnQuantity.Caption = "Operator";
+            this.gridColumnQuantity.FieldName = "OperatorCode";
             this.gridColumnQuantity.Name = "gridColumnQuantity";
             this.gridColumnQuantity.Visible = true;
             this.gridColumnQuantity.VisibleIndex = 5;

@@ -4,9 +4,20 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace OverTime.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUserLogin : IdentityUserLogin<string> { }
-    public class ApplicationUserClaim : IdentityUserClaim<string> { }
-    public class ApplicationUserRole : IdentityUserRole<string> { }
+    public class ApplicationUserLogin : IdentityUserLogin<string>
+    {
+        
+    }
+
+    public class ApplicationUserClaim : IdentityUserClaim<string>
+    {
+        
+    }
+
+    public class ApplicationUserRole : IdentityUserRole<string>
+    {
+        
+    }
 
     // Must be expressed in terms of our custom Role and other types:
 

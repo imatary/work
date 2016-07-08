@@ -26,31 +26,31 @@ namespace OverTime.Controllers
         // GET: Departments
         public async Task<ActionResult> Index()
         {
-            //var departments = await _gaService.GetGaDepartments();
-            //foreach (var department in departments)
-            //{
-            //    var currentDeptpartment = await _departmentService.GetDepartmentByIdAsync(department.DeptCode);
-            //    if (currentDeptpartment == null)
-            //    {
-            //        var addDepartment = new Department()
-            //        {
-            //            DepartmentID = department.DeptCode,
-            //            Name = department.DeptName,
-            //            ParentID = "Root",
-            //            Description = "Dept " + department.DeptName,
-            //            Sort = await _departmentService.MaxSortAsync()
-            //        };
-            //        try
-            //        {
-            //            await _departmentService.CreateAsync(addDepartment);
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            throw new Exception(ex.Message);
-            //        }
+            var departments = await _gaService.GetGaDepartments();
+            foreach (var department in departments)
+            {
+                var currentDeptpartment = await _departmentService.GetDepartmentByIdAsync(department.DeptCode);
+                if (currentDeptpartment == null)
+                {
+                    var addDepartment = new Department()
+                    {
+                        DepartmentID = department.DeptCode,
+                        Name = department.DeptCode,
+                        ParentID = "Root",
+                        Description = "Dept " + department.DeptName,
+                        Sort = await _departmentService.MaxSortAsync()
+                    };
+                    try
+                    {
+                        await _departmentService.CreateAsync(addDepartment);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
 
-            //    }
-            //}
+                }
+            }
             return View(await _departmentService.GetDepartmentsAsync());
         }
 

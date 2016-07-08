@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAction));
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::OQC.WaitFormUpdate), true, true);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -48,12 +47,12 @@
             this.txtBoxId = new DevExpress.XtraEditors.TextEdit();
             this.txtProductionId = new DevExpress.XtraEditors.MemoEdit();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblDeleteMessage = new DevExpress.XtraEditors.LabelControl();
             this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.comboBoxEditDelete = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtDeleteId = new DevExpress.XtraEditors.TextEdit();
             this.splashScreenManager2 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::OQC.WaitFormSearch), true, true);
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
-            this.lblDeleteMessage = new DevExpress.XtraEditors.LabelControl();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -265,6 +264,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Delete  by Id";
             // 
+            // lblDeleteMessage
+            // 
+            this.lblDeleteMessage.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
+            this.lblDeleteMessage.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblDeleteMessage.Location = new System.Drawing.Point(198, 143);
+            this.lblDeleteMessage.Name = "lblDeleteMessage";
+            this.lblDeleteMessage.Size = new System.Drawing.Size(0, 25);
+            this.lblDeleteMessage.TabIndex = 7;
+            this.lblDeleteMessage.Visible = false;
+            // 
             // btnDel
             // 
             this.btnDel.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
@@ -314,16 +323,6 @@
             // dxErrorProvider1
             // 
             this.dxErrorProvider1.ContainerControl = this;
-            // 
-            // lblDeleteMessage
-            // 
-            this.lblDeleteMessage.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
-            this.lblDeleteMessage.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblDeleteMessage.Location = new System.Drawing.Point(198, 143);
-            this.lblDeleteMessage.Name = "lblDeleteMessage";
-            this.lblDeleteMessage.Size = new System.Drawing.Size(0, 25);
-            this.lblDeleteMessage.TabIndex = 7;
-            this.lblDeleteMessage.Visible = false;
             // 
             // FormAction
             // 

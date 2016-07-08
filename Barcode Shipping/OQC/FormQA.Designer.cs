@@ -36,7 +36,7 @@
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSerialNo = new DevExpress.XtraEditors.LabelControl();
             this.lblCurentModel = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.lblCustomerName = new DevExpress.XtraEditors.LabelControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -109,7 +109,7 @@
             this.panelControl1.Appearance.Options.UseBackColor = true;
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Controls.Add(this.tableLayoutPanelModel);
-            this.panelControl1.Controls.Add(this.labelControl1);
+            this.panelControl1.Controls.Add(this.lblCustomerName);
             this.panelControl1.Controls.Add(this.pictureBox1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
@@ -186,16 +186,16 @@
             this.lblCurentModel.TabIndex = 1;
             this.lblCurentModel.Text = "Curent Model";
             // 
-            // labelControl1
+            // lblCustomerName
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 28F, System.Drawing.FontStyle.Bold);
-            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl1.Location = new System.Drawing.Point(182, 0);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(662, 94);
-            this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "Barcode FujiXerox";
+            this.lblCustomerName.Appearance.Font = new System.Drawing.Font("Tahoma", 28F, System.Drawing.FontStyle.Bold);
+            this.lblCustomerName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblCustomerName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCustomerName.Location = new System.Drawing.Point(182, 0);
+            this.lblCustomerName.Name = "lblCustomerName";
+            this.lblCustomerName.Size = new System.Drawing.Size(662, 94);
+            this.lblCustomerName.TabIndex = 1;
+            this.lblCustomerName.Text = "Barcode";
             // 
             // pictureBox1
             // 
@@ -574,7 +574,7 @@
             this.labelControl2.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.labelControl2.Size = new System.Drawing.Size(295, 41);
             this.labelControl2.TabIndex = 1;
-            this.labelControl2.Text = "Production list in Box";
+            this.labelControl2.Text = "Products in Box";
             // 
             // panelControl3
             // 
@@ -593,11 +593,11 @@
             this.btnAction.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnAction.Appearance.Options.UseFont = true;
             this.btnAction.Image = ((System.Drawing.Image)(resources.GetObject("btnAction.Image")));
-            this.btnAction.Location = new System.Drawing.Point(397, 4);
+            this.btnAction.Location = new System.Drawing.Point(446, 4);
             this.btnAction.Name = "btnAction";
-            this.btnAction.Size = new System.Drawing.Size(132, 32);
+            this.btnAction.Size = new System.Drawing.Size(83, 32);
             this.btnAction.TabIndex = 1;
-            this.btnAction.Text = "Action (Alt+A)";
+            this.btnAction.Text = "Action";
             this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
             // 
             // btnSearchPCB
@@ -605,11 +605,11 @@
             this.btnSearchPCB.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnSearchPCB.Appearance.Options.UseFont = true;
             this.btnSearchPCB.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchPCB.Image")));
-            this.btnSearchPCB.Location = new System.Drawing.Point(236, 5);
+            this.btnSearchPCB.Location = new System.Drawing.Point(329, 4);
             this.btnSearchPCB.Name = "btnSearchPCB";
-            this.btnSearchPCB.Size = new System.Drawing.Size(156, 32);
+            this.btnSearchPCB.Size = new System.Drawing.Size(111, 32);
             this.btnSearchPCB.TabIndex = 1;
-            this.btnSearchPCB.Text = "Search PCB (Ctrl+F)";
+            this.btnSearchPCB.Text = "Search PCB";
             this.btnSearchPCB.Click += new System.EventHandler(this.btnSearchPCB_Click);
             // 
             // btnLogOut
@@ -617,11 +617,11 @@
             this.btnLogOut.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.btnLogOut.Appearance.Options.UseFont = true;
             this.btnLogOut.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.Image")));
-            this.btnLogOut.Location = new System.Drawing.Point(50, 5);
+            this.btnLogOut.Location = new System.Drawing.Point(228, 4);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(180, 32);
+            this.btnLogOut.Size = new System.Drawing.Size(95, 32);
             this.btnLogOut.TabIndex = 0;
-            this.btnLogOut.Text = "Log Out (Ctrl+Shift+L)";
+            this.btnLogOut.Text = "Log Out";
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // gridControlData
@@ -763,7 +763,7 @@
             this.MinimumSize = new System.Drawing.Size(860, 640);
             this.Name = "FormQA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Barcode FujiXerox";
+            this.Text = "OQC System";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormQA_FormClosing);
             this.Load += new System.EventHandler(this.FormQA_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
@@ -798,7 +798,7 @@
 
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl lblCustomerName;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private DevExpress.XtraEditors.LabelControl lblMacAddress;

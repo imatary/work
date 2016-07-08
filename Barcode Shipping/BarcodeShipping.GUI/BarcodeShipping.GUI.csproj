@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BarcodeShipping.GUI</RootNamespace>
-    <AssemblyName>Barcode Shipping FUJI XEROX</AssemblyName>
+    <AssemblyName>Barcode Shipping FujiXerox</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -27,7 +27,7 @@
     <PublisherName>cuongpham%40umcvn.com</PublisherName>
     <SuiteName>UMC Electronics VietNam Ltd%27s</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>24</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

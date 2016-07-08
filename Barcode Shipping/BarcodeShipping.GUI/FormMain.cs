@@ -94,12 +94,11 @@ namespace BarcodeShipping.GUI
                             }
                             _iqcService.UpdateRemainsForPo(_currentPo.PO_NO, _currentPo.ModelID, int.Parse(lblRemains.Text));
                             splashScreenManager2.CloseWaitForm();
-                            txtBoxID.Text = string.Empty;
-                            lblCountPCB.Text = @"0";
+                            InsertOrUpdatePo(gridLookUpEditModelID.Text, txtPO.Text);
                             gridControlData.DataSource = null;
                             _shippings = new List<Shipping>();
-
-                            InsertOrUpdatePo(gridLookUpEditModelID.Text, txtPO.Text);
+                            txtBoxID.Text = string.Empty;
+                            lblCountPCB.Text = @"0";
                         }
                         else
                         {

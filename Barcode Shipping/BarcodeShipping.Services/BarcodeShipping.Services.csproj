@@ -58,6 +58,10 @@
       <Project>{5583026A-91DF-4C3D-A3BB-15B9977DC8A6}</Project>
       <Name>BarcodeShipping.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lib.Core\Lib.Core.csproj">
+      <Project>{36EE5B31-CFF5-47FF-9FB5-499B052B9834}</Project>
+      <Name>Lib.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

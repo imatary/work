@@ -27,6 +27,7 @@ namespace BarcodeShipping.Data
         public System.DateTime DateCreated { get; set; }
         public int Quantity { get; set; }
         public string SerialNo { get; set; }
+        public string CustomerName { get; set; }
     
         public virtual ICollection<PackingPO> PackingPOes { get; set; }
         public virtual ICollection<Shipping> Shippings { get; set; }

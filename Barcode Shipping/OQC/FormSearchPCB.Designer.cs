@@ -132,7 +132,7 @@
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(646, 94);
             this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "Search PCB - QA";
+            this.labelControl1.Text = "Search PCB";
             // 
             // pictureBox1
             // 
@@ -192,6 +192,7 @@
             this.txtSearchPCB.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtSearchPCB.Properties.Appearance.Options.UseFont = true;
             this.txtSearchPCB.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtSearchPCB.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtSearchPCB.Properties.NullValuePrompt = "Enter the ID";
             this.txtSearchPCB.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtSearchPCB.Size = new System.Drawing.Size(312, 28);

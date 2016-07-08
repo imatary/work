@@ -37,26 +37,31 @@
                                 <ul class="nav navbar-nav">
                                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                                     {
-                                        <li>@Html.ActionLink("Roles ", "Index", "RolesAdmin")</li>
-                                        <li>@Html.ActionLink("Users ", "Index", "UsersAdmin")</li>
-                                        <li>@Html.ActionLink("Groups", "Index", "GroupsAdmin")</li>
-                                        <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="glyphicon glyphicon-cog"></i> Settings
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>@Html.ActionLink("Roles ", "Index", "RolesAdmin")</li>
+                                                <li>@Html.ActionLink("Users ", "Index", "UsersAdmin")</li>
+                                                <li>@Html.ActionLink("Groups", "Index", "GroupsAdmin")</li>
+                                                <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
+                                            </ul>
+                                        </li>
                                     }
                                     <li>
                                         <a href="@Url.Action("Index", "Confirm")">
-                                            <i class="glyphicon glyphicon-ok"></i>
+                                            <i class="glyphicon glyphicon-barcode"></i>
                                             Confirm
                                         </a>
                                     </li>
-                                    @if (Request.IsAuthenticated && (User.IsInRole("Leader") || User.IsInRole("Admin")))
-                                    {
-                                        <li>
-                                            <a href="@Url.Action("InputBarcode", "Confirm")">
-                                                <i class="glyphicon glyphicon-barcode"></i>
-                                                Input Barcode
-                                            </a>
-                                        </li>
-                                    }
+                                    <li>
+                                        <a href="@Url.Action("InputBarcode", "Confirm")">
+                                            <i class="glyphicon glyphicon-barcode"></i>
+                                            Input Barcode
+                                        </a>
+                                    </li>
                                     @if (Request.IsAuthenticated && (User.IsInRole("Leader") || User.IsInRole("ManageDepartmentShift") || User.IsInRole("Admin")))
                                     {
                                         <li>
@@ -66,22 +71,6 @@
                                             </a>
                                         </li>
                                     }
-                                    @*<li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            Barcode
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            @if (User.IsInRole("Leader") || User.IsInRole("Admin"))
-                                            {
-                                                <li>@Html.ActionLink("Shoot Barcode ", "Index", "Barcode")</li>
-                                            }
-                                            @if (Request.IsAuthenticated && (User.IsInRole("Leader") || User.IsInRole("ManageDepartmentShift") || User.IsInRole("Admin")))
-                                            {
-                                                <li>@Html.ActionLink("Report Barcode ", "Index", "ReportLogs")</li>
-                                            }
-                                        </ul>
-                                    </li>*@
                                 </ul>
                             </div>
                             <div class="col-md-4">

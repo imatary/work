@@ -86,13 +86,12 @@
                     @if (User.IsInRole("ManageDepartmentShift"))
                     {
                         <th>Status</th>
-                        <th>@Html.DisplayNameFor(model=>model.CreateBy)</th>
                     }
-                    else if (!User.IsInRole("Admin"))
+                    @if (!User.IsInRole("Admin"))
                     {
                         <th>Status</th>
                     }
-                    else if (!User.IsInRole("GA"))
+                    @if (User.IsInRole("Leader"))
                     {
                         <th class="no-sort">&nbsp;</th>
                     }
@@ -112,7 +111,7 @@
                             <td>@item.DepartmentID</td>
                             <td>@item.TimeCheck.ToShortDateString()</td>
                             <td>@item.TimeCheck.ToShortTimeString()</td>
-                            @if (User.IsInRole("Leader"))
+                            @if (User.IsInRole("Leader") || User.IsInRole("ManageDepartmentShift"))
                             {
                                 <td>
                                     @if (item.LeaderApproved == false)
@@ -122,6 +121,22 @@
                                     else
                                     {
                                         <span class="label label-success">Approved</span>
+                                    }
+                                </td>
+                                <td class="center" style="width: 200px;">
+                                    @if (User.IsInRole("Leader") || User.IsInRole("IsDelete") || User.IsInRole("ManageDepartmentShift"))
+                                    {
+                                        <button class="btn btn-danger btn-xs deleteLog" name="Delete" data-id="@item.Id">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                            Delete
+                                        </button>
+                                    }
+                                    @if (User.IsInRole("Approved"))
+                                    {
+                                        <button class="btn btn-success btn-xs approvedLog" name="Approved" data-id="@item.Id">
+                                            <i class="glyphicon glyphicon-check"></i>
+                                            Approved
+                                        </button>
                                     }
                                 </td>
                             }
