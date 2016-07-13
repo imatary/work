@@ -27,8 +27,7 @@ namespace OverTime.Controllers
         {
             var userDepartment = await _userDepartmentsService.GetUserDepartmentsAsync(User.Identity.GetUserId());
             var departments = userDepartment as IList<Department> ?? userDepartment.ToList();
-            var employess = await _employeesService.FindEmployessesByDateAsync(DateTime.Now, departments.First().DepartmentID);
-
+            var employess = await _employeesService.FindEmployessesByDateAsync(DateTime.Now);  
             if(!string.IsNullOrEmpty(searchKey))
             {
                 try
@@ -42,6 +41,13 @@ namespace OverTime.Controllers
                 catch (Exception ex)
                 {
                     ViewBag.ErrorMessage = $"Invalid date {searchKey}." + ex.Message;
+                }
+            }
+            else
+            {
+                foreach (var dept in departments)
+                {
+                    employess = employess.Where(item => item.DepartmentID == dept.DepartmentID);
                 }
             }
             return View(employess);

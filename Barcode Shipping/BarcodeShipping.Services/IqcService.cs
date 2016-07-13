@@ -400,6 +400,34 @@ namespace BarcodeShipping.Services
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="boxId"></param>
+        public void DeleteShipingByBoxId(string boxId, int remain, string modelId, string poNo)
+        {
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@boxId", Value = boxId, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@quantityRemain", Value = remain, SqlDbType = SqlDbType.Int},
+                new SqlParameter() { ParameterName = "@modelId", Value = modelId, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@poNo", Value = poNo, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            try
+            {
+                _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_DeleteShipingByBoxId] @boxId, @quantityRemain, @modelId, @poNo", param);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Result check exits
         /// </summary>
         /// <param name="productionId"></param>

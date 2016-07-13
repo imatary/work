@@ -49,12 +49,12 @@
         <div class="pull-right">
             @if (!User.IsInRole("GA"))
             {
-                if (Model.Any())
-                {
+                //if (Model.Any())
+                //{
                     <button class="btn btn-sm btn-success approvredAllLog" @*onclick="OnApprovedAllClick()"*@>
                         <i class="glyphicon glyphicon-check"></i>Approved All
                     </button>
-                }
+                //}
                 @*@Html.ActionLink("Approved All", "Approveds", "Confirm", new {@class="btn btn-sm btn-success"})*@
             }
             else if (User.IsInRole("Leader") || User.IsInRole("Admin"))

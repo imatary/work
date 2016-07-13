@@ -105,7 +105,7 @@ namespace OverTime.Controllers
         public PartialViewResult GetBarcodes(string departmentId)
         {
             var userDepartment = _userDepartmentsService.GetUserDepartments(User.Identity.GetUserId());
-            var employes = _employeesService.GetEmployeesYesterday(DateTime.Today, userDepartment.First().DepartmentID);
+            var employes = _employeesService.GetEmployeesYesterday(DateTime.Today, userDepartment);
             return PartialView(employes);
         }
 

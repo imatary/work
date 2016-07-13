@@ -269,7 +269,7 @@ namespace MeetingRoom.Web.Controllers
             {
                 data = new SchedulerAjaxData(events);
             }
-            return (ContentResult) data;
+            return data;
         }
 
         public ActionResult LightboxCustomControl(CalendarEvent calendarEvent)

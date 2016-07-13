@@ -16,7 +16,7 @@ namespace OverTime.Services
         Task<IEnumerable<Employess>> GetEmployessesAsync();
         Task<Employess> GetEmployessByIdAsync(string id);
         Task<IEnumerable<Employess>> FindEmployessesByDateAsync(DateTime date);
-        Task<IEnumerable<Employess>> FindEmployessesByDateAsync(DateTime date, string departmentId);
+        Task<IEnumerable<Employess>> FindEmployessesByDateAsync(DateTime date, IEnumerable<Department> departments);
         Task<Employess> GetEmployesByIdAsync(Guid id, string staffCode);
         Employess GetEmployessByIdAndDate(string staffCode, DateTime dateCheck);
         Task<IEnumerable<Employess>> GetEmployessYesterDayByIdAndDateAsync(DateTime date, string departmentId);
@@ -25,7 +25,7 @@ namespace OverTime.Services
         Task<IEnumerable<Employess>> GetEmployeesYesterdayAsync(string staffCode, DateTime dateCheck, string departmentId);
         Task<IEnumerable<Employess>> GetEmployeesYesterdayAsync(DateTime dateCheck, string departmentId);
         IEnumerable<Employess> GetEmployeesYesterday(DateTime dateCheck);
-        IEnumerable<Employess> GetEmployeesYesterday(DateTime dateCheck, string departmentId);
+        IEnumerable<Employess> GetEmployeesYesterday(DateTime dateCheck, IEnumerable<Department> departments);
         Task<Employess> ApprovedAllByUserIdAsync(Guid id, string staffcode, DateTime date, string departmentId);
         Task<Employess> ApprovedByUserIdAsync(Guid id, string staffcode, string roleName);
         Task RemoveAsync(Guid id, string staffCode);
@@ -61,12 +61,31 @@ namespace OverTime.Services
                         item => EntityFunctions.TruncateTime(item.DateCheck) == date.Date).ToListAsync();
         }
 
-        public async Task<IEnumerable<Employess>> FindEmployessesByDateAsync(DateTime date, string departmentId)
+        public async Task<IEnumerable<Employess>> FindEmployessesByDateAsync(DateTime date, IEnumerable<Department> departments)
         {
-            return await _applicationDbContext.Employesses.Where(
-                item =>
-                    item.DepartmentID == departmentId &&
-                    EntityFunctions.TruncateTime(item.DateCheck) == date.Date).ToListAsync();
+            List<Employess> employeesByDeptIds = new List<Employess>();
+            var employees = _applicationDbContext.Employesses.Where(
+                item => EntityFunctions.TruncateTime(item.DateCheck) == date.Date).ToList();
+            foreach (var dept in departments)
+            {
+                foreach (var emp in employees)
+                {
+                    if (emp.DepartmentID == dept.DepartmentID)
+                    {
+                        employeesByDeptIds.Add(emp);
+                    }
+                }
+            }
+
+            employees = employeesByDeptIds;
+
+            return employees;
+
+
+            //return await _applicationDbContext.Employesses.Where(
+            //    item =>
+            //        item.DepartmentID == departmentId &&
+            //        EntityFunctions.TruncateTime(item.DateCheck) == date.Date).ToListAsync();
         }
 
         public Task<Employess> GetEmployesByIdAsync(Guid id, string staffCode)
@@ -128,13 +147,25 @@ namespace OverTime.Services
                 .ToList();
         }
 
-        public IEnumerable<Employess> GetEmployeesYesterday(DateTime dateCheck, string departmentId)
+        public IEnumerable<Employess> GetEmployeesYesterday(DateTime dateCheck, IEnumerable<Department> departments)
         {
-            return _applicationDbContext.Employesses.Where(
-                item =>
-                    item.DepartmentID == departmentId &&
-                    EntityFunctions.TruncateTime(item.DateCheck) == dateCheck.Date)
-                .ToList();
+            List<Employess> employeesByDeptIds = new List<Employess>();
+            var employees = _applicationDbContext.Employesses.Where(
+                item => EntityFunctions.TruncateTime(item.DateCheck) == dateCheck.Date).ToList();
+            foreach (var dept in departments)
+            {
+                foreach (var emp in employees)
+                {
+                    if(emp.DepartmentID == dept.DepartmentID)
+                    {
+                        employeesByDeptIds.Add(emp);
+                    }
+                }
+            }
+
+            employees = employeesByDeptIds;
+
+            return employees;
         }
 
         public Task<Employess> ApprovedAllByUserIdAsync(Guid id, string staffcode, DateTime date, string departmentId)
@@ -150,11 +181,12 @@ namespace OverTime.Services
                 if (roleName == "Leader")
                 {
                     emp.LeaderApproved = true;
-                }else if (roleName == "Manager")
+                }
+                else if (roleName == "Manager")
                 {
                     emp.ManagerApproved = true;
                 }
-                else if(roleName=="GA")
+                else if (roleName == "GA")
                 {
                     emp.GaComplete = true;
                 }

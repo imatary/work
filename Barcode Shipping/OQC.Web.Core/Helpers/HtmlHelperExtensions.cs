@@ -55,6 +55,23 @@ namespace Lib.Web.Core.Helpers
             return MvcHtmlString.Create(li.ToString());
         }
 
+        public static string IsActive(this HtmlHelper html,
+                                  string control,
+                                  string action)
+        {
+            var routeData = html.ViewContext.RouteData;
+
+            var routeAction = (string)routeData.Values["action"];
+            var routeControl = (string)routeData.Values["controller"];
+
+            // both must match
+            var returnActive = control == routeControl &&
+                               action == routeAction;
+
+            return returnActive ? "active_nav" : "";
+        }
+
+
 
         // As the text the: "<span class='glyphicon glyphicon-plus'></span>" can be entered
         public static MvcHtmlString NoEncodeActionLink(this HtmlHelper htmlHelper,
@@ -92,6 +109,8 @@ namespace Lib.Web.Core.Helpers
             var img = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(image));
             return new MvcHtmlString("<img src='" + img + "' />");
         }
+
+
 
     }
 

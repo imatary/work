@@ -158,10 +158,8 @@ namespace BarcodeShipping.GUI
 
         private void btnDelBox_Click(object sender, EventArgs e)
         {
-            foreach (var shipping in _shippings)
-            {
-                _iqcService.DeletePcbById(shipping.ID);
-            }
+            var logs = _iqcService.GetShippingsByBoxId(txtSearch.Text.Trim());
+            _iqcService.DeleteShipingByBoxId(txtSearch.Text.Trim(), logs.Count(), logs.FirstOrDefault().Model, logs.FirstOrDefault().PO_NO);
             _shippings = new List<Shipping>();
             gridControlData.Refresh();
             gridControlData.DataSource = null;
@@ -170,7 +168,6 @@ namespace BarcodeShipping.GUI
             txtSearch.Focus();
             btnDelBox.Enabled = false;
             btnExports.Enabled = false;
-
         }
 
         private void comboBoxEditSearchByKey_SelectedValueChanged(object sender, EventArgs e)

@@ -42,6 +42,8 @@ namespace OverTime.Controllers
         public async Task<ActionResult> Index(string searchDate)
         {
             IEnumerable<EmployeesLog> employeesLogs = null;
+            List<EmployeesLog> employeesList = new List<EmployeesLog>();
+
             var userDepartment = await _departmentService.GetUserDepartmentsAsync(User.Identity.GetUserId());
             var departments = userDepartment as IList<Department> ?? userDepartment.ToList();
             if (User.IsInRole("ManageDepartmentShift"))
@@ -79,28 +81,21 @@ namespace OverTime.Controllers
                             {
                                 throw new Exception(ex.Message);
                             }
-                        }                   
+                        }
                     }
                 }
 
-                foreach (var department in departments)
-                {
-                    employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("ManageDepartmentShift", DateTime.Today, department.DepartmentID);
-                } 
+                employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("ManageDepartmentShift", DateTime.Today, departments);
             }
             //else if (User.IsInRole("ManageDepartmentShift"))
             //{
-            //    foreach (var department in departments)
-            //    {
-            //        employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("ManageDepartmentShift", DateTime.Today, department.DepartmentID);
-            //    }
-                
+            //    employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("ManageDepartmentShift", DateTime.Today, departments);
             //}
-            else if (User.IsInRole("Manager"))
+            if (User.IsInRole("Manager"))
             {
                 employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("Manager", DateTime.Today, departments);
             }
-            else if (User.IsInRole("GA"))
+            if (User.IsInRole("GA"))
             {
                 if (!string.IsNullOrEmpty(searchDate))
                 {
@@ -120,7 +115,7 @@ namespace OverTime.Controllers
                     employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("GA", DateTime.Today);
                 }
             }
-            else if (User.IsInRole("Admin"))
+            if (User.IsInRole("Admin"))
             {
                 employeesLogs = await _employeesLogService.GetEmployeesLogsByApprovedAsync("Admin", DateTime.Today);
             }
@@ -307,9 +302,16 @@ namespace OverTime.Controllers
 
             //}
 
-            IEnumerable<Employess> employesses =
-                _employeesService.GetEmployeesYesterday(DateTime.Today)
-                .OrderByDescending(item => item.DateCheck);
+            IEnumerable<Employess> employesses = null;
+            if (User.Identity.Name == null)
+            {
+                employesses = _employeesService.GetEmployeesYesterday(DateTime.Today).OrderByDescending(item => item.DateCheck);
+            }
+            else
+            {
+                var userDepartment = _userDepartmentsService.GetUserDepartments(User.Identity.GetUserId());
+                employesses = _employeesService.GetEmployeesYesterday(DateTime.Today, userDepartment).OrderByDescending(item => item.DateCheck);
+            }
             return PartialView(employesses);
         }
 

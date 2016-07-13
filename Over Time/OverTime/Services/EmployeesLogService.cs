@@ -106,7 +106,7 @@ namespace OverTime.Services
                 employeesLogs = employeesLogs.Where(
                     item =>
                         item.LeaderApproved == false &&
-                        item.ManageDepartmentShiftApproved &&
+                        item.ManageDepartmentShiftApproved == true &&
                         item.ManagerApproved == false &&
                         item.IsDelete == false &&
                         item.DateCheck.Date == dateCheck.Date &&
@@ -120,8 +120,8 @@ namespace OverTime.Services
                     employeesLogs.Where(
                         item =>
                             item.LeaderApproved == false &&
-                            item.ManageDepartmentShiftApproved &&
-                            item.ManagerApproved &&
+                            item.ManageDepartmentShiftApproved == true &&
+                            item.ManagerApproved == true &&
                             item.GaComplete == false &&
                             item.IsDelete == false &&
                             item.DateCheck.Date == dateCheck.Date);
@@ -144,7 +144,7 @@ namespace OverTime.Services
             {
                 IEnumerable<EmployeesLog> employeesLogsIds = employeesLogs.Where(
                     item =>
-                        item.LeaderApproved &&
+                        item.LeaderApproved == false &&
                         item.ManageDepartmentShiftApproved == false &&
                         item.IsDelete == false &&
                         item.DateCheck.Date == dateCheck.Date);
@@ -169,8 +169,8 @@ namespace OverTime.Services
                     employeesLogs.Where(
                         item =>
                             item.ManagerApproved == false && 
-                            item.LeaderApproved && 
-                            item.ManageDepartmentShiftApproved &&
+                            item.LeaderApproved == false && 
+                            item.ManageDepartmentShiftApproved == true &&
                             item.DateCheck.Date == dateCheck.Date);
 
                 List<EmployeesLog> employeesLogsByDeptIds = new List<EmployeesLog>();
@@ -194,9 +194,9 @@ namespace OverTime.Services
                     employeesLogs.Where(
                         item =>
                             item.GaComplete == false && 
-                            item.LeaderApproved && 
-                            item.ManageDepartmentShiftApproved &&
-                            item.ManagerApproved && 
+                            item.LeaderApproved == false && 
+                            item.ManageDepartmentShiftApproved == true &&
+                            item.ManagerApproved == true && 
                             item.IsDelete == false && 
                             item.DateCheck.Date == dateCheck.Date);
             }

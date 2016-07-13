@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace OQC.Web.Controllers
+namespace OverTime.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public HomeController()
+        {
+        }
+
+        public async Task<ActionResult> Index(string searchDate)
         {
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
