@@ -42,8 +42,9 @@ namespace OQC.Web.Controllers
         }
 
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            ViewBag.RoleNames = await RoleManager.Roles.ToListAsync();
             return View(this.GroupManager.Groups.ToList());
         }
 

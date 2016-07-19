@@ -67,6 +67,7 @@ namespace OQC.Web.Models
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
         static ApplicationDbContext()

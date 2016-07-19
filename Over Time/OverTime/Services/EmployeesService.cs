@@ -64,8 +64,8 @@ namespace OverTime.Services
         public async Task<IEnumerable<Employess>> FindEmployessesByDateAsync(DateTime date, IEnumerable<Department> departments)
         {
             List<Employess> employeesByDeptIds = new List<Employess>();
-            var employees = _applicationDbContext.Employesses.Where(
-                item => EntityFunctions.TruncateTime(item.DateCheck) == date.Date).ToList();
+            var employees = await _applicationDbContext.Employesses.Where(
+                item => EntityFunctions.TruncateTime(item.DateCheck) == date.Date).ToListAsync();
             foreach (var dept in departments)
             {
                 foreach (var emp in employees)

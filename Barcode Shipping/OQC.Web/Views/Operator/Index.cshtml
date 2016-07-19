@@ -1,0 +1,119 @@
+﻿@model IEnumerable<OQC.Web.Models.mst_operator>
+@{
+    ViewBag.Title = "Index";
+}
+
+@section styles
+{
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+<div class="col-md-12 col-xs-12 col-lg-12 col-md-12">
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-home"></i></a></li>
+        <li class="active">
+            Operators
+        </li>
+    </ol>
+</div>
+<div class="col-md-12 col-xs-12 col-lg-12 col-md-12">
+    <div class="pull-right ">
+        @if (User.IsInRole("Admin") || User.IsInRole("Leader"))
+        {
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                <i class="glyphicon glyphicon-plus"></i>
+                Create
+            </button>
+        }
+    </div>
+</div>
+<div class="col-md-12 col-lg-12 col-xs-12 margintop10">
+    <table id="usersTable" class="table table-striped table-responsive table-hover dataTable no-footer">
+        <thead>
+            <tr>
+                <th class="no-sort">#</th>
+                <th>@Html.DisplayNameFor(model => model.OperatorID)</th>
+                <th>@Html.DisplayNameFor(model => model.OperatorName)</th>
+                <th class="no-sort">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                int count = 0;
+                foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <td>@count</td>
+                        <td>@Html.DisplayFor(modelItem => item.OperatorID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.OperatorName)</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.OperatorID }, new { @class="btn btn-primary btn-sm" })
+                            @*@Html.ActionLink("Details", "Details", new { id = item.OperatorID }) |*@
+                            @if (User.IsInRole("Admin") || User.IsInRole("Leader") || User.IsInRole("Delete"))
+                            {
+                                <button class="btn btn-danger btn-xs deleteLog" name="Delete" data-id="@item.OperatorID">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    Delete
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@{ Html.RenderAction("Create", "Operator"); }
+@section scripts
+{
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+    @Html.Partial("_ValidationPartial")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#usersTable')
+                .dataTable({
+                    responsive: true,
+                    "order": [],
+                    "columnDefs": [
+                        {
+                            "targets": 'no-sort',
+                            "orderable": false
+                        }
+                    ]
+                });
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#OperatorID').focus();
+            });
+            $('table tbody').on('click', "button.deleteLog", null, OnDeleteClick);
+        });
+
+        function OnDeleteClick() {
+            var pid = $(this).attr("data-id");
+            var flag = confirm('You are about to delete ID permanently. Are you sure you want to delete this record?');
+            if (flag) {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Operator")',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: '{id:' + JSON.stringify(pid) + '}',
+                    error: function (err, result) {
+                        alert(err.responseText + " " + pid);
+                    },
+                    success: function (id) {
+                        location.reload();
+                    },
+                    async: false,
+                    cache: false,
+                    processData: false,
+                    traditional: true
+                });
+            }
+            return false;
+        }
+    </script>
+}
+

@@ -53,7 +53,15 @@ namespace OQC
                 }
                 else
                 {
-                    txtOperationID.Focus();
+                    int line = int.Parse(txtLineID.Text.Trim());
+                    if (line > 20)
+                    {
+                        Ultils.EditTextErrorMessage(txtLineID, "Line error!");
+                    }
+                    else
+                    {
+                        txtOperationID.Focus();
+                    }
                 }
             }
             if (e.KeyCode == Keys.Tab)
@@ -64,7 +72,15 @@ namespace OQC
                 }
                 else
                 {
-                    txtOperationID.Focus();
+                    int line = int.Parse(txtLineID.Text.Trim());
+                    if (line > 20)
+                    {
+                        Ultils.EditTextErrorMessage(txtLineID, "Line error!");
+                    }
+                    else
+                    {
+                        txtOperationID.Focus();
+                    }
                 }
             }
         }
@@ -78,18 +94,34 @@ namespace OQC
                 }
                 else
                 {
-                    btnLogin.Focus();
+                    int op = int.Parse(txtOperationID.Text.Trim());
+                    if (op > 3)
+                    {
+                        Ultils.EditTextErrorMessage(txtOperationID, "OperationID error!");
+                    }
+                    else
+                    {
+                        btnLogin.PerformClick();
+                    }
                 }
             }
             if (e.KeyCode == Keys.Tab)
             {
                 if (string.IsNullOrEmpty(txtOperationID.Text))
                 {
-                    Ultils.TextControlNotNull(txtOperationID, "Line");
+                    Ultils.TextControlNotNull(txtOperationID, "OperationID");
                 }
                 else
                 {
-                    btnLogin.Focus();
+                    int op = int.Parse(txtOperationID.Text.Trim());
+                    if (op > 3)
+                    {
+                        Ultils.EditTextErrorMessage(txtOperationID, "OperationID error!");
+                    }
+                    else
+                    {
+                        btnLogin.PerformClick();
+                    }
                 }
             }
         }

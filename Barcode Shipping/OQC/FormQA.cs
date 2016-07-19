@@ -36,7 +36,8 @@ namespace OQC
                 }
                 else
                 {
-                    if(txtProductionID.Text.Length <= 10)
+                    string productionId = txtProductionID.Text.Trim();
+                    if (productionId.Length <= 10)
                     {
                         SetErrorStatus(true, "NG", $"Error!\nPCB không đúng định dạng!");
                         txtProductionID.SelectAll();
@@ -46,7 +47,7 @@ namespace OQC
                     {
                         foreach (var item in _modelService.GetModels())
                         {
-                            string modelName = txtProductionID.Text.Trim().Substring(0, item.ModelName.Length);
+                            string modelName = productionId.Substring(0, item.ModelName.Length);
                             if (modelName == item.ModelName)
                             {
                                 lblQuantityModel.Visible = true;
@@ -58,23 +59,22 @@ namespace OQC
                                 break;
                             }
                         }
-
-                        var production = _oqcService.GetLogByProductionId(txtProductionID.Text.Trim());
-                    if (production != null)
-                    {
-                        SetErrorStatus(true, "NG",
-                            $"PCB [{txtProductionID.Text}] đã có trong hệ thống.\nVui lòng kiểm tra lại\n" +
-                            $"Box ID: {production.BoxID} \n" +
-                            $"Operator: {production.OperatorCode} \n" +
-                            $"Date Check: {production.DateCheck} \n");
-                        txtProductionID.SelectAll();
-                        Ultils.EditTextErrorNoMessage(txtProductionID);
-                    }
-                    else
-                    {
-                        txtMacAddress.Focus();
-                        SetErrorStatus(false, "OK", null);
-                    }
+                        var production = _oqcService.GetLogByProductionId(productionId);
+                        if (production != null)
+                        {
+                            SetErrorStatus(true, "NG",
+                                $"PCB [{txtProductionID.Text}] đã có trong hệ thống.\nVui lòng kiểm tra lại\n" +
+                                $"Box ID: {production.BoxID} \n" +
+                                $"Operator: {production.OperatorCode} \n" +
+                                $"Date Check: {production.DateCheck} \n");
+                            txtProductionID.SelectAll();
+                            Ultils.EditTextErrorNoMessage(txtProductionID);
+                        }
+                        else
+                        {
+                            txtMacAddress.Focus();
+                            SetErrorStatus(false, "OK", null);
+                        }
                     }
                 }
             }

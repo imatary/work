@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Lib.Web.Core.Helpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -37,8 +38,7 @@
                                 <ul class="nav navbar-nav">
                                     <li>
                                         <a href="@Url.Action("Index", "Home")">
-                                            <i class="glyphicon glyphicon-home"></i>
-                                            Home
+                                            <i class="glyphicon glyphicon-home">&nbsp;</i>Home
                                         </a>
                                     </li>
                                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
@@ -55,7 +55,37 @@
                                             </ul>
                                         </li>
                                     }
-
+                                    @if (User.IsInRole("Admin") || User.IsInRole("Leader"))
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Index", "Operator")">
+                                                <i class="glyphicon glyphicon-user">&nbsp;</i>Operators
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "ModelsPcb")">
+                                                <i class="glyphicon glyphicon-barcode">&nbsp;</i>Models
+                                            </a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="glyphicon glyphicon-search"></i> Search
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="@Url.Action("Index", "ModelsPcb")">
+                                                        <i class="glyphicon glyphicon-chevron-right">&nbsp;</i>Search by Model
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Index", "ModelsPcb")">
+                                                        <i class="glyphicon glyphicon-chevron-right">&nbsp;</i>Search by User
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                             <div class="col-md-4">
@@ -91,7 +121,7 @@
                     <span class="glyphicon glyphicon-envelope">&nbsp;</span>Contact:<strong>&nbsp;cuongpham@umcvn.com</strong>
                 </p>
             </div>
-            <div class="col-lg-6">
+            @*<div class="col-lg-6">
                 <p style="font-style: italic;">
                     <b>Lưu ý</b> : Trường hợp có thai từ tháng thứ 7 hoặc nuôi con dưới 12 tháng tuổi không được đăng ký làm thêm giờ.
                     <br/>Bản thỏa thuận làm thêm giờ:&nbsp;
@@ -99,7 +129,7 @@
                     <b>Quản lý ca bộ phận</b>&rArr;<b>Trưởng bộ phận</b>&rArr;
                     <b>Hành chính </b> ký xác nhận trước 10:00 hôm sau
                 </p>
-            </div>
+            </div>*@
         </div>
     </div>
     <div class="container-fluid bottomfooter">
@@ -110,9 +140,9 @@
     <script src="~/Scripts/respond.min.js"></script>
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             $.each($('.navbar-nav').find('li'),
-                function() {
+                function () {
                     $(this)
                         .toggleClass('active_nav', $(this).find('a').attr('href') === window.location.pathname);
                 });

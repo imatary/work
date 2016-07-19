@@ -185,7 +185,7 @@
                                 <td class="center" style="width: 200px;">
                                     @if (User.IsInRole("Leader") || User.IsInRole("IsDelete"))
                                     {
-                                        <button class="btn btn-danger btn-xs deleteLog" name="Delete" data-id="@item.Id">
+                                        <button class="btn btn-danger deleteLog" name="Delete" data-id="@item.Id">
                                             <i class="glyphicon glyphicon-trash"></i>
                                             Delete
                                         </button>
@@ -193,8 +193,7 @@
                                     else if (User.IsInRole("Approved"))
                                     {
                                         <button class="btn btn-success btn-xs approvedLog" name="Approved" data-id="@item.Id">
-                                            <i class="glyphicon glyphicon-check"></i>
-                                            Approved
+                                            <i class="glyphicon glyphicon-check"></i> Approved
                                         </button>
                                     }
                                 </td>
@@ -214,7 +213,7 @@
     <script src="~/Scripts/DataTables/dataTables.buttons.min.js"></script>
     <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
     <script src="~/Scripts/jquery.maskedinput.min.js"></script>
-
+    
     <script type="text/javascript">
         $(document)
             .ready(function() {

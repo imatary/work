@@ -90,7 +90,7 @@ namespace OQC.Web.Controllers
         }
 
 
-        public async Task<ActionResult> Create()
+        public ActionResult Create()
         {
             // Show a list of available groups:
             ViewBag.GroupsList = new SelectList(this.GroupManager.Groups, "Id", "Name");
@@ -100,8 +100,7 @@ namespace OQC.Web.Controllers
 
         [HttpPost]
         public async Task<ActionResult> Create(RegisterViewModel userViewModel, 
-            string[] selectedGroups, 
-            string[] selectedDepartments)
+            string[] selectedGroups)
         {
             if (ModelState.IsValid)
             {

@@ -22,10 +22,12 @@ namespace OQCChecking
             _oqcService = new OQCService();
             _modelService = new ModelService();
             InitializeComponent();
+            txtProductionID.Focus();
         }
 
         private void FormQA_Load(object sender, EventArgs e)
         {
+            txtProductionID.Focus();
             lblOperatorName.Text = Program.CurrentUser.OperatorName;
             lblLineID.Text = string.Format("LINE {0}", Program.CurrentUser.LineID);
         }
@@ -39,6 +41,12 @@ namespace OQCChecking
                 }
                 else
                 {
+                    string productionId = txtProductionID.Text.Trim();
+                    if (checkBox1.Checked == true)
+                    {
+                        productionId = productionId.Replace("_", "");
+                        txtProductionID.Text = productionId;
+                    }
                     foreach (var item in _modelService.GetModels())
                     {
                         if (txtProductionID.Text.Trim().Contains(item.SerialNo) && txtProductionID.Text.Contains(item.ModelID))
@@ -51,24 +59,33 @@ namespace OQCChecking
                             break;
                         }
                     }
-                    _log = _oqcService.GetLogByProductionId(txtProductionID.Text);
+                    _log = _oqcService.GetLogByProductionId(productionId);
                     if (_log != null)
                     {
-                        if (_log.QA_Check == false)
-                        {
-                            txtJudge.Focus();
-                            SetErrorStatus(false, "OK", null);
-                        }
-                        else
-                        {
-                            SetSuccessStatus(true, "OK",
-                            $"PCB [{txtProductionID.Text}] đã được kiểm tra rồi.\n" +
-                            $"Box ID: {_log.BoxID} \n" +
-                            $"Operator: {_log.OperatorCode} \n" +
-                            $"Date Check: {_log.DateCheck} \n");
-                            txtProductionID.SelectAll();
-                            Ultils.EditTextErrorNoMessage(txtProductionID);
-                        }
+                        //if (_log.BoxID == txtBoxID.Text.Trim())
+                        //{
+                            if (_log.QA_Check == false)
+                            {
+                                txtJudge.Focus();
+                                SetErrorStatus(false, "OK", null);
+                            }
+                            else
+                            {
+                                SetSuccessStatus(true, "OK",
+                                $"PCB [{productionId}] đã được kiểm tra rồi.\n" +
+                                $"Box ID: {_log.BoxID} \n" +
+                                $"Operator: {_log.OperatorCode} \n" +
+                                $"Date Check: {_log.DateCheck} \n");
+                                txtProductionID.SelectAll();
+                                Ultils.EditTextErrorNoMessage(txtProductionID);
+                            }
+                        //}
+                        //else
+                        //{
+                        //    SetErrorStatus(true, "NG", $"PCB[{txtProductionID.Text.Trim()}]\nKhông nằm trong Box này. Vui lòng kiểm tra lại!");
+                        //    txtProductionID.SelectAll();
+                        //    Ultils.EditTextErrorNoMessage(txtProductionID);
+                        //}
                     }
                     else
                     {

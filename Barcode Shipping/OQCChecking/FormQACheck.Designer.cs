@@ -41,15 +41,15 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtProductionID = new DevExpress.XtraEditors.TextEdit();
+            this.txtBoxID = new DevExpress.XtraEditors.TextEdit();
             this.lblProductionID = new DevExpress.XtraEditors.LabelControl();
             this.lblOperatorName = new DevExpress.XtraEditors.LabelControl();
             this.lblLineID = new DevExpress.XtraEditors.LabelControl();
             this.lblMacAddress = new DevExpress.XtraEditors.LabelControl();
-            this.txtMacAddress = new DevExpress.XtraEditors.TextEdit();
             this.lblBoxID = new DevExpress.XtraEditors.LabelControl();
             this.lblJudge = new DevExpress.XtraEditors.LabelControl();
-            this.txtBoxID = new DevExpress.XtraEditors.TextEdit();
             this.txtJudge = new DevExpress.XtraEditors.TextEdit();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -58,6 +58,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lblStatus = new DevExpress.XtraEditors.LabelControl();
             this.lblStatusMessage = new DevExpress.XtraEditors.LabelControl();
+            this.txtMacAddress = new DevExpress.XtraEditors.TextEdit();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelSupport = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelPEIT = new System.Windows.Forms.ToolStripStatusLabel();
@@ -85,13 +86,13 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionID.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtJudge.Properties)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
@@ -227,15 +228,15 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64F));
             this.tableLayoutPanel2.Controls.Add(this.txtProductionID, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.lblProductionID, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblOperatorName, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblLineID, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblMacAddress, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.txtMacAddress, 1, 5);
             this.tableLayoutPanel2.Controls.Add(this.lblBoxID, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.lblJudge, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.txtJudge, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.checkBox1, 1, 5);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -265,6 +266,21 @@
             this.txtProductionID.TabIndex = 6;
             this.txtProductionID.EditValueChanged += new System.EventHandler(this.txtProductionID_EditValueChanged);
             this.txtProductionID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtProductionID_PreviewKeyDown);
+            // 
+            // txtBoxID
+            // 
+            this.txtBoxID.Location = new System.Drawing.Point(137, 127);
+            this.txtBoxID.Name = "txtBoxID";
+            this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxID.Properties.Appearance.Options.UseFont = true;
+            this.txtBoxID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtBoxID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtBoxID.Properties.NullValuePrompt = "Box ID";
+            this.txtBoxID.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtBoxID.Size = new System.Drawing.Size(233, 26);
+            this.txtBoxID.TabIndex = 9;
+            this.txtBoxID.EditValueChanged += new System.EventHandler(this.txtBoxID_EditValueChanged);
+            this.txtBoxID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBoxID_PreviewKeyDown);
             // 
             // lblProductionID
             // 
@@ -314,29 +330,11 @@
             this.lblMacAddress.Text = "Mac Address:";
             this.lblMacAddress.Visible = false;
             // 
-            // txtMacAddress
-            // 
-            this.txtMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMacAddress.Location = new System.Drawing.Point(137, 158);
-            this.txtMacAddress.Name = "txtMacAddress";
-            this.txtMacAddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMacAddress.Properties.Appearance.Options.UseFont = true;
-            this.txtMacAddress.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtMacAddress.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtMacAddress.Properties.NullValuePrompt = "Mac Address";
-            this.txtMacAddress.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtMacAddress.Size = new System.Drawing.Size(233, 26);
-            this.txtMacAddress.TabIndex = 7;
-            this.txtMacAddress.Visible = false;
-            this.txtMacAddress.EditValueChanged += new System.EventHandler(this.txtMacAddress_EditValueChanged);
-            this.txtMacAddress.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtMacAddress_PreviewKeyDown);
-            // 
             // lblBoxID
             // 
             this.lblBoxID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBoxID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblBoxID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblBoxID.Location = new System.Drawing.Point(3, 127);
             this.lblBoxID.Name = "lblBoxID";
             this.lblBoxID.Size = new System.Drawing.Size(128, 25);
@@ -354,22 +352,6 @@
             this.lblJudge.Size = new System.Drawing.Size(128, 25);
             this.lblJudge.TabIndex = 2;
             this.lblJudge.Text = "Judge:";
-            // 
-            // txtBoxID
-            // 
-            this.txtBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBoxID.Location = new System.Drawing.Point(137, 127);
-            this.txtBoxID.Name = "txtBoxID";
-            this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxID.Properties.Appearance.Options.UseFont = true;
-            this.txtBoxID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtBoxID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtBoxID.Properties.NullValuePrompt = "Box ID";
-            this.txtBoxID.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtBoxID.Size = new System.Drawing.Size(233, 26);
-            this.txtBoxID.TabIndex = 9;
-            this.txtBoxID.EditValueChanged += new System.EventHandler(this.txtBoxID_EditValueChanged);
-            this.txtBoxID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBoxID_PreviewKeyDown);
             // 
             // txtJudge
             // 
@@ -389,6 +371,18 @@
             this.txtJudge.TabIndex = 8;
             this.txtJudge.EditValueChanged += new System.EventHandler(this.txtJudge_EditValueChanged);
             this.txtJudge.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtJudge_PreviewKeyDown);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(137, 158);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(233, 31);
+            this.checkBox1.TabIndex = 20;
+            this.checkBox1.Text = "Bỏ dấu \"_\"";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
@@ -508,6 +502,22 @@
             this.lblStatusMessage.Text = "Message Info";
             this.lblStatusMessage.Visible = false;
             // 
+            // txtMacAddress
+            // 
+            this.txtMacAddress.Location = new System.Drawing.Point(198, 8);
+            this.txtMacAddress.Name = "txtMacAddress";
+            this.txtMacAddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMacAddress.Properties.Appearance.Options.UseFont = true;
+            this.txtMacAddress.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtMacAddress.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtMacAddress.Properties.NullValuePrompt = "Mac Address";
+            this.txtMacAddress.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtMacAddress.Size = new System.Drawing.Size(99, 26);
+            this.txtMacAddress.TabIndex = 7;
+            this.txtMacAddress.Visible = false;
+            this.txtMacAddress.EditValueChanged += new System.EventHandler(this.txtMacAddress_EditValueChanged);
+            this.txtMacAddress.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtMacAddress_PreviewKeyDown);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -559,6 +569,7 @@
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Office2003;
             this.panelControl2.Controls.Add(this.labelControl2);
             this.panelControl2.Controls.Add(this.panelControl3);
+            this.panelControl2.Controls.Add(this.txtMacAddress);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(0, 292);
             this.panelControl2.Name = "panelControl2";
@@ -573,9 +584,9 @@
             this.labelControl2.Location = new System.Drawing.Point(2, 2);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.labelControl2.Size = new System.Drawing.Size(295, 41);
+            this.labelControl2.Size = new System.Drawing.Size(180, 41);
             this.labelControl2.TabIndex = 1;
-            this.labelControl2.Text = "Production list in Box";
+            this.labelControl2.Text = "Products in Box";
             // 
             // panelControl3
             // 
@@ -768,14 +779,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionID.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtJudge.Properties)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
@@ -838,5 +850,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private DevExpress.XtraEditors.LabelControl lblSerialNo;
         private DevExpress.XtraEditors.LabelControl lblCurentModel;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
