@@ -258,32 +258,39 @@ namespace BarcodeShipping.Services
             string modelId,
             string workingOder,
             int quantity, 
-            string operatorCode)
+            string operatorCode,
+            bool qaCheck,
+            string checkBy, 
+            string client)
         {
-            var log = new tbl_test_log()
-            {
-                ProductionID = productionId,
-                LineID = lineId,
-                MacAddress = macAddress,
-                BoxID = boxId,
-                ModelID = modelId,
-                WorkingOder = workingOder,
-                DateCheck = DateTime.Now,
-                TimeCheck = DateTime.Now.TimeOfDay,
-                Quantity = quantity,
-                OperatorCode = operatorCode,
-                QA_Check = false,
-                CheckBy = operatorCode,
-                ClinetInput=StringHelper.GetInfo(),
-            };
-
+            object[] param =
+                {
+                    new SqlParameter() {ParameterName = "@productionID", Value = productionId, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@lineId", Value = lineId, SqlDbType = SqlDbType.Int},
+                    new SqlParameter() {ParameterName = "@macAddress", Value = macAddress, SqlDbType = SqlDbType.Char},
+                    new SqlParameter() {ParameterName = "@boxId", Value = boxId, SqlDbType = SqlDbType.Char},
+                    new SqlParameter() {ParameterName = "@modelId", Value = modelId, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@workingOrder", Value = workingOder, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@dateCheck", Value = DateTime.Now.Date, SqlDbType = SqlDbType.Date},
+                    new SqlParameter() {ParameterName = "@timeCheck", Value = DateTime.Now.TimeOfDay, SqlDbType = SqlDbType.Time},
+                    new SqlParameter() {ParameterName = "@quantity", Value = quantity, SqlDbType = SqlDbType.Int},
+                    new SqlParameter() {ParameterName = "@operatorCode", Value = operatorCode, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@qaCheck", Value = qaCheck, SqlDbType = SqlDbType.Bit},
+                    new SqlParameter() {ParameterName = "@checkBy", Value = checkBy, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@clinetInput", Value = client, SqlDbType = SqlDbType.NVarChar},
+ 
+                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    }
+                };
             try
             {
-                Repository.Insert(log);
+                _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_InsertLogs] @productionID, @lineId, @macAddress, @boxId, @modelId, @workingOrder, @dateCheck, @timeCheck, @quantity, @operatorCode, @qaCheck, @checkBy, @clinetInput", param);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
         }
         /// <summary>
@@ -304,28 +311,41 @@ namespace BarcodeShipping.Services
             string boxId,
             string modelId,
             string workingOder,
-            int quantity, string operatorCode)
+            string operatorCode)
         {
             var log = GetPcbById(productionId);
-
-            log.LineID = lineId;
-            log.MacAddress = macAddress;
-            log.BoxID = boxId;
-            log.ModelID = modelId;
-            log.WorkingOder = workingOder;
-            log.DateCheck = DateTime.Now;
-            log.TimeCheck = DateTime.Now.TimeOfDay;
-            log.Quantity = quantity;
-            log.OperatorCode = operatorCode;
-
-            try
+            if (log != null)
             {
-                Repository.Update(log);
+                object[] param =
+                {
+                    new SqlParameter() {ParameterName = "@productionID", Value = productionId, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@lineId", Value = lineId, SqlDbType = SqlDbType.Int},
+                    new SqlParameter() {ParameterName = "@macAddress", Value = macAddress, SqlDbType = SqlDbType.Char},
+                    new SqlParameter() {ParameterName = "@boxId", Value = boxId, SqlDbType = SqlDbType.Char},
+                    new SqlParameter() {ParameterName = "@modelId", Value = modelId, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@dateCheck", Value = DateTime.Now.Date, SqlDbType = SqlDbType.Date},
+                    new SqlParameter() {ParameterName = "@timeCheck", Value = DateTime.Now.TimeOfDay, SqlDbType = SqlDbType.Time},
+                    new SqlParameter() {ParameterName = "@operatorCode", Value = operatorCode, SqlDbType = SqlDbType.VarChar},
+
+                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    }
+                };
+                try
+                {
+                    _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_UpdateLogs] @productionID, @lineId, @macAddress, @boxId, @modelId, @dateCheck, @timeCheck, @operatorCode", param);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw ex;
+                throw new Exception($"Update notfound [{productionId}]. Please check agin!");
             }
+            
         }
         #endregion
 
@@ -476,17 +496,21 @@ namespace BarcodeShipping.Services
             bool judge,
             string operatorId)
         {
-            var result = new tbl_test_result()
-            {
-                ProductionID = productionId,
-                OperationID = operationId,
-                JudgeResult = judge,
-                OperatorID = operatorId,
-                OperationDate = DateTime.Now
-            };
+            object[] param =
+                {
+                    new SqlParameter() {ParameterName = "@productionID", Value = productionId, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@operationID", Value = operationId, SqlDbType = SqlDbType.Int},
+                    new SqlParameter() {ParameterName = "@judgeResult", Value = judge, SqlDbType = SqlDbType.Bit},
+                    new SqlParameter() {ParameterName = "@operatorID", Value = operatorId, SqlDbType = SqlDbType.Char},
+                    new SqlParameter() {ParameterName = "@operationDate", Value = DateTime.Now, SqlDbType = SqlDbType.DateTime},
+                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    }
+                };
             try
             {
-                Repository.Insert(result);
+                _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_InsertResult] @productionID, @operationID, @judgeResult, @operatorID, @operationDate", param);
             }
             catch (Exception ex)
             {
@@ -507,18 +531,32 @@ namespace BarcodeShipping.Services
             string operatorId)
         {
             var result = GetResultById(productionId, operationId);
-            result.JudgeResult = judge;
-            result.OperatorID = operatorId;
-            result.OperationDate = DateTime.Now;
-            
-            try
+            if(result != null)
             {
-                _context.Entry(result).State = EntityState.Modified;
-                _context.SaveChanges();
+                object[] param =
+                {
+                    new SqlParameter() {ParameterName = "@productionID", Value = productionId, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() {ParameterName = "@operationID", Value = operationId, SqlDbType = SqlDbType.Int},
+                    new SqlParameter() {ParameterName = "@judgeResult", Value = judge, SqlDbType = SqlDbType.Bit},
+                    new SqlParameter() {ParameterName = "@operatorID", Value = operatorId, SqlDbType = SqlDbType.Char},
+                    new SqlParameter() {ParameterName = "@operationDate", Value = DateTime.Now, SqlDbType = SqlDbType.DateTime},
+                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    }
+                };
+                try
+                {
+                    _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_UpdateResult] @productionID, @operationID, @judgeResult, @operatorID, @operationDate", param);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception(ex.Message);
+                throw new Exception($"Update notfound [{productionId}] and [{operationId}]. Please check agin!");
             }
         }
         #endregion

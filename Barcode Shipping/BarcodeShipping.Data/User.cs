@@ -9,5 +9,8 @@
         public int LineID { get; set; }
 
         public int OperationID { get; set; }
+
+        public string ProcessID { get; set; }
+
     }
 }

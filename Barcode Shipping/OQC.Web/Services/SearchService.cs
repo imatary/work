@@ -35,8 +35,15 @@ namespace OQC.Web.Services
                 SqlDbType = SqlDbType.Char,
                 Value = boxId,
             };
-            return await _context.Database.SqlQuery<SearchLogModel>("EXEC [dbo].[sp_SearchLogsByBoxId] @boxId", param).ToListAsync();
+            try
+            {
+                return await _context.Database.SqlQuery<SearchLogModel>("EXEC [dbo].[sp_SearchLogsByBoxId] @boxId", param).ToListAsync();
+            }
+            catch (Exception ex)
+            {
 
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<SearchLogModel>> SearchLogByMacAddress(string macAddress)
@@ -47,7 +54,15 @@ namespace OQC.Web.Services
                 SqlDbType = SqlDbType.Char,
                 Value = macAddress,
             };
-            return await _context.Database.SqlQuery<SearchLogModel>("EXEC [dbo].[sp_SearchLogsByMacAddress] @macAddress", param).ToListAsync();
+            try
+            {
+                return await _context.Database.SqlQuery<SearchLogModel>("EXEC [dbo].[sp_SearchLogsByMacAddress] @macAddress", param).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            } 
         }
 
         public async Task<IEnumerable<SearchLogModel>> SearchLogByOperationDate(string operationDate)
@@ -93,7 +108,15 @@ namespace OQC.Web.Services
                 SqlDbType = SqlDbType.Char,
                 Value = productionID,
             };
-            return await _context.Database.SqlQuery<SearchLogModel>("EXEC [dbo].[sp_SearchLogByProductionID] @productionId", param).ToListAsync();
+            try
+            {
+                return await _context.Database.SqlQuery<SearchLogModel>("EXEC [dbo].[sp_SearchLogByProductionID] @productionId", param).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            } 
         }
 
         public async Task<IEnumerable<SearchLogModel>> SearchLogs(string productionId, string boxId, string macAddress, DateTime operationDate)

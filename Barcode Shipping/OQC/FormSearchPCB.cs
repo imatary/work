@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BarcodeShipping.Data;
 using BarcodeShipping.Services;
-using OQC.Helper;
+using Lib.Core.Helper;
 
 namespace OQC
 {

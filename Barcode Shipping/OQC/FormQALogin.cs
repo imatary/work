@@ -3,7 +3,8 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using BarcodeShipping.Data;
 using BarcodeShipping.Services;
-using OQC.Helper;
+using Microsoft.Win32;
+using Lib.Core.Helper;
 
 namespace OQC
 {
@@ -15,6 +16,7 @@ namespace OQC
         {
             InitializeComponent();
             _oqcService = new OQCService();
+            LoadRegistry();
         }
 
         private void txtOperatorID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -101,7 +103,14 @@ namespace OQC
                     }
                     else
                     {
-                        btnLogin.PerformClick();
+                        if (string.IsNullOrEmpty(txtProcess.Text.Trim()))
+                        {
+                            txtProcess.Focus();
+                        }
+                        else
+                        {
+                            btnLogin.Focus();
+                        }
                     }
                 }
             }
@@ -120,7 +129,14 @@ namespace OQC
                     }
                     else
                     {
-                        btnLogin.PerformClick();
+                        if (string.IsNullOrEmpty(txtProcess.Text.Trim()))
+                        {
+                            txtProcess.Focus();
+                        }
+                        else
+                        {
+                            btnLogin.Focus();
+                        }
                     }
                 }
             }
@@ -184,9 +200,10 @@ namespace OQC
                     OperatorCode = _operator.OperatorID,
                     OperatorName = _operator.OperatorName,
                     LineID = int.Parse(txtLineID.EditValue.ToString()),
-                    OperationID = int.Parse(txtOperationID.EditValue.ToString())
+                    OperationID = int.Parse(txtOperationID.EditValue.ToString()),
+                    ProcessID = txtProcess.Text,
                 };
-
+                SaveRegistry();
                 Program.CurrentUser = user;
                 Hide();
                 if (Program.CurrentUser != null)
@@ -196,6 +213,69 @@ namespace OQC
                     qa.ShowDialog();
                 }
                 
+            }
+        }
+
+
+        /// <summary>
+        /// Lưu Mật Khẩu Và Tên Đăng nhập
+        /// </summary>
+        private void SaveRegistry()
+        {
+            //if (chkRemember.Checked)
+            //{
+
+            //    Registry.SetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "IsRemember", "1");
+            //    Registry.SetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "Username", txtUsername.Text);
+            //    Registry.SetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "Password", txtPassword.Text);
+            //}
+            //else
+            //{
+            Registry.SetValue(@"HKEY_CURRENT_USER\Software\BarcodeSystem\ProcessValue", "ProcessName", txtProcess.Text);
+                //Registry.SetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "Username", "");
+                //Registry.SetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "Password", "");
+            //}
+        }
+
+        private void LoadRegistry()
+        {
+            //txtUsername.Text = (string)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "Username", null));
+            txtProcess.Text = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\BarcodeSystem\ProcessValue", "ProcessName", null);
+
+            //if ((string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "IsRemember", null) == "1")
+            //{
+            //    chkRemember.Checked = true;
+            //}
+            //if ((string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "IsRemember", null) == "0")
+            //{
+            //    chkRemember.Checked = false;
+            //}
+        }
+
+        private void txtProcess_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (string.IsNullOrEmpty(txtProcess.Text))
+                {
+                    Ultils.TextControlNotNull(txtProcess, "Process ID");
+                }
+                else
+                {
+                    btnLogin.PerformClick();
+                }
+            }
+        }
+
+        private void txtProcess_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtProcess.Text))
+            {
+                Ultils.TextControlNotNull(txtProcess, "Process ID");
+            }
+            else
+            {
+                btnLogin.PerformClick();
             }
         }
     }

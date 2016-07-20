@@ -244,7 +244,7 @@ namespace BarcodeMurata
                                 {
                                     try
                                     {
-                                        _iqcService.InsertLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
+                                        _iqcService.InsertLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId, false, "IT", StringHelper.GetInfo());
 
                                         if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
                                         {
@@ -285,7 +285,7 @@ namespace BarcodeMurata
                     {
                         try
                         {
-                            _iqcService.InsertLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
+                            _iqcService.InsertLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId, false, "IT", StringHelper.GetInfo());
 
                             if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
                             {
@@ -312,7 +312,7 @@ namespace BarcodeMurata
                 }
                 else if (operationId >= 2)
                 {
-                    _iqcService.UpdateLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, null, null, 1, operatorId);
+                    _iqcService.UpdateLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, lblCurentModel.Text, null, operatorId);
                     _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
 
                     var refeshData = _oqcService.GetLogsByBoxId(boxId).ToList();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BarcodeShipping.Services;
-using OQC.Helper;
+using Lib.Core.Helper;
 
 namespace OQC
 {
