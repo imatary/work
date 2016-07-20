@@ -4,10 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using BarcodeShipping.Data;
-using BarcodeShipping.GUI.Helper;
 using BarcodeShipping.Services;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
+using Lib.Core.Helper;
 
 namespace BarcodeShipping.GUI
 {

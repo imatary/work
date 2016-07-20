@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using BarcodeShipping.GUI.Helper;
 using BarcodeShipping.Services;
+using Lib.Core.Helper;
 
 namespace BarcodeShipping.GUI
 {

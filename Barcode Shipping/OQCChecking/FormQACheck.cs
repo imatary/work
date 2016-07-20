@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using BarcodeShipping.Data;
 using BarcodeShipping.Services;
 using DevExpress.XtraEditors;
-using OQCChecking.Helper;
+using Lib.Core.Helper;
 
 namespace OQCChecking
 {

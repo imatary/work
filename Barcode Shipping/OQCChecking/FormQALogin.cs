@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using BarcodeShipping.Data;
 using BarcodeShipping.Services;
-using OQCChecking.Helper;
+using Lib.Core.Helper;
 
 namespace OQCChecking
 {

@@ -110,8 +110,6 @@
     <Compile Include="FormQALogin.Designer.cs">
       <DependentUpon>FormQALogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\MessageBoxHelper.cs" />
-    <Compile Include="Helper\Ultils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormQACheck.resx">
@@ -152,6 +150,10 @@
     <ProjectReference Include="..\BarcodeShipping.Services\BarcodeShipping.Services.csproj">
       <Project>{F0BBFE23-75D4-4D95-AF43-8CEAF86ABA56}</Project>
       <Name>BarcodeShipping.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib.Core\Lib.Core.csproj">
+      <Project>{36EE5B31-CFF5-47FF-9FB5-499B052B9834}</Project>
+      <Name>Lib.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
