@@ -17,6 +17,7 @@ namespace OQC
             InitializeComponent();
             _oqcService = new OQCService();
             LoadRegistry();
+            RegisterInStartup(true);
         }
 
         private void txtOperatorID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -209,7 +210,7 @@ namespace OQC
                 if (Program.CurrentUser != null)
                 {
                     //var qa = new FormQA();
-                    var qa = new FormQA();
+                    var qa = new FormOQCNullModel();
                     qa.ShowDialog();
                 }
                 
@@ -276,6 +277,20 @@ namespace OQC
             else
             {
                 btnLogin.PerformClick();
+            }
+        }
+
+        private void RegisterInStartup(bool isChecked)
+        {
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
+                    ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (isChecked)
+            {
+                registryKey.SetValue("ApplicationName", Application.ExecutablePath);
+            }
+            else
+            {
+                registryKey.DeleteValue("ApplicationName");
             }
         }
     }

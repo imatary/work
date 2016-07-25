@@ -105,6 +105,10 @@ namespace FCT_HFT1024
                 {
                     return;
                 }
+                else if(fileName.Length <= 32)
+                {
+                    return;
+                }
                 else
                 {
                     if (fileName.Contains("="))

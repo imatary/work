@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>Y:\Dev\Barcode Shipping\PE Barcode\</PublishUrl>
+    <PublishUrl>Y:\Dev\Barcode Shipping\OQC Null Model\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -23,14 +23,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>\\VN-FILE2\Share\18 IT\U16354 %28cuongpv%29\Dev\Barcode Shipping\PE Barcode\</UpdateUrl>
+    <UpdateUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Barcode Shipping\OQC Null Model\</UpdateUrl>
     <ProductName>OQC System</ProductName>
-    <PublisherName>UMC Electronics VietNam Ltd%27s</PublisherName>
+    <PublisherName>cuongpham%40umcvn.com</PublisherName>
     <SuiteName>Barcode System</SuiteName>
     <MinimumRequiredVersion>1.0.0.50</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>55</ApplicationRevision>
+    <ApplicationRevision>58</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -107,6 +107,12 @@
     <Compile Include="FormAction.Designer.cs">
       <DependentUpon>FormAction.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOQCNullModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOQCNullModel.Designer.cs">
+      <DependentUpon>FormOQCNullModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormQA.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     </Compile>
     <EmbeddedResource Include="FormAction.resx">
       <DependentUpon>FormAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOQCNullModel.resx">
+      <DependentUpon>FormOQCNullModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormQA.resx">
       <DependentUpon>FormQA.cs</DependentUpon>
