@@ -62,6 +62,12 @@
                                             Input Barcode
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "Exports")">
+                                            <i class="glyphicon glyphicon-export"></i>
+                                            Exports
+                                        </a>
+                                    </li>
                                     @if (Request.IsAuthenticated && (User.IsInRole("Leader") || User.IsInRole("ManageDepartmentShift") || User.IsInRole("Admin")))
                                     {
                                         <li>

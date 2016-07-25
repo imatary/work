@@ -60,6 +60,7 @@ namespace OQC
                                 break;
                             }
                         }
+
                         if (Program.CurrentUser.OperationID == 1)
                         {
                             var production = _oqcService.GetLogByProductionId(productionId);
@@ -513,12 +514,16 @@ namespace OQC
         {
             var search = new FormSearchPCB();
             search.ShowDialog();
+            txtProductionID.Focus();
+            txtProductionID.SelectAll();
         }
 
         private void btnAction_Click(object sender, EventArgs e)
         {
             var action = new FormAction();
             action.ShowDialog();
+            txtProductionID.Focus();
+            txtProductionID.SelectAll();
         }
 
         private void CreateFileLog(string modelId, string productionId, string status, string process)

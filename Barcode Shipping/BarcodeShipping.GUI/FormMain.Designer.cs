@@ -614,7 +614,7 @@
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(255, 35);
             this.labelControl2.TabIndex = 0;
-            this.labelControl2.Text = "Production list in Box";
+            this.labelControl2.Text = "Products in Box";
             // 
             // panelControl3
             // 
