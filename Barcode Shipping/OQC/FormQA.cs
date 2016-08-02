@@ -15,6 +15,7 @@ namespace OQC
         private readonly IqcService _iqcService = new IqcService();
         private readonly OQCService _oqcService;
         private readonly ModelService _modelService;
+        string modelID = null;
         public FormQA()
         {
             _oqcService = new OQCService();
@@ -49,14 +50,15 @@ namespace OQC
                     {
                         foreach (var item in _modelService.GetModels())
                         {
-                            if (productionId.Contains(item.ModelName))
+                            if (productionId.Contains(item.ModelName.ToUpper()))
                             {
                                 lblQuantityModel.Visible = true;
                                 lblQuantityModel.Text = $"/{item.Quantity}";
                                 tableLayoutPanelModel.Visible = true;
-                                lblCurentModel.Text = item.ModelID;
+                                lblCurentModel.Text = item.ModelName;
                                 lblSerialNo.Text = item.SerialNo;
                                 lblCustomerName.Text = $"Barcode {item.CustomerName}";
+                                modelID = item.ModelID;
                                 break;
                             }
                         }
@@ -76,13 +78,13 @@ namespace OQC
                             }
                             else
                             {
-                                txtMacAddress.Focus();
+                                txtJudge.Focus();
                                 SetErrorStatus(false, null, null);
                             }
                         }
                         else if(Program.CurrentUser.OperationID >= 2)
                         {
-                            txtMacAddress.Focus();
+                            txtJudge.Focus();
                             SetErrorStatus(false, null, null);
                         }
                     }
@@ -289,7 +291,7 @@ namespace OQC
                                     {
                                         try
                                         {
-                                            _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelName, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo());
+                                            _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo());
 
                                             if (!_iqcService.CheckResultExits(productionId, operationId))
                                             {
@@ -359,7 +361,7 @@ namespace OQC
                     {
                         try
                         {
-                            _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelName, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo());
+                            _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo());
 
                             if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
                             {
@@ -388,7 +390,7 @@ namespace OQC
                 }
                 else if (operationId >= 2)
                 {
-                    _iqcService.UpdateLogs(productionId, lineId, txtMacAddress.Text, boxId, lblCurentModel.Text, null, operatorId);
+                    _iqcService.UpdateLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, null, operatorId);
                     _iqcService.InsertResult(productionId, operationId, judge, operatorId);
 
                     logs = _oqcService.GetLogsByBoxId(boxId).ToList();
@@ -431,7 +433,7 @@ namespace OQC
         {
             txtProductionID.Focus();
             txtProductionID.Text = string.Empty;
-            txtMacAddress.Text = string.Empty;
+            //txtMacAddress.Text = string.Empty;
             txtJudge.Text = string.Empty;
             txtBoxID.Text = string.Empty;
         }

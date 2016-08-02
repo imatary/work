@@ -56,6 +56,8 @@
             this.bbiReportManager = new DevExpress.XtraBars.BarButtonItem();
             this.bbiTranferStock = new DevExpress.XtraBars.BarButtonItem();
             this.bbiInventoryManager = new DevExpress.XtraBars.BarButtonItem();
+            this.bbiHelp = new DevExpress.XtraBars.BarButtonItem();
+            this.bbiInfo = new DevExpress.XtraBars.BarButtonItem();
             this.PageSystem = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.PageGroupSystem = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.PageGroupSystemSecurity = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -67,21 +69,20 @@
             this.PageGroupStockManager = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.PageGroupAddOns = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.PageHelp = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.PageGroupHelp = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.xtraTabControlMain = new DevExpress.XtraTab.XtraTabControl();
             this.splashScreenOpenForm = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::Stock.GUI.WaitFormData), true, true);
-            this.PageGroupHelp = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.bbiHelp = new DevExpress.XtraBars.BarButtonItem();
-            this.bbiInfo = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             this.backstageViewControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
             // 
-            this.ribbon.ApplicationButtonDropDownControl = this.backstageViewControl1;
+            this.ribbon.ApplicationButtonDropDownControl = this.xtraTabControlMain;
             this.ribbon.ApplicationIcon = ((System.Drawing.Bitmap)(resources.GetObject("ribbon.ApplicationIcon")));
             this.ribbon.ExpandCollapseItem.Id = 0;
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
@@ -118,7 +119,7 @@
             this.PageCategory,
             this.PageStock,
             this.PageHelp});
-            this.ribbon.Size = new System.Drawing.Size(916, 144);
+            this.ribbon.Size = new System.Drawing.Size(916, 143);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // backstageViewControl1
@@ -128,7 +129,6 @@
             this.backstageViewControl1.Items.Add(this.backstageViewTabItem1);
             this.backstageViewControl1.Location = new System.Drawing.Point(72, 216);
             this.backstageViewControl1.Name = "backstageViewControl1";
-            this.backstageViewControl1.Ribbon = this.ribbon;
             this.backstageViewControl1.SelectedTab = null;
             this.backstageViewControl1.Size = new System.Drawing.Size(480, 150);
             this.backstageViewControl1.TabIndex = 5;
@@ -176,6 +176,7 @@
             this.bbiUsers.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bbiUsers.LargeGlyph")));
             this.bbiUsers.Name = "bbiUsers";
             this.bbiUsers.Tag = "SystemUsers";
+            this.bbiUsers.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiUsers_ItemClick);
             // 
             // bbiSetPermission
             // 
@@ -345,6 +346,22 @@
             this.bbiInventoryManager.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bbiInventoryManager.LargeGlyph")));
             this.bbiInventoryManager.Name = "bbiInventoryManager";
             // 
+            // bbiHelp
+            // 
+            this.bbiHelp.Caption = "Trợ Giúp";
+            this.bbiHelp.Glyph = ((System.Drawing.Image)(resources.GetObject("bbiHelp.Glyph")));
+            this.bbiHelp.Id = 24;
+            this.bbiHelp.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bbiHelp.LargeGlyph")));
+            this.bbiHelp.Name = "bbiHelp";
+            // 
+            // bbiInfo
+            // 
+            this.bbiInfo.Caption = "Thông Tin";
+            this.bbiInfo.Glyph = ((System.Drawing.Image)(resources.GetObject("bbiInfo.Glyph")));
+            this.bbiInfo.Id = 25;
+            this.bbiInfo.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bbiInfo.LargeGlyph")));
+            this.bbiInfo.Name = "bbiInfo";
+            // 
             // PageSystem
             // 
             this.PageSystem.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -441,27 +458,6 @@
             this.PageHelp.Tag = "P_Help";
             this.PageHelp.Text = "Trợ Giúp";
             // 
-            // ribbonStatusBar
-            // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 608);
-            this.ribbonStatusBar.Name = "ribbonStatusBar";
-            this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(916, 31);
-            // 
-            // defaultLookAndFeel1
-            // 
-            this.defaultLookAndFeel1.LookAndFeel.TouchUIMode = DevExpress.LookAndFeel.TouchUIMode.False;
-            // 
-            // xtraTabControlMain
-            // 
-            this.xtraTabControlMain.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InActiveTabPageAndTabControlHeader;
-            this.xtraTabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControlMain.Location = new System.Drawing.Point(0, 144);
-            this.xtraTabControlMain.Name = "xtraTabControlMain";
-            this.xtraTabControlMain.Size = new System.Drawing.Size(916, 464);
-            this.xtraTabControlMain.TabIndex = 2;
-            this.xtraTabControlMain.CloseButtonClick += new System.EventHandler(this.xtraTabControlMain_CloseButtonClick_1);
-            // 
             // PageGroupHelp
             // 
             this.PageGroupHelp.ItemLinks.Add(this.bbiHelp);
@@ -469,21 +465,22 @@
             this.PageGroupHelp.Name = "PageGroupHelp";
             this.PageGroupHelp.Text = "Hướng Dẫn";
             // 
-            // bbiHelp
+            // ribbonStatusBar
             // 
-            this.bbiHelp.Caption = "Trợ Giúp";
-            this.bbiHelp.Glyph = ((System.Drawing.Image)(resources.GetObject("bbiHelp.Glyph")));
-            this.bbiHelp.Id = 24;
-            this.bbiHelp.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bbiHelp.LargeGlyph")));
-            this.bbiHelp.Name = "bbiHelp";
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 608);
+            this.ribbonStatusBar.Name = "ribbonStatusBar";
+            this.ribbonStatusBar.Ribbon = this.ribbon;
+            this.ribbonStatusBar.Size = new System.Drawing.Size(916, 31);
             // 
-            // bbiInfo
+            // xtraTabControlMain
             // 
-            this.bbiInfo.Caption = "Thông Tin";
-            this.bbiInfo.Glyph = ((System.Drawing.Image)(resources.GetObject("bbiInfo.Glyph")));
-            this.bbiInfo.Id = 25;
-            this.bbiInfo.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("bbiInfo.LargeGlyph")));
-            this.bbiInfo.Name = "bbiInfo";
+            this.xtraTabControlMain.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InActiveTabPageAndTabControlHeader;
+            this.xtraTabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControlMain.Location = new System.Drawing.Point(0, 143);
+            this.xtraTabControlMain.Name = "xtraTabControlMain";
+            this.xtraTabControlMain.Size = new System.Drawing.Size(916, 465);
+            this.xtraTabControlMain.TabIndex = 2;
+            this.xtraTabControlMain.CloseButtonClick += new System.EventHandler(this.xtraTabControlMain_CloseButtonClick_1);
             // 
             // FormMain
             // 
@@ -504,6 +501,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).EndInit();
             this.backstageViewControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).EndInit();
             this.ResumeLayout(false);

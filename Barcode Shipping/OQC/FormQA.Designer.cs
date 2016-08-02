@@ -290,6 +290,8 @@
             // txtMacAddress
             // 
             this.txtMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMacAddress.EditValue = "0017C81120CD";
+            this.txtMacAddress.Enabled = false;
             this.txtMacAddress.Location = new System.Drawing.Point(137, 96);
             this.txtMacAddress.Name = "txtMacAddress";
             this.txtMacAddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

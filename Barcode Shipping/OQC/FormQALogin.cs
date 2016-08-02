@@ -33,41 +33,11 @@ namespace OQC
                     txtLineID.Focus();
                 }
             }
-            if (e.KeyCode == Keys.Tab)
-            {
-                if (string.IsNullOrEmpty(txtOperatorID.Text))
-                {
-                    Ultils.TextControlNotNull(txtOperatorID, "Operator ID");
-                }
-                else
-                {
-                    txtLineID.Focus();
-                }
-            }
 
         }
         private void txtLineID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
-                if (string.IsNullOrEmpty(txtLineID.Text))
-                {
-                    Ultils.TextControlNotNull(txtLineID, "Line");
-                }
-                else
-                {
-                    int line = int.Parse(txtLineID.Text.Trim());
-                    if (line > 20)
-                    {
-                        Ultils.EditTextErrorMessage(txtLineID, "Line error!");
-                    }
-                    else
-                    {
-                        txtOperationID.Focus();
-                    }
-                }
-            }
-            if (e.KeyCode == Keys.Tab)
             {
                 if (string.IsNullOrEmpty(txtLineID.Text))
                 {
@@ -115,32 +85,6 @@ namespace OQC
                     }
                 }
             }
-            if (e.KeyCode == Keys.Tab)
-            {
-                if (string.IsNullOrEmpty(txtOperationID.Text))
-                {
-                    Ultils.TextControlNotNull(txtOperationID, "OperationID");
-                }
-                else
-                {
-                    int op = int.Parse(txtOperationID.Text.Trim());
-                    if (op > 3)
-                    {
-                        Ultils.EditTextErrorMessage(txtOperationID, "OperationID error!");
-                    }
-                    else
-                    {
-                        if (string.IsNullOrEmpty(txtProcess.Text.Trim()))
-                        {
-                            txtProcess.Focus();
-                        }
-                        else
-                        {
-                            btnLogin.Focus();
-                        }
-                    }
-                }
-            }
         }
 
         private void txtOperatorID_EditValueChanged(object sender, EventArgs e)
@@ -150,7 +94,9 @@ namespace OQC
 
         private void txtLineID_EditValueChanged(object sender, EventArgs e)
         {
+            dxErrorProvider1.ClearErrors();
             Ultils.SetColorDefaultTextControl(txtLineID);
+
         }
 
         private void txtOperationID_EditValueChanged(object sender, EventArgs e)
@@ -179,7 +125,77 @@ namespace OQC
                 }
             }
         }
+        private void txtLineID_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtLineID.Text))
+            {
+                dxErrorProvider1.SetError(txtLineID, "Error! Line value required.");
+                Ultils.EditTextErrorNoMessage(txtLineID);
+            }
+            else
+            {
+                int value = 0;
+                if(!int.TryParse(txtLineID.Text, out value))
+                {
+                    dxErrorProvider1.SetError(txtLineID, "Error! Line value faild.");
+                    Ultils.EditTextErrorNoMessage(txtLineID);
+                }
+                else
+                {
+                    if(value > 20)
+                    {
+                        dxErrorProvider1.SetError(txtLineID, "Error! Line value faild.");
+                        Ultils.EditTextErrorNoMessage(txtLineID);
+                    }
+                    else
+                    {
+                        txtOperationID.Focus();
+                    }
+                }
+            }
+        }
 
+        private void txtOperationID_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtOperationID.Text))
+            {
+                dxErrorProvider1.SetError(txtOperationID, "Error! Operation value required.");
+                Ultils.EditTextErrorNoMessage(txtOperationID);
+            }
+            else
+            {
+                int value = 0;
+                if (!int.TryParse(txtOperationID.Text, out value))
+                {
+                    dxErrorProvider1.SetError(txtOperationID, "Error! Line value faild.");
+                    Ultils.EditTextErrorNoMessage(txtOperationID);
+                }
+                else
+                {
+                    if (value > 3)
+                    {
+                        dxErrorProvider1.SetError(txtOperationID, "Error! Operation value faild.");
+                        Ultils.EditTextErrorNoMessage(txtOperationID);
+                    }
+                    else
+                    {
+                        txtProcess.Focus();
+                    }
+                }
+            }
+        }
+        private void txtProcess_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtProcess.Text))
+            {
+                dxErrorProvider1.SetError(txtProcess, "Error! Process value required.");
+                Ultils.EditTextErrorNoMessage(txtProcess);
+            }
+            else
+            {
+                btnLogin.PerformClick();
+            }
+        }
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtOperatorID.Text))
@@ -210,7 +226,7 @@ namespace OQC
                 if (Program.CurrentUser != null)
                 {
                     //var qa = new FormQA();
-                    var qa = new FormOQCNullModel();
+                    var qa = new FormQA();
                     qa.ShowDialog();
                 }
                 
@@ -259,7 +275,8 @@ namespace OQC
             {
                 if (string.IsNullOrEmpty(txtProcess.Text))
                 {
-                    Ultils.TextControlNotNull(txtProcess, "Process ID");
+                    dxErrorProvider1.SetError(txtProcess, "Error! Process value required.");
+                    Ultils.EditTextErrorNoMessage(txtProcess);
                 }
                 else
                 {
@@ -268,17 +285,7 @@ namespace OQC
             }
         }
 
-        private void txtProcess_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtProcess.Text))
-            {
-                Ultils.TextControlNotNull(txtProcess, "Process ID");
-            }
-            else
-            {
-                btnLogin.PerformClick();
-            }
-        }
+        
 
         private void RegisterInStartup(bool isChecked)
         {

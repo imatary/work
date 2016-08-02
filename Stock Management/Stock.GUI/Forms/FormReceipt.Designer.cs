@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReceipt));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanel2 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
@@ -40,12 +40,15 @@
             this.navBarGroup4 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemAddProduct = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemAddStocks = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarItemUnit = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarItemGroupProduct = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemAddStock = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarItem4 = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarItem5 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem3 = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarItem4 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarControl2 = new DevExpress.XtraNavBar.NavBarControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
@@ -112,9 +115,6 @@
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.bar1 = new DevExpress.XtraBars.Bar();
-            this.navBarItemUnit = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarItemGroupProduct = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarItem5 = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.dockPanel2.SuspendLayout();
             this.dockPanel3.SuspendLayout();
@@ -277,10 +277,25 @@
             this.navBarItemAddStocks.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItemAddStocks.SmallImage")));
             this.navBarItemAddStocks.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemAddStocks_LinkClicked);
             // 
+            // navBarItemUnit
+            // 
+            this.navBarItemUnit.Caption = "Đơn Vị";
+            this.navBarItemUnit.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarItemUnit.LargeImage")));
+            this.navBarItemUnit.Name = "navBarItemUnit";
+            this.navBarItemUnit.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItemUnit.SmallImage")));
+            this.navBarItemUnit.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemUnit_LinkClicked);
+            // 
+            // navBarItemGroupProduct
+            // 
+            this.navBarItemGroupProduct.Caption = "Nhóm Hàng";
+            this.navBarItemGroupProduct.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarItemGroupProduct.LargeImage")));
+            this.navBarItemGroupProduct.Name = "navBarItemGroupProduct";
+            this.navBarItemGroupProduct.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItemGroupProduct.SmallImage")));
+            this.navBarItemGroupProduct.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemGroupProduct_LinkClicked);
+            // 
             // navBarGroup2
             // 
             this.navBarGroup2.Caption = "Nhập Kho";
-            this.navBarGroup2.Expanded = true;
             this.navBarGroup2.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.SmallIconsList;
             this.navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItemAddStock),
@@ -296,10 +311,12 @@
             this.navBarItemAddStock.Name = "navBarItemAddStock";
             this.navBarItemAddStock.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItemAddStock.SmallImage")));
             // 
-            // navBarItem4
+            // navBarItem5
             // 
-            this.navBarItem4.Caption = "Theo Hàng Hóa";
-            this.navBarItem4.Name = "navBarItem4";
+            this.navBarItem5.Caption = "Xuất Kho";
+            this.navBarItem5.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarItem5.LargeImage")));
+            this.navBarItem5.Name = "navBarItem5";
+            this.navBarItem5.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItem5.SmallImage")));
             // 
             // navBarItem1
             // 
@@ -315,6 +332,11 @@
             // 
             this.navBarItem3.Caption = "navBarItem3";
             this.navBarItem3.Name = "navBarItem3";
+            // 
+            // navBarItem4
+            // 
+            this.navBarItem4.Caption = "Theo Hàng Hóa";
+            this.navBarItem4.Name = "navBarItem4";
             // 
             // navBarControl2
             // 
@@ -344,9 +366,9 @@
             this.panelControl3.Controls.Add(this.panelControl6);
             this.panelControl3.Controls.Add(this.panelControlReceipt);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(5, 63);
+            this.panelControl3.Location = new System.Drawing.Point(5, 62);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(819, 595);
+            this.panelControl3.Size = new System.Drawing.Size(819, 596);
             this.panelControl3.TabIndex = 4;
             // 
             // panelControl6
@@ -356,7 +378,7 @@
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl6.Location = new System.Drawing.Point(0, 102);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(819, 493);
+            this.panelControl6.Size = new System.Drawing.Size(819, 494);
             this.panelControl6.TabIndex = 2;
             // 
             // splitContainerControl2
@@ -369,7 +391,7 @@
             this.splitContainerControl2.Panel1.Text = "Panel1";
             this.splitContainerControl2.Panel2.Controls.Add(this.panelControl5);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(819, 493);
+            this.splitContainerControl2.Size = new System.Drawing.Size(819, 494);
             this.splitContainerControl2.SplitterPosition = 270;
             this.splitContainerControl2.TabIndex = 0;
             this.splitContainerControl2.Text = "splitContainerControl2";
@@ -381,7 +403,7 @@
             this.groupControlProduct.Location = new System.Drawing.Point(0, 0);
             this.groupControlProduct.Name = "groupControlProduct";
             this.groupControlProduct.Padding = new System.Windows.Forms.Padding(3, 50, 3, 0);
-            this.groupControlProduct.Size = new System.Drawing.Size(270, 493);
+            this.groupControlProduct.Size = new System.Drawing.Size(270, 494);
             this.groupControlProduct.TabIndex = 0;
             this.groupControlProduct.Text = "Hàng Hóa";
             // 
@@ -663,7 +685,7 @@
             this.panelControl5.Location = new System.Drawing.Point(0, 0);
             this.panelControl5.Margin = new System.Windows.Forms.Padding(0);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(544, 493);
+            this.panelControl5.Size = new System.Drawing.Size(544, 494);
             this.panelControl5.TabIndex = 2;
             // 
             // gridControlStockImport
@@ -673,7 +695,7 @@
             this.gridControlStockImport.Location = new System.Drawing.Point(0, 0);
             this.gridControlStockImport.MainView = this.gridViewStockImport;
             this.gridControlStockImport.Name = "gridControlStockImport";
-            this.gridControlStockImport.Size = new System.Drawing.Size(544, 493);
+            this.gridControlStockImport.Size = new System.Drawing.Size(544, 494);
             this.gridControlStockImport.TabIndex = 0;
             this.gridControlStockImport.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewStockImport,
@@ -875,7 +897,7 @@
             this.panelControlToolStrip.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControlToolStrip.Controls.Add(this.toolStrip1);
             this.panelControlToolStrip.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControlToolStrip.Location = new System.Drawing.Point(5, 24);
+            this.panelControlToolStrip.Location = new System.Drawing.Point(5, 23);
             this.panelControlToolStrip.Name = "panelControlToolStrip";
             this.panelControlToolStrip.Size = new System.Drawing.Size(819, 39);
             this.panelControlToolStrip.TabIndex = 3;
@@ -1076,29 +1098,6 @@
             this.bar1.OptionsBar.DrawDragBorder = false;
             this.bar1.OptionsBar.UseWholeRow = true;
             this.bar1.Text = "Status bar";
-            // 
-            // navBarItemUnit
-            // 
-            this.navBarItemUnit.Caption = "Đơn Vị";
-            this.navBarItemUnit.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarItemUnit.LargeImage")));
-            this.navBarItemUnit.Name = "navBarItemUnit";
-            this.navBarItemUnit.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItemUnit.SmallImage")));
-            this.navBarItemUnit.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemUnit_LinkClicked);
-            // 
-            // navBarItemGroupProduct
-            // 
-            this.navBarItemGroupProduct.Caption = "Nhóm Hàng";
-            this.navBarItemGroupProduct.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarItemGroupProduct.LargeImage")));
-            this.navBarItemGroupProduct.Name = "navBarItemGroupProduct";
-            this.navBarItemGroupProduct.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItemGroupProduct.SmallImage")));
-            this.navBarItemGroupProduct.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemGroupProduct_LinkClicked);
-            // 
-            // navBarItem5
-            // 
-            this.navBarItem5.Caption = "Xuất Kho";
-            this.navBarItem5.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarItem5.LargeImage")));
-            this.navBarItem5.Name = "navBarItem5";
-            this.navBarItem5.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItem5.SmallImage")));
             // 
             // FormReceipt
             // 

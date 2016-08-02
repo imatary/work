@@ -378,9 +378,9 @@
             this.panelControl3.Controls.Add(this.panelControl6);
             this.panelControl3.Controls.Add(this.panelControlReceipt);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(5, 63);
+            this.panelControl3.Location = new System.Drawing.Point(5, 62);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(819, 595);
+            this.panelControl3.Size = new System.Drawing.Size(819, 596);
             this.panelControl3.TabIndex = 4;
             // 
             // panelControl6
@@ -390,7 +390,7 @@
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl6.Location = new System.Drawing.Point(0, 165);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(819, 430);
+            this.panelControl6.Size = new System.Drawing.Size(819, 431);
             this.panelControl6.TabIndex = 2;
             // 
             // splitContainerControl2
@@ -403,7 +403,7 @@
             this.splitContainerControl2.Panel1.Text = "Panel1";
             this.splitContainerControl2.Panel2.Controls.Add(this.panelControl5);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(819, 430);
+            this.splitContainerControl2.Size = new System.Drawing.Size(819, 431);
             this.splitContainerControl2.SplitterPosition = 270;
             this.splitContainerControl2.TabIndex = 0;
             this.splitContainerControl2.Text = "splitContainerControl2";
@@ -416,7 +416,7 @@
             this.groupControlProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlProduct.Location = new System.Drawing.Point(0, 0);
             this.groupControlProduct.Name = "groupControlProduct";
-            this.groupControlProduct.Size = new System.Drawing.Size(270, 430);
+            this.groupControlProduct.Size = new System.Drawing.Size(270, 431);
             this.groupControlProduct.TabIndex = 0;
             this.groupControlProduct.Text = "Hàng Hóa";
             // 
@@ -426,9 +426,9 @@
             this.lblNote.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.lblNote.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblNote.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNote.Location = new System.Drawing.Point(2, 400);
+            this.lblNote.Location = new System.Drawing.Point(2, 399);
             this.lblNote.Name = "lblNote";
-            this.lblNote.Size = new System.Drawing.Size(266, 28);
+            this.lblNote.Size = new System.Drawing.Size(266, 30);
             this.lblNote.TabIndex = 13;
             this.lblNote.Text = "Note: Chọn những mặt hàng cần xuất";
             // 
@@ -438,7 +438,7 @@
             this.lblStatus.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblStatus.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblStatus.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblStatus.Location = new System.Drawing.Point(2, 324);
+            this.lblStatus.Location = new System.Drawing.Point(2, 323);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.lblStatus.Size = new System.Drawing.Size(266, 76);
@@ -452,7 +452,7 @@
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.btnAddToCart, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(2, 21);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(2, 20);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
@@ -723,7 +723,7 @@
             this.panelControl5.Location = new System.Drawing.Point(0, 0);
             this.panelControl5.Margin = new System.Windows.Forms.Padding(0);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(544, 430);
+            this.panelControl5.Size = new System.Drawing.Size(544, 431);
             this.panelControl5.TabIndex = 2;
             // 
             // gridControlStockImport
@@ -733,7 +733,7 @@
             this.gridControlStockImport.Location = new System.Drawing.Point(0, 0);
             this.gridControlStockImport.MainView = this.gridViewStockImport;
             this.gridControlStockImport.Name = "gridControlStockImport";
-            this.gridControlStockImport.Size = new System.Drawing.Size(544, 430);
+            this.gridControlStockImport.Size = new System.Drawing.Size(544, 431);
             this.gridControlStockImport.TabIndex = 0;
             this.gridControlStockImport.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewStockImport,
@@ -1024,7 +1024,7 @@
             this.panelControlToolStrip.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControlToolStrip.Controls.Add(this.toolStrip1);
             this.panelControlToolStrip.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControlToolStrip.Location = new System.Drawing.Point(5, 24);
+            this.panelControlToolStrip.Location = new System.Drawing.Point(5, 23);
             this.panelControlToolStrip.Name = "panelControlToolStrip";
             this.panelControlToolStrip.Size = new System.Drawing.Size(819, 39);
             this.panelControlToolStrip.TabIndex = 3;

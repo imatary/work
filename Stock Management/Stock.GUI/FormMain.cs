@@ -355,5 +355,10 @@ namespace Stock.GUI
             OpenForm(reports, xtraTabControlMain);
             splashScreenOpenForm.CloseWaitForm();
         }
+
+        private void bbiUsers_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
     }
 }

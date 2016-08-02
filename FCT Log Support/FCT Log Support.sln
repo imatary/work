@@ -13,6 +13,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Data", "Lib.Data\Lib.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Form.Controls", "Lib.Form.Controls\Lib.Form.Controls.csproj", "{8B4DB396-66B7-4D3E-800E-8D80F2A737AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlBasedSecurity", "D:\Dev\SourcesCode\Control Based Security Source\ControlBasedSecurity\ControlBasedSecurity\ControlBasedSecurity.csproj", "{06700CA3-05BA-4889-A1F3-4CA1F8BB96A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OD.Forms.Security", "D:\Dev\SourcesCode\SecureBaseForm_Src\OD.Forms.Security.csproj", "{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSecureForms", "D:\Dev\SourcesCode\SecureBaseForm_Test\TestSecureForms.csproj", "{EEA97671-E0C4-4D5E-BFE4-5C4854C0F6A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{A7E4F7AC-2E06-427C-A368-7C16D9703F9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Forms.Security", "Lib.Forms.Security\Lib.Forms.Security.csproj", "{249AD2E7-3124-4AFC-8888-1DD533067AFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoleExamples", "D:\Dev\SourcesCode\AspNetDbSecurityExample\WindowsApplication1\RoleExamples.csproj", "{A3C7ECE3-F758-4AC9-BCE6-2A1BFAC307E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +51,30 @@ Global
 		{8B4DB396-66B7-4D3E-800E-8D80F2A737AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B4DB396-66B7-4D3E-800E-8D80F2A737AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B4DB396-66B7-4D3E-800E-8D80F2A737AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06700CA3-05BA-4889-A1F3-4CA1F8BB96A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06700CA3-05BA-4889-A1F3-4CA1F8BB96A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06700CA3-05BA-4889-A1F3-4CA1F8BB96A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06700CA3-05BA-4889-A1F3-4CA1F8BB96A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C9ADA8B-7F93-4968-B6C3-B6B9627C2B0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEA97671-E0C4-4D5E-BFE4-5C4854C0F6A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEA97671-E0C4-4D5E-BFE4-5C4854C0F6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEA97671-E0C4-4D5E-BFE4-5C4854C0F6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEA97671-E0C4-4D5E-BFE4-5C4854C0F6A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7E4F7AC-2E06-427C-A368-7C16D9703F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7E4F7AC-2E06-427C-A368-7C16D9703F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7E4F7AC-2E06-427C-A368-7C16D9703F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7E4F7AC-2E06-427C-A368-7C16D9703F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{249AD2E7-3124-4AFC-8888-1DD533067AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{249AD2E7-3124-4AFC-8888-1DD533067AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{249AD2E7-3124-4AFC-8888-1DD533067AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{249AD2E7-3124-4AFC-8888-1DD533067AFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3C7ECE3-F758-4AC9-BCE6-2A1BFAC307E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C7ECE3-F758-4AC9-BCE6-2A1BFAC307E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C7ECE3-F758-4AC9-BCE6-2A1BFAC307E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C7ECE3-F758-4AC9-BCE6-2A1BFAC307E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
