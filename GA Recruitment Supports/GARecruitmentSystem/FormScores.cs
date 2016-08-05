@@ -186,17 +186,24 @@ namespace GARecruitmentSystem
                 var score = _scoreService.GetScoreById(_Id, _dateCreated);
                 if(score!= null)
                 {
-                    try
+                    dynamic mboxResult = XtraMessageBox.Show($"Bạn có thực sự muốn xóa '{score.FullName}' không? \n'Yes' để xóa. \n'No' hủy bỏ.",
+                    "THÔNG BÁO",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                    if (mboxResult == DialogResult.Yes)
                     {
-                        _scoreService.Delete(_Id, _dateCreated);
-                        MessageBox.Show("Xóa thành công!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadData();
-                        EnableButtonEditAndDelete(false);
+                        try
+                        {
+                            _scoreService.Delete(_Id, _dateCreated);
+                            LoadData();
+                            EnableButtonEditAndDelete(false);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    
                 }
                 else
                 {

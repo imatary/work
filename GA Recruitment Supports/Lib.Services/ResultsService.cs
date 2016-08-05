@@ -51,15 +51,17 @@ namespace Lib.Services
         public string GetAge(string strBirthday)
         {
             DateTime birthday;
-            if (!DateTime.TryParse(strBirthday, out birthday))
+            int age = 0;
+            if (DateTime.TryParseExact(strBirthday, "dd/MM/yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out birthday))
             {
-                
+                DateTime now = DateTime.Today;
+                age = now.Year - birthday.Year;
+                //if (now < birthday.AddYears(age))
+                //    age--;
             }
-            birthday = DateTime.ParseExact(strBirthday, "dd/MM/yyyy", CultureInfo.InvariantCulture); ;
-            DateTime now = DateTime.Today;
-            int age = now.Year - birthday.Year;
-            if (now < birthday.AddYears(age)) age--;
-
             return age.ToString();
         }
 
@@ -119,6 +121,26 @@ namespace Lib.Services
             }
         }
 
+        public void Delete(string Id)
+        {
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@Id", Value = Id, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            try
+            {
+                _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_Delete_Result] @Id", param);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void InsertResult(string id, string fullName, 
             DateTime birthday, string sex, string sdt, string ns, string hktt, 
             string dt, string hight, string cmt, DateTime ngaycap,

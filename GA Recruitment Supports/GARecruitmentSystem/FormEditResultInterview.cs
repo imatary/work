@@ -11,73 +11,94 @@ namespace GARecruitmentSystem
     {
         private readonly ScoreService _scoreService;
         private readonly ResultsService _resultService;
+        private string _Id = null;
         public FormEditResultInterview(string id)
         {
             InitializeComponent();
 
             _scoreService = new ScoreService();
             _resultService = new ResultsService();
-
-            LoadDataGridLookUpEdit();
+            _Id = id;
+            GetScoreById(id);
+            LoadDataToControls(id);
         }
-
-        private void LoadDataGridLookUpEdit()
-        {
-            var items = _scoreService.GetScoresIsOk();
-            var collection = new AutoCompleteStringCollection();
-            foreach (var item in items)
-            {
-                collection.Add(item.FullName);
-            }
-            gridLookUpEditFullName.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            gridLookUpEditFullName.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            gridLookUpEditFullName.MaskBox.AutoCompleteCustomSource = collection;
-
-            gridLookUpEditFullName.Properties.DisplayMember = "FullName";
-            gridLookUpEditFullName.Properties.ValueMember = "Id";
-            gridLookUpEditFullName.Properties.PopupFormWidth = 500;
-            gridLookUpEditFullName.Properties.DataSource = items;
-        }
-
         #region Event EditValueChanged
-        private void gridLookUpEditFullName_EditValueChanged(object sender, System.EventArgs e)
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        private void GetScoreById(string id)
         {
-            if(gridLookUpEditFullName.EditValue != null)
+            var score = _scoreService.GetScoreById(Guid.Parse(id));
+            if (score != null)
             {
-                Guid id = (Guid)gridLookUpEditFullName.EditValue;
-                if (!string.IsNullOrEmpty(id.ToString()))
+                lblScoreEye.Text = $"V={ score.ScoreEye }";
+                lblResultEye.Text = $"D={ score.KetQuaEye }";
+
+                lblScorePicture.Text = $"{score.ScorePicture}/7";
+                lblPercentPicture.Text = $"{score.PercentPicture}%";
+
+                lblTotalPear.Text = score.TotalPear.ToString();
+                lblTotalEven.Text = score.TotalEven.ToString();
+                lblDifference.Text = score.Difference.ToString();
+                lblPercent.Text = $"{score.Percent}%";
+
+                txtBirthday.Text = score.Birthday;
+                txtBirthday.Focus();
+                if (score.KetQua == "OK")
                 {
-                    var score = _scoreService.GetScoreById(id);
-                    if (score != null)
-                    {
-                        lblScoreEye.Text = $"V={ score.ScoreEye }";
-                        lblResultEye.Text = $"D={ score.KetQuaEye }";
-
-                        lblScorePicture.Text = $"{score.ScorePicture}/7";
-                        lblPercentPicture.Text = $"{score.PercentPicture}%";
-
-                        lblTotalPear.Text = score.TotalPear.ToString();
-                        lblTotalEven.Text = score.TotalEven.ToString();
-                        lblDifference.Text = score.Difference.ToString();
-                        lblPercent.Text = $"{score.Percent}%";
-
-                        txtBirthday.Text = score.Birthday;
-                        txtBirthday.Focus();
-                        if (score.KetQua == "OK")
-                        {
-                            CheckTextBoxNullValue.SetBackColorSuccessMessage(lblResult, score.KetQua);
-                        }
-                        else if (score.KetQua == "NG")
-                        {
-                            CheckTextBoxNullValue.SetBackColorErrorMessage(lblResult, score.KetQua);
-                        }
-                    }
-
+                    CheckTextBoxNullValue.SetBackColorSuccessMessage(lblResult, score.KetQua);
+                }
+                else if (score.KetQua == "NG")
+                {
+                    CheckTextBoxNullValue.SetBackColorErrorMessage(lblResult, score.KetQua);
                 }
             }
+        }
 
-            CheckTextBoxNullValue.SetColorDefaultTextControl(dxErrorProvider1, gridLookUpEditFullName);
-            
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        private void LoadDataToControls(string id)
+        {
+            var result = _resultService.GetResultById(id);
+            if (result != null)
+            {
+                txtFullName.Text = result.FullName;
+                txtBirthday.Text = result.Birthday.ToString("dd/MM/yyyy");
+
+                if (result.Sex.Replace(" ", "") == "F")
+                {
+                    radioGroup1.SelectedIndex = 0;
+                }
+                if (result.Sex.Replace(" ", "") == "M")
+                {
+                    radioGroup1.SelectedIndex = 1;
+                }
+
+                txtSDT.Text = result.PhoneNumber;
+                txtNS.Text = result.NS;
+                txtHKTT.Text = result.HKTT;
+                txtDanToc.Text = result.DT;
+                txtHight.Text = result.Hight;
+                txtCMT.Text = result.CMT;
+                txtNgayCap.Text = result.NgayCap.ToString("dd/MM/yyyy");
+                txtNoiCap.Text = result.NoiCap;
+                txtExperiene.Text = result.Experiene;
+                txtID.Text = result.StaffID;
+                txtStaffCode.Text = result.StaffCode;
+                txtDepartment.Text = result.Dept;
+                txtPosition.Text = result.Position;
+                txtNgayPV.Text = result.NgayPV.ToString("dd/MM/yyyy");
+                txtNguoiPV.Text = result.NguoiPV;
+                txtNgayDiLam.Text = result.NgayDiLam.ToString("dd/MM/yyyy");
+            }
+        }
+        private void txtFullName_EditValueChanged(object sender, EventArgs e)
+        {
+            CheckTextBoxNullValue.SetColorDefaultTextControl(dxErrorProvider1, txtFullName);
         }
         private void txtBirthday_EditValueChanged(object sender, EventArgs e)
         {
@@ -119,6 +140,11 @@ namespace GARecruitmentSystem
         private void txtCMT_EditValueChanged(object sender, EventArgs e)
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(dxErrorProvider1, txtCMT);
+            //var result = _resultService.GetResultByCMT(txtCMT.Text);
+            //if (result != null)
+            //{
+            //    CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtCMT, toolTipController1, $"'Số chứng minh thư' đã tồn tại '{result.FullName}-{result.CMT}'. Vui lòng kiểm tra lại!");
+            //}
         }
 
         private void txtNgayCap_EditValueChanged(object sender, EventArgs e)
@@ -168,15 +194,15 @@ namespace GARecruitmentSystem
         #endregion
 
         #region Event Validating Controls
-        private void gridLookUpEditFullName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void txtFullName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(CheckTextBoxNullValue.ValidationTextEditNullValue(gridLookUpEditFullName))
+            if(CheckTextBoxNullValue.ValidationTextEditNullValue(txtFullName))
             {
                 txtBirthday.Focus();
             }
             else
             {
-                CheckTextBoxNullValue.ShowError(dxErrorProvider1, gridLookUpEditFullName, toolTipController1, "Vui lòng chọn một ứng viên!");
+                CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtFullName, toolTipController1, "Vui lòng chọn một ứng viên!");
             }
         }
 
@@ -255,12 +281,6 @@ namespace GARecruitmentSystem
                 if(value.Length < 9 || value.Length > 10)
                 {
                     CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtCMT, toolTipController1, "'Số chứng minh thư' không đúng định dạng. Vui lòng nhập lại!");
-                }
-
-                var result = _resultService.GetResultByCMT(value);
-                if (result != null)
-                {
-                    CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtCMT, toolTipController1, $"'Số chứng minh thư' đã tồn tại '{result.FullName}-{result.CMT}'. Vui lòng kiểm tra lại!");
                 }
             }
         }
@@ -342,9 +362,9 @@ namespace GARecruitmentSystem
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!CheckTextBoxNullValue.ValidationTextEditNullValue(gridLookUpEditFullName))
+            if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtFullName))
             {
-                CheckTextBoxNullValue.ShowError(dxErrorProvider1, gridLookUpEditFullName, toolTipController1, "Vui lòng chọn một ứng viên!");
+                CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtFullName, toolTipController1, "Vui lòng chọn một ứng viên!");
             }
             else if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtBirthday))
             {
@@ -418,10 +438,9 @@ namespace GARecruitmentSystem
             {
                 try
                 {
-                    string id = gridLookUpEditFullName.EditValue.ToString();
-                    _resultService.InsertResult(
-                        id,
-                        gridLookUpEditFullName.Text,
+                    _resultService.UpdateResult(
+                        _Id,
+                        txtFullName.Text,
                         Ultils.ConvertStringToDateTime(txtBirthday),
                         radioGroup1.EditValue.ToString(),
                         txtSDT.Text,
@@ -442,21 +461,9 @@ namespace GARecruitmentSystem
                         Ultils.ConvertStringToDateTime(txtNgayDiLam),
                         Program.CurentUser.UserName
                         );
-                    _scoreService.Update(Guid.Parse(id), true);
                     btnReset.PerformClick();
-                    dynamic mboxResult = XtraMessageBox.Show("Thêm thành công. Bạn có muốn thêm nữa không?",
-                    "THÔNG BÁO",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Information);
-                    if (mboxResult == DialogResult.No)
-                    {
-                        Close();
-                    }
-                    else if (mboxResult == DialogResult.Yes)
-                    {
-                        LoadDataGridLookUpEdit();
-                        gridLookUpEditFullName.Focus();
-                    }
+                    MessageBox.Show("Sửa thành công!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
@@ -469,7 +476,7 @@ namespace GARecruitmentSystem
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            gridLookUpEditFullName.EditValue = null;
+            txtFullName.ResetText();
             txtBirthday.ResetText();
             txtTuoi.ResetText();
             radioGroup1.SelectedIndex = -1;

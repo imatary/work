@@ -46,7 +46,40 @@ namespace GARecruitmentSystem
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            EnableButtonEditAndDelete(false);
+            if (!string.IsNullOrEmpty(_Id))
+            {
+                var score = _resultService.GetResultById(_Id);
+                if (score != null)
+                {
+                    dynamic mboxResult = XtraMessageBox.Show($"Bạn có thực sự muốn xóa '{score.FullName}' không? \n'Yes' để xóa. \n'No' hủy bỏ.",
+                    "THÔNG BÁO",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                    if (mboxResult == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            _resultService.Delete(_Id);
+                            LoadData();
+                            EnableButtonEditAndDelete(false);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn lại!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("Vui lòng chọn một người cần sửa!", "THÔNG BÁO", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void btnRefesh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
