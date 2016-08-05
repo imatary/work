@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lib.Data;
+using System;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -6,6 +7,8 @@ namespace GARecruitmentSystem
 {
     static class Program
     {
+        public static User CurentUser { get; set; }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -14,6 +17,8 @@ namespace GARecruitmentSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            CurentUser = new User();
 
             bool ownmutex;
 
@@ -24,10 +29,11 @@ namespace GARecruitmentSystem
                 // nếu không, ứng dụng sẽ thoát.
                 if (ownmutex)
                 {
-                    Application.Run(new FormMain());
+                    Application.Run(new FormLogin());
                     //giai phong Mutex;
                     mutex.ReleaseMutex();
                 }
+
                 else
                     Application.ExitThread();
             }

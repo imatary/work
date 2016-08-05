@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>4e3d6ea9-251d-4fd8-9e70-b455c24ca41f</ProjectGuid>
+    <ProjectGuid>{4E3D6EA9-251D-4FD8-9E70-B455C24CA41F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lib.Data</RootNamespace>
@@ -30,22 +30,110 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ColumnNameSelect_Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GARecruitmentDbContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GARecruitmentDbContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GARecruitmentDbContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GARecruitmentDbContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GARecruitmentDbContext.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Score.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScoreList.cs" />
+    <Compile Include="sp_CheckLogin_Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetResultByCMT_Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetResultById_Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetResults_Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetScoreById_Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetScoresById_Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetScores_Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetUserByUserName_Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersSelect_Result.cs">
+      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="GARecruitmentDbContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GARecruitmentDbContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="GARecruitmentDbContext.edmx.diagram">
+      <DependentUpon>GARecruitmentDbContext.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GARecruitmentDbContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GARecruitmentDbContext.Context.cs</LastGenOutput>
+      <DependentUpon>GARecruitmentDbContext.edmx</DependentUpon>
+    </Content>
+    <Content Include="GARecruitmentDbContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GARecruitmentDbContext.edmx</DependentUpon>
+      <LastGenOutput>GARecruitmentDbContext.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -55,5 +143,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
- </Project>
+</Project>

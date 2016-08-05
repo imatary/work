@@ -3,22 +3,26 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using Microsoft.Win32;
 using Lib.Forms.Helpers;
+using Lib.Services;
 
 namespace GARecruitmentSystem
 {
     public partial class FormLogin : XtraForm
     {
+        private readonly UserService _userService; 
+
         public FormLogin()
         {
             InitializeComponent();
+            _userService = new UserService();
         }
 
         private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                dynamic mboxResult = XtraMessageBox.Show("Are you want colse this form?",
-                    "Close",
+                dynamic mboxResult = XtraMessageBox.Show("Bạn có chắc muốn thoát?",
+                    "THÔNG BÁO",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning);
                 if (mboxResult == DialogResult.No)
@@ -35,7 +39,7 @@ namespace GARecruitmentSystem
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            if (XtraMessageBox.Show("Are you want colse this form?", "Close", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (XtraMessageBox.Show("Bạn có chắc muốn thoát?", "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Application.ExitThread();
             }
@@ -50,17 +54,34 @@ namespace GARecruitmentSystem
         {
             if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtUsername))
             {
-                dxErrorProvider1.SetError(txtUsername, "Vui lòng nhập vào tên đăng nhập của bạn!");
+                CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtUsername, toolTipController1, "Vui lòng nhập vào 'Tên đăng nhập'!");
             }
             else if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtPassword))
             {
-                dxErrorProvider1.SetError(txtUsername, "Vui lòng nhập vào mật khẩu của bạn!");
+                CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtUsername, toolTipController1, "Vui lòng nhập vào 'Mật khẩu'!");
             }
             else
             {
-                this.Hide();
-                var formMain = new FormMain();
-                formMain.Show();
+                var user = _userService.GetUserByUserName(txtUsername.Text.Trim());
+                if (user != null)
+                {
+                    if(_userService.CheckLogin(txtUsername.Text.Trim(), txtPassword.Text.Trim()))
+                    {
+                        Program.CurentUser = user;
+
+                        this.Hide();
+                        var formMain = new FormMain();
+                        formMain.Show();
+                    }
+                    else
+                    {
+                        CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtUsername, toolTipController1, "Sai 'Mật khẩu'. Vui lòng thử lại!");
+                    }
+                }
+                else
+                {
+                    CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtUsername, toolTipController1, "'Tên đăng nhập' không tồn tại. Vui lòng thử lại!");
+                }
             }
         }
 
@@ -111,11 +132,18 @@ namespace GARecruitmentSystem
             {
                 if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtUsername))
                 {
-                    dxErrorProvider1.SetError(txtUsername, "Please enter your username!");
+                    CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtUsername, toolTipController1, "Vui lòng nhập vào 'Tên đăng nhập'!");
                 }
                 else
                 {
-                    txtPassword.Focus();
+                    if (string.IsNullOrEmpty(txtPassword.Text.Trim()))
+                    {
+                        txtPassword.Focus();
+                    }
+                    else
+                    {
+                        btnLogin.Focus();
+                    }
                 }
             }
         }
@@ -125,7 +153,7 @@ namespace GARecruitmentSystem
             {
                 if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtPassword))
                 {
-                    dxErrorProvider1.SetError(txtPassword, "Please enter your password!");
+                    CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtUsername, toolTipController1, "Vui lòng nhập vào 'Mật khẩu'!");
                 }
                 else
                 {
@@ -135,13 +163,11 @@ namespace GARecruitmentSystem
         }
         private void txtUsername_EditValueChanged(object sender, EventArgs e)
         {
-            CheckTextBoxNullValue.SetColorDefaultTextControl(txtUsername);
-            dxErrorProvider1.ClearErrors();
+            CheckTextBoxNullValue.SetColorDefaultTextControl(dxErrorProvider1, txtUsername);
         }
         private void txtPassword_EditValueChanged(object sender, EventArgs e)
         {
-            CheckTextBoxNullValue.SetColorDefaultTextControl(txtPassword);
-            dxErrorProvider1.ClearErrors();
+            CheckTextBoxNullValue.SetColorDefaultTextControl(dxErrorProvider1, txtUsername);
         }
        
     }

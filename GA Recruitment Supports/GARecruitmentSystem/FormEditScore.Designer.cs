@@ -1,6 +1,6 @@
 ﻿namespace GARecruitmentSystem
 {
-    partial class FormInputScore
+    partial class FormEditScore
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInputScore));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEditScore));
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
@@ -570,7 +570,7 @@
             // lblKetQuaPicture
             // 
             this.lblKetQuaPicture.Appearance.Font = new System.Drawing.Font("Arial", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKetQuaPicture.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblKetQuaPicture.Appearance.ForeColor = System.Drawing.Color.Green;
             this.lblKetQuaPicture.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblKetQuaPicture.Appearance.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Show;
             this.lblKetQuaPicture.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
@@ -645,7 +645,7 @@
             // lblKetQua
             // 
             this.lblKetQua.Appearance.Font = new System.Drawing.Font("Arial", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKetQua.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblKetQua.Appearance.ForeColor = System.Drawing.Color.Green;
             this.lblKetQua.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblKetQua.Appearance.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Show;
             this.lblKetQua.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
@@ -2223,7 +2223,7 @@
             // 
             this.dxErrorProvider1.ContainerControl = this;
             // 
-            // FormInputScore
+            // FormEditScore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -2233,7 +2233,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(930, 800);
-            this.Name = "FormInputScore";
+            this.Name = "FormEditScore";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kết quả phỏng vấn của ứng viên";

@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Utils;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.DXErrorProvider;
 using System.Drawing;
 
@@ -42,13 +43,16 @@ namespace Lib.Forms.Helpers
             textEdit.Focus();
             textEdit.SelectAll();
         }
+        
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="textEdit"></param>
-        public static void SetColorDefaultTextControl(TextEdit textEdit)
+        /// <param name="errorProvider"></param>
+        /// <param name="control"></param>
+        public static void SetColorDefaultTextControl(DXErrorProvider errorProvider, BaseEdit control)
         {
-            textEdit.Properties.Appearance.BorderColor = Color.LightGray;
+            errorProvider.ClearErrors();
+            control.Properties.Appearance.BorderColor = Color.LightGray;
         }
 
         /// <summary>
@@ -73,18 +77,36 @@ namespace Lib.Forms.Helpers
             return true;
         }
 
+        public static void ShowError(DXErrorProvider errorProvider, BaseEdit control, ToolTipController tipController, string errorMessage)
+        {
+            control.Properties.Appearance.BorderColor = Color.Red;
+            control.Focus();
+            control.SelectAll();
+            errorProvider.SetError(control, errorMessage);
+            ToolTipControllerShowEventArgs args = new ToolTipControllerShowEventArgs();
+            args.ToolTipImage = DXErrorProvider.GetErrorIconInternal(ErrorType.Critical);
+            args.ToolTip = control.ErrorText;
+            args.SelectedControl = control;
+            args.SuperTip = null; // here
+            tipController.ShowHint(args, control.Parent.PointToScreen(control.Location));
+        }
+
         public static void SetBackColorErrorMessage(LabelControl label, string message)
         {
             label.Text = message;
-            label.BackColor = Color.Red;
-            label.ForeColor = Color.Yellow;
+            label.Refresh();
+            label.ResetForeColor();
+            label.Appearance.BackColor = Color.Red;
+            label.Appearance.ForeColor = Color.Yellow;
         }
 
         public static void SetBackColorSuccessMessage(LabelControl label, string message)
         {
             label.Text = message;
-            label.BackColor = Color.Green;
-            label.ForeColor = Color.Yellow;
+            label.Refresh();
+            label.ResetForeColor();
+            label.Appearance.BackColor = Color.Green;
+            label.Appearance.ForeColor = Color.Yellow;
         }
     }
 }

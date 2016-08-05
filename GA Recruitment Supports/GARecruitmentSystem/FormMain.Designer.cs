@@ -36,12 +36,16 @@
             this.barButtonItemInputScore = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.barHeaderItemVersion = new DevExpress.XtraBars.BarHeaderItem();
+            this.barCurentUser = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
             this.ribbonPageSystem = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupSystem = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabControlMain = new DevExpress.XtraTab.XtraTabControl();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::GARecruitmentSystem.FormWaiting.WaitFormLoadData), true, true);
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItemResultInterview = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).BeginInit();
             this.SuspendLayout();
@@ -59,9 +63,12 @@
             this.barButtonItem1,
             this.barButtonItemInputScore,
             this.barStaticItem2,
-            this.barHeaderItemVersion});
+            this.barHeaderItemVersion,
+            this.barCurentUser,
+            this.barStaticItem3,
+            this.barButtonItemResultInterview});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 11;
+            this.ribbon.MaxItemId = 15;
             this.ribbon.Name = "ribbon";
             this.ribbon.OptionsCustomizationForm.FormIcon = ((System.Drawing.Icon)(resources.GetObject("resource.FormIcon")));
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -130,11 +137,34 @@
             this.barHeaderItemVersion.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
             // 
+            // barCurentUser
+            // 
+            this.barCurentUser.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.barCurentUser.Caption = "User ";
+            this.barCurentUser.Id = 12;
+            this.barCurentUser.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            this.barCurentUser.ItemAppearance.Normal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.barCurentUser.ItemAppearance.Normal.Options.UseFont = true;
+            this.barCurentUser.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barCurentUser.Name = "barCurentUser";
+            this.barCurentUser.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItem3
+            // 
+            this.barStaticItem3.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.barStaticItem3.Caption = "Curent User:";
+            this.barStaticItem3.Glyph = ((System.Drawing.Image)(resources.GetObject("barStaticItem3.Glyph")));
+            this.barStaticItem3.Id = 13;
+            this.barStaticItem3.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barStaticItem3.LargeGlyph")));
+            this.barStaticItem3.Name = "barStaticItem3";
+            this.barStaticItem3.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
             // ribbonPageSystem
             // 
             this.ribbonPageSystem.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroupSystem,
-            this.ribbonPageGroup1});
+            this.ribbonPageGroup1,
+            this.ribbonPageGroup2});
             this.ribbonPageSystem.Name = "ribbonPageSystem";
             this.ribbonPageSystem.Text = "Quản lý thông tin";
             // 
@@ -160,6 +190,8 @@
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem1);
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem2);
             this.ribbonStatusBar.ItemLinks.Add(this.barHeaderItemVersion);
+            this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem3);
+            this.ribbonStatusBar.ItemLinks.Add(this.barCurentUser);
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 608);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
@@ -180,6 +212,23 @@
             // 
             this.splashScreenManager1.ClosingDelay = 500;
             // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.AllowTextClipping = false;
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemResultInterview);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.ShowCaptionButton = false;
+            this.ribbonPageGroup2.Text = "Lịch phỏng vấn & Kết quả phỏng vấn";
+            // 
+            // barButtonItemResultInterview
+            // 
+            this.barButtonItemResultInterview.Caption = "Lịch phỏng vấn Kết quả phỏng vấn";
+            this.barButtonItemResultInterview.Glyph = ((System.Drawing.Image)(resources.GetObject("barButtonItemResultInterview.Glyph")));
+            this.barButtonItemResultInterview.Id = 14;
+            this.barButtonItemResultInterview.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonItemResultInterview.LargeGlyph")));
+            this.barButtonItemResultInterview.Name = "barButtonItemResultInterview";
+            this.barButtonItemResultInterview.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemResultInterview_ItemClick);
+            // 
             // FormMain
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -197,6 +246,7 @@
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "Quản lý thông tin tuyển dụng - GA";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).EndInit();
             this.ResumeLayout(false);
@@ -219,5 +269,9 @@
         private DevExpress.XtraBars.BarHeaderItem barHeaderItemVersion;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
+        private DevExpress.XtraBars.BarStaticItem barCurentUser;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemResultInterview;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
     }
 }

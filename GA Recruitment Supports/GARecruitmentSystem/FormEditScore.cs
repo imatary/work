@@ -1,5 +1,4 @@
-﻿using DevExpress.XtraEditors;
-using Lib.Forms;
+﻿using Lib.Forms;
 using Lib.Forms.Helpers;
 using Lib.Services;
 using System;
@@ -7,15 +6,107 @@ using System.Windows.Forms;
 
 namespace GARecruitmentSystem
 {
-    public partial class FormInputScore : Form
+    public partial class FormEditScore : Form
     {
         private ScoreService _scoreService;
-
-        public FormInputScore()
+        private Guid _id;
+        private DateTime _dateCreated;
+        public FormEditScore(Guid Id, DateTime DateCreated)
         {
             InitializeComponent();
             _scoreService = new ScoreService();
+
+            _id = Id;
+            _dateCreated = DateCreated;
+            LoadDataToControls(Id, DateCreated);
         }
+
+        private void LoadDataToControls(Guid id, DateTime DateCreated)
+        {
+            var score = _scoreService.GetScoreById(id, DateCreated);
+            if(score != null)
+            {
+                txtFullName.Text = score.FullName;
+                txtBrithDay.Text = score.Birthday;
+                txtPartOne_Pear1.Text = score.PI_P1.ToString();
+                txtPartOne_Pear2.Text = score.PI_P2.ToString();
+                txtPartOne_Pear3.Text = score.PI_P3.ToString();
+                txtPartOne_Pear4.Text = score.PI_P4.ToString();
+                txtPartOne_Pear5.Text = score.PI_P5.ToString();
+                txtPartOne_Pear6.Text = score.PI_P6.ToString();
+                txtPartOne_Pear7.Text = score.PI_P7.ToString();
+                txtPartOne_Pear8.Text = score.PI_P8.ToString();
+                txtPartOne_Pear9.Text = score.PI_P9.ToString();
+                txtPartOne_Pear10.Text = score.PI_P10.ToString();
+                txtPartOne_Pear11.Text = score.PI_P11.ToString();
+                txtPartOne_Pear12.Text = score.PI_P12.ToString();
+                txtPartOne_Pear13.Text = score.PI_P13.ToString();
+                //Part Two
+                txtPartTwo_Pear1.Text = score.PII_P1.ToString();
+                txtPartTwo_Pear2.Text = score.PII_P2.ToString();
+                txtPartTwo_Pear3.Text = score.PII_P3.ToString();
+                txtPartTwo_Pear4.Text = score.PII_P4.ToString();
+                txtPartTwo_Pear5.Text = score.PII_P5.ToString();
+                txtPartTwo_Pear6.Text = score.PII_P6.ToString();
+                txtPartTwo_Pear7.Text = score.PII_P7.ToString();
+                txtPartTwo_Pear8.Text = score.PII_P8.ToString();
+                txtPartTwo_Pear9.Text = score.PII_P9.ToString();
+                txtPartTwo_Pear10.Text = score.PII_P10.ToString();
+                txtPartTwo_Pear11.Text = score.PII_P11.ToString();
+                txtPartTwo_Pear12.Text = score.PII_P12.ToString();
+                txtPartTwo_Pear13.Text = score.PII_P13.ToString();
+
+                txtPartOne_Even1.Text = score.PI_E1.ToString();
+                txtPartOne_Even2.Text = score.PI_E2.ToString();
+                txtPartOne_Even3.Text = score.PI_E3.ToString();
+                txtPartOne_Even4.Text = score.PI_E4.ToString();
+                txtPartOne_Even5.Text = score.PI_E5.ToString();
+                txtPartOne_Even6.Text = score.PI_E6.ToString();
+                txtPartOne_Even7.Text = score.PI_E7.ToString();
+                txtPartOne_Even8.Text = score.PI_E8.ToString();
+                txtPartOne_Even9.Text = score.PI_E9.ToString();
+                txtPartOne_Even10.Text = score.PI_E10.ToString();
+                txtPartOne_Even11.Text = score.PI_E11.ToString();
+                txtPartOne_Even12.Text = score.PI_E12.ToString();
+                txtPartOne_Even13.Text = score.PI_E13.ToString();
+
+                //Part Two
+                txtPartTwo_Even1.Text = score.PII_E1.ToString();
+                txtPartTwo_Even2.Text = score.PII_E2.ToString();
+                txtPartTwo_Even3.Text = score.PII_E3.ToString();
+                txtPartTwo_Even4.Text = score.PII_E4.ToString();
+                txtPartTwo_Even5.Text = score.PII_E5.ToString();
+                txtPartTwo_Even6.Text = score.PII_E6.ToString();
+                txtPartTwo_Even7.Text = score.PII_E7.ToString();
+                txtPartTwo_Even8.Text = score.PII_E8.ToString();
+                txtPartTwo_Even9.Text = score.PII_E9.ToString();
+                textEdit20txtPartTwo_Even10.Text = score.PII_E10.ToString();
+                txtPartTwo_Even11.Text = score.PII_E11.ToString();
+                txtPartTwo_Even12.Text = score.PII_E12.ToString();
+                txtPartTwo_Even13.Text = score.PII_E13.ToString();
+
+                txtPartOne_SumPear.Text = score.PI_SumPear.ToString();
+                txtPartOne_SumEven.Text = score.PI_SumEven.ToString();
+                txtPartTwo_SumPear.Text = score.PII_SumPear.ToString();
+                txtPartTwo_SumEven.Text = score.PII_SumEven.ToString();
+
+                txtTotalScorePear.Text = score.TotalPear.ToString();
+                txtTotalEven.Text = score.TotalEven.ToString();
+
+                txtScorePicture.Text = score.ScorePicture.ToString();
+                txtScoreEye.Text = score.ScoreEye.ToString();
+
+                lblPercent.Text = $"{ score.Percent }%";
+                lblDifference.Text = score.Difference.ToString();
+                lblKetQua.Text = score.KetQua;
+
+                lblPercentPicture.Text = $"{score.PercentPicture}%";
+                lblKetQuaPicture.Text = score.KetQuaPicture;
+
+                lblScorEye.Text = score.KetQuaEye;
+            }
+        }
+
 
         /// <summary>
         /// Array pear
@@ -528,6 +619,7 @@ namespace GARecruitmentSystem
         private void txtScorePicture_EditValueChanged(object sender, EventArgs e)
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(dxErrorProvider1,txtScorePicture);
+
         }
 
         private void txtScoreEye_EditValueChanged(object sender, EventArgs e)
@@ -675,7 +767,9 @@ namespace GARecruitmentSystem
             {
                 try
                 {
-                    _scoreService.Insert(
+                    _scoreService.Update(
+                        _id,
+                        _dateCreated,
                         txtFullName.Text,
                         txtBrithDay.Text.Trim(),
                         Ultils.ConvertStringToInt(txtPartOne_Pear1),
@@ -747,23 +841,11 @@ namespace GARecruitmentSystem
                         int.Parse(lblPercentPicture.Text.Replace("%", "")),
                         lblKetQuaPicture.Text.Trim(),
                         Ultils.ConvertStringToInt(txtScoreEye),
-                        lblScorEye.Text.Trim(),
-                        false
+                        lblScorEye.Text.Trim()
                         );
-
                     btnReset.PerformClick();
-                    dynamic mboxResult = XtraMessageBox.Show("Thêm thành công. Bạn có muốn thêm nữa không?",
-                    "THÔNG BÁO",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Information);
-                    if (mboxResult == DialogResult.No)
-                    {
-                        this.Close();
-                    }
-                    else if (mboxResult == DialogResult.Yes)
-                    {
-                        txtFullName.Focus();
-                    }
+                    MessageBox.Show("Cập nhật thành công!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
@@ -841,7 +923,7 @@ namespace GARecruitmentSystem
             txtTotalScorePear.Text = "0";
             txtTotalEven.Text = "0";
 
-            txtScorePicture.ResetText();
+            txtScorePicture.ResetText(); 
             txtScoreEye.ResetText();
 
             lblPercent.Text = $"0%";

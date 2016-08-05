@@ -29,7 +29,7 @@
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -86,7 +86,16 @@
     <Reference Include="DevExpress.XtraGrid.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -98,6 +107,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormEditScore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditScore.Designer.cs">
+      <DependentUpon>FormEditScore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEditResultInterview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditResultInterview.Designer.cs">
+      <DependentUpon>FormEditResultInterview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormInputResultInterview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInputResultInterview.Designer.cs">
+      <DependentUpon>FormInputResultInterview.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormInputScore.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,11 +149,23 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormResultInterviews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormResultInterviews.Designer.cs">
+      <DependentUpon>FormResultInterviews.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormScores.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormScores.Designer.cs">
       <DependentUpon>FormScores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTest.Designer.cs">
+      <DependentUpon>FormTest.cs</DependentUpon>
     </Compile>
     <Compile Include="FormWaiting\WaitFormLoadData.cs">
       <SubType>Form</SubType>
@@ -136,6 +175,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormEditScore.resx">
+      <DependentUpon>FormEditScore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEditResultInterview.resx">
+      <DependentUpon>FormEditResultInterview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInputResultInterview.resx">
+      <DependentUpon>FormInputResultInterview.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormInputScore.resx">
       <DependentUpon>FormInputScore.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,8 +196,14 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormResultInterviews.resx">
+      <DependentUpon>FormResultInterviews.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormScores.resx">
       <DependentUpon>FormScores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTest.resx">
+      <DependentUpon>FormTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormWaiting\WaitFormLoadData.resx">
       <DependentUpon>WaitFormLoadData.cs</DependentUpon>
@@ -165,7 +219,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="App.Config" />
     <None Include="GARecruitmentSystem_TemporaryKey.pfx" />
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -181,6 +237,10 @@
     <ProjectReference Include="..\Lib.Core\Lib.Core.csproj">
       <Project>{91E72467-1A45-41BC-AEFB-B7DAE20C8398}</Project>
       <Name>Lib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib.Data\Lib.Data.csproj">
+      <Project>{4E3D6EA9-251D-4FD8-9E70-B455C24CA41F}</Project>
+      <Name>Lib.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lib.Forms\Lib.Forms.csproj">
       <Project>{89DB6682-18A5-45D1-AA79-6640A85199A7}</Project>

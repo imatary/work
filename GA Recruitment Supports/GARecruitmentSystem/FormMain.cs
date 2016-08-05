@@ -4,15 +4,18 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using Lib.Core.Helpers;
+using Lib.Services;
 
 namespace GARecruitmentSystem
 {
     public partial class FormMain : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        
         public FormMain()
         {
             InitializeComponent();
             barHeaderItemVersion.Caption = StringHelper.GetRunningVersion();
+            barCurentUser.Caption = Program.CurentUser.FullName;
         }
 
 
@@ -98,9 +101,38 @@ namespace GARecruitmentSystem
             splashScreenManager1.CloseWaitForm();
         }
 
+        private void barButtonItemResultInterview_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splashScreenManager1.ShowWaitForm();
+            var resultInterview = new FormResultInterviews();
+            OpenForm(resultInterview, xtraTabControlMain);
+            splashScreenManager1.CloseWaitForm();
+        }
         private void xtraTabControlMain_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                dynamic mboxResult = XtraMessageBox.Show("Bạn có thực sự muốn đóng hay không!",
+                    @"THÔNG BÁO",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (mboxResult == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else if (mboxResult == DialogResult.Yes)
+                {
+                    e.Cancel = false;
+                    Application.ExitThread();
+                }
+            }
+        }
+
+        
     }
 }
