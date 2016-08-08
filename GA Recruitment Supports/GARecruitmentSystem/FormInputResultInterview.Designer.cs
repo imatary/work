@@ -36,11 +36,18 @@
             this.labelControl31 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl30 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl29 = new DevExpress.XtraEditors.LabelControl();
+            this.txtDepartment = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl28 = new DevExpress.XtraEditors.LabelControl();
+            this.txtPosition = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtID = new DevExpress.XtraEditors.TextEdit();
             this.txtStaffCode = new DevExpress.XtraEditors.TextEdit();
-            this.txtDepartment = new DevExpress.XtraEditors.TextEdit();
-            this.txtPosition = new DevExpress.XtraEditors.TextEdit();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.labelControl34 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl33 = new DevExpress.XtraEditors.LabelControl();
@@ -49,6 +56,8 @@
             this.txtNguoiPV = new DevExpress.XtraEditors.TextEdit();
             this.txtNgayDiLam = new DevExpress.XtraEditors.TextEdit();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
+            this.btnReset = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl27 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -64,6 +73,10 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.gridLookUpEditFullName = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumnFullName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnBirthday = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnPercent = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.txtTuoi = new DevExpress.XtraEditors.TextEdit();
@@ -108,23 +121,19 @@
             this.lblResult = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
-            this.btnReset = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
-            this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
-            this.gridColumnFullName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnBirthday = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnPercent = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepartment.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtStaffCode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepartment.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).BeginInit();
             this.tableLayoutPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNgayPV.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNguoiPV.Properties)).BeginInit();
@@ -160,8 +169,8 @@
             this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -205,19 +214,20 @@
             this.tableLayoutPanel9.Controls.Add(this.labelControl31, 0, 3);
             this.tableLayoutPanel9.Controls.Add(this.labelControl30, 0, 2);
             this.tableLayoutPanel9.Controls.Add(this.labelControl29, 0, 1);
+            this.tableLayoutPanel9.Controls.Add(this.txtDepartment, 1, 2);
             this.tableLayoutPanel9.Controls.Add(this.labelControl28, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.txtPosition, 1, 3);
             this.tableLayoutPanel9.Controls.Add(this.txtID, 1, 0);
             this.tableLayoutPanel9.Controls.Add(this.txtStaffCode, 1, 1);
-            this.tableLayoutPanel9.Controls.Add(this.txtDepartment, 1, 2);
-            this.tableLayoutPanel9.Controls.Add(this.txtPosition, 1, 3);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 4;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.61983F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.79339F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.61983F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.61983F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(495, 121);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
@@ -226,10 +236,10 @@
             this.labelControl31.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl31.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl31.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl31.Location = new System.Drawing.Point(3, 93);
+            this.labelControl31.Location = new System.Drawing.Point(3, 92);
             this.labelControl31.Name = "labelControl31";
             this.labelControl31.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.labelControl31.Size = new System.Drawing.Size(141, 25);
+            this.labelControl31.Size = new System.Drawing.Size(141, 26);
             this.labelControl31.TabIndex = 26;
             this.labelControl31.Text = "Vị trí";
             // 
@@ -238,7 +248,7 @@
             this.labelControl30.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl30.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl30.Location = new System.Drawing.Point(3, 63);
+            this.labelControl30.Location = new System.Drawing.Point(3, 62);
             this.labelControl30.Name = "labelControl30";
             this.labelControl30.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.labelControl30.Size = new System.Drawing.Size(141, 24);
@@ -253,9 +263,80 @@
             this.labelControl29.Location = new System.Drawing.Point(3, 33);
             this.labelControl29.Name = "labelControl29";
             this.labelControl29.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.labelControl29.Size = new System.Drawing.Size(141, 24);
+            this.labelControl29.Size = new System.Drawing.Size(141, 23);
             this.labelControl29.TabIndex = 22;
             this.labelControl29.Text = "Code";
+            // 
+            // txtDepartment
+            // 
+            this.txtDepartment.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtDepartment.Location = new System.Drawing.Point(150, 62);
+            this.txtDepartment.Name = "txtDepartment";
+            this.txtDepartment.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDepartment.Properties.Appearance.Options.UseFont = true;
+            this.txtDepartment.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDepartment.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtDepartment.Properties.NullText = "";
+            this.txtDepartment.Properties.NullValuePrompt = "ex: PE-IT";
+            this.txtDepartment.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtDepartment.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.txtDepartment.Properties.View = this.gridView1;
+            this.txtDepartment.Size = new System.Drawing.Size(164, 26);
+            this.txtDepartment.TabIndex = 25;
+            this.txtDepartment.EditValueChanged += new System.EventHandler(this.txtDepartment_EditValueChanged);
+            this.txtDepartment.Validating += new System.ComponentModel.CancelEventHandler(this.txtDepartment_Validating);
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5});
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn3.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn3.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn3.Caption = "ID";
+            this.gridColumn3.FieldName = "DeptCode";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
+            this.gridColumn3.Width = 100;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn4.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn4.Caption = "Name";
+            this.gridColumn4.FieldName = "DeptName";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 1;
+            this.gridColumn4.Width = 150;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn5.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn5.Caption = "Type Of";
+            this.gridColumn5.FieldName = "TypeOf";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 2;
+            this.gridColumn5.Width = 100;
             // 
             // labelControl28
             // 
@@ -268,6 +349,68 @@
             this.labelControl28.Size = new System.Drawing.Size(141, 24);
             this.labelControl28.TabIndex = 20;
             this.labelControl28.Text = "ID";
+            // 
+            // txtPosition
+            // 
+            this.txtPosition.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtPosition.Location = new System.Drawing.Point(150, 92);
+            this.txtPosition.Name = "txtPosition";
+            this.txtPosition.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPosition.Properties.Appearance.Options.UseFont = true;
+            this.txtPosition.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtPosition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtPosition.Properties.DisplayMember = "PosName";
+            this.txtPosition.Properties.NullText = "";
+            this.txtPosition.Properties.NullValuePrompt = "ex: Staff A";
+            this.txtPosition.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtPosition.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.txtPosition.Properties.ValueMember = "PosCode";
+            this.txtPosition.Properties.View = this.gridView2;
+            this.txtPosition.Size = new System.Drawing.Size(164, 26);
+            this.txtPosition.TabIndex = 27;
+            this.txtPosition.EditValueChanged += new System.EventHandler(this.txtPosition_EditValueChanged);
+            this.txtPosition.Validating += new System.ComponentModel.CancelEventHandler(this.txtPosition_Validating);
+            // 
+            // gridView2
+            // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2});
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn1.AppearanceCell.Options.UseFont = true;
+            this.gridColumn1.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn1.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn1.Caption = "ID";
+            this.gridColumn1.FieldName = "PosCode";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.Width = 80;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn2.AppearanceCell.Options.UseFont = true;
+            this.gridColumn2.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn2.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn2.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn2.Caption = "Name";
+            this.gridColumn2.FieldName = "PosName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.Width = 304;
             // 
             // txtID
             // 
@@ -302,37 +445,6 @@
             this.txtStaffCode.TabIndex = 23;
             this.txtStaffCode.EditValueChanged += new System.EventHandler(this.txtStaffCode_EditValueChanged);
             this.txtStaffCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtStaffCode_Validating);
-            // 
-            // txtDepartment
-            // 
-            this.txtDepartment.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtDepartment.Location = new System.Drawing.Point(150, 63);
-            this.txtDepartment.Name = "txtDepartment";
-            this.txtDepartment.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDepartment.Properties.Appearance.Options.UseFont = true;
-            this.txtDepartment.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtDepartment.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtDepartment.Properties.NullValuePrompt = "ex: PE-IT";
-            this.txtDepartment.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtDepartment.Size = new System.Drawing.Size(164, 26);
-            this.txtDepartment.TabIndex = 25;
-            this.txtDepartment.EditValueChanged += new System.EventHandler(this.txtDepartment_EditValueChanged);
-            this.txtDepartment.Validating += new System.ComponentModel.CancelEventHandler(this.txtDepartment_Validating);
-            // 
-            // txtPosition
-            // 
-            this.txtPosition.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtPosition.Location = new System.Drawing.Point(150, 93);
-            this.txtPosition.Name = "txtPosition";
-            this.txtPosition.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPosition.Properties.Appearance.Options.UseFont = true;
-            this.txtPosition.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtPosition.Properties.NullValuePrompt = "ex: Staff A";
-            this.txtPosition.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtPosition.Size = new System.Drawing.Size(164, 26);
-            this.txtPosition.TabIndex = 27;
-            this.txtPosition.EditValueChanged += new System.EventHandler(this.txtPosition_EditValueChanged);
-            this.txtPosition.Validating += new System.ComponentModel.CancelEventHandler(this.txtPosition_Validating);
             // 
             // tableLayoutPanel10
             // 
@@ -452,6 +564,32 @@
             this.panelControl6.Name = "panelControl6";
             this.panelControl6.Size = new System.Drawing.Size(1002, 51);
             this.panelControl6.TabIndex = 4;
+            // 
+            // btnReset
+            // 
+            this.btnReset.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnReset.Appearance.Options.UseFont = true;
+            this.btnReset.Appearance.Options.UseForeColor = true;
+            this.btnReset.Image = ((System.Drawing.Image)(resources.GetObject("btnReset.Image")));
+            this.btnReset.Location = new System.Drawing.Point(836, 14);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(101, 34);
+            this.btnReset.TabIndex = 2;
+            this.btnReset.Text = "Reset";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Appearance.Options.UseFont = true;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.Location = new System.Drawing.Point(736, 14);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(94, 34);
+            this.btnSave.TabIndex = 1;
+            this.btnSave.Text = "Save";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // labelControl27
             // 
@@ -678,6 +816,62 @@
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumnFullName
+            // 
+            this.gridColumnFullName.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumnFullName.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnFullName.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnFullName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnFullName.Caption = "Họ và Tên";
+            this.gridColumnFullName.FieldName = "FullName";
+            this.gridColumnFullName.Name = "gridColumnFullName";
+            this.gridColumnFullName.Visible = true;
+            this.gridColumnFullName.VisibleIndex = 0;
+            this.gridColumnFullName.Width = 150;
+            // 
+            // gridColumnBirthday
+            // 
+            this.gridColumnBirthday.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumnBirthday.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnBirthday.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnBirthday.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnBirthday.Caption = "Ngày sinh";
+            this.gridColumnBirthday.FieldName = "Birthday";
+            this.gridColumnBirthday.Name = "gridColumnBirthday";
+            this.gridColumnBirthday.Visible = true;
+            this.gridColumnBirthday.VisibleIndex = 1;
+            this.gridColumnBirthday.Width = 100;
+            // 
+            // gridColumnPercent
+            // 
+            this.gridColumnPercent.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumnPercent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnPercent.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumnPercent.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnPercent.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnPercent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnPercent.Caption = "%";
+            this.gridColumnPercent.FieldName = "Percent";
+            this.gridColumnPercent.Name = "gridColumnPercent";
+            this.gridColumnPercent.Visible = true;
+            this.gridColumnPercent.VisibleIndex = 2;
+            this.gridColumnPercent.Width = 70;
+            // 
+            // gridColumnResult
+            // 
+            this.gridColumnResult.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumnResult.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnResult.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumnResult.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnResult.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnResult.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnResult.Caption = "OK/NG";
+            this.gridColumnResult.FieldName = "KetQua";
+            this.gridColumnResult.Name = "gridColumnResult";
+            this.gridColumnResult.Visible = true;
+            this.gridColumnResult.VisibleIndex = 3;
+            this.gridColumnResult.Width = 70;
+            // 
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -752,8 +946,8 @@
             this.radioGroup1.Name = "radioGroup1";
             this.radioGroup1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("F", "Nam"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("M", "Nữ")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("0", "Nam"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("1", "Nữ")});
             this.radioGroup1.Size = new System.Drawing.Size(163, 20);
             this.radioGroup1.TabIndex = 6;
             this.radioGroup1.EditValueChanged += new System.EventHandler(this.radioGroup1_EditValueChanged);
@@ -1279,36 +1473,6 @@
             this.panelControl2.Size = new System.Drawing.Size(1002, 56);
             this.panelControl2.TabIndex = 0;
             // 
-            // dxErrorProvider1
-            // 
-            this.dxErrorProvider1.ContainerControl = this;
-            // 
-            // btnReset
-            // 
-            this.btnReset.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnReset.Appearance.Options.UseFont = true;
-            this.btnReset.Appearance.Options.UseForeColor = true;
-            this.btnReset.Image = ((System.Drawing.Image)(resources.GetObject("btnReset.Image")));
-            this.btnReset.Location = new System.Drawing.Point(836, 14);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(101, 34);
-            this.btnReset.TabIndex = 2;
-            this.btnReset.Text = "Reset";
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.Location = new System.Drawing.Point(736, 14);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(94, 34);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Save";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // pictureEdit1
             // 
             this.pictureEdit1.EditValue = global::GARecruitmentSystem.Properties.Resources.umc;
@@ -1320,61 +1484,9 @@
             this.pictureEdit1.Size = new System.Drawing.Size(50, 47);
             this.pictureEdit1.TabIndex = 0;
             // 
-            // gridColumnFullName
+            // dxErrorProvider1
             // 
-            this.gridColumnFullName.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumnFullName.AppearanceHeader.Options.UseFont = true;
-            this.gridColumnFullName.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumnFullName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnFullName.Caption = "Họ và Tên";
-            this.gridColumnFullName.FieldName = "FullName";
-            this.gridColumnFullName.Name = "gridColumnFullName";
-            this.gridColumnFullName.Visible = true;
-            this.gridColumnFullName.VisibleIndex = 0;
-            this.gridColumnFullName.Width = 150;
-            // 
-            // gridColumnBirthday
-            // 
-            this.gridColumnBirthday.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumnBirthday.AppearanceHeader.Options.UseFont = true;
-            this.gridColumnBirthday.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumnBirthday.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnBirthday.Caption = "Ngày sinh";
-            this.gridColumnBirthday.FieldName = "Birthday";
-            this.gridColumnBirthday.Name = "gridColumnBirthday";
-            this.gridColumnBirthday.Visible = true;
-            this.gridColumnBirthday.VisibleIndex = 1;
-            this.gridColumnBirthday.Width = 100;
-            // 
-            // gridColumnPercent
-            // 
-            this.gridColumnPercent.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumnPercent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnPercent.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumnPercent.AppearanceHeader.Options.UseFont = true;
-            this.gridColumnPercent.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumnPercent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnPercent.Caption = "%";
-            this.gridColumnPercent.FieldName = "Percent";
-            this.gridColumnPercent.Name = "gridColumnPercent";
-            this.gridColumnPercent.Visible = true;
-            this.gridColumnPercent.VisibleIndex = 2;
-            this.gridColumnPercent.Width = 70;
-            // 
-            // gridColumnResult
-            // 
-            this.gridColumnResult.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumnResult.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnResult.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumnResult.AppearanceHeader.Options.UseFont = true;
-            this.gridColumnResult.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumnResult.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnResult.Caption = "OK/NG";
-            this.gridColumnResult.FieldName = "KetQua";
-            this.gridColumnResult.Name = "gridColumnResult";
-            this.gridColumnResult.Visible = true;
-            this.gridColumnResult.VisibleIndex = 3;
-            this.gridColumnResult.Width = 70;
+            this.dxErrorProvider1.ContainerControl = this;
             // 
             // FormInputResultInterview
             // 
@@ -1394,10 +1506,12 @@
             this.panelControl1.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepartment.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtStaffCode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepartment.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).EndInit();
             this.tableLayoutPanel10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtNgayPV.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNguoiPV.Properties)).EndInit();
@@ -1433,8 +1547,8 @@
             this.tableLayoutPanel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1511,9 +1625,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl29;
         private DevExpress.XtraEditors.TextEdit txtStaffCode;
         private DevExpress.XtraEditors.LabelControl labelControl30;
-        private DevExpress.XtraEditors.TextEdit txtDepartment;
         private DevExpress.XtraEditors.LabelControl labelControl31;
-        private DevExpress.XtraEditors.TextEdit txtPosition;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private DevExpress.XtraEditors.LabelControl labelControl32;
         private DevExpress.XtraEditors.TextEdit txtNgayPV;
@@ -1528,5 +1640,14 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnBirthday;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPercent;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnResult;
+        private DevExpress.XtraEditors.GridLookUpEdit txtDepartment;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraEditors.GridLookUpEdit txtPosition;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
     }
 }

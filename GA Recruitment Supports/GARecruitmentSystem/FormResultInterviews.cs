@@ -101,6 +101,7 @@ namespace GARecruitmentSystem
                 if (_Id != null)
                 {
                     EnableButtonEditAndDelete(true);
+                    //MessageBox.Show(_Id);
                 }
             }
         }

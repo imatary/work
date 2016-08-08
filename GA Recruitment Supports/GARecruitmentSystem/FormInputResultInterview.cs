@@ -4,6 +4,7 @@ using Lib.Services;
 using System;
 using Lib.Forms.Helpers;
 using Lib.Forms;
+using System.Linq;
 
 namespace GARecruitmentSystem
 {
@@ -11,14 +12,21 @@ namespace GARecruitmentSystem
     {
         private readonly ScoreService _scoreService;
         private readonly ResultsService _resultService;
+        private readonly PositionService _positionService;
+        private readonly DepartmentService _departmentService;
         public FormInputResultInterview()
         {
             InitializeComponent();
 
             _scoreService = new ScoreService();
             _resultService = new ResultsService();
+            _positionService = new PositionService();
+            _departmentService = new DepartmentService();
 
             LoadDataGridLookUpEdit();
+            LoadDataGridLookUpEditPositions();
+            LoadDataGridLookUpEditDepartments();
+            //AutocompleteString();
         }
 
         private void LoadDataGridLookUpEdit()
@@ -37,6 +45,54 @@ namespace GARecruitmentSystem
             gridLookUpEditFullName.Properties.ValueMember = "Id";
             gridLookUpEditFullName.Properties.PopupFormWidth = 500;
             gridLookUpEditFullName.Properties.DataSource = items;
+        }
+        private void LoadDataGridLookUpEditPositions()
+        {
+            var items = _positionService.GetPositions();
+            //var collection = new AutoCompleteStringCollection();
+            //foreach (var item in items)
+            //{
+            //    collection.Add(item.FullName);
+            //}
+            //txtPosition.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            //txtPosition.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //txtPosition.MaskBox.AutoCompleteCustomSource = collection;
+
+            txtPosition.Properties.DisplayMember = "PosName";
+            txtPosition.Properties.ValueMember = "PosCode";
+            txtPosition.Properties.PopupFormWidth = 250;
+            txtPosition.Properties.DataSource = items;
+        }
+        private void LoadDataGridLookUpEditDepartments()
+        {
+            var items = _departmentService.GetDepartments();
+            //var collection = new AutoCompleteStringCollection();
+            //foreach (var item in items)
+            //{
+            //    collection.Add(item.FullName);
+            //}
+            //txtDepartment.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            //txtDepartment.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //txtDepartment.MaskBox.AutoCompleteCustomSource = collection;
+
+            txtDepartment.Properties.DisplayMember = "DeptName";
+            txtDepartment.Properties.ValueMember = "DeptCode";
+            txtDepartment.Properties.PopupFormWidth = 300;
+            txtDepartment.Properties.DataSource = items;
+        }
+        private void AutocompleteString()
+        {
+            var items = _scoreService.GetScores();
+            var collection = new AutoCompleteStringCollection();
+            foreach (var item in items)
+            {
+                collection.Add(item.FullName);
+            }
+
+            txtDepartment.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtDepartment.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtDepartment.MaskBox.AutoCompleteCustomSource = collection;
+            //txtDepartment.MaskBox.Sty
         }
 
         #region Event EditValueChanged
@@ -170,11 +226,7 @@ namespace GARecruitmentSystem
         #region Event Validating Controls
         private void gridLookUpEditFullName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(CheckTextBoxNullValue.ValidationTextEditNullValue(gridLookUpEditFullName))
-            {
-                txtBirthday.Focus();
-            }
-            else
+            if(!CheckTextBoxNullValue.ValidationTextEditNullValue(gridLookUpEditFullName))
             {
                 CheckTextBoxNullValue.ShowError(dxErrorProvider1, gridLookUpEditFullName, toolTipController1, "Vui lòng chọn một ứng viên!");
             }
@@ -182,23 +234,14 @@ namespace GARecruitmentSystem
 
         private void txtBirthday_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (CheckTextBoxNullValue.ValidationTextEditNullValue(txtBirthday))
-            {
-                txtTuoi.Text = _resultService.GetAge(txtBirthday.Text);
-                radioGroup1.Focus();
-            }
-            else
+            if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtBirthday))
             {
                 CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtBirthday, toolTipController1, "Vui lòng nhập 'Ngày sinh' cho ứng viên!");
             }
         }
         private void radioGroup1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (radioGroup1.EditValue != null)
-            {
-                txtSDT.Focus();
-            }
-            else
+            if (radioGroup1.EditValue == null)
             {
                 CheckTextBoxNullValue.ShowError(dxErrorProvider1, radioGroup1, toolTipController1, "Vui lòng chọn 'Giới tính' cho ứng viên!");
             }
@@ -435,8 +478,8 @@ namespace GARecruitmentSystem
                         txtExperiene.Text,
                         txtID.Text,
                         txtStaffCode.Text,
-                        txtDepartment.Text,
-                        txtPosition.Text,
+                        txtDepartment.EditValue.ToString(),
+                        txtPosition.EditValue.ToString(),
                         Ultils.ConvertStringToDateTime(txtNgayPV),
                         txtNguoiPV.Text,
                         Ultils.ConvertStringToDateTime(txtNgayDiLam),
@@ -484,8 +527,8 @@ namespace GARecruitmentSystem
             txtExperiene.ResetText();
             txtID.ResetText();
             txtStaffCode.ResetText();
-            txtDepartment.ResetText();
-            txtPosition.ResetText();
+            txtDepartment.EditValue = null;
+            txtPosition.EditValue = null;
             txtNgayPV.ResetText();
             txtNguoiPV.ResetText();
             txtNgayDiLam.ResetText();

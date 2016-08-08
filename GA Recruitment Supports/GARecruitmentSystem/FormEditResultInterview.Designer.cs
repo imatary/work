@@ -36,11 +36,18 @@
             this.labelControl31 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl30 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl29 = new DevExpress.XtraEditors.LabelControl();
+            this.txtPosition = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.txtDepartment = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl28 = new DevExpress.XtraEditors.LabelControl();
             this.txtID = new DevExpress.XtraEditors.TextEdit();
             this.txtStaffCode = new DevExpress.XtraEditors.TextEdit();
-            this.txtDepartment = new DevExpress.XtraEditors.TextEdit();
-            this.txtPosition = new DevExpress.XtraEditors.TextEdit();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.labelControl34 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl33 = new DevExpress.XtraEditors.LabelControl();
@@ -55,6 +62,7 @@
             this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtFullName = new DevExpress.XtraEditors.TextEdit();
             this.labelControl25 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
@@ -84,7 +92,6 @@
             this.txtNgayCap = new DevExpress.XtraEditors.TextEdit();
             this.txtNoiCap = new DevExpress.XtraEditors.TextEdit();
             this.txtExperiene = new DevExpress.XtraEditors.MemoEdit();
-            this.txtFullName = new DevExpress.XtraEditors.TextEdit();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.labelControl26 = new DevExpress.XtraEditors.LabelControl();
@@ -116,10 +123,12 @@
             this.panelControl1.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepartment.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtStaffCode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepartment.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).BeginInit();
             this.tableLayoutPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNgayPV.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNguoiPV.Properties)).BeginInit();
@@ -128,6 +137,7 @@
             this.panelControl6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFullName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTuoi.Properties)).BeginInit();
@@ -145,7 +155,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtNgayCap.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNoiCap.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExperiene.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFullName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
             this.panelControl5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -199,11 +208,11 @@
             this.tableLayoutPanel9.Controls.Add(this.labelControl31, 0, 3);
             this.tableLayoutPanel9.Controls.Add(this.labelControl30, 0, 2);
             this.tableLayoutPanel9.Controls.Add(this.labelControl29, 0, 1);
+            this.tableLayoutPanel9.Controls.Add(this.txtPosition, 1, 3);
+            this.tableLayoutPanel9.Controls.Add(this.txtDepartment, 1, 2);
             this.tableLayoutPanel9.Controls.Add(this.labelControl28, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.txtID, 1, 0);
             this.tableLayoutPanel9.Controls.Add(this.txtStaffCode, 1, 1);
-            this.tableLayoutPanel9.Controls.Add(this.txtDepartment, 1, 2);
-            this.tableLayoutPanel9.Controls.Add(this.txtPosition, 1, 3);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
@@ -212,6 +221,7 @@
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(495, 121);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
@@ -250,6 +260,125 @@
             this.labelControl29.Size = new System.Drawing.Size(141, 24);
             this.labelControl29.TabIndex = 22;
             this.labelControl29.Text = "Code";
+            // 
+            // txtPosition
+            // 
+            this.txtPosition.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtPosition.Location = new System.Drawing.Point(150, 93);
+            this.txtPosition.Name = "txtPosition";
+            this.txtPosition.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPosition.Properties.Appearance.Options.UseFont = true;
+            this.txtPosition.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtPosition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtPosition.Properties.NullText = "";
+            this.txtPosition.Properties.NullValuePrompt = "ex: Staff A";
+            this.txtPosition.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtPosition.Properties.View = this.gridView1;
+            this.txtPosition.Size = new System.Drawing.Size(164, 26);
+            this.txtPosition.TabIndex = 27;
+            this.txtPosition.EditValueChanged += new System.EventHandler(this.txtPosition_EditValueChanged);
+            this.txtPosition.Validating += new System.ComponentModel.CancelEventHandler(this.txtPosition_Validating);
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn4,
+            this.gridColumn5});
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn4.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn4.Caption = "ID";
+            this.gridColumn4.FieldName = "PosCode";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 0;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn5.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn5.Caption = "Name";
+            this.gridColumn5.FieldName = "PosName";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 1;
+            // 
+            // txtDepartment
+            // 
+            this.txtDepartment.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtDepartment.Location = new System.Drawing.Point(150, 63);
+            this.txtDepartment.Name = "txtDepartment";
+            this.txtDepartment.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDepartment.Properties.Appearance.Options.UseFont = true;
+            this.txtDepartment.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDepartment.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtDepartment.Properties.NullText = "";
+            this.txtDepartment.Properties.NullValuePrompt = "ex: PE-IT";
+            this.txtDepartment.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtDepartment.Properties.View = this.gridLookUpEdit1View;
+            this.txtDepartment.Size = new System.Drawing.Size(164, 26);
+            this.txtDepartment.TabIndex = 25;
+            this.txtDepartment.EditValueChanged += new System.EventHandler(this.txtDepartment_EditValueChanged);
+            this.txtDepartment.Validating += new System.ComponentModel.CancelEventHandler(this.txtDepartment_Validating);
+            // 
+            // gridLookUpEdit1View
+            // 
+            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn3,
+            this.gridColumn2,
+            this.gridColumn1});
+            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            this.gridColumn3.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn3.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn3.Caption = "ID";
+            this.gridColumn3.FieldName = "DeptCode";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn2.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn2.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn2.Caption = "Name";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn1.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn1.Caption = "Type Of";
+            this.gridColumn1.FieldName = "TypeOf";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 2;
             // 
             // labelControl28
             // 
@@ -296,37 +425,6 @@
             this.txtStaffCode.TabIndex = 23;
             this.txtStaffCode.EditValueChanged += new System.EventHandler(this.txtStaffCode_EditValueChanged);
             this.txtStaffCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtStaffCode_Validating);
-            // 
-            // txtDepartment
-            // 
-            this.txtDepartment.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtDepartment.Location = new System.Drawing.Point(150, 63);
-            this.txtDepartment.Name = "txtDepartment";
-            this.txtDepartment.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDepartment.Properties.Appearance.Options.UseFont = true;
-            this.txtDepartment.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtDepartment.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtDepartment.Properties.NullValuePrompt = "ex: PE-IT";
-            this.txtDepartment.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtDepartment.Size = new System.Drawing.Size(164, 26);
-            this.txtDepartment.TabIndex = 25;
-            this.txtDepartment.EditValueChanged += new System.EventHandler(this.txtDepartment_EditValueChanged);
-            this.txtDepartment.Validating += new System.ComponentModel.CancelEventHandler(this.txtDepartment_Validating);
-            // 
-            // txtPosition
-            // 
-            this.txtPosition.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtPosition.Location = new System.Drawing.Point(150, 93);
-            this.txtPosition.Name = "txtPosition";
-            this.txtPosition.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPosition.Properties.Appearance.Options.UseFont = true;
-            this.txtPosition.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtPosition.Properties.NullValuePrompt = "ex: Staff A";
-            this.txtPosition.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtPosition.Size = new System.Drawing.Size(164, 26);
-            this.txtPosition.TabIndex = 27;
-            this.txtPosition.EditValueChanged += new System.EventHandler(this.txtPosition_EditValueChanged);
-            this.txtPosition.Validating += new System.ComponentModel.CancelEventHandler(this.txtPosition_Validating);
             // 
             // tableLayoutPanel10
             // 
@@ -555,6 +653,21 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(595, 428);
             this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // txtFullName
+            // 
+            this.txtFullName.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtFullName.Location = new System.Drawing.Point(151, 3);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFullName.Properties.Appearance.Options.UseFont = true;
+            this.txtFullName.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtFullName.Properties.NullValuePrompt = "Chọn ứng viên";
+            this.txtFullName.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtFullName.Size = new System.Drawing.Size(284, 26);
+            this.txtFullName.TabIndex = 0;
+            this.txtFullName.EditValueChanged += new System.EventHandler(this.txtFullName_EditValueChanged);
+            this.txtFullName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFullName_Validating);
             // 
             // labelControl25
             // 
@@ -951,21 +1064,6 @@
             this.txtExperiene.Size = new System.Drawing.Size(441, 107);
             this.txtExperiene.TabIndex = 21;
             // 
-            // txtFullName
-            // 
-            this.txtFullName.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtFullName.Location = new System.Drawing.Point(151, 3);
-            this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFullName.Properties.Appearance.Options.UseFont = true;
-            this.txtFullName.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtFullName.Properties.NullValuePrompt = "Chọn ứng viên";
-            this.txtFullName.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtFullName.Size = new System.Drawing.Size(284, 26);
-            this.txtFullName.TabIndex = 0;
-            this.txtFullName.EditValueChanged += new System.EventHandler(this.txtFullName_EditValueChanged);
-            this.txtFullName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFullName_Validating);
-            // 
             // panelControl5
             // 
             this.panelControl5.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
@@ -1315,10 +1413,12 @@
             this.panelControl1.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDepartment.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtStaffCode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDepartment.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).EndInit();
             this.tableLayoutPanel10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtNgayPV.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNguoiPV.Properties)).EndInit();
@@ -1327,6 +1427,7 @@
             this.panelControl6.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtFullName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtTuoi.Properties)).EndInit();
@@ -1344,7 +1445,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtNgayCap.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNoiCap.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExperiene.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFullName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
             this.panelControl5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -1429,9 +1529,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl29;
         private DevExpress.XtraEditors.TextEdit txtStaffCode;
         private DevExpress.XtraEditors.LabelControl labelControl30;
-        private DevExpress.XtraEditors.TextEdit txtDepartment;
         private DevExpress.XtraEditors.LabelControl labelControl31;
-        private DevExpress.XtraEditors.TextEdit txtPosition;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private DevExpress.XtraEditors.LabelControl labelControl32;
         private DevExpress.XtraEditors.TextEdit txtNgayPV;
@@ -1443,5 +1541,14 @@
         private DevExpress.XtraEditors.SimpleButton btnReset;
         private DevExpress.XtraEditors.PictureEdit pictureEdit1;
         private DevExpress.XtraEditors.TextEdit txtFullName;
+        private DevExpress.XtraEditors.GridLookUpEdit txtDepartment;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
+        private DevExpress.XtraEditors.GridLookUpEdit txtPosition;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

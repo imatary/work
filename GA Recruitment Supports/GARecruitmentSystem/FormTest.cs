@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lib.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +19,7 @@ namespace GARecruitmentSystem
         
         private void FormTest_Load(object sender, EventArgs e)
         {
-
+            MessageBox.Show(Ultils.ConvertToTitleCase("pHạM văN cươNg"));
         }
         delegate void SetCallBack(string tex);
         private void button1_Click(object sender, EventArgs e)

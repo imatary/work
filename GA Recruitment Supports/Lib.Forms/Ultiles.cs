@@ -33,5 +33,57 @@ namespace Lib.Forms
           
             return value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string ConvertToTitleCase(string s)
+        {
+            return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(s.ToLower());
+        }
+
+
+
+        //private void btnDoichu_Click(object sender, EventArgs e)
+        //{
+        //    string hoten = this.txtTen.Text.Trim();
+        //    if (radioButton1.Checked == true) txtKetqua.Text = hoten.ToLower();
+        //    if (radioButton2.Checked == true) txtKetqua.Text = hoten.ToUpper();
+        //    if (radioButton3.Checked == true)
+        //    {
+        //        // Theo: diendan.congdongcviet.com/showthread.php?t=87982
+        //        string s = txtTen.Text.Trim();
+        //        int i = 0;
+        //        s = s.ToLower();
+        //        while (i != s.Length)
+        //        {
+        //            if (s[i] == ' ' && s[i + 1] == ' ')
+        //            {
+        //                s = s.Remove(i + 1, 1);
+        //                i = 0;
+        //            }
+        //            i++;
+        //        }
+        //        string p = s[0].ToString();
+        //        p = p.ToUpper();
+        //        s = s.Remove(0, 1);
+        //        s = s.Insert(0, p);
+        //        i = 0;
+        //        while (i < s.Length)
+        //        {
+        //            if (s[i] == ' ')
+        //            {
+        //                p = s[i + 1].ToString();
+        //                p = p.ToUpper();
+        //                s = s.Remove(i + 1, 1);
+        //                s = s.Insert(i + 1, p);
+        //            }
+        //            i++;
+        //        }
+        //        txtKetqua.Text = s;
+        //    }
+        //}
     }
 }

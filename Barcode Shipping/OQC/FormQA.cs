@@ -312,7 +312,7 @@ namespace OQC
                                         }
                                         catch (Exception ex)
                                         {
-                                            SetErrorStatus(true, "NG", "Error Insert! \n" + ex.Message);
+                                            SetErrorStatus(true, "NG", "Model chưa có trong hệ thống!\nVui lòng nhập model này vào, và thử lại. \n" + ex.Message);
                                             ResetControls();
                                         }
                                     }
