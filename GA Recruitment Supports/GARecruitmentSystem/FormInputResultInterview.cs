@@ -4,7 +4,6 @@ using Lib.Services;
 using System;
 using Lib.Forms.Helpers;
 using Lib.Forms;
-using System.Linq;
 
 namespace GARecruitmentSystem
 {
@@ -49,14 +48,14 @@ namespace GARecruitmentSystem
         private void LoadDataGridLookUpEditPositions()
         {
             var items = _positionService.GetPositions();
-            //var collection = new AutoCompleteStringCollection();
-            //foreach (var item in items)
-            //{
-            //    collection.Add(item.FullName);
-            //}
-            //txtPosition.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //txtPosition.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //txtPosition.MaskBox.AutoCompleteCustomSource = collection;
+            var collection = new AutoCompleteStringCollection();
+            foreach (var item in items)
+            {
+                collection.Add(item.PosName);
+            }
+            txtPosition.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtPosition.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtPosition.MaskBox.AutoCompleteCustomSource = collection;
 
             txtPosition.Properties.DisplayMember = "PosName";
             txtPosition.Properties.ValueMember = "PosCode";
@@ -66,14 +65,14 @@ namespace GARecruitmentSystem
         private void LoadDataGridLookUpEditDepartments()
         {
             var items = _departmentService.GetDepartments();
-            //var collection = new AutoCompleteStringCollection();
-            //foreach (var item in items)
-            //{
-            //    collection.Add(item.FullName);
-            //}
-            //txtDepartment.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //txtDepartment.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //txtDepartment.MaskBox.AutoCompleteCustomSource = collection;
+            var collection = new AutoCompleteStringCollection();
+            foreach (var item in items)
+            {
+                collection.Add(item.DeptName);
+            }
+            txtDepartment.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtDepartment.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtDepartment.MaskBox.AutoCompleteCustomSource = collection;
 
             txtDepartment.Properties.DisplayMember = "DeptName";
             txtDepartment.Properties.ValueMember = "DeptCode";

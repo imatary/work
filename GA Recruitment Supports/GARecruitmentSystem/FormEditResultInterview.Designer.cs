@@ -940,7 +940,7 @@
             this.labelControl10.Dock = System.Windows.Forms.DockStyle.Left;
             this.labelControl10.Location = new System.Drawing.Point(74, 0);
             this.labelControl10.Name = "labelControl10";
-            this.labelControl10.Size = new System.Drawing.Size(69, 26);
+            this.labelControl10.Size = new System.Drawing.Size(33, 26);
             this.labelControl10.TabIndex = 1;
             this.labelControl10.Text = " /m";
             // 
