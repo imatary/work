@@ -149,6 +149,7 @@
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.defaultToolTipController1 = new DevExpress.Utils.DefaultToolTipController(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
@@ -242,6 +243,7 @@
             // 
             // panelControl1
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.panelControl1, DevExpress.Utils.DefaultBoolean.Default);
             this.panelControl1.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.panelControl1.Appearance.Options.UseBackColor = true;
             this.panelControl1.Controls.Add(this.panelControl5);
@@ -265,6 +267,7 @@
             // 
             // panelControl5
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.panelControl5, DevExpress.Utils.DefaultBoolean.Default);
             this.panelControl5.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl5.Controls.Add(this.panelControl6);
             this.panelControl5.Controls.Add(this.labelControl28);
@@ -276,6 +279,7 @@
             // 
             // panelControl6
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.panelControl6, DevExpress.Utils.DefaultBoolean.Default);
             this.panelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl6.Controls.Add(this.btnReset);
             this.panelControl6.Controls.Add(this.btnSave);
@@ -324,6 +328,7 @@
             // 
             // tableLayoutPanel14
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel14, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel14.ColumnCount = 4;
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.75225F));
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.97748F));
@@ -408,6 +413,7 @@
             // 
             // tableLayoutPanel9
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel9, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel9.ColumnCount = 4;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.72973F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.53604F));
@@ -426,6 +432,7 @@
             // 
             // tableLayoutPanel10
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel10, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel10.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel10.ColumnCount = 1;
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -454,6 +461,7 @@
             // 
             // tableLayoutPanel13
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel13, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel13.ColumnCount = 2;
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -498,6 +506,7 @@
             // 
             // tableLayoutPanel11
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel11, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel11.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel11.ColumnCount = 1;
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -541,6 +550,7 @@
             // 
             // tableLayoutPanel12
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel12, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel12.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel12.ColumnCount = 1;
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -597,6 +607,7 @@
             // 
             // tableLayoutPanel5
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel5, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel5.ColumnCount = 4;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.003F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.33233F));
@@ -616,6 +627,7 @@
             // 
             // tableLayoutPanel8
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel8, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel8.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel8.ColumnCount = 1;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -658,6 +670,7 @@
             // 
             // tableLayoutPanel7
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel7, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel7.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel7.ColumnCount = 1;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -701,6 +714,7 @@
             // 
             // tableLayoutPanel4
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel4, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -787,6 +801,7 @@
             // 
             // tableLayoutPanel6
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel6, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel6.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel6.ColumnCount = 1;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -844,6 +859,7 @@
             // 
             // panelControl4
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.panelControl4, DevExpress.Utils.DefaultBoolean.Default);
             this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl4.Controls.Add(this.tableLayoutPanel2);
             this.panelControl4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -854,6 +870,7 @@
             // 
             // tableLayoutPanel2
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel2, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel2.ColumnCount = 14;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.18297F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.524385F));
@@ -1484,6 +1501,7 @@
             // 
             // panelControl3
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.panelControl3, DevExpress.Utils.DefaultBoolean.Default);
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl3.Controls.Add(this.tableLayoutPanel1);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1494,6 +1512,7 @@
             // 
             // tableLayoutPanel1
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel1, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel1.ColumnCount = 14;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.21278F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.522093F));
@@ -2123,6 +2142,7 @@
             // 
             // panelControl2
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.panelControl2, DevExpress.Utils.DefaultBoolean.Default);
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl2.Controls.Add(this.tableLayoutPanel3);
             this.panelControl2.Controls.Add(this.labelControl9);
@@ -2134,6 +2154,7 @@
             // 
             // tableLayoutPanel3
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this.tableLayoutPanel3, DevExpress.Utils.DefaultBoolean.Default);
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
@@ -2223,8 +2244,20 @@
             // 
             this.dxErrorProvider1.ContainerControl = this;
             // 
+            // defaultToolTipController1
+            // 
+            // 
+            // 
+            // 
+            this.defaultToolTipController1.DefaultController.IconSize = DevExpress.Utils.ToolTipIconSize.Large;
+            this.defaultToolTipController1.DefaultController.Rounded = true;
+            this.defaultToolTipController1.DefaultController.ShowBeak = true;
+            this.defaultToolTipController1.DefaultController.ToolTipLocation = DevExpress.Utils.ToolTipLocation.TopRight;
+            this.defaultToolTipController1.DefaultController.ToolTipStyle = DevExpress.Utils.ToolTipStyle.Windows7;
+            // 
             // FormEditScore
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this, DevExpress.Utils.DefaultBoolean.Default);
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
@@ -2451,5 +2484,6 @@
         private DevExpress.XtraEditors.SimpleButton btnReset;
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.PanelControl panelControl6;
+        private DevExpress.Utils.DefaultToolTipController defaultToolTipController1;
     }
 }

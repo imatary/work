@@ -23,6 +23,7 @@ namespace GARecruitmentSystem
         {
             btnUpdate.Enabled = enable;
             btnDelete.Enabled = enable;
+            
         }
         private void LoadData()
         {
@@ -68,7 +69,6 @@ namespace GARecruitmentSystem
                             MessageBox.Show(ex.Message, "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-
                 }
                 else
                 {

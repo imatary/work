@@ -1272,5 +1272,21 @@ namespace GARecruitmentSystem
                 }
             }
         }
+
+        private void txtFullName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtFullName))
+            {
+                CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtFullName, toolTipController1, "Vui lòng nhập vào 'Họ và Tên' cho ứng viên!");
+            }
+        }
+
+        private void txtBrithDay_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtBrithDay))
+            {
+                CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtBrithDay, toolTipController1, "Vui lòng nhập vào 'Ngày sinh' cho ứng viên!");
+            }
+        }
     }
 }

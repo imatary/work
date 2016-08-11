@@ -42,6 +42,7 @@
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
+            this.defaultToolTipController1 = new DevExpress.Utils.DefaultToolTipController(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkRemember.Properties)).BeginInit();
@@ -155,8 +156,25 @@
             // 
             this.dxErrorProvider1.ContainerControl = this;
             // 
+            // toolTipController1
+            // 
+            this.toolTipController1.Rounded = true;
+            this.toolTipController1.ShowBeak = true;
+            // 
+            // defaultToolTipController1
+            // 
+            // 
+            // 
+            // 
+            this.defaultToolTipController1.DefaultController.IconSize = DevExpress.Utils.ToolTipIconSize.Large;
+            this.defaultToolTipController1.DefaultController.Rounded = true;
+            this.defaultToolTipController1.DefaultController.ShowBeak = true;
+            this.defaultToolTipController1.DefaultController.ToolTipLocation = DevExpress.Utils.ToolTipLocation.TopRight;
+            this.defaultToolTipController1.DefaultController.ToolTipStyle = DevExpress.Utils.ToolTipStyle.Windows7;
+            // 
             // FormLogin
             // 
+            this.defaultToolTipController1.SetAllowHtmlText(this, DevExpress.Utils.DefaultBoolean.Default);
             this.Appearance.BackColor = System.Drawing.Color.White;
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,5 +223,6 @@
         private DevExpress.XtraEditors.SimpleButton btnConfig;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
         private DevExpress.Utils.ToolTipController toolTipController1;
+        private DevExpress.Utils.DefaultToolTipController defaultToolTipController1;
     }
 }

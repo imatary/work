@@ -13,6 +13,7 @@ namespace GARecruitmentSystem
         private readonly ResultsService _resultService;
         private readonly PositionService _positionService;
         private readonly DepartmentService _departmentService;
+        private readonly EducationService _educationService;
         public FormInputResultInterview()
         {
             InitializeComponent();
@@ -21,11 +22,12 @@ namespace GARecruitmentSystem
             _resultService = new ResultsService();
             _positionService = new PositionService();
             _departmentService = new DepartmentService();
+            _educationService = new EducationService();
 
             LoadDataGridLookUpEdit();
             LoadDataGridLookUpEditPositions();
             LoadDataGridLookUpEditDepartments();
-            //AutocompleteString();
+            LoadDataGridLookUpEditEducations();
         }
 
         private void LoadDataGridLookUpEdit()
@@ -78,6 +80,23 @@ namespace GARecruitmentSystem
             txtDepartment.Properties.ValueMember = "DeptCode";
             txtDepartment.Properties.PopupFormWidth = 300;
             txtDepartment.Properties.DataSource = items;
+        }
+        private void LoadDataGridLookUpEditEducations()
+        {
+            var items = _educationService.GetEducations();
+            var collection = new AutoCompleteStringCollection();
+            foreach (var item in items)
+            {
+                collection.Add(item.EduName);
+            }
+            gridLookUpEditEducation.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            gridLookUpEditEducation.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            gridLookUpEditEducation.MaskBox.AutoCompleteCustomSource = collection;
+
+            gridLookUpEditEducation.Properties.DisplayMember = "EduName";
+            gridLookUpEditEducation.Properties.ValueMember = "EduCode";
+            gridLookUpEditEducation.Properties.PopupFormWidth = 300;
+            gridLookUpEditEducation.Properties.DataSource = items;
         }
         private void AutocompleteString()
         {
@@ -219,6 +238,10 @@ namespace GARecruitmentSystem
         private void txtNgayDiLam_EditValueChanged(object sender, EventArgs e)
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(dxErrorProvider1, txtNgayDiLam);
+        }
+        private void gridLookUpEditEducation_EditValueChanged(object sender, EventArgs e)
+        {
+            CheckTextBoxNullValue.SetColorDefaultTextControl(dxErrorProvider1, gridLookUpEditEducation);
         }
         #endregion
 
@@ -379,7 +402,13 @@ namespace GARecruitmentSystem
             }
         }
 
-
+        private void gridLookUpEditEducation_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!CheckTextBoxNullValue.ValidationTextEditNullValue(gridLookUpEditEducation))
+            {
+                CheckTextBoxNullValue.ShowError(dxErrorProvider1, gridLookUpEditEducation, toolTipController1, "Vui lòng chọn 'Tên trường' cho ứng viên!");
+            }
+        }
         #endregion
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -455,6 +484,10 @@ namespace GARecruitmentSystem
             else if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtNgayDiLam))
             {
                 CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtNgayDiLam, toolTipController1, "Vui lòng nhập vào 'Ngày đi làm' của ứng viên!");
+            }
+            else if (!CheckTextBoxNullValue.ValidationTextEditNullValue(gridLookUpEditEducation))
+            {
+                CheckTextBoxNullValue.ShowError(dxErrorProvider1, gridLookUpEditEducation, toolTipController1, "Vui lòng chọn 'Tên trường' cho ứng viên!");
             }
             else
             {
@@ -542,5 +575,7 @@ namespace GARecruitmentSystem
             lblScorePicture.Text = "0/7";
             lblPercentPicture.Text = "0%";
         }
+
+        
     }
 }

@@ -27,6 +27,20 @@ namespace GARecruitmentSystem
             Thread t = new Thread(new ThreadStart(LapVoTan));
 
             t.Start();
+
+            ToolTip buttonToolTip = new ToolTip();
+            buttonToolTip.ToolTipTitle = "Button Tooltip";
+            buttonToolTip.UseFading = true;
+            buttonToolTip.UseAnimation = true;
+            buttonToolTip.IsBalloon = true;
+
+            buttonToolTip.ShowAlways = true;
+
+            buttonToolTip.AutoPopDelay = 5000;
+            buttonToolTip.InitialDelay = 1000;
+            buttonToolTip.ReshowDelay = 500;
+
+            buttonToolTip.SetToolTip(button1, "Click me to execute.");
         }
         int x = 0;
         private void LapVoTan()

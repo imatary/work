@@ -38,14 +38,9 @@
             this.labelControl29 = new DevExpress.XtraEditors.LabelControl();
             this.txtDepartment = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl28 = new DevExpress.XtraEditors.LabelControl();
             this.txtPosition = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtID = new DevExpress.XtraEditors.TextEdit();
             this.txtStaffCode = new DevExpress.XtraEditors.TextEdit();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
@@ -73,10 +68,6 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.gridLookUpEditFullName = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnFullName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnBirthday = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnPercent = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.txtTuoi = new DevExpress.XtraEditors.TextEdit();
@@ -124,6 +115,20 @@
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
+            this.gridLookUpEditEducation = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnFullName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnBirthday = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnPercent = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
@@ -171,6 +176,8 @@
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditEducation.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -299,45 +306,6 @@
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // gridColumn3
-            // 
-            this.gridColumn3.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn3.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn3.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn3.Caption = "ID";
-            this.gridColumn3.FieldName = "DeptCode";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
-            this.gridColumn3.Width = 100;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn4.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn4.Caption = "Name";
-            this.gridColumn4.FieldName = "DeptName";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 1;
-            this.gridColumn4.Width = 150;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn5.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn5.Caption = "Type Of";
-            this.gridColumn5.FieldName = "TypeOf";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 2;
-            this.gridColumn5.Width = 100;
-            // 
             // labelControl28
             // 
             this.labelControl28.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -381,36 +349,6 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn1.AppearanceCell.Options.UseFont = true;
-            this.gridColumn1.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn1.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn1.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn1.Caption = "ID";
-            this.gridColumn1.FieldName = "PosCode";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
-            this.gridColumn1.Width = 80;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn2.AppearanceCell.Options.UseFont = true;
-            this.gridColumn2.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn2.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn2.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn2.Caption = "Name";
-            this.gridColumn2.FieldName = "PosName";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
-            this.gridColumn2.Width = 304;
             // 
             // txtID
             // 
@@ -816,62 +754,6 @@
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
-            // gridColumnFullName
-            // 
-            this.gridColumnFullName.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumnFullName.AppearanceHeader.Options.UseFont = true;
-            this.gridColumnFullName.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumnFullName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnFullName.Caption = "Họ và Tên";
-            this.gridColumnFullName.FieldName = "FullName";
-            this.gridColumnFullName.Name = "gridColumnFullName";
-            this.gridColumnFullName.Visible = true;
-            this.gridColumnFullName.VisibleIndex = 0;
-            this.gridColumnFullName.Width = 150;
-            // 
-            // gridColumnBirthday
-            // 
-            this.gridColumnBirthday.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumnBirthday.AppearanceHeader.Options.UseFont = true;
-            this.gridColumnBirthday.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumnBirthday.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnBirthday.Caption = "Ngày sinh";
-            this.gridColumnBirthday.FieldName = "Birthday";
-            this.gridColumnBirthday.Name = "gridColumnBirthday";
-            this.gridColumnBirthday.Visible = true;
-            this.gridColumnBirthday.VisibleIndex = 1;
-            this.gridColumnBirthday.Width = 100;
-            // 
-            // gridColumnPercent
-            // 
-            this.gridColumnPercent.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumnPercent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnPercent.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumnPercent.AppearanceHeader.Options.UseFont = true;
-            this.gridColumnPercent.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumnPercent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnPercent.Caption = "%";
-            this.gridColumnPercent.FieldName = "Percent";
-            this.gridColumnPercent.Name = "gridColumnPercent";
-            this.gridColumnPercent.Visible = true;
-            this.gridColumnPercent.VisibleIndex = 2;
-            this.gridColumnPercent.Width = 70;
-            // 
-            // gridColumnResult
-            // 
-            this.gridColumnResult.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumnResult.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnResult.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumnResult.AppearanceHeader.Options.UseFont = true;
-            this.gridColumnResult.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumnResult.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnResult.Caption = "OK/NG";
-            this.gridColumnResult.FieldName = "KetQua";
-            this.gridColumnResult.Name = "gridColumnResult";
-            this.gridColumnResult.Visible = true;
-            this.gridColumnResult.VisibleIndex = 3;
-            this.gridColumnResult.Width = 70;
-            // 
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1180,6 +1062,8 @@
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel6, 1, 2);
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel7, 1, 3);
             this.tableLayoutPanel4.Controls.Add(this.lblResult, 1, 4);
+            this.tableLayoutPanel4.Controls.Add(this.labelControl17, 0, 5);
+            this.tableLayoutPanel4.Controls.Add(this.gridLookUpEditEducation, 1, 5);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -1189,8 +1073,8 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.31925F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.43925F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.17757F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.58879F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.345795F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.943925F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.85981F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(395, 428);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
@@ -1199,10 +1083,10 @@
             this.labelControl26.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl26.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl26.Location = new System.Drawing.Point(3, 283);
+            this.labelControl26.Location = new System.Drawing.Point(3, 278);
             this.labelControl26.Name = "labelControl26";
             this.labelControl26.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.labelControl26.Size = new System.Drawing.Size(159, 29);
+            this.labelControl26.Size = new System.Drawing.Size(159, 28);
             this.labelControl26.TabIndex = 28;
             this.labelControl26.Text = "Kết quả bài thi:";
             // 
@@ -1211,10 +1095,10 @@
             this.labelControl20.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl20.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl20.Location = new System.Drawing.Point(3, 157);
+            this.labelControl20.Location = new System.Drawing.Point(3, 154);
             this.labelControl20.Name = "labelControl20";
             this.labelControl20.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.labelControl20.Size = new System.Drawing.Size(159, 120);
+            this.labelControl20.Size = new System.Drawing.Size(159, 118);
             this.labelControl20.TabIndex = 26;
             this.labelControl20.Text = "Bài kiểm tra tính nhanh:";
             // 
@@ -1223,10 +1107,10 @@
             this.labelControl19.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl19.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl19.Location = new System.Drawing.Point(3, 96);
+            this.labelControl19.Location = new System.Drawing.Point(3, 94);
             this.labelControl19.Name = "labelControl19";
             this.labelControl19.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.labelControl19.Size = new System.Drawing.Size(159, 55);
+            this.labelControl19.Size = new System.Drawing.Size(159, 54);
             this.labelControl19.TabIndex = 24;
             this.labelControl19.Text = "Bài thi tranh:";
             // 
@@ -1235,10 +1119,10 @@
             this.labelControl16.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl16.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl16.Location = new System.Drawing.Point(3, 34);
+            this.labelControl16.Location = new System.Drawing.Point(3, 33);
             this.labelControl16.Name = "labelControl16";
             this.labelControl16.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.labelControl16.Size = new System.Drawing.Size(159, 56);
+            this.labelControl16.Size = new System.Drawing.Size(159, 55);
             this.labelControl16.TabIndex = 20;
             this.labelControl16.Text = "Bài thi mắt:";
             // 
@@ -1250,12 +1134,12 @@
             this.tableLayoutPanel5.Controls.Add(this.lblResultEye, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.lblScoreEye, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(168, 34);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(168, 33);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(224, 56);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(224, 55);
             this.tableLayoutPanel5.TabIndex = 21;
             // 
             // lblResultEye
@@ -1263,7 +1147,7 @@
             this.lblResultEye.Appearance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResultEye.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblResultEye.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblResultEye.Location = new System.Drawing.Point(5, 32);
+            this.lblResultEye.Location = new System.Drawing.Point(5, 31);
             this.lblResultEye.Name = "lblResultEye";
             this.lblResultEye.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.lblResultEye.Size = new System.Drawing.Size(214, 19);
@@ -1278,7 +1162,7 @@
             this.lblScoreEye.Location = new System.Drawing.Point(5, 5);
             this.lblScoreEye.Name = "lblScoreEye";
             this.lblScoreEye.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.lblScoreEye.Size = new System.Drawing.Size(214, 19);
+            this.lblScoreEye.Size = new System.Drawing.Size(214, 18);
             this.lblScoreEye.TabIndex = 0;
             this.lblScoreEye.Text = "V=0";
             // 
@@ -1290,12 +1174,12 @@
             this.tableLayoutPanel6.Controls.Add(this.lblPercentPicture, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.lblScorePicture, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(168, 96);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(168, 94);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(224, 55);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(224, 54);
             this.tableLayoutPanel6.TabIndex = 25;
             // 
             // lblPercentPicture
@@ -1306,7 +1190,7 @@
             this.lblPercentPicture.Location = new System.Drawing.Point(5, 31);
             this.lblPercentPicture.Name = "lblPercentPicture";
             this.lblPercentPicture.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.lblPercentPicture.Size = new System.Drawing.Size(214, 19);
+            this.lblPercentPicture.Size = new System.Drawing.Size(214, 18);
             this.lblPercentPicture.TabIndex = 3;
             this.lblPercentPicture.Text = "0%";
             // 
@@ -1337,14 +1221,14 @@
             this.tableLayoutPanel7.Controls.Add(this.labelControl24, 0, 2);
             this.tableLayoutPanel7.Controls.Add(this.lblTotalPear, 1, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(168, 157);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(168, 154);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 4;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(224, 120);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(224, 118);
             this.tableLayoutPanel7.TabIndex = 27;
             // 
             // lblDifference
@@ -1354,7 +1238,7 @@
             this.lblDifference.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDifference.Location = new System.Drawing.Point(137, 92);
             this.lblDifference.Name = "lblDifference";
-            this.lblDifference.Size = new System.Drawing.Size(82, 23);
+            this.lblDifference.Size = new System.Drawing.Size(82, 21);
             this.lblDifference.TabIndex = 31;
             this.lblDifference.Text = "0";
             // 
@@ -1388,7 +1272,7 @@
             this.labelControl22.Location = new System.Drawing.Point(5, 92);
             this.labelControl22.Name = "labelControl22";
             this.labelControl22.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.labelControl22.Size = new System.Drawing.Size(124, 23);
+            this.labelControl22.Size = new System.Drawing.Size(124, 21);
             this.labelControl22.TabIndex = 25;
             this.labelControl22.Text = "Điểm chênh lệch:";
             // 
@@ -1445,9 +1329,9 @@
             this.lblResult.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblResult.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblResult.Location = new System.Drawing.Point(168, 283);
+            this.lblResult.Location = new System.Drawing.Point(168, 278);
             this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(224, 29);
+            this.lblResult.Size = new System.Drawing.Size(224, 28);
             this.lblResult.TabIndex = 29;
             this.lblResult.Text = "OK/NG";
             // 
@@ -1487,6 +1371,199 @@
             // dxErrorProvider1
             // 
             this.dxErrorProvider1.ContainerControl = this;
+            // 
+            // labelControl17
+            // 
+            this.labelControl17.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl17.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl17.Location = new System.Drawing.Point(3, 312);
+            this.labelControl17.Name = "labelControl17";
+            this.labelControl17.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.labelControl17.Size = new System.Drawing.Size(159, 27);
+            this.labelControl17.TabIndex = 30;
+            this.labelControl17.Text = "Tên trường:";
+            // 
+            // gridLookUpEditEducation
+            // 
+            this.gridLookUpEditEducation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridLookUpEditEducation.Location = new System.Drawing.Point(168, 312);
+            this.gridLookUpEditEducation.Name = "gridLookUpEditEducation";
+            this.gridLookUpEditEducation.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEditEducation.Properties.Appearance.Options.UseFont = true;
+            this.gridLookUpEditEducation.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.gridLookUpEditEducation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.gridLookUpEditEducation.Properties.NullText = "";
+            this.gridLookUpEditEducation.Properties.NullValuePrompt = "ex: University";
+            this.gridLookUpEditEducation.Properties.NullValuePromptShowForEmptyValue = true;
+            this.gridLookUpEditEducation.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.gridLookUpEditEducation.Properties.View = this.gridView3;
+            this.gridLookUpEditEducation.Size = new System.Drawing.Size(224, 26);
+            this.gridLookUpEditEducation.TabIndex = 31;
+            this.gridLookUpEditEducation.EditValueChanged += new System.EventHandler(this.gridLookUpEditEducation_EditValueChanged);
+            this.gridLookUpEditEducation.Validating += new System.ComponentModel.CancelEventHandler(this.gridLookUpEditEducation_Validating);
+            // 
+            // gridView3
+            // 
+            this.gridView3.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn6,
+            this.gridColumn7});
+            this.gridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView3.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn3.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn3.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn3.Caption = "ID";
+            this.gridColumn3.FieldName = "DeptCode";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
+            this.gridColumn3.Width = 100;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn4.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn4.Caption = "Name";
+            this.gridColumn4.FieldName = "DeptName";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 1;
+            this.gridColumn4.Width = 150;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn5.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn5.Caption = "Type Of";
+            this.gridColumn5.FieldName = "TypeOf";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 2;
+            this.gridColumn5.Width = 100;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn1.AppearanceCell.Options.UseFont = true;
+            this.gridColumn1.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn1.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn1.Caption = "ID";
+            this.gridColumn1.FieldName = "PosCode";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.Width = 80;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn2.AppearanceCell.Options.UseFont = true;
+            this.gridColumn2.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn2.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn2.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn2.Caption = "Name";
+            this.gridColumn2.FieldName = "PosName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.Width = 304;
+            // 
+            // gridColumnFullName
+            // 
+            this.gridColumnFullName.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumnFullName.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnFullName.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnFullName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnFullName.Caption = "Họ và Tên";
+            this.gridColumnFullName.FieldName = "FullName";
+            this.gridColumnFullName.Name = "gridColumnFullName";
+            this.gridColumnFullName.Visible = true;
+            this.gridColumnFullName.VisibleIndex = 0;
+            this.gridColumnFullName.Width = 150;
+            // 
+            // gridColumnBirthday
+            // 
+            this.gridColumnBirthday.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumnBirthday.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnBirthday.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnBirthday.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnBirthday.Caption = "Ngày sinh";
+            this.gridColumnBirthday.FieldName = "Birthday";
+            this.gridColumnBirthday.Name = "gridColumnBirthday";
+            this.gridColumnBirthday.Visible = true;
+            this.gridColumnBirthday.VisibleIndex = 1;
+            this.gridColumnBirthday.Width = 100;
+            // 
+            // gridColumnPercent
+            // 
+            this.gridColumnPercent.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumnPercent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnPercent.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumnPercent.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnPercent.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnPercent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnPercent.Caption = "%";
+            this.gridColumnPercent.FieldName = "Percent";
+            this.gridColumnPercent.Name = "gridColumnPercent";
+            this.gridColumnPercent.Visible = true;
+            this.gridColumnPercent.VisibleIndex = 2;
+            this.gridColumnPercent.Width = 70;
+            // 
+            // gridColumnResult
+            // 
+            this.gridColumnResult.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumnResult.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnResult.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumnResult.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnResult.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnResult.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnResult.Caption = "OK/NG";
+            this.gridColumnResult.FieldName = "KetQua";
+            this.gridColumnResult.Name = "gridColumnResult";
+            this.gridColumnResult.Visible = true;
+            this.gridColumnResult.VisibleIndex = 3;
+            this.gridColumnResult.Width = 70;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn6.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn6.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn6.Caption = "ID";
+            this.gridColumn6.FieldName = "EduCode";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 0;
+            this.gridColumn6.Width = 60;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn7.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn7.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn7.Caption = "Name";
+            this.gridColumn7.FieldName = "EduName";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 1;
+            this.gridColumn7.Width = 324;
             // 
             // FormInputResultInterview
             // 
@@ -1549,6 +1626,8 @@
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditEducation.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1649,5 +1728,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraEditors.LabelControl labelControl17;
+        private DevExpress.XtraEditors.GridLookUpEdit gridLookUpEditEducation;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
     }
 }

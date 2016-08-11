@@ -58,7 +58,7 @@ namespace GARecruitmentSystem
             }
             else if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtPassword))
             {
-                CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtUsername, toolTipController1, "Vui lòng nhập vào 'Mật khẩu'!");
+                CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtPassword, toolTipController1, "Vui lòng nhập vào 'Mật khẩu'!");
             }
             else
             {
@@ -167,7 +167,7 @@ namespace GARecruitmentSystem
         }
         private void txtPassword_EditValueChanged(object sender, EventArgs e)
         {
-            CheckTextBoxNullValue.SetColorDefaultTextControl(dxErrorProvider1, txtUsername);
+            CheckTextBoxNullValue.SetColorDefaultTextControl(dxErrorProvider1, txtPassword);
         }
        
     }

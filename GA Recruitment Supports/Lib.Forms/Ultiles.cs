@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using System;
 using System.Globalization;
+using System.Threading;
 
 namespace Lib.Forms
 {
@@ -29,9 +30,7 @@ namespace Lib.Forms
         /// <returns></returns>
         public static DateTime ConvertStringToDateTime(BaseEdit control)
         {
-            DateTime value = DateTime.ParseExact(control.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-          
-            return value;
+            return DateTime.ParseExact(control.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -41,10 +40,8 @@ namespace Lib.Forms
         /// <returns></returns>
         public static string ConvertToTitleCase(string s)
         {
-            return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(s.ToLower());
+            return Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(s.ToLower());
         }
-
-
 
         //private void btnDoichu_Click(object sender, EventArgs e)
         //{

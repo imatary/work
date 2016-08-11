@@ -2,6 +2,7 @@
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.DXErrorProvider;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Lib.Forms.Helpers
 {
@@ -88,7 +89,29 @@ namespace Lib.Forms.Helpers
             args.ToolTip = control.ErrorText;
             args.SelectedControl = control;
             args.SuperTip = null; // here
+            
             tipController.ShowHint(args, control.Parent.PointToScreen(control.Location));
+        }
+
+        public static void ShowTooltipError(BaseEdit control, string toolTipTile, string message)
+        {
+            control.Properties.Appearance.BorderColor = Color.Red;
+            control.Focus();
+            control.SelectAll();
+
+            ToolTip buttonToolTip = new ToolTip();
+            buttonToolTip.ToolTipTitle = toolTipTile;
+            buttonToolTip.UseFading = true;
+            buttonToolTip.UseAnimation = true;
+            buttonToolTip.IsBalloon = true;
+            buttonToolTip.Active = true;
+            buttonToolTip.ShowAlways = true;
+
+            buttonToolTip.AutoPopDelay = 5000;
+            buttonToolTip.InitialDelay = 10;
+            buttonToolTip.ReshowDelay = 500;
+
+            buttonToolTip.SetToolTip(control, message);
         }
 
         public static void SetBackColorErrorMessage(LabelControl label, string message)

@@ -18,22 +18,6 @@ namespace Lib.Data
         public string FullName { get; set; }
         public System.DateTime Birthday { get; set; }
         public string Sex { get; set; }
-        public string GT {
-            get
-            {
-                string gt = null;
-                if (Sex == "M")
-                {
-                    gt = "Nữ";
-                }
-                else if (Sex == "F")
-                {
-                    gt = "Nam";
-                }
-
-                return gt;
-            }
-        }
         public string PhoneNumber { get; set; }
         public string NS { get; set; }
         public string HKTT { get; set; }

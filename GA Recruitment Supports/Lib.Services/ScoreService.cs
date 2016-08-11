@@ -63,8 +63,8 @@ namespace Lib.Services
         {
             int difference = 0;
             int value = 0;
-            int iMax = int.MinValue;
-            int iMin = int.MaxValue;
+            int iMax = 0;
+            int iMin = 0;
             int[] array = new int[100];
             List<int> list = new List<int>();
 
