@@ -1,8 +1,7 @@
-﻿using OQC.Web.Models;
+﻿using OQC.Web.Core;
+using OQC.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -16,7 +15,7 @@ namespace OQC.Web
         protected void Application_Start()
         {
             Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
-
+            UsingTimer.StartTimer();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

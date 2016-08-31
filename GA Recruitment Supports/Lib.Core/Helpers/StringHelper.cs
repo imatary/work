@@ -47,7 +47,7 @@ namespace Lib.Core.Helpers
             //System.Environment.MachineName
             //HttpContext.Current.Server.MachineName
             //System.Net.Dns.GetHostName()
-            String pcName = System.Net.Dns.GetHostName();
+            string pcName = Dns.GetHostName();
             string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             string info = $"{userName} - {pcName} - {GetComputerLanIp()} - {GetMacAddress()}";
             return info;

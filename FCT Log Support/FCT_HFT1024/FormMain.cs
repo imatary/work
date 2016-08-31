@@ -40,6 +40,12 @@ namespace FCT_HFT1024
                 errorProvider1.SetError(txtCurentProcessID, "Please input a curent process!");
                 isVaild = false;
             }
+            if (string.IsNullOrEmpty(txtCurentProcessID.Text))
+            {
+                ValidationTextBox.CheckNullValue(txtCurentProcessID);
+                errorProvider1.SetError(txtCurentProcessID, "Please input a curent process!");
+                isVaild = false;
+            }
             else if(string.IsNullOrEmpty(txtFile.Text))
             {
                 ValidationTextBox.CheckNullValue(txtFile);
@@ -345,5 +351,9 @@ namespace FCT_HFT1024
             return isAdmin;
         }
 
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

@@ -78,13 +78,13 @@ namespace OQC
                             }
                             else
                             {
-                                txtJudge.Focus();
+                                txtMacAddress.Focus();
                                 SetErrorStatus(false, null, null);
                             }
                         }
                         else if(Program.CurrentUser.OperationID >= 2)
                         {
-                            txtJudge.Focus();
+                            txtMacAddress.Focus();
                             SetErrorStatus(false, null, null);
                         }
                     }
@@ -433,7 +433,7 @@ namespace OQC
         {
             txtProductionID.Focus();
             txtProductionID.Text = string.Empty;
-            //txtMacAddress.Text = string.Empty;
+            txtMacAddress.Text = string.Empty;
             txtJudge.Text = string.Empty;
             txtBoxID.Text = string.Empty;
         }

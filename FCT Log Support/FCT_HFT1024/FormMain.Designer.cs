@@ -28,13 +28,12 @@ namespace FCT_HFT1024
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.txtFile = new System.Windows.Forms.TextBox();
             this.lblFile = new System.Windows.Forms.Label();
             this.btnWatchFile = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.tmrEditNotify = new System.Windows.Forms.Timer(this.components);
+            this.tmrEditNotify = new System.Windows.Forms.Timer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.chkSubFolder = new System.Windows.Forms.CheckBox();
@@ -55,20 +54,30 @@ namespace FCT_HFT1024
             this.colModel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lblMessage = new System.Windows.Forms.Label();
+            this.lblJudge = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblNG = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblPass = new System.Windows.Forms.Label();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCurentVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.colStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider();
             this.groupBox1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -97,7 +106,7 @@ namespace FCT_HFT1024
             this.btnWatchFile.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnWatchFile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnWatchFile.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnWatchFile.Location = new System.Drawing.Point(6, 101);
+            this.btnWatchFile.Location = new System.Drawing.Point(7, 91);
             this.btnWatchFile.Name = "btnWatchFile";
             this.btnWatchFile.Size = new System.Drawing.Size(119, 23);
             this.btnWatchFile.TabIndex = 10;
@@ -128,6 +137,7 @@ namespace FCT_HFT1024
             this.groupBox1.Controls.Add(this.rdbDir);
             this.groupBox1.Controls.Add(this.rdbFile);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Enabled = false;
             this.groupBox1.Location = new System.Drawing.Point(15, 15);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
@@ -249,6 +259,7 @@ namespace FCT_HFT1024
             this.panel4.Padding = new System.Windows.Forms.Padding(15);
             this.panel4.Size = new System.Drawing.Size(714, 516);
             this.panel4.TabIndex = 1;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // panel1
             // 
@@ -256,9 +267,9 @@ namespace FCT_HFT1024
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(15, 209);
+            this.panel1.Location = new System.Drawing.Point(15, 232);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(684, 292);
+            this.panel1.Size = new System.Drawing.Size(684, 269);
             this.panel1.TabIndex = 6;
             // 
             // listView1
@@ -275,7 +286,7 @@ namespace FCT_HFT1024
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(0, 29);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(684, 226);
+            this.listView1.Size = new System.Drawing.Size(684, 203);
             this.listView1.TabIndex = 20;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -304,11 +315,16 @@ namespace FCT_HFT1024
             this.colTime.Text = "Time";
             this.colTime.Width = 80;
             // 
+            // colStatus
+            // 
+            this.colStatus.Text = "Status";
+            this.colStatus.Width = 100;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.btnLog);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 255);
+            this.panel3.Location = new System.Drawing.Point(0, 232);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(684, 37);
             this.panel3.TabIndex = 19;
@@ -316,6 +332,9 @@ namespace FCT_HFT1024
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.lblMessage);
+            this.panel5.Controls.Add(this.lblJudge);
+            this.panel5.Controls.Add(this.tableLayoutPanel1);
             this.panel5.Controls.Add(this.label1);
             this.panel5.Controls.Add(this.lblFile);
             this.panel5.Controls.Add(this.btnBrowseFile);
@@ -325,8 +344,123 @@ namespace FCT_HFT1024
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(15, 81);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(684, 128);
+            this.panel5.Size = new System.Drawing.Size(684, 151);
             this.panel5.TabIndex = 5;
+            // 
+            // lblMessage
+            // 
+            this.lblMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblMessage.Location = new System.Drawing.Point(433, 80);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(248, 68);
+            this.lblMessage.TabIndex = 24;
+            // 
+            // lblJudge
+            // 
+            this.lblJudge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblJudge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblJudge.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJudge.ForeColor = System.Drawing.Color.Green;
+            this.lblJudge.Location = new System.Drawing.Point(328, 80);
+            this.lblJudge.Name = "lblJudge";
+            this.lblJudge.Size = new System.Drawing.Size(100, 68);
+            this.lblJudge.TabIndex = 23;
+            this.lblJudge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127F));
+            this.tableLayoutPanel1.Controls.Add(this.lblTotal, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblNG, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblPass, 0, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(328, 4);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(353, 66);
+            this.tableLayoutPanel1.TabIndex = 22;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.ForeColor = System.Drawing.Color.Blue;
+            this.lblTotal.Location = new System.Drawing.Point(227, 34);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(111, 30);
+            this.lblTotal.TabIndex = 22;
+            this.lblTotal.Text = "0";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label4.Location = new System.Drawing.Point(5, 2);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(103, 30);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "PASS";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblNG
+            // 
+            this.lblNG.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblNG.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNG.ForeColor = System.Drawing.Color.Maroon;
+            this.lblNG.Location = new System.Drawing.Point(116, 34);
+            this.lblNG.Name = "lblNG";
+            this.lblNG.Size = new System.Drawing.Size(103, 30);
+            this.lblNG.TabIndex = 21;
+            this.lblNG.Text = "0";
+            this.lblNG.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Maroon;
+            this.label5.Location = new System.Drawing.Point(116, 2);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(103, 30);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "NG";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Blue;
+            this.label6.Location = new System.Drawing.Point(227, 2);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(121, 30);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "TOTAL";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPass
+            // 
+            this.lblPass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblPass.Location = new System.Drawing.Point(5, 34);
+            this.lblPass.Name = "lblPass";
+            this.lblPass.Size = new System.Drawing.Size(103, 30);
+            this.lblPass.TabIndex = 20;
+            this.lblPass.Text = "0";
+            this.lblPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // toolStripStatusLabel1
             // 
@@ -378,11 +512,6 @@ namespace FCT_HFT1024
             this.errorProvider1.ContainerControl = this;
             this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
             // 
-            // colStatus
-            // 
-            this.colStatus.Text = "Status";
-            this.colStatus.Width = 100;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -392,6 +521,7 @@ namespace FCT_HFT1024
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(730, 580);
             this.MinimumSize = new System.Drawing.Size(420, 39);
@@ -406,6 +536,7 @@ namespace FCT_HFT1024
             this.panel3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -450,6 +581,15 @@ namespace FCT_HFT1024
         private System.Windows.Forms.ColumnHeader colDate;
         private System.Windows.Forms.ColumnHeader colTime;
         private System.Windows.Forms.ColumnHeader colStatus;
+        private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.Label lblJudge;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblNG;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblPass;
     }
 }
 

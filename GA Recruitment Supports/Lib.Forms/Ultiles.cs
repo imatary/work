@@ -32,7 +32,10 @@ namespace Lib.Forms
         {
             return DateTime.ParseExact(control.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
-
+        public static DateTime ConvertStringToDateTime(string value)
+        {
+            return DateTime.ParseExact(value, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        }
         /// <summary>
         /// 
         /// </summary>

@@ -253,4 +253,10 @@ namespace IndicateReport
             string reportId = string.Format("{0}_{1}_{2}", process.Name_process, actualModel.Name_actual_model, date);
             return reportId;
         }
-    }}
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

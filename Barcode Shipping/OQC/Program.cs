@@ -26,7 +26,7 @@ namespace OQC
                 // nếu không, ứng dụng sẽ thoát.
                 if (ownmutex)
                 {
-                    Application.Run(new FormQALogin());
+                    Application.Run(new FormTestTimerDatabase());
                     //giai phong Mutex;
                     mutex.ReleaseMutex();
                 }

@@ -94,7 +94,7 @@ namespace OQC.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Leader, Admin, Delete")]
+        [Authorize]
         public async Task<ActionResult> Delete(string id)
         {
             var model = await modelService.GetModelByIdAsync(id);

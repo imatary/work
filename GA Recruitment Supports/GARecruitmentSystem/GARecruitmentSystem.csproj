@@ -144,6 +144,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormTranferData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTranferData.Designer.cs">
+      <DependentUpon>FormTranferData.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormResultInterviews.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,12 @@
     <Compile Include="FormWaiting\WaitFormLoadData.Designer.cs">
       <DependentUpon>WaitFormLoadData.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormWaiting\WaitFormLoadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWaiting\WaitFormLoadForm.Designer.cs">
+      <DependentUpon>WaitFormLoadForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormEditScore.resx">
@@ -188,6 +200,9 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormTranferData.resx">
+      <DependentUpon>FormTranferData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormResultInterviews.resx">
       <DependentUpon>FormResultInterviews.cs</DependentUpon>
     </EmbeddedResource>
@@ -199,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormWaiting\WaitFormLoadData.resx">
       <DependentUpon>WaitFormLoadData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWaiting\WaitFormLoadForm.resx">
+      <DependentUpon>WaitFormLoadForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

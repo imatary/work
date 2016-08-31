@@ -221,7 +221,7 @@
             // 
             this.lblSetPlan.BackColor = System.Drawing.Color.White;
             this.lblSetPlan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSetPlan.Font = new System.Drawing.Font("DS-Digital", 50F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSetPlan.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSetPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblSetPlan.Location = new System.Drawing.Point(219, 141);
             this.lblSetPlan.Name = "lblSetPlan";
@@ -245,7 +245,7 @@
             // lblActual
             // 
             this.lblActual.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblActual.Font = new System.Drawing.Font("DS-Digital", 50F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblActual.ForeColor = System.Drawing.Color.Green;
             this.lblActual.Location = new System.Drawing.Point(3, 0);
             this.lblActual.Name = "lblActual";
@@ -280,7 +280,7 @@
             // lblBalenced
             // 
             this.lblBalenced.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblBalenced.Font = new System.Drawing.Font("DS-Digital", 50F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBalenced.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBalenced.ForeColor = System.Drawing.Color.Red;
             this.lblBalenced.Location = new System.Drawing.Point(219, 220);
             this.lblBalenced.Name = "lblBalenced";
@@ -631,6 +631,7 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "Thời gian";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label18
             // 
@@ -1114,7 +1115,7 @@
             // lblTotalNGWip23
             // 
             this.lblTotalNGWip23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalNGWip23.Font = new System.Drawing.Font("DS-Digital", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalNGWip23.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalNGWip23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalNGWip23.Location = new System.Drawing.Point(114, 0);
             this.lblTotalNGWip23.Name = "lblTotalNGWip23";
@@ -1140,7 +1141,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.43903F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.56097F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
             this.tableLayoutPanel3.Controls.Add(this.lblNotGoodWip23, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.lblPassWip23, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.lblTotalWip23, 0, 1);
@@ -1159,11 +1160,11 @@
             // lblNotGoodWip23
             // 
             this.lblNotGoodWip23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNotGoodWip23.Font = new System.Drawing.Font("DS-Digital", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotGoodWip23.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNotGoodWip23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblNotGoodWip23.Location = new System.Drawing.Point(118, 64);
+            this.lblNotGoodWip23.Location = new System.Drawing.Point(117, 64);
             this.lblNotGoodWip23.Name = "lblNotGoodWip23";
-            this.lblNotGoodWip23.Size = new System.Drawing.Size(102, 65);
+            this.lblNotGoodWip23.Size = new System.Drawing.Size(103, 65);
             this.lblNotGoodWip23.TabIndex = 5;
             this.lblNotGoodWip23.Text = "0";
             this.lblNotGoodWip23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1171,11 +1172,11 @@
             // lblPassWip23
             // 
             this.lblPassWip23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPassWip23.Font = new System.Drawing.Font("DS-Digital", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassWip23.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassWip23.ForeColor = System.Drawing.Color.Green;
             this.lblPassWip23.Location = new System.Drawing.Point(63, 64);
             this.lblPassWip23.Name = "lblPassWip23";
-            this.lblPassWip23.Size = new System.Drawing.Size(49, 65);
+            this.lblPassWip23.Size = new System.Drawing.Size(48, 65);
             this.lblPassWip23.TabIndex = 4;
             this.lblPassWip23.Text = "0";
             this.lblPassWip23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1183,7 +1184,7 @@
             // lblTotalWip23
             // 
             this.lblTotalWip23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalWip23.Font = new System.Drawing.Font("DS-Digital", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalWip23.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalWip23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblTotalWip23.Location = new System.Drawing.Point(3, 64);
             this.lblTotalWip23.Name = "lblTotalWip23";
@@ -1197,9 +1198,9 @@
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label14.Location = new System.Drawing.Point(118, 0);
+            this.label14.Location = new System.Drawing.Point(117, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(102, 64);
+            this.label14.Size = new System.Drawing.Size(103, 64);
             this.label14.TabIndex = 2;
             this.label14.Text = "NG";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1211,7 +1212,7 @@
             this.label15.ForeColor = System.Drawing.Color.Green;
             this.label15.Location = new System.Drawing.Point(63, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(49, 64);
+            this.label15.Size = new System.Drawing.Size(48, 64);
             this.label15.TabIndex = 1;
             this.label15.Text = "PASS";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1358,7 +1359,7 @@
             // lblTotalNGWip21
             // 
             this.lblTotalNGWip21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalNGWip21.Font = new System.Drawing.Font("DS-Digital", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalNGWip21.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalNGWip21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalNGWip21.Location = new System.Drawing.Point(114, 0);
             this.lblTotalNGWip21.Name = "lblTotalNGWip21";
@@ -1372,7 +1373,7 @@
             this.tableLayoutPanel4.ColumnCount = 3;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.17647F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.82353F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
             this.tableLayoutPanel4.Controls.Add(this.lblNotGoodWip21, 2, 1);
             this.tableLayoutPanel4.Controls.Add(this.lblPassWip21, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.lblTotalWip21, 0, 1);
@@ -1391,11 +1392,11 @@
             // lblNotGoodWip21
             // 
             this.lblNotGoodWip21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNotGoodWip21.Font = new System.Drawing.Font("DS-Digital", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotGoodWip21.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNotGoodWip21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblNotGoodWip21.Location = new System.Drawing.Point(124, 64);
+            this.lblNotGoodWip21.Location = new System.Drawing.Point(123, 64);
             this.lblNotGoodWip21.Name = "lblNotGoodWip21";
-            this.lblNotGoodWip21.Size = new System.Drawing.Size(96, 65);
+            this.lblNotGoodWip21.Size = new System.Drawing.Size(97, 65);
             this.lblNotGoodWip21.TabIndex = 5;
             this.lblNotGoodWip21.Text = "0";
             this.lblNotGoodWip21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1403,9 +1404,9 @@
             // lblPassWip21
             // 
             this.lblPassWip21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPassWip21.Font = new System.Drawing.Font("DS-Digital", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassWip21.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassWip21.ForeColor = System.Drawing.Color.Green;
-            this.lblPassWip21.Location = new System.Drawing.Point(65, 64);
+            this.lblPassWip21.Location = new System.Drawing.Point(64, 64);
             this.lblPassWip21.Name = "lblPassWip21";
             this.lblPassWip21.Size = new System.Drawing.Size(53, 65);
             this.lblPassWip21.TabIndex = 4;
@@ -1415,11 +1416,11 @@
             // lblTotalWip21
             // 
             this.lblTotalWip21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalWip21.Font = new System.Drawing.Font("DS-Digital", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalWip21.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalWip21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblTotalWip21.Location = new System.Drawing.Point(3, 64);
             this.lblTotalWip21.Name = "lblTotalWip21";
-            this.lblTotalWip21.Size = new System.Drawing.Size(56, 65);
+            this.lblTotalWip21.Size = new System.Drawing.Size(55, 65);
             this.lblTotalWip21.TabIndex = 3;
             this.lblTotalWip21.Text = "0";
             this.lblTotalWip21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1429,9 +1430,9 @@
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label23.Location = new System.Drawing.Point(124, 0);
+            this.label23.Location = new System.Drawing.Point(123, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(96, 64);
+            this.label23.Size = new System.Drawing.Size(97, 64);
             this.label23.TabIndex = 2;
             this.label23.Text = "NG";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1441,7 +1442,7 @@
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.Color.Green;
-            this.label24.Location = new System.Drawing.Point(65, 0);
+            this.label24.Location = new System.Drawing.Point(64, 0);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(53, 64);
             this.label24.TabIndex = 1;
@@ -1455,7 +1456,7 @@
             this.label25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.label25.Location = new System.Drawing.Point(3, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(56, 64);
+            this.label25.Size = new System.Drawing.Size(55, 64);
             this.label25.TabIndex = 0;
             this.label25.Text = "TOTAL";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1579,7 +1580,7 @@
             // lblTotalNGWip22
             // 
             this.lblTotalNGWip22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalNGWip22.Font = new System.Drawing.Font("DS-Digital", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalNGWip22.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalNGWip22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTotalNGWip22.Location = new System.Drawing.Point(115, 0);
             this.lblTotalNGWip22.Name = "lblTotalNGWip22";
@@ -1605,7 +1606,7 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.51515F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.48485F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
             this.tableLayoutPanel2.Controls.Add(this.lblNotGoodWip22, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblPassWip22, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblTotalWip22, 0, 1);
@@ -1624,11 +1625,11 @@
             // lblNotGoodWip22
             // 
             this.lblNotGoodWip22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNotGoodWip22.Font = new System.Drawing.Font("DS-Digital", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotGoodWip22.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNotGoodWip22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblNotGoodWip22.Location = new System.Drawing.Point(119, 64);
+            this.lblNotGoodWip22.Location = new System.Drawing.Point(118, 64);
             this.lblNotGoodWip22.Name = "lblNotGoodWip22";
-            this.lblNotGoodWip22.Size = new System.Drawing.Size(102, 65);
+            this.lblNotGoodWip22.Size = new System.Drawing.Size(103, 65);
             this.lblNotGoodWip22.TabIndex = 5;
             this.lblNotGoodWip22.Text = "0";
             this.lblNotGoodWip22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1636,9 +1637,9 @@
             // lblPassWip22
             // 
             this.lblPassWip22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPassWip22.Font = new System.Drawing.Font("DS-Digital", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassWip22.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassWip22.ForeColor = System.Drawing.Color.Green;
-            this.lblPassWip22.Location = new System.Drawing.Point(63, 64);
+            this.lblPassWip22.Location = new System.Drawing.Point(62, 64);
             this.lblPassWip22.Name = "lblPassWip22";
             this.lblPassWip22.Size = new System.Drawing.Size(50, 65);
             this.lblPassWip22.TabIndex = 4;
@@ -1648,11 +1649,11 @@
             // lblTotalWip22
             // 
             this.lblTotalWip22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotalWip22.Font = new System.Drawing.Font("DS-Digital", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalWip22.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalWip22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblTotalWip22.Location = new System.Drawing.Point(3, 64);
             this.lblTotalWip22.Name = "lblTotalWip22";
-            this.lblTotalWip22.Size = new System.Drawing.Size(54, 65);
+            this.lblTotalWip22.Size = new System.Drawing.Size(53, 65);
             this.lblTotalWip22.TabIndex = 3;
             this.lblTotalWip22.Text = "0";
             this.lblTotalWip22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1662,9 +1663,9 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label6.Location = new System.Drawing.Point(119, 0);
+            this.label6.Location = new System.Drawing.Point(118, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 64);
+            this.label6.Size = new System.Drawing.Size(103, 64);
             this.label6.TabIndex = 2;
             this.label6.Text = "NG";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1674,7 +1675,7 @@
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Green;
-            this.label7.Location = new System.Drawing.Point(63, 0);
+            this.label7.Location = new System.Drawing.Point(62, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 64);
             this.label7.TabIndex = 1;
@@ -1688,7 +1689,7 @@
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.label8.Location = new System.Drawing.Point(3, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(54, 64);
+            this.label8.Size = new System.Drawing.Size(53, 64);
             this.label8.TabIndex = 0;
             this.label8.Text = "TOTAL";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

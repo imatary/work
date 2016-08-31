@@ -16,10 +16,23 @@ namespace BarcodeShipping.Services
     }
     public class OQCService : IOQCService
     {
-        private readonly IQCDataEntities _context = new IQCDataEntities();
+        private readonly IQCDataEntities _context;
+        public OQCService()
+        {
+            _context = new IQCDataEntities();
+        }
         public IEnumerable<tbl_test_log> GetLogs()
         {
-            return _context.Database.SqlQuery<tbl_test_log>("EXEC sp_SelectAllLogs").ToList();
+            return _context.Database.SqlQuery<tbl_test_log>("EXEC [sp_SelectAllLogs]").ToList();
+        }
+
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <returns></returns>
+        public int CountRecords()
+        {
+            return _context.tbl_test_log.Count();
         }
 
         /// <summary>

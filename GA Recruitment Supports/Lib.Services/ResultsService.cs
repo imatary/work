@@ -109,6 +109,26 @@ namespace Lib.Services
             }
         }
 
+        public List<Result> GetResults(DateTime date)
+        {
+            object[] param =
+            {
+                new SqlParameter() { ParameterName="@NgayDiLam", Value=date.Date, SqlDbType=SqlDbType.Date },
+
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+            try
+            {
+                return _context.Database.SqlQuery<Result>("EXEC [dbo].[sp_GetResultsDate] @NgayDiLam", param).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public List<Result> GetResults()
         {
             try

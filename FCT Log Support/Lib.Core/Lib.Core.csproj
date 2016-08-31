@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\CsvFileReader.cs" />
+    <Compile Include="Helpers\CsvFileWriter.cs" />
+    <Compile Include="Helpers\CsvRow.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

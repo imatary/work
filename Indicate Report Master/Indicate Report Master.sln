@@ -1,13 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndicateReport.Data", "IndicateReport.Data\IndicateReport.Data.csproj", "{D1217C02-FA2C-468B-8D4E-138920C2E4F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndicateReport.Services", "IndicateReport.Services\IndicateReport.Services.csproj", "{3FF76B1A-C376-4C06-85E1-7DE47B8F0028}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndicateReport", "IndicateReport\IndicateReport.csproj", "{8E2DEB22-9AE4-40E4-A708-C3AE4AD09653}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Indicate Reports", "Indicate Reports\Indicate Reports.vdproj", "{E6C4972C-CEDC-42B9-B0EF-602EA45BD95C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,12 +49,6 @@ Global
 		{8E2DEB22-9AE4-40E4-A708-C3AE4AD09653}.Release|Mixed Platforms.Build.0 = Release|x86
 		{8E2DEB22-9AE4-40E4-A708-C3AE4AD09653}.Release|x86.ActiveCfg = Release|x86
 		{8E2DEB22-9AE4-40E4-A708-C3AE4AD09653}.Release|x86.Build.0 = Release|x86
-		{E6C4972C-CEDC-42B9-B0EF-602EA45BD95C}.Debug|Any CPU.ActiveCfg = Debug
-		{E6C4972C-CEDC-42B9-B0EF-602EA45BD95C}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{E6C4972C-CEDC-42B9-B0EF-602EA45BD95C}.Debug|x86.ActiveCfg = Debug
-		{E6C4972C-CEDC-42B9-B0EF-602EA45BD95C}.Release|Any CPU.ActiveCfg = Release
-		{E6C4972C-CEDC-42B9-B0EF-602EA45BD95C}.Release|Mixed Platforms.ActiveCfg = Release
-		{E6C4972C-CEDC-42B9-B0EF-602EA45BD95C}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportsMaster.Web", "ReportsMaster.Web\ReportsMaster.Web.csproj", "{9D52C509-A43A-47D4-8F5C-2C1098C703EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Data", "Lib.Data\Lib.Data.csproj", "{EBC88785-7394-4D39-847C-5E7882CF31DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D52C509-A43A-47D4-8F5C-2C1098C703EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D52C509-A43A-47D4-8F5C-2C1098C703EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D52C509-A43A-47D4-8F5C-2C1098C703EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D52C509-A43A-47D4-8F5C-2C1098C703EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC88785-7394-4D39-847C-5E7882CF31DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC88785-7394-4D39-847C-5E7882CF31DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC88785-7394-4D39-847C-5E7882CF31DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC88785-7394-4D39-847C-5E7882CF31DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

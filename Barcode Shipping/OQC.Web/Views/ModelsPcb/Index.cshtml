@@ -58,13 +58,13 @@
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.ModelID }, new { @class = "btn btn-primary btn-sm" })
                             @*@Html.ActionLink("Details", "Details", new { id = item.OperatorID }) |*@
-                            @if (User.IsInRole("Admin") || User.IsInRole("Leader") || User.IsInRole("Delete"))
-                            {
+                            @*@if (User.IsInRole("Admin") || User.IsInRole("Leader") || User.IsInRole("Delete"))
+                            {*@
                                 <button class="btn btn-danger btn-xs deleteLog" name="Delete" data-id="@item.ModelID">
                                     <i class="glyphicon glyphicon-trash"></i>
                                     Delete
                                 </button>
-                            }
+                            @*}*@
                         </td>
                     </tr>
                 }

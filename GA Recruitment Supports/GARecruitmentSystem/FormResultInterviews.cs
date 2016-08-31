@@ -4,6 +4,8 @@ using DevExpress.XtraEditors;
 using Lib.Services;
 using System.Globalization;
 using DevExpress.XtraGrid.Views.Grid;
+using GARecruitmentSystem.Properties;
+using DevExpress.Utils.Menu;
 
 namespace GARecruitmentSystem
 {
@@ -14,24 +16,30 @@ namespace GARecruitmentSystem
         public FormResultInterviews()
         {
             InitializeComponent();
+            InitializeMenuItems();
 
             _resultService = new ResultsService();
             EnableButtonEditAndDelete(false);
             LoadData();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="enable"></param>
         private void EnableButtonEditAndDelete(bool enable)
         {
             btnUpdate.Enabled = enable;
             btnDelete.Enabled = enable;
             
         }
+        /// <summary>
+        /// 
+        /// </summary>
         private void LoadData()
         {
             gridControl1.Refresh();
             gridControl1.DataSource = _resultService.GetResults();
         }
-
-        
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -42,7 +50,22 @@ namespace GARecruitmentSystem
 
         private void btnUpdate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            EnableButtonEditAndDelete(false);
+            splashScreenManager1.ShowWaitForm();
+            if (string.IsNullOrEmpty(_Id))
+            {
+                splashScreenManager1.CloseWaitForm();
+                XtraMessageBox.Show("Vui lòng chọn một người cần sửa!", "THÔNG BÁO", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Error);
+            }
+            else
+            {
+                var update = new FormEditResultInterview(_Id);
+                update.ShowDialog();
+                LoadData();
+                EnableButtonEditAndDelete(false);
+                splashScreenManager1.CloseWaitForm();
+            }
+            
         }
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -101,7 +124,6 @@ namespace GARecruitmentSystem
                 if (_Id != null)
                 {
                     EnableButtonEditAndDelete(true);
-                    //MessageBox.Show(_Id);
                 }
             }
         }
@@ -121,5 +143,55 @@ namespace GARecruitmentSystem
                 EnableButtonEditAndDelete(false);
             }
         }
+
+        private void btnExportExel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var saveFileDialog1 = new SaveFileDialog
+            {
+                Filter = Resources.SaveFileExcelFilter,
+                Title = Resources.SaveFileExelTitle,
+                FileName = DateTime.Now.ToString("dd-MM-yyyy")
+            };
+            saveFileDialog1.ShowDialog();
+            if (saveFileDialog1.FileName != "")
+            {
+                gridControl1.ExportToXls(saveFileDialog1.FileName);
+            }
+        }
+
+        private void btnPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            gridControl1.ShowPrintPreview();
+        }
+
+        DXMenuItem[] menuItems;
+        void InitializeMenuItems()
+        {
+            DXMenuItem itemEdit = new DXMenuItem("Sửa ứng viên", ItemEdit_Click, DXMenuItemPriority.High);
+            DXMenuItem itemDelete = new DXMenuItem("Xóa ứng viên", ItemDelete_Click, DXMenuItemPriority.Normal);
+            menuItems = new DXMenuItem[] { itemEdit, itemDelete };
+        }
+        private void bandedGridView1_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRow)
+            {
+                GridView view = sender as GridView;
+                view.FocusedRowHandle = e.HitInfo.RowHandle;
+                foreach (DXMenuItem item in menuItems)
+                    e.Menu.Items.Add(item);
+            }
+
+        }
+
+        private void ItemEdit_Click(object sender, System.EventArgs e)
+        {
+            btnUpdate.PerformClick();
+        }
+        private void ItemDelete_Click(object sender, System.EventArgs e)
+        {
+            //bandedGridView1.DeleteRow(bandedGridView1.FocusedRowHandle);
+            btnDelete.PerformClick();
+        }
+
     }
 }

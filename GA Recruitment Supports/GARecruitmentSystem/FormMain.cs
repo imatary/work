@@ -133,6 +133,13 @@ namespace GARecruitmentSystem
             }
         }
 
-        
+        private void btnTranferData_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splashScreenManager1.ShowWaitForm();
+            var tranfer = new FormTranferData();
+            OpenForm(tranfer, xtraTabControlMain);
+            splashScreenManager1.CloseWaitForm();
+
+        }
     }
 }

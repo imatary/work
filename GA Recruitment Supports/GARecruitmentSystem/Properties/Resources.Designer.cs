@@ -61,6 +61,24 @@ namespace GARecruitmentSystem.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Excel|*.xls.
+        /// </summary>
+        internal static string SaveFileExcelFilter {
+            get {
+                return ResourceManager.GetString("SaveFileExcelFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exel 97-2003 Workbook |*.xls.
+        /// </summary>
+        internal static string SaveFileExelTitle {
+            get {
+                return ResourceManager.GetString("SaveFileExelTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap thumb {

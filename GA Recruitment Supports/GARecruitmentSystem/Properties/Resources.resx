@@ -127,4 +127,10 @@
   <data name="umc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\umc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SaveFileExcelFilter" xml:space="preserve">
+    <value>Excel|*.xls</value>
+  </data>
+  <data name="SaveFileExelTitle" xml:space="preserve">
+    <value>Exel 97-2003 Workbook |*.xls</value>
+  </data>
 </root>
