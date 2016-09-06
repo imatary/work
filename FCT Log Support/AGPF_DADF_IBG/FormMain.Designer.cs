@@ -1,4 +1,4 @@
-﻿namespace FCT_HFT1024_DB
+﻿namespace AGPF_DADF_IBG
 {
     partial class FormMain
     {
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -82,7 +81,7 @@
             this.dlgOpenDir = new System.Windows.Forms.FolderBrowserDialog();
             this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
-            this.tmrEditNotify = new System.Windows.Forms.Timer(this.components);
+            this.tmrEditNotify = new System.Windows.Forms.Timer();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -140,7 +139,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel1.Image = global::FCT_HFT1024_DB.Properties.Resources._1471519853_malecostume;
+            this.toolStripStatusLabel1.Image = global::AGPF_DADF_IBG.Properties.Resources._1471519853_malecostume;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(152, 19);
             this.toolStripStatusLabel1.Text = "Phạm Văn Cương | ";
@@ -148,7 +147,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel2.Image = global::FCT_HFT1024_DB.Properties.Resources._1471519871_supportmale;
+            this.toolStripStatusLabel2.Image = global::AGPF_DADF_IBG.Properties.Resources._1471519871_supportmale;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(70, 19);
             this.toolStripStatusLabel2.Text = "2998 | ";
@@ -760,7 +759,7 @@
             this.KeyPreview = true;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Log for MES System";
+            this.Text = "AGPF DADF IBG - Log for MES System";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

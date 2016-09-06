@@ -12,7 +12,7 @@ namespace Lib.Forms.Controls
         {
             if (string.IsNullOrEmpty(control.Text))
             {
-                control.Properties.Appearance.BorderColor = Color.Red;
+                control.Properties.Appearance.BorderColor = Color.DarkRed;
                 control.Focus();
                 control.SelectAll();
                 return false;
@@ -24,7 +24,7 @@ namespace Lib.Forms.Controls
         {
             if (string.IsNullOrEmpty(textEdit.Text))
             {
-                textEdit.Properties.Appearance.BorderColor = Color.Red;
+                textEdit.Properties.Appearance.BorderColor = Color.DarkRed;
                 textEdit.Focus();
                 textEdit.SelectAll();
                 return false;
@@ -39,7 +39,7 @@ namespace Lib.Forms.Controls
         {
             if (string.IsNullOrEmpty(textEdit.Text))
             {
-                textEdit.Properties.Appearance.BorderColor = Color.Red;
+                textEdit.Properties.Appearance.BorderColor = Color.DarkRed;
                 textEdit.Focus();
                 textEdit.SelectAll();
                 return false;
@@ -52,7 +52,8 @@ namespace Lib.Forms.Controls
         /// <param name="textEdit"></param>
         public static void SetColorErrorTextControl(BaseEdit control)
         {
-            control.Properties.Appearance.BorderColor = Color.Red;
+            control.Properties.Appearance.BorderColor = Color.DarkRed;
+            control.Text = null;
             control.Focus();
             control.SelectAll();
         }
@@ -88,7 +89,7 @@ namespace Lib.Forms.Controls
             {
                 DXErrorProvider dxErrorProvider = new DXErrorProvider();
 
-                textEdit.Properties.Appearance.BorderColor = Color.Red;
+                textEdit.Properties.Appearance.BorderColor = Color.DarkRed;
                 textEdit.Focus();
 
                 dxErrorProvider.SetError(textEdit, errorMessage);
@@ -115,7 +116,7 @@ namespace Lib.Forms.Controls
 
         public static void ShowTooltipError(BaseEdit control, string toolTipTile, string message)
         {
-            control.Properties.Appearance.BorderColor = Color.Red;
+            control.Properties.Appearance.BorderColor = Color.DarkRed;
             control.Focus();
             control.SelectAll();
 

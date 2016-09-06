@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FCT_HFT1024_DB.Properties {
+namespace AGPF_DADF_IBG.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace FCT_HFT1024_DB.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FCT_HFT1024_DB.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AGPF_DADF_IBG.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -83,9 +83,9 @@ namespace FCT_HFT1024_DB.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap comment_icon_y {
+        internal static System.Drawing.Bitmap _1471523125_phone_old {
             get {
-                object obj = ResourceManager.GetObject("comment_icon_y", resourceCulture);
+                object obj = ResourceManager.GetObject("1471523125_phone-old", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,29 +103,9 @@ namespace FCT_HFT1024_DB.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap logo {
-            get {
-                object obj = ResourceManager.GetObject("logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap shops_close_icon_65321 {
             get {
                 object obj = ResourceManager.GetObject("shops-close-icon-65321", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap umc {
-            get {
-                object obj = ResourceManager.GetObject("umc", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

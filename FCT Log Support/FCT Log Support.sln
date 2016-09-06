@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCT_HFT1024_DB", "FCT_HFT10
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Services", "Lib.Services\Lib.Services.csproj", "{877A054C-D923-4E5A-BA9D-CEA31FCD21C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGPF_DADF_IBG", "AGPF_DADF_IBG\AGPF_DADF_IBG.csproj", "{DCF064C9-DB88-4225-A803-A88AD9728AF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{877A054C-D923-4E5A-BA9D-CEA31FCD21C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{877A054C-D923-4E5A-BA9D-CEA31FCD21C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{877A054C-D923-4E5A-BA9D-CEA31FCD21C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF064C9-DB88-4225-A803-A88AD9728AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF064C9-DB88-4225-A803-A88AD9728AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF064C9-DB88-4225-A803-A88AD9728AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF064C9-DB88-4225-A803-A88AD9728AF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

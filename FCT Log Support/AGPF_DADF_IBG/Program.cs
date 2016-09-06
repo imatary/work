@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace FCT_HFT1024_DB
+namespace AGPF_DADF_IBG
 {
     static class Program
     {
@@ -19,7 +21,7 @@ namespace FCT_HFT1024_DB
             bool ownmutex;
 
             // Tạo và lấy quyền sở hữu một Mutex có tên là Icon;
-            using (var mutex = new Mutex(true, "FCT_HFT1024", out ownmutex))
+            using (var mutex = new Mutex(true, "AGPF_DADF_IBG", out ownmutex))
             {
                 // Nếu ứng dụng sở hữu Mutex, nó có thể tiếp tục thực thi;
                 // nếu không, ứng dụng sẽ thoát.
@@ -39,7 +41,6 @@ namespace FCT_HFT1024_DB
                 else
                     Application.ExitThread();
             }
-            
         }
 
         private static bool CheckConnection()

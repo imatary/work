@@ -10,9 +10,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
-namespace FCT_HFT1024_DB
+namespace AGPF_DADF_IBG
 {
     public partial class FormMain : Form
     {
@@ -284,7 +285,7 @@ namespace FCT_HFT1024_DB
                     m_Watcher = new FileSystemWatcher();
                     if (rdbDir.Checked)
                     {
-                        m_Watcher.Filter = "*.txt";
+                        m_Watcher.Filter = "*.csv";
                         m_Watcher.Path = txtPath.Text + "\\";
                     }
                     else
@@ -313,45 +314,81 @@ namespace FCT_HFT1024_DB
         {
             if (!m_bDirty)
             {
-                string[] strSpit;
-                fileName = Path.GetFileNameWithoutExtension(e.FullPath);
-                if (fileName.Contains("ERROR"))
-                {
-                    return;
-                }
-                else if (fileName.Length <= 32)
+                if (e.ChangeType == WatcherChangeTypes.Deleted || e.ChangeType == WatcherChangeTypes.Renamed)
                 {
                     return;
                 }
                 else
                 {
-                    if (fileName.Contains("="))
+                    // DO SOMETING LIKE MOVE, COPY, ETC
+                    string backup_log = "D:\\Dev\\Test2\\" + e.Name;
+
+                    if (File.Exists(backup_log))
                     {
-                        fileName = fileName.Replace("=", "_");
-                        strSpit = fileName.Split('_');
+                        File.Delete(backup_log);
+                        Thread.Sleep(1000);
+                        File.Copy(e.FullPath, backup_log);
+
+                        var data = ReadCsv(e.FullPath).Skip(1); // skip 1 headerlines
+
+                        string[] _array = data.LastOrDefault();
+                        if (string.IsNullOrEmpty(_array[3]))
+                        {
+                            return;
+                        }
+                        if (string.IsNullOrEmpty(_array[5]))
+                        {
+                            return;
+                        }
+
+                        string status = null;
+                        if (_array[3] == "OK")
+                        {
+                            status = "P";
+                            pass = pass + 1;
+                        }
+                        if (_array[3] == "NG")
+                        {
+                            status = "F";
+                            ng = ng + 1;
+                        }
+
+                        MessageBox.Show(status + " " + _array[5]);
                     }
                     else
                     {
-                        strSpit = fileName.Split('_');
+                        Thread.Sleep(1000);
+                        File.Copy(e.FullPath, backup_log);
+                        var data = ReadCsv(e.FullPath).Skip(1); // skip 1 headerlines
+
+                        string[] _array = data.LastOrDefault();
+                        if (string.IsNullOrEmpty(_array[3]))
+                        {
+                            return;
+                        }
+                        if (string.IsNullOrEmpty(_array[5]))
+                        {
+                            return;
+                        }
+
+                        string status = null;
+                        if (_array[3] == "OK")
+                        {
+                            status = "P";
+                        }
+                        if (_array[3] == "NG")
+                        {
+                            status = "F";
+                        }
+                        string stationNo = gridLookUpEditProcessID.EditValue.ToString();
+                        CreateFileLog(modelId, productionId, _status, stationNo);
+
+                        total = pass + ng;
+                        MessageBox.Show(status + " " + _array[5]);
                     }
 
-                    string strStatus = strSpit[3];
-
-                    if (strStatus == "PASS")
-                    {
-                        _status = "P";
-                        pass = pass + 1;
-                    }
-                    else if (strStatus == "FAIL")
-                    {
-                        _status = "F";
-                        ng = ng + 1;
-                    }
-                    string stationNo = gridLookUpEditProcessID.EditValue.ToString();
-                    CreateFileLog(modelId, productionId, _status, stationNo);
-                    
-                    total = pass + ng;
                 }
+
                 m_bDirty = true;
             }
         }
@@ -368,6 +405,33 @@ namespace FCT_HFT1024_DB
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private IEnumerable<string[]> ReadCsv(string path)
+        {
+            char[] separator = new[] { ',' };
+            string currentLine;
+
+            using (var stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (var reader = new StreamReader(stream, Encoding.Default, true, 1024))
+                {
+                    while ((currentLine = reader.ReadLine()) != null)
+                    {
+                        yield return currentLine.Split(separator, StringSplitOptions.None);
+                    }
+                    reader.Dispose();
+                    reader.Close();
+                }
+                stream.Dispose();
+                stream.Close();
+            }
+        }
+
 
         private void rdbFile_CheckedChanged(object sender, EventArgs e)
         {
@@ -415,7 +479,7 @@ namespace FCT_HFT1024_DB
             if (m_bDirty)
             {
                 this.TopMost = true;
-                int iHandle = NativeWin32.FindWindow(null, "Log for MES System");
+                int iHandle = NativeWin32.FindWindow(null, "AGPF DADF IBG - Log for MES System");
                 NativeWin32.SetForegroundWindow(iHandle);
 
                 lblPass.Text = pass.ToString();
@@ -680,13 +744,17 @@ namespace FCT_HFT1024_DB
 
         private void cboWindows_EditValueChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cboWindows.EditValue.ToString()))
+            if (!string.IsNullOrEmpty(cboWindows.Text))
             {
                 if (checkKeepProcess.Checked == true)
                 {
                     Properties.Settings.Default["CurentProcess"] = cboWindows.EditValue.ToString();
                     Properties.Settings.Default.Save(); // Saves settings in application configuration file
                 }
+            }
+            else
+            {
+                return;
             } 
         }
     }

@@ -272,15 +272,12 @@ namespace CreateLogFromFileCSV
                     {
                         yield return currentLine.Split(separator, StringSplitOptions.None);
                     }
-                    stream.Flush();
                     reader.Dispose();
                     reader.Close();
                 }
                 stream.Dispose();
                 stream.Close();
             }
-            
-            
         }
 
         /// <summary>
