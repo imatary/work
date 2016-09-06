@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace FCT_HFT1024_DB
+namespace Lib.Core
 {
     public static class NativeWin32
     {

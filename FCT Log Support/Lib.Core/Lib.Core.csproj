@@ -43,6 +43,7 @@
     <Compile Include="Helpers\CsvFileWriter.cs" />
     <Compile Include="Helpers\CsvRow.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="NativeWin32.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
