@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{33DFA6B3-465D-482F-9FFD-4ABE140897BD}</ProjectGuid>
+    <ProjectGuid>{D9861965-CED8-4E9E-ACE9-9C061BF71E3B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mango_CTMS</RootNamespace>
-    <AssemblyName>Mango_CTMS</AssemblyName>
+    <RootNamespace>Mango_MCU</RootNamespace>
+    <AssemblyName>Mango_MCU</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Mango_CTMS\</PublishUrl>
+    <PublishUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Mango_MCU\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -22,14 +22,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Mango_CTMS\</InstallUrl>
-    <UpdateUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Mango_CTMS\</UpdateUrl>
-    <ProductName>Mango CTMS - Log File Text</ProductName>
+    <InstallUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Mango_MCU\</InstallUrl>
+    <UpdateUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Mango_MCU\</UpdateUrl>
+    <ProductName>Mango MCU Log File Text</ProductName>
     <PublisherName>cuongpham%40umcvn.com</PublisherName>
-    <SuiteName>UMC Electronics VietNam Ltd%27s</SuiteName>
+    <SuiteName>UMC Electrolics VietNam Ltd%27s</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -60,32 +59,22 @@
     <ApplicationIcon>1473324578_icon-113-document-file-txt.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>C4DD0D63DD7B2667A525BB20A7F96514BFBB4BB2</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>Mango_CTMS_1_TemporaryKey.pfx</ManifestKeyFile>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DelaySign>false</DelaySign>
-  </PropertyGroup>
-  <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetZone>Custom</TargetZone>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>7A6CCE611F4F12812109DBD5CDAE52164EC6541D</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Mango_MCU_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -153,6 +142,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Mango_MCU_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -166,10 +156,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\error.jpg" />
+    <None Include="Resources\shops-close-icon-65321.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\shops-close-icon-65321.png" />
+    <None Include="Resources\error.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lib.Core\Lib.Core.csproj">
@@ -190,9 +180,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1473324578_icon-113-document-file-txt.ico" />
-    <None Include="Resources\1471519871_supportmale.png" />
     <None Include="Resources\1471519853_malecostume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1471519871_supportmale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1473324578_icon-113-document-file-txt.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

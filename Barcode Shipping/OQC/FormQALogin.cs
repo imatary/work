@@ -239,34 +239,12 @@ namespace OQC
         /// </summary>
         private void SaveRegistry()
         {
-            //if (chkRemember.Checked)
-            //{
-
-            //    Registry.SetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "IsRemember", "1");
-            //    Registry.SetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "Username", txtUsername.Text);
-            //    Registry.SetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "Password", txtPassword.Text);
-            //}
-            //else
-            //{
             Registry.SetValue(@"HKEY_CURRENT_USER\Software\BarcodeSystem\ProcessValue", "ProcessName", txtProcess.Text);
-                //Registry.SetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "Username", "");
-                //Registry.SetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "Password", "");
-            //}
         }
 
         private void LoadRegistry()
         {
-            //txtUsername.Text = (string)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "Username", null));
             txtProcess.Text = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\BarcodeSystem\ProcessValue", "ProcessName", null);
-
-            //if ((string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "IsRemember", null) == "1")
-            //{
-            //    chkRemember.Checked = true;
-            //}
-            //if ((string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\StockManager\SaveUserAndPassword", "IsRemember", null) == "0")
-            //{
-            //    chkRemember.Checked = false;
-            //}
         }
 
         private void txtProcess_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -299,6 +277,21 @@ namespace OQC
             {
                 registryKey.DeleteValue("ApplicationName");
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.F6:
+                    txtProcess.Enabled = true;
+                    break;
+                case Keys.F7:
+                    txtProcess.Enabled = false;
+                    break;
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

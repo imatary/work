@@ -192,6 +192,7 @@
             // txtProcess
             // 
             this.txtProcess.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtProcess.Enabled = false;
             this.txtProcess.Location = new System.Drawing.Point(101, 115);
             this.txtProcess.Name = "txtProcess";
             this.txtProcess.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
@@ -239,6 +240,7 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormQALogin";
