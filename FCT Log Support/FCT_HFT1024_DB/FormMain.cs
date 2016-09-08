@@ -1,12 +1,13 @@
-﻿using Lib.Core;
+﻿using DevExpress.XtraGrid.Views.Grid;
+using Lib.Core;
 using Lib.Core.Helpers;
 using Lib.Data;
+using Lib.Form.Controls;
 using Lib.Forms.Controls;
 using Lib.Services;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace FCT_HFT1024_DB
         private string modelId = null;
         private string productionId = null;
         private string _status = null;
+        private string boardState = null;
         private int pass = 0;
         private int ng = 0;
         private int total = 0;
@@ -93,49 +95,12 @@ namespace FCT_HFT1024_DB
         }
 
         /// <summary>
-        /// create log
-        /// </summary>
-        /// <param name="modelId"></param>
-        /// <param name="productionId"></param>
-        /// <param name="status"></param>
-        /// <param name="process"></param>
-        private void CreateFileLog(string model, string productId, string status, string process)
-        {
-            string dateTime = DateTime.Now.ToString("yyMMddHHmmss");
-            string fileName = $"{dateTime}_{productId}.txt";
-            string folderRoot = @"C:\LOGPROCESS\";
-
-            bool exists = Directory.Exists(folderRoot);
-            if (!exists)
-                Directory.CreateDirectory(folderRoot);
-
-            string path = folderRoot + fileName;
-            if (!File.Exists(path))
-            {
-                File.Create(path).Dispose();
-                using (TextWriter tw = new StreamWriter(path))
-                {
-                    tw.WriteLine($"{model}|{productId}|{dateTime}|{status}|{process}");
-                    tw.Close();
-                }
-            }
-            else if (File.Exists(path))
-            {
-                using (TextWriter tw = new StreamWriter(path))
-                {
-                    tw.WriteLine($"{model}|{productId}|{dateTime}|{status}|{process}");
-                    tw.Close();
-                }
-            }
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="boardNo"></param>
         /// <param name="productId"></param>
         /// <param name="stationNo"></param>
-        private void LoadData(string boardNo, string productId, string stationNo)
+        private void LoadData(string boardNo, string productId, string stationNo, string state)
         {
             ItemDetail item = new ItemDetail()
             {
@@ -144,20 +109,12 @@ namespace FCT_HFT1024_DB
                 STATION_NO = stationNo,
                 DATE_CHECK = DateTime.Now.ToShortDateString(),
                 TIME_CHECK = DateTime.Now.ToShortTimeString(),
+                STATE = state,
             };
             List<ItemDetail> items = new List<ItemDetail>();
             items.Add(item);
 
             gridControl1.DataSource = items.OrderByDescending(it => it.TIME_CHECK);
-        }
-        /// <summary>
-        /// Check process is runing
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public static bool IsRunning(string name)
-        {
-            return Process.GetProcessesByName(name).Length > 0 ? true : false;
         }
         /// <summary>
         /// Refresh the combobox list with all the top level windows running on desktop.
@@ -250,12 +207,12 @@ namespace FCT_HFT1024_DB
             bool isVaild = true;
             if (!CheckTextBoxNullValue.ValidationTextEditNullValue(gridLookUpEditProcessID))
             {
-                SetErrorStatus(true, "NG", "Please select a 'Station No'!");
+                MessageHelpers.SetErrorStatus(true, "NG", "Please select a 'Station No'!", lblStatus, lblMessage);
                 isVaild = false;
             }
             else if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtPath))
             {
-                SetErrorStatus(true, "NG", "Please select a 'File/Directory'!");
+                MessageHelpers.SetErrorStatus(true, "NG", "Please select a 'File/Directory'!", lblStatus, lblMessage);
                 isVaild = false;
             }
             else if (isVaild)
@@ -341,15 +298,17 @@ namespace FCT_HFT1024_DB
                     if (strStatus == "PASS")
                     {
                         _status = "P";
+                        boardState = "OK";
                         pass = pass + 1;
                     }
                     else if (strStatus == "FAIL")
                     {
                         _status = "F";
+                        boardState = "FAILD";
                         ng = ng + 1;
                     }
                     string stationNo = gridLookUpEditProcessID.EditValue.ToString();
-                    CreateFileLog(modelId, productionId, _status, stationNo);
+                    Ultils.CreateFileLog(modelId, productionId, _status, stationNo);
                     
                     total = pass + ng;
                 }
@@ -415,66 +374,15 @@ namespace FCT_HFT1024_DB
         {
             if (m_bDirty)
             {
-                this.TopMost = true;
-                int iHandle = NativeWin32.FindWindow(null, "Log for MES System");
-                NativeWin32.SetForegroundWindow(iHandle);
-
+                //this.TopMost = true;
+                int iHandle2 = NativeWin32.FindWindow(null, "Log for MES System");
+                NativeWin32.SetForegroundWindow(iHandle2);
                 lblPass.Text = pass.ToString();
                 lblNG.Text = ng.ToString();
                 lblTotal.Text = total.ToString();
-                LoadData(productionId, modelId, gridLookUpEditProcessID.EditValue.ToString());
+                LoadData(productionId, modelId, gridLookUpEditProcessID.EditValue.ToString(), boardState);
                 m_bDirty = false;
             }
-        }
-
-        private void SetDefaultStatus(bool visible, string status, string messageInfo)
-        {
-            lblStatus.Visible = visible;
-            lblMessage.Visible = visible;
-
-            lblStatus.Appearance.ForeColor = Color.DarkOrange;
-            lblStatus.Appearance.BackColor = Color.DarkGray;
-
-            lblMessage.Appearance.ForeColor = Color.DarkOrange;
-            lblMessage.Appearance.BackColor = Color.DarkGray;
-
-            lblStatus.Text = status;
-            lblMessage.Text = messageInfo;
-        }
-
-        private void SetErrorStatus(bool visible, string status, string messageInfo)
-        {
-            lblStatus.Visible = visible;
-            lblMessage.Visible = visible;
-
-            lblStatus.Appearance.ForeColor = Color.Yellow;
-            lblStatus.Appearance.BackColor = Color.DarkRed;
-
-            lblMessage.Appearance.ForeColor = Color.White;
-            lblMessage.Appearance.BackColor = Color.DarkRed;
-
-            lblStatus.Text = status;
-            lblMessage.Text = messageInfo;
-        }
-        /// <summary>
-        /// Success
-        /// </summary>
-        /// <param name="visible"></param>
-        /// <param name="status"></param>
-        /// <param name="messageInfo"></param>
-        private void SetSuccessStatus(bool visible, string status, string messageInfo)
-        {
-            lblStatus.Visible = visible;
-            lblMessage.Visible = visible;
-
-            lblStatus.Appearance.ForeColor = Color.Yellow;
-            lblStatus.Appearance.BackColor = Color.DarkGreen;
-
-            lblMessage.Appearance.ForeColor = Color.DarkOrange;
-            lblMessage.Appearance.BackColor = Color.DarkGreen;
-
-            lblStatus.Text = status;
-            lblMessage.Text = messageInfo;
         }
 
         private void txtPath_EditValueChanged(object sender, EventArgs e)
@@ -483,7 +391,7 @@ namespace FCT_HFT1024_DB
             {
                 if (Directory.Exists(txtPath.Text))
                 {
-                    SetDefaultStatus(true, "N/A", "N/A");
+                    MessageHelpers.SetDefaultStatus(true, "N/A", "N/A", lblStatus, lblMessage);
                     CheckTextBoxNullValue.SetColorDefaultTextControl(txtPath);
 
                     if (checkPath.Checked == true)
@@ -494,13 +402,13 @@ namespace FCT_HFT1024_DB
                 }
                 else
                 {
-                    SetErrorStatus(true, "NG", "'File/Directory' not exits. Please try again!");
+                    MessageHelpers.SetErrorStatus(true, "NG", "'File/Directory' not exits. Please try again!", lblStatus, lblMessage);
                     CheckTextBoxNullValue.SetColorErrorTextControl(txtPath);
                 }
             }
             else
             {
-                SetErrorStatus(true, "NG", "'File/Directory' invaild. Please try again!");
+                MessageHelpers.SetErrorStatus(true, "NG", "'File/Directory' invaild. Please try again!", lblStatus, lblMessage);
                 CheckTextBoxNullValue.SetColorErrorTextControl(txtPath);
             }
         }
@@ -529,18 +437,18 @@ namespace FCT_HFT1024_DB
 
                 if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtBarcode))
                 {
-                    SetErrorStatus(true, "NG", "Please input a barcode!");
+                    MessageHelpers.SetErrorStatus(true, "NG", "Please input a barcode!", lblStatus, lblMessage);
                     return;
                 }
                 else if (txtBarcode.Text.Length <= 5)
                 {
-                    SetErrorStatus(true, "NG", "Board No invaild. Please try again!");
+                    MessageHelpers.SetErrorStatus(true, "NG", "Board No invaild. Please try again!", lblStatus, lblMessage);
                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                     return;
                 }
                 else
                 {
-                    SetDefaultStatus(true, "N/A", "N/A");
+                    MessageHelpers.SetDefaultStatus(true, "N/A", "N/A", lblStatus, lblMessage);
                     CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
 
                     var boards = _scanningLogsService.Get_SCANNING_LOGS(boardNo).FirstOrDefault();
@@ -558,7 +466,7 @@ namespace FCT_HFT1024_DB
                                 // thì thông báo cho người dùng biết
                                 if (curentStationNo.IS_FINISHED == true)
                                 {
-                                    SetErrorStatus(true, "NG", $"Board '{boardNo}' is finished!");
+                                    MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' is finished!", lblStatus, lblMessage);
                                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                     var errorForm = new FormError($"Board '{boardNo}' is finished!");
                                     errorForm.ShowDialog();
@@ -566,9 +474,9 @@ namespace FCT_HFT1024_DB
                                     return;
                                 }
                                 // Nếu tên giống nhau, thì thông báo đã chạy qua công đoạn này rồi
-                                else if (curentStationNo.STATION_NO == set_station_no)
+                                else if (curentStationNo.STATION_NO == set_station_no && curentStationNo.BOARD_STATE == 1)
                                 {
-                                    SetErrorStatus(true, "NG", $"Board '{boardNo}' is pass '{set_station_no}'!");
+                                    MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' is pass '{set_station_no}'!", lblStatus, lblMessage);
                                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                     var errorForm = new FormError($"Board '{boardNo}' is pass '{set_station_no}'!");
                                     errorForm.ShowDialog();
@@ -584,7 +492,7 @@ namespace FCT_HFT1024_DB
                                     // station_no curent thì thông báo cho người dùng biết
                                     if (process_by_station_no == null)
                                     {
-                                        SetErrorStatus(true, "NG", $"Board '{boardNo}' station '{set_station_no}' not invaild!");
+                                        MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' station '{set_station_no}' not invaild!", lblStatus, lblMessage);
                                         CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                         var errorForm = new FormError($"Board '{boardNo}' station '{set_station_no}' not invaild!");
                                         errorForm.ShowDialog();
@@ -597,7 +505,7 @@ namespace FCT_HFT1024_DB
                                         // Khi hai giá trị bằng nhau => ICT_FUJ
                                         if (curentStationNo.PROCEDURE_INDEX < (process_by_station_no.INDEX - 1))
                                         {
-                                            SetErrorStatus(true, "NG", $"Board '{boardNo}' skip stations!");
+                                            MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' skip stations!", lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                             var errorForm = new FormError($"Board '{boardNo}' skip stations!");
                                             errorForm.ShowDialog();
@@ -608,7 +516,7 @@ namespace FCT_HFT1024_DB
                                         else if (curentStationNo.PROCEDURE_INDEX > process_by_station_no.INDEX)
                                         {
                                             // transferred to the next station.
-                                            SetErrorStatus(true, "NG", $"Board '{boardNo}' transferred to the next station!");
+                                            MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' transferred to the next station!", lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                             var errorForm = new FormError($"Board '{boardNo}' transferred to the next station!");
                                             errorForm.ShowDialog();
@@ -618,24 +526,23 @@ namespace FCT_HFT1024_DB
 
                                         else if (curentStationNo.PROCEDURE_INDEX == (process_by_station_no.INDEX - 1))
                                         {
-                                            if (IsRunning(cboWindows.Text))
+                                            if (Ultils.IsRunning(cboWindows.Text))
                                             {
+                                                this.TopMost = false;
                                                 txtBarcode.ResetText();
                                                 txtBarcode.Focus();
                                                 productionId = boardNo;
                                                 modelId = boards.PRODUCT_ID;
-
+                                                MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
                                                 // Thực hiện gửi dữ liệu đi
                                                 int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
                                                 NativeWin32.SetForegroundWindow(iHandle);
                                                 SendKeys.Send(boardNo);
-                                                SendKeys.Send("{ENTER}");
-                                                SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!");
-                                                this.TopMost = false;
+                                                SendKeys.Send("{ENTER}");  
                                             }
                                             else
                                             {
-                                                SetErrorStatus(true, "NG", $"'{cboWindows.Text}' not runing. Please running programs, then try again!");
+                                                MessageHelpers.SetErrorStatus(true, "NG", $"'{cboWindows.Text}' not runing. Please running programs, then try again!", lblStatus, lblMessage);
                                                 CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                                 var errorForm = new FormError($"'{cboWindows.Text}' not runing. Please running programs, then try again!");
                                                 errorForm.ShowDialog();
@@ -643,12 +550,39 @@ namespace FCT_HFT1024_DB
                                                 return;
                                             }
                                         }
+                                        else if(curentStationNo.BOARD_STATE == 2)
+                                        {
+                                            if (Ultils.IsRunning(cboWindows.Text))
+                                            {
+                                                this.TopMost = false;
+                                                txtBarcode.ResetText();
+                                                txtBarcode.Focus();
+                                                productionId = boardNo;
+                                                modelId = boards.PRODUCT_ID;
+                                                MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
+                                                // Thực hiện gửi dữ liệu đi
+                                                int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
+                                                NativeWin32.SetForegroundWindow(iHandle);
+                                                SendKeys.Send(boardNo);
+                                                SendKeys.Send("{ENTER}");
+                                            }
+                                            else
+                                            {
+                                                MessageHelpers.SetErrorStatus(true, "NG", $"'{cboWindows.Text}' not runing. Please running programs, then try again!", lblStatus, lblMessage);
+                                                CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                                                var errorForm = new FormError($"'{cboWindows.Text}' not runing. Please running programs, then try again!");
+                                                errorForm.ShowDialog();
+                                                txtBarcode.Focus();
+                                                return;
+                                            }
+
+                                        }
                                     }
                                 }
                             }
                             else
                             {
-                                SetErrorStatus(true, "NG", $"Station No '{curentStationNo.STATION_NO}' not found!");
+                                MessageHelpers.SetErrorStatus(true, "NG", $"Station No '{curentStationNo.STATION_NO}' not found!", lblStatus, lblMessage);
                                 CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                 var errorForm = new FormError($"Station No '{curentStationNo.STATION_NO}' not found!");
                                 errorForm.ShowDialog();
@@ -658,7 +592,7 @@ namespace FCT_HFT1024_DB
                         }
                         else
                         {
-                            SetErrorStatus(true, "NG", $"Station No '{set_station_no}' invaild!");
+                            MessageHelpers.SetErrorStatus(true, "NG", $"Station No '{set_station_no}' invaild!", lblStatus, lblMessage);
                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                             var errorForm = new FormError($"Station No '{set_station_no}' invaild!");
                             errorForm.ShowDialog();
@@ -668,7 +602,7 @@ namespace FCT_HFT1024_DB
                     }
                     else
                     {
-                        SetErrorStatus(true, "NG", $"Board '{boardNo}' not initialized!");
+                        MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' not initialized!", lblStatus, lblMessage);
                         CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                         var errorForm = new FormError($"Board '{boardNo}' not initialized!");
                         errorForm.ShowDialog();
@@ -689,6 +623,28 @@ namespace FCT_HFT1024_DB
                     Properties.Settings.Default.Save(); // Saves settings in application configuration file
                 }
             } 
+        }
+
+        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            GridView View = sender as GridView;
+            if (e.Column.FieldName == "STATE")
+            {
+                string value = View.GetRowCellDisplayText(e.RowHandle, View.Columns.ColumnByName("gridColumnSTATE"));
+                if (value == "OK")
+                {
+                    e.Appearance.BackColor = Color.Green;
+                    e.Appearance.BackColor2 = Color.DarkGreen;
+                    e.Appearance.ForeColor = Color.White;
+
+                }
+                else if (value == "FAILD")
+                {
+                    e.Appearance.BackColor = Color.Red;
+                    e.Appearance.BackColor2 = Color.DarkRed;
+                    e.Appearance.ForeColor = Color.White;
+                }
+            }
         }
     }
 }

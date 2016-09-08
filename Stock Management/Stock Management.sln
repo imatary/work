@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.Data", "Stock.Data\St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.Services", "Stock.Services\Stock.Services.csproj", "{1A89E3C2-EF2A-44BF-9F93-6218B2A21F5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XtraReportDemo", "XtraReportDemo\XtraReportDemo.csproj", "{2EC2CB9B-0EF7-498C-841C-CFFBA94F85BE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock.Web", "Stock.Web\Stock.Web.csproj", "{D2240412-3EB6-46B1-8A34-FEB1C42A1FDF}"
 EndProject
 Global
@@ -31,10 +29,6 @@ Global
 		{1A89E3C2-EF2A-44BF-9F93-6218B2A21F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A89E3C2-EF2A-44BF-9F93-6218B2A21F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A89E3C2-EF2A-44BF-9F93-6218B2A21F5D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2EC2CB9B-0EF7-498C-841C-CFFBA94F85BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2EC2CB9B-0EF7-498C-841C-CFFBA94F85BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2EC2CB9B-0EF7-498C-841C-CFFBA94F85BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2EC2CB9B-0EF7-498C-841C-CFFBA94F85BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2240412-3EB6-46B1-8A34-FEB1C42A1FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2240412-3EB6-46B1-8A34-FEB1C42A1FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2240412-3EB6-46B1-8A34-FEB1C42A1FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU

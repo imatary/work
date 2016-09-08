@@ -1,4 +1,4 @@
-﻿namespace FCT_HFT1024_DB
+﻿namespace Mango_CTMS
 {
     partial class FormError
     {
@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lblMessageError = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,7 +53,7 @@
             // 
             this.pictureEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureEdit1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureEdit1.EditValue = global::FCT_HFT1024_DB.Properties.Resources.shops_close_icon_65321;
+            this.pictureEdit1.EditValue = global::Mango_CTMS.Properties.Resources.shops_close_icon_65321;
             this.pictureEdit1.Location = new System.Drawing.Point(587, 12);
             this.pictureEdit1.Name = "pictureEdit1";
             this.pictureEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -68,17 +66,11 @@
             this.pictureEdit1.EditValueChanged += new System.EventHandler(this.pictureEdit1_EditValueChanged);
             this.pictureEdit1.Click += new System.EventHandler(this.pictureEdit1_Click);
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // FormError
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::FCT_HFT1024_DB.Properties.Resources.error;
+            this.BackgroundImage = global::Mango_CTMS.Properties.Resources.error;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(782, 657);
             this.Controls.Add(this.lblMessageError);
@@ -100,6 +92,5 @@
 
         private DevExpress.XtraEditors.LabelControl lblMessageError;
         private DevExpress.XtraEditors.PictureEdit pictureEdit1;
-        private System.Windows.Forms.Timer timer1;
     }
 }

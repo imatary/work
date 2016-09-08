@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -45,6 +46,7 @@
             this.gridColStation_NO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnSTATE = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -81,7 +83,7 @@
             this.dlgOpenDir = new System.Windows.Forms.FolderBrowserDialog();
             this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
-            this.tmrEditNotify = new System.Windows.Forms.Timer();
+            this.tmrEditNotify = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -199,10 +201,12 @@
             this.gridColProductID,
             this.gridColStation_NO,
             this.gridColumn1,
-            this.gridColumn2});
+            this.gridColumn2,
+            this.gridColumnSTATE});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridView1_RowCellStyle);
             // 
             // gridColBoardNo
             // 
@@ -267,7 +271,19 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 4;
-            this.gridColumn2.Width = 162;
+            this.gridColumn2.Width = 100;
+            // 
+            // gridColumnSTATE
+            // 
+            this.gridColumnSTATE.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridColumnSTATE.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnSTATE.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnSTATE.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnSTATE.Caption = "STATE";
+            this.gridColumnSTATE.FieldName = "STATE";
+            this.gridColumnSTATE.Name = "gridColumnSTATE";
+            this.gridColumnSTATE.Visible = true;
+            this.gridColumnSTATE.VisibleIndex = 5;
             // 
             // panelControl2
             // 
@@ -846,6 +862,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraEditors.CheckEdit checkStationNo;
         private DevExpress.XtraEditors.CheckEdit checkPath;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnSTATE;
     }
 }
 

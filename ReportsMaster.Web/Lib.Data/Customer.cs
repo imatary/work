@@ -19,6 +19,6 @@ namespace Lib.Data
         public string CusName { get; set; }
 
         [StringLength(350)]
-        public string Logo { get; set; }
+        public byte[] Logo { get; set; }
     }
 }

@@ -15,7 +15,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace AGPF_DADF_IBG
+namespace Mango_CTMS
 {
     public partial class FormMain : Form
     {
@@ -244,7 +244,7 @@ namespace AGPF_DADF_IBG
                     m_Watcher = new FileSystemWatcher();
                     if (rdbDir.Checked)
                     {
-                        m_Watcher.Filter = "*.csv";
+                        m_Watcher.Filter = "*.txt";
                         m_Watcher.Path = txtPath.Text + "\\";
                     }
                     else
@@ -279,81 +279,69 @@ namespace AGPF_DADF_IBG
                 }
                 else
                 {
-                    // DO SOMETING LIKE MOVE, COPY, ETC
-                    bool exists = Directory.Exists(backup_log_folder);
-                    if (!exists)
-                        Directory.CreateDirectory(backup_log_folder);
-
-                    string fullPath = backup_log_folder + e.Name;
-
-                    if (File.Exists(fullPath))
+                    if (e.FullPath.Contains("Mango_CTMS"))
                     {
-                        File.Delete(fullPath);
-                        Thread.Sleep(1000);
-                        File.Copy(e.FullPath, fullPath);
+                        // DO SOMETING LIKE MOVE, COPY, ETC
+                        bool exists = Directory.Exists(backup_log_folder);
+                        if (!exists)
+                            Directory.CreateDirectory(backup_log_folder);
 
-                        var data = Ultils.ReadCsv(e.FullPath).Skip(1); // skip 1 headerlines
+                        string fullPath = backup_log_folder + e.Name;
 
-                        string[] _array = data.LastOrDefault();
-                        if (string.IsNullOrEmpty(_array[3]))
+                        if (File.Exists(fullPath))
                         {
-                            return;
-                        }
-                        if (string.IsNullOrEmpty(_array[5]))
-                        {
-                            return;
-                        }
+                            File.Delete(fullPath);
+                            Thread.Sleep(1000);
+                            File.Copy(e.FullPath, fullPath);
 
-                        if (_array[3] == "OK")
-                        {
-                            _status = "P";
-                            boardState = "OK";
-                            pass = pass + 1;
-                            
-                        }
-                        if (_array[3] == "NG")
-                        {
-                            _status = "F";
-                            boardState = "FAILD";
-                            ng = ng + 1;
-                        }
-                        total = pass + ng;
+                            var data = Ultils.ReadLogTxt(fullPath).LastOrDefault();
 
-                        Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+                            if (data == "FAIL")
+                            {
+                                _status = "F";
+                                boardState = "FAILD";
+                                ng = ng + 1;
+                            }
+                            else
+                            {
+                                _status = "P";
+                                boardState = "OK";
+                                pass = pass + 1;
+                            }
 
+                            total = pass + ng;
+
+                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+                        }
+                        else
+                        {
+                            Thread.Sleep(1000);
+                            File.Copy(e.FullPath, fullPath);
+
+                            var data = Ultils.ReadLogTxt(fullPath).LastOrDefault();
+
+                            if (data == "FAIL")
+                            {
+                                _status = "F";
+                                boardState = "FAILD";
+                                ng = ng + 1;
+                            }
+                            else
+                            {
+                                _status = "P";
+                                boardState = "OK";
+                                pass = pass + 1;
+                            }
+
+                            total = pass + ng;
+
+                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+
+                        }
                     }
                     else
                     {
-                        Thread.Sleep(1000);
-                        File.Copy(e.FullPath, fullPath);
-                        var data = Ultils.ReadCsv(e.FullPath).Skip(1); // skip 1 headerlines
-
-                        string[] _array = data.LastOrDefault();
-                        if (string.IsNullOrEmpty(_array[3]))
-                        {
-                            return;
-                        }
-                        if (string.IsNullOrEmpty(_array[5]))
-                        {
-                            return;
-                        }
-
-                        if (_array[3] == "OK")
-                        {
-                            _status = "P";
-                            boardState = "OK";
-                            pass = pass + 1;
-
-                        }
-                        if (_array[3] == "NG")
-                        {
-                            _status = "F";
-                            boardState = "FAILD";
-                            ng = ng + 1;
-                        }
-                        string stationNo = gridLookUpEditProcessID.EditValue.ToString();
-                        total = pass + ng;
-                        Ultils.CreateFileLog(modelId, productionId, _status, stationNo);                       
+                        return;
                     }
                 }
                 m_bDirty = true;
@@ -420,7 +408,7 @@ namespace AGPF_DADF_IBG
             if (m_bDirty)
             {
                 this.TopMost = true;
-                int iHandle = NativeWin32.FindWindow(null, "AGPF DADF IBG - Log for MES System");
+                int iHandle = NativeWin32.FindWindow(null, "Mango CTMS - Log for MES System");
                 NativeWin32.SetForegroundWindow(iHandle);
 
                 lblPass.Text = pass.ToString();

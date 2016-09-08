@@ -16,5 +16,7 @@ namespace Lib.Data
         public string DATE_CHECK { get; set; }
 
         public string TIME_CHECK { get; set; }
+
+        public string STATE { get; set; }
     }
 }

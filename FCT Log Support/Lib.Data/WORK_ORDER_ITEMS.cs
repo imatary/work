@@ -11,6 +11,8 @@ namespace Lib.Data
 
         public string BOARD_NO { get; set; }
 
+        public int BOARD_STATE { get; set; }
+
         public bool IS_FINISHED { get; set; }
 
         public int PROCEDURE_INDEX { get; set; }

@@ -1,5 +1,5 @@
 ﻿using Lib.Data;
-using System.Linq;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace ReportsMaster.Web.Controllers
@@ -12,8 +12,8 @@ namespace ReportsMaster.Web.Controllers
         {
             using (var context= new MasterDbContext())
             {
-                var cus = context.Customers.ToList();
-                return PartialView("_CustomerPartial", cus);
+                //var cus = context.Customers.ToList();
+                return PartialView("_CustomerPartial");
             }
         }
     }

@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Services", "Lib.Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGPF_DADF_IBG", "AGPF_DADF_IBG\AGPF_DADF_IBG.csproj", "{DCF064C9-DB88-4225-A803-A88AD9728AF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango_CTMS", "Mango_CTMS\Mango_CTMS.csproj", "{33DFA6B3-465D-482F-9FFD-4ABE140897BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{DCF064C9-DB88-4225-A803-A88AD9728AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCF064C9-DB88-4225-A803-A88AD9728AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCF064C9-DB88-4225-A803-A88AD9728AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33DFA6B3-465D-482F-9FFD-4ABE140897BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33DFA6B3-465D-482F-9FFD-4ABE140897BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33DFA6B3-465D-482F-9FFD-4ABE140897BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33DFA6B3-465D-482F-9FFD-4ABE140897BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿namespace FCT_HFT1024_DB
+﻿namespace Mango_CTMS
 {
     partial class FormMain
     {
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -46,6 +45,7 @@
             this.gridColStation_NO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnSTATE = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -82,8 +82,7 @@
             this.dlgOpenDir = new System.Windows.Forms.FolderBrowserDialog();
             this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
-            this.tmrEditNotify = new System.Windows.Forms.Timer(this.components);
-            this.gridColumnSTATE = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.tmrEditNotify = new System.Windows.Forms.Timer();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -141,17 +140,15 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel1.Image = global::FCT_HFT1024_DB.Properties.Resources._1471519853_malecostume;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(152, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(136, 19);
             this.toolStripStatusLabel1.Text = "Phạm Văn Cương | ";
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel2.Image = global::FCT_HFT1024_DB.Properties.Resources._1471519871_supportmale;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(70, 19);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(54, 19);
             this.toolStripStatusLabel2.Text = "2998 | ";
             // 
             // toolStripStatusLabel5
@@ -185,10 +182,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(10, 295);
+            this.gridControl1.Location = new System.Drawing.Point(10, 287);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(700, 218);
+            this.gridControl1.Size = new System.Drawing.Size(700, 226);
             this.gridControl1.TabIndex = 7;
             this.gridControl1.UseEmbeddedNavigator = true;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -219,7 +216,7 @@
             this.gridColBoardNo.Name = "gridColBoardNo";
             this.gridColBoardNo.Visible = true;
             this.gridColBoardNo.VisibleIndex = 0;
-            this.gridColBoardNo.Width = 180;
+            this.gridColBoardNo.Width = 200;
             // 
             // gridColProductID
             // 
@@ -232,7 +229,7 @@
             this.gridColProductID.Name = "gridColProductID";
             this.gridColProductID.Visible = true;
             this.gridColProductID.VisibleIndex = 1;
-            this.gridColProductID.Width = 108;
+            this.gridColProductID.Width = 120;
             // 
             // gridColStation_NO
             // 
@@ -245,7 +242,7 @@
             this.gridColStation_NO.Name = "gridColStation_NO";
             this.gridColStation_NO.Visible = true;
             this.gridColStation_NO.VisibleIndex = 2;
-            this.gridColStation_NO.Width = 90;
+            this.gridColStation_NO.Width = 100;
             // 
             // gridColumn1
             // 
@@ -258,7 +255,7 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 3;
-            this.gridColumn1.Width = 90;
+            this.gridColumn1.Width = 100;
             // 
             // gridColumn2
             // 
@@ -273,12 +270,24 @@
             this.gridColumn2.VisibleIndex = 4;
             this.gridColumn2.Width = 100;
             // 
+            // gridColumnSTATE
+            // 
+            this.gridColumnSTATE.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridColumnSTATE.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnSTATE.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnSTATE.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnSTATE.Caption = "STATE";
+            this.gridColumnSTATE.FieldName = "STATE";
+            this.gridColumnSTATE.Name = "gridColumnSTATE";
+            this.gridColumnSTATE.Visible = true;
+            this.gridColumnSTATE.VisibleIndex = 5;
+            // 
             // panelControl2
             // 
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl2.Controls.Add(this.labelControl3);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl2.Location = new System.Drawing.Point(10, 262);
+            this.panelControl2.Location = new System.Drawing.Point(10, 254);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(700, 33);
             this.panelControl2.TabIndex = 6;
@@ -303,7 +312,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 84);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 76);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -695,7 +704,7 @@
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(700, 74);
+            this.groupBox1.Size = new System.Drawing.Size(700, 66);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mode";
@@ -751,19 +760,6 @@
             this.tmrEditNotify.Enabled = true;
             this.tmrEditNotify.Tick += new System.EventHandler(this.tmrEditNotify_Tick);
             // 
-            // gridColumnSTATE
-            // 
-            this.gridColumnSTATE.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.gridColumnSTATE.AppearanceHeader.Options.UseFont = true;
-            this.gridColumnSTATE.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumnSTATE.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnSTATE.Caption = "STATE";
-            this.gridColumnSTATE.FieldName = "STATE";
-            this.gridColumnSTATE.Name = "gridColumnSTATE";
-            this.gridColumnSTATE.Visible = true;
-            this.gridColumnSTATE.VisibleIndex = 5;
-            this.gridColumnSTATE.Width = 114;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -773,10 +769,10 @@
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(736, 586);
+            this.KeyPreview = true;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Log for MES System";
+            this.Text = "Mango CTMS - Log for MES System";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
