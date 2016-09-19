@@ -74,7 +74,25 @@ namespace BarcodeShipping.Services
             };
             return _context.Database.SqlQuery<tbl_test_log>("EXEC sp_GetLogsByBoxId @boxId", param).ToList();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="boxId"></param>
+        /// <param name="dateCheck"></param>
+        /// <returns></returns>
+        public IEnumerable<tbl_test_log> GetLogsByBoxIdAndDate(string boxId, string dateCheck)
+        {
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@boxId", Value = boxId, SqlDbType = SqlDbType.Char},
+                new SqlParameter() { ParameterName = "@dateCheck", Value = dateCheck, SqlDbType = SqlDbType.Date},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+            return _context.Database.SqlQuery<tbl_test_log>("EXEC [dbo].[sp_GetLogsByBoxIdAndDate] @boxId, @dateCheck", param).ToList();
+        }
         public void DeleteLogByProductionId(string productionId)
         {
             var log = GetLogByProductionId(productionId);

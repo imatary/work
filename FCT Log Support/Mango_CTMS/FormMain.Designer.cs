@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -498,7 +499,8 @@
             this.cboWindows.Properties.Appearance.Options.UseFont = true;
             this.cboWindows.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.cboWindows.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("cboWindows.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
             this.cboWindows.Properties.NullText = "";
             this.cboWindows.Properties.NullValuePrompt = "Select process";
             this.cboWindows.Properties.NullValuePromptShowForEmptyValue = true;
@@ -507,6 +509,7 @@
             this.cboWindows.Size = new System.Drawing.Size(227, 28);
             this.cboWindows.TabIndex = 8;
             this.cboWindows.Visible = false;
+            this.cboWindows.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.cboWindows_ButtonPressed);
             this.cboWindows.EditValueChanged += new System.EventHandler(this.cboWindows_EditValueChanged);
             // 
             // gridView2
@@ -717,7 +720,7 @@
             this.chkSubFolder.Checked = true;
             this.chkSubFolder.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSubFolder.Enabled = false;
-            this.chkSubFolder.Location = new System.Drawing.Point(185, 45);
+            this.chkSubFolder.Location = new System.Drawing.Point(152, 43);
             this.chkSubFolder.Name = "chkSubFolder";
             this.chkSubFolder.Size = new System.Drawing.Size(115, 17);
             this.chkSubFolder.TabIndex = 6;
@@ -772,6 +775,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MinimumSize = new System.Drawing.Size(736, 586);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mango CTMS - Log for MES System";

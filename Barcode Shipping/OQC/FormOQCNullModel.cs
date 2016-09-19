@@ -55,8 +55,8 @@ namespace OQC
                         }
                         else
                         {
-                            txtJudge.Focus();
                             SetErrorStatus(false, null, null);
+                            InsertLog(txtBoxID.Text.Trim());
                         }
                     }
                     else if (Program.CurrentUser.OperationID >= 2)
@@ -67,6 +67,41 @@ namespace OQC
                 }
             }
         }
+        
+        private void txtJudge_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (string.IsNullOrEmpty(txtJudge.Text))
+                {
+                    SetErrorStatus(true, "NG", "Judge không được để trống!");
+                    Ultils.EditTextErrorNoMessage(txtJudge);
+                }
+                else
+                {
+                    if (txtJudge.Text.Trim() == "1" || txtJudge.Text.Trim() == "0")
+                    {
+                        SetErrorStatus(false, null, null);
+                        InsertLog(txtBoxID.Text);
+                    }
+                    else
+                    {
+                        SetErrorStatus(true, "NG", "Judge Error!\nKhông đúng định dạng.\nVui lòng thử lại!\nChỉ chấp nhận giá trị: 1 hoặc 0 ");
+                        txtJudge.SelectAll();
+                        Ultils.EditTextErrorNoMessage(txtJudge);
+                    }
+                }
+            }
+            if (e.KeyCode == Keys.Tab)
+            {
+                if (string.IsNullOrEmpty(txtJudge.Text))
+                {
+                    SetErrorStatus(true, "NG", "Judge không được để trống!");
+                    Ultils.EditTextErrorNoMessage(txtJudge);
+                }
+            }
+        }
+
         private void txtMacAddress_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -93,39 +128,6 @@ namespace OQC
                 }
             }
         }
-        private void txtJudge_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (string.IsNullOrEmpty(txtJudge.Text))
-                {
-                    SetErrorStatus(true, "NG", "Judge không được để trống!");
-                    Ultils.EditTextErrorNoMessage(txtJudge);
-                }
-                else
-                {
-                    if (txtJudge.Text.Trim() == "1" || txtJudge.Text.Trim() == "0")
-                    {
-                        txtBoxID.Focus();
-                        SetErrorStatus(false, null, null);
-                    }
-                    else
-                    {
-                        SetErrorStatus(true, "NG", "Judge Error!\nKhông đúng định dạng.\nVui lòng thử lại!\nChỉ chấp nhận giá trị: 1 hoặc 0 ");
-                        txtJudge.SelectAll();
-                        Ultils.EditTextErrorNoMessage(txtJudge);
-                    }
-                }
-            }
-            if (e.KeyCode == Keys.Tab)
-            {
-                if (string.IsNullOrEmpty(txtJudge.Text))
-                {
-                    SetErrorStatus(true, "NG", "Judge không được để trống!");
-                    Ultils.EditTextErrorNoMessage(txtJudge);
-                }
-            }
-        }
         private void txtBoxID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
@@ -149,7 +151,7 @@ namespace OQC
                         else
                         {
                             SetErrorStatus(false, null, null);
-                            InsertLog(txtBoxID.Text);
+                            InsertLog(txtBoxID.Text.Trim());
                         }
                     }
                     else
@@ -201,9 +203,9 @@ namespace OQC
                 string operatorId = Program.CurrentUser.OperatorCode;
                 string productionId = txtProductionID.Text.Trim();
 
-                bool judge = txtJudge.Text.Trim() == "1";
+                bool judge = radioGroupJudge.EditValue.ToString() == "1";
                 string status = null;
-                if (txtJudge.Text.Trim() == "1")
+                if (radioGroupJudge.EditValue.ToString() == "1")
                 {
                     status = "P";
                 }
@@ -220,8 +222,9 @@ namespace OQC
                 {
                     modelName = null;
                 }
-                var logs = _oqcService.GetLogsByBoxId(boxId).ToList();
-
+                string dateCheck = DateTime.Now.ToString("yyyy-MM-dd");
+                var logs = _oqcService.GetLogsByBoxIdAndDate(boxId, dateCheck).ToList();
+                
                 if (operationId == 1)
                 {
                     // Nếu Box có dữ liệu của PCB
@@ -244,7 +247,7 @@ namespace OQC
                                     _iqcService.UpdateResult(productionId, operationId, judge, operatorId);
                                 }
                                 CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID);
-                                logs = _oqcService.GetLogsByBoxId(boxId).ToList();
+                                logs = _oqcService.GetLogsByBoxIdAndDate(boxId, dateCheck).ToList();
                                 gridControlData.Refresh();
                                 gridControlData.DataSource = logs;
                                 lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
@@ -285,7 +288,7 @@ namespace OQC
                                 _iqcService.UpdateResult(productionId, operationId, judge, operatorId);
                             }
                             //CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID);
-                            logs = _oqcService.GetLogsByBoxId(boxId).ToList();
+                            logs = _oqcService.GetLogsByBoxIdAndDate(boxId, dateCheck).ToList();
                             gridControlData.Refresh();
                             gridControlData.DataSource = logs;
                             lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
@@ -305,7 +308,7 @@ namespace OQC
                     _iqcService.UpdateLogs(productionId, lineId, txtMacAddress.Text, boxId, lblCurentModel.Text, null, operatorId);
                     _iqcService.InsertResult(productionId, operationId, judge, operatorId);
 
-                    logs = _oqcService.GetLogsByBoxId(boxId).ToList();
+                    logs = _oqcService.GetLogsByBoxIdAndDate(boxId, dateCheck).ToList();
                     gridControlData.Refresh();
                     gridControlData.DataSource = logs;
                     lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
@@ -346,8 +349,8 @@ namespace OQC
             txtProductionID.Focus();
             txtProductionID.Text = string.Empty;
             //txtMacAddress.Text = string.Empty;
-            txtJudge.Text = string.Empty;
-            txtBoxID.Text = string.Empty;
+            //txtJudge.Text = string.Empty;
+            //txtBoxID.Text = string.Empty;
         }
 
         /// <summary>

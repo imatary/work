@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -8,18 +9,18 @@ namespace Lib.Core
 {
     public static class Ultils
     {
-        //public static void RegisterInStartup(bool isChecked)
-        //{
-        //    RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-        //    if (isChecked)
-        //    {
-        //        registryKey.SetValue("ApplicationName", Application.ExecutablePath);
-        //    }
-        //    else
-        //    {
-        //        registryKey.DeleteValue("ApplicationName");
-        //    }
-        //}
+        public static void RegisterInStartup(bool isChecked, string executablePath)
+        {
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (isChecked)
+            {
+                registryKey.SetValue("ApplicationName", executablePath);
+            }
+            else
+            {
+                registryKey.DeleteValue("ApplicationName");
+            }
+        }
 
 
         public static void CreateFolderBackupLog(string fileName,string model, string productId, string status, string process)

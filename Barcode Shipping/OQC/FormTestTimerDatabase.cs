@@ -1,11 +1,5 @@
 ﻿using BarcodeShipping.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -24,8 +18,11 @@ namespace OQC
 
         private void FormTestTimerDatabase_Load(object sender, EventArgs e)
         {
-            
+
             //this.Text = _oqcService.GetLogs().Count().ToString();
+            Thread t = new Thread(new ThreadStart(LapVoTan));
+
+            t.Start();
         }
 
         private void SetText(string t)

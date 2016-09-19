@@ -646,5 +646,21 @@ namespace FCT_HFT1024_DB
                 }
             }
         }
+
+        private void cboWindows_Properties_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 1)
+            {
+                RefreshWindows();
+            }
+        }
+
+        private void cboWindows_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 1)
+            {
+                RefreshWindows();
+            }
+        }
     }
 }

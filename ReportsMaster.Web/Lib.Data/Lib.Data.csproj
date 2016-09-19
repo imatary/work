@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lib.Data</RootNamespace>
     <AssemblyName>Lib.Data</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -55,6 +55,7 @@
     <Compile Include="Broad.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Line.cs" />
+    <Compile Include="LineStatus.cs" />
     <Compile Include="MasterDbContext.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Plan.cs" />

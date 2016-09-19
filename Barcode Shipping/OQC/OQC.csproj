@@ -13,9 +13,9 @@
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>Y:\Dev\Barcode Shipping\PE Barcode\</PublishUrl>
+    <PublishUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Snider\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
+    <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -28,9 +28,11 @@
     <PublisherName>cuongpham%40umcvn.com</PublisherName>
     <SuiteName>Barcode System</SuiteName>
     <MinimumRequiredVersion>1.0.0.50</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>70</ApplicationRevision>
+    <ApplicationRevision>73</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -157,6 +159,12 @@
     <Compile Include="WaitFormUpdate.Designer.cs">
       <DependentUpon>WaitFormUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="WatcherApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WatcherApplication.Designer.cs">
+      <DependentUpon>WatcherApplication.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormAction.resx">
       <DependentUpon>FormAction.cs</DependentUpon>
     </EmbeddedResource>
@@ -195,6 +203,9 @@
     <EmbeddedResource Include="WaitFormUpdate.resx">
       <DependentUpon>WaitFormUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WatcherApplication.resx">
+      <DependentUpon>WatcherApplication.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -207,7 +218,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BarcodeShipping.Data\BarcodeShipping.Data.csproj">

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormOQCNullModel));
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.tableLayoutPanelModel = new System.Windows.Forms.TableLayoutPanel();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -39,15 +40,15 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtBoxID = new DevExpress.XtraEditors.TextEdit();
-            this.txtJudge = new DevExpress.XtraEditors.TextEdit();
-            this.txtMacAddress = new DevExpress.XtraEditors.TextEdit();
             this.txtProductionID = new DevExpress.XtraEditors.TextEdit();
-            this.lblBoxID = new DevExpress.XtraEditors.LabelControl();
-            this.lblJudge = new DevExpress.XtraEditors.LabelControl();
             this.lblMacAddress = new DevExpress.XtraEditors.LabelControl();
+            this.txtMacAddress = new DevExpress.XtraEditors.TextEdit();
+            this.lblBoxID = new DevExpress.XtraEditors.LabelControl();
             this.lblProductionID = new DevExpress.XtraEditors.LabelControl();
             this.lblOperatorName = new DevExpress.XtraEditors.LabelControl();
             this.lblLineID = new DevExpress.XtraEditors.LabelControl();
+            this.lblJudge = new DevExpress.XtraEditors.LabelControl();
+            this.radioGroupJudge = new DevExpress.XtraEditors.RadioGroup();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -56,6 +57,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lblStatus = new DevExpress.XtraEditors.LabelControl();
             this.lblStatusMessage = new DevExpress.XtraEditors.LabelControl();
+            this.txtJudge = new DevExpress.XtraEditors.TextEdit();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelSupport = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelPEIT = new System.Windows.Forms.ToolStripStatusLabel();
@@ -87,13 +89,14 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJudge.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroupJudge.Properties)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJudge.Properties)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
@@ -229,15 +232,15 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64F));
             this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.txtJudge, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.txtMacAddress, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.txtProductionID, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblMacAddress, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.txtMacAddress, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.lblBoxID, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.lblJudge, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.lblMacAddress, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.lblProductionID, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblOperatorName, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblLineID, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblJudge, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.radioGroupJudge, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -255,6 +258,7 @@
             // txtBoxID
             // 
             this.txtBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxID.EditValue = "N/A";
             this.txtBoxID.Location = new System.Drawing.Point(137, 158);
             this.txtBoxID.Name = "txtBoxID";
             this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -265,45 +269,9 @@
             this.txtBoxID.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtBoxID.Size = new System.Drawing.Size(233, 26);
             this.txtBoxID.TabIndex = 9;
+            this.txtBoxID.Visible = false;
             this.txtBoxID.EditValueChanged += new System.EventHandler(this.txtBoxID_EditValueChanged);
             this.txtBoxID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBoxID_PreviewKeyDown);
-            // 
-            // txtJudge
-            // 
-            this.txtJudge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtJudge.Location = new System.Drawing.Point(137, 127);
-            this.txtJudge.Name = "txtJudge";
-            this.txtJudge.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtJudge.Properties.Appearance.Options.UseFont = true;
-            this.txtJudge.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtJudge.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtJudge.Properties.Mask.BeepOnError = true;
-            this.txtJudge.Properties.Mask.EditMask = "d";
-            this.txtJudge.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtJudge.Properties.NullValuePrompt = "Judge";
-            this.txtJudge.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtJudge.Size = new System.Drawing.Size(233, 26);
-            this.txtJudge.TabIndex = 8;
-            this.txtJudge.EditValueChanged += new System.EventHandler(this.txtJudge_EditValueChanged);
-            this.txtJudge.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtJudge_PreviewKeyDown);
-            // 
-            // txtMacAddress
-            // 
-            this.txtMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMacAddress.EditValue = "0017C81120CD";
-            this.txtMacAddress.Enabled = false;
-            this.txtMacAddress.Location = new System.Drawing.Point(137, 96);
-            this.txtMacAddress.Name = "txtMacAddress";
-            this.txtMacAddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMacAddress.Properties.Appearance.Options.UseFont = true;
-            this.txtMacAddress.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtMacAddress.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtMacAddress.Properties.NullValuePrompt = "Mac Address";
-            this.txtMacAddress.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtMacAddress.Size = new System.Drawing.Size(233, 26);
-            this.txtMacAddress.TabIndex = 7;
-            this.txtMacAddress.EditValueChanged += new System.EventHandler(this.txtMacAddress_EditValueChanged);
-            this.txtMacAddress.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtMacAddress_PreviewKeyDown);
             // 
             // txtProductionID
             // 
@@ -321,40 +289,50 @@
             this.txtProductionID.EditValueChanged += new System.EventHandler(this.txtProductionID_EditValueChanged);
             this.txtProductionID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtProductionID_PreviewKeyDown);
             // 
-            // lblBoxID
-            // 
-            this.lblBoxID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBoxID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblBoxID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblBoxID.Location = new System.Drawing.Point(3, 158);
-            this.lblBoxID.Name = "lblBoxID";
-            this.lblBoxID.Size = new System.Drawing.Size(128, 25);
-            this.lblBoxID.TabIndex = 4;
-            this.lblBoxID.Text = "Box ID:";
-            // 
-            // lblJudge
-            // 
-            this.lblJudge.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJudge.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblJudge.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblJudge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJudge.Location = new System.Drawing.Point(3, 127);
-            this.lblJudge.Name = "lblJudge";
-            this.lblJudge.Size = new System.Drawing.Size(128, 25);
-            this.lblJudge.TabIndex = 2;
-            this.lblJudge.Text = "Judge:";
-            // 
             // lblMacAddress
             // 
             this.lblMacAddress.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMacAddress.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblMacAddress.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMacAddress.Location = new System.Drawing.Point(3, 96);
+            this.lblMacAddress.Location = new System.Drawing.Point(3, 127);
             this.lblMacAddress.Name = "lblMacAddress";
             this.lblMacAddress.Size = new System.Drawing.Size(128, 25);
             this.lblMacAddress.TabIndex = 1;
             this.lblMacAddress.Text = "Mac Address:";
+            this.lblMacAddress.Visible = false;
+            // 
+            // txtMacAddress
+            // 
+            this.txtMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMacAddress.EditValue = "N/A";
+            this.txtMacAddress.Enabled = false;
+            this.txtMacAddress.Location = new System.Drawing.Point(137, 127);
+            this.txtMacAddress.Name = "txtMacAddress";
+            this.txtMacAddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMacAddress.Properties.Appearance.Options.UseFont = true;
+            this.txtMacAddress.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtMacAddress.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtMacAddress.Properties.NullValuePrompt = "Mac Address";
+            this.txtMacAddress.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtMacAddress.Size = new System.Drawing.Size(233, 26);
+            this.txtMacAddress.TabIndex = 7;
+            this.txtMacAddress.Visible = false;
+            this.txtMacAddress.EditValueChanged += new System.EventHandler(this.txtMacAddress_EditValueChanged);
+            this.txtMacAddress.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtMacAddress_PreviewKeyDown);
+            // 
+            // lblBoxID
+            // 
+            this.lblBoxID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBoxID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblBoxID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBoxID.Location = new System.Drawing.Point(3, 158);
+            this.lblBoxID.Name = "lblBoxID";
+            this.lblBoxID.Size = new System.Drawing.Size(128, 31);
+            this.lblBoxID.TabIndex = 4;
+            this.lblBoxID.Text = "Box ID:";
+            this.lblBoxID.Visible = false;
             // 
             // lblProductionID
             // 
@@ -390,6 +368,33 @@
             this.lblLineID.Size = new System.Drawing.Size(233, 25);
             this.lblLineID.TabIndex = 15;
             this.lblLineID.Text = "Line ID";
+            // 
+            // lblJudge
+            // 
+            this.lblJudge.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJudge.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblJudge.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblJudge.Location = new System.Drawing.Point(3, 96);
+            this.lblJudge.Name = "lblJudge";
+            this.lblJudge.Size = new System.Drawing.Size(128, 25);
+            this.lblJudge.TabIndex = 2;
+            this.lblJudge.Text = "Judge:";
+            // 
+            // radioGroupJudge
+            // 
+            this.radioGroupJudge.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioGroupJudge.EditValue = 0;
+            this.radioGroupJudge.Location = new System.Drawing.Point(137, 95);
+            this.radioGroupJudge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 3);
+            this.radioGroupJudge.Name = "radioGroupJudge";
+            this.radioGroupJudge.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.radioGroupJudge.Properties.Appearance.Options.UseFont = true;
+            this.radioGroupJudge.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.radioGroupJudge.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(0, "OK"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(1, "NG")});
+            this.radioGroupJudge.Size = new System.Drawing.Size(233, 26);
+            this.radioGroupJudge.TabIndex = 16;
             // 
             // tableLayoutPanel3
             // 
@@ -436,17 +441,17 @@
             // 
             // lblQuantityModel
             // 
-            this.lblQuantityModel.Appearance.Font = new System.Drawing.Font("Tahoma", 68F, System.Drawing.FontStyle.Bold);
+            this.lblQuantityModel.Appearance.Font = new System.Drawing.Font("Tahoma", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblQuantityModel.Appearance.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lblQuantityModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.lblQuantityModel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
             this.lblQuantityModel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblQuantityModel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblQuantityModel.Location = new System.Drawing.Point(204, 3);
             this.lblQuantityModel.Name = "lblQuantityModel";
             this.lblQuantityModel.Size = new System.Drawing.Size(240, 99);
             this.lblQuantityModel.TabIndex = 1;
-            this.lblQuantityModel.Text = "/0";
-            this.lblQuantityModel.Visible = false;
+            this.lblQuantityModel.Text = "/Ngày";
             // 
             // lblCountPCB
             // 
@@ -508,6 +513,25 @@
             this.lblStatusMessage.TabIndex = 1;
             this.lblStatusMessage.Text = "Message Info";
             this.lblStatusMessage.Visible = false;
+            // 
+            // txtJudge
+            // 
+            this.txtJudge.Location = new System.Drawing.Point(3, 6);
+            this.txtJudge.Name = "txtJudge";
+            this.txtJudge.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtJudge.Properties.Appearance.Options.UseFont = true;
+            this.txtJudge.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtJudge.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtJudge.Properties.Mask.BeepOnError = true;
+            this.txtJudge.Properties.Mask.EditMask = "d";
+            this.txtJudge.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtJudge.Properties.NullValuePrompt = "Judge";
+            this.txtJudge.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtJudge.Size = new System.Drawing.Size(40, 26);
+            this.txtJudge.TabIndex = 8;
+            this.txtJudge.Visible = false;
+            this.txtJudge.EditValueChanged += new System.EventHandler(this.txtJudge_EditValueChanged);
+            this.txtJudge.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtJudge_PreviewKeyDown);
             // 
             // statusStrip1
             // 
@@ -590,9 +614,9 @@
             this.labelControl2.Location = new System.Drawing.Point(2, 2);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.labelControl2.Size = new System.Drawing.Size(295, 41);
+            this.labelControl2.Size = new System.Drawing.Size(260, 41);
             this.labelControl2.TabIndex = 1;
-            this.labelControl2.Text = "Products in Box";
+            this.labelControl2.Text = "Products";
             // 
             // panelControl3
             // 
@@ -600,6 +624,7 @@
             this.panelControl3.Controls.Add(this.btnAction);
             this.panelControl3.Controls.Add(this.btnSearchPCB);
             this.panelControl3.Controls.Add(this.btnLogOut);
+            this.panelControl3.Controls.Add(this.txtJudge);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelControl3.Location = new System.Drawing.Point(303, 2);
             this.panelControl3.Name = "panelControl3";
@@ -610,6 +635,7 @@
             // 
             this.btnAction.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnAction.Appearance.Options.UseFont = true;
+            this.btnAction.Image = ((System.Drawing.Image)(resources.GetObject("btnAction.Image")));
             this.btnAction.Location = new System.Drawing.Point(446, 4);
             this.btnAction.Name = "btnAction";
             this.btnAction.Size = new System.Drawing.Size(83, 32);
@@ -621,6 +647,7 @@
             // 
             this.btnSearchPCB.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnSearchPCB.Appearance.Options.UseFont = true;
+            this.btnSearchPCB.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchPCB.Image")));
             this.btnSearchPCB.Location = new System.Drawing.Point(329, 4);
             this.btnSearchPCB.Name = "btnSearchPCB";
             this.btnSearchPCB.Size = new System.Drawing.Size(111, 32);
@@ -632,6 +659,7 @@
             // 
             this.btnLogOut.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.btnLogOut.Appearance.Options.UseFont = true;
+            this.btnLogOut.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.Image")));
             this.btnLogOut.Location = new System.Drawing.Point(228, 4);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(95, 32);
@@ -788,13 +816,14 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJudge.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroupJudge.Properties)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtJudge.Properties)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
@@ -861,5 +890,6 @@
         private DevExpress.XtraEditors.LabelControl lblCurentModel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblCurentVersion;
+        private DevExpress.XtraEditors.RadioGroup radioGroupJudge;
     }
 }

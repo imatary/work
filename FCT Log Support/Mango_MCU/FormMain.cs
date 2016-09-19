@@ -30,6 +30,7 @@ namespace Mango_MCU
         private int pass = 0;
         private int ng = 0;
         private int total = 0;
+        private string messageError = null;
         string backup_log_folder = @"C:\backup_log\";
 
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
@@ -461,7 +462,7 @@ namespace Mango_MCU
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
         }
-        
+
         private void txtBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -487,6 +488,7 @@ namespace Mango_MCU
 
                     var boards = _scanningLogsService.Get_SCANNING_LOGS(boardNo).FirstOrDefault();
 
+                    // nếu board đã được bắn vào trước đó
                     if (boards != null)
                     {
                         var process_No = _inspectionProcessesService.GET_INSPECTION_PROCESSES_BY_PRODUCT_ID(boards.PRODUCT_ID);
@@ -500,9 +502,11 @@ namespace Mango_MCU
                                 // thì thông báo cho người dùng biết
                                 if (curentStationNo.IS_FINISHED == true)
                                 {
-                                    MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' is finished!", lblStatus, lblMessage);
+                                    // Thông tin lỗi
+                                    messageError = $"Board '{boardNo}' is finished!";
+                                    MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                    var errorForm = new FormError($"Board '{boardNo}' is finished!");
+                                    var errorForm = new FormError(messageError);
                                     errorForm.ShowDialog();
                                     txtBarcode.Focus();
                                     return;
@@ -526,9 +530,12 @@ namespace Mango_MCU
                                     // station_no curent thì thông báo cho người dùng biết
                                     if (process_by_station_no == null)
                                     {
-                                        MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' station '{set_station_no}' not invaild!", lblStatus, lblMessage);
+                                        // Thông tin lỗi
+                                        messageError = $"Board '{boardNo}' station '{set_station_no}' not invaild!";
+
+                                        MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                         CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                        var errorForm = new FormError($"Board '{boardNo}' station '{set_station_no}' not invaild!");
+                                        var errorForm = new FormError(messageError);
                                         errorForm.ShowDialog();
                                         txtBarcode.Focus();
                                         return;
@@ -539,9 +546,16 @@ namespace Mango_MCU
                                         // Khi hai giá trị bằng nhau => ICT_FUJ
                                         if (curentStationNo.PROCEDURE_INDEX < (process_by_station_no.INDEX - 1))
                                         {
-                                            MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' skip stations!", lblStatus, lblMessage);
+                                            // Lấy tên trạm bị bỏ qua
+                                            string station_skip = process_Designer.FirstOrDefault(item => item.INDEX == (process_by_station_no.INDEX - 1)).STATION_NO;
+
+                                            // Thông tin lỗi
+                                            messageError = $"Board '{boardNo}' skip station '{station_skip}'!";
+
+                                            // Hiển thị thông báo cho người dùng
+                                            MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                            var errorForm = new FormError($"Board '{boardNo}' skip stations!");
+                                            var errorForm = new FormError(messageError);
                                             errorForm.ShowDialog();
                                             txtBarcode.Focus();
                                             return;
@@ -549,76 +563,74 @@ namespace Mango_MCU
                                         //// Nếu Index Board > Set Index 
                                         else if (curentStationNo.PROCEDURE_INDEX > process_by_station_no.INDEX)
                                         {
+                                            // Lấy tên trạm tiếp theo mà broad cần chạy qua.
+                                            string station_skip = process_Designer.FirstOrDefault(item => item.INDEX == (curentStationNo.PROCEDURE_INDEX + 1)).STATION_NO;
+
+                                            // Thông tin lỗi
+                                            messageError = $"Board '{boardNo}' transferred to the next station '{station_skip}'!";
+
                                             // transferred to the next station.
-                                            MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' transferred to the next station!", lblStatus, lblMessage);
+                                            MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                            var errorForm = new FormError($"Board '{boardNo}' transferred to the next station!");
+                                            var errorForm = new FormError(messageError);
                                             errorForm.ShowDialog();
                                             txtBarcode.Focus();
                                             return;
                                         }
 
+                                        // Nếu trạm hiện tại mà giống với trạm cài đặt thì gửi dữ liệu đi
                                         else if (curentStationNo.PROCEDURE_INDEX == (process_by_station_no.INDEX - 1))
                                         {
-                                            if (Ultils.IsRunning(cboWindows.Text))
-                                            {
-                                                this.TopMost = false;
-                                                txtBarcode.ResetText();
-                                                txtBarcode.Focus();
-                                                productionId = boardNo;
-                                                modelId = boards.PRODUCT_ID;
-                                                MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
-                                                // Thực hiện gửi dữ liệu đi
-                                                int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
-                                                NativeWin32.SetForegroundWindow(iHandle);
-                                                SendKeys.Send(boardNo);
-                                                SendKeys.Send("{ENTER}");
-                                            }
-                                            else
-                                            {
-                                                MessageHelpers.SetErrorStatus(true, "NG", $"'{cboWindows.Text}' not runing. Please running programs, then try again!", lblStatus, lblMessage);
-                                                CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                                var errorForm = new FormError($"'{cboWindows.Text}' not runing. Please running programs, then try again!");
-                                                errorForm.ShowDialog();
-                                                txtBarcode.Focus();
-                                                return;
-                                            }
+                                            this.TopMost = false;
+                                            txtBarcode.ResetText();
+                                            txtBarcode.Focus();
+                                            productionId = boardNo;
+                                            modelId = boards.PRODUCT_ID;
+                                            MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
+                                            // Thực hiện gửi dữ liệu đi
+                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.EditValue.ToString());
+                                            NativeWin32.SetForegroundWindow(iHandle);
+                                            SendKeys.Send(boardNo);
+                                            SendKeys.Send("{ENTER}");
                                         }
+                                        // Nếu board này đã chạy rồi, với trạng thái là FAILD thì thực hiện chạy lại.
                                         else if (curentStationNo.BOARD_STATE == 2)
                                         {
-                                            if (Ultils.IsRunning(cboWindows.Text))
-                                            {
-                                                this.TopMost = false;
-                                                txtBarcode.ResetText();
-                                                txtBarcode.Focus();
-                                                productionId = boardNo;
-                                                modelId = boards.PRODUCT_ID;
-                                                MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
-                                                // Thực hiện gửi dữ liệu đi
-                                                int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
-                                                NativeWin32.SetForegroundWindow(iHandle);
-                                                SendKeys.Send(boardNo);
-                                                SendKeys.Send("{ENTER}");
-                                            }
-                                            else
-                                            {
-                                                MessageHelpers.SetErrorStatus(true, "NG", $"'{cboWindows.Text}' not runing. Please running programs, then try again!", lblStatus, lblMessage);
-                                                CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                                var errorForm = new FormError($"'{cboWindows.Text}' not runing. Please running programs, then try again!");
-                                                errorForm.ShowDialog();
-                                                txtBarcode.Focus();
-                                                return;
-                                            }
+                                            this.TopMost = false;
+                                            txtBarcode.ResetText();
+                                            txtBarcode.Focus();
+                                            productionId = boardNo;
+                                            modelId = boards.PRODUCT_ID;
+                                            MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
+                                            // Thực hiện gửi dữ liệu đi
+                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.EditValue.ToString());
+                                            NativeWin32.SetForegroundWindow(iHandle);
+                                            SendKeys.Send(boardNo);
+                                            SendKeys.Send("{ENTER}");
+                                        }
+                                        else
+                                        {
+                                            // Thông tin lỗi
+                                            messageError = $"Broad '{boardNo} lỗi không rõ nguyên nhân. Vui lòng liên hệ với bộ phần 'PE-IT' để được hỗ trợ!'";
 
+                                            MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
+                                            CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                                            var errorForm = new FormError(messageError);
+                                            errorForm.ShowDialog();
+                                            txtBarcode.Focus();
+                                            return;
                                         }
                                     }
                                 }
                             }
                             else
                             {
-                                MessageHelpers.SetErrorStatus(true, "NG", $"Station No '{curentStationNo.STATION_NO}' not found!", lblStatus, lblMessage);
+                                // Thông tin lỗi
+                                messageError = $"Station No '{curentStationNo.STATION_NO}' not found!";
+
+                                MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                 CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                var errorForm = new FormError($"Station No '{curentStationNo.STATION_NO}' not found!");
+                                var errorForm = new FormError(messageError);
                                 errorForm.ShowDialog();
                                 txtBarcode.Focus();
                                 return;
@@ -626,9 +638,12 @@ namespace Mango_MCU
                         }
                         else
                         {
-                            MessageHelpers.SetErrorStatus(true, "NG", $"Station No '{set_station_no}' invaild!", lblStatus, lblMessage);
+                            // Thông tin lỗi
+                            messageError = $"Station No '{set_station_no}' invaild!";
+
+                            MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                            var errorForm = new FormError($"Station No '{set_station_no}' invaild!");
+                            var errorForm = new FormError(messageError);
                             errorForm.ShowDialog();
                             txtBarcode.Focus();
                             return;
@@ -636,9 +651,12 @@ namespace Mango_MCU
                     }
                     else
                     {
-                        MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' not initialized!", lblStatus, lblMessage);
+                        // Thông tin lỗi
+                        messageError = $"Board '{boardNo}' not initialized!";
+
+                        MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                         CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                        var errorForm = new FormError($"Board '{boardNo}' not initialized!");
+                        var errorForm = new FormError(messageError);
                         errorForm.ShowDialog();
                         return;
                     }

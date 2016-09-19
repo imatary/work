@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -46,6 +46,7 @@
             this.gridColStation_NO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnSTATE = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -82,8 +83,7 @@
             this.dlgOpenDir = new System.Windows.Forms.FolderBrowserDialog();
             this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
-            this.tmrEditNotify = new System.Windows.Forms.Timer(this.components);
-            this.gridColumnSTATE = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.tmrEditNotify = new System.Windows.Forms.Timer();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -273,6 +273,19 @@
             this.gridColumn2.VisibleIndex = 4;
             this.gridColumn2.Width = 100;
             // 
+            // gridColumnSTATE
+            // 
+            this.gridColumnSTATE.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridColumnSTATE.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnSTATE.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnSTATE.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnSTATE.Caption = "STATE";
+            this.gridColumnSTATE.FieldName = "STATE";
+            this.gridColumnSTATE.Name = "gridColumnSTATE";
+            this.gridColumnSTATE.Visible = true;
+            this.gridColumnSTATE.VisibleIndex = 5;
+            this.gridColumnSTATE.Width = 114;
+            // 
             // panelControl2
             // 
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
@@ -426,10 +439,10 @@
             this.txtPath.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPath.Properties.Appearance.Options.UseFont = true;
             this.txtPath.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            serializableAppearanceObject2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            serializableAppearanceObject2.Options.UseFont = true;
+            serializableAppearanceObject1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            serializableAppearanceObject1.Options.UseFont = true;
             this.txtPath.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Browse", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("txtPath.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Browse", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("txtPath.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.txtPath.Properties.NullValuePrompt = "ex: C:\\";
             this.txtPath.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtPath.Size = new System.Drawing.Size(227, 28);
@@ -487,15 +500,18 @@
             this.cboWindows.Properties.Appearance.Options.UseFont = true;
             this.cboWindows.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.cboWindows.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("cboWindows.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
             this.cboWindows.Properties.NullText = "";
             this.cboWindows.Properties.NullValuePrompt = "Select process";
             this.cboWindows.Properties.NullValuePromptShowForEmptyValue = true;
             this.cboWindows.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.cboWindows.Properties.View = this.gridView2;
+            this.cboWindows.Properties.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.cboWindows_Properties_ButtonPressed);
             this.cboWindows.Size = new System.Drawing.Size(227, 28);
             this.cboWindows.TabIndex = 8;
             this.cboWindows.Visible = false;
+            this.cboWindows.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.cboWindows_ButtonPressed);
             this.cboWindows.EditValueChanged += new System.EventHandler(this.cboWindows_EditValueChanged);
             // 
             // gridView2
@@ -750,19 +766,6 @@
             // 
             this.tmrEditNotify.Enabled = true;
             this.tmrEditNotify.Tick += new System.EventHandler(this.tmrEditNotify_Tick);
-            // 
-            // gridColumnSTATE
-            // 
-            this.gridColumnSTATE.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.gridColumnSTATE.AppearanceHeader.Options.UseFont = true;
-            this.gridColumnSTATE.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumnSTATE.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumnSTATE.Caption = "STATE";
-            this.gridColumnSTATE.FieldName = "STATE";
-            this.gridColumnSTATE.Name = "gridColumnSTATE";
-            this.gridColumnSTATE.Visible = true;
-            this.gridColumnSTATE.VisibleIndex = 5;
-            this.gridColumnSTATE.Width = 114;
             // 
             // FormMain
             // 

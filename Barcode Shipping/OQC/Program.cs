@@ -20,7 +20,7 @@ namespace OQC
             bool ownmutex;
 
             // Tạo và lấy quyền sở hữu một Mutex có tên là Icon;
-            using (var mutex = new Mutex(true, "Icon", out ownmutex))
+            using (var mutex = new Mutex(true, "Snider", out ownmutex))
             {
                 // Nếu ứng dụng sở hữu Mutex, nó có thể tiếp tục thực thi;
                 // nếu không, ứng dụng sẽ thoát.

@@ -17,6 +17,7 @@ namespace IndicateReport
 
         private void XtraForm1_Load(object sender, EventArgs e)
         {
+            
             //MessageBox.Show(DateTime.Now.Hour +":"+DateTime.Now.Minute);
             
             
