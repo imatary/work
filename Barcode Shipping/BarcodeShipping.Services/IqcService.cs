@@ -648,15 +648,19 @@ namespace BarcodeShipping.Services
 
             if (packingPo != null)
             {
-                packingPo.QuantityPO = packingPo.QuantityPO + qtyPo;
-                packingPo.QuantityRemain = qtyPo;
-                packingPo.DateCreated = DateTime.Now;
-                packingPo.TimeCreated = DateTime.Now.TimeOfDay;
-                packingPo.CreateBy = createdBy;
-
+                object[] param =
+                {
+                    new SqlParameter() { ParameterName = "@modelId", Value = modelId, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() { ParameterName = "@poNo", Value = po, SqlDbType = SqlDbType.VarChar},
+                    new SqlParameter() { ParameterName = "@qtyPo", Value = qtyPo, SqlDbType = SqlDbType.Int},
+                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    }
+                };
                 try
                 {
-                    Repository.Update(packingPo);
+                    _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_UpdatePackingPO]@modelId, @poNo, @qtyPo", param);
                 }
                 catch (Exception ex)
                 {

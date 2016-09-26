@@ -26,6 +26,16 @@ namespace BarcodeShipping.Services
         {
             return _context.Database.SqlQuery<Model>("EXEC sp_SelectAllModels").ToList();
         }
+        public IEnumerable<Model> GetModelsByCustomerName(string customerName)
+        {
+            var param = new SqlParameter()
+            {
+                ParameterName = "@customerName",
+                SqlDbType = SqlDbType.VarChar,
+                Value = customerName,
+            };
+            return _context.Database.SqlQuery<Model>("EXEC [dbo].[sp_GetModelsByCustomerName] @customerName", param).ToList();
+        }
         public Model GetModelById(string modelId)
         {
             var param = new SqlParameter()

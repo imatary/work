@@ -369,7 +369,7 @@ namespace BarcodeShipping.GUI
                         {
                             if (XtraMessageBox.Show(string.Format("Chưa tạo QTY PO và Remains cho Model [{0}] và PO [{1}] này.\nBạn có muốn thêm mới không?", gridLookUpEditModelID.Text, removePo), "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                             {
-                                var addPo = new FormAddPO(gridLookUpEditModelID.Text, removePo);
+                                var addPo = new FormAddPO(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, removePo);
                                 addPo.ShowDialog();
                                 txtPO.Text = removePo;
                                 GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.Text, removePo);

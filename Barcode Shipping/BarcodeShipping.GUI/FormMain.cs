@@ -94,7 +94,7 @@ namespace BarcodeShipping.GUI
                             }
                             _iqcService.UpdateRemainsForPo(_currentPo.PO_NO, _currentPo.ModelID, int.Parse(lblRemains.Text));
                             splashScreenManager2.CloseWaitForm();
-                            InsertOrUpdatePo(gridLookUpEditModelID.Text, txtPO.Text);
+                            InsertOrUpdatePo(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, txtPO.Text);
                             gridControlData.DataSource = null;
                             _shippings = new List<Shipping>();
                             txtBoxID.Text = string.Empty;
@@ -129,7 +129,7 @@ namespace BarcodeShipping.GUI
                 else
                 {
                     splashScreenManager1.CloseWaitForm();
-                    if (XtraMessageBox.Show("Dữ liệu PCB chưa được QA bắn vào Box [" + boxId + "].\nVui lòng bắn từng PCB vào Box [" + boxId + "]!", "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    if (XtraMessageBox.Show("Vui lòng bắn từng PCB vào Box [" + boxId + "]!", "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                         EnableTextControls(false);
                         VisibleControlAddPcb(true);
@@ -188,7 +188,7 @@ namespace BarcodeShipping.GUI
                         if (_shippings.Count == _currentModel.Quantity)
                         {
                             gridControlData.DataSource = _shippings;
-                            InsertOrUpdatePo(gridLookUpEditModelID.Text, txtPO.Text);
+                            InsertOrUpdatePo(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, txtPO.Text);
                             splashScreenManager2.ShowWaitForm();
                             foreach (var log in _shippings)
                             {
@@ -231,7 +231,7 @@ namespace BarcodeShipping.GUI
         /// </summary>
         /// <param name="modelId"></param>
         /// <param name="poNo"></param>
-        private void InsertOrUpdatePo(string modelId, string poNo)
+        private void InsertOrUpdatePo(string modelId,string modelName, string poNo)
         {
             if (_currentPo.QuantityRemain <= _currentModel.Quantity || _currentPo.QuantityRemain <= 0)
             {
@@ -239,7 +239,7 @@ namespace BarcodeShipping.GUI
                     $"Bạn có muốn nhập thêm QTY PO cho PO [{poNo}] này không?",
                     "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    var addPo = new FormAddPO(modelId, poNo);
+                    var addPo = new FormAddPO(modelId, modelName, poNo);
                     addPo.ShowDialog();
                     txtBoxID.Focus();
                     GetQtyPoAndRemainsByWorkingOderAndPoNo(modelId, poNo);
@@ -281,9 +281,13 @@ namespace BarcodeShipping.GUI
         /// </summary>
         public void LoadGridLookupEditModel()
         {
+            string customerName = "Fujixerox";
+            var models = _modelService.GetModelsByCustomerName(customerName);
             gridLookUpEditModelID.Properties.View.OptionsBehavior.AutoPopulateColumns = false;
+            gridLookUpEditModelID.Properties.DisplayMember = "ModelName";
+            gridLookUpEditModelID.Properties.ValueMember = "ModelID";
             gridLookUpEditModelID.Properties.View.BestFitColumns();
-            gridLookUpEditModelID.Properties.DataSource = _modelService.GetModels();
+            gridLookUpEditModelID.Properties.DataSource = models;
         }
 
         /// <summary>
@@ -673,7 +677,7 @@ namespace BarcodeShipping.GUI
                         {
                             if (XtraMessageBox.Show($"Chưa tạo QTY PO và Remains cho Model [{gridLookUpEditModelID.Text}] và PO [{removePo}] này.\nBạn có muốn thêm mới không?", "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                             {
-                                var addPo = new FormAddPO(gridLookUpEditModelID.Text, removePo);
+                                var addPo = new FormAddPO(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, removePo);
                                 addPo.ShowDialog();
                                 txtPO.Text = removePo;
                                 GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.Text, removePo);
@@ -687,7 +691,7 @@ namespace BarcodeShipping.GUI
                         }
                         else
                         {
-                            InsertOrUpdatePo(gridLookUpEditModelID.Text, removePo);
+                            InsertOrUpdatePo(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, removePo);
                         }
                     }
                 }

@@ -1,15 +1,15 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using Lib.Core;
 using Lib.Core.Helpers;
 using Lib.Data;
 using Lib.Form.Controls;
-using Lib.Forms.Controls;
 using Lib.Services;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -30,7 +30,7 @@ namespace FCT_HFT1024_DB
         private int pass = 0;
         private int ng = 0;
         private int total = 0;
-
+        private CommunicationManager com;
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
         private readonly SCANNING_LOGS_Service _scanningLogsService;
         private readonly INSPECTION_PROCESSES_Service _inspectionProcessesService;
@@ -43,20 +43,26 @@ namespace FCT_HFT1024_DB
             m_bDirty = false;
             m_bIsWatching = false;
             lblVersion.Text = StringHelper.GetRunningVersion();
-            RegisterInStartup(true);
-
+            Ultils.RegisterInStartup(true, Application.ExecutablePath);
+            com = new CommunicationManager();
             _inspectionStationsService = new INSPECTION_STATIONS_Service();
             _scanningLogsService = new SCANNING_LOGS_Service();
             _inspectionProcessesService = new INSPECTION_PROCESSES_Service();
             _inspectionProcessesDesignersService = new INSPECTION_PROCEDURE_DESIGNERS_Service();
             _workOrderItemService = new WORK_ORDER_ITEMS_Service();
-
             LoadDataGridLookUpEditINSPECTION_STATIONS();
+            GetPortNames();
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
             RefreshWindows();
 
+            //ConfigSerialPorts();
+
+            if (checkEditSerialPort.Checked == true)
+            {
+                gridLookUpEditSerialPort.EditValue = Properties.Settings.Default["SerialPort"].ToString();
+            }
             if (checkKeepProcess.Checked == true)
             {
                 cboWindows.EditValue = Properties.Settings.Default["CurentProcess"].ToString();
@@ -79,19 +85,6 @@ namespace FCT_HFT1024_DB
             gridLookUpEditProcessID.Properties.ValueMember = "STATION_NO";
             gridLookUpEditProcessID.Properties.PopupFormWidth = 300;
             gridLookUpEditProcessID.Properties.DataSource = items;
-        }
-
-        private void RegisterInStartup(bool isChecked)
-        {
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            if (isChecked)
-            {
-                registryKey.SetValue("ApplicationName", Application.ExecutablePath);
-            }
-            else
-            {
-                registryKey.DeleteValue("ApplicationName");
-            }
         }
 
         /// <summary>
@@ -165,6 +158,42 @@ namespace FCT_HFT1024_DB
         /// <summary>
         /// 
         /// </summary>
+        private void GetPortNames()
+        {
+            List<string> listCom = new List<string>();
+            foreach (string s in SerialPort.GetPortNames())
+            {
+                listCom.Add(s);
+            }
+
+            gridLookUpEditSerialPort.Properties.DataSource = listCom;
+            gridLookUpEditSerialPort.Properties.PopupFormWidth = 160;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ConfigSerialPorts()
+        {
+            string portName = gridLookUpEditSerialPort.EditValue.ToString();
+            if (portName != null)
+            {
+                com.PortName = portName;
+            }
+            else
+            {
+                com.PortName = "COM1";
+            }
+            com.Parity = "None";
+            com.StopBits = "One";
+            com.DataBits = "8";
+            com.BaudRate = "9600";
+            com.DisplayWindow = null;
+            com.OpenPort();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="enable"></param>
         private void EnableControls(bool enable)
         {
@@ -187,14 +216,31 @@ namespace FCT_HFT1024_DB
             {
                 case Keys.Shift | Keys.F2:
                     {
-                        cboWindows.Visible = true;
-                        checkKeepProcess.Visible = true;
+                        gridLookUpEditSerialPort.Enabled = true;
+                        checkEditSerialPort.Enabled = true;
+
+                        cboWindows.Enabled = true;
+                        checkKeepProcess.Enabled = true;
                         return true;
                     }
                 case Keys.Shift | Keys.F3:
                     {
-                        cboWindows.Visible = false;
-                        checkKeepProcess.Visible = false;
+                        gridLookUpEditSerialPort.Enabled = false;
+                        checkEditSerialPort.Enabled = false;
+
+                        cboWindows.Enabled = false;
+                        checkKeepProcess.Enabled = false;
+                        return true;
+                    }
+
+                case Keys.Shift | Keys.Control | Keys.Z:
+                    {
+                        Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), false);
+                        return true;
+                    }
+                case Keys.Shift | Keys.Control | Keys.X:
+                    {
+                        Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), true);
                         return true;
                     }
             }
@@ -220,6 +266,7 @@ namespace FCT_HFT1024_DB
                 if (m_bIsWatching)
                 {
                     m_bIsWatching = false;
+                    Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), m_bIsWatching);
                     m_Watcher.EnableRaisingEvents = false;
                     m_Watcher.Dispose();
                     btnWatchFile.Appearance.BackColor = Color.LightSkyBlue;
@@ -230,6 +277,13 @@ namespace FCT_HFT1024_DB
                 else
                 {
                     m_bIsWatching = true;
+
+                    // Cấu hình COM PORT
+                    ConfigSerialPorts();
+
+                    // Ẩn ứng dụng
+                    Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), m_bIsWatching);
+
                     btnWatchFile.ForeColor = Color.White;
                     btnWatchFile.Appearance.BackColor = Color.DarkRed;
                     btnWatchFile.Font = new Font(btnWatchFile.Font, FontStyle.Bold);
@@ -300,6 +354,8 @@ namespace FCT_HFT1024_DB
                         _status = "P";
                         boardState = "OK";
                         pass = pass + 1;
+
+                        com.WriteData("O");
                     }
                     else if (strStatus == "FAIL")
                     {
@@ -375,6 +431,7 @@ namespace FCT_HFT1024_DB
             if (m_bDirty)
             {
                 //this.TopMost = true;
+                Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, true);
                 int iHandle2 = NativeWin32.FindWindow(null, "Log for MES System");
                 NativeWin32.SetForegroundWindow(iHandle2);
                 lblPass.Text = pass.ToString();
@@ -526,34 +583,24 @@ namespace FCT_HFT1024_DB
 
                                         else if (curentStationNo.PROCEDURE_INDEX == (process_by_station_no.INDEX - 1))
                                         {
-                                            if (Ultils.IsRunning(cboWindows.Text))
-                                            {
-                                                this.TopMost = false;
-                                                txtBarcode.ResetText();
-                                                txtBarcode.Focus();
-                                                productionId = boardNo;
-                                                modelId = boards.PRODUCT_ID;
-                                                MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
-                                                // Thực hiện gửi dữ liệu đi
-                                                int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
-                                                NativeWin32.SetForegroundWindow(iHandle);
-                                                SendKeys.Send(boardNo);
-                                                SendKeys.Send("{ENTER}");  
-                                            }
-                                            else
-                                            {
-                                                MessageHelpers.SetErrorStatus(true, "NG", $"'{cboWindows.Text}' not runing. Please running programs, then try again!", lblStatus, lblMessage);
-                                                CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                                var errorForm = new FormError($"'{cboWindows.Text}' not runing. Please running programs, then try again!");
-                                                errorForm.ShowDialog();
-                                                txtBarcode.Focus();
-                                                return;
-                                            }
+                                            Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
+                                            this.TopMost = false;
+                                            txtBarcode.ResetText();
+                                            txtBarcode.Focus();
+                                            productionId = boardNo;
+                                            modelId = boards.PRODUCT_ID;
+                                            MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
+                                            // Thực hiện gửi dữ liệu đi
+                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
+                                            NativeWin32.SetForegroundWindow(iHandle);
+                                            SendKeys.Send(boardNo);
+                                            SendKeys.Send("{ENTER}");
+
                                         }
                                         else if(curentStationNo.BOARD_STATE == 2)
                                         {
-                                            if (Ultils.IsRunning(cboWindows.Text))
-                                            {
+
+                                                Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
                                                 this.TopMost = false;
                                                 txtBarcode.ResetText();
                                                 txtBarcode.Focus();
@@ -565,17 +612,6 @@ namespace FCT_HFT1024_DB
                                                 NativeWin32.SetForegroundWindow(iHandle);
                                                 SendKeys.Send(boardNo);
                                                 SendKeys.Send("{ENTER}");
-                                            }
-                                            else
-                                            {
-                                                MessageHelpers.SetErrorStatus(true, "NG", $"'{cboWindows.Text}' not runing. Please running programs, then try again!", lblStatus, lblMessage);
-                                                CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                                var errorForm = new FormError($"'{cboWindows.Text}' not runing. Please running programs, then try again!");
-                                                errorForm.ShowDialog();
-                                                txtBarcode.Focus();
-                                                return;
-                                            }
-
                                         }
                                     }
                                 }
@@ -608,7 +644,6 @@ namespace FCT_HFT1024_DB
                         errorForm.ShowDialog();
                         return;
                     }
-
                 }
             }    
         }
@@ -624,7 +659,17 @@ namespace FCT_HFT1024_DB
                 }
             } 
         }
-
+        private void gridLookUpEditSerialPort_EditValueChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(gridLookUpEditSerialPort.EditValue.ToString()))
+            {
+                if (checkEditSerialPort.Checked == true)
+                {
+                    Properties.Settings.Default["SerialPort"] = gridLookUpEditSerialPort.EditValue.ToString();
+                    Properties.Settings.Default.Save(); // Saves settings in application configuration file
+                }
+            }
+        }
         private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
             GridView View = sender as GridView;
@@ -647,7 +692,7 @@ namespace FCT_HFT1024_DB
             }
         }
 
-        private void cboWindows_Properties_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void cboWindows_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 1)
             {
@@ -655,11 +700,32 @@ namespace FCT_HFT1024_DB
             }
         }
 
-        private void cboWindows_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void gridLookUpEditSerialPort_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            if (e.Button.Index == 1)
+            if(e.Button.Index == 1)
             {
                 RefreshWindows();
+            }
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                dynamic mboxResult = XtraMessageBox.Show("Bạn có thực sự muốn thoát hay không?",
+                    @"THÔNG BÁO",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (mboxResult == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else if (mboxResult == DialogResult.Yes)
+                {
+                    e.Cancel = false;
+                    Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), false);
+                    Application.ExitThread();  
+                }
             }
         }
     }

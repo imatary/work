@@ -4,7 +4,7 @@ using DevExpress.XtraEditors.DXErrorProvider;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Lib.Forms.Controls
+namespace Lib.Form.Controls
 {
     public static class CheckTextBoxNullValue
     {

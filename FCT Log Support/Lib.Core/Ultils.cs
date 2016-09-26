@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Lib.Core
@@ -29,9 +30,6 @@ namespace Lib.Core
             bool exists = Directory.Exists(backup_log_folder);
             if (!exists)
                 Directory.CreateDirectory(backup_log_folder);
-
-
-
         }
 
 
@@ -81,6 +79,27 @@ namespace Lib.Core
         public static bool IsRunning(string name)
         {
             return Process.GetProcessesByName(name).Length > 0 ? true : false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="processName"></param>
+        /// <param name="isOk"></param>
+        public static void SuspendOrResumeCurentProcess(string processName, bool isOk=false)
+        {
+            var id = Process.GetProcessesByName(processName).FirstOrDefault();
+            var process = Process.GetProcessById(id.Id);
+            
+
+            if (isOk == true)
+            {
+                process.Suspend();
+            }
+            else if (isOk == false)
+            {
+                process.Resume();
+            }
         }
 
         /// <summary>

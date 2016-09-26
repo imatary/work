@@ -3,7 +3,6 @@ using Lib.Core;
 using Lib.Core.Helpers;
 using Lib.Data;
 using Lib.Form.Controls;
-using Lib.Forms.Controls;
 using Lib.Services;
 using System;
 using System.Collections.Generic;
@@ -151,6 +150,8 @@ namespace AGPF_DADF_IBG
             }
             cboWindows.Properties.DataSource = list;
         }
+
+
 
         /// <summary>
         /// 

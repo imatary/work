@@ -88,6 +88,7 @@
             this.gridColumnPO_NO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnDateCheck = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -368,12 +369,10 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Add", 45, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("gridLookUpEditModelID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.gridLookUpEditModelID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.gridLookUpEditModelID.Properties.DisplayMember = "ModelID";
             this.gridLookUpEditModelID.Properties.NullText = "";
             this.gridLookUpEditModelID.Properties.NullValuePrompt = "Enter the Model value";
             this.gridLookUpEditModelID.Properties.NullValuePromptShowForEmptyValue = true;
             this.gridLookUpEditModelID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.gridLookUpEditModelID.Properties.ValueMember = "ModelID";
             this.gridLookUpEditModelID.Properties.View = this.gridLookUpEdit1View;
             this.gridLookUpEditModelID.Size = new System.Drawing.Size(245, 26);
             this.gridLookUpEditModelID.TabIndex = 6;
@@ -385,7 +384,8 @@
             // gridLookUpEdit1View
             // 
             this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnModelID});
+            this.gridColumnModelID,
+            this.gridColumn1});
             this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -394,7 +394,7 @@
             // gridColumnModelID
             // 
             this.gridColumnModelID.Caption = "Model";
-            this.gridColumnModelID.FieldName = "ModelID";
+            this.gridColumnModelID.FieldName = "ModelName";
             this.gridColumnModelID.Name = "gridColumnModelID";
             this.gridColumnModelID.Visible = true;
             this.gridColumnModelID.VisibleIndex = 0;
@@ -880,6 +880,14 @@
             this.gridColumnDateCheck.VisibleIndex = 8;
             this.gridColumnDateCheck.Width = 100;
             // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Customer";
+            this.gridColumn1.FieldName = "CustomerName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -991,6 +999,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.GridControl gridControlData;
         private DevExpress.XtraEditors.TextEdit txtPO;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }
 

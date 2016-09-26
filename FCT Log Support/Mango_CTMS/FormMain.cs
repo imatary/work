@@ -3,13 +3,13 @@ using Lib.Core;
 using Lib.Core.Helpers;
 using Lib.Data;
 using Lib.Form.Controls;
-using Lib.Forms.Controls;
 using Lib.Services;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -32,6 +32,7 @@ namespace Mango_CTMS
         private int total = 0;
         private string messageError = null;
         string backup_log_folder = @"C:\backup_log\";
+        private CommunicationManager com;
 
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
         private readonly SCANNING_LOGS_Service _scanningLogsService;
@@ -45,8 +46,8 @@ namespace Mango_CTMS
             m_bDirty = false;
             m_bIsWatching = false;
             lblVersion.Text = StringHelper.GetRunningVersion();
-            RegisterInStartup(true);
-
+            Ultils.RegisterInStartup(true, Application.ExecutablePath);
+            com = new CommunicationManager();
             _inspectionStationsService = new INSPECTION_STATIONS_Service();
             _scanningLogsService = new SCANNING_LOGS_Service();
             _inspectionProcessesService = new INSPECTION_PROCESSES_Service();
@@ -82,20 +83,6 @@ namespace Mango_CTMS
             gridLookUpEditProcessID.Properties.PopupFormWidth = 300;
             gridLookUpEditProcessID.Properties.DataSource = items;
         }
-
-        private void RegisterInStartup(bool isChecked)
-        {
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            if (isChecked)
-            {
-                registryKey.SetValue("ApplicationName", Application.ExecutablePath);
-            }
-            else
-            {
-                registryKey.DeleteValue("ApplicationName");
-            }
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -126,6 +113,7 @@ namespace Mango_CTMS
         {
             cboWindows.Refresh();
             GetTaskWindows();
+            LoadSerialPorts();
         }
         /// <summary>
         /// 
@@ -166,6 +154,20 @@ namespace Mango_CTMS
         }
 
         /// <summary>
+        /// Load com port
+        /// </summary>
+        private void LoadSerialPorts()
+        {
+            List<string> listCom = new List<string>();
+            foreach (string s in SerialPort.GetPortNames())
+            {
+                listCom.Add(s);
+            }
+
+            gridLookUpEditSerialPort.Properties.DataSource = listCom;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="enable"></param>
@@ -192,12 +194,16 @@ namespace Mango_CTMS
                     {
                         cboWindows.Visible = true;
                         checkKeepProcess.Visible = true;
+                        checkEditSerialPort.Visible = true;
+                        gridLookUpEditSerialPort.Visible = true;
                         return true;
                     }
                 case Keys.Shift | Keys.F3:
                     {
                         cboWindows.Visible = false;
                         checkKeepProcess.Visible = false;
+                        checkEditSerialPort.Visible = false;
+                        gridLookUpEditSerialPort.Visible = false;
                         return true;
                     }
             }
@@ -270,6 +276,11 @@ namespace Mango_CTMS
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
             if (!m_bDirty)
@@ -346,6 +357,11 @@ namespace Mango_CTMS
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnRenamed(object sender, RenamedEventArgs e)
         {
             if (!m_bDirty)
@@ -359,7 +375,11 @@ namespace Mango_CTMS
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rdbFile_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbFile.Checked == true)
@@ -465,6 +485,7 @@ namespace Mango_CTMS
             if (e.KeyCode == Keys.Enter)
             {
                 string boardNo = txtBarcode.Text;
+
                 if (boardNo.Contains("="))
                 {
                     boardNo = boardNo.Replace("=", "_");
@@ -687,7 +708,7 @@ namespace Mango_CTMS
 
         private void cboWindows_EditValueChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cboWindows.Text))
+            if (!string.IsNullOrEmpty(cboWindows.EditValue.ToString()))
             {
                 if (checkKeepProcess.Checked == true)
                 {
@@ -728,6 +749,30 @@ namespace Mango_CTMS
             if (e.Button.Index == 1)
             {
                 RefreshWindows();
+            }
+        }
+
+        private void gridLookUpEditSerialPort_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 1)
+            {
+                RefreshWindows();
+            }
+        }
+
+        private void gridLookUpEditSerialPort_EditValueChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(gridLookUpEditSerialPort.EditValue.ToString()))
+            {
+                if (checkEditSerialPort.Checked == true)
+                {
+                    Properties.Settings.Default["SerialPort"] = gridLookUpEditSerialPort.EditValue.ToString();
+                    Properties.Settings.Default.Save(); // Saves settings in application configuration file
+                }
+            }
+            else
+            {
+                return;
             }
         }
     }

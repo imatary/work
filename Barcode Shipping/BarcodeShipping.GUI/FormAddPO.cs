@@ -8,12 +8,13 @@ namespace BarcodeShipping.GUI
     public partial class FormAddPO : Form
     {
         private readonly IqcService _iqcService = new IqcService();
-        public FormAddPO(string modelId, string po)
+        public FormAddPO(string modelId, string modelName, string po)
         {
             InitializeComponent();
-            if (!string.IsNullOrEmpty(modelId) && !string.IsNullOrEmpty(po))
+            if (!string.IsNullOrEmpty(modelName) && !string.IsNullOrEmpty(po))
             {
-                txtModelID.Text = modelId;
+                lblModelID.Text = modelId;
+                txtModelID.Text = modelName;
                 txtPO.Text = po;
             }
         }
@@ -25,12 +26,12 @@ namespace BarcodeShipping.GUI
         
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var po = _iqcService.GetPackingPoModelAndPoNo(txtModelID.Text, txtPO.Text);
+            var po = _iqcService.GetPackingPoModelAndPoNo(lblModelID.Text, txtPO.Text);
             if (po != null)
             {
                 try
                 {
-                    _iqcService.UpdatePo(txtModelID.Text, txtPO.Text, int.Parse(txtQtyPO.EditValue.ToString()), null);
+                    _iqcService.UpdatePo(lblModelID.Text, txtPO.Text, int.Parse(txtQtyPO.EditValue.ToString()), null);
                     Close();
                 }
                 catch (Exception ex)
