@@ -131,6 +131,7 @@ namespace FCT_HFT1024_DB
         {
             cboWindows.Refresh();
             GetTaskWindows();
+            GetPortNames();
         }
         /// <summary>
         /// 
@@ -171,7 +172,7 @@ namespace FCT_HFT1024_DB
         }
 
         /// <summary>
-        /// 
+        /// List Ports Name
         /// </summary>
         private void GetPortNames()
         {
@@ -193,10 +194,6 @@ namespace FCT_HFT1024_DB
             if (portName != null)
             {
                 com.PortName = portName;
-            }
-            else
-            {
-                com.PortName = "COM1";
             }
             com.Parity = "None";
             com.StopBits = "One";
@@ -453,7 +450,7 @@ namespace FCT_HFT1024_DB
             {
                 //this.TopMost = true;
                 //Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, true);
-                int iHandle2 = NativeWin32.FindWindow(null, "Log for MES System");
+                int iHandle2 = NativeWin32.FindWindow(null, this.Text);
                 NativeWin32.SetForegroundWindow(iHandle2);
                 lblPass.Text = pass.ToString();
                 lblNG.Text = ng.ToString();
@@ -461,56 +458,18 @@ namespace FCT_HFT1024_DB
                 LoadData(productionId, modelId, gridLookUpEditProcessID.EditValue.ToString(), boardState);
                 m_bDirty = false;
             }
-        }
-
-        private void txtPath_EditValueChanged(object sender, EventArgs e)
-        {
-            if (txtPath.Text.Contains(@":\"))
-            {
-                if (Directory.Exists(txtPath.Text))
-                {
-                    MessageHelpers.SetDefaultStatus(true, "N/A", "N/A", lblStatus, lblMessage);
-                    CheckTextBoxNullValue.SetColorDefaultTextControl(txtPath);
-
-                    if (checkPath.Checked == true)
-                    {
-                        Properties.Settings.Default["Folder"] = txtPath.Text;
-                        Properties.Settings.Default.Save(); // Saves settings in application configuration file
-                    }
-                }
-                else
-                {
-                    MessageHelpers.SetErrorStatus(true, "NG", "'File/Directory' not exits. Please try again!", lblStatus, lblMessage);
-                    CheckTextBoxNullValue.SetColorErrorTextControl(txtPath);
-                }
-            }
-            else
-            {
-                MessageHelpers.SetErrorStatus(true, "NG", "'File/Directory' invaild. Please try again!", lblStatus, lblMessage);
-                CheckTextBoxNullValue.SetColorErrorTextControl(txtPath);
-            }
-        }
-
-        private void gridLookUpEditProcessID_EditValueChanged(object sender, EventArgs e)
-        {
-            CheckTextBoxNullValue.SetColorDefaultTextControl(gridLookUpEditProcessID);
-            if (checkStationNo.Checked == true)
-            {
-                Properties.Settings.Default["StationNo"] = gridLookUpEditProcessID.EditValue.ToString();
-                Properties.Settings.Default.Save(); // Saves settings in application configuration file
-            }
-        }
-
-        private void txtBarcode_EditValueChanged(object sender, EventArgs e)
-        {
-            CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
-        }
-        
+        }  
         private void txtBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 string boardNo = txtBarcode.Text;
+
+                if (boardNo.Contains("="))
+                {
+                    boardNo = boardNo.Replace("=", "_");
+                }
+
                 string set_station_no = gridLookUpEditProcessID.EditValue.ToString();
 
                 if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtBarcode))
@@ -642,7 +601,6 @@ namespace FCT_HFT1024_DB
                                         }
                                         else if(curentStationNo.BOARD_STATE == 2)
                                         {
-
                                             //Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
                                             this.TopMost = false;
                                             txtBarcode.ResetText();
@@ -717,10 +675,47 @@ namespace FCT_HFT1024_DB
                 SaveSettings("SerialPort", serialPort);
             }
         }
-
         private void checkEditSerialPort_CheckedChanged(object sender, EventArgs e)
         {
             SaveSettings("UsingComPort", checkEditSerialPort.Checked);
+        }
+        private void txtPath_EditValueChanged(object sender, EventArgs e)
+        {
+            if (txtPath.Text.Contains(@":\"))
+            {
+                if (Directory.Exists(txtPath.Text))
+                {
+                    MessageHelpers.SetDefaultStatus(true, "N/A", "N/A", lblStatus, lblMessage);
+                    CheckTextBoxNullValue.SetColorDefaultTextControl(txtPath);
+                    string path = txtPath.Text;
+                    SaveSettings("Folder", path);
+                }
+                else
+                {
+                    MessageHelpers.SetErrorStatus(true, "NG", "'File/Directory' not exits. Please try again!", lblStatus, lblMessage);
+                    CheckTextBoxNullValue.SetColorErrorTextControl(txtPath);
+                }
+            }
+            else
+            {
+                MessageHelpers.SetErrorStatus(true, "NG", "'File/Directory' invaild. Please try again!", lblStatus, lblMessage);
+                CheckTextBoxNullValue.SetColorErrorTextControl(txtPath);
+            }
+        }
+
+        private void gridLookUpEditProcessID_EditValueChanged(object sender, EventArgs e)
+        {
+            CheckTextBoxNullValue.SetColorDefaultTextControl(gridLookUpEditProcessID);
+            string stationNo = gridLookUpEditProcessID.EditValue.ToString();
+            if (!string.IsNullOrEmpty(stationNo))
+            {
+                SaveSettings("StationNo", stationNo);
+            }           
+        }
+
+        private void txtBarcode_EditValueChanged(object sender, EventArgs e)
+        {
+            CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
         }
         private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {

@@ -96,8 +96,8 @@ namespace Mango_CTMS
                 BOARD_NO = boardNo,
                 ProductID = productId,
                 STATION_NO = stationNo,
-                DATE_CHECK = DateTime.Now.ToShortDateString(),
-                TIME_CHECK = DateTime.Now.ToShortTimeString(),
+                DATE_CHECK = Ultils.GetNetworkDateTime().ToShortDateString(),
+                TIME_CHECK = Ultils.GetNetworkDateTime().ToShortTimeString(),
                 STATE = boardSate,
             };
             List<ItemDetail> items = new List<ItemDetail>();
@@ -490,7 +490,6 @@ namespace Mango_CTMS
                 {
                     boardNo = boardNo.Replace("=", "_");
                 }
-
                 string set_station_no = gridLookUpEditProcessID.EditValue.ToString();
 
                 if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtBarcode))
