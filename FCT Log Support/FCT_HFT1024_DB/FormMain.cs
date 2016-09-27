@@ -12,6 +12,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace FCT_HFT1024_DB
@@ -30,6 +31,7 @@ namespace FCT_HFT1024_DB
         private int pass = 0;
         private int ng = 0;
         private int total = 0;
+        private string messageError = null;
         private CommunicationManager com;
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
         private readonly SCANNING_LOGS_Service _scanningLogsService;
@@ -56,27 +58,40 @@ namespace FCT_HFT1024_DB
         private void FormMain_Load(object sender, EventArgs e)
         {
             RefreshWindows();
-
-            //ConfigSerialPorts();
-
-            if (checkEditSerialPort.Checked == true)
+            string serialPort = Properties.Settings.Default["SerialPort"].ToString();
+            string processName = Properties.Settings.Default["CurentProcess"].ToString();
+            string path = Properties.Settings.Default["Folder"].ToString();
+            string stationNo = Properties.Settings.Default["StationNo"].ToString();
+            bool usingComPort = (bool) Properties.Settings.Default["UsingComPort"];
+            if (serialPort != null)
             {
-                gridLookUpEditSerialPort.EditValue = Properties.Settings.Default["SerialPort"].ToString();
+                gridLookUpEditSerialPort.EditValue = serialPort;
             }
-            if (checkKeepProcess.Checked == true)
+            if (processName != null)
             {
-                cboWindows.EditValue = Properties.Settings.Default["CurentProcess"].ToString();
+                cboWindows.EditValue = processName;
             }
-            if(checkPath.Checked == true)
+            if(path != null)
             {
-                txtPath.Text = Properties.Settings.Default["Folder"].ToString();
+                txtPath.Text = path;
             }
-            if (checkStationNo.Checked == true)
+            if(stationNo!= null)
             {
-                gridLookUpEditProcessID.EditValue = Properties.Settings.Default["StationNo"].ToString();
+                gridLookUpEditProcessID.EditValue = stationNo;
+            }
+            if (usingComPort == true)
+            {
+                checkEditSerialPort.Checked = true;
+            }
+            else
+            {
+                checkEditSerialPort.Checked = false;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void LoadDataGridLookUpEditINSPECTION_STATIONS()
         {
             var items = _inspectionStationsService.Get_INSPECTION_STATIONS();
@@ -141,7 +156,7 @@ namespace FCT_HFT1024_DB
                     StringBuilder sbTitle = new StringBuilder(1024);
                     // Read the Title bar text on the windows to put in combobox
                     NativeWin32.GetWindowText(nChildHandle, sbTitle, sbTitle.Capacity);
-                    String sWinTitle = sbTitle.ToString();
+                    string sWinTitle = sbTitle.ToString();
                     {
                         if (sWinTitle.Length > 0)
                         {
@@ -233,16 +248,16 @@ namespace FCT_HFT1024_DB
                         return true;
                     }
 
-                case Keys.Shift | Keys.Control | Keys.Z:
-                    {
-                        Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), false);
-                        return true;
-                    }
-                case Keys.Shift | Keys.Control | Keys.X:
-                    {
-                        Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), true);
-                        return true;
-                    }
+                //case Keys.Shift | Keys.Control | Keys.Z:
+                //    {
+                //        Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), false);
+                //        return true;
+                //    }
+                //case Keys.Shift | Keys.Control | Keys.X:
+                //    {
+                //        Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), true);
+                //        return true;
+                //    }
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -266,7 +281,7 @@ namespace FCT_HFT1024_DB
                 if (m_bIsWatching)
                 {
                     m_bIsWatching = false;
-                    Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), m_bIsWatching);
+                    //Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), m_bIsWatching);
                     m_Watcher.EnableRaisingEvents = false;
                     m_Watcher.Dispose();
                     btnWatchFile.Appearance.BackColor = Color.LightSkyBlue;
@@ -278,11 +293,13 @@ namespace FCT_HFT1024_DB
                 {
                     m_bIsWatching = true;
 
-                    // Cấu hình COM PORT
-                    ConfigSerialPorts();
-
+                    if(checkEditSerialPort.Checked == true)
+                    {
+                        // Cấu hình COM PORT
+                        ConfigSerialPorts();
+                    }
                     // Ẩn ứng dụng
-                    Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), m_bIsWatching);
+                    //Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), m_bIsWatching);
 
                     btnWatchFile.ForeColor = Color.White;
                     btnWatchFile.Appearance.BackColor = Color.DarkRed;
@@ -355,7 +372,11 @@ namespace FCT_HFT1024_DB
                         boardState = "OK";
                         pass = pass + 1;
 
-                        com.WriteData("O");
+                        if (checkEditSerialPort.Checked == true)
+                        {
+                            com.WriteData("O");
+                        }
+                        
                     }
                     else if (strStatus == "FAIL")
                     {
@@ -431,7 +452,7 @@ namespace FCT_HFT1024_DB
             if (m_bDirty)
             {
                 //this.TopMost = true;
-                Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, true);
+                //Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, true);
                 int iHandle2 = NativeWin32.FindWindow(null, "Log for MES System");
                 NativeWin32.SetForegroundWindow(iHandle2);
                 lblPass.Text = pass.ToString();
@@ -523,9 +544,22 @@ namespace FCT_HFT1024_DB
                                 // thì thông báo cho người dùng biết
                                 if (curentStationNo.IS_FINISHED == true)
                                 {
-                                    MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' is finished!", lblStatus, lblMessage);
+                                    messageError = $"Board '{boardNo}' is finished!";
+                                    MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                    var errorForm = new FormError($"Board '{boardNo}' is finished!");
+                                    var errorForm = new FormError(messageError);
+                                    errorForm.ShowDialog();
+                                    txtBarcode.Focus();
+                                    return;
+                                }
+                                // Kiểm tra nếu trạng thái bản mạch hiện tại bị NG
+                                // mà khác với với trạm được cài đặt "FCT" thì thông báo lỗi
+                                else if (curentStationNo.STATION_NO != set_station_no && curentStationNo.BOARD_STATE == 2)
+                                {
+                                    messageError = $"Board '{boardNo}' bị 'NG' tại trạm '{set_station_no}'!";
+                                    MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
+                                    CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                                    var errorForm = new FormError(messageError);
                                     errorForm.ShowDialog();
                                     txtBarcode.Focus();
                                     return;
@@ -533,9 +567,10 @@ namespace FCT_HFT1024_DB
                                 // Nếu tên giống nhau, thì thông báo đã chạy qua công đoạn này rồi
                                 else if (curentStationNo.STATION_NO == set_station_no && curentStationNo.BOARD_STATE == 1)
                                 {
-                                    MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' is pass '{set_station_no}'!", lblStatus, lblMessage);
+                                    messageError = $"Board '{boardNo}' is pass '{set_station_no}'!";
+                                    MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                    var errorForm = new FormError($"Board '{boardNo}' is pass '{set_station_no}'!");
+                                    var errorForm = new FormError(messageError);
                                     errorForm.ShowDialog();
                                     txtBarcode.Focus();
                                     return;
@@ -549,9 +584,10 @@ namespace FCT_HFT1024_DB
                                     // station_no curent thì thông báo cho người dùng biết
                                     if (process_by_station_no == null)
                                     {
-                                        MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' station '{set_station_no}' not invaild!", lblStatus, lblMessage);
+                                        messageError = $"Board '{boardNo}' station '{set_station_no}' not invaild!";
+                                        MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                         CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                        var errorForm = new FormError($"Board '{boardNo}' station '{set_station_no}' not invaild!");
+                                        var errorForm = new FormError(messageError);
                                         errorForm.ShowDialog();
                                         txtBarcode.Focus();
                                         return;
@@ -562,9 +598,10 @@ namespace FCT_HFT1024_DB
                                         // Khi hai giá trị bằng nhau => ICT_FUJ
                                         if (curentStationNo.PROCEDURE_INDEX < (process_by_station_no.INDEX - 1))
                                         {
-                                            MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' skip stations!", lblStatus, lblMessage);
+                                            messageError = $"Board '{boardNo}' skip stations!";
+                                            MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                            var errorForm = new FormError($"Board '{boardNo}' skip stations!");
+                                            var errorForm = new FormError(messageError);
                                             errorForm.ShowDialog();
                                             txtBarcode.Focus();
                                             return;
@@ -573,17 +610,17 @@ namespace FCT_HFT1024_DB
                                         else if (curentStationNo.PROCEDURE_INDEX > process_by_station_no.INDEX)
                                         {
                                             // transferred to the next station.
-                                            MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' transferred to the next station!", lblStatus, lblMessage);
+                                            messageError = $"Board '{boardNo}' transferred to the next station!";
+                                            MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                            var errorForm = new FormError($"Board '{boardNo}' transferred to the next station!");
+                                            var errorForm = new FormError(messageError);
                                             errorForm.ShowDialog();
                                             txtBarcode.Focus();
                                             return;
                                         }
-
                                         else if (curentStationNo.PROCEDURE_INDEX == (process_by_station_no.INDEX - 1))
                                         {
-                                            Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
+                                            //Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
                                             this.TopMost = false;
                                             txtBarcode.ResetText();
                                             txtBarcode.Focus();
@@ -596,31 +633,45 @@ namespace FCT_HFT1024_DB
                                             SendKeys.Send(boardNo);
                                             SendKeys.Send("{ENTER}");
 
+                                            if (checkEditSerialPort.Checked == true)
+                                            {
+                                                // Start machine FCT Check
+                                                Thread.Sleep(200);
+                                                com.WriteData("A");
+                                            }
                                         }
                                         else if(curentStationNo.BOARD_STATE == 2)
                                         {
 
-                                                Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
-                                                this.TopMost = false;
-                                                txtBarcode.ResetText();
-                                                txtBarcode.Focus();
-                                                productionId = boardNo;
-                                                modelId = boards.PRODUCT_ID;
-                                                MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
-                                                // Thực hiện gửi dữ liệu đi
-                                                int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
-                                                NativeWin32.SetForegroundWindow(iHandle);
-                                                SendKeys.Send(boardNo);
-                                                SendKeys.Send("{ENTER}");
+                                            //Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
+                                            this.TopMost = false;
+                                            txtBarcode.ResetText();
+                                            txtBarcode.Focus();
+                                            productionId = boardNo;
+                                            modelId = boards.PRODUCT_ID;
+                                            MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
+                                            // Thực hiện gửi dữ liệu đi
+                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
+                                            NativeWin32.SetForegroundWindow(iHandle);
+                                            SendKeys.Send(boardNo);
+                                            SendKeys.Send("{ENTER}");
+
+                                            if (checkEditSerialPort.Checked == true)
+                                            {
+                                                // Start machine FCT Check
+                                                Thread.Sleep(200);
+                                                com.WriteData("A");
+                                            }
                                         }
                                     }
                                 }
                             }
                             else
                             {
-                                MessageHelpers.SetErrorStatus(true, "NG", $"Station No '{curentStationNo.STATION_NO}' not found!", lblStatus, lblMessage);
+                                messageError = $"Station No '{curentStationNo.STATION_NO}' not found!";
+                                MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                 CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                var errorForm = new FormError($"Station No '{curentStationNo.STATION_NO}' not found!");
+                                var errorForm = new FormError(messageError);
                                 errorForm.ShowDialog();
                                 txtBarcode.Focus();
                                 return;
@@ -628,9 +679,10 @@ namespace FCT_HFT1024_DB
                         }
                         else
                         {
-                            MessageHelpers.SetErrorStatus(true, "NG", $"Station No '{set_station_no}' invaild!", lblStatus, lblMessage);
+                            messageError = $"Station No '{set_station_no}' invaild!";
+                            MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                            var errorForm = new FormError($"Station No '{set_station_no}' invaild!");
+                            var errorForm = new FormError(messageError);
                             errorForm.ShowDialog();
                             txtBarcode.Focus();
                             return;
@@ -638,9 +690,10 @@ namespace FCT_HFT1024_DB
                     }
                     else
                     {
-                        MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' not initialized!", lblStatus, lblMessage);
+                        messageError = $"Board '{boardNo}' not initialized!";
+                        MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                         CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                        var errorForm = new FormError($"Board '{boardNo}' not initialized!");
+                        var errorForm = new FormError(messageError);
                         errorForm.ShowDialog();
                         return;
                     }
@@ -650,25 +703,24 @@ namespace FCT_HFT1024_DB
 
         private void cboWindows_EditValueChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cboWindows.EditValue.ToString()))
+            string processName = cboWindows.EditValue.ToString();
+            if (!string.IsNullOrEmpty(processName))
             {
-                if (checkKeepProcess.Checked == true)
-                {
-                    Properties.Settings.Default["CurentProcess"] = cboWindows.EditValue.ToString();
-                    Properties.Settings.Default.Save(); // Saves settings in application configuration file
-                }
+                SaveSettings("CurentProcess", processName);
             } 
         }
         private void gridLookUpEditSerialPort_EditValueChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(gridLookUpEditSerialPort.EditValue.ToString()))
+            string serialPort = gridLookUpEditSerialPort.EditValue.ToString();
+            if (!string.IsNullOrEmpty(serialPort))
             {
-                if (checkEditSerialPort.Checked == true)
-                {
-                    Properties.Settings.Default["SerialPort"] = gridLookUpEditSerialPort.EditValue.ToString();
-                    Properties.Settings.Default.Save(); // Saves settings in application configuration file
-                }
+                SaveSettings("SerialPort", serialPort);
             }
+        }
+
+        private void checkEditSerialPort_CheckedChanged(object sender, EventArgs e)
+        {
+            SaveSettings("UsingComPort", checkEditSerialPort.Checked);
         }
         private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
@@ -723,10 +775,28 @@ namespace FCT_HFT1024_DB
                 else if (mboxResult == DialogResult.Yes)
                 {
                     e.Cancel = false;
-                    Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), false);
+                    //Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), false);
                     Application.ExitThread();  
                 }
             }
+        }
+
+        private void btnRefesh_Click(object sender, EventArgs e)
+        {
+            lblNG.Text = "0";
+            lblPass.Text = "0";
+            lblTotal.Text = "0";
+        }
+
+        /// <summary>
+        /// Save value setting
+        /// </summary>
+        /// <param name="settingName"></param>
+        /// <param name="value"></param>
+        private void SaveSettings(string settingName, object value)
+        {
+            Properties.Settings.Default[settingName] = value;
+            Properties.Settings.Default.Save();// Saves settings in application configuration file
         }
     }
 }

@@ -70,5 +70,17 @@ namespace FCT_HFT1024_DB.Properties {
                 this["SerialPort"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UsingComPort {
+            get {
+                return ((bool)(this["UsingComPort"]));
+            }
+            set {
+                this["UsingComPort"] = value;
+            }
+        }
     }
 }

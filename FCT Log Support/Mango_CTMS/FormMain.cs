@@ -534,12 +534,25 @@ namespace Mango_CTMS
                                     txtBarcode.Focus();
                                     return;
                                 }
+                                // Kiểm tra nếu trạng thái bản mạch hiện tại bị NG
+                                // mà khác với với trạm được cài đặt "FCT" thì thông báo lỗi
+                                else if (curentStationNo.STATION_NO != set_station_no && curentStationNo.BOARD_STATE == 2)
+                                {
+                                    messageError = $"Board '{boardNo}' bị 'NG' tại trạm '{set_station_no}'!";
+                                    MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
+                                    CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                                    var errorForm = new FormError(messageError);
+                                    errorForm.ShowDialog();
+                                    txtBarcode.Focus();
+                                    return;
+                                }
                                 // Nếu tên giống nhau, thì thông báo đã chạy qua công đoạn này rồi
                                 else if (curentStationNo.STATION_NO == set_station_no && curentStationNo.BOARD_STATE == 1)
                                 {
-                                    MessageHelpers.SetErrorStatus(true, "NG", $"Board '{boardNo}' is pass '{set_station_no}'!", lblStatus, lblMessage);
+                                    messageError = $"Board '{boardNo}' is pass '{set_station_no}'!";
+                                    MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                    var errorForm = new FormError($"Board '{boardNo}' is pass '{set_station_no}'!");
+                                    var errorForm = new FormError(messageError);
                                     errorForm.ShowDialog();
                                     txtBarcode.Focus();
                                     return;

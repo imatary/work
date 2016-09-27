@@ -155,6 +155,7 @@ namespace Lib.Core
                     if (!(comPort.IsOpen == true)) comPort.Open();
                     //send the message to the port
                     comPort.Write(msg);
+                    comPort.Close();
                     //display the message
                     //DisplayData(MessageType.Outgoing, msg + "\n");
                     break;
@@ -165,6 +166,7 @@ namespace Lib.Core
                         byte[] newMsg = HexToByte(msg);
                         //send the message to the port
                         comPort.Write(newMsg, 0, newMsg.Length);
+                        comPort.Close();
                         //convert back to hex and display
                         //DisplayData(MessageType.Outgoing, ByteToHex(newMsg) + "\n");
                     }
@@ -183,9 +185,11 @@ namespace Lib.Core
                 default:
                     //first make sure the port is open
                     //if its not open then open it
-                    if (!(comPort.IsOpen == true)) comPort.Open();
+                    if (!(comPort.IsOpen == true))
+                        comPort.Open();
                     //send the message to the port
                     comPort.Write(msg);
+                    comPort.Close();
                     //display the message
                     //DisplayData(MessageType.Outgoing, msg + "\n");
                     break;
