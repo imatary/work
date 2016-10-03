@@ -373,7 +373,6 @@ namespace FCT_HFT1024_DB
                         {
                             com.WriteData("O");
                         }
-                        
                     }
                     else if (strStatus == "FAIL")
                     {
@@ -596,7 +595,7 @@ namespace FCT_HFT1024_DB
                                             {
                                                 // Start machine FCT Check
                                                 Thread.Sleep(200);
-                                                com.WriteData("A");
+                                                com.WriteData("S");
                                             }
                                         }
                                         else if(curentStationNo.BOARD_STATE == 2)
@@ -618,7 +617,7 @@ namespace FCT_HFT1024_DB
                                             {
                                                 // Start machine FCT Check
                                                 Thread.Sleep(200);
-                                                com.WriteData("A");
+                                                com.WriteData("S");  
                                             }
                                         }
                                     }

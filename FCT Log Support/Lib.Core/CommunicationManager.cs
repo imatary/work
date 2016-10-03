@@ -267,7 +267,8 @@ namespace Lib.Core
             {
                 //first check if the port is already open
                 //if its open then close it
-                if (comPort.IsOpen == true) comPort.Close();
+                if (comPort.IsOpen == true)
+                    comPort.Close();
 
                 //set the properties of our SerialPort Object
                 comPort.BaudRate = int.Parse(_baudRate);    //BaudRate

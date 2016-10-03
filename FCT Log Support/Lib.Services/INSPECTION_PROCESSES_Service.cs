@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Lib.Services
 {
-    public class INSPECTION_PROCESSES_Service
+    public class INSPECTION_PROCESSES_Service : BaseService
     {
         private readonly MESSystemDbContext _context;
         public INSPECTION_PROCESSES_Service()
@@ -23,7 +23,9 @@ namespace Lib.Services
         /// <returns></returns>
         public INSPECTION_PROCESSES GET_INSPECTION_PROCESSES_BY_PRODUCT_ID(string productId)
         {
-            object[] param =
+            if (CheckConnection())
+            {
+                object[] param =
             {
                 new SqlParameter() { ParameterName="@PRODUCT_ID", Value=productId, SqlDbType=SqlDbType.NVarChar },
 
@@ -33,13 +35,19 @@ namespace Lib.Services
                 }
             };
 
-            try
-            {
-                return _context.Database.SqlQuery<INSPECTION_PROCESSES>("EXEC [dbo].[sp_GET_INSPECTION_PROCESSES_BY_PRODUCT_ID] @PRODUCT_ID", param).FirstOrDefault();
+                try
+                {
+                    return _context.Database.SqlQuery<INSPECTION_PROCESSES>("EXEC [dbo].[sp_GET_INSPECTION_PROCESSES_BY_PRODUCT_ID] @PRODUCT_ID", param).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Connected to database faild. Please check network, then try again! ");
             }
         }
     }

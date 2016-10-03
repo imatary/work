@@ -57,7 +57,7 @@ namespace BarcodeShipping.GUI
             {
                 try
                 {
-                    _modelService.InsertModel(txtModelID.Text, txtModelID.Text, txtOperatorCode.Text, int.Parse(txtQuantity.Text), txtSerialNo.Text);
+                    _modelService.InsertModel(txtModelID.Text, txtOperatorCode.Text, int.Parse(txtQuantity.Text), txtSerialNo.Text);
                     MessageBoxHelper.ShowMessageBoxSuccess("Thành công!");
                     this.Close();
                 }
@@ -78,7 +78,16 @@ namespace BarcodeShipping.GUI
                 }
                 else
                 {
-                    txtQuantity.Focus();
+                    var model = _modelService.GetModelByName(txtModelID.Text);
+                    if(model != null)
+                    {
+                        Ultils.SetColorErrorTextControl(txtModelID, "Model này đã được tạo rồi. Vui lòng kiểm tra lại!");
+                        
+                    }
+                    else
+                    {
+                        txtQuantity.Focus();
+                    }
                 }
             }
             if (e.KeyCode == Keys.Tab)

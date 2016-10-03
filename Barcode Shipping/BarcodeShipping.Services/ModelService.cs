@@ -36,6 +36,22 @@ namespace BarcodeShipping.Services
             };
             return _context.Database.SqlQuery<Model>("EXEC [dbo].[sp_GetModelsByCustomerName] @customerName", param).ToList();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelName"></param>
+        /// <returns></returns>
+        public Model GetModelByName(string modelName)
+        {
+            var param = new SqlParameter()
+            {
+                ParameterName = "@modelName",
+                SqlDbType = SqlDbType.VarChar,
+                Value = modelName,
+            };
+            return _context.Database.SqlQuery<Model>("EXEC [sp_GetModelByName] @modelName", param).FirstOrDefault();
+        }
         public Model GetModelById(string modelId)
         {
             var param = new SqlParameter()
@@ -74,11 +90,11 @@ namespace BarcodeShipping.Services
         /// <param name="createdBy"></param>
         /// <param name="quantity"></param>
         /// <param name="serialNo"></param>
-        public void InsertModel(string modelId, string modelName, string createdBy, int quantity, string serialNo)
+        public void InsertModel(string modelName, string createdBy, int quantity, string serialNo)
         {
             var model = new Model()
             {
-                ModelID = modelId,
+                ModelID = Guid.NewGuid().ToString(),
                 ModelName = modelName,
                 CreatedBy = createdBy,
                 DateCreated = DateTime.Now,
@@ -127,7 +143,5 @@ namespace BarcodeShipping.Services
         }
 
         #endregion
-
-
     }
 }

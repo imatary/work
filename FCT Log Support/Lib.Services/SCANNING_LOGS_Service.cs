@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
 namespace Lib.Services
 {
-    public class SCANNING_LOGS_Service
+    public class SCANNING_LOGS_Service : BaseService
     {
         private readonly MESSystemDbContext _context;
         public SCANNING_LOGS_Service()
@@ -23,23 +22,30 @@ namespace Lib.Services
         /// <returns></returns>
         public List<SCANNING_LOGS> Get_SCANNING_LOGS(string boardNo)
         {
-            object[] param =
+            if (CheckConnection())
             {
-                new SqlParameter() { ParameterName="@BOARD_NO", Value=boardNo, SqlDbType=SqlDbType.NVarChar },
-
-                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                object[] param =
                 {
-                    Direction = ParameterDirection.Output
-                }
-            };
+                    new SqlParameter() { ParameterName="@BOARD_NO", Value=boardNo, SqlDbType=SqlDbType.NVarChar },
+                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    }
+                };
 
-            try
-            {
-                return _context.Database.SqlQuery<SCANNING_LOGS>("EXEC [dbo].[sp_Get_SCANNING_LOGS_By_BroadNo] @BOARD_NO", param).ToList();
+                try
+                {
+                    return _context.Database.SqlQuery<SCANNING_LOGS>("EXEC [dbo].[sp_Get_SCANNING_LOGS_By_BroadNo] @BOARD_NO", param).ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Connected to database faild. Please check network, then try again! ");
             }
         }
     }

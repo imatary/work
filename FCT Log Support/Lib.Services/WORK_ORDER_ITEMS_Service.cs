@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Lib.Services
 {
-    public class WORK_ORDER_ITEMS_Service
+    public class WORK_ORDER_ITEMS_Service : BaseService
     {
         private readonly MESSystemDbContext _context;
         public WORK_ORDER_ITEMS_Service()
@@ -22,24 +22,32 @@ namespace Lib.Services
         /// <returns></returns>
         public WORK_ORDER_ITEMS Get_WORK_ORDER_ITEMS_By_BoardNo(string boardNo)
         {
-            object[] param =
+            if (CheckConnection())
             {
-                new SqlParameter() { ParameterName="@BOARD_NO", Value=boardNo, SqlDbType=SqlDbType.NVarChar },
-
-                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                object[] param =
                 {
-                    Direction = ParameterDirection.Output
-                }
-            };
+                    new SqlParameter() { ParameterName="@BOARD_NO", Value=boardNo, SqlDbType=SqlDbType.NVarChar },
 
-            try
-            {
-                return _context.Database.SqlQuery<WORK_ORDER_ITEMS>("EXEC [dbo].[sp_GET_WORK_ORDER_ITEMS_BY_BOARD_NO] @BOARD_NO", param).FirstOrDefault();
+                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    }
+                };
+
+                try
+                {
+                    return _context.Database.SqlQuery<WORK_ORDER_ITEMS>("EXEC [dbo].[sp_GET_WORK_ORDER_ITEMS_BY_BOARD_NO] @BOARD_NO", param).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Connected to database faild. Please check network, then try again! ");
             }
+            
         }
 
         /// <summary>
@@ -49,23 +57,30 @@ namespace Lib.Services
         /// <returns></returns>
         public List<WORK_ORDER_ITEMS> Get_WORK_ORDER_ITEMS_BoardNo(string boardNo)
         {
-            object[] param =
+            if (CheckConnection())
             {
-                new SqlParameter() { ParameterName="@BOARD_NO", Value=boardNo, SqlDbType=SqlDbType.NVarChar },
-
-                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                object[] param =
                 {
-                    Direction = ParameterDirection.Output
-                }
-            };
+                    new SqlParameter() { ParameterName="@BOARD_NO", Value=boardNo, SqlDbType=SqlDbType.NVarChar },
 
-            try
-            {
-                return _context.Database.SqlQuery<WORK_ORDER_ITEMS>("EXEC [dbo].[sp_GET_WORK_ORDER_ITEMS_BY_BOARD_NO] @BOARD_NO", param).ToList();
+                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    }
+                };
+
+                try
+                {
+                    return _context.Database.SqlQuery<WORK_ORDER_ITEMS>("EXEC [dbo].[sp_GET_WORK_ORDER_ITEMS_BY_BOARD_NO] @BOARD_NO", param).ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Connected to database faild. Please check network, then try again! ");
             }
         }
     }

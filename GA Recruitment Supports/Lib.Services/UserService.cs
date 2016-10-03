@@ -13,10 +13,10 @@ namespace Lib.Services
     }
     public class UserService : IUserService
     {
-        private readonly GARecruitmentEntities _context;
+        private readonly GARecruitmentDbContext _context;
         public UserService()
         {
-            _context = new GARecruitmentEntities();
+            _context = new GARecruitmentDbContext();
         }
         public bool CheckLogin(string userName, string password)
         {

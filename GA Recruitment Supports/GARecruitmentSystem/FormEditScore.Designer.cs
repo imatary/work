@@ -150,6 +150,7 @@
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.defaultToolTipController1 = new DevExpress.Utils.DefaultToolTipController(this.components);
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
@@ -2188,6 +2189,7 @@
             this.txtBrithDay.TabIndex = 2;
             this.txtBrithDay.EditValueChanged += new System.EventHandler(this.txtBrithDay_EditValueChanged);
             this.txtBrithDay.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBrithDay_PreviewKeyDown);
+            this.txtBrithDay.Validating += new System.ComponentModel.CancelEventHandler(this.txtBrithDay_Validating);
             // 
             // txtFullName
             // 
@@ -2203,6 +2205,7 @@
             this.txtFullName.TabIndex = 1;
             this.txtFullName.EditValueChanged += new System.EventHandler(this.txtFullName_EditValueChanged);
             this.txtFullName.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtFullName_PreviewKeyDown);
+            this.txtFullName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFullName_Validating);
             // 
             // labelControl8
             // 
@@ -2270,6 +2273,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kết quả phỏng vấn của ứng viên";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormEditScore_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
@@ -2485,5 +2489,6 @@
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.PanelControl panelControl6;
         private DevExpress.Utils.DefaultToolTipController defaultToolTipController1;
+        private DevExpress.Utils.ToolTipController toolTipController1;
     }
 }

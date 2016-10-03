@@ -193,5 +193,21 @@ namespace GARecruitmentSystem
             btnDelete.PerformClick();
         }
 
+        private void bandedGridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName != "Sex")
+            {
+                return;
+            }
+            else
+            {
+                string cellValue = bandedGridView1.GetRowCellValue(e.RowHandle, bandedGridView1.Columns["gridColumnSex"]).ToString();
+                if(cellValue == "0")
+                {
+                    bandedGridView1.SetRowCellValue(e.RowHandle, bandedGridView1.Columns["gridColumnSex"], "Nam");
+                }
+                
+            } 
+        }
     }
 }

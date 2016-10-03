@@ -21,10 +21,10 @@ namespace Lib.Services
     }
     public class ScoreService : IScoreService
     {
-        private readonly GARecruitmentEntities _context;
+        private readonly GARecruitmentDbContext _context;
         public ScoreService()
         {
-            _context = new GARecruitmentEntities();
+            _context = new GARecruitmentDbContext();
         }
         /// <summary>
         /// 

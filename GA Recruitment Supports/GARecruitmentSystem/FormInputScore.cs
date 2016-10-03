@@ -10,11 +10,12 @@ namespace GARecruitmentSystem
     public partial class FormInputScore : Form
     {
         private ScoreService _scoreService;
-
+        private readonly ResultsService _resultService;
         public FormInputScore()
         {
             InitializeComponent();
             _scoreService = new ScoreService();
+            _resultService = new ResultsService();
         }
 
         /// <summary>
@@ -1279,6 +1280,10 @@ namespace GARecruitmentSystem
             {
                 CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtFullName, toolTipController1, "Vui lòng nhập vào 'Họ và Tên' cho ứng viên!");
             }
+            else
+            {
+                txtFullName.Text = Ultils.ConvertToTitleCase(txtFullName.Text);
+            }
         }
 
         private void txtBrithDay_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -1286,6 +1291,32 @@ namespace GARecruitmentSystem
             if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtBrithDay))
             {
                 CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtBrithDay, toolTipController1, "Vui lòng nhập vào 'Ngày sinh' cho ứng viên!");
+            }
+            else
+            {
+                string age = _resultService.GetAge(txtBrithDay.Text);
+                if(int.Parse(age) <= 0 || int.Parse(age) > 150)
+                {
+                    CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtBrithDay, toolTipController1, $"'Ngày sinh' không hợp lệ. Vui lòng kiểm tra lại!");
+                }
+                else if (int.Parse(age) < 18)
+                {
+                    CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtBrithDay, toolTipController1, $"Ứng viên '{txtFullName.Text}' tuổi: '{age}' chưa đủ độ tuổi lao động. Vui lòng kiểm tra lại!");
+                }
+                else if (int.Parse(age) > 60)
+                {
+                    CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtBrithDay, toolTipController1, $"Ứng viên '{txtFullName.Text}' tuổi: '{age}' đã quá độ tuổi lao động. Vui lòng kiểm tra lại!");
+                }
+            }
+        }
+
+        private void FormInputScore_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
         }
     }

@@ -50,92 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColumnNameSelect_Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="GADbContext.cs" />
-    <Compile Include="GARecruitmentDbContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GARecruitmentDbContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GARecruitmentDbContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GARecruitmentDbContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GARecruitmentDbContext.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="GARecruitmentDbContext.cs" />
     <Compile Include="MS_Department.cs" />
     <Compile Include="MS_Education.cs" />
     <Compile Include="MS_Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PR_Staff.cs" />
-    <Compile Include="Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Score.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Result.cs" />
+    <Compile Include="Score.cs" />
     <Compile Include="ScoreList.cs" />
-    <Compile Include="sp_CheckLogin_Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetResultByCMT_Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetResultById_Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetResults_Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetScoreById_Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetScoresById_Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetScores_Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetUserByUserName_Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UsersSelect_Result.cs">
-      <DependentUpon>GARecruitmentDbContext.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="GARecruitmentDbContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GARecruitmentDbContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="GARecruitmentDbContext.edmx.diagram">
-      <DependentUpon>GARecruitmentDbContext.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="GARecruitmentDbContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>GARecruitmentDbContext.Context.cs</LastGenOutput>
-      <DependentUpon>GARecruitmentDbContext.edmx</DependentUpon>
-    </Content>
-    <Content Include="GARecruitmentDbContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GARecruitmentDbContext.edmx</DependentUpon>
-      <LastGenOutput>GARecruitmentDbContext.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

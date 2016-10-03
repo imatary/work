@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Lib.Services
 {
-    public class INSPECTION_STATIONS_Service
+    public class INSPECTION_STATIONS_Service : BaseService
     {
         private readonly MESSystemDbContext _context; 
         public INSPECTION_STATIONS_Service()
@@ -16,13 +16,20 @@ namespace Lib.Services
 
         public List<INSPECTION_STATIONS> Get_INSPECTION_STATIONS()
         {
-            try
+            if (CheckConnection())
             {
-                return _context.Database.SqlQuery<INSPECTION_STATIONS>("EXEC [dbo].[sp_GetINSPECTION_STATIONS]").ToList();
+                try
+                {
+                    return _context.Database.SqlQuery<INSPECTION_STATIONS>("EXEC [dbo].[sp_GetINSPECTION_STATIONS]").ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Connected to database faild. Please check network, then try again! ");
             }
         }
     }

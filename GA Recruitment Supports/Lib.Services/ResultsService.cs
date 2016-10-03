@@ -5,7 +5,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 
 namespace Lib.Services
 {
@@ -37,10 +36,10 @@ namespace Lib.Services
     }
     public class ResultsService : IResultsService
     {
-        private readonly GARecruitmentEntities _context;
+        private readonly GARecruitmentDbContext _context;
         public ResultsService()
         {
-            _context = new GARecruitmentEntities();
+            _context = new GARecruitmentDbContext();
         }
 
         /// <summary>
@@ -63,6 +62,27 @@ namespace Lib.Services
                 //    age--;
             }
             return age.ToString();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strBirthday"></param>
+        /// <returns></returns>
+        public int GetAgeByBirthday(string strBirthday)
+        {
+            DateTime birthday;
+            int age = 0;
+            if (DateTime.TryParseExact(strBirthday, "dd/MM/yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out birthday))
+            {
+                DateTime now = DateTime.Today;
+                age = now.Year - birthday.Year;
+                //if (now < birthday.AddYears(age))
+                //    age--;
+            }
+            return age;
         }
 
         public Result GetResultByCMT(string cmt)

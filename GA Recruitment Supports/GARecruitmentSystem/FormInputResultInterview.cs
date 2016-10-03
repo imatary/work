@@ -157,7 +157,8 @@ namespace GARecruitmentSystem
         {
             if (CheckTextBoxNullValue.ValidationTextEditNullValue(txtBirthday))
             {
-                txtTuoi.Text = _resultService.GetAge(txtBirthday.Text);
+                string age = _resultService.GetAge(txtBirthday.Text);
+                txtTuoi.Text = age;
             }
         }
 
@@ -248,7 +249,7 @@ namespace GARecruitmentSystem
         #region Event Validating Controls
         private void gridLookUpEditFullName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(!CheckTextBoxNullValue.ValidationTextEditNullValue(gridLookUpEditFullName))
+            if (!CheckTextBoxNullValue.ValidationTextEditNullValue(gridLookUpEditFullName))
             {
                 CheckTextBoxNullValue.ShowError(dxErrorProvider1, gridLookUpEditFullName, toolTipController1, "Vui lòng chọn một ứng viên!");
             }
@@ -259,6 +260,14 @@ namespace GARecruitmentSystem
             if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtBirthday))
             {
                 CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtBirthday, toolTipController1, "Vui lòng nhập 'Ngày sinh' cho ứng viên!");
+            }
+            else
+            {
+                string age = _resultService.GetAge(txtBirthday.Text);
+                if (int.Parse(age) < 18)
+                {
+                    CheckTextBoxNullValue.ShowError(dxErrorProvider1, txtBirthday, toolTipController1, $"Ứng viên '{gridLookUpEditFullName.Text}' chưa đủ độ tuổi lao động. Vui lòng kiểm tra lại!");
+                }
             }
         }
         private void radioGroup1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -576,6 +585,14 @@ namespace GARecruitmentSystem
             lblPercentPicture.Text = "0%";
         }
 
-        
+        private void FormInputResultInterview_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }
