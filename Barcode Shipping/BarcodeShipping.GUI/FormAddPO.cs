@@ -43,7 +43,7 @@ namespace BarcodeShipping.GUI
             {
                 try
                 {
-                    _iqcService.InsertPo(txtModelID.Text, txtPO.Text, int.Parse(txtQtyPO.EditValue.ToString()), null);
+                    _iqcService.InsertPo(lblModelID.Text, txtPO.Text, int.Parse(txtQtyPO.EditValue.ToString()), null);
                     Close();
                 }
                 catch (Exception ex)

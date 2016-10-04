@@ -85,6 +85,7 @@
             this.gridColumnMacAddress = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splashScreenManagerSaveData = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitFormSaveData), true, true);
             this.splashScreenLoadData = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitLoadData), true, true);
+            this.gridColumnCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -377,7 +378,8 @@
             // gridLookUpEdit1View
             // 
             this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnModelID});
+            this.gridColumnModelID,
+            this.gridColumnCustomerName});
             this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -386,7 +388,7 @@
             // gridColumnModelID
             // 
             this.gridColumnModelID.Caption = "Model";
-            this.gridColumnModelID.FieldName = "ModelID";
+            this.gridColumnModelID.FieldName = "ModelName";
             this.gridColumnModelID.Name = "gridColumnModelID";
             this.gridColumnModelID.Visible = true;
             this.gridColumnModelID.VisibleIndex = 0;
@@ -803,6 +805,14 @@
             this.gridColumnMacAddress.FieldName = "MacAddress";
             this.gridColumnMacAddress.Name = "gridColumnMacAddress";
             // 
+            // gridColumnCustomerName
+            // 
+            this.gridColumnCustomerName.Caption = "Customer";
+            this.gridColumnCustomerName.FieldName = "CustomerName";
+            this.gridColumnCustomerName.Name = "gridColumnCustomerName";
+            this.gridColumnCustomerName.Visible = true;
+            this.gridColumnCustomerName.VisibleIndex = 1;
+            // 
             // RetailProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -913,5 +923,6 @@
         private DevExpress.XtraEditors.SimpleButton btnSaveAndClose;
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManagerSaveData;
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenLoadData;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnCustomerName;
     }
 }

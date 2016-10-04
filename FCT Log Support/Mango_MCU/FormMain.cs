@@ -23,7 +23,6 @@ namespace Mango_MCU
         private bool m_bDirty;
         private FileSystemWatcher m_Watcher;
         private bool m_bIsWatching;
-        private string fileName = null;
         private string modelId = null;
         private string productionId = null;
         private string _status = null;
@@ -32,6 +31,7 @@ namespace Mango_MCU
         private int ng = 0;
         private int total = 0;
         private string messageError = null;
+        string backup_log_folder = @"C:\backup_log\";
         private CommunicationManager com;
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
         private readonly SCANNING_LOGS_Service _scanningLogsService;
@@ -244,17 +244,6 @@ namespace Mango_MCU
                         checkKeepProcess.Enabled = false;
                         return true;
                     }
-
-                //case Keys.Shift | Keys.Control | Keys.Z:
-                //    {
-                //        Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), false);
-                //        return true;
-                //    }
-                //case Keys.Shift | Keys.Control | Keys.X:
-                //    {
-                //        Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), true);
-                //        return true;
-                //    }
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -278,7 +267,6 @@ namespace Mango_MCU
                 if (m_bIsWatching)
                 {
                     m_bIsWatching = false;
-                    //Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), m_bIsWatching);
                     m_Watcher.EnableRaisingEvents = false;
                     m_Watcher.Dispose();
                     btnWatchFile.Appearance.BackColor = Color.LightSkyBlue;
@@ -295,9 +283,6 @@ namespace Mango_MCU
                         // Cấu hình COM PORT
                         ConfigSerialPorts();
                     }
-                    // Ẩn ứng dụng
-                    //Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), m_bIsWatching);
-
                     btnWatchFile.ForeColor = Color.White;
                     btnWatchFile.Appearance.BackColor = Color.DarkRed;
                     btnWatchFile.Font = new Font(btnWatchFile.Font, FontStyle.Bold);
@@ -339,52 +324,75 @@ namespace Mango_MCU
         {
             if (!m_bDirty)
             {
-                string[] strSpit;
-                fileName = Path.GetFileNameWithoutExtension(e.FullPath);
-                if (fileName.Contains("ERROR"))
-                {
-                    return;
-                }
-                else if (fileName.Length <= 32)
+                if (e.ChangeType == WatcherChangeTypes.Deleted || e.ChangeType == WatcherChangeTypes.Renamed)
                 {
                     return;
                 }
                 else
                 {
-                    if (fileName.Contains("="))
+                    if (e.FullPath.Contains("Mango_MCU"))
                     {
-                        fileName = fileName.Replace("=", "_");
-                        strSpit = fileName.Split('_');
+                        // DO SOMETING LIKE MOVE, COPY, ETC
+                        bool exists = Directory.Exists(backup_log_folder);
+                        if (!exists)
+                            Directory.CreateDirectory(backup_log_folder);
+
+                        string fullPath = backup_log_folder + e.Name;
+
+                        if (File.Exists(fullPath))
+                        {
+                            File.Delete(fullPath);
+                            Thread.Sleep(1000);
+                            File.Copy(e.FullPath, fullPath);
+
+                            var data = Ultils.ReadLogTxt(fullPath).LastOrDefault();
+
+                            if (data == "FAIL")
+                            {
+                                _status = "F";
+                                boardState = "FAILD";
+                                ng = ng + 1;
+                            }
+                            else if(data == "PASS")
+                            {
+                                _status = "P";
+                                boardState = "OK";
+                                pass = pass + 1;
+                            }
+
+                            total = pass + ng;
+                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+                        }
+                        else
+                        {
+                            Thread.Sleep(1000);
+                            File.Copy(e.FullPath, fullPath);
+
+                            var data = Ultils.ReadLogTxt(fullPath).LastOrDefault();
+
+                            if (data == "FAIL")
+                            {
+                                _status = "F";
+                                boardState = "FAILD";
+                                ng = ng + 1;
+                            }
+                            else if (data == "PASS")
+                            {
+                                _status = "P";
+                                boardState = "OK";
+                                pass = pass + 1;
+                            }
+
+                            total = pass + ng;
+                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+                        }
                     }
                     else
                     {
-                        strSpit = fileName.Split('_');
+                        return;
                     }
-
-                    string strStatus = strSpit[3];
-
-                    if (strStatus == "PASS")
-                    {
-                        _status = "P";
-                        boardState = "OK";
-                        pass = pass + 1;
-
-                        if (checkEditSerialPort.Checked == true)
-                        {
-                            com.WriteData("O");
-                        }
-                    }
-                    else if (strStatus == "FAIL")
-                    {
-                        _status = "F";
-                        boardState = "FAILD";
-                        ng = ng + 1;
-                    }
-                    string stationNo = gridLookUpEditProcessID.EditValue.ToString();
-                    Ultils.CreateFileLog(modelId, productionId, _status, stationNo);
-                    
-                    total = pass + ng;
                 }
+
                 m_bDirty = true;
             }
         }
@@ -448,7 +456,6 @@ namespace Mango_MCU
             if (m_bDirty)
             {
                 //this.TopMost = true;
-                //Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, true);
                 int iHandle2 = NativeWin32.FindWindow(null, this.Text);
                 NativeWin32.SetForegroundWindow(iHandle2);
                 lblPass.Text = pass.ToString();
@@ -600,7 +607,6 @@ namespace Mango_MCU
                                         }
                                         else if(curentStationNo.BOARD_STATE == 2)
                                         {
-                                            //Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
                                             this.TopMost = false;
                                             txtBarcode.ResetText();
                                             txtBarcode.Focus();
@@ -769,7 +775,6 @@ namespace Mango_MCU
                 else if (mboxResult == DialogResult.Yes)
                 {
                     e.Cancel = false;
-                    //Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), false);
                     Application.ExitThread();  
                 }
             }

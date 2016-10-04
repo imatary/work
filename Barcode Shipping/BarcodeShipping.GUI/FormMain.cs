@@ -192,7 +192,7 @@ namespace BarcodeShipping.GUI
                             splashScreenManager2.ShowWaitForm();
                             foreach (var log in _shippings)
                             {
-                                _iqcService.InsertShipping(txtOperatorCode.Text, gridLookUpEditModelID.Text, txtWorkingOrder.Text, 1, txtPO.Text, txtBoxID.Text, log.ProductID, log.MacAddress);
+                                _iqcService.InsertShipping(txtOperatorCode.Text, gridLookUpEditModelID.EditValue.ToString(), txtWorkingOrder.Text, 1, txtPO.Text, txtBoxID.Text, log.ProductID, log.MacAddress);
                             }
                             _iqcService.UpdateRemainsForPo(_currentPo.PO_NO, _currentPo.ModelID, int.Parse(lblRemains.Text));
                             splashScreenManager2.CloseWaitForm();
@@ -477,8 +477,6 @@ namespace BarcodeShipping.GUI
                 EditTextAddPCB_PreviewKeyDown();
             }
         }
-        
-        
         private void txtOperatorCode_EditValueChanged(object sender, EventArgs e)
         {
             Ultils.SetColorDefaultTextControl(txtOperatorCode);
@@ -503,7 +501,6 @@ namespace BarcodeShipping.GUI
         {
             Ultils.SetColorDefaultTextControl(txtAddPCB);
         }
-
         private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
             if (e.Column.Caption == @"#")
@@ -511,7 +508,6 @@ namespace BarcodeShipping.GUI
                 e.DisplayText = (e.ListSourceRowIndex + 1).ToString(CultureInfo.InvariantCulture);
             }
         }
-
         /// <summary>
         /// PO Validating
         /// </summary>
@@ -529,7 +525,6 @@ namespace BarcodeShipping.GUI
                 }
             }
         }
-        
         /// <summary>
         /// Box Validating
         /// </summary>
@@ -547,7 +542,6 @@ namespace BarcodeShipping.GUI
                 }
             }
         }
-
         /// <summary>
         /// Button Export Exel
         /// </summary>
@@ -680,7 +674,7 @@ namespace BarcodeShipping.GUI
                                 var addPo = new FormAddPO(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, removePo);
                                 addPo.ShowDialog();
                                 txtPO.Text = removePo;
-                                GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.Text, removePo);
+                                GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.EditValue.ToString(), removePo);
                                 txtBoxID.Focus();
                             }
                             else

@@ -49,6 +49,7 @@
             this.gridLookUpEditModelID = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnModelID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -88,7 +89,6 @@
             this.gridColumnPO_NO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnDateCheck = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -398,6 +398,14 @@
             this.gridColumnModelID.Name = "gridColumnModelID";
             this.gridColumnModelID.Visible = true;
             this.gridColumnModelID.VisibleIndex = 0;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Customer";
+            this.gridColumn1.FieldName = "CustomerName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
             // 
             // tableLayoutPanel3
             // 
@@ -879,14 +887,6 @@
             this.gridColumnDateCheck.Visible = true;
             this.gridColumnDateCheck.VisibleIndex = 8;
             this.gridColumnDateCheck.Width = 100;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Customer";
-            this.gridColumn1.FieldName = "CustomerName";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
             // 
             // FormMain
             // 

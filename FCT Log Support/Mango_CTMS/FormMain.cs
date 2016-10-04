@@ -314,7 +314,7 @@ namespace Mango_CTMS
                                 boardState = "FAILD";
                                 ng = ng + 1;
                             }
-                            else
+                            else if(data == "PASS")
                             {
                                 _status = "P";
                                 boardState = "OK";
@@ -337,7 +337,7 @@ namespace Mango_CTMS
                                 boardState = "FAILD";
                                 ng = ng + 1;
                             }
-                            else
+                            else if(data == "PASS")
                             {
                                 _status = "P";
                                 boardState = "OK";

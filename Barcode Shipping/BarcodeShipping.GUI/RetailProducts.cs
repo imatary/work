@@ -203,9 +203,11 @@ namespace BarcodeShipping.GUI
         /// </summary>
         public void LoadGridLookupEditModel()
         {
+            string customerName = "Fujixerox";
+            var models = _modelService.GetModelsByCustomerName(customerName);
             gridLookUpEditModelID.Properties.View.OptionsBehavior.AutoPopulateColumns = false;
             gridLookUpEditModelID.Properties.View.BestFitColumns();
-            gridLookUpEditModelID.Properties.DataSource = _modelService.GetModels();
+            gridLookUpEditModelID.Properties.DataSource = models;
         }
 
         /// <summary>
