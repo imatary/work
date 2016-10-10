@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
 using BarcodeShipping.Data;
 using BarcodeShipping.Services;
@@ -206,6 +205,8 @@ namespace BarcodeShipping.GUI
             string customerName = "Fujixerox";
             var models = _modelService.GetModelsByCustomerName(customerName);
             gridLookUpEditModelID.Properties.View.OptionsBehavior.AutoPopulateColumns = false;
+            gridLookUpEditModelID.Properties.DisplayMember = "ModelName";
+            gridLookUpEditModelID.Properties.ValueMember = "ModelID";
             gridLookUpEditModelID.Properties.View.BestFitColumns();
             gridLookUpEditModelID.Properties.DataSource = models;
         }
@@ -287,7 +288,7 @@ namespace BarcodeShipping.GUI
             splashScreenManagerSaveData.ShowWaitForm();
             foreach (var log in _shippings)
             {
-                _iqcService.InsertShipping(txtOperatorCode.Text, gridLookUpEditModelID.Text, txtWorkingOrder.Text, 1, txtPO.Text, txtBoxID.Text, log.ProductID, log.MacAddress);
+                _iqcService.InsertShipping(txtOperatorCode.Text, gridLookUpEditModelID.EditValue.ToString(), txtWorkingOrder.Text, 1, txtPO.Text, txtBoxID.Text, log.ProductID, log.MacAddress);
             }
             // cập nhật lại số lượng Remains
             _iqcService.UpdateRemainsForPo(_currentPo.PO_NO, _currentPo.ModelID, int.Parse(lblRemains.Text));
@@ -313,7 +314,7 @@ namespace BarcodeShipping.GUI
             }
             else
             {
-                var curentModel = _modelService.GetModelById(gridLookUpEditModelID.Text);
+                var curentModel = _modelService.GetModelById(gridLookUpEditModelID.EditValue.ToString());
                 if (curentModel != null)
                 {
                     _currentModel = curentModel;
@@ -328,7 +329,7 @@ namespace BarcodeShipping.GUI
                     Ultils.GridLookUpEditNoMessage(gridLookUpEditModelID);
                     if (XtraMessageBox.Show("Model [" + gridLookUpEditModelID.Text + "] chưa có trong hệ thống.\nBạn có muốn thêm mới Model?", "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        var addModel = new FormAddModel(gridLookUpEditModelID.Text, txtOperatorCode.Text);
+                        var addModel = new FormAddModel(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, txtOperatorCode.Text);
                         addModel.ShowDialog();
                         LoadGridLookupEditModel();
                     }

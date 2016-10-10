@@ -7,6 +7,7 @@ using BarcodeShipping.Data;
 using BarcodeShipping.Services;
 using DevExpress.XtraEditors;
 using Lib.Core.Helper;
+using System.Threading;
 
 namespace BarcodeShipping.GUI
 {
@@ -73,15 +74,17 @@ namespace BarcodeShipping.GUI
                         MessageBoxHelper.ShowMessageBoxError($"Box [{boxId}] có {logs.Count} PCB\n" +
                                                              $"Có {_pcbError.Count} PCB không dành cho Model [{gridLookUpEditModelID.Text}].\n" +
                                                              "Vui lòng kiểm tra lại!");
-                        EnableTextControls(false);
-                        VisibleControlAddPcb(true);
+                        //EnableTextControls(false);
+                        //VisibleControlAddPcb(true);
+                        txtBoxID.SelectAll();
+                        txtBoxID.Focus();
                     }
                     else
                     {
                         GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.EditValue.ToString(), txtPO.EditValue.ToString());
                         lblCountPCB.Text = _shippings.Count.ToString(CultureInfo.InvariantCulture);
                         lblRemains.Text = (_currentPo.QuantityRemain - _shippings.Count).ToString(CultureInfo.InvariantCulture);
-
+                        Thread.Sleep(200);
                         // Nếu số lượng đủ thì thực hiện lưu vào csdl
                         if (_shippings.Count == _currentModel.Quantity)
                         {
@@ -90,7 +93,7 @@ namespace BarcodeShipping.GUI
                             splashScreenManager2.ShowWaitForm();
                             foreach (var log in _shippings)
                             {
-                                _iqcService.InsertShipping(txtOperatorCode.Text, gridLookUpEditModelID.Text, txtWorkingOrder.Text, 1, txtPO.Text, txtBoxID.Text, log.ProductID, log.MacAddress);
+                                _iqcService.InsertShipping(txtOperatorCode.Text, gridLookUpEditModelID.EditValue.ToString(), txtWorkingOrder.Text, 1, txtPO.Text, txtBoxID.Text, log.ProductID, log.MacAddress);
                             }
                             _iqcService.UpdateRemainsForPo(_currentPo.PO_NO, _currentPo.ModelID, int.Parse(lblRemains.Text));
                             splashScreenManager2.CloseWaitForm();
@@ -297,7 +300,7 @@ namespace BarcodeShipping.GUI
         {
             txtOperatorCode.Focus();
             txtOperatorCode.Text = string.Empty;
-            gridLookUpEditModelID.Text = string.Empty;
+            gridLookUpEditModelID.EditValue = string.Empty;
             txtWorkingOrder.Text = string.Empty;
             txtPO.Text = string.Empty;
             txtBoxID.Text = string.Empty;
@@ -343,7 +346,7 @@ namespace BarcodeShipping.GUI
         {
             if (productionId != null)
             {
-                if (productionId.Contains(_currentModel.SerialNo) && productionId.Contains(_currentModel.ModelID))
+                if (productionId.Contains(_currentModel.SerialNo) && productionId.Contains(_currentModel.ModelName))
                 {
                     return true;
                 }
@@ -483,6 +486,7 @@ namespace BarcodeShipping.GUI
         }
         private void gridLookUpEditModelID_EditValueChanged(object sender, EventArgs e)
         {
+            GridLookUpModel_PreviewKeyDown();
             Ultils.SetColorDefaultGridLookUpEdit(gridLookUpEditModelID);
         }
         private void txtWorkingOrder_EditValueChanged(object sender, EventArgs e)
@@ -600,7 +604,7 @@ namespace BarcodeShipping.GUI
         {
             if (e.Button.Index == 1)
             {
-                var addModel = new FormAddModel(null, txtOperatorCode.Text);
+                var addModel = new FormAddModel(null, null, txtOperatorCode.Text);
                 addModel.ShowDialog();
                 LoadGridLookupEditModel();
             }
@@ -629,7 +633,7 @@ namespace BarcodeShipping.GUI
                     Ultils.GridLookUpEditNoMessage(gridLookUpEditModelID);
                     if (XtraMessageBox.Show("Model [" + gridLookUpEditModelID.Text + "] chưa có trong hệ thống.\nBạn có muốn thêm mới Model?", "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        var addModel = new FormAddModel(gridLookUpEditModelID.Text, txtOperatorCode.Text);
+                        var addModel = new FormAddModel(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, txtOperatorCode.Text);
                         addModel.ShowDialog();
                         LoadGridLookupEditModel();
                     }
@@ -667,7 +671,7 @@ namespace BarcodeShipping.GUI
                     }
                     else
                     {
-                        if (!GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.Text, removePo))
+                        if (!GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.EditValue.ToString(), removePo))
                         {
                             if (XtraMessageBox.Show($"Chưa tạo QTY PO và Remains cho Model [{gridLookUpEditModelID.Text}] và PO [{removePo}] này.\nBạn có muốn thêm mới không?", "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                             {
@@ -779,6 +783,7 @@ namespace BarcodeShipping.GUI
         {
             if (!string.IsNullOrEmpty(gridLookUpEditModelID.Text))
             {
+                GridLookUpModel_PreviewKeyDown();
                 txtWorkingOrder.Focus();
             }
         }

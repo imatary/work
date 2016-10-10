@@ -372,7 +372,6 @@
             this.gridLookUpEditModelID.Properties.NullText = "";
             this.gridLookUpEditModelID.Properties.NullValuePrompt = "Enter the Model value";
             this.gridLookUpEditModelID.Properties.NullValuePromptShowForEmptyValue = true;
-            this.gridLookUpEditModelID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.gridLookUpEditModelID.Properties.View = this.gridLookUpEdit1View;
             this.gridLookUpEditModelID.Size = new System.Drawing.Size(245, 26);
             this.gridLookUpEditModelID.TabIndex = 6;

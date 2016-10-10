@@ -45,6 +45,7 @@
             this.txtQuantity = new DevExpress.XtraEditors.TextEdit();
             this.txtModelID = new DevExpress.XtraEditors.TextEdit();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            this.lblModelID = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSerialNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperatorCode.Properties)).BeginInit();
@@ -233,11 +234,22 @@
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // lblModelID
+            // 
+            this.lblModelID.AutoSize = true;
+            this.lblModelID.Location = new System.Drawing.Point(39, 215);
+            this.lblModelID.Name = "lblModelID";
+            this.lblModelID.Size = new System.Drawing.Size(35, 13);
+            this.lblModelID.TabIndex = 2;
+            this.lblModelID.Text = "label1";
+            this.lblModelID.Visible = false;
+            // 
             // FormAddModel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(362, 251);
+            this.Controls.Add(this.lblModelID);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -255,6 +267,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantity.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelID.Properties)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -276,5 +289,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.LabelControl labelControl9;
         private DevExpress.XtraEditors.TextEdit txtSerialNo;
+        private System.Windows.Forms.Label lblModelID;
     }
 }

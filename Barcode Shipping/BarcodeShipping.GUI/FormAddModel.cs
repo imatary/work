@@ -8,17 +8,18 @@ namespace BarcodeShipping.GUI
     public partial class FormAddModel : Form
     {
         private readonly ModelService _modelService;
-        public FormAddModel(string modelId, string operatorCode)
+        public FormAddModel(string modelId, string modelName, string operatorCode)
         {
             InitializeComponent();
             _modelService = new ModelService();
-            if (!string.IsNullOrEmpty(modelId) && !string.IsNullOrEmpty(operatorCode))
+            if (!string.IsNullOrEmpty(modelName) && !string.IsNullOrEmpty(operatorCode))
             {
-                txtModelID.Text = modelId;
+                lblModelID.Text = modelId;
+                txtModelID.Text = modelName;
                 txtOperatorCode.Text = operatorCode;
                 txtQuantity.Focus();
             }
-            else if (string.IsNullOrEmpty(modelId) && !string.IsNullOrEmpty(operatorCode))
+            else if (string.IsNullOrEmpty(modelName) && !string.IsNullOrEmpty(operatorCode))
             {
                 txtOperatorCode.Text = operatorCode;
                 txtQuantity.Focus();
@@ -57,7 +58,7 @@ namespace BarcodeShipping.GUI
             {
                 try
                 {
-                    _modelService.InsertModel(txtModelID.Text, txtOperatorCode.Text, int.Parse(txtQuantity.Text), txtSerialNo.Text);
+                    _modelService.InsertModel(lblModelID.Text, txtOperatorCode.Text, int.Parse(txtQuantity.Text), txtSerialNo.Text);
                     MessageBoxHelper.ShowMessageBoxSuccess("Thành công!");
                     this.Close();
                 }

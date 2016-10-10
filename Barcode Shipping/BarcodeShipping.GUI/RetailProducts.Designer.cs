@@ -49,6 +49,7 @@
             this.gridLookUpEditModelID = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnModelID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -85,7 +86,6 @@
             this.gridColumnMacAddress = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splashScreenManagerSaveData = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitFormSaveData), true, true);
             this.splashScreenLoadData = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitLoadData), true, true);
-            this.gridColumnCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -367,7 +367,6 @@
             this.gridLookUpEditModelID.Properties.NullText = "";
             this.gridLookUpEditModelID.Properties.NullValuePrompt = "Enter the Model value";
             this.gridLookUpEditModelID.Properties.NullValuePromptShowForEmptyValue = true;
-            this.gridLookUpEditModelID.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.gridLookUpEditModelID.Properties.ValueMember = "ModelID";
             this.gridLookUpEditModelID.Properties.View = this.gridLookUpEdit1View;
             this.gridLookUpEditModelID.Size = new System.Drawing.Size(245, 26);
@@ -392,6 +391,14 @@
             this.gridColumnModelID.Name = "gridColumnModelID";
             this.gridColumnModelID.Visible = true;
             this.gridColumnModelID.VisibleIndex = 0;
+            // 
+            // gridColumnCustomerName
+            // 
+            this.gridColumnCustomerName.Caption = "Customer";
+            this.gridColumnCustomerName.FieldName = "CustomerName";
+            this.gridColumnCustomerName.Name = "gridColumnCustomerName";
+            this.gridColumnCustomerName.Visible = true;
+            this.gridColumnCustomerName.VisibleIndex = 1;
             // 
             // tableLayoutPanel3
             // 
@@ -804,14 +811,6 @@
             this.gridColumnMacAddress.Caption = "Mac Address";
             this.gridColumnMacAddress.FieldName = "MacAddress";
             this.gridColumnMacAddress.Name = "gridColumnMacAddress";
-            // 
-            // gridColumnCustomerName
-            // 
-            this.gridColumnCustomerName.Caption = "Customer";
-            this.gridColumnCustomerName.FieldName = "CustomerName";
-            this.gridColumnCustomerName.Name = "gridColumnCustomerName";
-            this.gridColumnCustomerName.Visible = true;
-            this.gridColumnCustomerName.VisibleIndex = 1;
             // 
             // RetailProducts
             // 

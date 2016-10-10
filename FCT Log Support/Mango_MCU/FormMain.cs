@@ -31,7 +31,7 @@ namespace Mango_MCU
         private int ng = 0;
         private int total = 0;
         private string messageError = null;
-        string backup_log_folder = @"C:\backup_log\";
+        private string backup_log_folder = @"C:\backup_log\";
         private CommunicationManager com;
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
         private readonly SCANNING_LOGS_Service _scanningLogsService;
@@ -707,7 +707,6 @@ namespace Mango_MCU
                 CheckTextBoxNullValue.SetColorErrorTextControl(txtPath);
             }
         }
-
         private void gridLookUpEditProcessID_EditValueChanged(object sender, EventArgs e)
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(gridLookUpEditProcessID);
@@ -717,7 +716,6 @@ namespace Mango_MCU
                 SaveSettings("StationNo", stationNo);
             }           
         }
-
         private void txtBarcode_EditValueChanged(object sender, EventArgs e)
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
@@ -743,7 +741,6 @@ namespace Mango_MCU
                 }
             }
         }
-
         private void cboWindows_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 1)
@@ -751,7 +748,6 @@ namespace Mango_MCU
                 RefreshWindows();
             }
         }
-
         private void gridLookUpEditSerialPort_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if(e.Button.Index == 1)
@@ -759,7 +755,6 @@ namespace Mango_MCU
                 RefreshWindows();
             }
         }
-
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -779,7 +774,6 @@ namespace Mango_MCU
                 }
             }
         }
-
         private void btnRefesh_Click(object sender, EventArgs e)
         {
             lblNG.Text = "0";
