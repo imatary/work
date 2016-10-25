@@ -1,15 +1,14 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using Lib.Core;
 using Lib.Core.Helpers;
 using Lib.Data;
 using Lib.Form.Controls;
 using Lib.Services;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -31,9 +30,10 @@ namespace Mango_CTMS
         private int ng = 0;
         private int total = 0;
         private string messageError = null;
-        string backup_log_folder = @"C:\backup_log\";
-        private CommunicationManager com;
-
+        string[] serial, maxaddress;
+        private string backup_log_folder = @"C:\backup_log\";
+        private CommunicationManager comRead;
+        private CommunicationManager comWrite;
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
         private readonly SCANNING_LOGS_Service _scanningLogsService;
         private readonly INSPECTION_PROCESSES_Service _inspectionProcessesService;
@@ -47,33 +47,75 @@ namespace Mango_CTMS
             m_bIsWatching = false;
             lblVersion.Text = StringHelper.GetRunningVersion();
             Ultils.RegisterInStartup(true, Application.ExecutablePath);
-            com = new CommunicationManager();
+            comRead = new CommunicationManager();
+            comWrite = new CommunicationManager();
             _inspectionStationsService = new INSPECTION_STATIONS_Service();
             _scanningLogsService = new SCANNING_LOGS_Service();
             _inspectionProcessesService = new INSPECTION_PROCESSES_Service();
             _inspectionProcessesDesignersService = new INSPECTION_PROCEDURE_DESIGNERS_Service();
             _workOrderItemService = new WORK_ORDER_ITEMS_Service();
-
             LoadDataGridLookUpEditINSPECTION_STATIONS();
+            GetPortNames();
         }
+        /// <summary>
+        /// Form load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
             RefreshWindows();
+            string valueComRead = Properties.Settings.Default["ValueComRead"].ToString();
+            string valueComWrite = Properties.Settings.Default["ValueComWrite"].ToString();
+            string processName = Properties.Settings.Default["CurentProcess"].ToString();
+            string path = Properties.Settings.Default["Folder"].ToString();
+            string stationNo = Properties.Settings.Default["StationNo"].ToString();
+            bool comRead = (bool) Properties.Settings.Default["COMRead"];
+            bool comWrite = (bool)Properties.Settings.Default["COMWrite"];
+            if (valueComWrite != null)
+            {
+                gridLookUpEditComWrite.EditValue = valueComWrite;
+            }
+            if (valueComRead != null)
+            {
+                gridLookUpEditComRead.EditValue = valueComRead;
+            }
+            if (processName != null)
+            {
+                cboWindows.EditValue = processName;
+            }
+            if(path != null)
+            {
+                txtPath.Text = path;
+            }
+            if(stationNo!= null)
+            {
+                gridLookUpEditProcessID.EditValue = stationNo;
+            }
+            // COM WRITE
+            if (comWrite == true)
+            {
+                checkComWrite.Checked = true;
+            }
+            else
+            {
+                checkComWrite.Checked = false;
+            }
 
-            if (checkKeepProcess.Checked == true)
+            // COM READ
+            if (comRead == true)
             {
-                cboWindows.EditValue = Properties.Settings.Default["CurentProcess"].ToString();
+                checkComRead.Checked = true;
             }
-            if(checkPath.Checked == true)
+            else
             {
-                txtPath.Text = Properties.Settings.Default["Folder"].ToString();
-            }
-            if (checkStationNo.Checked == true)
-            {
-                gridLookUpEditProcessID.EditValue = Properties.Settings.Default["StationNo"].ToString();
+                checkComRead.Checked = false;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void LoadDataGridLookUpEditINSPECTION_STATIONS()
         {
             var items = _inspectionStationsService.Get_INSPECTION_STATIONS();
@@ -83,29 +125,29 @@ namespace Mango_CTMS
             gridLookUpEditProcessID.Properties.PopupFormWidth = 300;
             gridLookUpEditProcessID.Properties.DataSource = items;
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="boardNo"></param>
         /// <param name="productId"></param>
         /// <param name="stationNo"></param>
-        private void LoadData(string boardNo, string productId, string stationNo, string boardSate)
+        private void LoadData(string boardNo, string productId, string stationNo, string state)
         {
             ItemDetail item = new ItemDetail()
             {
                 BOARD_NO = boardNo,
                 ProductID = productId,
                 STATION_NO = stationNo,
-                DATE_CHECK = Ultils.GetNetworkDateTime().ToShortDateString(),
-                TIME_CHECK = Ultils.GetNetworkDateTime().ToShortTimeString(),
-                STATE = boardSate,
+                DATE_CHECK = DateTime.Now.ToShortDateString(),
+                TIME_CHECK = DateTime.Now.ToShortTimeString(),
+                STATE = state,
             };
             List<ItemDetail> items = new List<ItemDetail>();
             items.Add(item);
 
             gridControl1.DataSource = items.OrderByDescending(it => it.TIME_CHECK);
         }
-        
         /// <summary>
         /// Refresh the combobox list with all the top level windows running on desktop.
         /// </summary>
@@ -113,7 +155,7 @@ namespace Mango_CTMS
         {
             cboWindows.Refresh();
             GetTaskWindows();
-            LoadSerialPorts();
+            //GetPortNames();
         }
         /// <summary>
         /// 
@@ -139,7 +181,7 @@ namespace Mango_CTMS
                     StringBuilder sbTitle = new StringBuilder(1024);
                     // Read the Title bar text on the windows to put in combobox
                     NativeWin32.GetWindowText(nChildHandle, sbTitle, sbTitle.Capacity);
-                    String sWinTitle = sbTitle.ToString();
+                    string sWinTitle = sbTitle.ToString();
                     {
                         if (sWinTitle.Length > 0)
                         {
@@ -154,17 +196,50 @@ namespace Mango_CTMS
         }
 
         /// <summary>
-        /// Load com port
+        /// List Ports Name
         /// </summary>
-        private void LoadSerialPorts()
+        private void GetPortNames()
         {
-            List<string> listCom = new List<string>();
-            foreach (string s in SerialPort.GetPortNames())
-            {
-                listCom.Add(s);
-            }
+            gridLookUpEditComWrite.Properties.DataSource = comWrite.SetPortNameValues();
+            gridLookUpEditComWrite.Properties.PopupFormWidth = 160;
 
-            gridLookUpEditSerialPort.Properties.DataSource = listCom;
+            gridLookUpEditComRead.Properties.DataSource = comRead.SetPortNameValues();
+            gridLookUpEditComRead.Properties.PopupFormWidth = 160;
+        }
+        /// <summary>
+        /// Cấu hình cổng COM ghi
+        /// </summary>
+        private void ConfigComWrite()
+        {
+            string portName = gridLookUpEditComWrite.EditValue.ToString();
+            if (portName != null)
+            {
+                comWrite.PortName = portName;
+            }
+            comWrite.Parity = "None";
+            comWrite.StopBits = "One";
+            comWrite.DataBits = "8";
+            comWrite.BaudRate = "9600";
+            comWrite.DisplayWindow = null;
+            comWrite.OpenPort();
+        }
+
+        /// <summary>
+        /// Cấu hình cổng COM đọc
+        /// </summary>
+        private void ConfigComRead()
+        {
+            string portName = gridLookUpEditComRead.EditValue.ToString();
+            if (portName != null)
+            {
+                comRead.PortName = portName;
+            }
+            comRead.Parity = "None";
+            comRead.StopBits = "One";
+            comRead.DataBits = "8";
+            comRead.BaudRate = "9600";
+            comRead.DisplayWindow = null;
+            comRead.OpenPort();
         }
 
         /// <summary>
@@ -173,9 +248,6 @@ namespace Mango_CTMS
         /// <param name="enable"></param>
         private void EnableControls(bool enable)
         {
-            //rdbFile.Enabled = enable;
-            //rdbDir.Enabled = enable;
-            //chkSubFolder.Enabled = enable;
             gridLookUpEditProcessID.Enabled = enable;
             txtPath.Enabled = enable;
         }
@@ -192,25 +264,35 @@ namespace Mango_CTMS
             {
                 case Keys.Shift | Keys.F2:
                     {
-                        cboWindows.Visible = true;
-                        checkKeepProcess.Visible = true;
-                        checkEditSerialPort.Visible = true;
-                        gridLookUpEditSerialPort.Visible = true;
+                        // COM WRITE
+                        gridLookUpEditComWrite.Enabled = true;
+                        checkComWrite.Enabled = true;
+
+                        // COM READ
+                        gridLookUpEditComRead.Enabled = true;
+                        checkComRead.Enabled = true;
+
+                        cboWindows.Enabled = true;
+                        checkKeepProcess.Enabled = true;
                         return true;
                     }
                 case Keys.Shift | Keys.F3:
                     {
-                        cboWindows.Visible = false;
-                        checkKeepProcess.Visible = false;
-                        checkEditSerialPort.Visible = false;
-                        gridLookUpEditSerialPort.Visible = false;
+                        // COM WRITE
+                        gridLookUpEditComWrite.Enabled = false;
+                        checkComWrite.Enabled = false;
+
+                        // COM READ
+                        gridLookUpEditComRead.Enabled = false;
+                        checkComRead.Enabled = false;
+
+                        cboWindows.Enabled = false;
+                        checkKeepProcess.Enabled = false;
                         return true;
                     }
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
-
         private void btnWatchFile_Click(object sender, EventArgs e)
         {
             bool isVaild = true;
@@ -235,10 +317,28 @@ namespace Mango_CTMS
                     btnWatchFile.Text = "Start Watching";
                     EnableControls(true);
                     txtBarcode.Visible = false;
+                    StopTimerReadBarcode();         
                 }
                 else
                 {
                     m_bIsWatching = true;
+
+                    StartTimerReadBarcode();
+
+                    if (checkComWrite.Checked == true)
+                    {
+                        // Cấu hình COM PORT
+                        ConfigComWrite();
+                    }
+
+                    if(checkComRead.Checked == true)
+                    {
+                        ConfigComRead();
+                    }
+
+                    //comWrite.WriteData("NG");
+                    //comRead.WriteData("X69A0170QJA2_960K 77102 K001.080037E9406F");
+
                     btnWatchFile.ForeColor = Color.White;
                     btnWatchFile.Appearance.BackColor = Color.DarkRed;
                     btnWatchFile.Font = new Font(btnWatchFile.Font, FontStyle.Bold);
@@ -277,6 +377,11 @@ namespace Mango_CTMS
         }
 
         /// <summary>
+        /// Chờ sự thay đổi trong folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
@@ -314,15 +419,33 @@ namespace Mango_CTMS
                                 boardState = "FAILD";
                                 ng = ng + 1;
                             }
-                            else if(data == "PASS")
+                            else if (data == "PASS")
                             {
                                 _status = "P";
                                 boardState = "OK";
                                 pass = pass + 1;
+
+                                // Đóng dấu
+                                if (checkComWrite.Checked == true)
+                                {
+                                    comWrite.WriteData("O");
+                                }
                             }
 
                             total = pass + ng;
                             Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+
+                            Thread.Sleep(200);
+                            SendKeys.SendWait(serial[0]);
+                            SendKeys.SendWait("{ENTER}");
+                            Thread.Sleep(200);
+                            SendKeys.SendWait(maxaddress[1]);
+                            SendKeys.SendWait("{ENTER}");
+
+                            if (checkComRead.Checked == true)
+                            {
+                                StartTimerReadBarcode();
+                            }
                         }
                         else
                         {
@@ -337,7 +460,7 @@ namespace Mango_CTMS
                                 boardState = "FAILD";
                                 ng = ng + 1;
                             }
-                            else if(data == "PASS")
+                            else if (data == "PASS")
                             {
                                 _status = "P";
                                 boardState = "OK";
@@ -345,7 +468,19 @@ namespace Mango_CTMS
                             }
 
                             total = pass + ng;
-                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());     
+                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+
+                            Thread.Sleep(200);
+                            SendKeys.SendWait(serial[0]);
+                            SendKeys.SendWait("{ENTER}");
+                            Thread.Sleep(200);
+                            SendKeys.SendWait(maxaddress[1]);
+                            SendKeys.SendWait("{ENTER}");
+
+                            if (checkComRead.Checked == true)
+                            {
+                                StartTimerReadBarcode();
+                            }
                         }
                     }
                     else
@@ -374,12 +509,6 @@ namespace Mango_CTMS
                 }
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void rdbFile_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbFile.Checked == true)
@@ -388,7 +517,6 @@ namespace Mango_CTMS
                 chkSubFolder.Checked = false;
             }
         }
-
         private void rdbDir_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbDir.Checked == true)
@@ -397,7 +525,6 @@ namespace Mango_CTMS
                 chkSubFolder.Checked = true;
             }
         }
-
         private void txtPath_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 0)
@@ -420,23 +547,52 @@ namespace Mango_CTMS
                 }
             }
         }
-
         private void tmrEditNotify_Tick(object sender, EventArgs e)
         {
             if (m_bDirty)
             {
-                this.TopMost = true;
-                int iHandle = NativeWin32.FindWindow(null, "Mango CTMS - Log for MES System");
-                NativeWin32.SetForegroundWindow(iHandle);
-
+                //this.TopMost = true;
+                int iHandle2 = NativeWin32.FindWindow(null, this.Text);
+                NativeWin32.SetForegroundWindow(iHandle2);
                 lblPass.Text = pass.ToString();
                 lblNG.Text = ng.ToString();
                 lblTotal.Text = total.ToString();
                 LoadData(productionId, modelId, gridLookUpEditProcessID.EditValue.ToString(), boardState);
                 m_bDirty = false;
             }
+        }  
+        private void cboWindows_EditValueChanged(object sender, EventArgs e)
+        {
+            string processName = cboWindows.EditValue.ToString();
+            if (!string.IsNullOrEmpty(processName))
+            {
+                SaveSettings("CurentProcess", processName);
+            } 
         }
-
+        private void gridLookUpEditSerialPort_EditValueChanged(object sender, EventArgs e)
+        {
+            string comWrite = gridLookUpEditComWrite.EditValue.ToString();
+            if (!string.IsNullOrEmpty(comWrite))
+            {
+                SaveSettings("ValueComWrite", comWrite);
+            }
+        }
+        private void gridLookUpEditComRead_EditValueChanged(object sender, EventArgs e)
+        {
+            string comRead = gridLookUpEditComRead.EditValue.ToString();
+            if (!string.IsNullOrEmpty(comRead))
+            {
+                SaveSettings("ValueComRead", comRead);
+            }
+        }
+        private void checkEditSerialPort_CheckedChanged(object sender, EventArgs e)
+        {
+            SaveSettings("COMWrite", checkComWrite.Checked);
+        }
+        private void checkComRead_CheckedChanged(object sender, EventArgs e)
+        {
+            SaveSettings("COMRead", checkComRead.Checked);
+        }
         private void txtPath_EditValueChanged(object sender, EventArgs e)
         {
             if (txtPath.Text.Contains(@":\"))
@@ -445,12 +601,8 @@ namespace Mango_CTMS
                 {
                     MessageHelpers.SetDefaultStatus(true, "N/A", "N/A", lblStatus, lblMessage);
                     CheckTextBoxNullValue.SetColorDefaultTextControl(txtPath);
-
-                    if (checkPath.Checked == true)
-                    {
-                        Properties.Settings.Default["Folder"] = txtPath.Text;
-                        Properties.Settings.Default.Save(); // Saves settings in application configuration file
-                    }
+                    string path = txtPath.Text;
+                    SaveSettings("Folder", path);
                 }
                 else
                 {
@@ -464,22 +616,103 @@ namespace Mango_CTMS
                 CheckTextBoxNullValue.SetColorErrorTextControl(txtPath);
             }
         }
-
         private void gridLookUpEditProcessID_EditValueChanged(object sender, EventArgs e)
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(gridLookUpEditProcessID);
-            if (checkStationNo.Checked == true)
+            string stationNo = gridLookUpEditProcessID.EditValue.ToString();
+            if (!string.IsNullOrEmpty(stationNo))
             {
-                Properties.Settings.Default["StationNo"] = gridLookUpEditProcessID.EditValue.ToString();
-                Properties.Settings.Default.Save(); // Saves settings in application configuration file
-            }
+                SaveSettings("StationNo", stationNo);
+            }           
         }
-
         private void txtBarcode_EditValueChanged(object sender, EventArgs e)
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
         }
-        
+        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            GridView View = sender as GridView;
+            if (e.Column.FieldName == "STATE")
+            {
+                string value = View.GetRowCellDisplayText(e.RowHandle, View.Columns.ColumnByName("gridColumnSTATE"));
+                if (value == "OK")
+                {
+                    e.Appearance.BackColor = Color.Green;
+                    e.Appearance.BackColor2 = Color.DarkGreen;
+                    e.Appearance.ForeColor = Color.White;
+
+                }
+                else if (value == "FAILD")
+                {
+                    e.Appearance.BackColor = Color.Red;
+                    e.Appearance.BackColor2 = Color.DarkRed;
+                    e.Appearance.ForeColor = Color.White;
+                }
+            }
+        }
+        private void cboWindows_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 1)
+            {
+                RefreshWindows();
+            }
+        }
+        private void gridLookUpEditSerialPort_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if(e.Button.Index == 1)
+            {
+                RefreshWindows();
+            }
+        }
+        private void gridLookUpEditComRead_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 1)
+            {
+                RefreshWindows();
+            }
+        }
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                dynamic mboxResult = XtraMessageBox.Show("Bạn có thực sự muốn thoát hay không?",
+                    @"THÔNG BÁO",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (mboxResult == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else if (mboxResult == DialogResult.Yes)
+                {
+                    e.Cancel = false;
+                    Application.ExitThread();  
+                }
+            }
+        }
+        private void btnRefesh_Click(object sender, EventArgs e)
+        {
+            lblNG.Text = "0";
+            lblPass.Text = "0";
+            lblTotal.Text = "0";
+        }
+
+        /// <summary>
+        /// Save value setting
+        /// </summary>
+        /// <param name="settingName"></param>
+        /// <param name="value"></param>
+        private void SaveSettings(string settingName, object value)
+        {
+            Properties.Settings.Default[settingName] = value;
+            Properties.Settings.Default.Save();// Saves settings in application configuration file
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -490,6 +723,7 @@ namespace Mango_CTMS
                 {
                     boardNo = boardNo.Replace("=", "_");
                 }
+
                 string set_station_no = gridLookUpEditProcessID.EditValue.ToString();
 
                 if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtBarcode))
@@ -499,7 +733,7 @@ namespace Mango_CTMS
                 }
                 else if (txtBarcode.Text.Length <= 5)
                 {
-                    MessageHelpers.SetErrorStatus(true, "NG", "Board No invaild. Please try again!", lblStatus, lblMessage);
+                    MessageHelpers.SetErrorStatus(true, "NG", $"Board No {boardNo} invaild. Please try again!", lblStatus, lblMessage);
                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                     return;
                 }
@@ -510,7 +744,6 @@ namespace Mango_CTMS
 
                     var boards = _scanningLogsService.Get_SCANNING_LOGS(boardNo).FirstOrDefault();
 
-                    // nếu board đã được bắn vào trước đó
                     if (boards != null)
                     {
                         var process_No = _inspectionProcessesService.GET_INSPECTION_PROCESSES_BY_PRODUCT_ID(boards.PRODUCT_ID);
@@ -524,7 +757,6 @@ namespace Mango_CTMS
                                 // thì thông báo cho người dùng biết
                                 if (curentStationNo.IS_FINISHED == true)
                                 {
-                                    // Thông tin lỗi
                                     messageError = $"Board '{boardNo}' is finished!";
                                     MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
@@ -565,9 +797,7 @@ namespace Mango_CTMS
                                     // station_no curent thì thông báo cho người dùng biết
                                     if (process_by_station_no == null)
                                     {
-                                        // Thông tin lỗi
                                         messageError = $"Board '{boardNo}' station '{set_station_no}' not invaild!";
-
                                         MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                         CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                         var errorForm = new FormError(messageError);
@@ -581,13 +811,7 @@ namespace Mango_CTMS
                                         // Khi hai giá trị bằng nhau => ICT_FUJ
                                         if (curentStationNo.PROCEDURE_INDEX < (process_by_station_no.INDEX - 1))
                                         {
-                                            // Lấy tên trạm bị bỏ qua
-                                            string station_skip = process_Designer.FirstOrDefault(item => item.INDEX == (process_by_station_no.INDEX - 1)).STATION_NO;
-
-                                            // Thông tin lỗi
-                                            messageError = $"Board '{boardNo}' skip station '{station_skip}'!";
-
-                                            // Hiển thị thông báo cho người dùng
+                                            messageError = $"Board '{boardNo}' skip stations!";
                                             MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                             var errorForm = new FormError(messageError);
@@ -598,13 +822,8 @@ namespace Mango_CTMS
                                         //// Nếu Index Board > Set Index 
                                         else if (curentStationNo.PROCEDURE_INDEX > process_by_station_no.INDEX)
                                         {
-                                            // Lấy tên trạm tiếp theo mà broad cần chạy qua.
-                                            string station_skip = process_Designer.FirstOrDefault(item => item.INDEX == (curentStationNo.PROCEDURE_INDEX + 1)).STATION_NO;
-
-                                            // Thông tin lỗi
-                                            messageError = $"Board '{boardNo}' transferred to the next station '{station_skip}'!";
-
                                             // transferred to the next station.
+                                            messageError = $"Board '{boardNo}' transferred to the next station!";
                                             MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                             var errorForm = new FormError(messageError);
@@ -612,24 +831,23 @@ namespace Mango_CTMS
                                             txtBarcode.Focus();
                                             return;
                                         }
-
-                                        // Nếu trạm hiện tại mà giống với trạm cài đặt thì gửi dữ liệu đi
                                         else if (curentStationNo.PROCEDURE_INDEX == (process_by_station_no.INDEX - 1))
                                         {
                                             this.TopMost = false;
+
+                                            StopTimerReadBarcode();
+
                                             txtBarcode.ResetText();
                                             txtBarcode.Focus();
                                             productionId = boardNo;
                                             modelId = boards.PRODUCT_ID;
                                             MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
                                             // Thực hiện gửi dữ liệu đi
-                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.EditValue.ToString());
+                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
                                             NativeWin32.SetForegroundWindow(iHandle);
-                                            //SendKeys.Send(boardNo);
-                                            //SendKeys.Send("{ENTER}");
 
-                                            var serial = boardNo.Split(separator: new[] { "_" }, count: 4, options: StringSplitOptions.None);
-                                            var maxaddress = boardNo.Split(separator: new[] { "." }, count: 4, options: StringSplitOptions.None);
+                                            serial = boardNo.Split(separator: new[] { "_" }, count: 4, options: StringSplitOptions.None);
+                                            maxaddress = boardNo.Split(separator: new[] { "." }, count: 4, options: StringSplitOptions.None);
 
                                             SendKeys.Send(serial[0]);
                                             SendKeys.Send("{ENTER}");
@@ -637,50 +855,52 @@ namespace Mango_CTMS
                                             SendKeys.Send(maxaddress[1]);
                                             SendKeys.Send("{ENTER}");
 
+                                            if (checkComWrite.Checked == true)
+                                            {
+                                                // Start machine FCT Check
+                                                Thread.Sleep(200);
+                                                comWrite.WriteData("S");
+                                            }
                                         }
-                                        // Nếu board này đã chạy rồi, với trạng thái là FAILD thì thực hiện chạy lại.
                                         else if (curentStationNo.BOARD_STATE == 2)
                                         {
                                             this.TopMost = false;
+
+                                            StopTimerReadBarcode();
+
                                             txtBarcode.ResetText();
                                             txtBarcode.Focus();
                                             productionId = boardNo;
                                             modelId = boards.PRODUCT_ID;
                                             MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
                                             // Thực hiện gửi dữ liệu đi
-                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.EditValue.ToString());
+                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
                                             NativeWin32.SetForegroundWindow(iHandle);
 
-                                            var serial = boardNo.Split(separator: new[] { "_" }, count: 4, options: StringSplitOptions.None);
-                                            var maxaddress = boardNo.Split(separator: new[] { "." }, count: 4, options: StringSplitOptions.None);
+                                            serial = boardNo.Split(separator: new[] { "_" }, count: 4, options: StringSplitOptions.None);
+                                            maxaddress = boardNo.Split(separator: new[] { "." }, count: 4, options: StringSplitOptions.None);
 
+                                            //SendKeys.Send("{TAB}");
+                                            //SendKeys.Send("{ENTER}");
                                             SendKeys.Send(serial[0]);
                                             SendKeys.Send("{ENTER}");
 
                                             SendKeys.Send(maxaddress[1]);
                                             SendKeys.Send("{ENTER}");
 
-                                        }
-                                        else
-                                        {
-                                            // Thông tin lỗi
-                                            messageError = $"Broad '{boardNo} lỗi không rõ nguyên nhân. Vui lòng liên hệ với bộ phần 'PE-IT' để được hỗ trợ!'";
-
-                                            MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
-                                            CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                            var errorForm = new FormError(messageError);
-                                            errorForm.ShowDialog();
-                                            txtBarcode.Focus();
-                                            return;
+                                            if (checkComWrite.Checked == true)
+                                            {
+                                                // Start machine FCT Check
+                                                Thread.Sleep(200);
+                                                comWrite.WriteData("S");
+                                            }
                                         }
                                     }
                                 }
                             }
                             else
                             {
-                                // Thông tin lỗi
                                 messageError = $"Station No '{curentStationNo.STATION_NO}' not found!";
-
                                 MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                 CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                 var errorForm = new FormError(messageError);
@@ -691,9 +911,7 @@ namespace Mango_CTMS
                         }
                         else
                         {
-                            // Thông tin lỗi
                             messageError = $"Station No '{set_station_no}' invaild!";
-
                             MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                             var errorForm = new FormError(messageError);
@@ -704,88 +922,60 @@ namespace Mango_CTMS
                     }
                     else
                     {
-                        // Thông tin lỗi
                         messageError = $"Board '{boardNo}' not initialized!";
-
                         MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                         CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                         var errorForm = new FormError(messageError);
                         errorForm.ShowDialog();
                         return;
                     }
-
                 }
             }
         }
 
-        private void cboWindows_EditValueChanged(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timerReadCom_Tick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cboWindows.EditValue.ToString()))
-            {
-                if (checkKeepProcess.Checked == true)
-                {
-                    Properties.Settings.Default["CurentProcess"] = cboWindows.EditValue.ToString();
-                    Properties.Settings.Default.Save(); // Saves settings in application configuration file
-                }
-            }
-            else
-            {
-                return;
-            } 
+            //if (checkComRead.Checked == true)
+            //{
+            //    if (comRead.ReadComPort() != "")
+            //    {
+            //        if(comRead.ReadComPort().Length > 10)
+            //        {
+            //            txtBarcode.Text = comRead.ReadComPort();
+            //            SendKeys.Send("{ENTER}");
+            //            StopTimerReadBarcode();
+            //        }
+            //        else
+            //        {
+            //            StartTimerReadBarcode();
+            //        }
+            //    }
+            //}
         }
 
-        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        /// <summary>
+        /// STOP TIMER BARCODE
+        /// </summary>
+        private void StopTimerReadBarcode()
         {
-            GridView View = sender as GridView;
-            if (e.Column.FieldName == "STATE")
-            {
-                string value = View.GetRowCellDisplayText(e.RowHandle, View.Columns.ColumnByName("gridColumnSTATE"));
-                if (value == "OK")
-                {
-                    e.Appearance.BackColor = Color.Green;
-                    e.Appearance.BackColor2 = Color.DarkGreen;
-                    e.Appearance.ForeColor = Color.White;
+            timerReadCom.Enabled = false;
+            timerReadCom.Stop();
 
-                }
-                else if (value == "FAILD")
-                {
-                    e.Appearance.BackColor = Color.Red;
-                    e.Appearance.BackColor2 = Color.DarkRed;
-                    e.Appearance.ForeColor = Color.White;
-                }
-            }
         }
 
-        private void cboWindows_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        /// <summary>
+        /// START TIMER BARCODE
+        /// </summary>
+        private void StartTimerReadBarcode()
         {
-            if (e.Button.Index == 1)
-            {
-                RefreshWindows();
-            }
-        }
+            timerReadCom.Enabled = true;
+            timerReadCom.Start();
 
-        private void gridLookUpEditSerialPort_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            if (e.Button.Index == 1)
-            {
-                RefreshWindows();
-            }
-        }
-
-        private void gridLookUpEditSerialPort_EditValueChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(gridLookUpEditSerialPort.EditValue.ToString()))
-            {
-                if (checkEditSerialPort.Checked == true)
-                {
-                    Properties.Settings.Default["SerialPort"] = gridLookUpEditSerialPort.EditValue.ToString();
-                    Properties.Settings.Default.Save(); // Saves settings in application configuration file
-                }
-            }
-            else
-            {
-                return;
-            }
         }
     }
 }

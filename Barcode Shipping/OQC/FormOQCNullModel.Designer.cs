@@ -194,11 +194,11 @@
             this.lblCustomerName.Appearance.Font = new System.Drawing.Font("Tahoma", 28F, System.Drawing.FontStyle.Bold);
             this.lblCustomerName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblCustomerName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCustomerName.Location = new System.Drawing.Point(182, 0);
+            this.lblCustomerName.Location = new System.Drawing.Point(159, 0);
             this.lblCustomerName.Name = "lblCustomerName";
-            this.lblCustomerName.Size = new System.Drawing.Size(662, 94);
+            this.lblCustomerName.Size = new System.Drawing.Size(685, 94);
             this.lblCustomerName.TabIndex = 1;
-            this.lblCustomerName.Text = "Barcode";
+            this.lblCustomerName.Text = "Barcode Schneider";
             // 
             // pictureBox1
             // 
@@ -206,7 +206,7 @@
             this.pictureBox1.Image = global::OQC.Properties.Resources.umc;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(182, 94);
+            this.pictureBox1.Size = new System.Drawing.Size(159, 94);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;

@@ -387,6 +387,9 @@
             this.gridColumn1});
             this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsFind.FindDelay = 10000;
+            this.gridLookUpEdit1View.OptionsFind.FindNullPrompt = "Tên Model cần tìm...";
+            this.gridLookUpEdit1View.OptionsFind.SearchInPreview = true;
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 

@@ -286,6 +286,15 @@ namespace BarcodeShipping.GUI
         {
             string customerName = "Fujixerox";
             var models = _modelService.GetModelsByCustomerName(customerName);
+            var collection = new AutoCompleteStringCollection();
+            foreach (var item in models)
+            {
+                collection.Add(item.ModelName);
+            }
+            gridLookUpEditModelID.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            gridLookUpEditModelID.MaskBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            gridLookUpEditModelID.MaskBox.AutoCompleteCustomSource = collection;
+
             gridLookUpEditModelID.Properties.View.OptionsBehavior.AutoPopulateColumns = false;
             gridLookUpEditModelID.Properties.DisplayMember = "ModelName";
             gridLookUpEditModelID.Properties.ValueMember = "ModelID";

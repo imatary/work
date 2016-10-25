@@ -8,7 +8,8 @@ using DevExpress.XtraEditors;
 using System;
 using System.Windows.Forms;
 using DevExpress.XtraReports.UI;
-
+using DevExpress.XtraPrinting;
+using DevExpress.XtraPrinting.Preview;
 namespace CartonLabel.GUI
 {
     public partial class FormInput : XtraForm
@@ -124,7 +125,7 @@ namespace CartonLabel.GUI
 
                         report.DataSource = results;
                         report.Landscape = true;
-                        var tool = new ReportPrintTool(report);
+                        ReportPrintTool tool = new ReportPrintTool(report);
                         tool.PreviewForm.FormClosing += new FormClosingEventHandler(ReportCartonLabels_FormClosing);
 
 

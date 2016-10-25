@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO.Ports;
 using System.Text;
@@ -27,6 +28,7 @@ namespace Lib.Core
         private string _stopBits = string.Empty;
         private string _dataBits = string.Empty;
         private string _portName = string.Empty;
+        private string _readValue = string.Empty;
         private TransmissionType _transType;
         private RichTextBox _displayWindow;
         //global manager variables
@@ -157,7 +159,7 @@ namespace Lib.Core
                     comPort.Write(msg);
                     comPort.Close();
                     //display the message
-                    //DisplayData(MessageType.Outgoing, msg + "\n");
+                    _readValue = msg;
                     break;
                 case TransmissionType.Hex:
                     try
@@ -190,6 +192,7 @@ namespace Lib.Core
                     //send the message to the port
                     comPort.Write(msg);
                     comPort.Close();
+                    _readValue = msg;
                     //display the message
                     //DisplayData(MessageType.Outgoing, msg + "\n");
                     break;
@@ -258,6 +261,29 @@ namespace Lib.Core
                 _displayWindow.ScrollToCaret();
             }));
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="control"></param>
+        /// <returns></returns>
+        public string ReadComPort()
+        {
+            if (_readValue != null)
+            {
+                return _readValue;
+            }
+            return null;
+        }
+
+        //public byte[] ReadComPort(string control)
+        //{
+        //    if (control != null)
+        //    {
+        //        return null;
+        //    }
+
+        //    return null;
+        //}
         #endregion
 
         #region OpenPort
@@ -275,9 +301,16 @@ namespace Lib.Core
                 comPort.DataBits = int.Parse(_dataBits);    //DataBits
                 comPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), _stopBits);    //StopBits
                 comPort.Parity = (Parity)Enum.Parse(typeof(Parity), _parity);    //Parity
-                comPort.PortName = _portName;   //PortName
+                comPort.PortName = _portName;
+                //PortName
                 //now open the port
+                //if (!comPort.IsOpen)
+                //{
+                //    comPort.Open();
+                //}
+
                 comPort.Open();
+
                 //display message
                 //DisplayData(MessageType.Normal, "Port opened at " + DateTime.Now + "\n");
                 //return true
@@ -313,13 +346,15 @@ namespace Lib.Core
         #endregion
 
         #region SetPortNameValues
-        public void SetPortNameValues(object obj)
+        public List<string> SetPortNameValues()
         {
-
+            List<string> portNames = new List<string>();
             foreach (string str in SerialPort.GetPortNames())
             {
-                ((ComboBox)obj).Items.Add(str);
+                portNames.Add(str);
             }
+
+            return portNames;
         }
         #endregion
 
@@ -337,9 +372,10 @@ namespace Lib.Core
                 //user chose string
                 case TransmissionType.Text:
                     //read data waiting in the buffer
-                    string msg = comPort.ReadExisting();
+                    _readValue = comPort.ReadExisting();
                     //display the data to the user
-                    DisplayData(MessageType.Incoming, msg + "\n");
+                    //DisplayData(MessageType.Incoming, msg + "\n");
+                    
                     break;
                 //user chose binary
                 case TransmissionType.Hex:
@@ -350,13 +386,13 @@ namespace Lib.Core
                     //read the data and store it
                     comPort.Read(comBuffer, 0, bytes);
                     //display the data to the user
-                    DisplayData(MessageType.Incoming, ByteToHex(comBuffer) + "\n");
+                    //DisplayData(MessageType.Incoming, ByteToHex(comBuffer) + "\n");
                     break;
                 default:
                     //read data waiting in the buffer
-                    string str = comPort.ReadExisting();
+                    _readValue = comPort.ReadExisting();
                     //display the data to the user
-                    DisplayData(MessageType.Incoming, str + "\n");
+                    //DisplayData(MessageType.Incoming, str + "\n");
                     break;
             }
         }

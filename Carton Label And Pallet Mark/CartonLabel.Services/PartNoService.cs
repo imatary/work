@@ -9,15 +9,15 @@ namespace CartonLabel.Services
 {
     public class PartNoService
     {
-        private readonly CartonLabelEntities _context;
+        private readonly CartonLabelDbContext _context;
         public PartNoService()
         {
-            _context = new CartonLabelEntities();
+            _context = new CartonLabelDbContext();
         }
 
         public List<Part> GetPartNoes()
         {
-            using (var context=new CartonLabelEntities())
+            using (var context=new CartonLabelDbContext())
             {
                 return context.Parts.ToList();
             }

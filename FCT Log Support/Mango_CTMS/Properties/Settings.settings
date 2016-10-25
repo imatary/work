@@ -11,7 +11,16 @@
     <Setting Name="Folder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="SerialPort" Type="System.String" Scope="User">
+    <Setting Name="ValueComRead" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="COMRead" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="COMWrite" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ValueComWrite" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

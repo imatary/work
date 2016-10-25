@@ -40,7 +40,12 @@ namespace ComPortTest
 
             mySerialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
 
-            mySerialPort.Open();
+            if (!mySerialPort.IsOpen)
+            {
+                mySerialPort.Open();
+            }
+
+            //mySerialPort.Open();
 
             Console.WriteLine("Press any key to continue...");
             Console.WriteLine();

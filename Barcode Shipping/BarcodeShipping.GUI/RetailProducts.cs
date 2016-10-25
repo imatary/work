@@ -368,14 +368,14 @@ namespace BarcodeShipping.GUI
                     }
                     else
                     {
-                        if (!GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.Text, removePo))
+                        if (!GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.EditValue.ToString(), removePo))
                         {
                             if (XtraMessageBox.Show(string.Format("Chưa tạo QTY PO và Remains cho Model [{0}] và PO [{1}] này.\nBạn có muốn thêm mới không?", gridLookUpEditModelID.Text, removePo), "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                             {
                                 var addPo = new FormAddPO(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, removePo);
                                 addPo.ShowDialog();
                                 txtPO.Text = removePo;
-                                GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.Text, removePo);
+                                GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.EditValue.ToString(), removePo);
                                 txtBoxID.Focus();
                             }
                             else
@@ -524,7 +524,7 @@ namespace BarcodeShipping.GUI
                         {
                             ID = Guid.NewGuid(),
                             Operator = txtOperatorCode.Text,
-                            Model = gridLookUpEditModelID.Text,
+                            Model = gridLookUpEditModelID.EditValue.ToString(),
                             WorkingOder = txtWorkingOrder.Text,
                             Quantity = 1,
                             BoxID = boxid,

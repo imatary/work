@@ -6,15 +6,15 @@ namespace CartonLabel.Services
 {
     public class CartonLabelService
     {
-        private readonly CartonLabelEntities _context;
+        private readonly CartonLabelDbContext _context;
         public CartonLabelService()
         {
-            _context = new CartonLabelEntities();
+            _context = new CartonLabelDbContext();
         }
 
         public List<Data.Label> GetCartonLabels()
         {
-            using (var context=new CartonLabelEntities())
+            using (var context=new CartonLabelDbContext())
             {
                 return context.Labels.ToList();
             }

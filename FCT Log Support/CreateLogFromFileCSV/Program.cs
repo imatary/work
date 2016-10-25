@@ -23,7 +23,7 @@ namespace CreateLogFromFileCSV
                 // nếu không, ứng dụng sẽ thoát.
                 if (ownmutex)
                 {
-                    Application.Run(new FormMain());
+                    Application.Run(new FormMain_old());
                     //giai phong Mutex;
                     mutex.ReleaseMutex();
                 }

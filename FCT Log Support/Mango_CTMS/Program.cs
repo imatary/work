@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -21,7 +19,7 @@ namespace Mango_CTMS
             bool ownmutex;
 
             // Tạo và lấy quyền sở hữu một Mutex có tên là Icon;
-            using (var mutex = new Mutex(true, "Mango_CTMS", out ownmutex))
+            using (var mutex = new Mutex(true, "Mango CTMS - Log for MES System", out ownmutex))
             {
                 // Nếu ứng dụng sở hữu Mutex, nó có thể tiếp tục thực thi;
                 // nếu không, ứng dụng sẽ thoát.

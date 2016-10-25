@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AXSerialCom.cs" />
     <Compile Include="CommunicationManager.cs" />
+    <Compile Include="GetValueWindowText.cs" />
     <Compile Include="Helpers\CsvFileReader.cs" />
     <Compile Include="Helpers\CsvFileWriter.cs" />
     <Compile Include="Helpers\CsvRow.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="NativeWin32.cs" />
     <Compile Include="ProcessExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerialPortClient.cs" />
     <Compile Include="SuspendFlags.cs" />
     <Compile Include="Ultils.cs" />
   </ItemGroup>

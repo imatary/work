@@ -58,5 +58,53 @@ namespace AGPF_DADF_IBG.Properties {
                 this["Folder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ValueComRead {
+            get {
+                return ((string)(this["ValueComRead"]));
+            }
+            set {
+                this["ValueComRead"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool COMRead {
+            get {
+                return ((bool)(this["COMRead"]));
+            }
+            set {
+                this["COMRead"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool COMWrite {
+            get {
+                return ((bool)(this["COMWrite"]));
+            }
+            set {
+                this["COMWrite"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ValueComWrite {
+            get {
+                return ((string)(this["ValueComWrite"]));
+            }
+            set {
+                this["ValueComWrite"] = value;
+            }
+        }
     }
 }

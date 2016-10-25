@@ -578,7 +578,6 @@ namespace FCT_HFT1024_DB
                                         }
                                         else if (curentStationNo.PROCEDURE_INDEX == (process_by_station_no.INDEX - 1))
                                         {
-                                            //Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
                                             this.TopMost = false;
                                             txtBarcode.ResetText();
                                             txtBarcode.Focus();
@@ -600,7 +599,7 @@ namespace FCT_HFT1024_DB
                                         }
                                         else if(curentStationNo.BOARD_STATE == 2)
                                         {
-                                            //Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
+
                                             this.TopMost = false;
                                             txtBarcode.ResetText();
                                             txtBarcode.Focus();
