@@ -16,7 +16,7 @@ namespace Lib.Core.Helper
         public static void EditTextErrorMessage(TextEdit textEdit, string title)
         {
             textEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red;
-            MessageBox.Show(string.Format("Error! {0}", title), Resource.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(string.Format("Error!\n{0}", title), Resource.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             textEdit.Focus();
             textEdit.SelectAll();
         }

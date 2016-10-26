@@ -10,10 +10,10 @@ namespace BarcodeShipping.Services
 {
     public class ModelService
     {
-        private readonly IQCDataEntities _context;
+        private readonly ShippingFujiXeroxDbContext _context;
         public ModelService()
         {
-            _context = new IQCDataEntities();
+            _context = new ShippingFujiXeroxDbContext();
         }
 
         #region Models
@@ -42,15 +42,18 @@ namespace BarcodeShipping.Services
         /// </summary>
         /// <param name="modelName"></param>
         /// <returns></returns>
-        public Model GetModelByName(string modelName)
+        public Model GetModelByName(string modelName, string customerName)
         {
-            var param = new SqlParameter()
+            object[] param =
             {
-                ParameterName = "@modelName",
-                SqlDbType = SqlDbType.VarChar,
-                Value = modelName,
+                new SqlParameter() { ParameterName = "@modelName", Value = modelName, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@customerName", Value = customerName, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
             };
-            return _context.Database.SqlQuery<Model>("EXEC [sp_GetModelByName] @modelName", param).FirstOrDefault();
+            return _context.Database.SqlQuery<Model>("EXEC [sp_GetModelByName] @modelName,@customerName", param).FirstOrDefault();
         }
         public Model GetModelById(string modelId)
         {

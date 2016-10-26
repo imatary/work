@@ -16,10 +16,10 @@ namespace BarcodeShipping.Services
     }
     public class OQCService : IOQCService
     {
-        private readonly IQCDataEntities _context;
+        private readonly ShippingFujiXeroxDbContext _context;
         public OQCService()
         {
-            _context = new IQCDataEntities();
+            _context = new ShippingFujiXeroxDbContext();
         }
         public IEnumerable<tbl_test_log> GetLogs()
         {
@@ -42,15 +42,15 @@ namespace BarcodeShipping.Services
         /// <returns></returns>
         public string CheckBoxIdExits(string boxId)
         {
-            //var param = new SqlParameter()
-            //{
-            //    ParameterName = "@boxId",
-            //    SqlDbType = SqlDbType.Char,
-            //    Value = boxId,
-            //};
-            //return _context.Database.SqlQuery<tbl_test_log>("EXEC [sp_CheckBoxIdExits] @boxId", param).First();
+            var param = new SqlParameter()
+            {
+                ParameterName = "@boxId",
+                SqlDbType = SqlDbType.Char,
+                Value = boxId,
+            };
+            var log= _context.Database.SqlQuery<tbl_test_log>("EXEC [sp_CheckBoxIdExits] @boxId", param).FirstOrDefault();
 
-            return _context.sp_CheckBoxIdExits(boxId).FirstOrDefault();
+            return log.BoxID;
         }
 
         public tbl_test_log GetLogByProductionId(string productionId)
@@ -69,7 +69,7 @@ namespace BarcodeShipping.Services
             var param = new SqlParameter()
             {
                 ParameterName = "@boxId",
-                SqlDbType = SqlDbType.Char,
+                SqlDbType = SqlDbType.VarChar,
                 Value = boxId,
             };
             return _context.Database.SqlQuery<tbl_test_log>("EXEC sp_GetLogsByBoxId @boxId", param).ToList();
@@ -93,12 +93,22 @@ namespace BarcodeShipping.Services
             };
             return _context.Database.SqlQuery<tbl_test_log>("EXEC [dbo].[sp_GetLogsByBoxIdAndDate] @boxId, @dateCheck", param).ToList();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productionId"></param>
         public void DeleteLogByProductionId(string productionId)
         {
             var log = GetLogByProductionId(productionId);
+            var param = new SqlParameter()
+            {
+                ParameterName = "@productionId",
+                SqlDbType = SqlDbType.VarChar,
+                Value = productionId,
+            };
             if (log != null)
             {
-                _context.sp_DeleteLogByProductionId(productionId);
+                _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_DeleteLogByProductionId] @productionId");
             }
         }
         public void DeleteLogByBoxId(string boxId)

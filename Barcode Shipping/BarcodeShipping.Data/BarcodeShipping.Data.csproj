@@ -68,111 +68,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IQCDataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IQCDataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IQCDataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IQCDataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IQCDataModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="mst_operator.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PackingPO.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Model.cs" />
+    <Compile Include="mst_operator.cs" />
+    <Compile Include="PackingPO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QACheck.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IQCRepository.cs" />
-    <Compile Include="Shipping.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetLogByProductionId_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetLogResultsById_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetLogsByBoxId_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetLogsById_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetModelById_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetOperatorByCode_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetPackingPoModelAndPoNo_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetShippingByGuiId_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetShippingById_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetShippingsByBoxId_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_GetShippingsByPo_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_SelectAllLogs_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_SelectAllModels_Result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tbl_test_log.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tbl_test_result.cs">
-      <DependentUpon>IQCDataModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Shipping.cs" />
+    <Compile Include="ShippingFujiXeroxDbContext.cs" />
+    <Compile Include="tbl_test_log.cs" />
+    <Compile Include="tbl_test_result.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="IQCDataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>IQCDataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="App.Config" />
-    <None Include="IQCDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IQCDataModel.edmx</DependentUpon>
-      <LastGenOutput>IQCDataModel.Context.cs</LastGenOutput>
-    </None>
-    <None Include="IQCDataModel.edmx.diagram">
-      <DependentUpon>IQCDataModel.edmx</DependentUpon>
-    </None>
-    <None Include="IQCDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IQCDataModel.edmx</DependentUpon>
-      <LastGenOutput>IQCDataModel.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

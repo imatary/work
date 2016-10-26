@@ -5,7 +5,7 @@ namespace BarcodeShipping.Data.Repositories
 {
     public class IqcRepository : IRepository
     {
-        private readonly IQCDataEntities _context = new IQCDataEntities();
+        private readonly ShippingFujiXeroxDbContext _context = new ShippingFujiXeroxDbContext();
 
         public void Dispose()
         {

@@ -3,11 +3,13 @@ using System.Windows.Forms;
 using BarcodeShipping.Services;
 using Lib.Core.Helper;
 
+
 namespace BarcodeShipping.GUI
 {
     public partial class FormAddModel : Form
     {
         private readonly ModelService _modelService;
+        private string FujiXerox = "FujiXerox";
         public FormAddModel(string modelId, string modelName, string operatorCode)
         {
             InitializeComponent();
@@ -79,7 +81,7 @@ namespace BarcodeShipping.GUI
                 }
                 else
                 {
-                    var model = _modelService.GetModelByName(txtModelID.Text);
+                    var model = _modelService.GetModelByName(txtModelID.Text, FujiXerox);
                     if(model != null)
                     {
                         Ultils.SetColorErrorTextControl(txtModelID, "Model này đã được tạo rồi. Vui lòng kiểm tra lại!");

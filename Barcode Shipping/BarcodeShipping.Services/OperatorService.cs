@@ -11,8 +11,11 @@ namespace BarcodeShipping.Services
     }
     public class OperatorService : IOperatorService
     {
-        private readonly IQCDataEntities _context = new IQCDataEntities();
-
+        private readonly ShippingFujiXeroxDbContext _context;
+        public OperatorService()
+        {
+            _context = new ShippingFujiXeroxDbContext();
+        }
         public IEnumerable<mst_operator> GetOperators()
         {
             return _context.Database.SqlQuery<mst_operator>("EXEC [sp_GetOperators]").OrderByDescending(item => item.OperatorName).ToList();

@@ -70,6 +70,16 @@ namespace BarcodeShipping.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap error {
+            get {
+                object obj = ResourceManager.GetObject("error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Info.
         /// </summary>
         internal static string InfoMessageTitle {
@@ -84,6 +94,16 @@ namespace BarcodeShipping.GUI.Properties {
         internal static string MessageBoxErrorMessageTitle {
             get {
                 return ResourceManager.GetString("MessageBoxErrorMessageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shops_close_icon_65321 {
+            get {
+                object obj = ResourceManager.GetObject("shops-close-icon-65321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

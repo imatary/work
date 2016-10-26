@@ -13,10 +13,10 @@ namespace BarcodeShipping.Services
 
     public class IqcService
     {
-        private readonly IQCDataEntities _context;
+        private readonly ShippingFujiXeroxDbContext _context;
         public IqcService()
         {
-            _context = new IQCDataEntities();
+            _context = new ShippingFujiXeroxDbContext();
         }
         private IRepository _repository;
 
