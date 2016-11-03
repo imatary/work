@@ -764,5 +764,16 @@ namespace BarcodeShipping.GUI
                 }
             }
         }
+
+        private void btnVersionOld_Click(object sender, EventArgs e)
+        {
+            var old = new FormMain();
+            old.ShowDialog();
+
+            ResetControls();
+            VisibleControlAddPcb(false);
+            _currentModel = new Model();
+            _currentPo = new PackingPO();
+        }
     }
 }

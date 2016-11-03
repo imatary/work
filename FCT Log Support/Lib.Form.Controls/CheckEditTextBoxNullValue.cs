@@ -33,8 +33,6 @@ namespace Lib.Form.Controls
             return true;
         }
 
-
-
         public static bool ValidationTextEditNullValueMessage(TextEdit textEdit, string messageTitle)
         {
             if (string.IsNullOrEmpty(textEdit.Text))
@@ -53,7 +51,7 @@ namespace Lib.Form.Controls
         public static void SetColorErrorTextControl(BaseEdit control)
         {
             control.Properties.Appearance.BorderColor = Color.DarkRed;
-            control.Text = null;
+            control.Text = string.Empty;
             control.Focus();
             control.SelectAll();
         }
@@ -120,17 +118,19 @@ namespace Lib.Form.Controls
             control.Focus();
             control.SelectAll();
 
-            ToolTip buttonToolTip = new ToolTip();
-            buttonToolTip.ToolTipTitle = toolTipTile;
-            buttonToolTip.UseFading = true;
-            buttonToolTip.UseAnimation = true;
-            buttonToolTip.IsBalloon = true;
-            buttonToolTip.Active = true;
-            buttonToolTip.ShowAlways = true;
+            ToolTip buttonToolTip = new ToolTip
+            {
+                ToolTipTitle = toolTipTile,
+                UseFading = true,
+                UseAnimation = true,
+                IsBalloon = true,
+                Active = true,
+                ShowAlways = true,
+                AutoPopDelay = 5000,
+                InitialDelay = 10,
+                ReshowDelay = 500
+            };
 
-            buttonToolTip.AutoPopDelay = 5000;
-            buttonToolTip.InitialDelay = 10;
-            buttonToolTip.ReshowDelay = 500;
 
             buttonToolTip.SetToolTip(control, message);
         }

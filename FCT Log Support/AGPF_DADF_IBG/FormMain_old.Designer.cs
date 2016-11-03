@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain_old));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -84,7 +83,7 @@
             this.dlgOpenDir = new System.Windows.Forms.FolderBrowserDialog();
             this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
-            this.tmrEditNotify = new System.Windows.Forms.Timer(this.components);
+            this.tmrEditNotify = new System.Windows.Forms.Timer();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -766,7 +765,7 @@
             this.tmrEditNotify.Enabled = true;
             this.tmrEditNotify.Tick += new System.EventHandler(this.tmrEditNotify_Tick);
             // 
-            // FormMain
+            // FormMain_old
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -776,7 +775,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Name = "FormMain";
+            this.Name = "FormMain_old";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AGPF DADF IBG - Log for MES System";
             this.Load += new System.EventHandler(this.FormMain_Load);

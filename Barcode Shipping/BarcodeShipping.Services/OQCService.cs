@@ -108,7 +108,7 @@ namespace BarcodeShipping.Services
             };
             if (log != null)
             {
-                _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_DeleteLogByProductionId] @productionId");
+                _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_DeleteLogByProductionId] @productionId", param);
             }
         }
         public void DeleteLogByBoxId(string boxId)

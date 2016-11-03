@@ -85,6 +85,7 @@
             this.gridColumnPO_NO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnDateCheck = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnVersionOld = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -122,7 +123,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(884, 94);
+            this.panelControl1.Size = new System.Drawing.Size(963, 94);
             this.panelControl1.TabIndex = 0;
             // 
             // labelControl1
@@ -132,7 +133,7 @@
             this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelControl1.Location = new System.Drawing.Point(198, 0);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(686, 94);
+            this.labelControl1.Size = new System.Drawing.Size(765, 94);
             this.labelControl1.TabIndex = 1;
             this.labelControl1.Text = "Shipping FujiXerox";
             // 
@@ -159,7 +160,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(884, 226);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(963, 226);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tableLayoutPanel2
@@ -191,13 +192,13 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(391, 220);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(427, 220);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // txtPO
             // 
             this.txtPO.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtPO.Location = new System.Drawing.Point(143, 96);
+            this.txtPO.Location = new System.Drawing.Point(156, 96);
             this.txtPO.Name = "txtPO";
             this.txtPO.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPO.Properties.Appearance.Options.UseFont = true;
@@ -205,7 +206,7 @@
             this.txtPO.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPO.Properties.NullValuePrompt = "Bắn vào PO";
             this.txtPO.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtPO.Size = new System.Drawing.Size(245, 26);
+            this.txtPO.Size = new System.Drawing.Size(268, 26);
             this.txtPO.TabIndex = 8;
             this.txtPO.EditValueChanged += new System.EventHandler(this.txtPO_EditValueChanged);
             this.txtPO.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtPO_PreviewKeyDown);
@@ -214,7 +215,7 @@
             // txtWorkingOrder
             // 
             this.txtWorkingOrder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtWorkingOrder.Location = new System.Drawing.Point(143, 65);
+            this.txtWorkingOrder.Location = new System.Drawing.Point(156, 65);
             this.txtWorkingOrder.Name = "txtWorkingOrder";
             this.txtWorkingOrder.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtWorkingOrder.Properties.Appearance.Options.UseFont = true;
@@ -222,7 +223,7 @@
             this.txtWorkingOrder.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtWorkingOrder.Properties.NullValuePrompt = "Enter the Working oder";
             this.txtWorkingOrder.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtWorkingOrder.Size = new System.Drawing.Size(245, 26);
+            this.txtWorkingOrder.Size = new System.Drawing.Size(268, 26);
             this.txtWorkingOrder.TabIndex = 7;
             this.txtWorkingOrder.EditValueChanged += new System.EventHandler(this.txtWorkingOrder_EditValueChanged);
             this.txtWorkingOrder.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtWorkingOrder_PreviewKeyDown);
@@ -235,7 +236,7 @@
             this.lblWorkingOder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblWorkingOder.Location = new System.Drawing.Point(3, 65);
             this.lblWorkingOder.Name = "lblWorkingOder";
-            this.lblWorkingOder.Size = new System.Drawing.Size(134, 25);
+            this.lblWorkingOder.Size = new System.Drawing.Size(147, 25);
             this.lblWorkingOder.TabIndex = 2;
             this.lblWorkingOder.Text = "Working Oder:";
             // 
@@ -247,13 +248,13 @@
             this.lblPO.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPO.Location = new System.Drawing.Point(3, 96);
             this.lblPO.Name = "lblPO";
-            this.lblPO.Size = new System.Drawing.Size(134, 25);
+            this.lblPO.Size = new System.Drawing.Size(147, 25);
             this.lblPO.TabIndex = 3;
             this.lblPO.Text = "PO:";
             // 
             // txtAddPCB
             // 
-            this.txtAddPCB.Location = new System.Drawing.Point(143, 189);
+            this.txtAddPCB.Location = new System.Drawing.Point(156, 189);
             this.txtAddPCB.Name = "txtAddPCB";
             this.txtAddPCB.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.txtAddPCB.Properties.Appearance.Options.UseFont = true;
@@ -281,7 +282,7 @@
             // 
             // txtBoxID
             // 
-            this.txtBoxID.Location = new System.Drawing.Point(143, 158);
+            this.txtBoxID.Location = new System.Drawing.Point(156, 158);
             this.txtBoxID.Name = "txtBoxID";
             this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxID.Properties.Appearance.Options.UseFont = true;
@@ -314,14 +315,14 @@
             this.lblOperator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblOperator.Location = new System.Drawing.Point(3, 34);
             this.lblOperator.Name = "lblOperator";
-            this.lblOperator.Size = new System.Drawing.Size(134, 25);
+            this.lblOperator.Size = new System.Drawing.Size(147, 25);
             this.lblOperator.TabIndex = 0;
             this.lblOperator.Text = "Operator:";
             // 
             // txtOperatorCode
             // 
             this.txtOperatorCode.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtOperatorCode.Location = new System.Drawing.Point(143, 34);
+            this.txtOperatorCode.Location = new System.Drawing.Point(156, 34);
             this.txtOperatorCode.Name = "txtOperatorCode";
             this.txtOperatorCode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtOperatorCode.Properties.Appearance.Options.UseFont = true;
@@ -342,14 +343,14 @@
             this.lblModel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblModel.Location = new System.Drawing.Point(3, 127);
             this.lblModel.Name = "lblModel";
-            this.lblModel.Size = new System.Drawing.Size(134, 25);
+            this.lblModel.Size = new System.Drawing.Size(147, 25);
             this.lblModel.TabIndex = 1;
             this.lblModel.Text = "Model:";
             // 
             // txtModel
             // 
             this.txtModel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtModel.Location = new System.Drawing.Point(143, 127);
+            this.txtModel.Location = new System.Drawing.Point(156, 127);
             this.txtModel.Name = "txtModel";
             this.txtModel.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.txtModel.Properties.Appearance.Options.UseFont = true;
@@ -357,7 +358,7 @@
             this.txtModel.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtModel.Properties.NullValuePrompt = "Bắn vào Model";
             this.txtModel.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtModel.Size = new System.Drawing.Size(245, 26);
+            this.txtModel.Size = new System.Drawing.Size(268, 26);
             this.txtModel.TabIndex = 12;
             this.txtModel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtModel_PreviewKeyDown);
             // 
@@ -367,11 +368,11 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(400, 3);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(436, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(481, 220);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(524, 220);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // tableLayoutPanel5
@@ -386,7 +387,7 @@
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(475, 214);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(518, 214);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
             // tableLayoutPanel4
@@ -405,7 +406,7 @@
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(469, 101);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(512, 101);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // lblQtyPOTitle
@@ -416,7 +417,7 @@
             this.lblQtyPOTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblQtyPOTitle.Location = new System.Drawing.Point(6, 6);
             this.lblQtyPOTitle.Name = "lblQtyPOTitle";
-            this.lblQtyPOTitle.Size = new System.Drawing.Size(224, 30);
+            this.lblQtyPOTitle.Size = new System.Drawing.Size(245, 30);
             this.lblQtyPOTitle.TabIndex = 0;
             this.lblQtyPOTitle.Text = "Qty PO";
             // 
@@ -426,9 +427,9 @@
             this.lblRemainsTitle.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblRemainsTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblRemainsTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRemainsTitle.Location = new System.Drawing.Point(239, 6);
+            this.lblRemainsTitle.Location = new System.Drawing.Point(260, 6);
             this.lblRemainsTitle.Name = "lblRemainsTitle";
-            this.lblRemainsTitle.Size = new System.Drawing.Size(224, 30);
+            this.lblRemainsTitle.Size = new System.Drawing.Size(246, 30);
             this.lblRemainsTitle.TabIndex = 1;
             this.lblRemainsTitle.Text = "Remains";
             // 
@@ -441,7 +442,7 @@
             this.lblQtyPO.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblQtyPO.Location = new System.Drawing.Point(6, 45);
             this.lblQtyPO.Name = "lblQtyPO";
-            this.lblQtyPO.Size = new System.Drawing.Size(224, 50);
+            this.lblQtyPO.Size = new System.Drawing.Size(245, 50);
             this.lblQtyPO.TabIndex = 2;
             this.lblQtyPO.Text = "0";
             // 
@@ -452,9 +453,9 @@
             this.lblRemains.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblRemains.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblRemains.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRemains.Location = new System.Drawing.Point(239, 45);
+            this.lblRemains.Location = new System.Drawing.Point(260, 45);
             this.lblRemains.Name = "lblRemains";
-            this.lblRemains.Size = new System.Drawing.Size(224, 50);
+            this.lblRemains.Size = new System.Drawing.Size(246, 50);
             this.lblRemains.TabIndex = 2;
             this.lblRemains.Text = "0";
             // 
@@ -470,7 +471,7 @@
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(469, 101);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(512, 101);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // lblQuantityModel
@@ -480,9 +481,9 @@
             this.lblQuantityModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.lblQuantityModel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblQuantityModel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblQuantityModel.Location = new System.Drawing.Point(214, 3);
+            this.lblQuantityModel.Location = new System.Drawing.Point(233, 3);
             this.lblQuantityModel.Name = "lblQuantityModel";
-            this.lblQuantityModel.Size = new System.Drawing.Size(252, 95);
+            this.lblQuantityModel.Size = new System.Drawing.Size(276, 95);
             this.lblQuantityModel.TabIndex = 1;
             this.lblQuantityModel.Text = "/0";
             // 
@@ -495,7 +496,7 @@
             this.lblCountPCB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCountPCB.Location = new System.Drawing.Point(3, 3);
             this.lblCountPCB.Name = "lblCountPCB";
-            this.lblCountPCB.Size = new System.Drawing.Size(205, 95);
+            this.lblCountPCB.Size = new System.Drawing.Size(224, 95);
             this.lblCountPCB.TabIndex = 0;
             this.lblCountPCB.Text = "0";
             // 
@@ -507,9 +508,9 @@
             this.toolStripStatusLabel3,
             this.toolStripStatusLabelDessignBy,
             this.toolStripStatusLabelName});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 617);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 649);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(884, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(963, 24);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -554,7 +555,7 @@
             this.panelControl2.Location = new System.Drawing.Point(0, 320);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Padding = new System.Windows.Forms.Padding(3);
-            this.panelControl2.Size = new System.Drawing.Size(884, 45);
+            this.panelControl2.Size = new System.Drawing.Size(963, 45);
             this.panelControl2.TabIndex = 3;
             // 
             // panelControlStatus
@@ -564,7 +565,7 @@
             this.panelControlStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControlStatus.Location = new System.Drawing.Point(5, 5);
             this.panelControlStatus.Name = "panelControlStatus";
-            this.panelControlStatus.Size = new System.Drawing.Size(255, 35);
+            this.panelControlStatus.Size = new System.Drawing.Size(250, 35);
             this.panelControlStatus.TabIndex = 1;
             // 
             // labelControl2
@@ -574,7 +575,7 @@
             this.labelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelControl2.Location = new System.Drawing.Point(0, 0);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(255, 35);
+            this.labelControl2.Size = new System.Drawing.Size(250, 35);
             this.labelControl2.TabIndex = 0;
             this.labelControl2.Text = "Products in Box";
             // 
@@ -583,30 +584,32 @@
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl3.Controls.Add(this.tableLayoutPanel7);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelControl3.Location = new System.Drawing.Point(260, 5);
+            this.panelControl3.Location = new System.Drawing.Point(255, 5);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(619, 35);
+            this.panelControl3.Size = new System.Drawing.Size(703, 35);
             this.panelControl3.TabIndex = 0;
             // 
             // tableLayoutPanel7
             // 
-            this.tableLayoutPanel7.ColumnCount = 5;
+            this.tableLayoutPanel7.ColumnCount = 6;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.64296F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.07824F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.09531F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.34139F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.96284F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.93215F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.77868F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.94023F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.22456F));
-            this.tableLayoutPanel7.Controls.Add(this.btnExportCurrentBox, 2, 0);
-            this.tableLayoutPanel7.Controls.Add(this.btnExportToExel, 3, 0);
-            this.tableLayoutPanel7.Controls.Add(this.btnSearch, 4, 0);
-            this.tableLayoutPanel7.Controls.Add(this.btnClear, 1, 0);
-            this.tableLayoutPanel7.Controls.Add(this.btnXuatLe, 0, 0);
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.54766F));
+            this.tableLayoutPanel7.Controls.Add(this.btnSearch, 5, 0);
+            this.tableLayoutPanel7.Controls.Add(this.btnExportToExel, 4, 0);
+            this.tableLayoutPanel7.Controls.Add(this.btnExportCurrentBox, 3, 0);
+            this.tableLayoutPanel7.Controls.Add(this.btnClear, 2, 0);
+            this.tableLayoutPanel7.Controls.Add(this.btnXuatLe, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.btnVersionOld, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(619, 35);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(703, 35);
             this.tableLayoutPanel7.TabIndex = 4;
             // 
             // btnExportCurrentBox
@@ -615,9 +618,9 @@
             this.btnExportCurrentBox.Appearance.Options.UseFont = true;
             this.btnExportCurrentBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnExportCurrentBox.Image = ((System.Drawing.Image)(resources.GetObject("btnExportCurrentBox.Image")));
-            this.btnExportCurrentBox.Location = new System.Drawing.Point(219, 3);
+            this.btnExportCurrentBox.Location = new System.Drawing.Point(304, 3);
             this.btnExportCurrentBox.Name = "btnExportCurrentBox";
-            this.btnExportCurrentBox.Size = new System.Drawing.Size(135, 29);
+            this.btnExportCurrentBox.Size = new System.Drawing.Size(137, 29);
             this.btnExportCurrentBox.TabIndex = 2;
             this.btnExportCurrentBox.Text = "Export Current Box";
             this.btnExportCurrentBox.Click += new System.EventHandler(this.btnExportCurrentBox_Click);
@@ -628,11 +631,11 @@
             this.btnExportToExel.Appearance.Options.UseFont = true;
             this.btnExportToExel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnExportToExel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.Image")));
-            this.btnExportToExel.Location = new System.Drawing.Point(360, 3);
+            this.btnExportToExel.Location = new System.Drawing.Point(447, 3);
             this.btnExportToExel.Name = "btnExportToExel";
-            this.btnExportToExel.Size = new System.Drawing.Size(136, 29);
+            this.btnExportToExel.Size = new System.Drawing.Size(113, 29);
             this.btnExportToExel.TabIndex = 0;
-            this.btnExportToExel.Text = "Export Exel (Ctrl+E)";
+            this.btnExportToExel.Text = "Export Exel";
             this.btnExportToExel.Click += new System.EventHandler(this.btnExportToExel_Click);
             // 
             // btnSearch
@@ -641,9 +644,9 @@
             this.btnSearch.Appearance.Options.UseFont = true;
             this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.Location = new System.Drawing.Point(502, 3);
+            this.btnSearch.Location = new System.Drawing.Point(566, 3);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(114, 29);
+            this.btnSearch.Size = new System.Drawing.Size(134, 29);
             this.btnSearch.TabIndex = 0;
             this.btnSearch.Text = "Search (Ctrl+F)";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -654,11 +657,11 @@
             this.btnClear.Appearance.Options.UseFont = true;
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
-            this.btnClear.Location = new System.Drawing.Point(108, 3);
+            this.btnClear.Location = new System.Drawing.Point(226, 3);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(105, 29);
+            this.btnClear.Size = new System.Drawing.Size(72, 29);
             this.btnClear.TabIndex = 1;
-            this.btnClear.Text = "Clear (Ctrl+R)";
+            this.btnClear.Text = "Reset";
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnXuatLe
@@ -667,9 +670,9 @@
             this.btnXuatLe.Appearance.Options.UseFont = true;
             this.btnXuatLe.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnXuatLe.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatLe.Image")));
-            this.btnXuatLe.Location = new System.Drawing.Point(3, 3);
+            this.btnXuatLe.Location = new System.Drawing.Point(120, 3);
             this.btnXuatLe.Name = "btnXuatLe";
-            this.btnXuatLe.Size = new System.Drawing.Size(99, 29);
+            this.btnXuatLe.Size = new System.Drawing.Size(100, 29);
             this.btnXuatLe.TabIndex = 3;
             this.btnXuatLe.Text = "Retail Export";
             this.btnXuatLe.Click += new System.EventHandler(this.btnXuatLe_Click);
@@ -689,7 +692,7 @@
             this.gridControlData.Location = new System.Drawing.Point(0, 365);
             this.gridControlData.MainView = this.gridView1;
             this.gridControlData.Name = "gridControlData";
-            this.gridControlData.Size = new System.Drawing.Size(884, 252);
+            this.gridControlData.Size = new System.Drawing.Size(963, 284);
             this.gridControlData.TabIndex = 7;
             this.gridControlData.UseEmbeddedNavigator = true;
             this.gridControlData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -842,12 +845,27 @@
             this.gridColumnDateCheck.VisibleIndex = 8;
             this.gridColumnDateCheck.Width = 100;
             // 
+            // btnVersionOld
+            // 
+            this.btnVersionOld.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            this.btnVersionOld.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnVersionOld.Appearance.Options.UseFont = true;
+            this.btnVersionOld.Appearance.Options.UseForeColor = true;
+            this.btnVersionOld.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnVersionOld.Image = ((System.Drawing.Image)(resources.GetObject("btnVersionOld.Image")));
+            this.btnVersionOld.Location = new System.Drawing.Point(3, 3);
+            this.btnVersionOld.Name = "btnVersionOld";
+            this.btnVersionOld.Size = new System.Drawing.Size(111, 29);
+            this.btnVersionOld.TabIndex = 4;
+            this.btnVersionOld.Text = "Form Cũ";
+            this.btnVersionOld.Click += new System.EventHandler(this.btnVersionOld_Click);
+            // 
             // FormMainV2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(884, 641);
+            this.ClientSize = new System.Drawing.Size(963, 673);
             this.Controls.Add(this.gridControlData);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.statusStrip1);
@@ -950,6 +968,7 @@
         private DevExpress.XtraGrid.GridControl gridControlData;
         private DevExpress.XtraEditors.TextEdit txtPO;
         private DevExpress.XtraEditors.TextEdit txtModel;
+        private DevExpress.XtraEditors.SimpleButton btnVersionOld;
     }
 }
 

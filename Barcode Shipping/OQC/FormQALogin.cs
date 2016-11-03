@@ -226,7 +226,7 @@ namespace OQC
                 if (Program.CurrentUser != null)
                 {
                     //var qa = new FormQA();
-                    var qa = new FormOQCNullModel();
+                    var qa = new FormQA();
                     qa.ShowDialog();
                 }
                 

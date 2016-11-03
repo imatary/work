@@ -31,7 +31,8 @@ namespace Mango_CTMS
                     }
                     else
                     {
-                        MessageBox.Show("Connected to database unsuccessful. Please check network, then try again!");
+                        string message = "Mất kết nối đến máy chủ. Vui lòng kiểm tra lại dây mạng, hoặc bạn có thể liên hệ cho phòng IT để được trợ giúp!";
+                        Application.Run(new FormError(message));
                     }
                     //giai phong Mutex;
                     mutex.ReleaseMutex();
@@ -41,6 +42,12 @@ namespace Mango_CTMS
             }
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private static bool CheckConnection()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["MESSystemDbContext"].ConnectionString; ;

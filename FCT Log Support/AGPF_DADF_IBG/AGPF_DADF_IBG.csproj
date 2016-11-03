@@ -29,8 +29,8 @@
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>14</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
@@ -114,6 +114,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormMain_old1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain_old1.Designer.cs">
+      <DependentUpon>FormMain_old1.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain_old.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,11 +133,20 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TakeScreenShoot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TakeScreenShoot.Designer.cs">
+      <DependentUpon>TakeScreenShoot.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormError.resx">
       <DependentUpon>FormError.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain_old1.resx">
+      <DependentUpon>FormMain_old1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain_old.resx">
       <DependentUpon>FormMain_old.cs</DependentUpon>
@@ -147,6 +162,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TakeScreenShoot.resx">
+      <DependentUpon>TakeScreenShoot.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="AGPF_DADF_IBG_TemporaryKey.pfx" />
     <None Include="App.config">
       <SubType>Designer</SubType>

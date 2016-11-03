@@ -35,21 +35,21 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtPO = new DevExpress.XtraEditors.TextEdit();
-            this.txtWorkingOrder = new DevExpress.XtraEditors.TextEdit();
-            this.lblOperator = new DevExpress.XtraEditors.LabelControl();
-            this.lblModel = new DevExpress.XtraEditors.LabelControl();
-            this.lblWorkingOder = new DevExpress.XtraEditors.LabelControl();
-            this.lblPO = new DevExpress.XtraEditors.LabelControl();
-            this.txtOperatorCode = new DevExpress.XtraEditors.TextEdit();
-            this.gridLookUpEditModelID = new DevExpress.XtraEditors.GridLookUpEdit();
-            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnModelID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtAddPCB = new DevExpress.XtraEditors.TextEdit();
             this.lblAddPCB = new DevExpress.XtraEditors.LabelControl();
             this.txtBoxID = new DevExpress.XtraEditors.TextEdit();
             this.lblBoxNumber = new DevExpress.XtraEditors.LabelControl();
+            this.txtPO = new DevExpress.XtraEditors.TextEdit();
+            this.lblPO = new DevExpress.XtraEditors.LabelControl();
+            this.lblWorkingOder = new DevExpress.XtraEditors.LabelControl();
+            this.txtWorkingOrder = new DevExpress.XtraEditors.TextEdit();
+            this.gridLookUpEditModelID = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumnModelID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lblModel = new DevExpress.XtraEditors.LabelControl();
+            this.lblOperator = new DevExpress.XtraEditors.LabelControl();
+            this.txtOperatorCode = new DevExpress.XtraEditors.TextEdit();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -94,13 +94,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPO.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtWorkingOrder.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOperatorCode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditModelID.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddPCB.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPO.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtWorkingOrder.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditModelID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOperatorCode.Properties)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -172,18 +172,18 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64F));
-            this.tableLayoutPanel2.Controls.Add(this.txtPO, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.txtWorkingOrder, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblOperator, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblModel, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblWorkingOder, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblPO, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.txtOperatorCode, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.gridLookUpEditModelID, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtAddPCB, 1, 6);
             this.tableLayoutPanel2.Controls.Add(this.lblAddPCB, 0, 6);
             this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 5);
             this.tableLayoutPanel2.Controls.Add(this.lblBoxNumber, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.txtPO, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.lblPO, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.lblWorkingOder, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.txtWorkingOrder, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.gridLookUpEditModelID, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblModel, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblOperator, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txtOperatorCode, 1, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -197,158 +197,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(391, 220);
             this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // txtPO
-            // 
-            this.txtPO.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtPO.Location = new System.Drawing.Point(143, 96);
-            this.txtPO.Name = "txtPO";
-            this.txtPO.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPO.Properties.Appearance.Options.UseFont = true;
-            this.txtPO.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtPO.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtPO.Properties.NullValuePrompt = "Enter the PO number";
-            this.txtPO.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtPO.Size = new System.Drawing.Size(245, 26);
-            this.txtPO.TabIndex = 8;
-            this.txtPO.EditValueChanged += new System.EventHandler(this.txtPO_EditValueChanged);
-            this.txtPO.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtPO_PreviewKeyDown);
-            this.txtPO.Validating += new System.ComponentModel.CancelEventHandler(this.txtPO_Validating);
-            // 
-            // txtWorkingOrder
-            // 
-            this.txtWorkingOrder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtWorkingOrder.Location = new System.Drawing.Point(143, 65);
-            this.txtWorkingOrder.Name = "txtWorkingOrder";
-            this.txtWorkingOrder.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWorkingOrder.Properties.Appearance.Options.UseFont = true;
-            this.txtWorkingOrder.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtWorkingOrder.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtWorkingOrder.Properties.NullValuePrompt = "Enter the Working oder";
-            this.txtWorkingOrder.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtWorkingOrder.Size = new System.Drawing.Size(245, 26);
-            this.txtWorkingOrder.TabIndex = 7;
-            this.txtWorkingOrder.EditValueChanged += new System.EventHandler(this.txtWorkingOrder_EditValueChanged);
-            this.txtWorkingOrder.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtWorkingOrder_PreviewKeyDown);
-            // 
-            // lblOperator
-            // 
-            this.lblOperator.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOperator.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblOperator.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblOperator.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOperator.Location = new System.Drawing.Point(3, 3);
-            this.lblOperator.Name = "lblOperator";
-            this.lblOperator.Size = new System.Drawing.Size(134, 25);
-            this.lblOperator.TabIndex = 0;
-            this.lblOperator.Text = "Operator:";
-            // 
-            // lblModel
-            // 
-            this.lblModel.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblModel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblModel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblModel.Location = new System.Drawing.Point(3, 34);
-            this.lblModel.Name = "lblModel";
-            this.lblModel.Size = new System.Drawing.Size(134, 25);
-            this.lblModel.TabIndex = 1;
-            this.lblModel.Text = "Model:";
-            // 
-            // lblWorkingOder
-            // 
-            this.lblWorkingOder.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWorkingOder.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblWorkingOder.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblWorkingOder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblWorkingOder.Location = new System.Drawing.Point(3, 65);
-            this.lblWorkingOder.Name = "lblWorkingOder";
-            this.lblWorkingOder.Size = new System.Drawing.Size(134, 25);
-            this.lblWorkingOder.TabIndex = 2;
-            this.lblWorkingOder.Text = "Working Oder:";
-            // 
-            // lblPO
-            // 
-            this.lblPO.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPO.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblPO.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblPO.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPO.Location = new System.Drawing.Point(3, 96);
-            this.lblPO.Name = "lblPO";
-            this.lblPO.Size = new System.Drawing.Size(134, 25);
-            this.lblPO.TabIndex = 3;
-            this.lblPO.Text = "PO:";
-            // 
-            // txtOperatorCode
-            // 
-            this.txtOperatorCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtOperatorCode.Location = new System.Drawing.Point(143, 3);
-            this.txtOperatorCode.Name = "txtOperatorCode";
-            this.txtOperatorCode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOperatorCode.Properties.Appearance.Options.UseFont = true;
-            this.txtOperatorCode.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtOperatorCode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtOperatorCode.Properties.NullValuePrompt = "Enter the operator code";
-            this.txtOperatorCode.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtOperatorCode.Size = new System.Drawing.Size(245, 26);
-            this.txtOperatorCode.TabIndex = 5;
-            this.txtOperatorCode.EditValueChanged += new System.EventHandler(this.txtOperatorCode_EditValueChanged);
-            this.txtOperatorCode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtOperatorCode_PreviewKeyDown);
-            // 
-            // gridLookUpEditModelID
-            // 
-            this.gridLookUpEditModelID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridLookUpEditModelID.EditValue = "";
-            this.gridLookUpEditModelID.Location = new System.Drawing.Point(143, 34);
-            this.gridLookUpEditModelID.Name = "gridLookUpEditModelID";
-            this.gridLookUpEditModelID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
-            this.gridLookUpEditModelID.Properties.Appearance.Options.UseFont = true;
-            this.gridLookUpEditModelID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            serializableAppearanceObject1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            serializableAppearanceObject1.Options.UseFont = true;
-            this.gridLookUpEditModelID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Add", 45, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("gridLookUpEditModelID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
-            this.gridLookUpEditModelID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.gridLookUpEditModelID.Properties.NullText = "";
-            this.gridLookUpEditModelID.Properties.NullValuePrompt = "Enter the Model value";
-            this.gridLookUpEditModelID.Properties.NullValuePromptShowForEmptyValue = true;
-            this.gridLookUpEditModelID.Properties.View = this.gridLookUpEdit1View;
-            this.gridLookUpEditModelID.Size = new System.Drawing.Size(245, 26);
-            this.gridLookUpEditModelID.TabIndex = 6;
-            this.gridLookUpEditModelID.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.gridLookUpEditModelID_ButtonPressed);
-            this.gridLookUpEditModelID.EditValueChanged += new System.EventHandler(this.gridLookUpEditModelID_EditValueChanged);
-            this.gridLookUpEditModelID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.gridLookUpEditModelID_PreviewKeyDown);
-            this.gridLookUpEditModelID.Validating += new System.ComponentModel.CancelEventHandler(this.gridLookUpEditModelID_Validating);
-            // 
-            // gridLookUpEdit1View
-            // 
-            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnModelID,
-            this.gridColumn1});
-            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
-            this.gridLookUpEdit1View.OptionsFind.FindDelay = 10000;
-            this.gridLookUpEdit1View.OptionsFind.FindNullPrompt = "Tên Model cần tìm...";
-            this.gridLookUpEdit1View.OptionsFind.SearchInPreview = true;
-            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumnModelID
-            // 
-            this.gridColumnModelID.Caption = "Model";
-            this.gridColumnModelID.FieldName = "ModelName";
-            this.gridColumnModelID.Name = "gridColumnModelID";
-            this.gridColumnModelID.Visible = true;
-            this.gridColumnModelID.VisibleIndex = 0;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Customer";
-            this.gridColumn1.FieldName = "CustomerName";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
             // 
             // txtAddPCB
             // 
@@ -404,6 +252,157 @@
             this.lblBoxNumber.Size = new System.Drawing.Size(134, 25);
             this.lblBoxNumber.TabIndex = 4;
             this.lblBoxNumber.Text = "Box Number:";
+            // 
+            // txtPO
+            // 
+            this.txtPO.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtPO.Location = new System.Drawing.Point(143, 127);
+            this.txtPO.Name = "txtPO";
+            this.txtPO.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPO.Properties.Appearance.Options.UseFont = true;
+            this.txtPO.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtPO.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtPO.Properties.NullValuePrompt = "Enter the PO number";
+            this.txtPO.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtPO.Size = new System.Drawing.Size(245, 26);
+            this.txtPO.TabIndex = 8;
+            this.txtPO.EditValueChanged += new System.EventHandler(this.txtPO_EditValueChanged);
+            this.txtPO.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtPO_PreviewKeyDown);
+            this.txtPO.Validating += new System.ComponentModel.CancelEventHandler(this.txtPO_Validating);
+            // 
+            // lblPO
+            // 
+            this.lblPO.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPO.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblPO.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblPO.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPO.Location = new System.Drawing.Point(3, 127);
+            this.lblPO.Name = "lblPO";
+            this.lblPO.Size = new System.Drawing.Size(134, 25);
+            this.lblPO.TabIndex = 3;
+            this.lblPO.Text = "PO:";
+            // 
+            // lblWorkingOder
+            // 
+            this.lblWorkingOder.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWorkingOder.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblWorkingOder.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblWorkingOder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblWorkingOder.Location = new System.Drawing.Point(3, 96);
+            this.lblWorkingOder.Name = "lblWorkingOder";
+            this.lblWorkingOder.Size = new System.Drawing.Size(134, 25);
+            this.lblWorkingOder.TabIndex = 2;
+            this.lblWorkingOder.Text = "Working Oder:";
+            // 
+            // txtWorkingOrder
+            // 
+            this.txtWorkingOrder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtWorkingOrder.Location = new System.Drawing.Point(143, 96);
+            this.txtWorkingOrder.Name = "txtWorkingOrder";
+            this.txtWorkingOrder.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtWorkingOrder.Properties.Appearance.Options.UseFont = true;
+            this.txtWorkingOrder.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtWorkingOrder.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtWorkingOrder.Properties.NullValuePrompt = "Enter the Working oder";
+            this.txtWorkingOrder.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtWorkingOrder.Size = new System.Drawing.Size(245, 26);
+            this.txtWorkingOrder.TabIndex = 7;
+            this.txtWorkingOrder.EditValueChanged += new System.EventHandler(this.txtWorkingOrder_EditValueChanged);
+            this.txtWorkingOrder.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtWorkingOrder_PreviewKeyDown);
+            // 
+            // gridLookUpEditModelID
+            // 
+            this.gridLookUpEditModelID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridLookUpEditModelID.EditValue = "";
+            this.gridLookUpEditModelID.Location = new System.Drawing.Point(143, 65);
+            this.gridLookUpEditModelID.Name = "gridLookUpEditModelID";
+            this.gridLookUpEditModelID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.gridLookUpEditModelID.Properties.Appearance.Options.UseFont = true;
+            this.gridLookUpEditModelID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            serializableAppearanceObject1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            serializableAppearanceObject1.Options.UseFont = true;
+            this.gridLookUpEditModelID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Add", 45, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("gridLookUpEditModelID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            this.gridLookUpEditModelID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.gridLookUpEditModelID.Properties.NullText = "";
+            this.gridLookUpEditModelID.Properties.NullValuePrompt = "Enter the Model value";
+            this.gridLookUpEditModelID.Properties.NullValuePromptShowForEmptyValue = true;
+            this.gridLookUpEditModelID.Properties.View = this.gridLookUpEdit1View;
+            this.gridLookUpEditModelID.Size = new System.Drawing.Size(245, 26);
+            this.gridLookUpEditModelID.TabIndex = 6;
+            this.gridLookUpEditModelID.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.gridLookUpEditModelID_ButtonPressed);
+            this.gridLookUpEditModelID.EditValueChanged += new System.EventHandler(this.gridLookUpEditModelID_EditValueChanged);
+            this.gridLookUpEditModelID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.gridLookUpEditModelID_PreviewKeyDown);
+            this.gridLookUpEditModelID.Validating += new System.ComponentModel.CancelEventHandler(this.gridLookUpEditModelID_Validating);
+            // 
+            // gridLookUpEdit1View
+            // 
+            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnModelID,
+            this.gridColumn1});
+            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsFind.FindDelay = 10000;
+            this.gridLookUpEdit1View.OptionsFind.FindNullPrompt = "Tên Model cần tìm...";
+            this.gridLookUpEdit1View.OptionsFind.SearchInPreview = true;
+            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumnModelID
+            // 
+            this.gridColumnModelID.Caption = "Model";
+            this.gridColumnModelID.FieldName = "ModelName";
+            this.gridColumnModelID.Name = "gridColumnModelID";
+            this.gridColumnModelID.Visible = true;
+            this.gridColumnModelID.VisibleIndex = 0;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Customer";
+            this.gridColumn1.FieldName = "CustomerName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
+            // 
+            // lblModel
+            // 
+            this.lblModel.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblModel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblModel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblModel.Location = new System.Drawing.Point(3, 65);
+            this.lblModel.Name = "lblModel";
+            this.lblModel.Size = new System.Drawing.Size(134, 25);
+            this.lblModel.TabIndex = 1;
+            this.lblModel.Text = "Model:";
+            // 
+            // lblOperator
+            // 
+            this.lblOperator.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOperator.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblOperator.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblOperator.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblOperator.Location = new System.Drawing.Point(3, 34);
+            this.lblOperator.Name = "lblOperator";
+            this.lblOperator.Size = new System.Drawing.Size(134, 25);
+            this.lblOperator.TabIndex = 0;
+            this.lblOperator.Text = "Operator:";
+            // 
+            // txtOperatorCode
+            // 
+            this.txtOperatorCode.Location = new System.Drawing.Point(143, 34);
+            this.txtOperatorCode.Name = "txtOperatorCode";
+            this.txtOperatorCode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOperatorCode.Properties.Appearance.Options.UseFont = true;
+            this.txtOperatorCode.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtOperatorCode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtOperatorCode.Properties.NullValuePrompt = "Enter the operator code";
+            this.txtOperatorCode.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtOperatorCode.Size = new System.Drawing.Size(245, 26);
+            this.txtOperatorCode.TabIndex = 5;
+            this.txtOperatorCode.EditValueChanged += new System.EventHandler(this.txtOperatorCode_EditValueChanged);
+            this.txtOperatorCode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtOperatorCode_PreviewKeyDown);
             // 
             // tableLayoutPanel3
             // 
@@ -910,13 +909,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtPO.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtWorkingOrder.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOperatorCode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditModelID.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddPCB.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPO.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtWorkingOrder.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditModelID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOperatorCode.Properties)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);

@@ -46,10 +46,10 @@
             this.txtProductionID = new DevExpress.XtraEditors.TextEdit();
             this.lblBoxID = new DevExpress.XtraEditors.LabelControl();
             this.lblJudge = new DevExpress.XtraEditors.LabelControl();
-            this.lblMacAddress = new DevExpress.XtraEditors.LabelControl();
             this.lblProductionID = new DevExpress.XtraEditors.LabelControl();
             this.lblOperatorName = new DevExpress.XtraEditors.LabelControl();
             this.lblLineID = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -234,10 +234,10 @@
             this.tableLayoutPanel2.Controls.Add(this.txtProductionID, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblBoxID, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.lblJudge, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.lblMacAddress, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.lblProductionID, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblOperatorName, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblLineID, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.labelControl1, 0, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -290,7 +290,8 @@
             // txtMacAddress
             // 
             this.txtMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMacAddress.EditValue = "";
+            this.txtMacAddress.EditValue = "0017C81120CD";
+            this.txtMacAddress.Enabled = false;
             this.txtMacAddress.Location = new System.Drawing.Point(137, 96);
             this.txtMacAddress.Name = "txtMacAddress";
             this.txtMacAddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -343,18 +344,6 @@
             this.lblJudge.TabIndex = 2;
             this.lblJudge.Text = "Judge:";
             // 
-            // lblMacAddress
-            // 
-            this.lblMacAddress.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMacAddress.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblMacAddress.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMacAddress.Location = new System.Drawing.Point(3, 96);
-            this.lblMacAddress.Name = "lblMacAddress";
-            this.lblMacAddress.Size = new System.Drawing.Size(128, 25);
-            this.lblMacAddress.TabIndex = 1;
-            this.lblMacAddress.Text = "Mac Address:";
-            // 
             // lblProductionID
             // 
             this.lblProductionID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -389,6 +378,17 @@
             this.lblLineID.Size = new System.Drawing.Size(233, 25);
             this.lblLineID.TabIndex = 15;
             this.lblLineID.Text = "Line ID";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.labelControl1.Location = new System.Drawing.Point(37, 96);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(94, 25);
+            this.labelControl1.TabIndex = 16;
+            this.labelControl1.Text = "MAC Address:";
             // 
             // tableLayoutPanel3
             // 
@@ -802,7 +802,6 @@
         private DevExpress.XtraEditors.LabelControl lblCustomerName;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private DevExpress.XtraEditors.LabelControl lblMacAddress;
         private DevExpress.XtraEditors.LabelControl lblJudge;
         private DevExpress.XtraEditors.LabelControl lblBoxID;
         private DevExpress.XtraEditors.TextEdit txtBoxID;
@@ -846,5 +845,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private DevExpress.XtraEditors.LabelControl lblSerialNo;
         private DevExpress.XtraEditors.LabelControl lblCurentModel;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
     }
 }

@@ -78,13 +78,13 @@ namespace OQC
                             }
                             else
                             {
-                                txtMacAddress.Focus();
+                                txtJudge.Focus();
                                 SetErrorStatus(false, null, null);
                             }
                         }
                         else if(Program.CurrentUser.OperationID >= 2)
                         {
-                            txtMacAddress.Focus();
+                            txtJudge.Focus();
                             SetErrorStatus(false, null, null);
                         }
                     }
@@ -267,15 +267,12 @@ namespace OQC
                     // Nếu Box có dữ liệu của PCB
                     if (logs.Any())
                     {
-                        string checkModel = logs.FirstOrDefault().ProductionID;
-                        if (checkModel.Contains(lblCurentModel.Text.Trim()) && checkModel.Contains(lblSerialNo.Text.Trim()))
-                        {
                             var log = logs.FirstOrDefault(l => l.ProductionID == productionId);
                             // Nếu PCB mới bắn vào chưa có trong Box
                             if (log == null)
                             {
                                 // Nếu Production ID, có Model giống với Model hiện tại
-                                if (productionId.Contains(lblCurentModel.Text.Trim()) && productionId.Contains(lblSerialNo.Text.Trim()))
+                                if (productionId.Contains(lblCurentModel.Text) && productionId.Contains(lblSerialNo.Text))
                                 {
                                     string tmp = lblQuantityModel.Text.Replace("/", "");
                                     int countPcbInBox = int.Parse(lblCountPCB.Text);
@@ -341,20 +338,6 @@ namespace OQC
                                 gridControlData.DataSource = logs;
                                 lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
                             }
-                        }
-                        else
-                        {
-                            SetErrorStatus(true, "NG", $"Sai Model !\nVui lòng kiểm tra lại!");
-                            txtProductionID.SelectAll();
-                            Ultils.EditTextErrorNoMessage(txtProductionID);
-                            txtJudge.ResetText();
-                            txtMacAddress.ResetText();
-                            txtBoxID.ResetText();
-
-                            gridControlData.Refresh();
-                            gridControlData.DataSource = logs;
-                            lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
-                        }
                     }
                     // Nếu Box chưa có dữ liệu gì, thực hiện insert
                     else
@@ -433,7 +416,7 @@ namespace OQC
         {
             txtProductionID.Focus();
             txtProductionID.Text = string.Empty;
-            txtMacAddress.Text = string.Empty;
+            //txtMacAddress.Text = string.Empty;
             txtJudge.Text = string.Empty;
             txtBoxID.Text = string.Empty;
         }

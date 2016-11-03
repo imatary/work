@@ -82,5 +82,17 @@ namespace FCT_HFT1024_DB.Properties {
                 this["UsingComPort"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CheckPASS {
+            get {
+                return ((bool)(this["CheckPASS"]));
+            }
+            set {
+                this["CheckPASS"] = value;
+            }
+        }
     }
 }

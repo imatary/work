@@ -43,10 +43,10 @@ namespace Lib.Core
         /// <param name="productionId"></param>
         /// <param name="status"></param>
         /// <param name="process"></param>
-        public static void CreateFileLog(string model, string productId, string status, string process)
+        public static void CreateFileLog(string model, string productId, string status, string process, string dateCheck)
         {
-            string dateTime = DateTime.Now.ToString("yyMMddHHmmss");
-            string fileName = $"{dateTime}_{productId}.txt";
+            
+            string fileName = $"{dateCheck}_{productId}.txt";
             string folderRoot = @"C:\LOGPROCESS\";
 
             bool exists = Directory.Exists(folderRoot);
@@ -59,7 +59,7 @@ namespace Lib.Core
                 File.Create(path).Dispose();
                 using (TextWriter tw = new StreamWriter(path))
                 {
-                    tw.WriteLine($"{model}|{productId}|{dateTime}|{status}|{process}");
+                    tw.WriteLine($"{model}|{productId}|{dateCheck}|{status}|{process}");
                     tw.Close();
                 }
             }
@@ -67,7 +67,7 @@ namespace Lib.Core
             {
                 using (TextWriter tw = new StreamWriter(path))
                 {
-                    tw.WriteLine($"{model}|{productId}|{dateTime}|{status}|{process}");
+                    tw.WriteLine($"{model}|{productId}|{dateCheck}|{status}|{process}");
                     tw.Close();
                 }
             }
@@ -214,6 +214,73 @@ namespace Lib.Core
                            ((x & 0x0000ff00) << 8) +
                            ((x & 0x00ff0000) >> 8) +
                            ((x & 0xff000000) >> 24));
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="content"></param>
+        public static void WriteFile(string content)
+        {
+            string dateTime = DateTime.Now.ToString("yyMMddHHmmss");
+            string fileName = $"{dateTime}.txt";
+            string folderRoot = @"C:\text content\";
+
+            bool exists = Directory.Exists(folderRoot);
+            if (!exists)
+                Directory.CreateDirectory(folderRoot);
+
+            string path = folderRoot + fileName;
+
+            using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+            if (!File.Exists(path))
+            {
+                File.Create(path).Dispose();
+                using (StreamWriter tw = new StreamWriter(fs))
+                {
+                    tw.WriteLine(content);
+                    tw.Close();
+                }
+            }
+            else if (File.Exists(path))
+            {
+                using (StreamWriter tw = new StreamWriter(fs))
+                {
+                    tw.WriteLine(content);
+                    tw.Close();
+                }
+            }
+        }
+
+        public static void WriteFile(string fileName, string content)
+        {
+            string dateTime = DateTime.Now.ToString("yyMMddHHmmss");
+            var fullName = fileName + $"{dateTime}.txt";
+            string folderRoot = @"C:\text content\";
+
+            bool exists = Directory.Exists(folderRoot);
+            if (!exists)
+                Directory.CreateDirectory(folderRoot);
+
+            string path = folderRoot + fullName;
+
+            using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+                if (!File.Exists(path))
+                {
+                    File.Create(path).Dispose();
+                    using (StreamWriter tw = new StreamWriter(fs))
+                    {
+                        tw.WriteLine(content);
+                        tw.Close();
+                    }
+                }
+                else if (File.Exists(path))
+                {
+                    using (StreamWriter tw = new StreamWriter(fs))
+                    {
+                        tw.WriteLine(content);
+                        tw.Close();
+                    }
+                }
         }
     }
 }

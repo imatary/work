@@ -31,7 +31,12 @@ namespace Shanks_IB02
         private int ng = 0;
         private int total = 0;
         private string messageError = null;
+        string[] serial, maxaddress;
         private string backup_log_folder = @"C:\backup_log\";
+        static string barcode_old = null;
+        delegate void SetCallBack(string text);
+
+        private string dateCheck;
         private CommunicationManager comRead;
         private CommunicationManager comWrite;
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
@@ -67,45 +72,31 @@ namespace Shanks_IB02
             string stationNo = Properties.Settings.Default["StationNo"].ToString();
             bool comRead = (bool) Properties.Settings.Default["COMRead"];
             bool comWrite = (bool)Properties.Settings.Default["COMWrite"];
-            if (valueComWrite != null)
+            if (valueComWrite != "")
             {
                 gridLookUpEditComWrite.EditValue = valueComWrite;
             }
-            if (valueComRead != null)
+            if (valueComRead != "")
             {
                 gridLookUpEditComRead.EditValue = valueComRead;
             }
-            if (processName != null)
+            if (processName != "")
             {
                 cboWindows.EditValue = processName;
             }
-            if(path != null)
+            if(path != "")
             {
                 txtPath.Text = path;
             }
-            if(stationNo!= null)
+            if(stationNo!= "")
             {
                 gridLookUpEditProcessID.EditValue = stationNo;
             }
             // COM WRITE
-            if (comWrite == true)
-            {
-                checkComWrite.Checked = true;
-            }
-            else
-            {
-                checkComWrite.Checked = false;
-            }
+            checkComWrite.Checked = comWrite;
 
             // COM READ
-            if (comRead == true)
-            {
-                checkComRead.Checked = true;
-            }
-            else
-            {
-                checkComRead.Checked = false;
-            }
+            checkComRead.Checked = comRead;
         }
 
         /// <summary>
@@ -207,7 +198,7 @@ namespace Shanks_IB02
         private void ConfigComWrite()
         {
             string portName = gridLookUpEditComWrite.EditValue.ToString();
-            if (portName != null)
+            if (portName != "")
             {
                 comWrite.PortName = portName;
             }
@@ -225,7 +216,7 @@ namespace Shanks_IB02
         private void ConfigComRead()
         {
             string portName = gridLookUpEditComRead.EditValue.ToString();
-            if (portName != null)
+            if (portName != "")
             {
                 comRead.PortName = portName;
             }
@@ -315,17 +306,14 @@ namespace Shanks_IB02
                     EnableControls(true);
                     txtBarcode.Visible = false;
 
-                    startRead = false;
-                    timerReadCom.Enabled = false;
-                    timerReadCom.Stop();
+                    StopTimerReadBarcode();
                     
                 }
                 else
                 {
                     m_bIsWatching = true;
-                    startRead = true;
-                    timerReadCom.Enabled = true;
-                    timerReadCom.Start();
+
+                    StartTimerReadBarcode();
 
                     if (checkComWrite.Checked == true)
                     {
@@ -337,9 +325,6 @@ namespace Shanks_IB02
                     {
                         ConfigComRead();
                     }
-
-                    //comWrite.WriteData("NG");
-                    //comRead.WriteData("OK");
 
                     btnWatchFile.ForeColor = Color.White;
                     btnWatchFile.Appearance.BackColor = Color.DarkRed;
@@ -425,7 +410,7 @@ namespace Shanks_IB02
                             }
 
                             total = pass + ng;
-                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString(), dateCheck);
                         }
                         else
                         {
@@ -448,7 +433,7 @@ namespace Shanks_IB02
                             }
 
                             total = pass + ng;
-                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString(), dateCheck);
                         }
                     }
                     else
@@ -534,6 +519,7 @@ namespace Shanks_IB02
             if (e.KeyCode == Keys.Enter)
             {
                 string boardNo = txtBarcode.Text;
+                dateCheck = Ultils.GetNetworkDateTime().ToString("yyMMddHHmmss");
 
                 if (boardNo.Contains("="))
                 {
@@ -582,7 +568,6 @@ namespace Shanks_IB02
                                     var errorForm = new FormError(messageError);
                                     errorForm.ShowDialog();
                                     txtBarcode.Focus();
-                                    return;
                                 }
                                 // Kiểm tra nếu trạng thái bản mạch hiện tại bị NG
                                 // mà khác với với trạm được cài đặt "FCT" thì thông báo lỗi
@@ -595,19 +580,11 @@ namespace Shanks_IB02
                                     var errorForm = new FormError(messageError);
                                     errorForm.ShowDialog();
                                     txtBarcode.Focus();
-                                    return;
                                 }
                                 // Nếu tên giống nhau, thì thông báo đã chạy qua công đoạn này rồi
                                 else if (curentStationNo.STATION_NO == set_station_no && curentStationNo.BOARD_STATE == 1)
                                 {
-                                    messageError = $"Board '{boardNo}' is pass '{set_station_no}'!";
-                                    MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
-                                    CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                    startRead = false;
-                                    var errorForm = new FormError(messageError);
-                                    errorForm.ShowDialog();
-                                    txtBarcode.Focus();
-                                    return;
+                                    Excute(boardNo, boards.PRODUCT_ID);
                                 }
                                 else
                                 {
@@ -625,7 +602,6 @@ namespace Shanks_IB02
                                         var errorForm = new FormError(messageError);
                                         errorForm.ShowDialog();
                                         txtBarcode.Focus();
-                                        return;
                                     }
                                     // nếu hợp lệ thực hiện tiếp
                                     else
@@ -657,46 +633,11 @@ namespace Shanks_IB02
                                         }
                                         else if (curentStationNo.PROCEDURE_INDEX == (process_by_station_no.INDEX - 1))
                                         {
-                                            //Ultils.SuspendOrResumeCurentProcess(cboWindows.Text, false);
-                                            this.TopMost = false;
-                                            txtBarcode.ResetText();
-                                            txtBarcode.Focus();
-                                            productionId = boardNo;
-                                            modelId = boards.PRODUCT_ID;
-                                            MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
-                                            // Thực hiện gửi dữ liệu đi
-                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
-                                            NativeWin32.SetForegroundWindow(iHandle);
-                                            SendKeys.Send(boardNo);
-                                            SendKeys.Send("{ENTER}");
-
-                                            if (checkComWrite.Checked == true)
-                                            {
-                                                // Start machine FCT Check
-                                                Thread.Sleep(200);
-                                                comWrite.WriteData("S");
-                                            }
+                                            Excute(boardNo, boards.PRODUCT_ID);
                                         }
                                         else if(curentStationNo.BOARD_STATE == 2)
                                         {
-                                            this.TopMost = false;
-                                            txtBarcode.ResetText();
-                                            txtBarcode.Focus();
-                                            productionId = boardNo;
-                                            modelId = boards.PRODUCT_ID;
-                                            MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
-                                            // Thực hiện gửi dữ liệu đi
-                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
-                                            NativeWin32.SetForegroundWindow(iHandle);
-                                            SendKeys.Send(boardNo);
-                                            SendKeys.Send("{ENTER}");
-
-                                            if (checkComWrite.Checked == true)
-                                            {
-                                                // Start machine FCT Check
-                                                Thread.Sleep(200);
-                                                comWrite.WriteData("S");  
-                                            }
+                                            Excute(boardNo, boards.PRODUCT_ID);
                                         }
                                     }
                                 }
@@ -720,7 +661,7 @@ namespace Shanks_IB02
                             var errorForm = new FormError(messageError);
                             errorForm.ShowDialog();
                             txtBarcode.Focus();
-                            return;
+  
                         }
                     }
                     else
@@ -730,7 +671,7 @@ namespace Shanks_IB02
                         CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                         var errorForm = new FormError(messageError);
                         errorForm.ShowDialog();
-                        return;
+                        txtBarcode.Focus();
                     }
                 }
             }    
@@ -870,6 +811,8 @@ namespace Shanks_IB02
             lblNG.Text = "0";
             lblPass.Text = "0";
             lblTotal.Text = "0";
+
+            comRead.WriteData("OK");
         }
 
         /// <summary>
@@ -885,21 +828,76 @@ namespace Shanks_IB02
 
         private void timerReadCom_Tick(object sender, EventArgs e)
         {
-            if (comRead.ReadComPort() != null)
+            if (comRead.ReadComPort() != "")
             {
-                if (startRead)
+                if (comRead.ReadComPort().Length > 6)
                 {
                     txtBarcode.Text = comRead.ReadComPort();
                     SendKeys.Send("{ENTER}");
-                }   
+                    comRead.WriteData("");
+                }
             }
-            else        
+        }
+
+        private void gridLookUpEditModel_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if(e.Button.Index==1)
             {
-                startRead = false;
+
             }
+        }
+
+        /// <summary>
+        /// STOP TIMER BARCODE
+        /// </summary>
+        private void StopTimerReadBarcode()
+        {
+            timerReadCom.Enabled = false;
+            timerReadCom.Stop();
 
         }
 
-        
+        /// <summary>
+        /// START TIMER BARCODE
+        /// </summary>
+        private void StartTimerReadBarcode()
+        {
+            timerReadCom.Enabled = true;
+            timerReadCom.Start();
+
+        }
+        private void Excute(string boardNo, string product_id)
+        {
+            this.TopMost = false;
+
+            StopTimerReadBarcode();
+
+            txtBarcode.ResetText();
+            txtBarcode.Focus();
+            productionId = boardNo;
+            modelId = product_id;
+            MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
+            // Thực hiện gửi dữ liệu đi
+            int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
+            NativeWin32.SetForegroundWindow(iHandle);
+
+            serial = boardNo.Split(separator: new[] { "_" }, count: 4, options: StringSplitOptions.None);
+            //maxaddress = boardNo.Split(separator: new[] { "." }, count: 4, options: StringSplitOptions.None);
+
+            //SendKeys.Send("{TAB}");
+            //SendKeys.Send("{ENTER}");
+            SendKeys.Send(serial[0]);
+            SendKeys.Send("{ENTER}");
+
+            //SendKeys.Send(maxaddress[1]);
+            //SendKeys.Send("{ENTER}");
+
+            if (checkComWrite.Checked == true)
+            {
+                // Start machine FCT Check
+                Thread.Sleep(200);
+                comWrite.WriteData("S");
+            }
+        }
     }
 }

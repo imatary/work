@@ -32,6 +32,7 @@ namespace Mango_MCU
         private int total = 0;
         private string messageError = null;
         private string backup_log_folder = @"C:\backup_log\";
+        private string dateCheck;
         private CommunicationManager com;
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
         private readonly SCANNING_LOGS_Service _scanningLogsService;
@@ -361,7 +362,7 @@ namespace Mango_MCU
                             }
 
                             total = pass + ng;
-                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString(), dateCheck);
                         }
                         else
                         {
@@ -384,7 +385,7 @@ namespace Mango_MCU
                             }
 
                             total = pass + ng;
-                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString());
+                            Ultils.CreateFileLog(modelId, productionId, _status, gridLookUpEditProcessID.EditValue.ToString(), dateCheck);
                         }
                     }
                     else
@@ -470,6 +471,7 @@ namespace Mango_MCU
             if (e.KeyCode == Keys.Enter)
             {
                 string boardNo = txtBarcode.Text;
+                dateCheck = Ultils.GetNetworkDateTime().ToString("yyMMddHHmmss");
 
                 if (boardNo.Contains("="))
                 {

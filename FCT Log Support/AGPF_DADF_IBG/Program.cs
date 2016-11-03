@@ -33,7 +33,8 @@ namespace AGPF_DADF_IBG
                     }
                     else
                     {
-                        MessageBox.Show("Connected to database unsuccessful. Please check network, then try again!");
+                        string errorMessage = "Không thể kết nối đến máy chủ. Vui lòng kiểm tra lại đường truyền mạng LAN, hoặc bạn có thể liên hệ với phòng IT để được trợ giúp !";
+                        Application.Run(new FormError(errorMessage));
                     }
                     //giai phong Mutex;
                     mutex.ReleaseMutex();

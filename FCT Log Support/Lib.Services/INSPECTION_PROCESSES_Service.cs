@@ -26,14 +26,14 @@ namespace Lib.Services
             if (CheckConnection())
             {
                 object[] param =
-            {
-                new SqlParameter() { ParameterName="@PRODUCT_ID", Value=productId, SqlDbType=SqlDbType.NVarChar },
-
-                new SqlParameter("@Out_Parameter", SqlDbType.Int)
                 {
-                    Direction = ParameterDirection.Output
-                }
-            };
+                    new SqlParameter() { ParameterName="@PRODUCT_ID", Value=productId, SqlDbType=SqlDbType.NVarChar },
+
+                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    }
+                };
 
                 try
                 {

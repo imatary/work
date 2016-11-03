@@ -33,6 +33,7 @@ namespace FCT_HFT1024_DB
         private int total = 0;
         private string messageError = null;
         private CommunicationManager com;
+        private string dateCheck;
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
         private readonly SCANNING_LOGS_Service _scanningLogsService;
         private readonly INSPECTION_PROCESSES_Service _inspectionProcessesService;
@@ -191,7 +192,7 @@ namespace FCT_HFT1024_DB
         private void ConfigSerialPorts()
         {
             string portName = gridLookUpEditSerialPort.EditValue.ToString();
-            if (portName != null)
+            if (portName != "")
             {
                 com.PortName = portName;
             }
@@ -233,6 +234,7 @@ namespace FCT_HFT1024_DB
 
                         cboWindows.Enabled = true;
                         checkKeepProcess.Enabled = true;
+
                         return true;
                     }
                 case Keys.Shift | Keys.F3:
@@ -244,17 +246,6 @@ namespace FCT_HFT1024_DB
                         checkKeepProcess.Enabled = false;
                         return true;
                     }
-
-                //case Keys.Shift | Keys.Control | Keys.Z:
-                //    {
-                //        Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), false);
-                //        return true;
-                //    }
-                //case Keys.Shift | Keys.Control | Keys.X:
-                //    {
-                //        Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), true);
-                //        return true;
-                //    }
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -381,7 +372,7 @@ namespace FCT_HFT1024_DB
                         ng = ng + 1;
                     }
                     string stationNo = gridLookUpEditProcessID.EditValue.ToString();
-                    Ultils.CreateFileLog(modelId, productionId, _status, stationNo);
+                    Ultils.CreateFileLog(modelId, productionId, _status, stationNo, dateCheck);
                     
                     total = pass + ng;
                 }
@@ -463,6 +454,7 @@ namespace FCT_HFT1024_DB
             if (e.KeyCode == Keys.Enter)
             {
                 string boardNo = txtBarcode.Text;
+                dateCheck = Ultils.GetNetworkDateTime().ToString("yyMMddHHmmss");
 
                 if (boardNo.Contains("="))
                 {
@@ -487,14 +479,19 @@ namespace FCT_HFT1024_DB
                     MessageHelpers.SetDefaultStatus(true, "N/A", "N/A", lblStatus, lblMessage);
                     CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
 
+                    // Lấy toàn bộ thông tin bản mạch hiện tại bắn vào
                     var boards = _scanningLogsService.Get_SCANNING_LOGS(boardNo).FirstOrDefault();
 
+                    // Nếu đã được khởi tạo trước đó, thì thực hiện các bước kiểm tra tiếp theo
                     if (boards != null)
                     {
+                        //Lấy thông tin PROCESS_NO hiện tại theo PRODUCT_ID của board hiện tại
                         var process_No = _inspectionProcessesService.GET_INSPECTION_PROCESSES_BY_PRODUCT_ID(boards.PRODUCT_ID);
+
+                        // Nếu có dữ liệu, thì thực hiện các bước tiếp theo
                         if (process_No != null)
                         {
-                            //    //trạng thái bản mạch hiện tại
+                            //trạng thái bản mạch hiện tại
                             var curentStationNo = _workOrderItemService.Get_WORK_ORDER_ITEMS_By_BoardNo(boardNo);
                             if (curentStationNo != null)
                             {
@@ -508,30 +505,32 @@ namespace FCT_HFT1024_DB
                                     var errorForm = new FormError(messageError);
                                     errorForm.ShowDialog();
                                     txtBarcode.Focus();
-                                    return;
                                 }
                                 // Kiểm tra nếu trạng thái bản mạch hiện tại bị NG
                                 // mà khác với với trạm được cài đặt "FCT" thì thông báo lỗi
-                                else if (curentStationNo.STATION_NO != set_station_no && curentStationNo.BOARD_STATE == 2)
+                                else if (curentStationNo.BOARD_STATE == 2)
                                 {
-                                    messageError = $"Board '{boardNo}' bị 'NG' tại trạm '{set_station_no}'!";
-                                    MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
-                                    CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                    var errorForm = new FormError(messageError);
-                                    errorForm.ShowDialog();
-                                    txtBarcode.Focus();
-                                    return;
+                                    //messageError = $"Board '{boardNo}' bị 'NG' tại trạm '{set_station_no}'!";
+                                    //MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
+                                    //CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                                    //var errorForm = new FormError(messageError);
+                                    //errorForm.ShowDialog();
+                                    //txtBarcode.Focus();
+                                    //return;
+                                    Excute(boardNo, boards.PRODUCT_ID);
                                 }
                                 // Nếu tên giống nhau, thì thông báo đã chạy qua công đoạn này rồi
                                 else if (curentStationNo.STATION_NO == set_station_no && curentStationNo.BOARD_STATE == 1)
                                 {
-                                    messageError = $"Board '{boardNo}' is pass '{set_station_no}'!";
-                                    MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
-                                    CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                    var errorForm = new FormError(messageError);
-                                    errorForm.ShowDialog();
-                                    txtBarcode.Focus();
-                                    return;
+                                    //messageError = $"Board '{boardNo}' is pass '{set_station_no}'!";
+                                    //MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
+                                    //CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                                    //var errorForm = new FormError(messageError);
+                                    //errorForm.ShowDialog();
+                                    //txtBarcode.Focus();
+                                    //return;
+
+                                    Excute(boardNo, boards.PRODUCT_ID);
                                 }
                                 else
                                 {
@@ -548,7 +547,6 @@ namespace FCT_HFT1024_DB
                                         var errorForm = new FormError(messageError);
                                         errorForm.ShowDialog();
                                         txtBarcode.Focus();
-                                        return;
                                     }
                                     // nếu hợp lệ thực hiện tiếp
                                     else
@@ -556,102 +554,67 @@ namespace FCT_HFT1024_DB
                                         // Khi hai giá trị bằng nhau => ICT_FUJ
                                         if (curentStationNo.PROCEDURE_INDEX < (process_by_station_no.INDEX - 1))
                                         {
-                                            messageError = $"Board '{boardNo}' skip stations!";
+                                            messageError = $"Board '{boardNo}' bỏ qua công đoạn!";
                                             MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                             var errorForm = new FormError(messageError);
                                             errorForm.ShowDialog();
                                             txtBarcode.Focus();
-                                            return;
                                         }
                                         //// Nếu Index Board > Set Index 
                                         else if (curentStationNo.PROCEDURE_INDEX > process_by_station_no.INDEX)
                                         {
                                             // transferred to the next station.
-                                            messageError = $"Board '{boardNo}' transferred to the next station!";
-                                            MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
-                                            CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                            var errorForm = new FormError(messageError);
-                                            errorForm.ShowDialog();
-                                            txtBarcode.Focus();
-                                            return;
+                                            //messageError = $"Board '{boardNo}' đã PASS ở trạm này rồi. Chuyển đến công đoạn tiếp theo để kiểm tra!";
+                                            //MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
+                                            //CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                                            //var errorForm = new FormError(messageError);
+                                            //errorForm.ShowDialog();
+                                            //txtBarcode.Focus();
+                                            //return;
+                                            Excute(boardNo, boards.PRODUCT_ID);
                                         }
                                         else if (curentStationNo.PROCEDURE_INDEX == (process_by_station_no.INDEX - 1))
                                         {
-                                            this.TopMost = false;
-                                            txtBarcode.ResetText();
-                                            txtBarcode.Focus();
-                                            productionId = boardNo;
-                                            modelId = boards.PRODUCT_ID;
-                                            MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
-                                            // Thực hiện gửi dữ liệu đi
-                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
-                                            NativeWin32.SetForegroundWindow(iHandle);
-                                            SendKeys.Send(boardNo);
-                                            SendKeys.Send("{ENTER}");
-
-                                            if (checkEditSerialPort.Checked == true)
-                                            {
-                                                // Start machine FCT Check
-                                                Thread.Sleep(200);
-                                                com.WriteData("S");
-                                            }
+                                            Excute(boardNo, boards.PRODUCT_ID);
                                         }
                                         else if(curentStationNo.BOARD_STATE == 2)
                                         {
-
-                                            this.TopMost = false;
-                                            txtBarcode.ResetText();
-                                            txtBarcode.Focus();
-                                            productionId = boardNo;
-                                            modelId = boards.PRODUCT_ID;
-                                            MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
-                                            // Thực hiện gửi dữ liệu đi
-                                            int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
-                                            NativeWin32.SetForegroundWindow(iHandle);
-                                            SendKeys.Send(boardNo);
-                                            SendKeys.Send("{ENTER}");
-
-                                            if (checkEditSerialPort.Checked == true)
-                                            {
-                                                // Start machine FCT Check
-                                                Thread.Sleep(200);
-                                                com.WriteData("S");  
-                                            }
+                                            Excute(boardNo, boards.PRODUCT_ID);
                                         }
                                     }
                                 }
                             }
                             else
                             {
-                                messageError = $"Station No '{curentStationNo.STATION_NO}' not found!";
+                                messageError = $"Không tìm thấy trạm nào với tên '{curentStationNo.STATION_NO}'!";
                                 MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                                 CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                 var errorForm = new FormError(messageError);
                                 errorForm.ShowDialog();
                                 txtBarcode.Focus();
-                                return;
                             }
                         }
+                        // PROCESS_NO = null thì thông báo lỗi
                         else
                         {
-                            messageError = $"Station No '{set_station_no}' invaild!";
+                            messageError = $"Không tìm thấy trạm nào với tên '{set_station_no}'!";
                             MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                             var errorForm = new FormError(messageError);
                             errorForm.ShowDialog();
                             txtBarcode.Focus();
-                            return;
                         }
                     }
+                    // Nếu chưa có thì thông báo lỗi cho người dùng
                     else
                     {
-                        messageError = $"Board '{boardNo}' not initialized!";
+                        messageError = $"Board '{boardNo}' chưa được khởi tạo. Vui lòng kiểm tra lại!";
                         MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
                         CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                         var errorForm = new FormError(messageError);
                         errorForm.ShowDialog();
-                        return;
+                        txtBarcode.Focus();
                     }
                 }
             }    
@@ -790,6 +753,33 @@ namespace FCT_HFT1024_DB
         {
             Properties.Settings.Default[settingName] = value;
             Properties.Settings.Default.Save();// Saves settings in application configuration file
+        }
+
+        /// <summary>
+        /// Thực hiện lệnh gửi đi
+        /// </summary>
+        /// <param name="boardNo"></param>
+        /// <param name="product_id"></param>
+        private void Excute(string boardNo, string product_id)
+        {
+            this.TopMost = false;
+            txtBarcode.ResetText();
+            txtBarcode.Focus();
+            productionId = boardNo;
+            modelId = product_id;
+            MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
+            // Thực hiện gửi dữ liệu đi
+            int iHandle = NativeWin32.FindWindow(null, cboWindows.Text);
+            NativeWin32.SetForegroundWindow(iHandle);
+            SendKeys.Send(boardNo);
+            SendKeys.Send("{ENTER}");
+
+            if (checkEditSerialPort.Checked == true)
+            {
+                // Start machine FCT Check
+                Thread.Sleep(200);
+                com.WriteData("S");
+            }
         }
     }
 }

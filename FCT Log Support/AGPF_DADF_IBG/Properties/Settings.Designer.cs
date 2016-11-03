@@ -106,5 +106,17 @@ namespace AGPF_DADF_IBG.Properties {
                 this["ValueComWrite"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CheckPASS {
+            get {
+                return ((bool)(this["CheckPASS"]));
+            }
+            set {
+                this["CheckPASS"] = value;
+            }
+        }
     }
 }
