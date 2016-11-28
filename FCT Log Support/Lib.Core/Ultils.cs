@@ -153,6 +153,30 @@ namespace Lib.Core
             return data;
         }
 
+        public static List<string> ReadStringBuilder(StringBuilder stringBuilder)
+        {
+            List<string> data = new List<string>();
+            var lines = new StringReader(stringBuilder.ToString());
+            string result;
+            
+            while ((result = lines.ReadLine()) != null)
+            {
+                if (result.Contains("FAIL"))
+                {
+                    data.Add(result);
+                }
+                else if(result.Contains("PASS"))
+                {
+                    data.Add(result);
+                }
+            }
+
+            lines.Dispose();
+            lines.Close();
+
+            return data;
+        }
+
         /// <summary>
         /// Lấy thông tin ngày giờ từ server
         /// </summary>
@@ -281,6 +305,30 @@ namespace Lib.Core
                         tw.Close();
                     }
                 }
+        }
+
+        public static string GetLine(StringBuilder fileName, int line)
+        {
+            //string line = fileName..Skip(14).Take(1).First();
+
+            using (var sr = new StringReader(fileName.ToString()))
+            {
+                for (int i = 1; i < line; i++)
+                    sr.ReadLine();
+                return sr.ReadLine();
+            }
+        }
+
+        public static string GetLine(string fileName, int line)
+        {
+            ////string line = fileName..Skip(14).Take(1).First();
+
+            using (var sr = new StreamReader(fileName))
+            {
+                for (int i = 1; i < line; i++)
+                    sr.ReadLine();
+                return sr.ReadLine();
+            }
         }
     }
 }

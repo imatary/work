@@ -31,7 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.XtraEditors.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v16.1, Version=16.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Deployment" />
@@ -46,21 +50,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AXSerialCom.cs" />
-    <Compile Include="CommunicationManager.cs" />
-    <Compile Include="GetValueWindowText.cs" />
+    <Compile Include="COM\AXSerialCom.cs" />
+    <Compile Include="COM\CommunicationManager.cs" />
+    <Compile Include="ControlDataSQL.cs" />
+    <Compile Include="File\ControlExcelFile.cs" />
+    <Compile Include="File\ControlFile.cs" />
+    <Compile Include="File\ControlFolder.cs" />
+    <Compile Include="CSV\CsvFileCommon.cs" />
+    <Compile Include="CSV\CsvFileReader.cs" />
+    <Compile Include="CSV\CsvFileWriter.cs" />
+    <Compile Include="EmptyLineBehavior.cs" />
+    <Compile Include="Win32\GetValueWindowText.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="Helpers\CsvFileReader.cs" />
-    <Compile Include="Helpers\CsvFileWriter.cs" />
-    <Compile Include="Helpers\CsvRow.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="NativeWin32.cs" />
-    <Compile Include="PrintWindowWin32.cs" />
+    <Compile Include="Win32\NativeWin32.cs" />
+    <Compile Include="Win32\PrintWindowWin32.cs" />
     <Compile Include="ProcessExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SerialPortClient.cs" />
+    <Compile Include="COM\SerialPortClient.cs" />
+    <Compile Include="SettingConfiguration.cs" />
+    <Compile Include="SuggestComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SuspendFlags.cs" />
     <Compile Include="Ultils.cs" />
+    <Compile Include="CSV\WriteDatatableToFileCSV.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

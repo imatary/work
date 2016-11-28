@@ -83,13 +83,9 @@ namespace AGPF_DADF_IBG
             {
                 Status = "P";
             }
-            else if (name == fail)
+            if (name == fail)
             {
                 Status = "F";
-            }
-            else
-            {
-                Status = "Nothing";
             }
             b.Dispose(); 
         }

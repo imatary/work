@@ -16,10 +16,10 @@ namespace Mango_CTMS
             _nameProcess = name;
 
             backgroundWorker1.RunWorkerAsync();
+            
         }
 
-        public string Ok { get; set; }
-        public string Fail { get; set; }
+        public string Status { get; set; }
 
         private void TakeScreenShoot_MouseClick(object sender, MouseEventArgs e)
         {
@@ -45,13 +45,15 @@ namespace Mango_CTMS
                 Color colour = b.GetPixel(width, height);
                 string name = colour.ToString();
 
+                MessageBox.Show(name);
+
                 if (name == ok)
                 {
-                    Ok = ok;
+                    Status = ok;
                 }
                 else if (name == fail)
                 {
-                    Fail = fail;
+                    Status = fail;
                 }
                 else
                 {
@@ -64,13 +66,15 @@ namespace Mango_CTMS
 
         private void TakeScreenShoot_Load(object sender, EventArgs e)
         {
+            toolStripProgressBar1.Value = 0;
+
             int iHandle = NativeWin32.FindWindow(null, _nameProcess);
             pictureBox1.Image = PrintWindowWin32.PrintWindow(iHandle);
 
             Bitmap b = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.Height);
             pictureBox1.DrawToBitmap(b, pictureBox1.ClientRectangle);
 
-            string ok = "Color [A=255, R=0, G=255, B=0]";
+            string ok = "Color [A=255, R=212, G=208, B=200]";
             string fail = "Color [A=255, R=255, G=0, B=0";
             int width = 354;
             int height = 78;
@@ -79,13 +83,13 @@ namespace Mango_CTMS
             string name = colour.ToString();
             if (name == ok)
             {
-                Ok = "OK";
+                Status = "P";
             }
-            else if (name == fail)
+            if (name == fail)
             {
-                Fail = "FAIL";
+                Status = "F";
             }
-            b.Dispose(); 
+            b.Dispose();
         }
         private int _backgroundInt;
 
@@ -95,15 +99,21 @@ namespace Mango_CTMS
             while (backgroundWorker1.CancellationPending == false)
             {
                 if (backgroundWorker1.CancellationPending)
-                    break; Thread.Sleep(500);
-                backgroundWorker1.ReportProgress(0, $"Form tự động đóng sau 8/giây ({_backgroundInt}) ");
+                    break;
+                Thread.Sleep(500);
+                backgroundWorker1.ReportProgress(0, _backgroundInt);
                 _backgroundInt++;
             }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            if (_backgroundInt == 8)
+            int value = Convert.ToInt32(e.UserState);
+
+            //toolStripProgressBar1.Value = value;
+            //toolStripStatusLabel1.Text = $@"{value}0%";
+
+            if (value == 6)
             {
                 if (backgroundWorker1.IsBusy)
                 {

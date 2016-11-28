@@ -33,6 +33,7 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -72,6 +73,7 @@
             this.btnRefesh = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.btnWatchFile = new DevExpress.XtraEditors.SimpleButton();
+            this.buttonEdit1 = new DevExpress.XtraEditors.ButtonEdit();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -115,6 +117,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit1.Properties)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -359,6 +362,7 @@
             this.tableLayoutPanel2.Controls.Add(this.txtPath, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.gridLookUpEditProcessID, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.panelControl3, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.buttonEdit1, 0, 5);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -490,7 +494,9 @@
             this.txtBarcode.Location = new System.Drawing.Point(149, 173);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBarcode.Properties.Appearance.Image = ((System.Drawing.Image)(resources.GetObject("txtBarcode.Properties.Appearance.Image")));
             this.txtBarcode.Properties.Appearance.Options.UseFont = true;
+            this.txtBarcode.Properties.Appearance.Options.UseImage = true;
             this.txtBarcode.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtBarcode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBarcode.Properties.NullValuePrompt = "Enter barcode in here!";
@@ -635,6 +641,27 @@
             this.btnWatchFile.TabIndex = 4;
             this.btnWatchFile.Text = "Start Watching";
             this.btnWatchFile.Click += new System.EventHandler(this.btnWatchFile_Click);
+            // 
+            // buttonEdit1
+            // 
+            this.buttonEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonEdit1.Location = new System.Drawing.Point(3, 173);
+            this.buttonEdit1.Name = "buttonEdit1";
+            this.buttonEdit1.Properties.AutoHeight = false;
+            serializableAppearanceObject4.BackColor = System.Drawing.Color.White;
+            serializableAppearanceObject4.BackColor2 = System.Drawing.Color.White;
+            serializableAppearanceObject4.BorderColor = System.Drawing.Color.White;
+            serializableAppearanceObject4.Font = new System.Drawing.Font("Tahoma", 16F);
+            serializableAppearanceObject4.ForeColor = System.Drawing.Color.Gainsboro;
+            serializableAppearanceObject4.Options.UseBackColor = true;
+            serializableAppearanceObject4.Options.UseBorderColor = true;
+            serializableAppearanceObject4.Options.UseFont = true;
+            serializableAppearanceObject4.Options.UseForeColor = true;
+            this.buttonEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "|", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.Default, ((System.Drawing.Image)(resources.GetObject("buttonEdit1.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            this.buttonEdit1.Size = new System.Drawing.Size(140, 32);
+            this.buttonEdit1.TabIndex = 13;
             // 
             // tableLayoutPanel3
             // 
@@ -896,6 +923,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit1.Properties)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
@@ -967,6 +995,7 @@
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.SimpleButton btnRefesh;
+        private DevExpress.XtraEditors.ButtonEdit buttonEdit1;
     }
 }
 

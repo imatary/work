@@ -75,9 +75,9 @@
             this.labelControl1.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl1.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl1.Location = new System.Drawing.Point(459, 159);
+            this.labelControl1.Location = new System.Drawing.Point(401, 159);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(293, 270);
+            this.labelControl1.Size = new System.Drawing.Size(369, 208);
             this.labelControl1.TabIndex = 2;
             // 
             // backgroundWorker1

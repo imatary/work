@@ -21,17 +21,11 @@ namespace AGPF_DADF_IBG
         private bool _mBDirty;
         private FileSystemWatcher _mWatcher;
         private bool _mBIsWatching;
-        private string _modelId;
-        private string _productionId;
-        private string _status;
-        private string _boardState;
-        private int _pass;
-        private int _ng;
-        private int _total;
-        private string _messageError;
-        private string _result;
+        private string _productionId, _modelId, _status, _boardState;
+        private int _pass, _ng, _total;
+        private string _messageError, _dateCheck, _result, _barcodeOld = "", _strTimeRun = "0";
+
         delegate void SetCallBack(string text);
-        private string _dateCheck;
         private readonly CommunicationManager _comRead;
         private readonly CommunicationManager _comWrite;
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
@@ -43,11 +37,13 @@ namespace AGPF_DADF_IBG
         private SCANNING_LOGS _scanningLogs;
         private INSPECTION_PROCESSES _inspectionProcesses;
         private WORK_ORDER_ITEMS _workOrderItems;
+        private List<INSPECTION_PROCEDURE_DESIGNERS> _inspectionProcedureDesigners;
 
         public FormMain()
         {
             InitializeComponent();
             backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker2.WorkerReportsProgress = true;
             _mBDirty = false;
             _mBIsWatching = false;
             lblVersion.Text = StringHelper.GetRunningVersion();
@@ -316,6 +312,7 @@ namespace AGPF_DADF_IBG
                     txtBarcode.Visible = false;
     
                     CancelAsyncBackgroundWorker();
+                    CancelAsyncBackgroundWorker2();
                 }
                 else
                 {
@@ -325,7 +322,12 @@ namespace AGPF_DADF_IBG
                     {
                         backgroundWorker1.RunWorkerAsync();
                     }
-                    
+
+                    if (!backgroundWorker2.IsBusy)
+                    {
+                        backgroundWorker2.RunWorkerAsync();
+                    }
+
                     if (checkComWrite.Checked)
                     {
                         // Cấu hình COM PORT
@@ -368,7 +370,7 @@ namespace AGPF_DADF_IBG
                     _mWatcher.Created += new FileSystemEventHandler(OnChanged);
                     _mWatcher.Changed += new FileSystemEventHandler(OnChanged);
                     //m_Watcher.Deleted += new FileSystemEventHandler(OnChanged);
-                    _mWatcher.Renamed += new RenamedEventHandler(OnRenamed);
+                    //_mWatcher.Renamed += new RenamedEventHandler(OnRenamed);
                     _mWatcher.EnableRaisingEvents = true;
                 }
             }
@@ -419,29 +421,28 @@ namespace AGPF_DADF_IBG
                 _mBDirty = true;
                 SetStatusDefault("N/A");
                 SetMessageDefault("Waiting...");
+                _strTimeRun = "0";
                 ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
-                SendKeys.SendWait("^{A}");
-                SendKeys.SendWait("{BS}");
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnRenamed(object sender, RenamedEventArgs e)
-        {
-            if (!_mBDirty)
-            {
-                _mBDirty = true;
-                if (rdbFile.Checked)
-                {
-                    _mWatcher.Filter = e.Name;
-                    _mWatcher.Path = e.FullPath.Substring(0, e.FullPath.Length - _mWatcher.Filter.Length);
-                }
-            }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void OnRenamed(object sender, RenamedEventArgs e)
+        //{
+        //    if (!_mBDirty)
+        //    {
+        //        _mBDirty = true;
+        //        if (rdbFile.Checked)
+        //        {
+        //            _mWatcher.Filter = e.Name;
+        //            _mWatcher.Path = e.FullPath.Substring(0, e.FullPath.Length - _mWatcher.Filter.Length);
+        //        }
+        //    }
+        //}
         private void rdbFile_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbFile.Checked)
@@ -566,24 +567,27 @@ namespace AGPF_DADF_IBG
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
         }
-        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
             GridView gridView = sender as GridView;
             if (e.Column.FieldName == "STATE")
             {
-                string value = gridView.GetRowCellDisplayText(e.RowHandle, gridView.Columns.ColumnByName("gridColumnSTATE"));
-                if (value == "OK")
+                if (gridView != null)
                 {
-                    e.Appearance.BackColor = Color.Green;
-                    e.Appearance.BackColor2 = Color.DarkGreen;
-                    e.Appearance.ForeColor = Color.White;
+                    string value = gridView.GetRowCellDisplayText(e.RowHandle, gridView.Columns.ColumnByName("gridColumnSTATE"));
+                    if (value == "OK")
+                    {
+                        e.Appearance.BackColor = Color.Green;
+                        e.Appearance.BackColor2 = Color.DarkGreen;
+                        e.Appearance.ForeColor = Color.White;
 
-                }
-                else if (value == "FAILD")
-                {
-                    e.Appearance.BackColor = Color.Red;
-                    e.Appearance.BackColor2 = Color.DarkRed;
-                    e.Appearance.ForeColor = Color.White;
+                    }
+                    else if (value == "FAILD")
+                    {
+                        e.Appearance.BackColor = Color.Red;
+                        e.Appearance.BackColor2 = Color.DarkRed;
+                        e.Appearance.ForeColor = Color.White;
+                    }
                 }
             }
         }
@@ -628,7 +632,7 @@ namespace AGPF_DADF_IBG
             _pass = 0;
             _ng = 0;
             _total = 0;
-            barcodeOld = "";
+            _barcodeOld = "";
             if(!backgroundWorker1.IsBusy)
             {
                 backgroundWorker1.RunWorkerAsync();
@@ -636,10 +640,6 @@ namespace AGPF_DADF_IBG
             SetStatusDefault("N/A");
             SetMessageDefault("Waiting...");
             txtBarcode.Focus();
-
-            //var allText = GetValueWindowText.GetAllTextFromWindowByTitle(cboWindows.EditValue.ToString());
-            //Ultils.WriteFile(allText);
-
             ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
         }
 
@@ -695,6 +695,8 @@ namespace AGPF_DADF_IBG
                         _inspectionProcesses = _inspectionProcessesService.GET_INSPECTION_PROCESSES_BY_PRODUCT_ID(_scanningLogs.PRODUCT_ID);
                         if (_inspectionProcesses != null)
                         {
+                            _inspectionProcedureDesigners = _inspectionProcessesDesignersService.GET_INSPECTION_PROCEDURE_DESIGNERS_BY_PROCESS_NO(_inspectionProcesses.PROCESS_NO);
+
                             //trạng thái bản mạch hiện tại
                             _workOrderItems = _workOrderItemService.Get_WORK_ORDER_ITEMS_By_BoardNo(boardNo);
                             if (_workOrderItems != null)
@@ -715,7 +717,11 @@ namespace AGPF_DADF_IBG
                                 else if (_workOrderItems.STATION_NO != setStationNo && _workOrderItems.BOARD_STATE == 2)
                                 {
                                     CancelAsyncBackgroundWorker();
-                                    _messageError = $"Board '{boardNo}' bị 'NG' tại trạm trước đó!";
+                                    var stationName =_inspectionProcedureDesigners.FirstOrDefault(item=>item.INDEX == _workOrderItems.PROCEDURE_INDEX);
+
+                                    if (stationName != null)
+                                        _messageError = $"Board '{boardNo}' bị 'NG' tại trạm trước {stationName.STATION_NO}!";
+
                                     MessageHelpers.SetErrorStatus(true, "NG", _messageError, lblStatus, lblMessage);
                                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
 
@@ -728,9 +734,9 @@ namespace AGPF_DADF_IBG
                                 }
                                 else
                                 {
-                                    var processDesigner = _inspectionProcessesDesignersService.GET_INSPECTION_PROCEDURE_DESIGNERS_BY_PROCESS_NO(_inspectionProcesses.PROCESS_NO);
+                                    
                                     // Set station no
-                                    var processByStationNo = processDesigner.FirstOrDefault(item => item.STATION_NO == setStationNo);
+                                    var processByStationNo = _inspectionProcedureDesigners.FirstOrDefault(item => item.STATION_NO == setStationNo);
                                     // Nếu trong process_Designer không có STATION_NO giống với 
                                     // station_no curent thì thông báo cho người dùng biết
                                     if (processByStationNo == null)
@@ -749,17 +755,24 @@ namespace AGPF_DADF_IBG
                                         if (_workOrderItems.PROCEDURE_INDEX < (processByStationNo.INDEX - 1))
                                         {
                                             CancelAsyncBackgroundWorker();
-                                            _messageError = $"Board '{boardNo}' bỏ qua công đoạn!";
+                                            var stationName = _inspectionProcedureDesigners.FirstOrDefault(item => item.INDEX == _workOrderItems.PROCEDURE_INDEX);
+
+                                            if (stationName != null)
+                                                _messageError = $"Board '{boardNo}' bỏ qua công đoạn '{stationName.STATION_NO}'!";
                                             MessageHelpers.SetErrorStatus(true, "NG", _messageError, lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                             Reset(_messageError);
+                                            //Excute(boardNo, _scanningLogs.PRODUCT_ID);
                                         }
                                         //// Nếu Index Board > Set Index 
                                         else if (_workOrderItems.PROCEDURE_INDEX > processByStationNo.INDEX)
                                         {
                                             CancelAsyncBackgroundWorker();
                                             // transferred to the next station.
-                                            _messageError = $"Board '{boardNo}' transferred to the next station!";
+                                            var stationName = _inspectionProcedureDesigners.FirstOrDefault(item => item.INDEX == _workOrderItems.PROCEDURE_INDEX);
+
+                                            if (stationName != null)
+                                                _messageError = $"Board '{boardNo}' chuyển đến trạm '{stationName.STATION_NO}' để chạy tiếp!";
                                             MessageHelpers.SetErrorStatus(true, "NG", _messageError, lblStatus, lblMessage);
                                             CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
 
@@ -819,6 +832,27 @@ namespace AGPF_DADF_IBG
             backgroundWorker1.CancelAsync();
         }
 
+        private void CancelAsyncBackgroundWorker2()
+        {
+            backgroundWorker2.WorkerSupportsCancellation = true;
+            backgroundWorker2.CancelAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void RunAsyncBackgroundWorker()
+        {
+            if(!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+
+            if (!backgroundWorker2.IsBusy)
+            {
+                backgroundWorker2.RunWorkerAsync();
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -834,9 +868,7 @@ namespace AGPF_DADF_IBG
             // Active Form
             ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
             SendKeys.Send("^{A}");
-            SendKeys.SendWait("{BS}");   
-            
-            Thread.Sleep(1000);                                                                                                                  
+            SendKeys.SendWait("{BS}");                                                                                                                   
         }
         /// <summary>
         /// 
@@ -863,7 +895,7 @@ namespace AGPF_DADF_IBG
         private void Excute(string boardNo, string productId)
         {
             CancelAsyncBackgroundWorker();
-            barcodeOld = txtBarcode.Text;
+            _barcodeOld = txtBarcode.Text;
             txtBarcode.ResetText();
             txtBarcode.Focus();
             _productionId = boardNo;
@@ -882,7 +914,6 @@ namespace AGPF_DADF_IBG
             ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
         }
 
-        private string barcodeOld = "";
         /// <summary>
         /// 
         /// </summary>
@@ -892,58 +923,56 @@ namespace AGPF_DADF_IBG
         {
             while (backgroundWorker1.CancellationPending == false)
             {
-                Thread.Sleep(200);
+                Thread.Sleep(2000);
                 var allText = GetValueWindowText.GetAllTextFromWindowByTitle(cboWindows.EditValue.ToString());
+                //string allText = "10.751427478测试完成87.3OK2016/11/2 9:52:39X6AQ0683QYT2_960K 87372 K001DADF 960K87372";
                 var broad_id_first = allText.Split(new[] { "_" }, 4, StringSplitOptions.None);
 
-                //string allText = "10.751427478测试完成87.3OK2016/11/2 9:52:39X6AQ0683QYT2_960K 87372 K001DADF 960K87372";
                 //var broad_id_first = allText.Split(new[] { "labelControl1" }, 4, StringSplitOptions.None);
                 //var broad_id_last = broad_id_first[1].Split(new[] { "123456789" }, 4, StringSplitOptions.None);
                 // Lấy giá trị serial
                 //var broad_id_first = allText.Split(new[] { "S/N" }, 4, StringSplitOptions.None);
                 //var broad_id_last = broad_id_first[1].Split(new[] { "NVM " }, 4, StringSplitOptions.None);
 
-                _result = $"{ broad_id_first[0].Substring(broad_id_first[0].Length-12)}";
+                _result = $"{ broad_id_first[0].Substring(broad_id_first[0].Length-12)}_{broad_id_first[1].Substring(0, 14)}";
                 //_result = broad_id_last[0].ToString();
-                if (_result.Length > 10)
+                if (_result.Length > 23)
                 {
                     _workOrderItems = _workOrderItemService.Get_WORK_ORDER_ITEMS_LIKE_BoardNo(_result);
-
                     if (_workOrderItems != null)
                     {
                         if (!_workOrderItems.IS_FINISHED)
                         {
                             backgroundWorker1.ReportProgress(0, _workOrderItems.BOARD_NO);
                         }
+                        else
+                        {
+                            SetStatusDefault("OK");
+                            SetMessageDefault("Broad is finished.");
+                        }
                     }
                     else
                     {
                         backgroundWorker1.ReportProgress(0, _result);
                     }
-                    
                 }
-            }
-
-            if (backgroundWorker1.CancellationPending)
-            {
-                backgroundWorker1.ReportProgress(0, null);
             }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             ActiveFormByWindowsTitle(Text);
-
-            if (_result != "")
+            string barcodeNew = e.UserState as string;
+            if (!string.IsNullOrEmpty(barcodeNew) && barcodeNew.Length > 10)
             {
                 if (lblStatus.Text != @"OK")
                 {
-                    string barcodeNew = e.UserState as string;
-                    if (barcodeOld == barcodeNew)
+                    if (_barcodeOld == barcodeNew)
                     {
-                        SetStatusDefault("N/A");
-                        SetMessageDefault($"Vui lòng nhấn 'Reset' để chạy lại\n" +
-                                          $"Board {barcodeNew}");
+                        SetStatusDefault("OK");
+                        SetMessageDefault("Waiting...!");
+
+                        RunAsyncBackgroundWorker();
                     }
                     else
                     {
@@ -954,6 +983,53 @@ namespace AGPF_DADF_IBG
                 else
                 {
                     ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
+                }
+            }
+        }
+
+        private void backgroundWorker2_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            while (backgroundWorker2.CancellationPending == false)
+            {
+                Thread.Sleep(1000);
+                var allText = GetValueWindowText.GetAllTextFromWindowByTitle(cboWindows.EditValue.ToString());
+                if (allText.Contains("..."))
+                    allText = allText.Replace("...", "");
+
+                var value = allText.Split(new[] { "." }, 4, StringSplitOptions.None);
+                string resultSpit = value[1];
+                _strTimeRun = resultSpit.Remove(0, 12);
+                _strTimeRun = $"{_strTimeRun}";
+
+                int n;
+                if (int.TryParse(new string(_strTimeRun.Where(Char.IsDigit).ToArray()), out n))
+                {
+                    _strTimeRun = n.ToString();
+                }
+                backgroundWorker2.ReportProgress(0, _strTimeRun);
+            }
+        }
+
+        private void backgroundWorker2_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            string value = e.UserState as string;
+            if (!string.IsNullOrEmpty(value))
+            {
+                var timeRun = Convert.ToInt32(value);
+                if (lblStatus.Text == @"OK")
+                {
+                    if (timeRun == 3)
+                    {
+                        txtBarcode.Focus();
+                        _result = "";
+                        _barcodeOld = "";
+                        SetStatusDefault("N/A");
+                        SetMessageDefault("Waiting...");
+                        if (!backgroundWorker1.IsBusy)
+                        {
+                            backgroundWorker1.RunWorkerAsync();
+                        }
+                    }
                 }
             }
         }
@@ -980,7 +1056,6 @@ namespace AGPF_DADF_IBG
                 return;
             }
             lblStatus.Text = status;
-
             lblStatus.Appearance.ForeColor = Color.DarkOrange;
             lblStatus.Appearance.BackColor = Color.DarkGray; 
         }
@@ -997,7 +1072,6 @@ namespace AGPF_DADF_IBG
                 return;
             }
             lblMessage.Text = status;
-
             lblMessage.Appearance.ForeColor = Color.White;
             lblMessage.Appearance.BackColor = Color.DarkGray;
         }

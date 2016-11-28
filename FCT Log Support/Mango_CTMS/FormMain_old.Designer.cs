@@ -53,23 +53,22 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkKeepProcess = new DevExpress.XtraEditors.CheckEdit();
+            this.txtBarcode = new DevExpress.XtraEditors.TextEdit();
+            this.btnWatchFile = new DevExpress.XtraEditors.SimpleButton();
+            this.txtPath = new DevExpress.XtraEditors.ButtonEdit();
             this.gridLookUpEditProcessID = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColStationNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColDescription = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.txtPath = new DevExpress.XtraEditors.ButtonEdit();
-            this.btnWatchFile = new DevExpress.XtraEditors.SimpleButton();
-            this.txtBarcode = new DevExpress.XtraEditors.TextEdit();
-            this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.cboWindows = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.checkStationNo = new DevExpress.XtraEditors.CheckEdit();
-            this.checkPath = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditSerialPort = new DevExpress.XtraEditors.CheckEdit();
             this.gridLookUpEditSerialPort = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.checkPath = new DevExpress.XtraEditors.CheckEdit();
+            this.checkStationNo = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditSerialPort = new DevExpress.XtraEditors.CheckEdit();
+            this.checkKeepProcess = new DevExpress.XtraEditors.CheckEdit();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -98,20 +97,18 @@
             this.panelControl2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkKeepProcess.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBarcode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditProcessID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPath.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBarcode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
-            this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboWindows.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkStationNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkPath.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditSerialPort.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditSerialPort.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkPath.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkStationNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditSerialPort.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkKeepProcess.Properties)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -335,16 +332,16 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.71951F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.28049F));
-            this.tableLayoutPanel2.Controls.Add(this.checkKeepProcess, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.gridLookUpEditProcessID, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.txtPath, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.btnWatchFile, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtBarcode, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.panelControl3, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.checkStationNo, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.checkPath, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.checkEditSerialPort, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.gridLookUpEditSerialPort, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.txtBarcode, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.btnWatchFile, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.txtPath, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.gridLookUpEditProcessID, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.cboWindows, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.gridLookUpEditSerialPort, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.checkPath, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.checkStationNo, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.checkEditSerialPort, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.checkKeepProcess, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -358,25 +355,58 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(379, 199);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // checkKeepProcess
+            // txtBarcode
             // 
-            this.checkKeepProcess.Dock = System.Windows.Forms.DockStyle.Right;
-            this.checkKeepProcess.EditValue = true;
-            this.checkKeepProcess.Location = new System.Drawing.Point(43, 140);
-            this.checkKeepProcess.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
-            this.checkKeepProcess.Name = "checkKeepProcess";
-            this.checkKeepProcess.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.checkKeepProcess.Properties.Appearance.Options.UseFont = true;
-            this.checkKeepProcess.Properties.Caption = "Keep Process:";
-            this.checkKeepProcess.Size = new System.Drawing.Size(100, 19);
-            this.checkKeepProcess.TabIndex = 7;
-            this.checkKeepProcess.Visible = false;
+            this.txtBarcode.Location = new System.Drawing.Point(149, 170);
+            this.txtBarcode.Name = "txtBarcode";
+            this.txtBarcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBarcode.Properties.Appearance.Options.UseFont = true;
+            this.txtBarcode.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtBarcode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtBarcode.Properties.NullValuePrompt = "Enter barcode in here!";
+            this.txtBarcode.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtBarcode.Size = new System.Drawing.Size(227, 28);
+            this.txtBarcode.TabIndex = 5;
+            this.txtBarcode.Visible = false;
+            this.txtBarcode.EditValueChanged += new System.EventHandler(this.txtBarcode_EditValueChanged);
+            this.txtBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBarcode_PreviewKeyDown);
+            // 
+            // btnWatchFile
+            // 
+            this.btnWatchFile.Appearance.BackColor = System.Drawing.Color.LightBlue;
+            this.btnWatchFile.Appearance.Options.UseBackColor = true;
+            this.btnWatchFile.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.btnWatchFile.Image = ((System.Drawing.Image)(resources.GetObject("btnWatchFile.Image")));
+            this.btnWatchFile.Location = new System.Drawing.Point(149, 135);
+            this.btnWatchFile.Name = "btnWatchFile";
+            this.btnWatchFile.Size = new System.Drawing.Size(125, 27);
+            this.btnWatchFile.TabIndex = 4;
+            this.btnWatchFile.Text = "Start Watching";
+            this.btnWatchFile.Click += new System.EventHandler(this.btnWatchFile_Click);
+            // 
+            // txtPath
+            // 
+            this.txtPath.EditValue = "";
+            this.txtPath.Location = new System.Drawing.Point(149, 102);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPath.Properties.Appearance.Options.UseFont = true;
+            this.txtPath.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            serializableAppearanceObject1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            serializableAppearanceObject1.Options.UseFont = true;
+            this.txtPath.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Browse", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("txtPath.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            this.txtPath.Properties.NullValuePrompt = "ex: C:\\";
+            this.txtPath.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtPath.Size = new System.Drawing.Size(227, 28);
+            this.txtPath.TabIndex = 2;
+            this.txtPath.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtPath_ButtonPressed);
+            this.txtPath.EditValueChanged += new System.EventHandler(this.txtPath_EditValueChanged);
             // 
             // gridLookUpEditProcessID
             // 
-            this.gridLookUpEditProcessID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridLookUpEditProcessID.EditValue = "";
-            this.gridLookUpEditProcessID.Location = new System.Drawing.Point(149, 3);
+            this.gridLookUpEditProcessID.Location = new System.Drawing.Point(149, 69);
             this.gridLookUpEditProcessID.Name = "gridLookUpEditProcessID";
             this.gridLookUpEditProcessID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.gridLookUpEditProcessID.Properties.Appearance.Options.UseFont = true;
@@ -440,71 +470,10 @@
             this.gridColDescription.Visible = true;
             this.gridColDescription.VisibleIndex = 2;
             // 
-            // txtPath
-            // 
-            this.txtPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtPath.EditValue = "";
-            this.txtPath.Location = new System.Drawing.Point(149, 36);
-            this.txtPath.Name = "txtPath";
-            this.txtPath.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPath.Properties.Appearance.Options.UseFont = true;
-            this.txtPath.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            serializableAppearanceObject1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            serializableAppearanceObject1.Options.UseFont = true;
-            this.txtPath.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Browse", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("txtPath.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
-            this.txtPath.Properties.NullValuePrompt = "ex: C:\\";
-            this.txtPath.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtPath.Size = new System.Drawing.Size(227, 28);
-            this.txtPath.TabIndex = 2;
-            this.txtPath.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtPath_ButtonPressed);
-            this.txtPath.EditValueChanged += new System.EventHandler(this.txtPath_EditValueChanged);
-            // 
-            // btnWatchFile
-            // 
-            this.btnWatchFile.Appearance.BackColor = System.Drawing.Color.LightBlue;
-            this.btnWatchFile.Appearance.Options.UseBackColor = true;
-            this.btnWatchFile.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.btnWatchFile.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnWatchFile.Image = ((System.Drawing.Image)(resources.GetObject("btnWatchFile.Image")));
-            this.btnWatchFile.Location = new System.Drawing.Point(149, 69);
-            this.btnWatchFile.Name = "btnWatchFile";
-            this.btnWatchFile.Size = new System.Drawing.Size(125, 27);
-            this.btnWatchFile.TabIndex = 4;
-            this.btnWatchFile.Text = "Start Watching";
-            this.btnWatchFile.Click += new System.EventHandler(this.btnWatchFile_Click);
-            // 
-            // txtBarcode
-            // 
-            this.txtBarcode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBarcode.Location = new System.Drawing.Point(149, 102);
-            this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBarcode.Properties.Appearance.Options.UseFont = true;
-            this.txtBarcode.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtBarcode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtBarcode.Properties.NullValuePrompt = "Enter barcode in here!";
-            this.txtBarcode.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtBarcode.Size = new System.Drawing.Size(227, 28);
-            this.txtBarcode.TabIndex = 5;
-            this.txtBarcode.Visible = false;
-            this.txtBarcode.EditValueChanged += new System.EventHandler(this.txtBarcode_EditValueChanged);
-            this.txtBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBarcode_PreviewKeyDown);
-            // 
-            // panelControl3
-            // 
-            this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl3.Controls.Add(this.cboWindows);
-            this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(149, 135);
-            this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(227, 29);
-            this.panelControl3.TabIndex = 7;
-            // 
             // cboWindows
             // 
-            this.cboWindows.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cboWindows.Location = new System.Drawing.Point(0, 0);
+            this.cboWindows.Enabled = false;
+            this.cboWindows.Location = new System.Drawing.Point(149, 36);
             this.cboWindows.Name = "cboWindows";
             this.cboWindows.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.cboWindows.Properties.Appearance.Options.UseFont = true;
@@ -519,7 +488,6 @@
             this.cboWindows.Properties.View = this.gridView2;
             this.cboWindows.Size = new System.Drawing.Size(227, 28);
             this.cboWindows.TabIndex = 8;
-            this.cboWindows.Visible = false;
             this.cboWindows.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.cboWindows_ButtonPressed);
             this.cboWindows.EditValueChanged += new System.EventHandler(this.cboWindows_EditValueChanged);
             // 
@@ -530,50 +498,10 @@
             this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
-            // checkStationNo
-            // 
-            this.checkStationNo.Dock = System.Windows.Forms.DockStyle.Right;
-            this.checkStationNo.EditValue = true;
-            this.checkStationNo.Location = new System.Drawing.Point(58, 8);
-            this.checkStationNo.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
-            this.checkStationNo.Name = "checkStationNo";
-            this.checkStationNo.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.checkStationNo.Properties.Appearance.Options.UseFont = true;
-            this.checkStationNo.Properties.Caption = "Station No:";
-            this.checkStationNo.Size = new System.Drawing.Size(85, 19);
-            this.checkStationNo.TabIndex = 8;
-            // 
-            // checkPath
-            // 
-            this.checkPath.Dock = System.Windows.Forms.DockStyle.Right;
-            this.checkPath.EditValue = true;
-            this.checkPath.Location = new System.Drawing.Point(33, 41);
-            this.checkPath.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
-            this.checkPath.Name = "checkPath";
-            this.checkPath.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.checkPath.Properties.Appearance.Options.UseFont = true;
-            this.checkPath.Properties.Caption = "\'File/Directory\':";
-            this.checkPath.Size = new System.Drawing.Size(110, 19);
-            this.checkPath.TabIndex = 9;
-            // 
-            // checkEditSerialPort
-            // 
-            this.checkEditSerialPort.Dock = System.Windows.Forms.DockStyle.Right;
-            this.checkEditSerialPort.EditValue = true;
-            this.checkEditSerialPort.Location = new System.Drawing.Point(67, 175);
-            this.checkEditSerialPort.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
-            this.checkEditSerialPort.Name = "checkEditSerialPort";
-            this.checkEditSerialPort.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.checkEditSerialPort.Properties.Appearance.Options.UseFont = true;
-            this.checkEditSerialPort.Properties.Caption = "COM Port:";
-            this.checkEditSerialPort.Size = new System.Drawing.Size(76, 19);
-            this.checkEditSerialPort.TabIndex = 10;
-            this.checkEditSerialPort.Visible = false;
-            // 
             // gridLookUpEditSerialPort
             // 
-            this.gridLookUpEditSerialPort.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gridLookUpEditSerialPort.Location = new System.Drawing.Point(149, 170);
+            this.gridLookUpEditSerialPort.Enabled = false;
+            this.gridLookUpEditSerialPort.Location = new System.Drawing.Point(149, 3);
             this.gridLookUpEditSerialPort.Name = "gridLookUpEditSerialPort";
             this.gridLookUpEditSerialPort.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.gridLookUpEditSerialPort.Properties.Appearance.Options.UseFont = true;
@@ -588,7 +516,6 @@
             this.gridLookUpEditSerialPort.Properties.View = this.gridView3;
             this.gridLookUpEditSerialPort.Size = new System.Drawing.Size(125, 28);
             this.gridLookUpEditSerialPort.TabIndex = 11;
-            this.gridLookUpEditSerialPort.Visible = false;
             this.gridLookUpEditSerialPort.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.gridLookUpEditSerialPort_ButtonPressed);
             this.gridLookUpEditSerialPort.EditValueChanged += new System.EventHandler(this.gridLookUpEditSerialPort_EditValueChanged);
             // 
@@ -598,6 +525,60 @@
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView3.OptionsView.ShowGroupPanel = false;
+            // 
+            // checkPath
+            // 
+            this.checkPath.Dock = System.Windows.Forms.DockStyle.Right;
+            this.checkPath.EditValue = true;
+            this.checkPath.Location = new System.Drawing.Point(33, 107);
+            this.checkPath.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
+            this.checkPath.Name = "checkPath";
+            this.checkPath.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.checkPath.Properties.Appearance.Options.UseFont = true;
+            this.checkPath.Properties.Caption = "\'File/Directory\':";
+            this.checkPath.Size = new System.Drawing.Size(110, 19);
+            this.checkPath.TabIndex = 9;
+            // 
+            // checkStationNo
+            // 
+            this.checkStationNo.Dock = System.Windows.Forms.DockStyle.Right;
+            this.checkStationNo.EditValue = true;
+            this.checkStationNo.Location = new System.Drawing.Point(33, 74);
+            this.checkStationNo.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
+            this.checkStationNo.Name = "checkStationNo";
+            this.checkStationNo.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.checkStationNo.Properties.Appearance.Options.UseFont = true;
+            this.checkStationNo.Properties.Caption = "Station No:";
+            this.checkStationNo.Size = new System.Drawing.Size(110, 19);
+            this.checkStationNo.TabIndex = 8;
+            // 
+            // checkEditSerialPort
+            // 
+            this.checkEditSerialPort.Dock = System.Windows.Forms.DockStyle.Right;
+            this.checkEditSerialPort.EditValue = true;
+            this.checkEditSerialPort.Enabled = false;
+            this.checkEditSerialPort.Location = new System.Drawing.Point(33, 8);
+            this.checkEditSerialPort.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
+            this.checkEditSerialPort.Name = "checkEditSerialPort";
+            this.checkEditSerialPort.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.checkEditSerialPort.Properties.Appearance.Options.UseFont = true;
+            this.checkEditSerialPort.Properties.Caption = "COM Port:";
+            this.checkEditSerialPort.Size = new System.Drawing.Size(110, 19);
+            this.checkEditSerialPort.TabIndex = 10;
+            // 
+            // checkKeepProcess
+            // 
+            this.checkKeepProcess.Dock = System.Windows.Forms.DockStyle.Right;
+            this.checkKeepProcess.EditValue = true;
+            this.checkKeepProcess.Enabled = false;
+            this.checkKeepProcess.Location = new System.Drawing.Point(33, 41);
+            this.checkKeepProcess.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
+            this.checkKeepProcess.Name = "checkKeepProcess";
+            this.checkKeepProcess.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.checkKeepProcess.Properties.Appearance.Options.UseFont = true;
+            this.checkKeepProcess.Properties.Caption = "Keep Process:";
+            this.checkKeepProcess.Size = new System.Drawing.Size(110, 19);
+            this.checkKeepProcess.TabIndex = 7;
             // 
             // tableLayoutPanel3
             // 
@@ -844,20 +825,18 @@
             this.panelControl2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.checkKeepProcess.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBarcode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPath.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditProcessID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPath.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBarcode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
-            this.panelControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cboWindows.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkStationNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkPath.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditSerialPort.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditSerialPort.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkPath.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkStationNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditSerialPort.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkKeepProcess.Properties)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
@@ -916,7 +895,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColDescription;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.CheckEdit checkKeepProcess;
         private DevExpress.XtraEditors.GridLookUpEdit cboWindows;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;

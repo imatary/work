@@ -47,8 +47,9 @@ namespace Mango_CTMS
             while (backgroundWorker1.CancellationPending == false)
             {
                 if (backgroundWorker1.CancellationPending)
-                    break; System.Threading.Thread.Sleep(500);
-                backgroundWorker1.ReportProgress(0, $"Form tự động đóng sau 20/giây ({_backgroundInt}) ");
+                    break;
+                System.Threading.Thread.Sleep(500);
+                backgroundWorker1.ReportProgress(0, $"Form tự động đóng sau {15 - _backgroundInt}/ giây!");
                 _backgroundInt++;
             }
 
@@ -57,7 +58,7 @@ namespace Mango_CTMS
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             labelControl1.Text = e.UserState as string;
-            if(_backgroundInt == 20)
+            if(_backgroundInt == 15)
             {
                 if (backgroundWorker1.IsBusy)
                 {

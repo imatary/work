@@ -11,8 +11,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.Data.Helpers;
 
 namespace Mango_CTMS
 {
@@ -21,20 +23,13 @@ namespace Mango_CTMS
         private bool _mBDirty;
         private FileSystemWatcher _mWatcher;
         private bool _mBIsWatching;
-        private string _modelId;
-        private string _productionId;
-        private string _status;
-        private string _boardState;
-        private int _pass;
-        private int _ng;
-        private int _total;
-        private string _messageError;
-        private string _result;
-        private string backup_log_folder = @"C:\backup_log\";
+        private string _productionId, _modelId, _status, _boardState;
+        private int _pass, _ng, _total;
+        private string _messageError, _dateCheck, _timeCheck, _result, _barcodeOld = "", _strTimeRun = "0";
+        string backup_log_folder = @"C:\backup_log\";
 
         delegate void SetCallBack(string text);
 
-        private string _dateCheck;
         private readonly CommunicationManager _comRead;
         private readonly CommunicationManager _comWrite;
         private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
@@ -46,11 +41,13 @@ namespace Mango_CTMS
         private SCANNING_LOGS _scanningLogs;
         private INSPECTION_PROCESSES _inspectionProcesses;
         private WORK_ORDER_ITEMS _workOrderItems;
+        private List<INSPECTION_PROCEDURE_DESIGNERS> _inspectionProcedureDesigners;
 
         public FormMain()
         {
             InitializeComponent();
             backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker2.WorkerReportsProgress = true;
             _mBDirty = false;
             _mBIsWatching = false;
             lblVersion.Text = StringHelper.GetRunningVersion();
@@ -135,8 +132,8 @@ namespace Mango_CTMS
                 BOARD_NO = boardNo,
                 ProductID = productId,
                 STATION_NO = stationNo,
-                DATE_CHECK = DateTime.Now.ToShortDateString(),
-                TIME_CHECK = DateTime.Now.ToShortTimeString(),
+                DATE_CHECK = _dateCheck,
+                TIME_CHECK = _timeCheck,
                 STATE = state,
             };
             List<ItemDetail> items = new List<ItemDetail> {item};
@@ -272,6 +269,9 @@ namespace Mango_CTMS
 
                     cboWindows.Enabled = true;
                     checkKeepProcess.Enabled = true;
+
+                    checkComRead.Visible = true;
+                    gridLookUpEditComRead.Visible = true;
                     return true;
                 }
                 case Keys.Shift | Keys.F3:
@@ -286,8 +286,12 @@ namespace Mango_CTMS
 
                     cboWindows.Enabled = false;
                     checkKeepProcess.Enabled = false;
+
+                    checkComRead.Visible = false;
+                    gridLookUpEditComRead.Visible = false;
                     return true;
-                }}
+                }
+            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -317,6 +321,7 @@ namespace Mango_CTMS
                     txtBarcode.Visible = false;
 
                     CancelAsyncBackgroundWorker();
+                    CancelAsyncBackgroundWorker2();
                 }
                 else
                 {
@@ -325,6 +330,11 @@ namespace Mango_CTMS
                     if (!backgroundWorker1.IsBusy)
                     {
                         backgroundWorker1.RunWorkerAsync();
+                    }
+
+                    if (!backgroundWorker2.IsBusy)
+                    {
+                        backgroundWorker2.RunWorkerAsync();
                     }
 
                     if (checkComWrite.Checked)
@@ -369,11 +379,15 @@ namespace Mango_CTMS
                     _mWatcher.Created += new FileSystemEventHandler(OnChanged);
                     _mWatcher.Changed += new FileSystemEventHandler(OnChanged);
                     //m_Watcher.Deleted += new FileSystemEventHandler(OnChanged);
-                    _mWatcher.Renamed += new RenamedEventHandler(OnRenamed);
+                    //_mWatcher.Renamed += new RenamedEventHandler(OnRenamed);
                     _mWatcher.EnableRaisingEvents = true;
                 }
             }
         }
+
+
+        private bool IsBusy = true;
+        private bool IsReading = false;
 
         /// <summary>
         /// Chờ sự thay đổi trong folder
@@ -384,100 +398,129 @@ namespace Mango_CTMS
         {
             if (!_mBDirty)
             {
-                if (e.ChangeType == WatcherChangeTypes.Deleted || e.ChangeType == WatcherChangeTypes.Renamed)
-                {
-                    return;
-                }
-                if (e.FullPath.Contains("Mango_CTMS"))
+                if (e.ChangeType == WatcherChangeTypes.Created || e.ChangeType == WatcherChangeTypes.Changed)
                 {
                     // DO SOMETING LIKE MOVE, COPY, ETC
                     bool exists = Directory.Exists(backup_log_folder);
                     if (!exists)
                         Directory.CreateDirectory(backup_log_folder);
-
-                    string fullPath = backup_log_folder + e.Name;
-
-                    if (File.Exists(fullPath))
+                    string fileName = e.Name;
+                    string fullPath = backup_log_folder + fileName;
+                    //string fullPath = e.FullPath;
+                    if (!string.IsNullOrEmpty(fileName))
                     {
-                        File.Delete(fullPath);
-                        Thread.Sleep(1000);
-                        File.Copy(e.FullPath, fullPath);
-
-                        var data = Ultils.ReadLogTxt(fullPath).LastOrDefault();
-
-                        if (data == "FAIL")
+                        // tên file phải có tên Mango_CTMS, thì mới làm việc tiếp, còn không nghỉ nhé
+                        if (fileName.Contains("Mango_CTMS"))
                         {
-                            _status = "F";
-                            _boardState = "FAILD";
-                            _ng = _ng + 1;
-                        }
-                        else if (data == "PASS")
-                        {
-                            _status = "P";
-                            _boardState = "OK";
-                            _pass = _pass + 1;
-                        }
+                            if (IsBusy)
+                            {
+                                IsBusy = false;
+                                // nếu file trong thư mục backup có rồi thì xóa đi, copy file mới
+                                if (File.Exists(fullPath))
+                                {
+                                    Thread.Sleep(1000);
+                                    File.Delete(fullPath);
+                                    Thread.Sleep(1000);
+                                    File.Copy(e.FullPath, fullPath, true);
+                                    if (!string.IsNullOrEmpty(txtBarcode.Text))
+                                    {
+                                        ExcuteSaveLog(true, fullPath);
+                                    }
+                                }
+                                // Chưa có thì copy file
+                                else
+                                {
+                                    Thread.Sleep(1000);
+                                    File.Copy(e.FullPath, fullPath);
+                                    if (!string.IsNullOrEmpty(txtBarcode.Text))
+                                    {
+                                        ExcuteSaveLog(true, fullPath);
+                                    }
+                                }
+                            }
 
-                        _total = _pass + _ng;
+                        }
                     }
-                    else
+                }
+            }
+        }
+
+        private void ExcuteSaveLog(bool continute, string fullPath)
+        {
+            if (continute)
+            {
+                int coutLine = 0;
+                StringBuilder stringBuilder = new StringBuilder();
+                var stremReader = new StreamReader(fullPath);
+                string strReaderStep;
+                // Đọc toàn bộ nội dung file Text, gán vào StringBuider.
+                while ((strReaderStep = stremReader.ReadLine()) != null)
+                {
+                    stringBuilder.AppendLine(strReaderStep);
+                    coutLine = coutLine + 1;
+                    IsBusy = true;
+                }
+                stremReader.Dispose();
+                stremReader.Close();
+
+                var result = Ultils.ReadStringBuilder(stringBuilder);
+                bool isCheckStaus = false;
+                if (result.Any(c => c.Contains("FAIL")))
+                {
+                    _ng = _ng + 1;
+                    _status = "F";
+                    _boardState = "FAIL";
+                    isCheckStaus = true;
+                }
+                else
+                {
+                    _pass = _pass + 1;
+                    _status = "P";
+                    _boardState = "PASS";
+                    if (checkComWrite.Checked)
                     {
-                        Thread.Sleep(1000);
-                        File.Copy(e.FullPath, fullPath);
-
-                        var data = Ultils.ReadLogTxt(fullPath).LastOrDefault();
-
-                        if (data == "FAIL")
-                        {
-                            _status = "F";
-                            _boardState = "FAILD";
-                            _ng = _ng + 1;
-                        }
-                        else if (data == "PASS")
-                        {
-                            _status = "P";
-                            _boardState = "OK";
-                            _pass = _pass + 1;
-                        }
-
-                        _total = _pass + _ng;
+                        _comWrite.WriteData("A");
                     }
+                    isCheckStaus = true;
+                }
 
-                    Ultils.CreateFileLog(_modelId, _productionId, _status, gridLookUpEditProcessID.EditValue.ToString(), _dateCheck);
-
+                if (isCheckStaus)
+                {
+                    _total = _pass + _ng;
+                    Ultils.CreateFileLog(_modelId, _productionId, _status,
+                        gridLookUpEditProcessID.EditValue.ToString(), _dateCheck);
                     if (!backgroundWorker1.IsBusy)
                     {
                         backgroundWorker1.RunWorkerAsync();
                     }
-
+                    _mBDirty = true;
+                    SetStatusDefault("N/A");
+                    SetMessageDefault("Waiting...");
+                    _strTimeRun = "0";
+                    _modelId = "";
+                    _productionId = "";
                     ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
                 }
-                else
-                {
-                    return;
-                }
-                _mBDirty = true;
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnRenamed(object sender, RenamedEventArgs e)
-        {
-            if (!_mBDirty)
-            {
-                _mBDirty = true;
-                if (rdbFile.Checked)
-                {
-                    _mWatcher.Filter = e.Name;
-                    _mWatcher.Path = e.FullPath.Substring(0, e.FullPath.Length - _mWatcher.Filter.Length);
-                }
-            }
-        }
-
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void OnRenamed(object sender, RenamedEventArgs e)
+        //{
+        //    if (!_mBDirty)
+        //    {
+        //        _mBDirty = true;
+        //        if (rdbFile.Checked)
+        //        {
+        //            _mWatcher.Filter = e.Name;
+        //            _mWatcher.Path = e.FullPath.Substring(0, e.FullPath.Length - _mWatcher.Filter.Length);
+        //        }
+        //    }
+        //}
         private void rdbFile_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbFile.Checked)
@@ -486,16 +529,14 @@ namespace Mango_CTMS
                 chkSubFolder.Checked = false;
             }
         }
-
         private void rdbDir_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbDir.Checked == true)
+            if (rdbDir.Checked)
             {
                 chkSubFolder.Enabled = true;
                 chkSubFolder.Checked = true;
             }
         }
-
         private void txtPath_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 0)
@@ -518,7 +559,6 @@ namespace Mango_CTMS
                 }
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -537,7 +577,6 @@ namespace Mango_CTMS
                 _mBDirty = false;
             }
         }
-
         private void cboWindows_EditValueChanged(object sender, EventArgs e)
         {
             string processName = cboWindows.EditValue.ToString();
@@ -546,7 +585,6 @@ namespace Mango_CTMS
                 SaveSettings("CurentProcess", processName);
             }
         }
-
         private void gridLookUpEditSerialPort_EditValueChanged(object sender, EventArgs e)
         {
             string strcomWrite = gridLookUpEditComWrite.EditValue.ToString();
@@ -555,7 +593,6 @@ namespace Mango_CTMS
                 SaveSettings("ValueComWrite", strcomWrite);
             }
         }
-
         private void gridLookUpEditComRead_EditValueChanged(object sender, EventArgs e)
         {
             string strcomRead = gridLookUpEditComRead.EditValue.ToString();
@@ -564,17 +601,14 @@ namespace Mango_CTMS
                 SaveSettings("ValueComRead", strcomRead);
             }
         }
-
         private void checkEditSerialPort_CheckedChanged(object sender, EventArgs e)
         {
             SaveSettings("COMWrite", checkComWrite.Checked);
         }
-
         private void checkComRead_CheckedChanged(object sender, EventArgs e)
         {
             SaveSettings("COMRead", checkComRead.Checked);
         }
-
         private void txtPath_EditValueChanged(object sender, EventArgs e)
         {
             if (txtPath.Text.Contains(@":\"))
@@ -588,19 +622,16 @@ namespace Mango_CTMS
                 }
                 else
                 {
-                    MessageHelpers.SetErrorStatus(true, "NG", "'File/Directory' not exits. Please try again!", lblStatus,
-                        lblMessage);
+                    MessageHelpers.SetErrorStatus(true, "NG", "'File/Directory' not exits. Please try again!", lblStatus, lblMessage);
                     CheckTextBoxNullValue.SetColorErrorTextControl(txtPath);
                 }
             }
             else
             {
-                MessageHelpers.SetErrorStatus(true, "NG", "'File/Directory' invaild. Please try again!", lblStatus,
-                    lblMessage);
+                MessageHelpers.SetErrorStatus(true, "NG", "'File/Directory' invaild. Please try again!", lblStatus, lblMessage);
                 CheckTextBoxNullValue.SetColorErrorTextControl(txtPath);
             }
         }
-
         private void gridLookUpEditProcessID_EditValueChanged(object sender, EventArgs e)
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(gridLookUpEditProcessID);
@@ -610,35 +641,34 @@ namespace Mango_CTMS
                 SaveSettings("StationNo", stationNo);
             }
         }
-
         private void txtBarcode_EditValueChanged(object sender, EventArgs e)
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
         }
-
-        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
             GridView gridView = sender as GridView;
             if (e.Column.FieldName == "STATE")
             {
-                string value = gridView.GetRowCellDisplayText(e.RowHandle,
-                    gridView.Columns.ColumnByName("gridColumnSTATE"));
-                if (value == "OK")
+                if (gridView != null)
                 {
-                    e.Appearance.BackColor = Color.Green;
-                    e.Appearance.BackColor2 = Color.DarkGreen;
-                    e.Appearance.ForeColor = Color.White;
+                    string value = gridView.GetRowCellDisplayText(e.RowHandle, gridView.Columns.ColumnByName("gridColumnSTATE"));
+                    if (value == "OK")
+                    {
+                        e.Appearance.BackColor = Color.Green;
+                        e.Appearance.BackColor2 = Color.DarkGreen;
+                        e.Appearance.ForeColor = Color.White;
 
-                }
-                else if (value == "FAILD")
-                {
-                    e.Appearance.BackColor = Color.Red;
-                    e.Appearance.BackColor2 = Color.DarkRed;
-                    e.Appearance.ForeColor = Color.White;
+                    }
+                    else if (value == "FAILD")
+                    {
+                        e.Appearance.BackColor = Color.Red;
+                        e.Appearance.BackColor2 = Color.DarkRed;
+                        e.Appearance.ForeColor = Color.White;
+                    }
                 }
             }
         }
-
         private void cboWindows_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 1)
@@ -646,16 +676,13 @@ namespace Mango_CTMS
                 RefreshWindows();
             }
         }
-
-        private void gridLookUpEditSerialPort_ButtonPressed(object sender,
-            DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void gridLookUpEditSerialPort_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 1)
             {
                 RefreshWindows();
             }
         }
-
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -675,15 +702,23 @@ namespace Mango_CTMS
                 }
             }
         }
-
         private void btnRefesh_Click(object sender, EventArgs e)
         {
             lblNG.Text = @"0";
             lblPass.Text = @"0";
             lblTotal.Text = @"0";
-            var allText = GetValueWindowText.GetAllTextFromWindowByTitle(cboWindows.EditValue.ToString());
-            Ultils.WriteFile(allText);
-            MessageBox.Show("Ghi OK");
+            _pass = 0;
+            _ng = 0;
+            _total = 0;
+            _barcodeOld = "";
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+            SetStatusDefault("N/A");
+            SetMessageDefault("Waiting...");
+            txtBarcode.Focus();
+            ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
         }
 
         /// <summary>
@@ -694,7 +729,7 @@ namespace Mango_CTMS
         private void SaveSettings(string settingName, object value)
         {
             Properties.Settings.Default[settingName] = value;
-            Properties.Settings.Default.Save(); // Saves settings in application configuration file
+            Properties.Settings.Default.Save();// Saves settings in application configuration file
         }
 
         /// <summary>
@@ -708,13 +743,14 @@ namespace Mango_CTMS
             {
                 CancelAsyncBackgroundWorker();
 
-                // Active form
-                ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
-
                 string boardNo = txtBarcode.Text;
                 _dateCheck = Ultils.GetNetworkDateTime().ToString("yyMMddHHmmss") != ""
                     ? Ultils.GetNetworkDateTime().ToString("yyMMddHHmmss")
                     : DateTime.Now.ToString("yyMMddHHmmss");
+
+                _timeCheck = Ultils.GetNetworkDateTime().ToShortTimeString() != ""
+                    ? Ultils.GetNetworkDateTime().ToShortTimeString()
+                    : DateTime.Now.ToShortTimeString();
 
                 if (boardNo.Contains("="))
                 {
@@ -725,12 +761,12 @@ namespace Mango_CTMS
 
                 if (txtBarcode.Text.Length <= 10)
                 {
-                    CancelAsyncBackgroundWorker();
-                    MessageHelpers.SetDefaultStatus(true, "N/A", "Waiting...", lblStatus, lblMessage);
                     if (!backgroundWorker1.IsBusy)
                     {
                         backgroundWorker1.RunWorkerAsync();
                     }
+                    // Active form
+                    ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
                 }
                 else
                 {
@@ -738,10 +774,11 @@ namespace Mango_CTMS
 
                     if (_scanningLogs != null)
                     {
-                        _inspectionProcesses =
-                            _inspectionProcessesService.GET_INSPECTION_PROCESSES_BY_PRODUCT_ID(_scanningLogs.PRODUCT_ID);
+                        _inspectionProcesses = _inspectionProcessesService.GET_INSPECTION_PROCESSES_BY_PRODUCT_ID(_scanningLogs.PRODUCT_ID);
                         if (_inspectionProcesses != null)
                         {
+                            _inspectionProcedureDesigners = _inspectionProcessesDesignersService.GET_INSPECTION_PROCEDURE_DESIGNERS_BY_PROCESS_NO(_inspectionProcesses.PROCESS_NO);
+
                             //trạng thái bản mạch hiện tại
                             _workOrderItems = _workOrderItemService.Get_WORK_ORDER_ITEMS_By_BoardNo(boardNo);
                             if (_workOrderItems != null)
@@ -762,7 +799,11 @@ namespace Mango_CTMS
                                 else if (_workOrderItems.STATION_NO != setStationNo && _workOrderItems.BOARD_STATE == 2)
                                 {
                                     CancelAsyncBackgroundWorker();
-                                    _messageError = $"Board '{boardNo}' bị 'NG' tại trạm trước đó!";
+                                    var stationName = _inspectionProcedureDesigners.FirstOrDefault(item => item.INDEX == _workOrderItems.PROCEDURE_INDEX);
+
+                                    if (stationName != null)
+                                        _messageError = $"Board '{boardNo}' bị 'NG' tại trạm trước {stationName.STATION_NO}!";
+
                                     MessageHelpers.SetErrorStatus(true, "NG", _messageError, lblStatus, lblMessage);
                                     CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
 
@@ -775,13 +816,9 @@ namespace Mango_CTMS
                                 }
                                 else
                                 {
-                                    var processDesigner =
-                                        _inspectionProcessesDesignersService
-                                            .GET_INSPECTION_PROCEDURE_DESIGNERS_BY_PROCESS_NO(
-                                                _inspectionProcesses.PROCESS_NO);
+
                                     // Set station no
-                                    var processByStationNo =
-                                        processDesigner.FirstOrDefault(item => item.STATION_NO == setStationNo);
+                                    var processByStationNo = _inspectionProcedureDesigners.FirstOrDefault(item => item.STATION_NO == setStationNo);
                                     // Nếu trong process_Designer không có STATION_NO giống với 
                                     // station_no curent thì thông báo cho người dùng biết
                                     if (processByStationNo == null)
@@ -800,24 +837,30 @@ namespace Mango_CTMS
                                         if (_workOrderItems.PROCEDURE_INDEX < (processByStationNo.INDEX - 1))
                                         {
                                             CancelAsyncBackgroundWorker();
-                                            _messageError = $"Board '{boardNo}' bỏ qua công đoạn ''!";
-                                            MessageHelpers.SetErrorStatus(true, "NG", _messageError, lblStatus,
-                                                lblMessage);
-                                            CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                                            var stationName = _inspectionProcedureDesigners.FirstOrDefault(item => item.INDEX == _workOrderItems.PROCEDURE_INDEX);
 
+                                            if (stationName != null)
+                                                _messageError = $"Board '{boardNo}' bỏ qua công đoạn '{stationName.STATION_NO}'!";
+                                            MessageHelpers.SetErrorStatus(true, "NG", _messageError, lblStatus, lblMessage);
+                                            CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                                             Reset(_messageError);
+                                            //Excute(boardNo, _scanningLogs.PRODUCT_ID);
                                         }
                                         //// Nếu Index Board > Set Index 
                                         else if (_workOrderItems.PROCEDURE_INDEX > processByStationNo.INDEX)
                                         {
-                                            CancelAsyncBackgroundWorker();
-                                            // transferred to the next station.
-                                            _messageError = $"Board '{boardNo}' transferred to the next station!";
-                                            MessageHelpers.SetErrorStatus(true, "NG", _messageError, lblStatus,
-                                                lblMessage);
-                                            CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                                            //CancelAsyncBackgroundWorker();
+                                            //// transferred to the next station.
+                                            //var stationName = _inspectionProcedureDesigners.FirstOrDefault(item => item.INDEX == _workOrderItems.PROCEDURE_INDEX);
 
-                                            Reset(_messageError);
+                                            //if (stationName != null)
+                                            //    _messageError = $"Board '{boardNo}' chuyển đến trạm '{stationName.STATION_NO}' để chạy tiếp!";
+                                            //MessageHelpers.SetErrorStatus(true, "NG", _messageError, lblStatus, lblMessage);
+                                            //CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+
+                                            //Reset(_messageError);
+
+                                            Excute(boardNo, _scanningLogs.PRODUCT_ID);
                                         }
                                         else if (_workOrderItems.PROCEDURE_INDEX == (processByStationNo.INDEX - 1))
                                         {
@@ -860,11 +903,6 @@ namespace Mango_CTMS
 
                         Reset(_messageError);
                     }
-
-                    if (!backgroundWorker1.IsBusy)
-                    {
-                        backgroundWorker1.RunWorkerAsync();
-                    }
                 }
             }
         }
@@ -878,28 +916,44 @@ namespace Mango_CTMS
             backgroundWorker1.CancelAsync();
         }
 
+        private void CancelAsyncBackgroundWorker2()
+        {
+            backgroundWorker2.WorkerSupportsCancellation = true;
+            backgroundWorker2.CancelAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void RunAsyncBackgroundWorker()
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+
+            if (!backgroundWorker2.IsBusy)
+            {
+                backgroundWorker2.RunWorkerAsync();
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
         private void Reset(string message)
         {
             _result = "";
-            //backgroundWorker1.ReportProgress(0, "NG");
             var errorForm = new FormError(message);
             errorForm.ShowDialog();
-            // Active Form
-            ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
-            SendKeys.Send("^{A}");
-            SendKeys.SendWait("{BS}");
-            //txtBarcode.Text = string.Empty;
-            //txtBarcode.Focus();
             if (!backgroundWorker1.IsBusy)
             {
                 backgroundWorker1.RunWorkerAsync();
             }
-
+            // Active Form
+            ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
+            SendKeys.Send("^{A}");
+            SendKeys.SendWait("{BS}");
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -924,27 +978,15 @@ namespace Mango_CTMS
         /// <param name="productId"></param>
         private void Excute(string boardNo, string productId)
         {
-
             CancelAsyncBackgroundWorker();
-
+            _barcodeOld = txtBarcode.Text;
             txtBarcode.ResetText();
             txtBarcode.Focus();
             _productionId = boardNo;
             _modelId = productId;
             _result = "";
+
             MessageHelpers.SetSuccessStatus(true, "OK", $"Board '{boardNo}' OK!", lblStatus, lblMessage);
-            // Thực hiện gửi dữ liệu đi
-
-            //_serial = boardNo.Split(new[] { "_" }, 4, StringSplitOptions.None);
-            //_maxaddress = boardNo.Split(new[] { "." }, 4, StringSplitOptions.None);
-
-            //SendKeys.Send("{TAB}");
-            //SendKeys.Send("{ENTER}");
-            //SendKeys.Send(_serial[0]);
-            //SendKeys.Send("{ENTER}");
-
-            //SendKeys.Send(_maxaddress[1]);
-            //SendKeys.Send("{ENTER}");
 
             if (checkComWrite.Checked)
             {
@@ -953,6 +995,8 @@ namespace Mango_CTMS
                 _comWrite.WriteData("S");
             }
 
+            // set IsBusy=true, để cho đọc tiếp bản tiếp theo
+            IsBusy = true;
             ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
         }
 
@@ -965,49 +1009,117 @@ namespace Mango_CTMS
         {
             while (backgroundWorker1.CancellationPending == false)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(2000);
                 var allText = GetValueWindowText.GetAllTextFromWindowByTitle(cboWindows.EditValue.ToString());
+                //string allText = "10.751427478测试完成87.3OK2016/11/2 9:52:39X6AQ0683QYT2_960K 87372 K001DADF 960K87372";
+                //var broad_id_first = allText.Split(new[] { "_" }, 4, StringSplitOptions.None);
 
-                //var broad_id_first = allText.Split(new[] {"labelControl1"}, 4, StringSplitOptions.None);
-                //var broad_id_last = broad_id_first[1].Split(new[] {"123456789"}, 4, StringSplitOptions.None);
-                // Lấy giá trị serial
-                var broad_id_first = allText.Split(new[] { "S/N" }, 4, StringSplitOptions.None);
-                var broad_id_last = broad_id_first[1].Split(new[] { "NVM " }, 4, StringSplitOptions.None);
+                ////var broad_id_first = allText.Split(new[] { "labelControl1" }, 4, StringSplitOptions.None);
+                ////var broad_id_last = broad_id_first[1].Split(new[] { "123456789" }, 4, StringSplitOptions.None);
+                //// Lấy giá trị serial
+                ////var broad_id_first = allText.Split(new[] { "S/N" }, 4, StringSplitOptions.None);
+                ////var broad_id_last = broad_id_first[1].Split(new[] { "NVM " }, 4, StringSplitOptions.None);
 
-                _result = $"{broad_id_last[0]}";
-                if (_result.Length > 10)
-                {
-                    _workOrderItems = _workOrderItemService.Get_WORK_ORDER_ITEMS_LIKE_BoardNo(_result);
-
-                    if (_workOrderItems != null)
-                    {
-                        if (!_workOrderItems.IS_FINISHED)
-                        {
-                            backgroundWorker1.ReportProgress(0, _workOrderItems.BOARD_NO);
-                        }
-                    }
-                    else
-                    {
-                        backgroundWorker1.ReportProgress(0, _result);
-                    }
-
-                }
-
-                if (backgroundWorker1.CancellationPending)
-                {
-                    backgroundWorker1.ReportProgress(0, null);
-                }
+                //_result = $"{ broad_id_first[0].Substring(broad_id_first[0].Length - 12)}_{broad_id_first[1].Substring(0, 14)}";
+                ////_result = broad_id_last[0].ToString();
+                //if (_result.Length > 23)
+                //{
+                //    _workOrderItems = _workOrderItemService.Get_WORK_ORDER_ITEMS_LIKE_BoardNo(_result);
+                //    if (_workOrderItems != null)
+                //    {
+                //        if (!_workOrderItems.IS_FINISHED)
+                //        {
+                //            backgroundWorker1.ReportProgress(0, _workOrderItems.BOARD_NO);
+                //        }
+                //        else
+                //        {
+                //            SetStatusDefault("OK");
+                //            SetMessageDefault("Broad is finished.");
+                //        }
+                //    }
+                //    else
+                //    {
+                //        backgroundWorker1.ReportProgress(0, _result);
+                //    }
+                //}
             }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            ActiveFormByWindowsTitle(Text);
-
-            if (_result != "")
+            string barcodeNew = e.UserState as string;
+            if (!string.IsNullOrEmpty(barcodeNew) && barcodeNew.Length > 10)
             {
-                SetText(e.UserState as string);
-                SendKeys.SendWait("{ENTER}");
+                if (lblStatus.Text != @"OK")
+                {
+                    if (_barcodeOld == barcodeNew)
+                    {
+                        SetStatusDefault("OK");
+                        SetMessageDefault("Waiting...!");
+                        RunAsyncBackgroundWorker();
+
+                        ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
+                    }
+                    else
+                    {
+                        ActiveFormByWindowsTitle(Text);
+                        SetText(barcodeNew);
+                        SendKeys.SendWait("{ENTER}");
+                    }
+                }
+                else
+                {
+                    ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
+                }
+            }
+        }
+
+        private void backgroundWorker2_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            while (backgroundWorker2.CancellationPending == false)
+            {
+                Thread.Sleep(1000);
+                //var allText = GetValueWindowText.GetAllTextFromWindowByTitle(cboWindows.EditValue.ToString());
+                //if (allText.Contains("..."))
+                //    allText = allText.Replace("...", "");
+
+                //var value = allText.Split(new[] { "." }, 4, StringSplitOptions.None);
+                //string resultSpit = value[1];
+                //_strTimeRun = resultSpit.Remove(0, 12);
+                //_strTimeRun = $"{_strTimeRun}";
+
+                //int n;
+                //if (int.TryParse(new string(_strTimeRun.Where(Char.IsDigit).ToArray()), out n))
+                //{
+                //    _strTimeRun = n.ToString();
+                //}
+                backgroundWorker2.ReportProgress(0, _strTimeRun);
+            }
+        }
+
+        private void backgroundWorker2_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            string value = e.UserState as string;
+            if (!string.IsNullOrEmpty(value))
+            {
+                var timeRun = Convert.ToInt32(value);
+                if (lblStatus.Text == @"OK")
+                {
+                    if (timeRun == 3)
+                    {
+                        txtBarcode.Focus();
+                        _result = "";
+                        _barcodeOld = "";
+                        SetStatusDefault("N/A");
+                        SetMessageDefault("Waiting...");
+                        if (!backgroundWorker1.IsBusy)
+                        {
+                            backgroundWorker1.RunWorkerAsync();
+                        }
+
+                        ActiveFormByWindowsTitle(cboWindows.EditValue.ToString());
+                    }
+                }
             }
         }
 
@@ -1019,6 +1131,38 @@ namespace Mango_CTMS
         {
             int iHandle = NativeWin32.FindWindow(null, windowsTitle);
             NativeWin32.SetForegroundWindow(iHandle);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="status"></param>
+        private void SetStatusDefault(string status)
+        {
+            if (lblStatus.InvokeRequired)
+            {
+                lblStatus.Invoke(new Action<string>(SetStatusDefault), status);
+                return;
+            }
+            lblStatus.Text = status;
+            lblStatus.Appearance.ForeColor = Color.DarkOrange;
+            lblStatus.Appearance.BackColor = Color.DarkGray;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="status"></param>
+        private void SetMessageDefault(string status)
+        {
+            if (lblMessage.InvokeRequired)
+            {
+                lblMessage.Invoke(new Action<string>(SetMessageDefault), status);
+                return;
+            }
+            lblMessage.Text = status;
+            lblMessage.Appearance.ForeColor = Color.White;
+            lblMessage.Appearance.BackColor = Color.DarkGray;
         }
     }
 }

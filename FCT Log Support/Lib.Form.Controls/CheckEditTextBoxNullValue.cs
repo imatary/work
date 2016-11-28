@@ -1,4 +1,5 @@
-﻿using DevExpress.Utils;
+﻿using System;
+using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.DXErrorProvider;
 using System.Drawing;
@@ -74,6 +75,7 @@ namespace Lib.Form.Controls
         public static void SetColorDefaultTextControl(BaseEdit control)
         {
             control.Properties.Appearance.BorderColor = Color.LightGray;
+            
         }
         /// <summary>
         /// Not good reset default
@@ -140,8 +142,40 @@ namespace Lib.Form.Controls
             label.Text = message;
             label.Refresh();
             label.ResetForeColor();
-            label.Appearance.BackColor = Color.Red;
-            label.Appearance.ForeColor = Color.Yellow;
+            label.Appearance.BackColor = Color.DarkRed;
+            label.Appearance.ForeColor = Color.White;
+        }
+
+        public static void SetColorErrorMessage(LabelControl label, string message)
+        {
+            label.Text = message;
+            label.Refresh();
+            label.ResetForeColor();
+            label.BackColor = Color.White;
+            label.ForeColor = Color.DarkRed;
+        }
+        /// <summary>
+        /// BackColor = Color.Red;
+        /// ForeColor = Color.White;
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="message"></param>
+        public static void SetLabelBackColorErrorMessage(Label label, string message)
+        {
+            label.Text = message;
+            label.Refresh();
+            label.ResetForeColor();
+            label.BackColor = Color.DarkRed;
+            label.ForeColor = Color.White;
+        }
+
+        public static void SetColorErrorMessage(Label label, string message)
+        {
+            label.Text = message;
+            label.Refresh();
+            label.ResetForeColor();
+            label.BackColor = Color.White;
+            label.ForeColor = Color.DarkRed;
         }
 
         public static void SetBackColorSuccessMessage(LabelControl label, string message)
@@ -150,7 +184,7 @@ namespace Lib.Form.Controls
             label.Refresh();
             label.ResetForeColor();
             label.Appearance.BackColor = Color.Green;
-            label.Appearance.ForeColor = Color.Yellow;
+            label.Appearance.ForeColor = Color.White;
         }
     }
 }
