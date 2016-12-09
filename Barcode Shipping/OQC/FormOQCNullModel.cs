@@ -15,12 +15,14 @@ namespace OQC
         private readonly IqcService _iqcService = new IqcService();
         private readonly OQCService _oqcService;
         private readonly ModelService _modelService;
+        private DateTime _dateTimeCheck;
         public FormOQCNullModel()
         {
             _oqcService = new OQCService();
             _modelService = new ModelService();
             InitializeComponent();
             lblCurentVersion.Text = StringHelper.GetRunningVersion();
+            _dateTimeCheck = Ultils.GetNetworkDateTime();
         }
 
         private void FormOQCNullModel_Load(object sender, EventArgs e)
@@ -240,7 +242,7 @@ namespace OQC
 
                                 if (!_iqcService.CheckResultExits(productionId, operationId))
                                 {
-                                    _iqcService.InsertResult(productionId, operationId, judge, operatorId);
+                                    _iqcService.InsertResult(productionId, operationId, judge, operatorId, _dateTimeCheck);
                                 }
                                 else
                                 {
@@ -281,7 +283,7 @@ namespace OQC
 
                             if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
                             {
-                                _iqcService.InsertResult(productionId, operationId, judge, operatorId);
+                                _iqcService.InsertResult(productionId, operationId, judge, operatorId, _dateTimeCheck);
                             }
                             else
                             {
@@ -306,7 +308,7 @@ namespace OQC
                 else if (operationId >= 2)
                 {
                     _iqcService.UpdateLogs(productionId, lineId, txtMacAddress.Text, boxId, lblCurentModel.Text, null, operatorId);
-                    _iqcService.InsertResult(productionId, operationId, judge, operatorId);
+                    _iqcService.InsertResult(productionId, operationId, judge, operatorId, _dateTimeCheck);
 
                     logs = _oqcService.GetLogsByBoxIdAndDate(boxId, dateCheck).ToList();
                     gridControlData.Refresh();

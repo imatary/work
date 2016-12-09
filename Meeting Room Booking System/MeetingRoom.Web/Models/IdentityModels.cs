@@ -104,16 +104,6 @@ namespace MeetingRoom.Web.Models
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "cuongpv", Email = "cuongpham@umcvn.com"};
-
-                manager.Create(user, "umcevn");
-                manager.AddToRole(user.Id, "Manager");
-            }
-
-            if (!context.Users.Any(u => u.UserName == "cuongpv"))
-            {
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
                 var user = new ApplicationUser { UserName = "cuongpv", Email = "cuongpham@umcvn.com" };
 
                 manager.Create(user, "umcevn");

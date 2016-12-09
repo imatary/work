@@ -1,0 +1,205 @@
+﻿@model EmployeeViewModel
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- Bread crumb is created dynamically -->
+    <!-- row -->
+    <div class="row">
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER --><i class="fa-fw fa fa-file-o"></i> Profile 
+                <span><i class="fa fa-xs fa-chevron-right ">&nbsp;</i>@Model.ApplicationUser.UserName</span>
+            </h1>
+        </div>
+        <!-- end col -->
+        <!-- right side of the page with the sparkline graphs -->
+        <!-- col -->
+        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+            <!-- sparks -->
+            <ul id="sparks">
+                <li class="sparks-info">
+                    <h5> My Income <span class="txt-color-blue">$47,171</span></h5>
+                    <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+                        1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+                    </div>
+                </li>
+                <li class="sparks-info">
+                    <h5> Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+                    <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                        110,150,300,130,400,240,220,310,220,300, 270, 210
+                    </div>
+                </li>
+                <li class="sparks-info">
+                    <h5> Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+                    <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                        110,150,300,130,400,240,220,310,220,300, 270, 210
+                    </div>
+                </li>
+            </ul>
+            <!-- end sparks -->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row -->
+    <!-- row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="well well-light well-sm no-margin no-padding">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div id="myCarousel" class="carousel fade profile-carousel">
+                                        <div class="air air-bottom-right padding-10">
+                                            <a href="javascript:void(0);" class="btn txt-color-white bg-color-teal btn-sm"><i class="fa fa-check"></i> Follow</a>&nbsp; <a href="javascript:void(0);" class="btn txt-color-white bg-color-pinkDark btn-sm"><i class="fa fa-link"></i> Connect</a>
+                                        </div>
+                                        <div class="air air-top-left padding-10">
+                                            <h4 class="txt-color-white font-md">@DateTime.Now.ToLongDateString()</h4>
+                                        </div>
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+                                            <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            <!-- Slide 1 -->
+                                            <div class="item active">
+                                                <img src="/Content/img/demo/s1.jpg" style="width:100%;" alt="demo user">
+                                            </div>
+                                            <!-- Slide 2 -->
+                                            <div class="item">
+                                                <img src="/Content/img/demo/s2.jpg" style="width:100%;" alt="demo user">
+                                            </div>
+                                            <!-- Slide 3 -->
+                                            <div class="item">
+                                                <img src="/Content/img/demo/m3.jpg" style="width:100%;" alt="demo user">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-3 profile-pic">
+                                            <style>
+                                                .img-avatar{
+                                                    height:80px;
+                                                    width:100px;
+                                                    background-color:white;
+                                                }
+                                            </style>
+                                            @{
+                                                if (Model.ApplicationUser.Avatar != null)
+                                                {
+                                                    @Html.Image(Model.ApplicationUser.Avatar, "img-avatar", null)
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/content/img/avatars/logo.png" alt="img" style="height:100px; width:120px;">
+                                                }
+                                            }
+                                            <div class="padding-10">
+                                                <h4 class="font-md">
+                                                    <strong>10</strong>
+                                                    <br>
+                                                    <small>Tasks</small>
+                                                </h4>
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h1>
+                                                <span class="semi-bold">@Model.ApplicationUser.UserName</span>
+                                                <br>
+                                                <small><b>@Model.ApplicationUser.Position</b></small>
+                                            </h1>
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    <p class="text-muted">
+                                                        <i class="fa fa-phone"></i>&nbsp;&nbsp;<span class="txt-color-blueDark">2998</span>
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="text-muted">
+                                                        <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a href="mailto:@Model.ApplicationUser.Email">@Model.ApplicationUser.Email</a>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h1><small>Other staffs</small></h1>
+                                            <ul class="list-inline friends-list">
+                                                @{
+                                                    var otherStaffs = Model.Users.Where(u => u.Id != Model.ApplicationUser.Id);
+                                                    if(otherStaffs.Count() > 15)
+                                                    {
+                                                        otherStaffs = otherStaffs.Take(15);
+                                                    }
+                                                    foreach (var item in otherStaffs)
+                                                    {
+                                                        <li>
+                                                            <a href="@Url.Action("Employee", "User", new { id = item.Id })">
+                                                                @if (item.Avatar != null)
+                                                                {
+                                                                    @Html.Image(item.Avatar, null, null)
+                                                                }
+                                                                else
+                                                                {
+                                                                    <img src="~/content/img/avatars/logo.png" alt="@item.UserName">
+                                                                }
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <hr>
+                                    <div class="padding-10">
+                                        <ul class="nav nav-tabs tabs-pull-left">
+                                            <li class="active">
+                                                <a href="#a1" data-toggle="tab">WEEKLY WORKING SCHEDULE</a>
+                                            </li>
+                                            <li>
+                                                <a href="#a2" data-toggle="tab">New Members</a>
+                                            </li>
+                                            <li class="pull-right">
+                                                <span class="margin-top-10 display-inline"><i class="fa fa-rss text-success"></i> Activity</span>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content padding-top-10">
+                                            <div class="tab-pane fade in active" id="a1">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-xs-12">
+                                                        <h2>WEEKLY WORKING SCHEDULE IN HERE</h2>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="a2">
+                                                <div class="alert alert-info fade in">
+                                                    <button class="close" data-dismiss="alert">
+                                                        ×
+                                                    </button>
+                                                    <i class="fa-fw fa fa-info"></i>
+                                                    <strong>51 new members </strong>joined today!
+                                                </div>
+                                            </div><!-- end tab -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end row -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- end row -->
+</div>
+<!-- END MAIN CONTENT -->

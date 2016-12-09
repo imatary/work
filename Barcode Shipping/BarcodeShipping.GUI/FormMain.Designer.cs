@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -133,6 +136,7 @@
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 28F, System.Drawing.FontStyle.Bold);
+            this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelControl1.Location = new System.Drawing.Point(198, 0);
@@ -217,6 +221,8 @@
             // lblAddPCB
             // 
             this.lblAddPCB.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAddPCB.Appearance.Options.UseFont = true;
+            this.lblAddPCB.Appearance.Options.UseTextOptions = true;
             this.lblAddPCB.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblAddPCB.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblAddPCB.Location = new System.Drawing.Point(3, 189);
@@ -245,6 +251,8 @@
             // lblBoxNumber
             // 
             this.lblBoxNumber.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBoxNumber.Appearance.Options.UseFont = true;
+            this.lblBoxNumber.Appearance.Options.UseTextOptions = true;
             this.lblBoxNumber.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblBoxNumber.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblBoxNumber.Location = new System.Drawing.Point(3, 158);
@@ -273,6 +281,8 @@
             // lblPO
             // 
             this.lblPO.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPO.Appearance.Options.UseFont = true;
+            this.lblPO.Appearance.Options.UseTextOptions = true;
             this.lblPO.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblPO.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblPO.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -285,6 +295,8 @@
             // lblWorkingOder
             // 
             this.lblWorkingOder.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWorkingOder.Appearance.Options.UseFont = true;
+            this.lblWorkingOder.Appearance.Options.UseTextOptions = true;
             this.lblWorkingOder.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblWorkingOder.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblWorkingOder.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -321,9 +333,15 @@
             this.gridLookUpEditModelID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             serializableAppearanceObject1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             serializableAppearanceObject1.Options.UseFont = true;
+            serializableAppearanceObject2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            serializableAppearanceObject2.Options.UseFont = true;
+            serializableAppearanceObject3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            serializableAppearanceObject3.Options.UseFont = true;
+            serializableAppearanceObject4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            serializableAppearanceObject4.Options.UseFont = true;
             this.gridLookUpEditModelID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Add", 45, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("gridLookUpEditModelID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Add", 45, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, ((System.Drawing.Image)(resources.GetObject("gridLookUpEditModelID.Properties.Buttons"))), "", new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, true)});
             this.gridLookUpEditModelID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.gridLookUpEditModelID.Properties.NullText = "";
             this.gridLookUpEditModelID.Properties.NullValuePrompt = "Enter the Model value";
@@ -368,6 +386,8 @@
             // lblModel
             // 
             this.lblModel.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModel.Appearance.Options.UseFont = true;
+            this.lblModel.Appearance.Options.UseTextOptions = true;
             this.lblModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblModel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblModel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -380,6 +400,8 @@
             // lblOperator
             // 
             this.lblOperator.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOperator.Appearance.Options.UseFont = true;
+            this.lblOperator.Appearance.Options.UseTextOptions = true;
             this.lblOperator.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblOperator.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblOperator.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -454,6 +476,8 @@
             // lblQtyPOTitle
             // 
             this.lblQtyPOTitle.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.lblQtyPOTitle.Appearance.Options.UseFont = true;
+            this.lblQtyPOTitle.Appearance.Options.UseTextOptions = true;
             this.lblQtyPOTitle.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblQtyPOTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblQtyPOTitle.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -466,6 +490,8 @@
             // lblRemainsTitle
             // 
             this.lblRemainsTitle.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.lblRemainsTitle.Appearance.Options.UseFont = true;
+            this.lblRemainsTitle.Appearance.Options.UseTextOptions = true;
             this.lblRemainsTitle.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblRemainsTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblRemainsTitle.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -479,6 +505,9 @@
             // 
             this.lblQtyPO.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
             this.lblQtyPO.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.lblQtyPO.Appearance.Options.UseFont = true;
+            this.lblQtyPO.Appearance.Options.UseForeColor = true;
+            this.lblQtyPO.Appearance.Options.UseTextOptions = true;
             this.lblQtyPO.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblQtyPO.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblQtyPO.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -492,6 +521,9 @@
             // 
             this.lblRemains.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
             this.lblRemains.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.lblRemains.Appearance.Options.UseFont = true;
+            this.lblRemains.Appearance.Options.UseForeColor = true;
+            this.lblRemains.Appearance.Options.UseTextOptions = true;
             this.lblRemains.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblRemains.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblRemains.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -520,6 +552,9 @@
             // 
             this.lblQuantityModel.Appearance.Font = new System.Drawing.Font("Tahoma", 68F, System.Drawing.FontStyle.Bold);
             this.lblQuantityModel.Appearance.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblQuantityModel.Appearance.Options.UseFont = true;
+            this.lblQuantityModel.Appearance.Options.UseForeColor = true;
+            this.lblQuantityModel.Appearance.Options.UseTextOptions = true;
             this.lblQuantityModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.lblQuantityModel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblQuantityModel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -533,6 +568,9 @@
             // 
             this.lblCountPCB.Appearance.Font = new System.Drawing.Font("Tahoma", 68F, System.Drawing.FontStyle.Bold);
             this.lblCountPCB.Appearance.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblCountPCB.Appearance.Options.UseFont = true;
+            this.lblCountPCB.Appearance.Options.UseForeColor = true;
+            this.lblCountPCB.Appearance.Options.UseTextOptions = true;
             this.lblCountPCB.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblCountPCB.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblCountPCB.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -613,6 +651,7 @@
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
+            this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelControl2.Location = new System.Drawing.Point(0, 0);
@@ -909,6 +948,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddPCB.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPO.Properties)).EndInit();
@@ -919,7 +959,9 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();

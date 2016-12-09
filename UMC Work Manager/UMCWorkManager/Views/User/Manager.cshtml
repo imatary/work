@@ -1,0 +1,90 @@
+﻿@model UMCWorkManager.ViewModels.RoleUserViewModel
+<style>
+    .img-avatar{
+        max-width:150px;
+        max-height:300px;
+    }
+</style>
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- row -->
+    <div class="row">
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER --><i class="fa-fw fa fa-home"></i> Dashboard <span>
+                    &gt;
+                    All Employess
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row -->
+    <!--
+    The ID "widget-grid" will start to initialize all widgets below
+    You do not need to use widgets if you dont want to. Simply remove
+    the <section></section> and you can use wells or panels instead
+    -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            @if (Model.ApplicationUsers.Any())
+            {
+                foreach (var item in Model.ApplicationUsers)
+                {
+                    <div class="col-sm-5 col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body status">
+                                <div class="who clearfix">
+                                    @if (item.Avatar != null)
+                                    {
+                                        @Html.Image(item.Avatar, "online", null)
+                                    }
+                                    else
+                                    {
+                                        <img src="~/content/img/avatars/logo.png" alt="@item.UserName" class="online">
+                                    }
+                                    <a href="@Url.Action("Employee", "User", new { id = item.Id })">
+                                        <span class="name"><b>@item.UserName</b>&nbsp;</span>
+                                    </a>
+                                    
+                                    <span class="from"><b>@item.Code</b> <i class="fa fa-star-o"></i></span>
+                                </div>
+                                <div class="text">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-xs-12 col-md-12 text-center">
+                                            @if (item.Avatar != null)
+                                            {
+                                                @Html.Image(item.Avatar, "img-avatar", null)
+                                            }
+                                            else
+                                            {
+                                                <img src="~/content/img/avatars/logo.png" alt="@item.UserName">
+                                            }
+                                        </div> 
+                                    </div>
+                                </div>
+                                <ul class="links">
+                                    <li>
+                                        <a href="javascript:void(0);"><i class="fa fa-smile-o "></i> Taks</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"><i class="fa fa-clock-o"></i> Overtime</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            }
+        </div>
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+</div>
+<!-- END MAIN CONTENT -->
+@section pagespecific {
+}

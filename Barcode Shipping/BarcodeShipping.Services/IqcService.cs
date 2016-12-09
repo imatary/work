@@ -494,7 +494,7 @@ namespace BarcodeShipping.Services
             string productionId,
             int operationId,
             bool judge,
-            string operatorId)
+            string operatorId, DateTime dateCheck)
         {
             object[] param =
                 {
@@ -502,7 +502,7 @@ namespace BarcodeShipping.Services
                     new SqlParameter() {ParameterName = "@operationID", Value = operationId, SqlDbType = SqlDbType.Int},
                     new SqlParameter() {ParameterName = "@judgeResult", Value = judge, SqlDbType = SqlDbType.Bit},
                     new SqlParameter() {ParameterName = "@operatorID", Value = operatorId, SqlDbType = SqlDbType.Char},
-                    new SqlParameter() {ParameterName = "@operationDate", Value = DateTime.Now, SqlDbType = SqlDbType.DateTime},
+                    new SqlParameter() {ParameterName = "@operationDate", Value = dateCheck, SqlDbType = SqlDbType.DateTime},
                     new SqlParameter("@Out_Parameter", SqlDbType.Int)
                     {
                         Direction = ParameterDirection.Output

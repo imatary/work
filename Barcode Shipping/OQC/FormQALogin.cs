@@ -89,30 +89,36 @@ namespace OQC
 
         private void txtOperatorID_EditValueChanged(object sender, EventArgs e)
         {
-            Ultils.SetColorDefaultTextControl(txtOperationID);
+            Ultils.SetColorDefaultTextControl(txtOperatorID);
+            if (!string.IsNullOrEmpty(txtOperatorID.Text))
+            {
+                txtOperatorID.Properties.Buttons[0].Visible = true;
+            }
         }
 
         private void txtLineID_EditValueChanged(object sender, EventArgs e)
         {
             dxErrorProvider1.ClearErrors();
             Ultils.SetColorDefaultTextControl(txtLineID);
-
+            if (!string.IsNullOrEmpty(txtLineID.Text))
+            {
+                txtLineID.Properties.Buttons[0].Visible = true;
+            }
         }
 
         private void txtOperationID_EditValueChanged(object sender, EventArgs e)
         {
             Ultils.SetColorDefaultTextControl(txtOperationID);
+            if (!string.IsNullOrEmpty(txtOperationID.Text))
+            {
+                txtOperationID.Properties.Buttons[0].Visible = true;
+            }
         }
 
         private void txtOperatorID_Validating(object sender, CancelEventArgs e)
         {
             string operatorCode = txtOperatorID.Text;
-            if (string.IsNullOrEmpty(operatorCode))
-            {
-                Ultils.TextControlNotNull(txtOperatorID, "Operator");
-                txtOperatorID.SelectAll();
-            }
-            else
+            if (!string.IsNullOrEmpty(operatorCode))
             {
                 _operator = _oqcService.GetOperatorByCode(operatorCode);
                 if (_operator == null)
@@ -127,22 +133,17 @@ namespace OQC
         }
         private void txtLineID_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtLineID.Text))
-            {
-                dxErrorProvider1.SetError(txtLineID, "Error! Line value required.");
-                Ultils.EditTextErrorNoMessage(txtLineID);
-            }
-            else
+            if (!string.IsNullOrEmpty(txtLineID.Text))
             {
                 int value = 0;
-                if(!int.TryParse(txtLineID.Text, out value))
+                if (!int.TryParse(txtLineID.Text, out value))
                 {
                     dxErrorProvider1.SetError(txtLineID, "Error! Line value faild.");
                     Ultils.EditTextErrorNoMessage(txtLineID);
                 }
                 else
                 {
-                    if(value > 20)
+                    if (value > 20)
                     {
                         dxErrorProvider1.SetError(txtLineID, "Error! Line value faild.");
                         Ultils.EditTextErrorNoMessage(txtLineID);
@@ -157,12 +158,7 @@ namespace OQC
 
         private void txtOperationID_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtOperationID.Text))
-            {
-                dxErrorProvider1.SetError(txtOperationID, "Error! Operation value required.");
-                Ultils.EditTextErrorNoMessage(txtOperationID);
-            }
-            else
+            if (!string.IsNullOrEmpty(txtOperationID.Text))
             {
                 int value = 0;
                 if (!int.TryParse(txtOperationID.Text, out value))
@@ -186,12 +182,7 @@ namespace OQC
         }
         private void txtProcess_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtProcess.Text))
-            {
-                dxErrorProvider1.SetError(txtProcess, "Error! Process value required.");
-                Ultils.EditTextErrorNoMessage(txtProcess);
-            }
-            else
+            if (!string.IsNullOrEmpty(txtProcess.Text))
             {
                 btnLogin.PerformClick();
             }
@@ -292,6 +283,38 @@ namespace OQC
 
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void txtOperatorID_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 0)
+            {
+                txtOperatorID.ResetText();
+                txtOperatorID.Properties.Buttons[0].Visible = false;
+            }     
+        }
+
+        private void txtLineID_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 0)
+            {
+                txtLineID.ResetText();
+                txtLineID.Properties.Buttons[0].Visible = false;
+            }
+        }
+
+        private void txtOperationID_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 0)
+            {
+                txtOperationID.ResetText();
+                txtOperationID.Properties.Buttons[0].Visible = false;
+            }
+        }
+
+        private void txtProcess_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+
         }
     }
 }

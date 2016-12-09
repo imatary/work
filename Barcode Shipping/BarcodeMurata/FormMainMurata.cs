@@ -14,6 +14,7 @@ namespace BarcodeMurata
         private readonly IqcService _iqcService = new IqcService();
         private readonly OQCService _oqcService;
         private readonly ModelService _modelService;
+        private DateTime _dateTimeCheck;
         public FormMainMurata()
         {
             InitializeComponent();
@@ -26,11 +27,13 @@ namespace BarcodeMurata
         {
             lblOperatorName.Text = Program.CurrentUser.OperatorName;
             lblLineID.Text = string.Format("LINE {0}", Program.CurrentUser.LineID);
+            _dateTimeCheck = Ultils.GetNetworkDateTime();
         }
         private void txtProductionID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
+                _dateTimeCheck = Ultils.GetNetworkDateTime();
                 if (string.IsNullOrEmpty(txtProductionID.Text))
                 {
                     Ultils.TextControlNotNull(txtProductionID, "Production ID");
@@ -248,7 +251,7 @@ namespace BarcodeMurata
 
                                         if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
                                         {
-                                            _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
+                                            _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId,_dateTimeCheck);
                                         }
                                         else
                                         {
@@ -289,7 +292,7 @@ namespace BarcodeMurata
 
                             if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
                             {
-                                _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
+                                _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId, _dateTimeCheck);
                             }
                             else
                             {
@@ -313,7 +316,7 @@ namespace BarcodeMurata
                 else if (operationId >= 2)
                 {
                     _iqcService.UpdateLogs(txtProductionID.Text, lineId, txtMacAddress.Text, boxId, lblCurentModel.Text, null, operatorId);
-                    _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId);
+                    _iqcService.InsertResult(txtProductionID.Text, operationId, judge, operatorId, _dateTimeCheck);
 
                     var refeshData = _oqcService.GetLogsByBoxId(boxId).ToList();
                     gridControlData.Refresh();
