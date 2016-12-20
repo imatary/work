@@ -153,8 +153,8 @@
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.8147F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.1853F));
             this.tableLayoutPanel7.Controls.Add(this.lblSerialNo, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.lblCurentModel, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -175,9 +175,9 @@
             this.lblSerialNo.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblSerialNo.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblSerialNo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSerialNo.Location = new System.Drawing.Point(159, 3);
+            this.lblSerialNo.Location = new System.Drawing.Point(209, 3);
             this.lblSerialNo.Name = "lblSerialNo";
-            this.lblSerialNo.Size = new System.Drawing.Size(151, 45);
+            this.lblSerialNo.Size = new System.Drawing.Size(101, 45);
             this.lblSerialNo.TabIndex = 2;
             this.lblSerialNo.Text = "Curent Model";
             // 
@@ -193,7 +193,7 @@
             this.lblCurentModel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCurentModel.Location = new System.Drawing.Point(3, 3);
             this.lblCurentModel.Name = "lblCurentModel";
-            this.lblCurentModel.Size = new System.Drawing.Size(150, 45);
+            this.lblCurentModel.Size = new System.Drawing.Size(200, 45);
             this.lblCurentModel.TabIndex = 1;
             this.lblCurentModel.Text = "Curent Model";
             // 

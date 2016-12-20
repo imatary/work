@@ -37,6 +37,10 @@ namespace BarcodeShipping.Data
         [StringLength(150)]
         public string CustomerName { get; set; }
 
+        public bool? CheckWidthModelCus { get; set; }
+
+        public string CodeMurata { get; set; }  
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PackingPO> PackingPOes { get; set; }
 

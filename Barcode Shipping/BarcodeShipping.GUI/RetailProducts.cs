@@ -515,7 +515,7 @@ namespace BarcodeShipping.GUI
             gridControlData.DataSource = null;
             if (!string.IsNullOrEmpty(txtAddPCB.Text))
             {
-                if (_iqcService.CheckPcbExitsOnBoxOrShip(txtAddPCB.Text, _shippings))
+                if (_iqcService.CheckPcbExitsOnBoxOrShipCurrent(txtAddPCB.Text, _shippings))
                 {
                     var shippings = _iqcService.GetShippingById(txtAddPCB.Text.Trim());
                     if (shippings == null)

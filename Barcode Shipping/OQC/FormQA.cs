@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using BarcodeShipping.Services;
 using DevExpress.XtraEditors;
-using System.IO;
 using Lib.Core.Helper;
 
 namespace OQC
@@ -28,14 +27,12 @@ namespace OQC
         {
             lblOperatorName.Text = Program.CurrentUser.OperatorName;
             lblLineID.Text = string.Format("LINE {0}", Program.CurrentUser.LineID);
-            _dateTimeCheck = Ultils.GetNetworkDateTime();
         }
         private void txtProductionID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _dateTimeCheck = Ultils.GetNetworkDateTime();
-
+                _dateTimeCheck = DateTime.Now;
                 if (string.IsNullOrEmpty(txtProductionID.Text))
                 {
                     SetErrorStatus(true, "NG", $"Production ID không được để trống!");
@@ -266,9 +263,11 @@ namespace OQC
                     status = "F";
                 }
                 string modelName = null;
+                string serialNo = null;
                 if (!string.IsNullOrEmpty(lblCurentModel.Text))
                 {
                     modelName = lblCurentModel.Text;
+                    serialNo = lblSerialNo.Text;
                 }
                 else
                 {
@@ -285,9 +284,9 @@ namespace OQC
                         // Nếu PCB mới bắn vào chưa có trong Box
                         if (log == null)
                         {
-                            var model = _modelService.GetModelById(logs.FirstOrDefault().ModelID);
+                            //var model = _modelService.GetModelById(logs.FirstOrDefault().ModelID);
                             // Nếu Production ID, có Model giống với Model hiện tại
-                            if (productionId.Contains(model.ModelID) && productionId.Contains(model.SerialNo))
+                            if (productionId.Contains(modelName) && productionId.Contains(serialNo))
                             {
                                 string tmp = lblQuantityModel.Text.Replace("/", "");
                                 int countPcbInBox = int.Parse(lblCountPCB.Text);
@@ -303,7 +302,7 @@ namespace OQC
                                 {
                                     try
                                     {
-                                        _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo());
+                                        _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo(), "tmp");
 
                                         if (!_iqcService.CheckResultExits(productionId, operationId))
                                         {
@@ -357,7 +356,7 @@ namespace OQC
                     {
                         try
                         {
-                            _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo());
+                            _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo(), "tmp");
 
                             if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
                             {
@@ -386,7 +385,7 @@ namespace OQC
                 }
                 else if (operationId >= 2)
                 {
-                    _iqcService.UpdateLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, null, operatorId);
+                    _iqcService.UpdateLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, null, operatorId, "tmp");
                     _iqcService.InsertResult(productionId, operationId, judge, operatorId, _dateTimeCheck);
 
                     logs = _oqcService.GetLogsByBoxId(boxId).ToList();
@@ -527,9 +526,6 @@ namespace OQC
             txtProductionID.Focus();
             txtProductionID.SelectAll();
         }
-
-        
-
         private void txtProductionID_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 0)

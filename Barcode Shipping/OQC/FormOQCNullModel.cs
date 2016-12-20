@@ -238,7 +238,7 @@ namespace OQC
                         {
                             try
                             {
-                                _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelName, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo());
+                                _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelName, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo(), "tmp");
 
                                 if (!_iqcService.CheckResultExits(productionId, operationId))
                                 {
@@ -279,7 +279,7 @@ namespace OQC
                     {
                         try
                         {
-                            _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelName, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo());
+                            _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelName, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo(), "tmp");
 
                             if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
                             {
@@ -307,7 +307,7 @@ namespace OQC
                 }
                 else if (operationId >= 2)
                 {
-                    _iqcService.UpdateLogs(productionId, lineId, txtMacAddress.Text, boxId, lblCurentModel.Text, null, operatorId);
+                    _iqcService.UpdateLogs(productionId, lineId, txtMacAddress.Text, boxId, lblCurentModel.Text, null, operatorId, "tmp");
                     _iqcService.InsertResult(productionId, operationId, judge, operatorId, _dateTimeCheck);
 
                     logs = _oqcService.GetLogsByBoxIdAndDate(boxId, dateCheck).ToList();

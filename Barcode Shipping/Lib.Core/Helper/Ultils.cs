@@ -49,14 +49,15 @@ namespace Lib.Core.Helper
             gridLookUpEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red;
             gridLookUpEdit.Focus();
         }
-        public static void EditTextErrorNoMessage(TextEdit textEdit)
+        public static void EditTextErrorNoMessage(BaseEdit textEdit)
         {
             textEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red;
             textEdit.Focus();
+            textEdit.ResetText();
             textEdit.SelectAll();
         }
 
-        public static void SetColorErrorTextControl(TextEdit textEdit, string title)
+        public static void SetColorErrorTextControl(BaseEdit textEdit, string title)
         {
             textEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red;
             textEdit.Focus();
@@ -64,7 +65,7 @@ namespace Lib.Core.Helper
             MessageBox.Show(title, Resource.MessageBoxErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public static void SetColorDefaultTextControl(TextEdit textEdit)
+        public static void SetColorDefaultTextControl(BaseEdit textEdit)
         {
             textEdit.Properties.Appearance.BorderColor = System.Drawing.Color.LightGray;
         }

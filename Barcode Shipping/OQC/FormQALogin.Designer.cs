@@ -39,20 +39,20 @@
             this.lblLineID = new DevExpress.XtraEditors.LabelControl();
             this.lblOperationID = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
             this.txtOperatorID = new DevExpress.XtraEditors.ButtonEdit();
             this.txtLineID = new DevExpress.XtraEditors.ButtonEdit();
             this.txtOperationID = new DevExpress.XtraEditors.ButtonEdit();
             this.txtProcess = new DevExpress.XtraEditors.ButtonEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperatorID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLineID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperationID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProcess.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -147,32 +147,6 @@
             this.labelControl2.TabIndex = 4;
             this.labelControl2.Text = "Process:";
             // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 20F, System.Drawing.FontStyle.Bold);
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(98, 12);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(121, 33);
-            this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "QA Login";
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnLogin.Appearance.Options.UseFont = true;
-            this.btnLogin.Image = ((System.Drawing.Image)(resources.GetObject("btnLogin.Image")));
-            this.btnLogin.Location = new System.Drawing.Point(235, 211);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(110, 31);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "Login (Ctrl+L)";
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // dxErrorProvider1
-            // 
-            this.dxErrorProvider1.ContainerControl = this;
-            // 
             // txtOperatorID
             // 
             this.txtOperatorID.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -254,6 +228,32 @@
             this.txtProcess.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtProcess_PreviewKeyDown);
             this.txtProcess.Validating += new System.ComponentModel.CancelEventHandler(this.txtProcess_Validating);
             // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 20F, System.Drawing.FontStyle.Bold);
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Location = new System.Drawing.Point(98, 12);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(121, 33);
+            this.labelControl1.TabIndex = 1;
+            this.labelControl1.Text = "QA Login";
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnLogin.Appearance.Options.UseFont = true;
+            this.btnLogin.Image = ((System.Drawing.Image)(resources.GetObject("btnLogin.Image")));
+            this.btnLogin.Location = new System.Drawing.Point(235, 211);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(110, 31);
+            this.btnLogin.TabIndex = 2;
+            this.btnLogin.Text = "Login (Ctrl+L)";
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
+            // 
             // FormQALogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,11 +273,11 @@
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperatorID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLineID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperationID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProcess.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -102,7 +102,7 @@ namespace BarcodeShipping.GUI
                             InsertOrUpdatePo(_currentModel.ModelID, _currentModel.ModelName, txtPO.Text);
                             gridControlData.DataSource = null;
                             _shippings = new List<Shipping>();
-                            txtModel.Focus();
+                            txtBoxID.Focus();
                             txtBoxID.Text = string.Empty;
                             lblCountPCB.Text = @"0";
                         }
@@ -163,11 +163,12 @@ namespace BarcodeShipping.GUI
         private void AddPcbToBox(string boxid)
         {
             gridControlData.DataSource = null;
-            if (!string.IsNullOrEmpty(txtAddPCB.Text))
+            string addPcb = txtAddPCB.Text.Trim();
+            if (!string.IsNullOrEmpty(addPcb))
             {
-                if (_iqcService.CheckPcbExitsOnBoxOrShip(txtAddPCB.Text.Trim(), _shippings))
+                if (_iqcService.CheckPcbExitsOnBoxOrShipCurrent(addPcb, _shippings))
                 {
-                    var ship = _iqcService.GetShippingById(txtAddPCB.Text.Trim());
+                    var ship = _iqcService.GetShippingById(addPcb);
                     if (ship == null)
                     {
                         var shipping = new Shipping()
@@ -178,7 +179,7 @@ namespace BarcodeShipping.GUI
                             WorkingOder = txtWorkingOrder.Text,
                             Quantity = 1,
                             BoxID = boxid,
-                            ProductID = txtAddPCB.Text,
+                            ProductID = addPcb,
                             PO_NO = txtPO.Text,
                             MacAddress = txtAddPCB.Text,
                             DateCheck = DateTime.Now,
@@ -188,8 +189,6 @@ namespace BarcodeShipping.GUI
                         gridControlData.DataSource = _shippings;
                         lblCountPCB.Text = _shippings.Count.ToString(CultureInfo.InvariantCulture);
                         lblRemains.Text = (int.Parse(lblRemains.Text) - 1).ToString(CultureInfo.InvariantCulture);
-
-                        txtAddPCB.Text = string.Empty;
 
                         if (_shippings.Count == _currentModel.Quantity)
                         {
@@ -420,6 +419,68 @@ namespace BarcodeShipping.GUI
                 EditTextBox_PreviewKeyDown();
             }
         }
+        private void txtModel_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (string.IsNullOrEmpty(txtModel.Text))
+                {
+                    Ultils.TextControlNotNull(txtModel, "Model");
+                }
+                else if (string.IsNullOrEmpty(txtPO.Text))
+                {
+                    Ultils.TextControlNotNull(txtPO, "PO");
+                }
+                else
+                {
+                    string input = txtModel.Text.Trim();
+                    string po_no = txtPO.Text.Trim();
+
+                    if (input.Length > 6 && input.Substring(0, 3) == "3N4")
+                    {
+                        input = input.Remove(0, 3);
+                        string[] array = input.Split(separator: new[] { " " }, count: 4, options: StringSplitOptions.None);
+                        string model = $"{array[0]} {array[1]}";
+
+                        _currentModel = _modelService.GetModelByName(model, FujiXerox);
+
+                        if (_currentModel != null)
+                        {
+                            lblQuantityModel.Text = $"/{_currentModel.Quantity}";
+
+                            if (!string.IsNullOrEmpty(po_no))
+                            {
+                                if (!GetQtyPoAndRemainsByWorkingOderAndPoNo(_currentModel.ModelID, po_no))
+                                {
+                                    _iqcService.InsertPo(_currentModel.ModelID, po_no, quantityPO, txtOperatorCode.Text);
+                                    GetQtyPoAndRemainsByWorkingOderAndPoNo(_currentModel.ModelID, po_no);
+                                }
+                                else
+                                {
+                                    InsertOrUpdatePo(_currentModel.ModelID, model, po_no);
+                                }
+                                txtModel.Text = model;
+                                txtBoxID.Focus();
+                            }
+                            else
+                            {
+                                Ultils.EditTextErrorMessage(txtModel, "PO NO không được để trống. Vui lòng bắn nhập vào PO NO!");
+                            }
+                        }
+                        else
+                        {
+                            Ultils.EditTextErrorMessage(txtModel, "Model không tồn tại. Vui lòng kiểm tra lại!");
+                            txtModel.ResetText();
+                            txtModel.Focus();
+                        }
+                    }
+                    else
+                    {
+                        Ultils.EditTextErrorMessage(txtModel, "Model không đúng định dạng. Vui lòng bắn lại!");
+                    }
+                }
+            }
+        }
         private void txtAddPCB_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -431,6 +492,7 @@ namespace BarcodeShipping.GUI
                 EditTextAddPCB_PreviewKeyDown();
             }
         }
+
         private void txtOperatorCode_EditValueChanged(object sender, EventArgs e)
         {
             Ultils.SetColorDefaultTextControl(txtOperatorCode);
@@ -450,6 +512,10 @@ namespace BarcodeShipping.GUI
         private void txtAddPCB_EditValueChanged(object sender, EventArgs e)
         {
             Ultils.SetColorDefaultTextControl(txtAddPCB);
+        }
+        private void txtModel_EditValueChanged(object sender, EventArgs e)
+        {
+            Ultils.SetColorDefaultTextControl(txtModel);
         }
         private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
@@ -489,6 +555,25 @@ namespace BarcodeShipping.GUI
                 {
                     Ultils.EditTextErrorMessage(txtBoxID, "BOX ID phải bắt đầu bằng F00");
                     txtBoxID.SelectAll();
+                }
+            }
+        }
+
+        private void txtModel_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string model = txtModel.Text.Trim();
+            if (!string.IsNullOrEmpty(model) && model.Length > 6)
+            {
+                var checkModel = _modelService.GetModelByName(model, "FujiXerox");
+                if (checkModel == null)
+                {
+                    Ultils.EditTextErrorMessage(txtModel, "Sai Model. vui lòng kiểm tra lại!");
+                    txtModel.ResetText();
+                    txtModel.SelectAll();
+                }
+                else
+                {
+                    txtBoxID.Focus();
                 }
             }
         }
@@ -660,10 +745,10 @@ namespace BarcodeShipping.GUI
             }
             else
             {
-                string productionId = txtAddPCB.Text;
+                string productionId = txtAddPCB.Text.Trim();
                 if (CheckModels(productionId))
                 {
-                    AddPcbToBox(txtBoxID.Text);
+                    AddPcbToBox(txtBoxID.Text.Trim());
                 }
                 else
                 {
@@ -705,66 +790,6 @@ namespace BarcodeShipping.GUI
             _currentModel = new Model();
             _currentPo = new PackingPO();
         }
-
-
-        private void txtModel_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                if (string.IsNullOrEmpty(txtModel.Text))
-                {
-                    Ultils.TextControlNotNull(txtModel, "Model");
-                }
-                else if(string.IsNullOrEmpty(txtPO.Text))
-                {
-                    Ultils.TextControlNotNull(txtPO, "PO");
-                }
-                else
-                {
-                    string input = txtModel.Text;
-                    string po_no = txtPO.Text;
-                    if(input.Length > 6)
-                    {
-                        if(input.Substring(0,3) == "3N4")
-                        {
-                            input = input.Remove(0, 3);
-                            //input = input.Substring(0, input.Length - 3);
-                            string[] array = input.Split(separator: new[] { " " }, count: 4, options: StringSplitOptions.None);
-                            string model = $"{array[0]} {array[1]}";
-
-                            _currentModel = _modelService.GetModelByName(model, FujiXerox);
-
-                            if (_currentModel != null)
-                            {
-                                lblQuantityModel.Text = $"/{_currentModel.Quantity}";
-                            }
-
-                            if (!GetQtyPoAndRemainsByWorkingOderAndPoNo(_currentModel.ModelID, po_no))
-                            {
-                                _iqcService.InsertPo(_currentModel.ModelID, po_no, quantityPO, txtOperatorCode.Text);
-                                GetQtyPoAndRemainsByWorkingOderAndPoNo(_currentModel.ModelID, po_no);
-                                
-                            }
-                            else
-                            {
-                                InsertOrUpdatePo(_currentModel.ModelID, model, po_no);
-                            }
-                            txtModel.Text = model;
-                            txtBoxID.Focus();
-                        }
-                        else
-                        {
-                            Ultils.EditTextErrorMessage(txtModel, "Model không đúng định dạng. Vui lòng bắn lại!");
-                        }
-                    }
-                    else
-                    {
-                        Ultils.EditTextErrorMessage(txtModel, "Model không đúng định dạng. Vui lòng bắn lại!");
-                    }
-                }
-            }
-        }
-
         private void btnVersionOld_Click(object sender, EventArgs e)
         {
             var old = new FormMain();
@@ -775,5 +800,7 @@ namespace BarcodeShipping.GUI
             _currentModel = new Model();
             _currentPo = new PackingPO();
         }
+
+        
     }
 }

@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="IqcService.cs" />
     <Compile Include="ModelService.cs" />
+    <Compile Include="MurataService.cs" />
     <Compile Include="OperatorService.cs" />
     <Compile Include="OQCService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -135,6 +135,8 @@
             // labelControl3
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Appearance.Options.UseTextOptions = true;
             this.labelControl3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelControl3.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -163,6 +165,9 @@
             // 
             this.lblSerialNo.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
             this.lblSerialNo.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSerialNo.Appearance.Options.UseFont = true;
+            this.lblSerialNo.Appearance.Options.UseForeColor = true;
+            this.lblSerialNo.Appearance.Options.UseTextOptions = true;
             this.lblSerialNo.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblSerialNo.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblSerialNo.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -176,6 +181,9 @@
             // 
             this.lblCurentModel.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
             this.lblCurentModel.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblCurentModel.Appearance.Options.UseFont = true;
+            this.lblCurentModel.Appearance.Options.UseForeColor = true;
+            this.lblCurentModel.Appearance.Options.UseTextOptions = true;
             this.lblCurentModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblCurentModel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblCurentModel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -188,6 +196,7 @@
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 28F, System.Drawing.FontStyle.Bold);
+            this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelControl1.Location = new System.Drawing.Point(182, 0);
@@ -285,6 +294,8 @@
             // lblProductionID
             // 
             this.lblProductionID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductionID.Appearance.Options.UseFont = true;
+            this.lblProductionID.Appearance.Options.UseTextOptions = true;
             this.lblProductionID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblProductionID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -297,6 +308,7 @@
             // lblOperatorName
             // 
             this.lblOperatorName.Appearance.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
+            this.lblOperatorName.Appearance.Options.UseFont = true;
             this.lblOperatorName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblOperatorName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblOperatorName.Location = new System.Drawing.Point(137, 3);
@@ -309,6 +321,8 @@
             // 
             this.lblLineID.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Bold);
             this.lblLineID.Appearance.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblLineID.Appearance.Options.UseFont = true;
+            this.lblLineID.Appearance.Options.UseForeColor = true;
             this.lblLineID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblLineID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblLineID.Location = new System.Drawing.Point(137, 34);
@@ -320,6 +334,8 @@
             // lblMacAddress
             // 
             this.lblMacAddress.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMacAddress.Appearance.Options.UseFont = true;
+            this.lblMacAddress.Appearance.Options.UseTextOptions = true;
             this.lblMacAddress.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblMacAddress.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -333,6 +349,8 @@
             // lblBoxID
             // 
             this.lblBoxID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBoxID.Appearance.Options.UseFont = true;
+            this.lblBoxID.Appearance.Options.UseTextOptions = true;
             this.lblBoxID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblBoxID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblBoxID.Location = new System.Drawing.Point(3, 127);
@@ -344,6 +362,8 @@
             // lblJudge
             // 
             this.lblJudge.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJudge.Appearance.Options.UseFont = true;
+            this.lblJudge.Appearance.Options.UseTextOptions = true;
             this.lblJudge.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblJudge.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblJudge.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -431,6 +451,9 @@
             // 
             this.lblQuantityModel.Appearance.Font = new System.Drawing.Font("Tahoma", 68F, System.Drawing.FontStyle.Bold);
             this.lblQuantityModel.Appearance.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblQuantityModel.Appearance.Options.UseFont = true;
+            this.lblQuantityModel.Appearance.Options.UseForeColor = true;
+            this.lblQuantityModel.Appearance.Options.UseTextOptions = true;
             this.lblQuantityModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.lblQuantityModel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblQuantityModel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -445,6 +468,9 @@
             // 
             this.lblCountPCB.Appearance.Font = new System.Drawing.Font("Tahoma", 68F, System.Drawing.FontStyle.Bold);
             this.lblCountPCB.Appearance.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblCountPCB.Appearance.Options.UseFont = true;
+            this.lblCountPCB.Appearance.Options.UseForeColor = true;
+            this.lblCountPCB.Appearance.Options.UseTextOptions = true;
             this.lblCountPCB.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblCountPCB.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblCountPCB.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -473,6 +499,9 @@
             // 
             this.lblStatus.Appearance.Font = new System.Drawing.Font("Tahoma", 30F, System.Drawing.FontStyle.Bold);
             this.lblStatus.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lblStatus.Appearance.Options.UseFont = true;
+            this.lblStatus.Appearance.Options.UseForeColor = true;
+            this.lblStatus.Appearance.Options.UseTextOptions = true;
             this.lblStatus.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblStatus.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblStatus.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
@@ -490,6 +519,9 @@
             // 
             this.lblStatusMessage.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.lblStatusMessage.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lblStatusMessage.Appearance.Options.UseFont = true;
+            this.lblStatusMessage.Appearance.Options.UseForeColor = true;
+            this.lblStatusMessage.Appearance.Options.UseTextOptions = true;
             this.lblStatusMessage.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
             this.lblStatusMessage.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblStatusMessage.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
@@ -579,6 +611,7 @@
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
+            this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl2.Dock = System.Windows.Forms.DockStyle.Left;
             this.labelControl2.Location = new System.Drawing.Point(2, 2);
@@ -775,7 +808,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.tableLayoutPanelModel.ResumeLayout(false);
+            this.tableLayoutPanelModel.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -786,7 +821,9 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

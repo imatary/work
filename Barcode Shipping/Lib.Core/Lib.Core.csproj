@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\MessageBoxHelper.cs" />
+    <Compile Include="Helper\NtpClient.cs" />
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Helper\Ultils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -132,11 +132,11 @@ namespace BarcodeShipping.Services
         /// Chưa có thì thực hiện thêm mới vào danh sách
         /// </summary>
         /// <returns></returns>
-        public bool CheckPcbExitsOnBoxOrShip(string productId, IEnumerable<Shipping> shippings)
+        public bool CheckPcbExitsOnBoxOrShipCurrent(string productId, IEnumerable<Shipping> shippings)
         {
             if (!string.IsNullOrEmpty(productId))
             {
-                var shipping = shippings.FirstOrDefault(p => p.ProductID == productId);
+                var shipping = shippings.SingleOrDefault(p => p.ProductID == productId);
                 if (shipping != null)
                 {
                     return false;
@@ -261,7 +261,8 @@ namespace BarcodeShipping.Services
             string operatorCode,
             bool qaCheck,
             string checkBy, 
-            string client)
+            string client,
+            string lebelMurata)
         {
             object[] param =
                 {
@@ -278,7 +279,7 @@ namespace BarcodeShipping.Services
                     new SqlParameter() {ParameterName = "@qaCheck", Value = qaCheck, SqlDbType = SqlDbType.Bit},
                     new SqlParameter() {ParameterName = "@checkBy", Value = checkBy, SqlDbType = SqlDbType.VarChar},
                     new SqlParameter() {ParameterName = "@clinetInput", Value = client, SqlDbType = SqlDbType.NVarChar},
- 
+                    new SqlParameter() {ParameterName = "@lebelMurata", Value = lebelMurata, SqlDbType = SqlDbType.VarChar},
                     new SqlParameter("@Out_Parameter", SqlDbType.Int)
                     {
                         Direction = ParameterDirection.Output
@@ -286,7 +287,7 @@ namespace BarcodeShipping.Services
                 };
             try
             {
-                _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_InsertLogs] @productionID, @lineId, @macAddress, @boxId, @modelId, @workingOrder, @dateCheck, @timeCheck, @quantity, @operatorCode, @qaCheck, @checkBy, @clinetInput", param);
+                _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_InsertLogs] @productionID, @lineId, @macAddress, @boxId, @modelId, @workingOrder, @dateCheck, @timeCheck, @quantity, @operatorCode, @qaCheck, @checkBy, @clinetInput, @lebelMurata", param);
             }
             catch (Exception ex)
             {
@@ -311,7 +312,8 @@ namespace BarcodeShipping.Services
             string boxId,
             string modelId,
             string workingOder,
-            string operatorCode)
+            string operatorCode,
+            string lebelMurata)
         {
             var log = GetPcbById(productionId);
             if (log != null)
@@ -326,7 +328,7 @@ namespace BarcodeShipping.Services
                     new SqlParameter() {ParameterName = "@dateCheck", Value = DateTime.Now.Date, SqlDbType = SqlDbType.Date},
                     new SqlParameter() {ParameterName = "@timeCheck", Value = DateTime.Now.TimeOfDay, SqlDbType = SqlDbType.Time},
                     new SqlParameter() {ParameterName = "@operatorCode", Value = operatorCode, SqlDbType = SqlDbType.VarChar},
-
+                    new SqlParameter() {ParameterName = "@lebelMurata", Value = lebelMurata, SqlDbType = SqlDbType.VarChar},
                     new SqlParameter("@Out_Parameter", SqlDbType.Int)
                     {
                         Direction = ParameterDirection.Output
@@ -334,7 +336,7 @@ namespace BarcodeShipping.Services
                 };
                 try
                 {
-                    _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_UpdateLogs] @productionID, @lineId, @macAddress, @boxId, @modelId, @dateCheck, @timeCheck, @operatorCode", param);
+                    _context.Database.ExecuteSqlCommand("EXEC [dbo].[sp_UpdateLogs] @productionID, @lineId, @macAddress, @boxId, @modelId, @dateCheck, @timeCheck, @operatorCode, @lebelMurata", param);
                 }
                 catch (Exception ex)
                 {
