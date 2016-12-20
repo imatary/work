@@ -22,7 +22,7 @@ namespace OQC
             _modelService = new ModelService();
             InitializeComponent();
             lblCurentVersion.Text = StringHelper.GetRunningVersion();
-            _dateTimeCheck = Ultils.GetNetworkDateTime();
+            _dateTimeCheck = DateTime.Now;
         }
 
         private void FormOQCNullModel_Load(object sender, EventArgs e)

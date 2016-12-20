@@ -223,8 +223,18 @@ namespace MurataSystem
                         }
                         else
                         {
-                            StartInsert(false);
-                            txtProductID.Focus();
+                            if (checkModelCUS.Checked == false)
+                            {
+                                StartInsert(true);
+                                EnableLabelMurata(false);
+                                txtProductID.Focus();
+                            }
+                            else
+                            {
+                                StartInsert(true);
+                                EnableLabelMurata(true);
+                                txtProductID.Focus();
+                            }
                         }
                     }
                     else
@@ -564,11 +574,18 @@ namespace MurataSystem
         private void StartInsert(bool enable)
         {
             txtModelUMC.Enabled = enable;
-            checkModelCUS.Enabled = enable;
-            txtModelCUS.Enabled = enable;
             txtBoxID.Enabled = enable;
         }
 
+        /// <summary>
+        /// Enable model Murata
+        /// </summary>
+        /// <param name="enable"></param>
+        private void EnableLabelMurata(bool enable)
+        {
+            txtModelCUS.Enabled = enable;
+            checkModelCUS.Enabled = enable;
+        }
         /// <summary>
         /// Reset controls
         /// </summary>
