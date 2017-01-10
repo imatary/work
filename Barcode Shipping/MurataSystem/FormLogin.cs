@@ -52,29 +52,7 @@ namespace MurataSystem
                     }
                     else
                     {
-                        txtOperationID.Focus();
-                    }
-                }
-            }
-        }
-        private void txtOperationID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (string.IsNullOrEmpty(txtOperationID.Text))
-                {
-                    Ultils.TextControlNotNull(txtOperationID, "Operation ID");
-                }
-                else
-                {
-                    int op = int.Parse(txtOperationID.Text.Trim());
-                    if (op > 3)
-                    {
-                        Ultils.EditTextErrorMessage(txtOperationID, "OperationID error!");
-                    }
-                    else
-                    {
-                        if (string.IsNullOrEmpty(txtProcess.Text.Trim()))
+                        if (txtProcess.Enabled == true)
                         {
                             txtProcess.Focus();
                         }
@@ -103,15 +81,6 @@ namespace MurataSystem
             if (!string.IsNullOrEmpty(txtLineID.Text))
             {
                 txtLineID.Properties.Buttons[0].Visible = true;
-            }
-        }
-
-        private void txtOperationID_EditValueChanged(object sender, EventArgs e)
-        {
-            Ultils.SetColorDefaultTextControl(txtOperationID);
-            if (!string.IsNullOrEmpty(txtOperationID.Text))
-            {
-                txtOperationID.Properties.Buttons[0].Visible = true;
             }
         }
 
@@ -150,36 +119,19 @@ namespace MurataSystem
                     }
                     else
                     {
-                        txtOperationID.Focus();
+                        if (txtProcess.Enabled == true)
+                        {
+                            txtProcess.Focus();
+                        }
+                        else
+                        {
+                            btnLogin.Focus();
+                        }
                     }
                 }
             }
         }
 
-        private void txtOperationID_Validating(object sender, CancelEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtOperationID.Text))
-            {
-                int value = 0;
-                if (!int.TryParse(txtOperationID.Text, out value))
-                {
-                    dxErrorProvider1.SetError(txtOperationID, "Error! Line value faild.");
-                    Ultils.EditTextErrorNoMessage(txtOperationID);
-                }
-                else
-                {
-                    if (value > 3)
-                    {
-                        dxErrorProvider1.SetError(txtOperationID, "Error! Operation value faild.");
-                        Ultils.EditTextErrorNoMessage(txtOperationID);
-                    }
-                    else
-                    {
-                        txtProcess.Focus();
-                    }
-                }
-            }
-        }
         private void txtProcess_Validating(object sender, CancelEventArgs e)
         {
             if (!string.IsNullOrEmpty(txtProcess.Text))
@@ -197,10 +149,6 @@ namespace MurataSystem
             {
                 Ultils.TextControlNotNull(txtLineID, "Line ID");
             }
-            else if (string.IsNullOrEmpty(txtOperationID.Text))
-            {
-                Ultils.TextControlNotNull(txtOperationID, "Operation ID");
-            }
             else
             {
                 var user = new User()
@@ -208,16 +156,16 @@ namespace MurataSystem
                     OperatorCode = _operator.OperatorID,
                     OperatorName = _operator.OperatorName,
                     LineID = int.Parse(txtLineID.EditValue.ToString()),
-                    OperationID = int.Parse(txtOperationID.EditValue.ToString()),
+                    OperationID = 1,
                     ProcessID = txtProcess.Text,
+                    CheckItemOnWIP = checkEdit1.Checked,
                 };
                 SaveRegistry();
                 Program.CurrentUser = user;
                 Hide();
                 if (Program.CurrentUser != null)
                 {
-                    //var qa = new FormQA();
-                    var qa = new FormMain();
+                    var qa = new FormMurata();
                     qa.ShowDialog();
                 }
                 
@@ -254,8 +202,6 @@ namespace MurataSystem
             }
         }
 
-        
-
         private void RegisterInStartup(bool isChecked)
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
@@ -276,9 +222,11 @@ namespace MurataSystem
             {
                 case Keys.F6:
                     txtProcess.Enabled = true;
+                    checkEdit1.Enabled = true;
                     break;
                 case Keys.F7:
                     txtProcess.Enabled = false;
+                    checkEdit1.Enabled = false;
                     break;
 
             }
@@ -302,16 +250,6 @@ namespace MurataSystem
                 txtLineID.Properties.Buttons[0].Visible = false;
             }
         }
-
-        private void txtOperationID_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            if (e.Button.Index == 0)
-            {
-                txtOperationID.ResetText();
-                txtOperationID.Properties.Buttons[0].Visible = false;
-            }
-        }
-
         private void txtProcess_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
 

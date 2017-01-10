@@ -29,7 +29,7 @@
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -119,6 +119,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormMurata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMurata.Designer.cs">
+      <DependentUpon>FormMurata.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,13 +137,31 @@
     <Compile Include="FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSearchPCB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSearchPCB.Designer.cs">
+      <DependentUpon>FormSearchPCB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WaitFormSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitFormSearch.Designer.cs">
+      <DependentUpon>WaitFormSearch.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormMurata.resx">
+      <DependentUpon>FormMurata.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSearchPCB.resx">
+      <DependentUpon>FormSearchPCB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -150,6 +174,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="WaitFormSearch.resx">
+      <DependentUpon>WaitFormSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>

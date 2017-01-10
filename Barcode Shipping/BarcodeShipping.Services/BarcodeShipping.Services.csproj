@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IqcService.cs" />
+    <Compile Include="MESService.cs" />
     <Compile Include="ModelService.cs" />
     <Compile Include="MurataService.cs" />
     <Compile Include="OperatorService.cs" />

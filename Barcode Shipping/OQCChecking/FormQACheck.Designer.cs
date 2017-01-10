@@ -78,6 +78,7 @@
             this.gridColumnQA_Check = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnDateCheck = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.tableLayoutPanelModel.SuspendLayout();
@@ -100,6 +101,7 @@
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -650,6 +652,8 @@
             this.gridControlData.Location = new System.Drawing.Point(0, 337);
             this.gridControlData.MainView = this.gridView1;
             this.gridControlData.Name = "gridControlData";
+            this.gridControlData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemTextEdit1});
             this.gridControlData.Size = new System.Drawing.Size(844, 240);
             this.gridControlData.TabIndex = 7;
             this.gridControlData.UseEmbeddedNavigator = true;
@@ -751,6 +755,7 @@
             this.gridColumnQA_Check.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumnQA_Check.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumnQA_Check.Caption = "Checking";
+            this.gridColumnQA_Check.ColumnEdit = this.repositoryItemTextEdit1;
             this.gridColumnQA_Check.FieldName = "QA_Check";
             this.gridColumnQA_Check.Name = "gridColumnQA_Check";
             this.gridColumnQA_Check.OptionsColumn.ReadOnly = true;
@@ -785,6 +790,11 @@
             this.gridColumnDateCheck.Visible = true;
             this.gridColumnDateCheck.VisibleIndex = 6;
             this.gridColumnDateCheck.Width = 98;
+            // 
+            // repositoryItemTextEdit1
+            // 
+            this.repositoryItemTextEdit1.AutoHeight = false;
+            this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
             // 
             // FormQACheck
             // 
@@ -833,6 +843,7 @@
             this.panelControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -888,5 +899,6 @@
         private DevExpress.XtraEditors.LabelControl lblSerialNo;
         private DevExpress.XtraEditors.LabelControl lblCurentModel;
         private System.Windows.Forms.CheckBox checkBox1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
     }
 }

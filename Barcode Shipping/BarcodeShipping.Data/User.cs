@@ -12,5 +12,7 @@
 
         public string ProcessID { get; set; }
 
+        public bool CheckItemOnWIP { get; set; }
+
     }
 }

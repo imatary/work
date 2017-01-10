@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MESSystemDbContext.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="mst_operator.cs" />
     <Compile Include="Murata.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="tbl_test_log.cs" />
     <Compile Include="tbl_test_result.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="WORK_ORDER_ITEMS.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

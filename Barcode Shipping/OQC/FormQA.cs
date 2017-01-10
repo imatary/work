@@ -284,9 +284,9 @@ namespace OQC
                         // Nếu PCB mới bắn vào chưa có trong Box
                         if (log == null)
                         {
-                            //var model = _modelService.GetModelById(logs.FirstOrDefault().ModelID);
+                            var model = _modelService.GetModelById(logs.FirstOrDefault().ModelID);
                             // Nếu Production ID, có Model giống với Model hiện tại
-                            if (productionId.Contains(modelName) && productionId.Contains(serialNo))
+                            if (productionId.Contains(model.ModelName) && productionId.Contains(model.SerialNo))
                             {
                                 string tmp = lblQuantityModel.Text.Replace("/", "");
                                 int countPcbInBox = int.Parse(lblCountPCB.Text);

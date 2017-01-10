@@ -52,9 +52,8 @@ namespace Lib.Core.Helper
         public static void EditTextErrorNoMessage(BaseEdit textEdit)
         {
             textEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red;
-            textEdit.Focus();
             textEdit.ResetText();
-            textEdit.SelectAll();
+            textEdit.Focus();
         }
 
         public static void SetColorErrorTextControl(BaseEdit textEdit, string title)

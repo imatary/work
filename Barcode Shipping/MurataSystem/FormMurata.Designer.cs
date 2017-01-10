@@ -1,6 +1,6 @@
 ﻿namespace MurataSystem
 {
-    partial class FormMain
+    partial class FormMurata
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMurata));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -285,8 +285,8 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.76087F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.84783F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.30435F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(398, 247);
             this.tableLayoutPanel2.TabIndex = 0;
@@ -333,6 +333,7 @@
             // 
             // txtModelUMC
             // 
+            this.txtModelUMC.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtModelUMC.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtModelUMC.Location = new System.Drawing.Point(123, 66);
             this.txtModelUMC.Name = "txtModelUMC";
@@ -429,9 +430,9 @@
             this.labelControl4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.labelControl4.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl4.Location = new System.Drawing.Point(3, 213);
+            this.labelControl4.Location = new System.Drawing.Point(3, 218);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(114, 31);
+            this.labelControl4.Size = new System.Drawing.Size(114, 26);
             this.labelControl4.TabIndex = 17;
             this.labelControl4.Text = "Label Murata:";
             // 
@@ -439,7 +440,7 @@
             // 
             this.txtModelCUS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtModelCUS.Enabled = false;
-            this.txtModelCUS.Location = new System.Drawing.Point(123, 213);
+            this.txtModelCUS.Location = new System.Drawing.Point(123, 218);
             this.txtModelCUS.Name = "txtModelCUS";
             this.txtModelCUS.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.txtModelCUS.Properties.Appearance.Options.UseFont = true;
@@ -457,6 +458,8 @@
             // 
             // checkModelCUS
             // 
+            this.checkModelCUS.AutoSizeInLayoutControl = true;
+            this.checkModelCUS.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkModelCUS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkModelCUS.Enabled = false;
             this.checkModelCUS.Location = new System.Drawing.Point(123, 187);
@@ -465,9 +468,11 @@
             this.checkModelCUS.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.checkModelCUS.Properties.Appearance.Options.UseFont = true;
             this.checkModelCUS.Properties.Appearance.Options.UseForeColor = true;
+            this.checkModelCUS.Properties.AutoWidth = true;
             this.checkModelCUS.Properties.Caption = "Check width Label Murata";
+            this.checkModelCUS.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Style15;
             this.checkModelCUS.Properties.ReadOnly = true;
-            this.checkModelCUS.Size = new System.Drawing.Size(272, 20);
+            this.checkModelCUS.Size = new System.Drawing.Size(272, 25);
             this.checkModelCUS.TabIndex = 19;
             // 
             // txtProductID
@@ -531,6 +536,7 @@
             // 
             // checkNG
             // 
+            this.checkNG.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkNG.Dock = System.Windows.Forms.DockStyle.Left;
             this.checkNG.Enabled = false;
             this.checkNG.Location = new System.Drawing.Point(120, 0);
@@ -546,6 +552,7 @@
             // 
             // checkPASS
             // 
+            this.checkPASS.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkPASS.Dock = System.Windows.Forms.DockStyle.Left;
             this.checkPASS.EditValue = true;
             this.checkPASS.Enabled = false;
@@ -791,6 +798,7 @@
             // 
             // btnReset
             // 
+            this.btnReset.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReset.Image = ((System.Drawing.Image)(resources.GetObject("btnReset.Image")));
             this.btnReset.Location = new System.Drawing.Point(188, 5);
             this.btnReset.Name = "btnReset";
@@ -803,6 +811,7 @@
             // 
             this.btnAction.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAction.Appearance.Options.UseFont = true;
+            this.btnAction.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAction.Image = ((System.Drawing.Image)(resources.GetObject("btnAction.Image")));
             this.btnAction.Location = new System.Drawing.Point(434, 6);
             this.btnAction.Name = "btnAction";
@@ -815,6 +824,7 @@
             // 
             this.btnSearchPCB.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearchPCB.Appearance.Options.UseFont = true;
+            this.btnSearchPCB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearchPCB.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchPCB.Image")));
             this.btnSearchPCB.Location = new System.Drawing.Point(341, 6);
             this.btnSearchPCB.Name = "btnSearchPCB";
@@ -827,6 +837,7 @@
             // 
             this.btnLogOut.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogOut.Appearance.Options.UseFont = true;
+            this.btnLogOut.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogOut.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.Image")));
             this.btnLogOut.Location = new System.Drawing.Point(260, 5);
             this.btnLogOut.Name = "btnLogOut";
@@ -1000,7 +1011,7 @@
             this.gridColumnDateCheck.VisibleIndex = 8;
             this.gridColumnDateCheck.Width = 102;
             // 
-            // FormMain
+            // FormMurata
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1014,7 +1025,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(860, 640);
-            this.Name = "FormMain";
+            this.Name = "FormMurata";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Murata System";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormQA_FormClosing);
