@@ -1,4 +1,6 @@
-﻿namespace BarcodeShipping.Data
+﻿using System;
+
+namespace BarcodeShipping.Data
 {
     public class User
     {
@@ -13,6 +15,5 @@
         public string ProcessID { get; set; }
 
         public bool CheckItemOnWIP { get; set; }
-
     }
 }

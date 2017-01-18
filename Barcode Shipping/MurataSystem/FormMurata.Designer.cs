@@ -60,6 +60,7 @@
             this.lblProductionID = new DevExpress.XtraEditors.LabelControl();
             this.lblJudge = new DevExpress.XtraEditors.LabelControl();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
             this.checkNG = new DevExpress.XtraEditors.CheckEdit();
             this.checkPASS = new DevExpress.XtraEditors.CheckEdit();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -112,6 +113,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtProductID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkNG.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkPASS.Properties)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
@@ -526,6 +528,7 @@
             // panelControl4
             // 
             this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl4.Controls.Add(this.checkEdit1);
             this.panelControl4.Controls.Add(this.checkNG);
             this.panelControl4.Controls.Add(this.checkPASS);
             this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -534,19 +537,36 @@
             this.panelControl4.Size = new System.Drawing.Size(272, 24);
             this.panelControl4.TabIndex = 22;
             // 
+            // checkEdit1
+            // 
+            this.checkEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkEdit1.EditValue = true;
+            this.checkEdit1.Location = new System.Drawing.Point(157, 0);
+            this.checkEdit1.Name = "checkEdit1";
+            this.checkEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.checkEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.checkEdit1.Properties.Appearance.Options.UseFont = true;
+            this.checkEdit1.Properties.Appearance.Options.UseForeColor = true;
+            this.checkEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.checkEdit1.Properties.Caption = "Check MES";
+            this.checkEdit1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
+            this.checkEdit1.Size = new System.Drawing.Size(115, 24);
+            this.checkEdit1.TabIndex = 2;
+            // 
             // checkNG
             // 
             this.checkNG.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkNG.Dock = System.Windows.Forms.DockStyle.Left;
             this.checkNG.Enabled = false;
-            this.checkNG.Location = new System.Drawing.Point(120, 0);
+            this.checkNG.Location = new System.Drawing.Point(86, 0);
             this.checkNG.Name = "checkNG";
             this.checkNG.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkNG.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.checkNG.Properties.Appearance.Options.UseFont = true;
             this.checkNG.Properties.Appearance.Options.UseForeColor = true;
+            this.checkNG.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.checkNG.Properties.Caption = "NG";
-            this.checkNG.Size = new System.Drawing.Size(152, 24);
+            this.checkNG.Size = new System.Drawing.Size(71, 24);
             this.checkNG.TabIndex = 1;
             this.checkNG.CheckedChanged += new System.EventHandler(this.checkNG_CheckedChanged);
             // 
@@ -562,8 +582,9 @@
             this.checkPASS.Properties.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
             this.checkPASS.Properties.Appearance.Options.UseFont = true;
             this.checkPASS.Properties.Appearance.Options.UseForeColor = true;
+            this.checkPASS.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.checkPASS.Properties.Caption = "PASS";
-            this.checkPASS.Size = new System.Drawing.Size(120, 24);
+            this.checkPASS.Size = new System.Drawing.Size(86, 24);
             this.checkPASS.TabIndex = 0;
             this.checkPASS.CheckedChanged += new System.EventHandler(this.checkPASS_CheckedChanged);
             // 
@@ -781,7 +802,7 @@
             this.labelControl2.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.labelControl2.Size = new System.Drawing.Size(295, 39);
             this.labelControl2.TabIndex = 1;
-            this.labelControl2.Text = "Products in Box";
+            this.labelControl2.Text = "PCB in Box";
             // 
             // panelControl3
             // 
@@ -1048,6 +1069,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtProductID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkNG.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkPASS.Properties)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -1134,5 +1156,6 @@
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraEditors.SimpleButton btnReset;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraEditors.CheckEdit checkEdit1;
     }
 }

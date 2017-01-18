@@ -3,30 +3,24 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using BarcodeShipping.Services;
 using DevExpress.XtraEditors;
 using Lib.Core.Helper;
-using BarcodeShipping.Data;
 using DevExpress.XtraGrid.Views.Grid;
+using NichiconSystem.Data;
 
-namespace MurataSystem
+namespace NichiconSystem
 {
-    public partial class FormMurata : Form
+    public partial class FormMain : Form
     {
-        private readonly ModelService _modelService;
-        private readonly MurataService _murataService;
-        private readonly MESService _mesService;
+        private readonly NichiconDbContext _context;
         private Model _model;
         private DateTime _dateTimeCheck;
         string modelID = "";
-        string codeMurata = "";
         string serialNo = "";
-        public FormMurata()
+        public FormMain()
         {
-            _modelService = new ModelService();
-            _murataService = new MurataService();
-            _mesService = new MESService();
             InitializeComponent();
+            _context = new NichiconDbContext();
         }
 
         private void FormQA_Load(object sender, EventArgs e)
@@ -43,8 +37,7 @@ namespace MurataSystem
         /// </summary>
         public void LoadGridLookupEditModel()
         {
-            string customerName = "Murata";
-            var models = _modelService.GetModelsByCustomerName(customerName);
+            var models = _context.Set<Model>().OrderByDescending(m => m.ModelName).ToList();
             txtModelUMC.Properties.View.OptionsBehavior.AutoPopulateColumns = false;
             txtModelUMC.Properties.DisplayMember = "ModelName";
             txtModelUMC.Properties.ValueMember = "ModelID";
@@ -58,7 +51,7 @@ namespace MurataSystem
                 string modelName = txtModelUMC.Text.Trim();
                 if (!string.IsNullOrEmpty(modelName))
                 {
-                    _model = _modelService.GetModelByName(modelName, "MURATA");
+                    _model = _context.Models.SingleOrDefault(m => m.ModelID == txtModelUMC.EditValue.ToString());
                     if (_model != null)
                     {
                         lblQuantityModel.Visible = true;
@@ -66,22 +59,14 @@ namespace MurataSystem
                         tableLayoutPanelModel.Visible = true;
                         lblCurentModel.Text = _model.ModelName;
                         lblSerialNo.Text = _model.SerialNo;
-                        lblCustomerName.Text = $"Barcode {_model.CustomerName}";
                         modelID = _model.ModelID;
 
-                        if (_model.CheckWidthModelCus == true)
-                        {
-                            EnbaleCheckWidthModelCus(true);
-                        }
-                        else
-                        {
-                            EnbaleCheckWidthModelCus(false);
-                            txtBoxID.Enabled = true;
-                            checkPASS.Enabled = true;
-                            checkNG.Enabled = true;
-                            txtProductID.Enabled = true;
-                            txtBoxID.Focus();
-                        }
+                        // Enable = true
+                        txtBoxID.Enabled = true;
+                        checkPASS.Enabled = true;
+                        checkNG.Enabled = true;
+                        txtProductID.Enabled = true;
+                        txtBoxID.Focus();
                     }
                     else
                     {
@@ -96,70 +81,19 @@ namespace MurataSystem
                 }
             }
         }
-        private void txtModelCUS_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                string labelMurata = txtModelCUS.Text.Trim();
-                if (!string.IsNullOrEmpty(labelMurata))
-                {
-                    if (labelMurata.Length > 10)
-                    {
-                        if (labelMurata.Contains(codeMurata))
-                        {
-                            var murata = _murataService.GetProducts_Murata_by_ModelCustomer(labelMurata);
-                            if (murata != null)
-                            {
-                                SetErrorStatus("NG", $"Label {labelMurata} đã tồn tại.\nModel: {murata.ModelName}\nIn Box:{murata.BoxID}");
-                                Ultils.EditTextErrorNoMessage(txtProductID);
-                                txtModelCUS.ResetText();
-                            }
-                            else
-                            {
-                                InsertLog(txtBoxID.Text.Trim());
-                            }
-                        }
-                        else
-                        {
-                            SetErrorStatus("NG", $"Sai Label. Vui lòng kiểm tra và bắn lại!");
-                            Ultils.EditTextErrorNoMessage(txtModelCUS);
-                        }
-                    }
-                    else
-                    {
-                        SetErrorStatus("NG", $"Sai Label. Vui lòng kiểm tra và bắn lại!");
-                        Ultils.EditTextErrorNoMessage(txtModelUMC);
-                    }
-                }
-                else
-                {
-                    SetErrorStatus("NG", $"Vui lòng nhập vào Label!");
-                    Ultils.EditTextErrorNoMessage(txtModelUMC);
-                }
-            }
-        }
         private void txtProductionID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 _dateTimeCheck = DateTime.Now;
-
-                // Nếu PCB rỗng, thì thông báo lỗi
                 if (string.IsNullOrEmpty(txtProductID.Text))
                 {
                     SetErrorStatus("NG", $"Label không được để trống!");
                     Ultils.EditTextErrorNoMessage(txtProductID);
                 }
-                else if (string.IsNullOrEmpty(txtBoxID.Text))
-                {
-                    SetErrorStatus("NG", $"Box không được để trống!");
-                    Ultils.EditTextErrorNoMessage(txtBoxID);
-                }
                 else
                 {
                     string productionId = txtProductID.Text.Trim();
-                    // Nếu chuỗi PCB có dộ dài mà nhỏ hơn 16,
-                    // thì thông báo lỗi cho người dùng biết.
                     if (productionId.Length <= 16)
                     {
                         SetErrorStatus("NG", $"Error! Label không đúng định dạng!");
@@ -168,104 +102,16 @@ namespace MurataSystem
                     }
                     else
                     {
-                        // Nếu PCB, giống với ModelName đang chạy,   
-                        if (productionId.Contains(lblCurentModel.Text) && productionId.Contains(lblSerialNo.Text))
+                        if(productionId.Contains(lblCurentModel.Text) && productionId.Contains(lblSerialNo.Text))
                         {
-                            var production = _murataService.GetProducts_Murata_by_ID(productionId);
-                            if (production != null)
-                            {
-                                SetErrorStatus("NG",
-                                    $"PCB [{productionId}] đã có trong hệ thống. Vui lòng kiểm tra lại\n" +
-                                    $"Box ID: {production.BoxID}");
-                                txtProductID.ResetText();
-                                Ultils.EditTextErrorNoMessage(txtProductID);
-                            }
-                            else
-                            {
-                                if (Program.CurrentUser.CheckItemOnWIP == true)
-                                {
-                                    var checkMes = _mesService.Get_WORK_ORDER_ITEMS_By_BoardNo(productionId);
-                                    // Kiểm tra sự tồn tại của bản mạch có trên hệ thống WIP chưa?
-                                    // Nếu có rồi thì thực hiện kiểm tra các bước tiếp theo
-                                    if (checkMes != null)
-                                    {
-                                        // 1 => OK
-                                        // 2 => NG
-                                        // 3 => Discard
-
-                                        // Nếu trạng thái bản mạch đang là 'NG'
-                                        if (checkMes.BOARD_STATE == 2)
-                                        {
-                                            try
-                                            {
-                                                _murataService.DeleteLogByProductionId(productionId);
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                MessageBox.Show($"Delete error!\n{ex.Message}", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                            }
-                                            
-                                            if (checkModelCUS.Checked == true)
-                                            {
-                                                txtModelCUS.Focus();
-                                            }
-                                            else
-                                            {
-                                                InsertLog(txtBoxID.Text);
-                                            }
-                                        }
-                                        // Nếu trạng thái bản mạch đang là Discard
-                                        else if (checkMes.BOARD_STATE == 3)
-                                        {
-                                            SetErrorStatus("NG", $"PCB [{productionId}] này đã được loại bỏ. Vui lòng kiểm tra lại!");
-                                            Ultils.EditTextErrorNoMessage(txtProductID);
-                                        }
-                                        // Nếu bản mạch này đã finished
-                                        else if(checkMes.IS_FINISHED == true)
-                                        {
-                                            SetErrorStatus("OK", $"[{productionId}] đã hoàn thành. Vui lòng kiểm tra lại!");
-                                            Ultils.EditTextErrorNoMessage(txtProductID);
-                                        }
-                                        // Trạng thái bản mạch OK
-                                        else if(checkMes.BOARD_STATE == 1)
-                                        {
-                                            if (checkModelCUS.Checked == true)
-                                            {
-                                                txtModelCUS.Focus();
-                                            }
-                                            else
-                                            {
-                                                InsertLog(txtBoxID.Text);
-                                            }
-                                        }
-                                    }
-                                    // Nếu bản mạch chưa có trên hệ thống WIP thì thông báo lỗi
-                                    // cho người dùng
-                                    else
-                                    {
-                                        SetErrorStatus("NG", $"[{productionId}]\nChưa khởi tạo trên WIP. Vui lòng kiểm tra lại!");
-                                        Ultils.EditTextErrorNoMessage(txtProductID);
-                                    }
-                                }
-                                else
-                                {
-                                    if (checkModelCUS.Checked == true)
-                                    {
-                                        txtModelCUS.Focus();
-                                    }
-                                    else
-                                    {
-                                        InsertLog(txtBoxID.Text);
-                                    }
-                                }
-                            }
+                            InsertLog(txtBoxID.Text.Trim());
                         }
                         else
                         {
                             SetErrorStatus("NG", $"Sai Label. Vui lòng kiểm tra lại!");
                             Ultils.EditTextErrorNoMessage(txtProductID);
                         }
-
+                        
                     }
                 }
             }
@@ -292,18 +138,9 @@ namespace MurataSystem
                         }
                         else
                         {
-                            if (checkModelCUS.Checked == false)
-                            {
+
                                 EnableBoxIDWidthModel(false);
-                                EnableLabelMurata(false);
                                 txtProductID.Focus();
-                            }
-                            else
-                            {
-                                EnableBoxIDWidthModel(false);
-                                EnableLabelMurata(true);
-                                txtProductID.Focus();
-                            }
                         }
                     }
                     else
@@ -314,23 +151,22 @@ namespace MurataSystem
                 }
             }
         }
+        
+
         private void txtProductionID_EditValueChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtProductID.Text.Trim()))
+            Ultils.SetColorDefaultTextControl(txtProductID);
+            if (!string.IsNullOrEmpty(txtProductID.Text))
             {
                 txtProductID.Properties.Buttons[0].Visible = true;
-                SetDefaultStatus("N/A", "no results");
-                Ultils.SetColorDefaultTextControl(txtProductID);
             }
         }
         private void txtBoxID_EditValueChanged(object sender, EventArgs e)
         {
-            
+            Ultils.SetColorDefaultTextControl(txtBoxID);
             if (!string.IsNullOrEmpty(txtBoxID.Text))
             {
                 txtBoxID.Properties.Buttons[0].Visible = true;
-                SetDefaultStatus("N/A", "no results");
-                Ultils.SetColorDefaultTextControl(txtBoxID);
             }
         }
         private void txtModelUMC_EditValueChanged(object sender, EventArgs e)
@@ -339,7 +175,7 @@ namespace MurataSystem
             string modelName = txtModelUMC.EditValue.ToString();
             if (!string.IsNullOrEmpty(modelName))
             {
-                var model = _modelService.GetModelById(modelName);
+                var model = _context.Models.SingleOrDefault(m => m.ModelID == modelName);
                 if (model != null)
                 {
                     lblQuantityModel.Visible = true;
@@ -347,49 +183,27 @@ namespace MurataSystem
                     tableLayoutPanelModel.Visible = true;
                     lblCurentModel.Text = model.ModelName;
                     lblSerialNo.Text = model.SerialNo;
-                    lblCustomerName.Text = $"Barcode {model.CustomerName}";
                     modelID = model.ModelID;
-
-                    checkModelCUS.Text = $"Check width Label Murata - {model.CodeMurata}";
 
                     modelName = model.ModelName.Trim();
                     serialNo = model.SerialNo.Trim();
-                    if (model.CheckWidthModelCus == true)
-                    {
-                        codeMurata = model.CodeMurata.Trim();
 
-                        EnbaleCheckWidthModelCus(true);
-                        txtBoxID.Enabled = true;
-                        checkPASS.Enabled = true;
-                        checkNG.Enabled = true;
-                        txtProductID.Enabled = true;
-                        txtBoxID.Focus();
-                    }
-                    else
-                    {
-                        EnbaleCheckWidthModelCus(false);
-                        txtBoxID.Enabled = true;
-                        checkPASS.Enabled = true;
-                        checkNG.Enabled = true;
-                        txtProductID.Enabled = true;
-                        txtBoxID.Focus();
-                    }
+                    // Enable = true
+                    txtBoxID.Enabled = true;
+                    checkPASS.Enabled = true;
+                    checkNG.Enabled = true;
+                    txtProductID.Enabled = true;
+                    txtBoxID.Focus();
+
                 }
                 else
                 {
                     SetErrorStatus("NG", $"Sai Model. Vui lòng kiểm tra lại!");
-                    Ultils.EditTextErrorNoMessage(txtModelCUS);
+                    Ultils.EditTextErrorNoMessage(txtModelUMC);
                 }
             }
         }
-        private void txtModelCUS_EditValueChanged(object sender, EventArgs e)
-        {
-            Ultils.SetColorDefaultTextControl(txtModelCUS);
-            if (!string.IsNullOrEmpty(txtModelCUS.Text))
-            {
-                txtModelCUS.Properties.Buttons[0].Visible = true;
-            }
-        }
+
         private void txtProductionID_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 0)
@@ -412,16 +226,14 @@ namespace MurataSystem
             {
                 LoadGridLookupEditModel();
             }
-        }
-        private void txtModelCUS_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            if (e.Button.Index == 0)
+            else if(e.Button.Index == 2)
             {
-                txtModelCUS.Properties.Buttons[0].Visible = false;
-                txtModelCUS.ResetText();
+                var addModel = new FormAddModel();
+                addModel.ShowDialog();
+
+                LoadGridLookupEditModel();
             }
         }
-
         private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
             if (e.Column.Caption == "#")
@@ -435,12 +247,12 @@ namespace MurataSystem
                 {
                     e.DisplayText = "OK";
                 }
-                if (e.DisplayText == "False")
+                if(e.DisplayText == "False")
                 {
                     e.DisplayText = "NG";
                 }
             }
-
+                
         }
 
         /// <summary>
@@ -454,24 +266,23 @@ namespace MurataSystem
                 || !string.IsNullOrEmpty(txtModelUMC.Text.Trim()))
             {
                 int lineId = Program.CurrentUser.LineID;
-                int operationId = Program.CurrentUser.OperationID;
                 string operatorId = Program.CurrentUser.OperatorCode;
                 string productionId = txtProductID.Text.Trim();
 
                 string status = null;
-                bool judge = false;
-                if (checkPASS.Checked == true)
+                bool judge=false;
+                if (checkPASS.Checked==true)
                 {
                     status = "P";
                     judge = true;
-
+                    
                 }
-                if (checkNG.Checked == true)
+                if(checkNG.Checked==true)
                 {
                     status = "F";
                     judge = false;
                 }
-                var logs = _murataService.GetProducts_Murata_by_BoxId(boxId).ToList();
+                var logs = _context.Set<Nichicon>().Where(n => n.BoxID == boxId).ToList();
                 // Nếu Box có dữ liệu của PCB
                 if (logs.Any())
                 {
@@ -489,30 +300,21 @@ namespace MurataSystem
 
                             if (logs.Count == quantity)
                             {
-                                SetErrorStatus("NG", $"Box [{boxId}] đã đủ số lượng. Vui lòng kiểm tra lại!");
+                                SetErrorStatus("NG", $"Box [{txtBoxID.Text}] đã đủ số lượng. Vui lòng kiểm tra lại!");
                                 Ultils.EditTextErrorNoMessage(txtBoxID);
                                 EnableBoxIDWidthModel(true);
-                                if (checkModelCUS.Checked == true)
-                                {
-                                    EnbaleCheckWidthModelCus(true);
-                                }
-                                else
-                                {
-                                    EnbaleCheckWidthModelCus(false);
-                                }
                                 txtProductID.ResetText();
                             }
                             else
                             {
                                 try
                                 {
-                                    if (checkNG.Checked == false)
-                                    {
-                                        _murataService.InsertLogs(productionId, lineId, boxId, modelID, lblCurentModel.Text, operatorId, txtModelCUS.Text.Trim(), judge);
-                                    }
+                                    // Insert
+                                    Add(productionId, lineId, boxId, modelID, txtModelUMC.Text, operatorId, judge);
+
                                     Ultils.CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
                                     Ultils.CreateFileLogDirModelName(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
-                                    logs = _murataService.GetProducts_Murata_by_BoxId(boxId).ToList();
+                                    logs = _context.Set<Nichicon>().Where(n => n.BoxID == boxId).ToList();
                                     gridControlData.Refresh();
                                     gridControlData.DataSource = logs;
                                     lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
@@ -521,18 +323,11 @@ namespace MurataSystem
                                     ResetControls();
                                     if (logs.Count() == quantity)
                                     {
-                                        SetErrorStatus("OK", $"Box [{txtBoxID.Text}] đã đủ số lượng. Vui lòng lấy box mới!");
+                                        SetErrorStatus("NG", $"Box [{txtBoxID.Text}] đã đủ số lượng. Vui lòng lấy box mới!");
                                         Ultils.EditTextErrorNoMessage(txtBoxID);
                                         EnableBoxIDWidthModel(true);
-                                        if (checkModelCUS.Checked == true)
-                                        {
-                                            EnbaleCheckWidthModelCus(true);
-                                        }
-                                        else
-                                        {
-                                            EnbaleCheckWidthModelCus(false);
-                                        }
-                                        txtProductID.ResetText();
+
+
                                     }
                                 }
                                 catch (Exception ex)
@@ -547,7 +342,7 @@ namespace MurataSystem
                             SetErrorStatus("NG", "Sai Model! Vui lòng kiểm tra và thử lại!");
                             Ultils.EditTextErrorNoMessage(txtProductID);
                             ResetControls();
-                            logs = _murataService.GetProducts_Murata_by_BoxId(boxId).ToList();
+                            logs = _context.Set<Nichicon>().Where(n => n.BoxID == boxId).ToList();
                             gridControlData.Refresh();
                             gridControlData.DataSource = logs;
                             lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
@@ -568,13 +363,12 @@ namespace MurataSystem
                 {
                     try
                     {
-                        if (checkNG.Checked == false)
-                        {
-                            _murataService.InsertLogs(productionId, lineId, boxId, modelID, lblCurentModel.Text, operatorId, txtModelCUS.Text.Trim(), judge);
-                        }
+                        // Insert
+                        Add(productionId, lineId, boxId, modelID, txtModelUMC.Text, operatorId, judge);
+
                         Ultils.CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
                         Ultils.CreateFileLogDirModelName(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
-                        logs = _murataService.GetProducts_Murata_by_BoxId(boxId).ToList();
+                        logs = _context.Set<Nichicon>().Where(n => n.BoxID == boxId).ToList();
                         gridControlData.Refresh();
                         gridControlData.DataSource = logs;
                         lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
@@ -594,6 +388,31 @@ namespace MurataSystem
                 SetErrorStatus("NG", "Vui lòng nhập đủ thông tin!");
                 EnableBoxIDWidthModel(true);
                 txtBoxID.Focus();
+            }
+        }
+
+        private void Add(string id, int lineId, string boxId, 
+            string modelId, string modelName, string operatorCode, bool judgeResult)
+        {
+            var nichicon = new Nichicon()
+            {
+                ProductionID = id,
+                LineID = lineId,
+                BoxID = boxId,
+                ModelID = modelId,
+                ModelName = modelName,
+                OperatorCode = operatorCode,
+                JudgeResult = judgeResult
+            };
+
+            try
+            {
+                _context.Nichicon.Add(nichicon);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inresrt!\n {ex.Message}", "Error Insert!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -619,18 +438,6 @@ namespace MurataSystem
         }
 
         /// <summary>
-        /// Enable
-        /// </summary>
-        /// <param name="enable"></param>
-        private void EnbaleCheckWidthModelCus(bool enable)
-        {
-            checkModelCUS.Enabled = enable;
-            checkModelCUS.Checked = enable;
-            txtModelCUS.Enabled = enable;
-            txtBoxID.Focus();
-        }
-
-        /// <summary>
         /// Start Insert Enable Controls
         /// </summary>
         /// <param name="enable"></param>
@@ -641,24 +448,12 @@ namespace MurataSystem
         }
 
         /// <summary>
-        /// Enable model Murata
-        /// </summary>
-        /// <param name="enable"></param>
-        private void EnableLabelMurata(bool enable)
-        {
-            txtModelCUS.Enabled = enable;
-            checkModelCUS.Enabled = enable;
-        }
-        /// <summary>
         /// Reset controls
         /// </summary>
         private void ResetControls()
         {
             txtProductID.Focus();
             txtProductID.Text = string.Empty;
-            txtModelCUS.ResetText();
-
-            txtModelCUS.Properties.Buttons[0].Visible = false;
             txtProductID.Properties.Buttons[0].Visible = false;
             //txtBoxID.Properties.Buttons[0].Visible = false;
         }
@@ -766,15 +561,13 @@ namespace MurataSystem
             {
                 checkNG.Checked = true;
             }
-            txtProductID.SelectAll();
-            txtProductID.Focus();
         }
         private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
             GridView View = sender as GridView;
             if (e.Column.FieldName == "JudgeResult")
             {
-                bool value = (bool)View.GetRowCellValue(e.RowHandle, View.Columns.ColumnByFieldName("JudgeResult"));
+                bool value = (bool) View.GetRowCellValue(e.RowHandle, View.Columns.ColumnByFieldName("JudgeResult"));
                 if (value == true)
                 {
                     e.Appearance.BackColor = Color.Green;
@@ -800,8 +593,6 @@ namespace MurataSystem
             {
                 checkPASS.Checked = true;
             }
-            txtProductID.SelectAll();
-            txtProductID.Focus();
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -810,13 +601,6 @@ namespace MurataSystem
             txtBoxID.ResetText();
             txtProductID.ResetText();
             txtProductID.Enabled = false;
-
-            checkModelCUS.Checked = false;
-            checkModelCUS.Enabled = false;
-
-            txtModelCUS.ResetText();
-            txtModelCUS.Enabled = false;
-
             txtModelUMC.Focus();
 
             lblCountPCB.Text = "0";
@@ -824,13 +608,6 @@ namespace MurataSystem
             tableLayoutPanelModel.Visible = false;
 
             SetDefaultStatus("N/A", "no results");
-            gridControlData.DataSource = null;
-            gridControlData.Refresh();
-
-            Ultils.SetColorDefaultTextControl(txtBoxID);
-            Ultils.SetColorDefaultTextControl(txtProductID);
-            Ultils.SetColorDefaultTextControl(txtModelUMC);
-            Ultils.SetColorDefaultTextControl(txtModelCUS);
         }
     }
 }

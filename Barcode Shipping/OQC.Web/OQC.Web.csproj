@@ -648,14 +648,6 @@
       <Project>{2ee4ad13-e699-4e84-8014-7418beacbceb}</Project>
       <Name>OQC.Web.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OQC.Web.PagedList.Mvc\OQC.Web.PagedList.Mvc.csproj">
-      <Project>{1606262c-a9da-4eb5-8da3-cce068743dea}</Project>
-      <Name>OQC.Web.PagedList.Mvc</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OQC.Web.PagedList\OQC.Web.PagedList.csproj">
-      <Project>{92a6a53b-6208-4d50-95cd-d1c087d8a8dc}</Project>
-      <Name>OQC.Web.PagedList</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

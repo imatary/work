@@ -102,8 +102,9 @@ namespace BarcodeShipping.GUI
                             InsertOrUpdatePo(_currentModel.ModelID, _currentModel.ModelName, txtPO.Text);
                             gridControlData.DataSource = null;
                             _shippings = new List<Shipping>();
-                            txtBoxID.Focus();
-                            txtBoxID.Text = string.Empty;
+                            txtModel.Focus();
+                            txtModel.ResetText();
+                            txtBoxID.ResetText();
                             lblCountPCB.Text = @"0";
                         }
                         else
@@ -561,19 +562,60 @@ namespace BarcodeShipping.GUI
 
         private void txtModel_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string model = txtModel.Text.Trim();
-            if (!string.IsNullOrEmpty(model) && model.Length > 6)
+            if (string.IsNullOrEmpty(txtModel.Text))
             {
-                var checkModel = _modelService.GetModelByName(model, "FujiXerox");
-                if (checkModel == null)
+                Ultils.TextControlNotNull(txtModel, "Model");
+            }
+            else if (string.IsNullOrEmpty(txtPO.Text))
+            {
+                Ultils.TextControlNotNull(txtPO, "PO");
+            }
+            else
+            {
+                string input = txtModel.Text.Trim();
+                string po_no = txtPO.Text.Trim();
+
+                if (input.Length > 6 && input.Substring(0, 3) == "3N4")
                 {
-                    Ultils.EditTextErrorMessage(txtModel, "Sai Model. vui lòng kiểm tra lại!");
-                    txtModel.ResetText();
-                    txtModel.SelectAll();
+                    input = input.Remove(0, 3);
+                    string[] array = input.Split(separator: new[] { " " }, count: 4, options: StringSplitOptions.None);
+                    string model = $"{array[0]} {array[1]}";
+
+                    _currentModel = _modelService.GetModelByName(model, FujiXerox);
+
+                    if (_currentModel != null)
+                    {
+                        lblQuantityModel.Text = $"/{_currentModel.Quantity}";
+
+                        if (!string.IsNullOrEmpty(po_no))
+                        {
+                            if (!GetQtyPoAndRemainsByWorkingOderAndPoNo(_currentModel.ModelID, po_no))
+                            {
+                                _iqcService.InsertPo(_currentModel.ModelID, po_no, quantityPO, txtOperatorCode.Text);
+                                GetQtyPoAndRemainsByWorkingOderAndPoNo(_currentModel.ModelID, po_no);
+                            }
+                            else
+                            {
+                                InsertOrUpdatePo(_currentModel.ModelID, model, po_no);
+                            }
+                            txtModel.Text = model;
+                            txtBoxID.Focus();
+                        }
+                        else
+                        {
+                            Ultils.EditTextErrorMessage(txtModel, "PO NO không được để trống. Vui lòng bắn nhập vào PO NO!");
+                        }
+                    }
+                    else
+                    {
+                        Ultils.EditTextErrorMessage(txtModel, "Model không tồn tại. Vui lòng kiểm tra lại!");
+                        txtModel.ResetText();
+                        txtModel.Focus();
+                    }
                 }
                 else
                 {
-                    txtBoxID.Focus();
+                    Ultils.EditTextErrorMessage(txtModel, "Model không đúng định dạng. Vui lòng bắn lại!");
                 }
             }
         }
