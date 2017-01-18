@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace CPUNichiconSupportWIP
@@ -15,7 +14,22 @@ namespace CPUNichiconSupportWIP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            bool ownmutex;
+
+            // Tạo và lấy quyền sở hữu một Mutex có tên là Icon;
+            using (var mutex = new Mutex(true, "CPUNichiconSupportWIP", out ownmutex))
+            {
+                // Nếu ứng dụng sở hữu Mutex, nó có thể tiếp tục thực thi;
+                // nếu không, ứng dụng sẽ thoát.
+                if (ownmutex)
+                {
+                    Application.Run(new FormMain());
+                    //giai phong Mutex;
+                    mutex.ReleaseMutex();
+                }
+                else
+                    Application.ExitThread();
+            }
         }
     }
 }

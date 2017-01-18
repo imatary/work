@@ -133,9 +133,7 @@ namespace CPUNichiconSupportWIP
             {
                 if (e.ChangeType == WatcherChangeTypes.Changed)
                 {
-                    //lblStatusMessage.Visible = false;
                     m_bDirty = true;
-
                 }
             }
         }

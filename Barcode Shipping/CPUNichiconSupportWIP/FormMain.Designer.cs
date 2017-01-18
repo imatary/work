@@ -39,6 +39,11 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.colBoardNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -66,11 +71,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tmrEditNotify = new System.Windows.Forms.Timer(this.components);
             this.lblStatusMessage = new System.Windows.Forms.Label();
-            this.colBoardNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -155,6 +155,53 @@
             this.dataGridView1.Size = new System.Drawing.Size(570, 90);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            // 
+            // colBoardNo
+            // 
+            this.colBoardNo.DataPropertyName = "BoardNo";
+            this.colBoardNo.HeaderText = "BOARD NO";
+            this.colBoardNo.MinimumWidth = 125;
+            this.colBoardNo.Name = "colBoardNo";
+            this.colBoardNo.ReadOnly = true;
+            this.colBoardNo.Width = 185;
+            // 
+            // colModel
+            // 
+            this.colModel.DataPropertyName = "Model";
+            this.colModel.HeaderText = "MODEL";
+            this.colModel.Name = "colModel";
+            this.colModel.ReadOnly = true;
+            // 
+            // colDate
+            // 
+            this.colDate.DataPropertyName = "Date";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDate.HeaderText = "DATE";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            this.colDate.Width = 80;
+            // 
+            // colTime
+            // 
+            this.colTime.DataPropertyName = "Time";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colTime.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colTime.HeaderText = "TIME";
+            this.colTime.Name = "colTime";
+            this.colTime.ReadOnly = true;
+            this.colTime.Width = 80;
+            // 
+            // colState
+            // 
+            this.colState.DataPropertyName = "State";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colState.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colState.HeaderText = "STATE";
+            this.colState.Name = "colState";
+            this.colState.ReadOnly = true;
+            this.colState.Width = 80;
             // 
             // groupBox1
             // 
@@ -445,53 +492,6 @@
             this.lblStatusMessage.TabIndex = 5;
             this.lblStatusMessage.Text = "label7";
             this.lblStatusMessage.Visible = false;
-            // 
-            // colBoardNo
-            // 
-            this.colBoardNo.DataPropertyName = "BoardNo";
-            this.colBoardNo.HeaderText = "BOARD NO";
-            this.colBoardNo.MinimumWidth = 125;
-            this.colBoardNo.Name = "colBoardNo";
-            this.colBoardNo.ReadOnly = true;
-            this.colBoardNo.Width = 185;
-            // 
-            // colModel
-            // 
-            this.colModel.DataPropertyName = "Model";
-            this.colModel.HeaderText = "MODEL";
-            this.colModel.Name = "colModel";
-            this.colModel.ReadOnly = true;
-            // 
-            // colDate
-            // 
-            this.colDate.DataPropertyName = "Date";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colDate.HeaderText = "DATE";
-            this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
-            this.colDate.Width = 80;
-            // 
-            // colTime
-            // 
-            this.colTime.DataPropertyName = "Time";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colTime.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colTime.HeaderText = "TIME";
-            this.colTime.Name = "colTime";
-            this.colTime.ReadOnly = true;
-            this.colTime.Width = 80;
-            // 
-            // colState
-            // 
-            this.colState.DataPropertyName = "State";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colState.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colState.HeaderText = "STATE";
-            this.colState.Name = "colState";
-            this.colState.ReadOnly = true;
-            this.colState.Width = 80;
             // 
             // FormMain
             // 
