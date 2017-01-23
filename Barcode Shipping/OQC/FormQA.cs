@@ -109,7 +109,6 @@ namespace OQC
                 }
             }
         }
-
         private void txtProductionID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -132,6 +131,7 @@ namespace OQC
                     }
                     else
                     {
+                        //var curentModel=_modelService.GetModelLikeName()
                         foreach (var item in _modelService.GetModels())
                         {
                             if (productionId.Contains(item.ModelName.ToUpper()))
@@ -180,8 +180,7 @@ namespace OQC
                     Ultils.EditTextErrorNoMessage(txtProductionID);
                 }
             }
-        }
-        
+        } 
         private void txtProductionID_EditValueChanged(object sender, EventArgs e)
         {
             Ultils.SetColorDefaultTextControl(txtProductionID);
@@ -302,14 +301,15 @@ namespace OQC
                             else
                             {
                                 SetErrorStatus("NG", $"Sai Model: {lblCurentModel.Text} !\nPCB [{productionId}] này khác với các PCB trong Box [{boxId}].\nVui lòng kiểm tra lại!");
-                                Ultils.EditTextErrorNoMessage(txtProductionID);
                                 txtProductionID.ResetText();
                                 txtProductionID.Focus();
+                                Ultils.EditTextErrorNoMessage(txtProductionID);
 
                                 logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                                 gridControlData.Refresh();
                                 gridControlData.DataSource = logs;
                                 lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
+                                
                             }
                         }
                         // Nếu có rồi thì thống báo lỗi
@@ -382,7 +382,6 @@ namespace OQC
             }
 
         }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
@@ -493,17 +492,9 @@ namespace OQC
         {
             var search = new FormSearchPCB();
             search.ShowDialog();
-            txtProductionID.Focus();
-            txtProductionID.SelectAll();
+            btnReset.PerformClick();
         }
 
-        private void btnAction_Click(object sender, EventArgs e)
-        {
-            var action = new FormAction();
-            action.ShowDialog();
-            txtProductionID.Focus();
-            txtProductionID.SelectAll();
-        }
         private void txtProductionID_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 0)
@@ -519,6 +510,26 @@ namespace OQC
                 txtBoxID.Properties.Buttons[0].Visible = false;
                 txtBoxID.ResetText();
             }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            txtBoxID.Enabled = true;
+            txtBoxID.ResetText();
+            txtBoxID.Focus();
+
+            txtProductionID.ResetText();
+
+            SetDefaultStatus("N/A", "no results");
+
+            lblCurentModel.Text = "N/A";
+            lblSerialNo.Text = "N/A";
+
+            lblCountPCB.Text = "0";
+            lblQuantityModel.Text = "/0";
+
+            gridControlData.DataSource = null;
+            gridControlData.Refresh();
         }
 
         //private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)

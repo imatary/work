@@ -74,7 +74,7 @@
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.btnAction = new DevExpress.XtraEditors.SimpleButton();
+            this.btnReset = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearchPCB = new DevExpress.XtraEditors.SimpleButton();
             this.btnLogOut = new DevExpress.XtraEditors.SimpleButton();
             this.gridControlData = new DevExpress.XtraGrid.GridControl();
@@ -142,7 +142,6 @@
             this.tableLayoutPanelModel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 59.57447F));
             this.tableLayoutPanelModel.Size = new System.Drawing.Size(319, 94);
             this.tableLayoutPanelModel.TabIndex = 2;
-            this.tableLayoutPanelModel.Visible = false;
             // 
             // labelControl3
             // 
@@ -187,7 +186,7 @@
             this.lblSerialNo.Name = "lblSerialNo";
             this.lblSerialNo.Size = new System.Drawing.Size(101, 45);
             this.lblSerialNo.TabIndex = 2;
-            this.lblSerialNo.Text = "Curent Model";
+            this.lblSerialNo.Text = "N/A";
             // 
             // lblCurentModel
             // 
@@ -203,7 +202,7 @@
             this.lblCurentModel.Name = "lblCurentModel";
             this.lblCurentModel.Size = new System.Drawing.Size(200, 45);
             this.lblCurentModel.TabIndex = 1;
-            this.lblCurentModel.Text = "Curent Model";
+            this.lblCurentModel.Text = "N/A";
             // 
             // lblCustomerName
             // 
@@ -579,7 +578,6 @@
             this.lblQuantityModel.Size = new System.Drawing.Size(240, 95);
             this.lblQuantityModel.TabIndex = 1;
             this.lblQuantityModel.Text = "/0";
-            this.lblQuantityModel.Visible = false;
             // 
             // lblCountPCB
             // 
@@ -686,7 +684,7 @@
             // panelControl3
             // 
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl3.Controls.Add(this.btnAction);
+            this.panelControl3.Controls.Add(this.btnReset);
             this.panelControl3.Controls.Add(this.btnSearchPCB);
             this.panelControl3.Controls.Add(this.btnLogOut);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Right;
@@ -695,38 +693,38 @@
             this.panelControl3.Size = new System.Drawing.Size(539, 41);
             this.panelControl3.TabIndex = 0;
             // 
-            // btnAction
+            // btnReset
             // 
-            this.btnAction.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnAction.Appearance.Options.UseFont = true;
-            this.btnAction.Image = ((System.Drawing.Image)(resources.GetObject("btnAction.Image")));
-            this.btnAction.Location = new System.Drawing.Point(446, 4);
-            this.btnAction.Name = "btnAction";
-            this.btnAction.Size = new System.Drawing.Size(83, 32);
-            this.btnAction.TabIndex = 1;
-            this.btnAction.Text = "Action";
-            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
+            this.btnReset.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.Appearance.Options.UseFont = true;
+            this.btnReset.Image = ((System.Drawing.Image)(resources.GetObject("btnReset.Image")));
+            this.btnReset.Location = new System.Drawing.Point(454, 5);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 31);
+            this.btnReset.TabIndex = 2;
+            this.btnReset.Text = "Reset";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnSearchPCB
             // 
-            this.btnSearchPCB.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnSearchPCB.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearchPCB.Appearance.Options.UseFont = true;
             this.btnSearchPCB.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchPCB.Image")));
-            this.btnSearchPCB.Location = new System.Drawing.Point(329, 4);
+            this.btnSearchPCB.Location = new System.Drawing.Point(349, 6);
             this.btnSearchPCB.Name = "btnSearchPCB";
-            this.btnSearchPCB.Size = new System.Drawing.Size(111, 32);
+            this.btnSearchPCB.Size = new System.Drawing.Size(99, 30);
             this.btnSearchPCB.TabIndex = 1;
             this.btnSearchPCB.Text = "Search PCB";
             this.btnSearchPCB.Click += new System.EventHandler(this.btnSearchPCB_Click);
             // 
             // btnLogOut
             // 
-            this.btnLogOut.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.btnLogOut.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogOut.Appearance.Options.UseFont = true;
             this.btnLogOut.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.Image")));
-            this.btnLogOut.Location = new System.Drawing.Point(228, 4);
+            this.btnLogOut.Location = new System.Drawing.Point(258, 6);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(95, 32);
+            this.btnLogOut.Size = new System.Drawing.Size(85, 30);
             this.btnLogOut.TabIndex = 0;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
@@ -947,7 +945,6 @@
         private DevExpress.XtraEditors.LabelControl lblLineID;
         private DevExpress.XtraEditors.SimpleButton btnLogOut;
         private DevExpress.XtraEditors.SimpleButton btnSearchPCB;
-        private DevExpress.XtraEditors.SimpleButton btnAction;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelModel;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
@@ -965,5 +962,6 @@
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraEditors.LabelControl lblStatusMessage;
         private DevExpress.XtraEditors.LabelControl lblStatus;
+        private DevExpress.XtraEditors.SimpleButton btnReset;
     }
 }

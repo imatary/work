@@ -55,6 +55,19 @@ namespace BarcodeShipping.Services
             };
             return _context.Database.SqlQuery<Model>("EXEC [sp_GetModelByName] @modelName,@customerName", param).FirstOrDefault();
         }
+        public Model GetModelLikeName(string modelName, string customerName)
+        {
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@modelName", Value = modelName, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter() { ParameterName = "@customerName", Value = customerName, SqlDbType = SqlDbType.VarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+            return _context.Database.SqlQuery<Model>("EXEC [sp_GetModelLikeName] @modelName,@customerName", param).SingleOrDefault();
+        }
         public Model GetModelById(string modelId)
         {
             var param = new SqlParameter()

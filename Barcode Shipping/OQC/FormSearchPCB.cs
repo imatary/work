@@ -36,11 +36,10 @@ namespace OQC
                 SearchPCB(txtSearchPCB.Text.Trim());
             }
         }
-
-        private void SearchPCB(string productionId)
+        private void SearchPCB(string searchKey)
         {
             splashScreenManager2.ShowWaitForm();
-            if (string.IsNullOrEmpty(productionId))
+            if (string.IsNullOrEmpty(searchKey))
             {
                 splashScreenManager2.CloseWaitForm();
                 Ultils.TextControlNotNull(txtSearchPCB, "Nhập vào từ khóa cần tìm!");
@@ -50,18 +49,19 @@ namespace OQC
             {
                 if (comboBoxEditSearchByKey.EditValue.Equals("Production ID"))
                 {
-                    var logs = _oqcService.GetLogByProductionId(productionId);
+                    var logs = _oqcService.GetLogsById(searchKey);
                     var list = new List<tbl_test_log>();
                     if (logs != null)
                     {
                         list.Add(logs);
                         gridControlData.DataSource = list;
+                        btnDelete.Enabled = true;
                         splashScreenManager2.CloseWaitForm();
                     }
                     else
                     {
                         splashScreenManager2.CloseWaitForm();
-                        MessageBoxHelper.ShowMessageBoxWaring($"Không tìm thấy PCB nào với Production ID [{productionId}]");
+                        MessageBoxHelper.ShowMessageBoxWaring($"No results width ID:[{searchKey}]");
                         txtSearchPCB.SelectAll();
                         txtSearchPCB.Focus();
                     }
@@ -79,17 +79,18 @@ namespace OQC
                         }
                         else
                         {
-                            var logs = _oqcService.GetLogsByBoxId(productionId).ToList();
+                            var logs = _oqcService.GetLogsByBoxId(searchKey).ToList();
 
                             if (logs.Any())
                             {
                                 gridControlData.DataSource = logs;
+                                btnDelete.Enabled = true;
                                 splashScreenManager2.CloseWaitForm();
                             }
                             else
                             {
                                 splashScreenManager2.CloseWaitForm();
-                                MessageBoxHelper.ShowMessageBoxWaring($"Không tìm thấy PCB nào trong Box [{productionId}]");
+                                MessageBoxHelper.ShowMessageBoxWaring($"Không tìm thấy PCB nào trong Box [{searchKey}]");
                                 txtSearchPCB.SelectAll();
                                 txtSearchPCB.Focus();
                             }
@@ -110,6 +111,62 @@ namespace OQC
             if (e.Column.Caption == "#")
             {
                 e.DisplayText = (e.ListSourceRowIndex + 1).ToString(CultureInfo.InvariantCulture);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            string id = txtSearchPCB.Text.Trim();
+            if (string.IsNullOrEmpty(id))
+            {
+                Ultils.TextControlNotNull(txtSearchPCB, "Vui lòng nhập thông tin cần tìm");
+            }
+            else
+            {
+                dynamic mboxResult = MessageBox.Show($"Bạn có muốn xóa [{id}] hay không?",
+                    @"THÔNG BÁO",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (mboxResult == DialogResult.Yes)
+                {
+                    if (comboBoxEditSearchByKey.EditValue.ToString() == "Production ID")
+                    {
+
+
+                        try
+                        {
+                            _oqcService.DeleteLogByProductionId(id);
+                            MessageBox.Show($"Delete Label [{id}] success!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            gridControlData.DataSource = null;
+                            gridControlData.Refresh();
+                            btnDelete.Enabled = false;
+                            txtSearchPCB.ResetText();
+                            txtSearchPCB.Focus();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else if (comboBoxEditSearchByKey.EditValue.ToString() == "Box ID")
+                    {
+                        try
+                        {
+                            _oqcService.DeleteLogByBoxId(id);
+                            MessageBox.Show($"Delete BoxID [{id}] success!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            gridControlData.DataSource = null;
+                            gridControlData.Refresh();
+                            txtSearchPCB.ResetText();
+                            txtSearchPCB.Focus();
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+
             }
         }
     }
