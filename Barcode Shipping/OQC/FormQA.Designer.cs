@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormQA));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.tableLayoutPanelModel = new System.Windows.Forms.TableLayoutPanel();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -43,30 +42,35 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtMacAddress = new DevExpress.XtraEditors.TextEdit();
-            this.lblBoxID = new DevExpress.XtraEditors.LabelControl();
+            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
+            this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.checkNG = new DevExpress.XtraEditors.CheckEdit();
+            this.checkPASS = new DevExpress.XtraEditors.CheckEdit();
             this.lblJudge = new DevExpress.XtraEditors.LabelControl();
-            this.lblProductionID = new DevExpress.XtraEditors.LabelControl();
             this.lblOperatorName = new DevExpress.XtraEditors.LabelControl();
             this.lblLineID = new DevExpress.XtraEditors.LabelControl();
+            this.lblProductionID = new DevExpress.XtraEditors.LabelControl();
+            this.txtMacAddress = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.lblBoxID = new DevExpress.XtraEditors.LabelControl();
             this.txtProductionID = new DevExpress.XtraEditors.ButtonEdit();
-            this.txtJudge = new DevExpress.XtraEditors.ButtonEdit();
             this.txtBoxID = new DevExpress.XtraEditors.ButtonEdit();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblStatusMessage = new DevExpress.XtraEditors.LabelControl();
+            this.lblStatus = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.lblQuantityModel = new DevExpress.XtraEditors.LabelControl();
             this.lblCountPCB = new DevExpress.XtraEditors.LabelControl();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblStatus = new DevExpress.XtraEditors.LabelControl();
-            this.lblStatusMessage = new DevExpress.XtraEditors.LabelControl();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelSupport = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelPEIT = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelDessignBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelName = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
@@ -89,14 +93,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
+            this.panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkNG.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkPASS.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionID.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJudge.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
@@ -212,7 +220,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Image = global::OQC.Properties.Resources.umc;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(182, 94);
@@ -232,7 +240,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(844, 198);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(844, 236);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tableLayoutPanel2
@@ -240,61 +248,86 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.29491F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.70509F));
-            this.tableLayoutPanel2.Controls.Add(this.txtMacAddress, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lblBoxID, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.checkEdit1, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.panelControl4, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.lblJudge, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.lblProductionID, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblOperatorName, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblLineID, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.labelControl1, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.txtProductionID, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtJudge, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.lblProductionID, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.txtMacAddress, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.labelControl1, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblBoxID, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.txtProductionID, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 6;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.14583F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.14583F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(373, 192);
+            this.tableLayoutPanel2.RowCount = 7;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(373, 230);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // txtMacAddress
+            // checkEdit1
             // 
-            this.txtMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMacAddress.EditValue = "0017C81120CD";
-            this.txtMacAddress.Enabled = false;
-            this.txtMacAddress.Location = new System.Drawing.Point(116, 99);
-            this.txtMacAddress.Name = "txtMacAddress";
-            this.txtMacAddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMacAddress.Properties.Appearance.Options.UseFont = true;
-            this.txtMacAddress.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtMacAddress.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtMacAddress.Properties.NullValuePrompt = "Mac Address";
-            this.txtMacAddress.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtMacAddress.Size = new System.Drawing.Size(254, 26);
-            this.txtMacAddress.TabIndex = 7;
-            this.txtMacAddress.EditValueChanged += new System.EventHandler(this.txtMacAddress_EditValueChanged);
-            this.txtMacAddress.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtMacAddress_PreviewKeyDown);
+            this.checkEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkEdit1.EditValue = true;
+            this.checkEdit1.Location = new System.Drawing.Point(116, 195);
+            this.checkEdit1.Name = "checkEdit1";
+            this.checkEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.checkEdit1.Properties.Appearance.Options.UseFont = true;
+            this.checkEdit1.Properties.Appearance.Options.UseForeColor = true;
+            this.checkEdit1.Properties.Caption = "Check Label on MES";
+            this.checkEdit1.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Style15;
+            this.checkEdit1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
+            this.checkEdit1.Size = new System.Drawing.Size(254, 32);
+            this.checkEdit1.TabIndex = 9;
             // 
-            // lblBoxID
+            // panelControl4
             // 
-            this.lblBoxID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBoxID.Appearance.Options.UseFont = true;
-            this.lblBoxID.Appearance.Options.UseTextOptions = true;
-            this.lblBoxID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblBoxID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblBoxID.Location = new System.Drawing.Point(3, 162);
-            this.lblBoxID.Name = "lblBoxID";
-            this.lblBoxID.Size = new System.Drawing.Size(107, 27);
-            this.lblBoxID.TabIndex = 4;
-            this.lblBoxID.Text = "Box ID:";
+            this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl4.Controls.Add(this.checkNG);
+            this.panelControl4.Controls.Add(this.checkPASS);
+            this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl4.Location = new System.Drawing.Point(116, 131);
+            this.panelControl4.Name = "panelControl4";
+            this.panelControl4.Size = new System.Drawing.Size(254, 26);
+            this.panelControl4.TabIndex = 23;
+            // 
+            // checkNG
+            // 
+            this.checkNG.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkNG.Dock = System.Windows.Forms.DockStyle.Left;
+            this.checkNG.Location = new System.Drawing.Point(116, 0);
+            this.checkNG.Name = "checkNG";
+            this.checkNG.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkNG.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.checkNG.Properties.Appearance.Options.UseFont = true;
+            this.checkNG.Properties.Appearance.Options.UseForeColor = true;
+            this.checkNG.Properties.Caption = "NG";
+            this.checkNG.Size = new System.Drawing.Size(138, 26);
+            this.checkNG.TabIndex = 1;
+            // 
+            // checkPASS
+            // 
+            this.checkPASS.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkPASS.Dock = System.Windows.Forms.DockStyle.Left;
+            this.checkPASS.EditValue = true;
+            this.checkPASS.Location = new System.Drawing.Point(0, 0);
+            this.checkPASS.Name = "checkPASS";
+            this.checkPASS.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkPASS.Properties.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkPASS.Properties.Appearance.Options.UseFont = true;
+            this.checkPASS.Properties.Appearance.Options.UseForeColor = true;
+            this.checkPASS.Properties.Caption = "OK";
+            this.checkPASS.Size = new System.Drawing.Size(116, 26);
+            this.checkPASS.TabIndex = 0;
             // 
             // lblJudge
             // 
@@ -304,25 +337,11 @@
             this.lblJudge.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.lblJudge.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblJudge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJudge.Location = new System.Drawing.Point(3, 130);
+            this.lblJudge.Location = new System.Drawing.Point(3, 131);
             this.lblJudge.Name = "lblJudge";
             this.lblJudge.Size = new System.Drawing.Size(107, 26);
             this.lblJudge.TabIndex = 2;
             this.lblJudge.Text = "Judge:";
-            // 
-            // lblProductionID
-            // 
-            this.lblProductionID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductionID.Appearance.Options.UseFont = true;
-            this.lblProductionID.Appearance.Options.UseTextOptions = true;
-            this.lblProductionID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblProductionID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblProductionID.Location = new System.Drawing.Point(3, 67);
-            this.lblProductionID.Name = "lblProductionID";
-            this.lblProductionID.Size = new System.Drawing.Size(107, 26);
-            this.lblProductionID.TabIndex = 12;
-            this.lblProductionID.Text = "Production ID:";
             // 
             // lblOperatorName
             // 
@@ -350,22 +369,70 @@
             this.lblLineID.TabIndex = 15;
             this.lblLineID.Text = "Line ID";
             // 
+            // lblProductionID
+            // 
+            this.lblProductionID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductionID.Appearance.Options.UseFont = true;
+            this.lblProductionID.Appearance.Options.UseTextOptions = true;
+            this.lblProductionID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblProductionID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblProductionID.Location = new System.Drawing.Point(3, 163);
+            this.lblProductionID.Name = "lblProductionID";
+            this.lblProductionID.Size = new System.Drawing.Size(107, 26);
+            this.lblProductionID.TabIndex = 12;
+            this.lblProductionID.Text = "Label ID:";
+            // 
+            // txtMacAddress
+            // 
+            this.txtMacAddress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMacAddress.EditValue = "0017C81120CD";
+            this.txtMacAddress.Enabled = false;
+            this.txtMacAddress.Location = new System.Drawing.Point(116, 67);
+            this.txtMacAddress.Name = "txtMacAddress";
+            this.txtMacAddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMacAddress.Properties.Appearance.Options.UseFont = true;
+            this.txtMacAddress.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtMacAddress.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtMacAddress.Properties.NullValuePrompt = "Mac Address";
+            this.txtMacAddress.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtMacAddress.Size = new System.Drawing.Size(254, 26);
+            this.txtMacAddress.TabIndex = 7;
+            this.txtMacAddress.EditValueChanged += new System.EventHandler(this.txtMacAddress_EditValueChanged);
+            this.txtMacAddress.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtMacAddress_PreviewKeyDown);
+            // 
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
             this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Appearance.Options.UseTextOptions = true;
+            this.labelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.labelControl1.Location = new System.Drawing.Point(16, 99);
+            this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl1.Location = new System.Drawing.Point(3, 67);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(94, 25);
+            this.labelControl1.Size = new System.Drawing.Size(107, 26);
             this.labelControl1.TabIndex = 16;
             this.labelControl1.Text = "MAC Address:";
+            // 
+            // lblBoxID
+            // 
+            this.lblBoxID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBoxID.Appearance.Options.UseFont = true;
+            this.lblBoxID.Appearance.Options.UseTextOptions = true;
+            this.lblBoxID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblBoxID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBoxID.Location = new System.Drawing.Point(3, 99);
+            this.lblBoxID.Name = "lblBoxID";
+            this.lblBoxID.Size = new System.Drawing.Size(107, 26);
+            this.lblBoxID.TabIndex = 4;
+            this.lblBoxID.Text = "Box ID:";
             // 
             // txtProductionID
             // 
             this.txtProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProductionID.Location = new System.Drawing.Point(116, 67);
+            this.txtProductionID.Location = new System.Drawing.Point(116, 163);
             this.txtProductionID.Name = "txtProductionID";
             this.txtProductionID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.txtProductionID.Properties.Appearance.Options.UseFont = true;
@@ -376,48 +443,26 @@
             this.txtProductionID.Properties.NullValuePrompt = "Production ID";
             this.txtProductionID.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtProductionID.Size = new System.Drawing.Size(254, 26);
-            this.txtProductionID.TabIndex = 6;
+            this.txtProductionID.TabIndex = 3;
             this.txtProductionID.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtProductionID_ButtonPressed);
             this.txtProductionID.EditValueChanged += new System.EventHandler(this.txtProductionID_EditValueChanged);
             this.txtProductionID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtProductionID_PreviewKeyDown);
             // 
-            // txtJudge
-            // 
-            this.txtJudge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtJudge.Location = new System.Drawing.Point(116, 130);
-            this.txtJudge.Name = "txtJudge";
-            this.txtJudge.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtJudge.Properties.Appearance.Options.UseFont = true;
-            this.txtJudge.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtJudge.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtJudge.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
-            this.txtJudge.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtJudge.Properties.Mask.BeepOnError = true;
-            this.txtJudge.Properties.Mask.EditMask = "d";
-            this.txtJudge.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtJudge.Properties.NullValuePrompt = "Judge";
-            this.txtJudge.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtJudge.Size = new System.Drawing.Size(254, 26);
-            this.txtJudge.TabIndex = 8;
-            this.txtJudge.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtJudge_ButtonPressed);
-            this.txtJudge.EditValueChanged += new System.EventHandler(this.txtJudge_EditValueChanged);
-            this.txtJudge.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtJudge_PreviewKeyDown);
-            // 
             // txtBoxID
             // 
             this.txtBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBoxID.Location = new System.Drawing.Point(116, 162);
+            this.txtBoxID.Location = new System.Drawing.Point(116, 99);
             this.txtBoxID.Name = "txtBoxID";
             this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxID.Properties.Appearance.Options.UseFont = true;
             this.txtBoxID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtBoxID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBoxID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBoxID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
             this.txtBoxID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBoxID.Properties.NullValuePrompt = "Box ID";
             this.txtBoxID.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtBoxID.Size = new System.Drawing.Size(254, 26);
-            this.txtBoxID.TabIndex = 9;
+            this.txtBoxID.TabIndex = 2;
             this.txtBoxID.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtBoxID_ButtonPressed);
             this.txtBoxID.EditValueChanged += new System.EventHandler(this.txtBoxID_EditValueChanged);
             this.txtBoxID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBoxID_PreviewKeyDown);
@@ -432,23 +477,77 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(459, 192);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(459, 230);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.panel1, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel4, 0, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(453, 186);
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.76786F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.23214F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(453, 224);
             this.tableLayoutPanel5.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Silver;
+            this.panel1.Controls.Add(this.lblStatusMessage);
+            this.panel1.Controls.Add(this.lblStatus);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 110);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(3);
+            this.panel1.Size = new System.Drawing.Size(447, 111);
+            this.panel1.TabIndex = 2;
+            // 
+            // lblStatusMessage
+            // 
+            this.lblStatusMessage.Appearance.BackColor = System.Drawing.Color.White;
+            this.lblStatusMessage.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.lblStatusMessage.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lblStatusMessage.Appearance.Options.UseBackColor = true;
+            this.lblStatusMessage.Appearance.Options.UseFont = true;
+            this.lblStatusMessage.Appearance.Options.UseForeColor = true;
+            this.lblStatusMessage.Appearance.Options.UseTextOptions = true;
+            this.lblStatusMessage.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+            this.lblStatusMessage.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.lblStatusMessage.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblStatusMessage.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.lblStatusMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblStatusMessage.Location = new System.Drawing.Point(127, 3);
+            this.lblStatusMessage.Name = "lblStatusMessage";
+            this.lblStatusMessage.Padding = new System.Windows.Forms.Padding(5);
+            this.lblStatusMessage.Size = new System.Drawing.Size(317, 105);
+            this.lblStatusMessage.TabIndex = 1;
+            this.lblStatusMessage.Text = "no results";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Appearance.BackColor = System.Drawing.Color.White;
+            this.lblStatus.Appearance.Font = new System.Drawing.Font("Tahoma", 30F, System.Drawing.FontStyle.Bold);
+            this.lblStatus.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lblStatus.Appearance.Options.UseBackColor = true;
+            this.lblStatus.Appearance.Options.UseFont = true;
+            this.lblStatus.Appearance.Options.UseForeColor = true;
+            this.lblStatus.Appearance.Options.UseTextOptions = true;
+            this.lblStatus.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lblStatus.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblStatus.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblStatus.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblStatus.Location = new System.Drawing.Point(3, 3);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Padding = new System.Windows.Forms.Padding(3);
+            this.lblStatus.Size = new System.Drawing.Size(124, 105);
+            this.lblStatus.TabIndex = 0;
+            this.lblStatus.Text = "N/A";
             // 
             // tableLayoutPanel6
             // 
@@ -462,7 +561,7 @@
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(447, 105);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(447, 101);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // lblQuantityModel
@@ -477,7 +576,7 @@
             this.lblQuantityModel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblQuantityModel.Location = new System.Drawing.Point(204, 3);
             this.lblQuantityModel.Name = "lblQuantityModel";
-            this.lblQuantityModel.Size = new System.Drawing.Size(240, 99);
+            this.lblQuantityModel.Size = new System.Drawing.Size(240, 95);
             this.lblQuantityModel.TabIndex = 1;
             this.lblQuantityModel.Text = "/0";
             this.lblQuantityModel.Visible = false;
@@ -494,64 +593,9 @@
             this.lblCountPCB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCountPCB.Location = new System.Drawing.Point(3, 3);
             this.lblCountPCB.Name = "lblCountPCB";
-            this.lblCountPCB.Size = new System.Drawing.Size(195, 99);
+            this.lblCountPCB.Size = new System.Drawing.Size(195, 95);
             this.lblCountPCB.TabIndex = 0;
             this.lblCountPCB.Text = "0";
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel4.Controls.Add(this.lblStatus, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.lblStatusMessage, 1, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 114);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(447, 69);
-            this.tableLayoutPanel4.TabIndex = 1;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.Appearance.Font = new System.Drawing.Font("Tahoma", 30F, System.Drawing.FontStyle.Bold);
-            this.lblStatus.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lblStatus.Appearance.Options.UseFont = true;
-            this.lblStatus.Appearance.Options.UseForeColor = true;
-            this.lblStatus.Appearance.Options.UseTextOptions = true;
-            this.lblStatus.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.lblStatus.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblStatus.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStatus.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblStatus.Location = new System.Drawing.Point(3, 3);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Padding = new System.Windows.Forms.Padding(3);
-            this.lblStatus.Size = new System.Drawing.Size(128, 63);
-            this.lblStatus.TabIndex = 0;
-            this.lblStatus.Text = "Status";
-            this.lblStatus.Visible = false;
-            // 
-            // lblStatusMessage
-            // 
-            this.lblStatusMessage.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.lblStatusMessage.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lblStatusMessage.Appearance.Options.UseFont = true;
-            this.lblStatusMessage.Appearance.Options.UseForeColor = true;
-            this.lblStatusMessage.Appearance.Options.UseTextOptions = true;
-            this.lblStatusMessage.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-            this.lblStatusMessage.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.lblStatusMessage.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblStatusMessage.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.lblStatusMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStatusMessage.Location = new System.Drawing.Point(137, 3);
-            this.lblStatusMessage.Name = "lblStatusMessage";
-            this.lblStatusMessage.Padding = new System.Windows.Forms.Padding(5);
-            this.lblStatusMessage.Size = new System.Drawing.Size(307, 63);
-            this.lblStatusMessage.TabIndex = 1;
-            this.lblStatusMessage.Text = "Message Info";
-            this.lblStatusMessage.Visible = false;
             // 
             // statusStrip1
             // 
@@ -560,44 +604,60 @@
             this.toolStripStatusLabelPEIT,
             this.toolStripStatusLabel3,
             this.toolStripStatusLabelDessignBy,
-            this.toolStripStatusLabelName});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 577);
+            this.toolStripStatusLabelName,
+            this.toolStripStatusLabel1,
+            this.lblVersion});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 575);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(844, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(844, 26);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabelSupport
             // 
             this.toolStripStatusLabelSupport.Name = "toolStripStatusLabelSupport";
-            this.toolStripStatusLabelSupport.Size = new System.Drawing.Size(52, 19);
+            this.toolStripStatusLabelSupport.Size = new System.Drawing.Size(52, 21);
             this.toolStripStatusLabelSupport.Text = "Support:";
             // 
             // toolStripStatusLabelPEIT
             // 
             this.toolStripStatusLabelPEIT.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.toolStripStatusLabelPEIT.Name = "toolStripStatusLabelPEIT";
-            this.toolStripStatusLabelPEIT.Size = new System.Drawing.Size(43, 19);
+            this.toolStripStatusLabelPEIT.Size = new System.Drawing.Size(43, 21);
             this.toolStripStatusLabelPEIT.Text = "PE-IT";
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(10, 19);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(10, 21);
             this.toolStripStatusLabel3.Text = "|";
             // 
             // toolStripStatusLabelDessignBy
             // 
             this.toolStripStatusLabelDessignBy.Name = "toolStripStatusLabelDessignBy";
-            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(62, 19);
+            this.toolStripStatusLabelDessignBy.Size = new System.Drawing.Size(62, 21);
             this.toolStripStatusLabelDessignBy.Text = "Design by:";
             // 
             // toolStripStatusLabelName
             // 
             this.toolStripStatusLabelName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.toolStripStatusLabelName.Name = "toolStripStatusLabelName";
-            this.toolStripStatusLabelName.Size = new System.Drawing.Size(148, 19);
+            this.toolStripStatusLabelName.Size = new System.Drawing.Size(148, 21);
             this.toolStripStatusLabelName.Text = "cuongpham@umcvn.com";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(54, 21);
+            this.toolStripStatusLabel1.Text = "| Version:";
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(19, 21);
+            this.lblVersion.Text = "0";
             // 
             // panelControl2
             // 
@@ -605,7 +665,7 @@
             this.panelControl2.Controls.Add(this.labelControl2);
             this.panelControl2.Controls.Add(this.panelControl3);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl2.Location = new System.Drawing.Point(0, 292);
+            this.panelControl2.Location = new System.Drawing.Point(0, 330);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(844, 45);
             this.panelControl2.TabIndex = 3;
@@ -621,7 +681,7 @@
             this.labelControl2.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.labelControl2.Size = new System.Drawing.Size(295, 41);
             this.labelControl2.TabIndex = 1;
-            this.labelControl2.Text = "Products in Box";
+            this.labelControl2.Text = "PCB in Box";
             // 
             // panelControl3
             // 
@@ -675,10 +735,10 @@
             // 
             this.gridControlData.Cursor = System.Windows.Forms.Cursors.Default;
             this.gridControlData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlData.Location = new System.Drawing.Point(0, 337);
+            this.gridControlData.Location = new System.Drawing.Point(0, 375);
             this.gridControlData.MainView = this.gridView1;
             this.gridControlData.Name = "gridControlData";
-            this.gridControlData.Size = new System.Drawing.Size(844, 240);
+            this.gridControlData.Size = new System.Drawing.Size(844, 200);
             this.gridControlData.TabIndex = 7;
             this.gridControlData.UseEmbeddedNavigator = true;
             this.gridControlData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -823,16 +883,19 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
+            this.panelControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.checkNG.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkPASS.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionID.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJudge.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
@@ -879,9 +942,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private DevExpress.XtraEditors.LabelControl lblQuantityModel;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnMacAddress;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private DevExpress.XtraEditors.LabelControl lblStatus;
-        private DevExpress.XtraEditors.LabelControl lblStatusMessage;
         private DevExpress.XtraEditors.LabelControl lblProductionID;
         private DevExpress.XtraEditors.LabelControl lblOperatorName;
         private DevExpress.XtraEditors.LabelControl lblLineID;
@@ -895,7 +955,15 @@
         private DevExpress.XtraEditors.LabelControl lblCurentModel;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.ButtonEdit txtProductionID;
-        private DevExpress.XtraEditors.ButtonEdit txtJudge;
         private DevExpress.XtraEditors.ButtonEdit txtBoxID;
+        private DevExpress.XtraEditors.PanelControl panelControl4;
+        private DevExpress.XtraEditors.CheckEdit checkEdit1;
+        private DevExpress.XtraEditors.CheckEdit checkNG;
+        private DevExpress.XtraEditors.CheckEdit checkPASS;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lblVersion;
+        private System.Windows.Forms.Panel panel1;
+        private DevExpress.XtraEditors.LabelControl lblStatusMessage;
+        private DevExpress.XtraEditors.LabelControl lblStatus;
     }
 }

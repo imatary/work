@@ -4,38 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7D3E20B3-46DD-4CC3-9C02-DB2C1F02E984}</ProjectGuid>
+    <ProjectGuid>{683C4D9E-B8BA-4805-8273-9F06AAA0B25C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OQCChecking</RootNamespace>
-    <AssemblyName>OQC Checking FujiXerox</AssemblyName>
+    <RootNamespace>PEBarcode</RootNamespace>
+    <AssemblyName>PEBarcode</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>Y:\Dev\Barcode Shipping\QA Check\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Barcode Shipping\QA Check\</UpdateUrl>
-    <ProductName>OQC Checking FujiXerox</ProductName>
-    <PublisherName>UMC Electronics VietNam Ltd%27s</PublisherName>
-    <SuiteName>Barcode System</SuiteName>
-    <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>19</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>true</UseApplicationTrust>
-    <CreateDesktopShortcut>true</CreateDesktopShortcut>
-    <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <BootstrapperComponentsLocation>Absolute</BootstrapperComponentsLocation>
-    <BootstrapperComponentsUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\NetFramework</BootstrapperComponentsUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,52 +31,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>87A12105F75FC06ED9EE846B802FF31AE200BDA1</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>OQCChecking_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>false</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Data.v16.2, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      
-    </Reference>
-    <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      
-    </Reference>
-    <Reference Include="DevExpress.Utils.v16.2, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      
-    </Reference>
-    <Reference Include="DevExpress.XtraEditors.v16.2, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      
-    </Reference>
-    <Reference Include="DevExpress.XtraPrinting.v16.2, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      
-    </Reference>
-    <Reference Include="DevExpress.XtraGrid.v16.2, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      
-    </Reference>
+    <Reference Include="DevExpress.Data.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v15.1.Core, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -117,11 +58,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormQACheck.cs">
+    <Compile Include="FormAction.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormQACheck.Designer.cs">
-      <DependentUpon>FormQACheck.cs</DependentUpon>
+    <Compile Include="FormAction.Designer.cs">
+      <DependentUpon>FormAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQA.Designer.cs">
+      <DependentUpon>FormQA.cs</DependentUpon>
     </Compile>
     <Compile Include="FormQALogin.cs">
       <SubType>Form</SubType>
@@ -129,15 +76,40 @@
     <Compile Include="FormQALogin.Designer.cs">
       <DependentUpon>FormQALogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSearchPCB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSearchPCB.Designer.cs">
+      <DependentUpon>FormSearchPCB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\MessageBoxHelper.cs" />
+    <Compile Include="Helper\Ultils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormQACheck.resx">
-      <DependentUpon>FormQACheck.cs</DependentUpon>
+    <Compile Include="WaitFormSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitFormSearch.Designer.cs">
+      <DependentUpon>WaitFormSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WaitFormUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitFormUpdate.Designer.cs">
+      <DependentUpon>WaitFormUpdate.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormAction.resx">
+      <DependentUpon>FormAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQA.resx">
+      <DependentUpon>FormQA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormQALogin.resx">
       <DependentUpon>FormQALogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="FormSearchPCB.resx">
+      <DependentUpon>FormSearchPCB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -148,6 +120,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="WaitFormSearch.resx">
+      <DependentUpon>WaitFormSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaitFormUpdate.resx">
+      <DependentUpon>WaitFormUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -169,24 +147,6 @@
       <Project>{F0BBFE23-75D4-4D95-AF43-8CEAF86ABA56}</Project>
       <Name>BarcodeShipping.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lib.Core\Lib.Core.csproj">
-      <Project>{36EE5B31-CFF5-47FF-9FB5-499B052B9834}</Project>
-      <Name>Lib.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\apply_32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-    <None Include="Resources\umc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

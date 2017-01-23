@@ -30,10 +30,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMurata));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.tableLayoutPanelModel = new System.Windows.Forms.TableLayoutPanel();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -99,7 +95,6 @@
             this.gridColumnQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnDateCheck = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
             this.tableLayoutPanelModel.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -112,7 +107,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.checkModelCUS.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
-            this.panelControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkNG.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkPASS.Properties)).BeginInit();
@@ -122,9 +116,7 @@
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
-            this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
@@ -236,7 +228,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Image = global::MurataSystem.Properties.Resources.umc;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(137, 94);
@@ -339,12 +331,15 @@
             this.txtModelUMC.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtModelUMC.Location = new System.Drawing.Point(123, 66);
             this.txtModelUMC.Name = "txtModelUMC";
+            // 
+            // 
+            // 
             this.txtModelUMC.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.txtModelUMC.Properties.Appearance.Options.UseFont = true;
             this.txtModelUMC.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtModelUMC.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtModelUMC.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(),
+            new DevExpress.XtraEditors.Controls.EditorButton()});
             this.txtModelUMC.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtModelUMC.Properties.NullText = "";
             this.txtModelUMC.Properties.NullValuePrompt = "Model UMC";
@@ -396,11 +391,14 @@
             this.txtBoxID.Enabled = false;
             this.txtBoxID.Location = new System.Drawing.Point(123, 97);
             this.txtBoxID.Name = "txtBoxID";
+            // 
+            // 
+            // 
             this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxID.Properties.Appearance.Options.UseFont = true;
             this.txtBoxID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtBoxID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBoxID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton()});
             this.txtBoxID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBoxID.Properties.NullValuePrompt = "Box ID";
             this.txtBoxID.Properties.NullValuePromptShowForEmptyValue = true;
@@ -444,11 +442,14 @@
             this.txtModelCUS.Enabled = false;
             this.txtModelCUS.Location = new System.Drawing.Point(123, 218);
             this.txtModelCUS.Name = "txtModelCUS";
+            // 
+            // 
+            // 
             this.txtModelCUS.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.txtModelCUS.Properties.Appearance.Options.UseFont = true;
             this.txtModelCUS.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtModelCUS.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtModelCUS.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton()});
             this.txtModelCUS.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtModelCUS.Properties.NullValuePrompt = "Label Murata";
             this.txtModelCUS.Properties.NullValuePromptShowForEmptyValue = true;
@@ -466,6 +467,9 @@
             this.checkModelCUS.Enabled = false;
             this.checkModelCUS.Location = new System.Drawing.Point(123, 187);
             this.checkModelCUS.Name = "checkModelCUS";
+            // 
+            // 
+            // 
             this.checkModelCUS.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkModelCUS.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.checkModelCUS.Properties.Appearance.Options.UseFont = true;
@@ -483,11 +487,14 @@
             this.txtProductID.Enabled = false;
             this.txtProductID.Location = new System.Drawing.Point(123, 126);
             this.txtProductID.Name = "txtProductID";
+            // 
+            // 
+            // 
             this.txtProductID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.txtProductID.Properties.Appearance.Options.UseFont = true;
             this.txtProductID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtProductID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtProductID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton()});
             this.txtProductID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtProductID.Properties.NullValuePrompt = "Label UMC";
             this.txtProductID.Properties.NullValuePromptShowForEmptyValue = true;
@@ -543,6 +550,9 @@
             this.checkEdit1.EditValue = true;
             this.checkEdit1.Location = new System.Drawing.Point(157, 0);
             this.checkEdit1.Name = "checkEdit1";
+            // 
+            // 
+            // 
             this.checkEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.checkEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
             this.checkEdit1.Properties.Appearance.Options.UseFont = true;
@@ -560,6 +570,9 @@
             this.checkNG.Enabled = false;
             this.checkNG.Location = new System.Drawing.Point(86, 0);
             this.checkNG.Name = "checkNG";
+            // 
+            // 
+            // 
             this.checkNG.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkNG.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.checkNG.Properties.Appearance.Options.UseFont = true;
@@ -578,6 +591,9 @@
             this.checkPASS.Enabled = false;
             this.checkPASS.Location = new System.Drawing.Point(0, 0);
             this.checkPASS.Name = "checkPASS";
+            // 
+            // 
+            // 
             this.checkPASS.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkPASS.Properties.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
             this.checkPASS.Properties.Appearance.Options.UseFont = true;
@@ -690,10 +706,10 @@
             this.lblStatusMessage.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblStatusMessage.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.lblStatusMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStatusMessage.Location = new System.Drawing.Point(103, 3);
+            this.lblStatusMessage.Location = new System.Drawing.Point(131, 3);
             this.lblStatusMessage.Name = "lblStatusMessage";
             this.lblStatusMessage.Padding = new System.Windows.Forms.Padding(5);
-            this.lblStatusMessage.Size = new System.Drawing.Size(316, 106);
+            this.lblStatusMessage.Size = new System.Drawing.Size(288, 106);
             this.lblStatusMessage.TabIndex = 1;
             this.lblStatusMessage.Text = "no results";
             // 
@@ -714,7 +730,7 @@
             this.lblStatus.Location = new System.Drawing.Point(3, 3);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Padding = new System.Windows.Forms.Padding(3);
-            this.lblStatus.Size = new System.Drawing.Size(100, 106);
+            this.lblStatus.Size = new System.Drawing.Size(128, 106);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "N/A";
             // 
@@ -1052,7 +1068,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormQA_FormClosing);
             this.Load += new System.EventHandler(this.FormQA_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
             this.tableLayoutPanelModel.ResumeLayout(false);
             this.tableLayoutPanelModel.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
@@ -1068,7 +1083,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.checkModelCUS.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
-            this.panelControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkNG.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkPASS.Properties)).EndInit();
@@ -1080,9 +1094,7 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
-            this.panelControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();

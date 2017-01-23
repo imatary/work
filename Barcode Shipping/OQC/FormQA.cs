@@ -21,6 +21,9 @@ namespace OQC
             _oqcService = new OQCService();
             _modelService = new ModelService();
             InitializeComponent();
+            lblVersion.Text = StringHelper.GetRunningVersion();
+            Ultils.RegisterInStartup(true, Application.ExecutablePath);
+            txtBoxID.Focus();
         }
 
         private void FormQA_Load(object sender, EventArgs e)
@@ -28,22 +31,102 @@ namespace OQC
             lblOperatorName.Text = Program.CurrentUser.OperatorName;
             lblLineID.Text = string.Format("LINE {0}", Program.CurrentUser.LineID);
         }
+        private void txtMacAddress_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (string.IsNullOrEmpty(txtMacAddress.Text))
+                {
+                    SetErrorStatus("NG", "Mac Address không được để trống!");
+                    Ultils.EditTextErrorNoMessage(txtMacAddress);
+                }
+                else
+                {
+                    if (txtMacAddress.Text.Length <= 2)
+                    {
+                        SetErrorStatus("NG", "Mac Address Error!\nKhông đúng định dạng.\nVui lòng thử lại!");
+                        txtMacAddress.SelectAll();
+                        Ultils.EditTextErrorNoMessage(txtMacAddress);
+                    }
+                    else
+                    {
+                        txtBoxID.Focus();
+                        SetDefaultStatus("N/A", "no results");
+                    }
+
+                }
+            }
+            if (e.KeyCode == Keys.Tab)
+            {
+                if (string.IsNullOrEmpty(txtMacAddress.Text))
+                {
+                    SetErrorStatus("NG", "Mac Address không được để trống!");
+                    Ultils.EditTextErrorNoMessage(txtMacAddress);
+                }
+            }
+        }
+        private void txtBoxID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
+            {
+                if (string.IsNullOrEmpty(txtBoxID.Text))
+                {
+                    SetErrorStatus("NG", "Box ID không được để trống!");
+                    Ultils.EditTextErrorNoMessage(txtBoxID);
+                }
+                else
+                {
+                    string strBoxId = txtBoxID.Text;
+                    if (strBoxId.Length >= 3)
+                    {
+                        if(strBoxId.Length > 10)
+                        {
+                            SetErrorStatus("NG", "BOX không được dài quá 10 ký tự!");
+                            Ultils.EditTextErrorNoMessage(txtBoxID);
+                            Ultils.EditTextErrorNoMessage(txtBoxID);
+                        }
+                        else
+                        {
+                            if (strBoxId.Substring(0, 3).ToUpper() != "F00")
+                            {
+                                SetErrorStatus("NG", "BOX ID phải bắt đầu bằng F00!");
+                                Ultils.EditTextErrorNoMessage(txtBoxID);
+                                txtBoxID.SelectAll();
+                            }
+                            else
+                            {
+                                SetDefaultStatus("N/A", "no results");
+                                txtBoxID.Enabled = false;
+                                txtProductionID.Focus();
+                            }
+                        } 
+                    }
+                    else
+                    {
+                        SetErrorStatus("NG", "BOX ID không đúng định đạng!");
+                        Ultils.EditTextErrorNoMessage(txtBoxID);
+                    }
+                }
+            }
+        }
+
         private void txtProductionID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 _dateTimeCheck = DateTime.Now;
-                if (string.IsNullOrEmpty(txtProductionID.Text))
+                string productionId = txtProductionID.Text.Trim();
+                if (string.IsNullOrEmpty(productionId))
                 {
-                    SetErrorStatus(true, "NG", $"Production ID không được để trống!");
+                    SetErrorStatus("NG", $"Production ID không được để trống!");
                     Ultils.EditTextErrorNoMessage(txtProductionID);
                 }
                 else
                 {
-                    string productionId = txtProductionID.Text.Trim();
+                    
                     if (productionId.Length <= 10)
                     {
-                        SetErrorStatus(true, "NG", $"Error!\nPCB không đúng định dạng!");
+                        SetErrorStatus("NG", $"Error!\nPCB không đúng định dạng!");
                         txtProductionID.SelectAll();
                         Ultils.EditTextErrorNoMessage(txtProductionID);
                     }
@@ -69,7 +152,7 @@ namespace OQC
                             var production = _oqcService.GetLogByProductionId(productionId);
                             if (production != null)
                             {
-                                SetErrorStatus(true, "NG",
+                                SetErrorStatus("NG",
                                     $"PCB [{txtProductionID.Text}] đã có trong hệ thống. Vui lòng kiểm tra lại\n" +
                                     $"Box ID: {production.BoxID}");
                                 txtProductionID.ResetText();
@@ -77,14 +160,14 @@ namespace OQC
                             }
                             else
                             {
-                                txtJudge.Focus();
-                                SetErrorStatus(false, null, null);
+                                SetErrorStatus("N/A", "no results");
+                                InsertLog(txtBoxID.Text.Trim());
                             }
                         }
                         else if (Program.CurrentUser.OperationID >= 2)
                         {
-                            txtJudge.Focus();
-                            SetErrorStatus(false, null, null);
+                            SetErrorStatus("N/A", "no results");
+                            InsertLog(txtBoxID.Text.Trim());
                         }
                     }
                 }
@@ -93,113 +176,12 @@ namespace OQC
             {
                 if (string.IsNullOrEmpty(txtProductionID.Text))
                 {
-                    SetErrorStatus(true, "NG", $"Production ID không được để trống!");
+                    SetErrorStatus("NG", $"Production ID không được để trống!");
                     Ultils.EditTextErrorNoMessage(txtProductionID);
                 }
             }
         }
-        private void txtMacAddress_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (string.IsNullOrEmpty(txtMacAddress.Text))
-                {
-                    SetErrorStatus(true, "NG", "Mac Address không được để trống!");
-                    Ultils.EditTextErrorNoMessage(txtMacAddress);
-                }
-                else
-                {
-                    if (txtMacAddress.Text.Length <= 2)
-                    {
-                        SetErrorStatus(true, "NG", "Mac Address Error!\nKhông đúng định dạng.\nVui lòng thử lại!");
-                        txtMacAddress.SelectAll();
-                        Ultils.EditTextErrorNoMessage(txtMacAddress);
-                    }
-                    else
-                    {
-                        txtJudge.Focus();
-                        SetErrorStatus(false, null, null);
-                    }
-
-                }
-            }
-            if (e.KeyCode == Keys.Tab)
-            {
-                if (string.IsNullOrEmpty(txtMacAddress.Text))
-                {
-                    SetErrorStatus(true, "NG", "Mac Address không được để trống!");
-                    Ultils.EditTextErrorNoMessage(txtMacAddress);
-                }
-            }
-        }
-        private void txtJudge_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (string.IsNullOrEmpty(txtJudge.Text))
-                {
-                    SetErrorStatus(true, "NG", "Judge không được để trống!");
-                    Ultils.EditTextErrorNoMessage(txtJudge);
-                }
-                else
-                {
-                    if (txtJudge.Text.Trim() == "1" || txtJudge.Text.Trim() == "0")
-                    {
-                        txtBoxID.Focus();
-                        SetErrorStatus(false, null, null);
-                    }
-                    else
-                    {
-                        SetErrorStatus(true, "NG", "Judge Error!\nKhông đúng định dạng.\nVui lòng thử lại!\nChỉ chấp nhận giá trị: 1 hoặc 0 ");
-                        txtJudge.SelectAll();
-                        Ultils.EditTextErrorNoMessage(txtJudge);
-                    }
-                }
-            }
-            if (e.KeyCode == Keys.Tab)
-            {
-                if (string.IsNullOrEmpty(txtJudge.Text))
-                {
-                    SetErrorStatus(true, "NG", "Judge không được để trống!");
-                    Ultils.EditTextErrorNoMessage(txtJudge);
-                }
-            }
-        }
-        private void txtBoxID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
-            {
-                if (string.IsNullOrEmpty(txtBoxID.Text))
-                {
-                    SetErrorStatus(true, "NG", "Box ID không được để trống!");
-                    Ultils.EditTextErrorNoMessage(txtBoxID);
-                }
-                else
-                {
-                    string strBoxId = txtBoxID.Text;
-                    if (strBoxId.Length >= 3)
-                    {
-                        if (strBoxId.Substring(0, 3).ToUpper() != "F00")
-                        {
-                            SetErrorStatus(true, "NG", "BOX ID phải bắt đầu bằng F00!");
-                            Ultils.EditTextErrorNoMessage(txtBoxID);
-                            txtBoxID.SelectAll();
-                        }
-                        else
-                        {
-                            SetErrorStatus(false, null, null);
-                            InsertLog(txtBoxID.Text);
-                        }
-                    }
-                    else
-                    {
-                        SetErrorStatus(true, "NG", "BOX ID không đúng định đạng!");
-                        Ultils.EditTextErrorNoMessage(txtBoxID);
-                    }
-                }
-            }
-        }
-
+        
         private void txtProductionID_EditValueChanged(object sender, EventArgs e)
         {
             Ultils.SetColorDefaultTextControl(txtProductionID);
@@ -211,14 +193,6 @@ namespace OQC
         private void txtMacAddress_EditValueChanged(object sender, EventArgs e)
         {
             Ultils.SetColorDefaultTextControl(txtMacAddress);
-        }
-        private void txtJudge_EditValueChanged(object sender, EventArgs e)
-        {
-            Ultils.SetColorDefaultTextControl(txtJudge);
-            if (!string.IsNullOrEmpty(txtJudge.Text))
-            {
-                txtJudge.Properties.Buttons[0].Visible = true;
-            }
         }
         private void txtBoxID_EditValueChanged(object sender, EventArgs e)
         {
@@ -244,35 +218,27 @@ namespace OQC
         private void InsertLog(string boxId)
         {
             if (!string.IsNullOrEmpty(txtProductionID.Text.Trim())
-                || !string.IsNullOrEmpty(txtMacAddress.Text.Trim())
-                || !string.IsNullOrEmpty(txtJudge.Text.Trim()))
+                || !string.IsNullOrEmpty(txtBoxID.Text.Trim()))
             {
                 int lineId = Program.CurrentUser.LineID;
                 int operationId = Program.CurrentUser.OperationID;
                 string operatorId = Program.CurrentUser.OperatorCode;
                 string productionId = txtProductionID.Text.Trim();
 
-                bool judge = txtJudge.Text.Trim() == "1";
                 string status = null;
-                if (txtJudge.Text.Trim() == "1")
+                bool judge = false;
+                if (checkPASS.Checked == true)
                 {
                     status = "P";
+                    judge = true;
+
                 }
-                else
+                if (checkNG.Checked == true)
                 {
                     status = "F";
+                    judge = false;
                 }
-                string modelName = null;
-                string serialNo = null;
-                if (!string.IsNullOrEmpty(lblCurentModel.Text))
-                {
-                    modelName = lblCurentModel.Text;
-                    serialNo = lblSerialNo.Text;
-                }
-                else
-                {
-                    modelName = "#N/T";
-                }
+
                 var logs = _oqcService.GetLogsByBoxId(boxId).ToList();
 
                 if (operationId == 1)
@@ -294,8 +260,10 @@ namespace OQC
 
                                 if (logs.Count == quantity)
                                 {
-                                    SetErrorStatus(true, "NG", $"Box [{txtBoxID.Text}] đã đủ số lượng. Vui lòng kiểm tra lại!");
+                                    SetErrorStatus("NG", $"Box [{txtBoxID.Text}] đã đủ số lượng. Vui lòng kiểm tra lại!");
                                     Ultils.EditTextErrorNoMessage(txtBoxID);
+                                    txtBoxID.Enabled = true;
+                                    txtBoxID.Focus();
                                     txtBoxID.ResetText();
                                 }
                                 else
@@ -313,27 +281,30 @@ namespace OQC
                                             _iqcService.UpdateResult(productionId, operationId, judge, operatorId);
                                         }
                                         Ultils.CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
-                                        Ultils.CreateFileLogDirModelName(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
+                                        //Ultils.CreateFileLogDirModelName(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
                                         logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                                         gridControlData.Refresh();
                                         gridControlData.DataSource = logs;
                                         lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
 
-                                        SetSuccessStatus(true, "PASS", $"Thành công!\nPCB [{txtProductionID.Text}]");
-                                        ResetControls();
+                                        SetSuccessStatus("PASS", $"Thành công!\nPCB [{txtProductionID.Text}]");
+                                        txtProductionID.ResetText();
+                                        txtProductionID.Focus();
                                     }
                                     catch (Exception ex)
                                     {
-                                        SetErrorStatus(true, "NG", "Model chưa có trong hệ thống!\nVui lòng nhập model này vào, và thử lại. \n" + ex.Message);
-                                        ResetControls();
+                                        SetErrorStatus("NG", "Model chưa có trong hệ thống!\nVui lòng nhập model này vào, và thử lại. \n" + ex.Message);
+                                        txtProductionID.ResetText();
+                                        txtProductionID.Focus();
                                     }
                                 }
                             }
                             else
                             {
-                                SetErrorStatus(true, "NG", $"Sai Model: {lblCurentModel.Text} !\nPCB [{productionId}] này khác với các PCB trong Box [{boxId}].\nVui lòng kiểm tra lại!");
+                                SetErrorStatus("NG", $"Sai Model: {lblCurentModel.Text} !\nPCB [{productionId}] này khác với các PCB trong Box [{boxId}].\nVui lòng kiểm tra lại!");
                                 Ultils.EditTextErrorNoMessage(txtProductionID);
-                                ResetControls();
+                                txtProductionID.ResetText();
+                                txtProductionID.Focus();
 
                                 logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                                 gridControlData.Refresh();
@@ -344,8 +315,9 @@ namespace OQC
                         // Nếu có rồi thì thống báo lỗi
                         else
                         {
-                            SetErrorStatus(true, "NG", $"PCB [{txtProductionID.Text}] này đã có trong Box rồi.\nVui lòng kiểm tra lại");
-                            ResetControls();
+                            SetErrorStatus("NG", $"PCB [{txtProductionID.Text}] này đã có trong Box rồi.\nVui lòng kiểm tra lại");
+                            txtProductionID.ResetText();
+                            txtProductionID.Focus();
                             gridControlData.Refresh();
                             gridControlData.DataSource = logs;
                             lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
@@ -367,19 +339,23 @@ namespace OQC
                                 _iqcService.UpdateResult(productionId, operationId, judge, operatorId);
                             }
                             Ultils.CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
-                            Ultils.CreateFileLogDirModelName(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
+                            //Ultils.CreateFileLogDirModelName(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
                             logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                             gridControlData.Refresh();
                             gridControlData.DataSource = logs;
                             lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
 
-                            SetSuccessStatus(true, "PASS", string.Format("Thêm thành công!\nPCB [{0}]", productionId));
-                            ResetControls();
+                            SetSuccessStatus("PASS", string.Format("Thêm thành công!\nPCB [{0}]", productionId));
+                            txtProductionID.ResetText();
+                            txtProductionID.Focus();
+                            //ResetControls();
                         }
                         catch (Exception ex)
                         {
-                            SetErrorStatus(true, "NG", "Error Insert! \n" + ex.Message);
-                            ResetControls();
+                            SetErrorStatus("NG", "Error Insert! \n" + ex.Message);
+                            //ResetControls();
+                            txtProductionID.ResetText();
+                            txtProductionID.Focus();
                         }
                     }
                 }
@@ -393,13 +369,14 @@ namespace OQC
                     gridControlData.DataSource = logs;
                     lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
 
-                    SetSuccessStatus(true, "PASS", string.Format("Thành công!\nPCB [{0}] vừa được bắn lại lần {1}", productionId, operationId));
-                    ResetControls();
+                    SetSuccessStatus("PASS", string.Format("Thành công!\nPCB [{0}] vừa được bắn lại lần {1}", productionId, operationId));
+                    txtProductionID.ResetText();
+                    txtProductionID.Focus();
                 }
             }
             else
             {
-                SetErrorStatus(true, "NG", "Vui lòng nhập đủ thông tin!");
+                SetErrorStatus("NG", "Vui lòng nhập đủ thông tin!");
                 txtProductionID.Focus();
                 txtProductionID.SelectAll();
             }
@@ -429,11 +406,9 @@ namespace OQC
             txtProductionID.Focus();
             txtProductionID.Text = string.Empty;
             //txtMacAddress.Text = string.Empty;
-            txtJudge.Text = string.Empty;
             txtBoxID.Text = string.Empty;
 
             txtProductionID.Properties.Buttons[0].Visible = false;
-            txtJudge.Properties.Buttons[0].Visible = false;
             txtBoxID.Properties.Buttons[0].Visible = false;
         }
 
@@ -443,11 +418,8 @@ namespace OQC
         /// <param name="visible"></param>
         /// <param name="status"></param>
         /// <param name="messageInfo"></param>
-        private void SetErrorStatus(bool visible, string status, string messageInfo)
+        private void SetErrorStatus(string status, string messageInfo)
         {
-            lblStatus.Visible = visible;
-            lblStatusMessage.Visible = visible;
-
             lblStatus.Appearance.BackColor = Color.DarkRed;
             lblStatusMessage.Appearance.BackColor = Color.DarkRed;
 
@@ -461,13 +433,19 @@ namespace OQC
         /// <param name="visible"></param>
         /// <param name="status"></param>
         /// <param name="messageInfo"></param>
-        private void SetSuccessStatus(bool visible, string status, string messageInfo)
+        private void SetSuccessStatus(string status, string messageInfo)
         {
-            lblStatus.Visible = visible;
-            lblStatusMessage.Visible = visible;
-
             lblStatus.Appearance.BackColor = Color.DarkGreen;
             lblStatusMessage.Appearance.BackColor = Color.DarkGreen;
+
+            lblStatus.Text = status;
+            lblStatusMessage.Text = messageInfo;
+        }
+
+        private void SetDefaultStatus(string status, string messageInfo)
+        {
+            lblStatus.Appearance.BackColor = Color.White;
+            lblStatusMessage.Appearance.BackColor = Color.White;
 
             lblStatus.Text = status;
             lblStatusMessage.Text = messageInfo;
@@ -534,16 +512,6 @@ namespace OQC
                 txtProductionID.ResetText();
             }
         }
-
-        private void txtJudge_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            if (e.Button.Index == 0)
-            {
-                txtJudge.Properties.Buttons[0].Visible = false;
-                txtJudge.ResetText();
-            }
-        }
-
         private void txtBoxID_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 0)

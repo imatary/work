@@ -13,6 +13,19 @@ namespace Lib.Core.Helper
 {
     public class Ultils
     {
+        public static void RegisterInStartup(bool isChecked, string executablePath)
+        {
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (isChecked)
+            {
+                registryKey.SetValue("ApplicationName", executablePath);
+            }
+            else
+            {
+                registryKey.DeleteValue("ApplicationName");
+            }
+        }
+
         public static void TextControlNotNull(TextEdit textEdit, string title)
         {
             textEdit.Properties.Appearance.BorderColor = System.Drawing.Color.Red; 

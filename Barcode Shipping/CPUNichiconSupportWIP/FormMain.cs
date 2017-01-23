@@ -98,6 +98,8 @@ namespace CPUNichiconSupportWIP
                     SettingConfiguration.F_UpdateKey("StationNo", txtStationNO.Text);
                 }
 
+                string pathInput = ConfigurationManager.AppSettings["PathInput"];
+
                 if (m_bIsWatching)
                 {
                     m_bIsWatching = false;
@@ -114,7 +116,7 @@ namespace CPUNichiconSupportWIP
                     btnStartWatch.Text = "Stop Watching";
 
                     m_Watcher = new FileSystemWatcher();
-                    string pathInput = ConfigurationManager.AppSettings["PathInput"];
+                    
                     m_Watcher.Filter = pathInput.Substring(pathInput.LastIndexOf('\\') + 1);
                     m_Watcher.Path = pathInput.Substring(0, pathInput.Length - m_Watcher.Filter.Length);
 
@@ -171,6 +173,23 @@ namespace CPUNichiconSupportWIP
             return null;
         }
         int pass = 0, total = 0, ng = 0;
+
+        private void txtPath_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPath.Text))
+            {
+                SettingConfiguration.F_UpdateKey("PathInput", txtPath.Text);
+            }
+        }
+
+        private void txtStationNO_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtStationNO.Text))
+            {
+                SettingConfiguration.F_UpdateKey("StationNo", txtStationNO.Text);
+            }
+        }
+
         private void tmrEditNotify_Tick(object sender, EventArgs e)
         {
             if (m_bDirty)
