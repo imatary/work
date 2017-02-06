@@ -183,10 +183,11 @@ namespace OQC
         } 
         private void txtProductionID_EditValueChanged(object sender, EventArgs e)
         {
-            Ultils.SetColorDefaultTextControl(txtProductionID);
             if (!string.IsNullOrEmpty(txtProductionID.Text))
             {
+                Ultils.SetColorDefaultTextControl(txtProductionID);
                 txtProductionID.Properties.Buttons[0].Visible = true;
+                SetDefaultStatus("N/A", "no results");
             }
         }
         private void txtMacAddress_EditValueChanged(object sender, EventArgs e)
@@ -195,10 +196,12 @@ namespace OQC
         }
         private void txtBoxID_EditValueChanged(object sender, EventArgs e)
         {
-            Ultils.SetColorDefaultTextControl(txtBoxID);
+            
             if (!string.IsNullOrEmpty(txtBoxID.Text))
             {
+                Ultils.SetColorDefaultTextControl(txtBoxID);
                 txtBoxID.Properties.Buttons[0].Visible = true;
+                SetDefaultStatus("N/A", "no results");
             }
         }
 
@@ -530,6 +533,54 @@ namespace OQC
 
             gridControlData.DataSource = null;
             gridControlData.Refresh();
+
+            Ultils.SetColorDefaultTextControl(txtBoxID);
+            Ultils.SetColorDefaultTextControl(txtProductionID);
+        }
+
+        private void checkPASS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkPASS.Checked == true)
+            {
+                checkNG.Checked = false;
+            }
+            else
+            {
+                checkNG.Checked = true;
+            }
+
+            if (string.IsNullOrEmpty(txtBoxID.Text))
+            {
+                txtBoxID.Focus();
+            }
+            else
+            {
+                txtBoxID.Enabled = false;
+                txtProductionID.ResetText();
+                txtProductionID.Focus();
+            }
+        }
+
+        private void checkNG_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkNG.Checked == true)
+            {
+                checkPASS.Checked = false;
+            }
+            else
+            {
+                checkPASS.Checked = true;
+            }
+            if (string.IsNullOrEmpty(txtBoxID.Text))
+            {
+                txtBoxID.Focus();
+            }
+            else
+            {
+                txtBoxID.Enabled = false;
+                txtProductionID.ResetText();
+                txtProductionID.Focus();
+            }  
         }
 
         //private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)

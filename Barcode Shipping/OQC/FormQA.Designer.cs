@@ -30,8 +30,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormQA));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.tableLayoutPanelModel = new System.Windows.Forms.TableLayoutPanel();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -312,6 +312,7 @@
             this.checkNG.Properties.Caption = "NG";
             this.checkNG.Size = new System.Drawing.Size(138, 26);
             this.checkNG.TabIndex = 1;
+            this.checkNG.CheckedChanged += new System.EventHandler(this.checkNG_CheckedChanged);
             // 
             // checkPASS
             // 
@@ -327,6 +328,7 @@
             this.checkPASS.Properties.Caption = "OK";
             this.checkPASS.Size = new System.Drawing.Size(116, 26);
             this.checkPASS.TabIndex = 0;
+            this.checkPASS.CheckedChanged += new System.EventHandler(this.checkPASS_CheckedChanged);
             // 
             // lblJudge
             // 
@@ -437,7 +439,7 @@
             this.txtProductionID.Properties.Appearance.Options.UseFont = true;
             this.txtProductionID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtProductionID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtProductionID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtProductionID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
             this.txtProductionID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtProductionID.Properties.NullValuePrompt = "Production ID";
             this.txtProductionID.Properties.NullValuePromptShowForEmptyValue = true;
@@ -456,7 +458,7 @@
             this.txtBoxID.Properties.Appearance.Options.UseFont = true;
             this.txtBoxID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtBoxID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBoxID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBoxID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.txtBoxID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBoxID.Properties.NullValuePrompt = "Box ID";
             this.txtBoxID.Properties.NullValuePromptShowForEmptyValue = true;

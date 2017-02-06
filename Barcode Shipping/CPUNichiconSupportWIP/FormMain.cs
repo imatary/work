@@ -84,10 +84,16 @@ namespace CPUNichiconSupportWIP
             bool isVaild = true;
             if (string.IsNullOrEmpty(txtStationNO.Text))
             {
+                errorProvider1.Clear();
+                errorProvider1.SetError(txtStationNO, "Field required!");
+                txtStationNO.Focus();
                 isVaild = false;
             }
             else if (string.IsNullOrEmpty(txtPath.Text))
             {
+                errorProvider1.Clear();
+                errorProvider1.SetError(panel4, "Field required!");
+                txtPath.Focus();
                 isVaild = false;
             }
             else if (isVaild == true)
@@ -195,8 +201,8 @@ namespace CPUNichiconSupportWIP
             if (m_bDirty)
             {
                 string strDSN = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = {path}";
-                string strSQL = $"SELECT TOP 1 *  FROM PTS_HEADER  WHERE EndDateTime >= #1/7/2017# ORDER BY EndDateTime DESC";
-                //string strSQL = $"SELECT TOP 1 *  FROM PTS_HEADER  WHERE EndDateTime >= #{DateTime.Now.Date}# ORDER BY EndDateTime DESC";
+                //string strSQL = $"SELECT TOP 1 *  FROM PTS_HEADER  WHERE EndDateTime >= #1/7/2017# ORDER BY EndDateTime DESC";
+                string strSQL = $"SELECT TOP 1 *  FROM PTS_HEADER  WHERE EndDateTime >= #{DateTime.Now.Date}# ORDER BY EndDateTime DESC";
                 // create Objects of ADOConnection and ADOCommand  
                 OleDbConnection myConn = new OleDbConnection(strDSN);
                 OleDbDataAdapter myCmd = new OleDbDataAdapter(strSQL, myConn);
