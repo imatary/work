@@ -9,7 +9,6 @@ using Lib.Core;
 using Lib.Core.Helpers;
 using Lib.Data;
 using Lib.Form.Controls;
-using Lib.Services;
 
 namespace HondaLookSupports
 {
@@ -149,8 +148,8 @@ namespace HondaLookSupports
             _processName = ConfigurationManager.AppSettings["ProcessName"];
             MessageBox.Show(_processName);
 
-            Ultils.WriteFile(GetValueWindowText.GetAllTextFromWindowByTitle(_processName));
-            MessageBox.Show("Write file OK");
+            //Ultils.WriteFile(GetValueWindowText.GetAllTextFromWindowByTitle(_processName));
+            //MessageBox.Show("Write file OK");
         }
 
         private void txtBarcode_EditValueChanged(object sender, EventArgs e)

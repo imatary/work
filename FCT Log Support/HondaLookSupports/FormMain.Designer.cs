@@ -30,6 +30,7 @@ namespace HondaLookSupports
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -47,6 +48,7 @@ namespace HondaLookSupports
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
@@ -72,8 +74,7 @@ namespace HondaLookSupports
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblMessage = new DevExpress.XtraEditors.LabelControl();
             this.lblState = new DevExpress.XtraEditors.LabelControl();
-            this.tmrEditNotify = new System.Windows.Forms.Timer();
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tmrEditNotify = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
@@ -150,7 +151,7 @@ namespace HondaLookSupports
             this.toolStripStatusLabel5,
             this.lblVersion,
             this.toolStripStatusLabel6});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 277);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 298);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(483, 24);
             this.statusStrip1.TabIndex = 2;
@@ -197,6 +198,12 @@ namespace HondaLookSupports
             this.lblVersion.Size = new System.Drawing.Size(16, 19);
             this.lblVersion.Text = "0";
             // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(118, 15);
+            this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.panel4);
@@ -205,7 +212,7 @@ namespace HondaLookSupports
             this.panel2.Location = new System.Drawing.Point(0, 62);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(5);
-            this.panel2.Size = new System.Drawing.Size(483, 215);
+            this.panel2.Size = new System.Drawing.Size(483, 236);
             this.panel2.TabIndex = 3;
             // 
             // panel4
@@ -216,16 +223,16 @@ namespace HondaLookSupports
             this.panel4.Location = new System.Drawing.Point(5, 77);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel4.Size = new System.Drawing.Size(473, 133);
+            this.panel4.Size = new System.Drawing.Size(473, 154);
             this.panel4.TabIndex = 1;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(0, 60);
+            this.gridControl1.Location = new System.Drawing.Point(0, 69);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(473, 73);
+            this.gridControl1.Size = new System.Drawing.Size(473, 85);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -333,7 +340,7 @@ namespace HondaLookSupports
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(473, 55);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(473, 64);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -355,7 +362,7 @@ namespace HondaLookSupports
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(176, 49);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(176, 58);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // lblTotal
@@ -369,9 +376,9 @@ namespace HondaLookSupports
             this.lblTotal.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblTotal.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.lblTotal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotal.Location = new System.Drawing.Point(120, 28);
+            this.lblTotal.Location = new System.Drawing.Point(120, 32);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(52, 17);
+            this.lblTotal.Size = new System.Drawing.Size(52, 22);
             this.lblTotal.TabIndex = 5;
             this.lblTotal.Text = "0";
             // 
@@ -386,9 +393,9 @@ namespace HondaLookSupports
             this.lblNG.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblNG.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.lblNG.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNG.Location = new System.Drawing.Point(62, 28);
+            this.lblNG.Location = new System.Drawing.Point(62, 32);
             this.lblNG.Name = "lblNG";
-            this.lblNG.Size = new System.Drawing.Size(51, 17);
+            this.lblNG.Size = new System.Drawing.Size(51, 22);
             this.lblNG.TabIndex = 4;
             this.lblNG.Text = "0";
             // 
@@ -406,7 +413,7 @@ namespace HondaLookSupports
             this.labelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelControl4.Location = new System.Drawing.Point(4, 4);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(51, 17);
+            this.labelControl4.Size = new System.Drawing.Size(51, 21);
             this.labelControl4.TabIndex = 0;
             this.labelControl4.Text = "PASS";
             // 
@@ -423,7 +430,7 @@ namespace HondaLookSupports
             this.labelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelControl5.Location = new System.Drawing.Point(62, 4);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(51, 17);
+            this.labelControl5.Size = new System.Drawing.Size(51, 21);
             this.labelControl5.TabIndex = 1;
             this.labelControl5.Text = "NG";
             // 
@@ -439,7 +446,7 @@ namespace HondaLookSupports
             this.labelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelControl6.Location = new System.Drawing.Point(120, 4);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(52, 17);
+            this.labelControl6.Size = new System.Drawing.Size(52, 21);
             this.labelControl6.TabIndex = 2;
             this.labelControl6.Text = "TOTAL";
             // 
@@ -454,9 +461,9 @@ namespace HondaLookSupports
             this.lblPASS.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblPASS.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.lblPASS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPASS.Location = new System.Drawing.Point(4, 28);
+            this.lblPASS.Location = new System.Drawing.Point(4, 32);
             this.lblPASS.Name = "lblPASS";
-            this.lblPASS.Size = new System.Drawing.Size(51, 17);
+            this.lblPASS.Size = new System.Drawing.Size(51, 22);
             this.lblPASS.TabIndex = 3;
             this.lblPASS.Text = "0";
             // 
@@ -468,7 +475,7 @@ namespace HondaLookSupports
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(3, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(285, 49);
+            this.panel5.Size = new System.Drawing.Size(285, 58);
             this.panel5.TabIndex = 1;
             // 
             // checkStartWatching
@@ -482,14 +489,14 @@ namespace HondaLookSupports
             this.checkStartWatching.Properties.Appearance.Options.UseFont = true;
             this.checkStartWatching.Properties.Appearance.Options.UseForeColor = true;
             this.checkStartWatching.Properties.Caption = "Start watching";
-            this.checkStartWatching.Size = new System.Drawing.Size(127, 23);
+            this.checkStartWatching.Size = new System.Drawing.Size(127, 32);
             this.checkStartWatching.TabIndex = 2;
             this.checkStartWatching.CheckedChanged += new System.EventHandler(this.checkStartWatching_CheckedChanged);
             // 
             // hyperlinkConfigs
             // 
             this.hyperlinkConfigs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hyperlinkConfigs.Location = new System.Drawing.Point(133, 33);
+            this.hyperlinkConfigs.Location = new System.Drawing.Point(133, 35);
             this.hyperlinkConfigs.Name = "hyperlinkConfigs";
             this.hyperlinkConfigs.Size = new System.Drawing.Size(36, 13);
             this.hyperlinkConfigs.TabIndex = 1;
@@ -581,26 +588,20 @@ namespace HondaLookSupports
             this.tmrEditNotify.Enabled = true;
             this.tmrEditNotify.Tick += new System.EventHandler(this.tmrEditNotify_Tick);
             // 
-            // toolStripStatusLabel6
-            // 
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(118, 15);
-            this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
-            // 
             // FormMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 301);
+            this.ClientSize = new System.Drawing.Size(483, 322);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panelControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(499, 340);
+            this.MinimumSize = new System.Drawing.Size(499, 361);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HondaLook Supports MES";

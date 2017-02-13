@@ -10,13 +10,13 @@ namespace HondaLookSupports
 {
     public partial class FormConfigs : Form
     {
-        //private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
+        private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
         public FormConfigs()
         {
             InitializeComponent();
-            //_inspectionStationsService = new INSPECTION_STATIONS_Service();
+            _inspectionStationsService = new INSPECTION_STATIONS_Service();
 
-            //LoadDataGridLookUpEditINSPECTION_STATIONS();
+            LoadDataGridLookUpEditINSPECTION_STATIONS();
             RefreshWindows();
             LoadSetting();
         }
@@ -135,12 +135,12 @@ namespace HondaLookSupports
         /// </summary>
         private void LoadDataGridLookUpEditINSPECTION_STATIONS()
         {
-            //var items = _inspectionStationsService.Get_INSPECTION_STATIONS();
+            var items = _inspectionStationsService.Get_INSPECTION_STATIONS();
 
-            //gridLookUpStation.Properties.DisplayMember = "STATION_NO";
-            //gridLookUpStation.Properties.ValueMember = "STATION_NO";
-            //gridLookUpStation.Properties.PopupFormWidth = 300;
-            //gridLookUpStation.Properties.DataSource = items;
+            gridLookUpStation.Properties.DisplayMember = "STATION_NO";
+            gridLookUpStation.Properties.ValueMember = "STATION_NO";
+            gridLookUpStation.Properties.PopupFormWidth = 300;
+            gridLookUpStation.Properties.DataSource = items;
         }
 
         private void LoadSetting()
