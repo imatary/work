@@ -33,7 +33,7 @@
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -82,6 +82,10 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.16.3.0\lib\net40\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.BonusSkins.v16.2" />
     <Reference Include="DevExpress.Data.v16.2" />
     <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -114,6 +118,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAddModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddModel.Designer.cs">
+      <DependentUpon>FormAddModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormConfigs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,8 +136,20 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model.cs" />
+    <Compile Include="MyClass.cs" />
+    <Compile Include="MyClassMap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TakeScreenShoot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TakeScreenShoot.Designer.cs">
+      <DependentUpon>TakeScreenShoot.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormAddModel.resx">
+      <DependentUpon>FormAddModel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormConfigs.resx">
       <DependentUpon>FormConfigs.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,9 +161,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="TakeScreenShoot.resx">
+      <DependentUpon>TakeScreenShoot.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Data\HondaLookModel.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -210,6 +238,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

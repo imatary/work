@@ -1,0 +1,214 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridCheckEye";
+        settings.CallbackRouteValues = new { Controller = "Reports", Action = "CheckEyePartial" };
+
+        settings.KeyFieldName = "StaffCode";
+
+        settings.Width = Unit.Pixel(980);
+        settings.SettingsBehavior.AutoExpandAllGroups = true;
+        settings.Styles.FixedColumn.BackColor = System.Drawing.Color.LightYellow;
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
+        settings.EnableRowsCache = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        // Filter
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+
+        // Page
+        settings.SettingsPager.PageSize = 20;
+        settings.SettingsPager.NumericButtonCount = 6;
+        settings.Styles.Cell.Wrap = DefaultBoolean.False;
+
+        settings.SettingsPager.FirstPageButton.Visible = true;
+        settings.SettingsPager.LastPageButton.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "10", "20", "50" };
+
+        // Search
+        settings.SettingsSearchPanel.Visible = true;
+        settings.SettingsSearchPanel.HighlightResults = true;
+
+        
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.AddBand(infoBand =>
+        {
+            infoBand.Caption = "Info";
+            infoBand.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            infoBand.Columns.Add(column =>
+            {
+                column.FieldName = "StaffCode";
+                column.Width = 80;
+                column.FixedStyle = GridViewColumnFixedStyle.Left;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            });
+            infoBand.Columns.Add(column =>
+            {
+                column.FieldName = "FullName";
+                column.Width = 150;
+                column.FixedStyle = GridViewColumnFixedStyle.Left;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            });
+            infoBand.Columns.Add(column =>
+            {
+                column.FieldName = "DeptCode";
+                column.Caption = "Dept";
+                column.Width = Unit.Pixel(100);
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            });
+        });
+
+        settings.Columns.AddBand(levelCurrent =>
+        {
+            levelCurrent.Caption = "Cấp độ hiện tại";
+            levelCurrent.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+
+            levelCurrent.Columns.Add(column =>
+            {
+                column.Caption = "Cấp độ";
+                column.FieldName = "CNNguoiDaoTao";
+                column.Width = Unit.Pixel(100);
+                column.CellStyle.Wrap = DefaultBoolean.True;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            });
+
+
+            levelCurrent.Columns.Add(column =>
+            {
+                column.Caption = "Thời gian xác nhận";
+                column.FieldName = "NgayCNNguoiDaoTao";
+                column.ColumnType = MVCxGridViewColumnType.DateEdit;
+                column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+                column.Width = Unit.Pixel(120);
+                column.CellStyle.Wrap = DefaultBoolean.True;
+                column.HeaderStyle.Wrap = DefaultBoolean.True;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                column.CellStyle.HorizontalAlign = HorizontalAlign.Right;
+            });
+        });
+
+        settings.Columns.AddBand(levelOne => {
+            levelOne.Caption = "Cấp độ I";
+            levelOne.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            levelOne.Columns.Add(column =>
+            {
+                column.Caption = "Cấp độ";
+                column.FieldName = "CapDo";
+                column.Width = Unit.Pixel(80);
+                column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                column.HeaderStyle.Wrap = DefaultBoolean.True;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            });
+            levelOne.Columns.Add(column =>
+            {
+                column.FieldName = "NgayCap";
+                column.Caption = "Ngày cấp";
+                column.ColumnType = MVCxGridViewColumnType.DateEdit;
+                column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+                column.CellStyle.HorizontalAlign = HorizontalAlign.Right;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                column.Width = Unit.Pixel(120);
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            });
+        });
+
+        settings.Columns.AddBand(levelTwo => {
+            levelTwo.Caption = "Cấp độ II";
+            levelTwo.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            levelTwo.Columns.Add(column =>
+            {
+                column.Caption = "Cấp độ";
+                column.FieldName = "NangCap";
+                column.Width = Unit.Pixel(80);
+                column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                column.HeaderStyle.Wrap = DefaultBoolean.True;
+            });
+            levelTwo.Columns.Add(column =>
+            {
+                column.FieldName = "NgayNangCap";
+                column.Caption = "Ngày cấp";
+                column.ColumnType = MVCxGridViewColumnType.DateEdit;
+                column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+                column.CellStyle.HorizontalAlign = HorizontalAlign.Right;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                column.Width = Unit.Pixel(120);
+            });
+        });
+        settings.Columns.AddBand(levelThree =>
+        {
+            levelThree.Caption = "Cấp độ III";
+            levelThree.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+
+            levelThree.Columns.Add(column =>
+            {
+                column.Caption = "Cấp độ";
+                column.FieldName = "CNNguoiDaoTao";
+                column.Width = Unit.Pixel(100);
+                column.CellStyle.Wrap = DefaultBoolean.True;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            });
+
+
+            levelThree.Columns.Add(column =>
+            {
+                column.Caption = "Ngày cấp";
+                column.FieldName = "NgayCNNguoiDaoTao";
+                column.ColumnType = MVCxGridViewColumnType.DateEdit;
+                column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+                column.Width = Unit.Pixel(120);
+                column.CellStyle.Wrap = DefaultBoolean.True;
+                column.HeaderStyle.Wrap = DefaultBoolean.True;
+                column.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+                column.CellStyle.HorizontalAlign = HorizontalAlign.Right;
+            });
+        });
+
+        settings.Columns.Add("LoaiChuyenDoi");
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NgayChuyenDoi";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+            column.Width = Unit.Pixel(100);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NgayThi";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+            column.Width = Unit.Pixel(100);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NgayThiThucTe";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+            column.Width = Unit.Pixel(100);
+        });
+
+        settings.Columns.Add("KetQuaThi");
+        settings.Columns.Add("SoLanThi");
+
+
+        settings.Styles.Cell.Wrap = DefaultBoolean.False;
+    });
+}
+@grid.Bind(Model).GetHtml()

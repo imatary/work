@@ -47,12 +47,15 @@
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.gridLookUpProcess = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.txtFolderLogs = new DevExpress.XtraEditors.ButtonEdit();
+            this.txtFolderOutLog = new DevExpress.XtraEditors.ButtonEdit();
             this.gridLookUpStation = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.txtFolderLogs = new DevExpress.XtraEditors.ButtonEdit();
-            this.txtFolderOutLog = new DevExpress.XtraEditors.ButtonEdit();
+            this.txtStationNo = new DevExpress.XtraEditors.TextEdit();
+            this.txtBarcodeLength = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.folderLogsBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.folderOutLogBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
@@ -61,10 +64,12 @@
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpProcess.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpStation.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit2View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFolderLogs.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFolderOutLog.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpStation.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit2View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStationNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBarcodeLength.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -152,9 +157,12 @@
             this.tableLayoutPanel1.Controls.Add(this.labelControl4, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.labelControl5, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.gridLookUpProcess, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.gridLookUpStation, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtFolderLogs, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtFolderOutLog, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.gridLookUpStation, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtStationNo, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtBarcodeLength, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.labelControl6, 0, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -245,22 +253,48 @@
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
+            // txtFolderLogs
+            // 
+            this.txtFolderLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtFolderLogs.Location = new System.Drawing.Point(96, 84);
+            this.txtFolderLogs.Name = "txtFolderLogs";
+            this.txtFolderLogs.Properties.AutoHeight = false;
+            this.txtFolderLogs.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtFolderLogs.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtFolderLogs.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            this.txtFolderLogs.Size = new System.Drawing.Size(169, 21);
+            this.txtFolderLogs.TabIndex = 6;
+            this.txtFolderLogs.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtFolderLogs_ButtonPressed);
+            // 
+            // txtFolderOutLog
+            // 
+            this.txtFolderOutLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtFolderOutLog.Location = new System.Drawing.Point(96, 111);
+            this.txtFolderOutLog.Name = "txtFolderOutLog";
+            this.txtFolderOutLog.Properties.AutoHeight = false;
+            this.txtFolderOutLog.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtFolderOutLog.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtFolderOutLog.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            this.txtFolderOutLog.Size = new System.Drawing.Size(169, 21);
+            this.txtFolderOutLog.TabIndex = 7;
+            this.txtFolderOutLog.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtFolderOutLog_ButtonPressed);
+            // 
             // gridLookUpStation
             // 
-            this.gridLookUpStation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridLookUpStation.Location = new System.Drawing.Point(96, 57);
+            this.gridLookUpStation.Location = new System.Drawing.Point(334, 165);
             this.gridLookUpStation.Name = "gridLookUpStation";
             this.gridLookUpStation.Properties.AutoHeight = false;
             this.gridLookUpStation.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.gridLookUpStation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("gridLookUpStation.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("gridLookUpStation.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
             this.gridLookUpStation.Properties.NullText = "";
             this.gridLookUpStation.Properties.NullValuePrompt = "Select state no";
             this.gridLookUpStation.Properties.NullValuePromptShowForEmptyValue = true;
             this.gridLookUpStation.Properties.View = this.gridLookUpEdit2View;
-            this.gridLookUpStation.Size = new System.Drawing.Size(169, 21);
+            this.gridLookUpStation.Size = new System.Drawing.Size(108, 21);
             this.gridLookUpStation.TabIndex = 5;
+            this.gridLookUpStation.Visible = false;
             this.gridLookUpStation.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.gridLookUpStation_ButtonPressed);
             // 
             // gridLookUpEdit2View
@@ -297,31 +331,40 @@
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
             // 
-            // txtFolderLogs
+            // txtStationNo
             // 
-            this.txtFolderLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtFolderLogs.Location = new System.Drawing.Point(96, 84);
-            this.txtFolderLogs.Name = "txtFolderLogs";
-            this.txtFolderLogs.Properties.AutoHeight = false;
-            this.txtFolderLogs.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtFolderLogs.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtFolderLogs.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
-            this.txtFolderLogs.Size = new System.Drawing.Size(169, 21);
-            this.txtFolderLogs.TabIndex = 6;
-            this.txtFolderLogs.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtFolderLogs_ButtonPressed);
+            this.txtStationNo.Location = new System.Drawing.Point(96, 57);
+            this.txtStationNo.Name = "txtStationNo";
+            this.txtStationNo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtStationNo.Properties.NullValuePrompt = "ex: FCT";
+            this.txtStationNo.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtStationNo.Size = new System.Drawing.Size(169, 22);
+            this.txtStationNo.TabIndex = 8;
             // 
-            // txtFolderOutLog
+            // txtBarcodeLength
             // 
-            this.txtFolderOutLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtFolderOutLog.Location = new System.Drawing.Point(96, 111);
-            this.txtFolderOutLog.Name = "txtFolderOutLog";
-            this.txtFolderOutLog.Properties.AutoHeight = false;
-            this.txtFolderOutLog.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtFolderOutLog.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtFolderOutLog.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
-            this.txtFolderOutLog.Size = new System.Drawing.Size(169, 21);
-            this.txtFolderOutLog.TabIndex = 7;
-            this.txtFolderOutLog.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtFolderOutLog_ButtonPressed);
+            this.txtBarcodeLength.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtBarcodeLength.Location = new System.Drawing.Point(96, 138);
+            this.txtBarcodeLength.Name = "txtBarcodeLength";
+            this.txtBarcodeLength.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtBarcodeLength.Properties.Mask.EditMask = "d";
+            this.txtBarcodeLength.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtBarcodeLength.Properties.NullValuePrompt = "0";
+            this.txtBarcodeLength.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtBarcodeLength.Size = new System.Drawing.Size(92, 22);
+            this.txtBarcodeLength.TabIndex = 9;
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Appearance.Options.UseTextOptions = true;
+            this.labelControl6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.labelControl6.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl6.Location = new System.Drawing.Point(3, 138);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(87, 21);
+            this.labelControl6.TabIndex = 10;
+            this.labelControl6.Text = "Barcode Length:";
             // 
             // folderLogsBrowserDialog
             // 
@@ -355,10 +398,12 @@
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpProcess.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpStation.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit2View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFolderLogs.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFolderOutLog.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpStation.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit2View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStationNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBarcodeLength.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -387,5 +432,8 @@
         private System.Windows.Forms.FolderBrowserDialog folderOutLogBrowserDialog;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraEditors.TextEdit txtStationNo;
+        private DevExpress.XtraEditors.TextEdit txtBarcodeLength;
+        private DevExpress.XtraEditors.LabelControl labelControl6;
     }
 }

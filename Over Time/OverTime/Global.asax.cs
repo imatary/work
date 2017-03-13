@@ -13,7 +13,7 @@ namespace OverTime
         protected void Application_Start()
         {
             //GlobalFilters.Filters.Add(new SqlExceptionFilter());
-            //Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
+            Database.SetInitializer(new ApplicationDbInitializer());
 
             Bootstrapper.Run();
             AreaRegistration.RegisterAllAreas();

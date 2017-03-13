@@ -169,7 +169,9 @@ namespace MurataSystem
                     else
                     {
                         // Nếu PCB, giống với ModelName đang chạy,   
-                        if (productionId.Contains(lblCurentModel.Text) && productionId.Contains(lblSerialNo.Text))
+                        string[] strSpit = productionId.Split(' ');
+                        //string beginWidth=productionId.StartsWith()
+                        if (strSpit[0] == lblCurentModel.Text && productionId.Contains(lblSerialNo.Text))
                         {
                             var production = _murataService.GetProducts_Murata_by_ID(productionId);
                             if (production != null)

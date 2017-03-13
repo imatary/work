@@ -1,0 +1,90 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "gridOlympics";
+        settings.CallbackRouteValues = new { Controller = "Reports", Action = "OlympicPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Reports", Action = "OlympicPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Reports", Action = "OlympicPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Reports", Action = "OlympicPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "Id";
+
+        settings.EnableRowsCache = true;
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        // Filter
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+
+        // Page
+        settings.SettingsPager.FirstPageButton.Visible = true;
+        settings.SettingsPager.LastPageButton.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "10", "20", "50" };
+
+        // Search
+        settings.SettingsSearchPanel.Visible = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "StaffPicture";
+            column.Width = Unit.Pixel(80);
+
+            column.Settings.ShowFilterRowMenu = DefaultBoolean.False;
+            column.Settings.AllowHeaderFilter = DefaultBoolean.False;
+            column.EditorProperties().BinaryImage(p =>
+            {
+
+                p.ImageHeight = 65;
+                p.ImageWidth = 60;
+                p.EnableServerResize = true;
+                p.ShowLoadingImage = true;
+                p.ImageSizeMode = ImageSizeMode.FitProportional;
+                p.ImageAlign = ImageAlign.NotSet;
+                //p.CallbackRouteValues = new { Action = "BinaryImageColumnPhotoUpdate", Controller = "Employee" };
+                p.EditingSettings.Enabled = true;
+                p.EditingSettings.UploadSettings.UploadValidationSettings.MaxFileSize = 4194304;
+            });
+        });
+        settings.Columns.Add(col=>
+        {
+            col.FieldName = "StaffCode";
+            col.Width = Unit.Pixel(80);
+        });
+        settings.Columns.Add("FullName");
+        settings.Columns.Add("Content");
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TestDate";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+            column.Width = Unit.Pixel(150);
+        });
+        settings.Columns.Add("Certificate");
+
+        settings.Styles.Cell.Wrap = DefaultBoolean.False;
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

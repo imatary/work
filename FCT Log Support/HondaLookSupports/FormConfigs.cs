@@ -10,13 +10,13 @@ namespace HondaLookSupports
 {
     public partial class FormConfigs : Form
     {
-        private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
+        //private readonly INSPECTION_STATIONS_Service _inspectionStationsService;
         public FormConfigs()
         {
             InitializeComponent();
-            _inspectionStationsService = new INSPECTION_STATIONS_Service();
+            //_inspectionStationsService = new INSPECTION_STATIONS_Service();
 
-            LoadDataGridLookUpEditINSPECTION_STATIONS();
+            //LoadDataGridLookUpEditINSPECTION_STATIONS();
             RefreshWindows();
             LoadSetting();
         }
@@ -26,7 +26,8 @@ namespace HondaLookSupports
             string dirLog = txtFolderLogs.Text.Trim();
             string dirOutLog = txtFolderOutLog.Text.Trim();
             string processName = gridLookUpProcess.EditValue.ToString();
-            string stationNo = gridLookUpStation.EditValue.ToString();
+            string stationNo = txtStationNo.Text;
+            string barcodeLength = txtBarcodeLength.Text;
 
 
             if (dirLog.Length > 0)
@@ -37,9 +38,12 @@ namespace HondaLookSupports
                 SettingConfiguration.F_UpdateKey("ProcessName", processName);
             if (stationNo.Length > 0)
                 SettingConfiguration.F_UpdateKey("StationNo", stationNo);
+            if (barcodeLength.Length > 1)
+                SettingConfiguration.F_UpdateKey("BarcodeLength", barcodeLength);
 
-            MessageBox.Show("Save success!");
-            LoadSetting();
+
+            MessageBox.Show("Cập nhật cấu hình thành công. Chương trình sẽ tự động tắt, vui lòng chạy lại!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            Application.Exit();
         }
 
         private void txtFolderLogs_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -79,7 +83,7 @@ namespace HondaLookSupports
         {
             if(e.Button.Index == 1)
             {
-                LoadDataGridLookUpEditINSPECTION_STATIONS();
+                //LoadDataGridLookUpEditINSPECTION_STATIONS();
             }
         }
 
@@ -133,15 +137,15 @@ namespace HondaLookSupports
         /// <summary>
         /// 
         /// </summary>
-        private void LoadDataGridLookUpEditINSPECTION_STATIONS()
-        {
-            var items = _inspectionStationsService.Get_INSPECTION_STATIONS();
+        //private void LoadDataGridLookUpEditINSPECTION_STATIONS()
+        //{
+        //    var items = _inspectionStationsService.Get_INSPECTION_STATIONS();
 
-            gridLookUpStation.Properties.DisplayMember = "STATION_NO";
-            gridLookUpStation.Properties.ValueMember = "STATION_NO";
-            gridLookUpStation.Properties.PopupFormWidth = 300;
-            gridLookUpStation.Properties.DataSource = items;
-        }
+        //    gridLookUpStation.Properties.DisplayMember = "STATION_NO";
+        //    gridLookUpStation.Properties.ValueMember = "STATION_NO";
+        //    gridLookUpStation.Properties.PopupFormWidth = 300;
+        //    gridLookUpStation.Properties.DataSource = items;
+        //}
 
         private void LoadSetting()
         {
@@ -149,11 +153,13 @@ namespace HondaLookSupports
             string stationNo = ConfigurationManager.AppSettings["StationNo"];
             string pathInput = ConfigurationManager.AppSettings["PathInput"];
             string pathOutput = ConfigurationManager.AppSettings["PathOutput"];
+            string barcodeLength = ConfigurationManager.AppSettings["BarcodeLength"];
+
             if (!string.IsNullOrEmpty(processName))
                 gridLookUpProcess.EditValue = processName;
 
             if (!string.IsNullOrEmpty(stationNo))
-                gridLookUpStation.EditValue = stationNo;
+                txtStationNo.Text = stationNo;
 
             if (!string.IsNullOrEmpty(pathInput))
                 txtFolderLogs.Text = pathInput;
@@ -161,6 +167,8 @@ namespace HondaLookSupports
             if (!string.IsNullOrEmpty(pathOutput))
                 txtFolderOutLog.Text = pathOutput;
 
+            if (!string.IsNullOrEmpty(barcodeLength))
+                txtBarcodeLength.Text = barcodeLength;
         }
     }
 }

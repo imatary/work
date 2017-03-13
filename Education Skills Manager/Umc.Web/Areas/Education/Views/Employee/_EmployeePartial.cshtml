@@ -1,0 +1,88 @@
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridEmployee";
+        settings.CallbackRouteValues = new { Controller = "Employee", Action = "EmployeePartial" };
+
+        settings.KeyFieldName = "StaffCode";
+
+        settings.EnableRowsCache = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        // Filter
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+
+        // Page
+        settings.SettingsPager.FirstPageButton.Visible = true;
+        settings.SettingsPager.LastPageButton.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "10", "20", "50" };
+
+        settings.SettingsSearchPanel.Visible = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "StaffPicture";
+            column.Width = Unit.Pixel(80);
+
+            column.Settings.ShowFilterRowMenu = DefaultBoolean.False;
+            column.Settings.AllowHeaderFilter = DefaultBoolean.False;
+            column.EditorProperties().BinaryImage(p =>
+            {
+
+                p.ImageHeight = 65;
+                p.ImageWidth = 60;
+                p.EnableServerResize = true;
+                p.ShowLoadingImage = true;
+                p.ImageSizeMode = ImageSizeMode.FitProportional;
+                p.ImageAlign = ImageAlign.Middle;
+                //p.CallbackRouteValues = new { Action = "BinaryImageColumnPhotoUpdate", Controller = "Employee" };
+                p.EditingSettings.Enabled = true;
+                p.EditingSettings.UploadSettings.UploadValidationSettings.MaxFileSize = 4194304;
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "StaffCode";
+            column.Width = Unit.Pixel(90);
+        });
+        settings.Columns.Add("FullName");
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DeptCode";
+            column.Caption = "Dept";
+            column.Width = Unit.Pixel(100);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "BirthDate";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+            column.Width = Unit.Pixel(100);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EntryDate";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+            column.Width = Unit.Pixel(100);
+        });
+        settings.Columns.Add("PosName");
+
+        settings.ClientSideEvents.Init = "function(s, e) { s.PerformCallback(); }";
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { OnStartCallback(s, e); }";
+        settings.ClientSideEvents.EndCallback = "function(s, e) { OnEndCallback(s, e); }";
+
+        settings.Styles.Cell.Wrap = DefaultBoolean.False;
+    }).Bind(Model).GetHtml();
+}

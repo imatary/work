@@ -9,6 +9,9 @@ using Lib.Core;
 using Lib.Core.Helpers;
 using Lib.Data;
 using Lib.Form.Controls;
+using CsvHelper;
+using System.Globalization;
+using System.Text;
 
 namespace HondaLookSupports
 {
@@ -60,7 +63,7 @@ namespace HondaLookSupports
                     _mWatcher.Changed += new FileSystemEventHandler(OnChanged);
                     _mWatcher.EnableRaisingEvents = true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     var configs = new FormConfigs();
                     configs.ShowDialog();
@@ -74,6 +77,9 @@ namespace HondaLookSupports
             InitializeComponent();
             lblVersion.Text = StringHelper.GetRunningVersion();
             Ultils.RegisterInStartup(true, Application.ExecutablePath);
+
+            _path = FilePath();
+            GetModels();
 
             //_workOrderItemService = new WORK_ORDER_ITEMS_Service();
             //_scanningLogsService = new SCANNING_LOGS_Service();
@@ -91,7 +97,7 @@ namespace HondaLookSupports
                 _mWatcher = new FileSystemWatcher();
                 if (rdbDir)
                 {
-                    _mWatcher.Filter = "*.txt";
+                    _mWatcher.Filter = "*.csv";
                     _mWatcher.Path = _path + "\\";
                 }
                 else
@@ -108,8 +114,7 @@ namespace HondaLookSupports
                     _mWatcher.IncludeSubdirectories = true;
                 }
 
-                _mWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
-                                         | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+                _mWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.CreationTime;
                 _mWatcher.Created += new FileSystemEventHandler(OnChanged);
                 _mWatcher.Changed += new FileSystemEventHandler(OnChanged);
                 _mWatcher.EnableRaisingEvents = true;
@@ -133,9 +138,30 @@ namespace HondaLookSupports
         {
             if (!_mBDirty)
             {
+                _path = FilePath();
+
                 if (e.ChangeType == WatcherChangeTypes.Created || e.ChangeType == WatcherChangeTypes.Changed)
                 {
+                    _productionId = txtBarcode.Text;
+                    _modelId = gridLookUpEditModel.EditValue.ToString();
+                    _sationNo = ConfigurationManager.AppSettings["StationNo"];
+                    _boardState = State(_path);
+                    _dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
+
+                    if (_boardState == "P")
+                    {
+                        _pass = _pass + 1;
+                    }
+                    if(_boardState=="F")
+                    {
+                        _ng = _ng + 1;
+                    }
+                    _total = _pass + _ng;
+
                     ActiveFormByWindowsTitle(Text);
+                    txtBarcode.ResetText();
+                    txtBarcode.Enabled = true;
+
                     _mBDirty = true;
                 }
             }
@@ -145,11 +171,33 @@ namespace HondaLookSupports
         {
             var configs = new FormConfigs();
             configs.ShowDialog();
-            _processName = ConfigurationManager.AppSettings["ProcessName"];
-            MessageBox.Show(_processName);
+
+            //_processName = ConfigurationManager.AppSettings["ProcessName"];
+            //MessageBox.Show(_processName);
 
             //Ultils.WriteFile(GetValueWindowText.GetAllTextFromWindowByTitle(_processName));
             //MessageBox.Show("Write file OK");
+
+            _path = ConfigurationManager.AppSettings["PathInput"];
+            _processName = ConfigurationManager.AppSettings["ProcessName"];
+            
+        }
+
+        private void gridLookUpEditModel_EditValueChanged(object sender, EventArgs e)
+        {
+            txtBarcode.ResetText();
+            txtBarcode.Focus();
+        }
+
+        private void gridLookUpEditModel_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 1)
+            {
+                var addModel = new FormAddModel();
+                addModel.ShowDialog();
+
+                GetModels();
+            }
         }
 
         private void txtBarcode_EditValueChanged(object sender, EventArgs e)
@@ -159,7 +207,7 @@ namespace HondaLookSupports
                 txtBarcode.Properties.Buttons[1].Visible = true;
                 SetStatusDefault("N/A");
                 SetMessageDefault("no results");
-
+                CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
             }
             else
             {
@@ -180,34 +228,43 @@ namespace HondaLookSupports
         {
             if(e.KeyCode==Keys.Enter)
             {
+                _path = FilePath();
+
                 if (!CheckTextBoxNullValue.ValidationTextEditNullValue(txtBarcode))
                 {
                     CheckTextBoxNullValue.SetBackColorErrorMessage(lblMessage, "Vui lòng bắn vào barcode cần kiểm tra!");
                     CheckTextBoxNullValue.SetColorErrorMessage(lblState, "NG");
+                    CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
                 }
                 else
                 {
                     _processName= ConfigurationManager.AppSettings["ProcessName"];
                     _sationNo = ConfigurationManager.AppSettings["StationNo"];
+                    int barcodeLength = Convert.ToInt32(ConfigurationManager.AppSettings["BarcodeLength"]);
 
+                    
                     string boardNo = txtBarcode.Text;
-                    _dateCheck = Ultils.GetNetworkDateTime().ToString("yyMMddHHmmss") != ""
-                        ? Ultils.GetNetworkDateTime().ToString("yyMMddHHmmss")
-                        : DateTime.Now.ToString("yyMMddHHmmss");
-
-                    _dateCheck2 = Ultils.GetNetworkDateTime().ToShortDateString() != ""
-                        ? Ultils.GetNetworkDateTime().ToShortDateString()
-                        : DateTime.Now.ToShortDateString();
-
-                    _timeCheck = Ultils.GetNetworkDateTime().ToShortTimeString() != ""
-                        ? Ultils.GetNetworkDateTime().ToShortTimeString()
-                        : DateTime.Now.ToShortTimeString();
-
-                    if (boardNo.Contains("="))
+                    if(boardNo.Length < barcodeLength)
                     {
-                        boardNo = boardNo.Replace("=", "_");
+                        CheckTextBoxNullValue.SetBackColorErrorMessage(lblMessage, "Barcode không đúng định dạng!");
+                        CheckTextBoxNullValue.SetColorErrorMessage(lblState, "NG");
+                        CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                        
                     }
+                    else
+                    {
+                        //MessageBox.Show(_processName);
+                        if (boardNo.Contains("="))
+                        {
+                            boardNo = boardNo.Replace("=", "_");
+                        }
 
+                        //MessageBox.Show(_path);
+
+                        txtBarcode.Enabled = false;
+                        ActiveFormByWindowsTitle(_processName);
+                    }
+                    
                     //_workOrderItems = _workOrderItemService.Get_WORK_ORDER_ITEMS_LIKE_BoardNo(boardNo);
                     //if (_workOrderItems != null)
                     //{
@@ -231,8 +288,11 @@ namespace HondaLookSupports
         {
             if (_mBDirty)
             {
-                ActiveFormByWindowsTitle(Text);
+                // Create Log
+                Ultils.CreateFileLog(_modelId, _productionId, _boardState, _sationNo, _dateCheck);
 
+                ActiveFormByWindowsTitle(Text);
+                
                 lblPASS.Text = _pass.ToString();
                 lblNG.Text = _ng.ToString();
                 lblTotal.Text = _total.ToString();
@@ -240,6 +300,85 @@ namespace HondaLookSupports
                 _mBDirty = false;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private string FilePath()
+        {
+            string fileLogName = $"\\LOG_{DateTime.Now.ToString("yyyyMMdd")}.csv";
+
+            return ConfigurationManager.AppSettings["PathInput"] + fileLogName; 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private string State(string path)
+        {
+            //path = @"C:\Users\cuong\Desktop\Record\LOG_20170211.csv";
+            string status = "";
+            using (var stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var reader = new StreamReader(stream))
+            using (var csv = new CsvReader(reader))
+            {
+                ConfigureCsvReader(csv);
+                var myClassMap = new MyClassMap();
+                csv.Configuration.RegisterClassMap(myClassMap);
+
+                var testProg = csv.GetRecords<MyClass>().Last(i => i.ColA == "TestProg");
+                if (testProg.ColE == "Pass")
+                {
+                    var subProg = csv.GetRecords<MyClass>().Last(i => i.ColA == "SubProg" && i.ColC == "Cmd");
+                    if (subProg.ColF == "Pass")
+                    {
+                        status = "P";
+                    }
+                    else if (testProg.ColE == "Fail")
+                    {
+                        status = "F";
+                    }
+                }
+                else if (testProg.ColE == "Fail")
+                {
+                    status = "F";
+                }
+            }
+
+            return status;
+        }
+
+        /// <summary>
+        /// Cấu hình CSV Helper
+        /// </summary>
+        /// <param name="csvReader"></param>
+        internal static void ConfigureCsvReader(CsvReader csvReader)
+        {
+            csvReader.Configuration.AllowComments = false;
+            csvReader.Configuration.CountBytes = false;
+            csvReader.Configuration.CultureInfo = CultureInfo.CurrentCulture;
+            csvReader.Configuration.Delimiter = ",";
+            csvReader.Configuration.DetectColumnCountChanges = true;
+            csvReader.Configuration.Encoding = Encoding.UTF8;
+            csvReader.Configuration.HasExcelSeparator = false;
+            csvReader.Configuration.HasHeaderRecord = true;
+            csvReader.Configuration.IgnoreBlankLines = true;
+            csvReader.Configuration.IgnoreHeaderWhiteSpace = false;
+            csvReader.Configuration.IgnorePrivateAccessor = true;
+            csvReader.Configuration.IgnoreQuotes = false;
+            csvReader.Configuration.IgnoreReadingExceptions = false;
+            csvReader.Configuration.IgnoreReferences = true;
+            csvReader.Configuration.IsHeaderCaseSensitive = true;
+            csvReader.Configuration.SkipEmptyRecords = false;
+            csvReader.Configuration.ThrowOnBadData = true;
+            csvReader.Configuration.TrimFields = false;
+            csvReader.Configuration.TrimHeaders = false;
+            csvReader.Configuration.WillThrowOnMissingField = true;
+        }
+
 
         /// <summary>
         /// 
@@ -306,5 +445,27 @@ namespace HondaLookSupports
 
             gridControl1.DataSource = items.OrderByDescending(it => it.TIME_CHECK);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void GetModels()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"\Data\HondaLookModel.csv";
+            using (var stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var reader = new StreamReader(stream))
+            using (var csv = new CsvReader(reader))
+            {
+                ConfigureCsvReader(csv);
+                var myClassMap = new MyClassMap();
+                csv.Configuration.RegisterClassMap(myClassMap);
+
+                var models = csv.GetRecords<Model>().OrderBy(i => i.ModelCode);
+                gridLookUpEditModel.Properties.DisplayMember = "ModelName";
+                gridLookUpEditModel.Properties.ValueMember = "ModelCode";
+                gridLookUpEditModel.Properties.DataSource = models.ToList();
+            }
+        }
+
     }
 }

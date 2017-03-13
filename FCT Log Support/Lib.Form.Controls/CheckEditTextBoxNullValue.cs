@@ -52,7 +52,7 @@ namespace Lib.Form.Controls
         public static void SetColorErrorTextControl(BaseEdit control)
         {
             control.Properties.Appearance.BorderColor = Color.DarkRed;
-            control.Text = string.Empty;
+            control.ResetText();
             control.Focus();
             control.SelectAll();
         }
@@ -93,6 +93,20 @@ namespace Lib.Form.Controls
                 textEdit.Focus();
 
                 dxErrorProvider.SetError(textEdit, errorMessage);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool ValidationTextEditNullValueWidthErrorProvider(DXErrorProvider errorProvider, TextEdit textEdit, string errorMessage)
+        {
+            if (string.IsNullOrEmpty(textEdit.Text))
+            {
+                textEdit.Properties.Appearance.BorderColor = Color.DarkRed;
+                textEdit.Focus();
+
+                errorProvider.SetError(textEdit, errorMessage);
                 return false;
             }
 

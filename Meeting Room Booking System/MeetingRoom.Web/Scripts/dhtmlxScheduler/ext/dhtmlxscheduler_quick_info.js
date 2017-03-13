@@ -1,6 +1,6 @@
 /*
 @license
-dhtmlxScheduler.Net v.3.3.18 Professional Evaluation
+dhtmlxScheduler.Net v.3.3.23 Professional Evaluation
 
 This software is covered by DHTMLX Evaluation License. Contact sales@dhtmlx.com to get Commercial or Enterprise license. Usage without proper license is prohibited.
 
@@ -16,6 +16,6 @@ t.parentNode&&t.parentNode.removeChild(t),this._quick_info_box=null}}),e._quick_
 n+='<div class="dhx_cal_qi_controls" style="height:'+t.quick_info_buttons+'px">';for(var i=e.config.icons_select,r=0;r<i.length;r++)n+='<div class="dhx_qi_big_icon '+i[r]+'" title="'+e.locale.labels[i[r]]+"\"><div class='dhx_menu_icon "+i[r]+"'></div><div>"+e.locale.labels[i[r]]+"</div></div>";n+="</div>",a.innerHTML=n,dhtmlxEvent(a,"click",function(t){t=t||event,e._qi_button_click(t.target||t.srcElement)}),e.config.quick_info_detached&&(e._detachDomEvent(e._els.dhx_cal_data[0],"scroll",e._quick_info_onscroll_handler),
 dhtmlxEvent(e._els.dhx_cal_data[0],"scroll",e._quick_info_onscroll_handler))}return this._quick_info_box},e._qi_button_click=function(t){var a=e._quick_info_box;if(t&&t!=a){var n=e._getClassName(t);if(-1!=n.indexOf("_icon")){var i=e._quick_info_box_id;e._click.buttons[n.split(" ")[1].replace("icon_","")](i)}else e._qi_button_click(t.parentNode)}},e._get_event_counter_part=function(t){for(var a=e.getRenderedEvent(t),n=0,i=0,r=a;r&&r!=e._obj;)n+=r.offsetLeft,i+=r.offsetTop-r.scrollTop,r=r.offsetParent;
 
-if(r){var s=n+a.offsetWidth/2>e._x/2?1:0,d=i+a.offsetHeight/2>e._y/2?1:0;return{left:n,top:i,dx:s,dy:d,width:a.offsetWidth,height:a.offsetHeight}}return 0},e._fill_quick_data=function(t){var a=e.getEvent(t),n=e._quick_info_box;e._quick_info_box_id=t;var i=n.firstChild.firstChild;i.innerHTML=e.templates.quick_info_title(a.start_date,a.end_date,a);var r=i.nextSibling;r.innerHTML=e.templates.quick_info_date(a.start_date,a.end_date,a);var s=n.firstChild.nextSibling;s.innerHTML=e.templates.quick_info_content(a.start_date,a.end_date,a);
+if(r){var d=n+a.offsetWidth/2>e._x/2?1:0,o=i+a.offsetHeight/2>e._y/2?1:0;return{left:n,top:i,dx:d,dy:o,width:a.offsetWidth,height:a.offsetHeight}}return 0},e._fill_quick_data=function(t){var a=e.getEvent(t),n=e._quick_info_box;e._quick_info_box_id=t;var i=n.firstChild.firstChild;i.innerHTML=e.templates.quick_info_title(a.start_date,a.end_date,a);var r=i.nextSibling;r.innerHTML=e.templates.quick_info_date(a.start_date,a.end_date,a);var d=n.firstChild.nextSibling;d.innerHTML=e.templates.quick_info_content(a.start_date,a.end_date,a);
 
 }});

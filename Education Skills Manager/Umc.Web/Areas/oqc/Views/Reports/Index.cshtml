@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Tìm kiếm - Tổng hợp";
+    ViewBag.SubTitle = "Tổng hợp, tìm kiếm dữ liệu khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#murata" data-toggle="tab"><i class="fa fa-bar-chart"></i> Murata</a>
+                </li>
+                <li>
+                    <a href="#nichicon" data-toggle="tab"><i class="fa fa-bar-chart"></i> Nichicon</a>
+                </li>
+                <li><a href="#fujixerox" data-toggle="tab"><i class="fa fa-bar-chart"></i> Fujixerox</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="nichicon">
+                    @Html.Action("NichiconPartial", "Reports")
+                </div>
+                <div class="active tab-pane" id="murata">
+                    @Html.Action("MurataPartial")
+                </div>
+                <div class="tab-pane" id="fujixerox">
+                    @*@Html.Action("Fujixerox")*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

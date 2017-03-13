@@ -1,0 +1,82 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridModels";
+        settings.CallbackRouteValues = new { Controller = "Models", Action = "ModelsPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Models", Action = "ModelsPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Models", Action = "ModelsPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Models", Action = "ModelsPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+
+        settings.EnableRowsCache = false;
+
+        //Menu
+        settings.SettingsContextMenu.Enabled = true;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.Settings.VerticalScrollableHeight = 400;
+
+        // Filter
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+
+        // Page
+        settings.SettingsPager.FirstPageButton.Visible = true;
+        settings.SettingsPager.LastPageButton.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Visible = true;
+        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "10", "20", "50" };
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 600;
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditForm;
+
+        settings.SettingsSearchPanel.Visible = true;
+
+        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Pixel(100);
+
+        settings.KeyFieldName = "ModelID";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsPager.PageSize = 20;
+        settings.SettingsPager.NumericButtonCount = 6;
+        settings.Styles.Cell.Wrap = DefaultBoolean.False;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add("ModelName");
+        settings.Columns.Add("CreatedBy");
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DateCreated";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Equals;
+            column.Width = Unit.Pixel(120);
+        });
+        settings.Columns.Add("Quantity");
+        settings.Columns.Add("SerialNo");
+        settings.Columns.Add("CustomerName");
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

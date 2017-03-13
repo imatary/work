@@ -118,23 +118,122 @@ namespace BarcodeShipping.GUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                EditTextPO_PreviewKeyDown();
-            }
-            if (e.KeyCode == Keys.Tab)
-            {
-                EditTextPO_PreviewKeyDown();
+                if (string.IsNullOrEmpty(txtPO.Text))
+                {
+                    Ultils.TextControlNotNull(txtPO, "PO");
+                }
+                else
+                {
+                    string strPo = txtPO.Text;
+                    string removePo = null;
+
+                    int index = strPo.IndexOf(' ');
+                    removePo = index >= 0 ? strPo.Remove(index) : txtPO.Text;
+                    if (removePo.Length >= 3)
+                    {
+                        if (removePo.Substring(0, 3).ToUpper() != "3N3")
+                        {
+                            Ultils.EditTextErrorMessage(txtPO, "PO phải bắt đầu bằng 3N3");
+                            txtPO.SelectAll();
+                        }
+                        else
+                        {
+                            if (!GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.EditValue.ToString(), removePo))
+                            {
+                                if (XtraMessageBox.Show(string.Format("Chưa tạo QTY PO và Remains cho Model [{0}] và PO [{1}] này.\nBạn có muốn thêm mới không?", gridLookUpEditModelID.Text, removePo), "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                                {
+                                    var addPo = new FormAddPO(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, removePo);
+                                    addPo.ShowDialog();
+                                    txtPO.Text = removePo;
+                                    GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.EditValue.ToString(), removePo);
+                                    txtBoxID.Focus();
+                                }
+                                else
+                                {
+                                    DialogResult = DialogResult.No;
+                                    txtPO.SelectAll();
+                                }
+                            }
+                            else
+                            {
+                                if (_currentPo.QuantityRemain <= 0)
+                                {
+                                    MessageBoxHelper.ShowMessageBoxWaring("PO đã được nhập đủ. Vui lòng nhập PO khác!");
+                                    gridLookUpEditModelID.Focus();
+                                    txtPO.ResetText();
+                                    lblQtyPO.Text = "0";
+                                    lblRemains.Text = "0";
+                                    lblQuantityModel.Text = "/0";
+                                }
+                                else
+                                {
+                                    txtPO.Text = removePo;
+                                    Ultils.SetColorDefaultTextControl(txtPO);
+                                    txtBoxID.Focus();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Ultils.EditTextErrorMessage(txtPO, "PO NO không đúng!");
+                    }
+                }
             }
         }
         private void txtBoxID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                EditTextBox_PreviewKeyDown();
+                if (string.IsNullOrEmpty(txtBoxID.Text))
+                {
+                    Ultils.TextControlNotNull(txtBoxID, "Box");
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(txtOperatorCode.Text))
+                    {
+                        Ultils.TextControlNotNull(txtOperatorCode, "Operator code");
+                    }
+                    else if (string.IsNullOrEmpty(gridLookUpEditModelID.Text))
+                    {
+                        Ultils.GridLookUpEditControlNotNull(gridLookUpEditModelID, "Model");
+                    }
+                    else if (string.IsNullOrEmpty(txtWorkingOrder.Text))
+                    {
+                        Ultils.TextControlNotNull(txtWorkingOrder, "Working oder");
+                    }
+                    else if (string.IsNullOrEmpty(txtPO.Text))
+                    {
+                        Ultils.TextControlNotNull(txtWorkingOrder, "PO");
+                    }
+                    else
+                    {
+                        string strBoxId = txtBoxID.Text;
+                        if (strBoxId.Length >= 3)
+                        {
+                            if (strBoxId.Substring(0, 3).ToUpper() != "F00")
+                            {
+                                Ultils.EditTextErrorMessage(txtBoxID, "BOX ID phải bắt đầu bằng F00");
+                                txtBoxID.SelectAll();
+                            }
+                            else
+                            {
+                                EnableTextControls(false);
+                                VisibleControlAddPCB(true);
+                                txtAddPCB.Focus();
+                            }
+                        }
+                        else
+                        {
+                            Ultils.EditTextErrorMessage(txtBoxID, "BOX ID ngắn quá!");
+                            txtBoxID.SelectAll();
+                        }
+
+                    }
+                }
             }
-            if (e.KeyCode == Keys.Tab)
-            {
-                EditTextBox_PreviewKeyDown();
-            }
+
         }
         private void txtAddPCB_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -341,129 +440,6 @@ namespace BarcodeShipping.GUI
 
                 }
             }
-        }
-
-        /// <summary>
-        /// PO
-        /// </summary>
-        private void EditTextPO_PreviewKeyDown()
-        {
-            if (string.IsNullOrEmpty(txtPO.Text))
-            {
-                Ultils.TextControlNotNull(txtPO, "PO");
-            }
-            else
-            {
-                string strPo = txtPO.Text;
-                string removePo = null;
-
-                int index = strPo.IndexOf(' ');
-                removePo = index >= 0 ? strPo.Remove(index) : txtPO.Text;
-                if (removePo.Length >= 3)
-                {
-                    if (removePo.Substring(0, 3).ToUpper() != "3N3")
-                    {
-                        Ultils.EditTextErrorMessage(txtPO, "PO phải bắt đầu bằng 3N3");
-                        txtPO.SelectAll();
-                    }
-                    else
-                    {
-                        if (!GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.EditValue.ToString(), removePo))
-                        {
-                            if (XtraMessageBox.Show(string.Format("Chưa tạo QTY PO và Remains cho Model [{0}] và PO [{1}] này.\nBạn có muốn thêm mới không?", gridLookUpEditModelID.Text, removePo), "THÔNG BÁO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                            {
-                                var addPo = new FormAddPO(gridLookUpEditModelID.EditValue.ToString(), gridLookUpEditModelID.Text, removePo);
-                                addPo.ShowDialog();
-                                txtPO.Text = removePo;
-                                GetQtyPoAndRemainsByWorkingOderAndPoNo(gridLookUpEditModelID.EditValue.ToString(), removePo);
-                                txtBoxID.Focus();
-                            }
-                            else
-                            {
-                                DialogResult = DialogResult.No;
-                                txtPO.SelectAll();
-                            }
-                        }
-                        else
-                        {
-                            if (_currentPo.QuantityRemain <= 0)
-                            {
-                                MessageBoxHelper.ShowMessageBoxWaring("PO đã được nhập đủ. Vui lòng nhập PO khác!");
-                                gridLookUpEditModelID.Focus();
-                                txtPO.ResetText();
-                                lblQtyPO.Text = "0";
-                                lblRemains.Text = "0";
-                                lblQuantityModel.Text = "/0";
-                            }
-                            else
-                            {
-                                txtPO.Text = removePo;
-                                Ultils.SetColorDefaultTextControl(txtPO);
-                                txtBoxID.Focus();
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    Ultils.EditTextErrorMessage(txtPO, "PO NO không đúng!");
-                }
-            }
-        }
-
-        /// <summary>
-        /// BOX
-        /// </summary>
-        private void EditTextBox_PreviewKeyDown()
-        {
-            if (string.IsNullOrEmpty(txtBoxID.Text))
-            {
-                Ultils.TextControlNotNull(txtBoxID, "Box");
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(txtOperatorCode.Text))
-                {
-                    Ultils.TextControlNotNull(txtOperatorCode, "Operator code");
-                }
-                else if (string.IsNullOrEmpty(gridLookUpEditModelID.Text))
-                {
-                    Ultils.GridLookUpEditControlNotNull(gridLookUpEditModelID, "Model");
-                }
-                else if (string.IsNullOrEmpty(txtWorkingOrder.Text))
-                {
-                    Ultils.TextControlNotNull(txtWorkingOrder, "Working oder");
-                }
-                else if (string.IsNullOrEmpty(txtPO.Text))
-                {
-                    Ultils.TextControlNotNull(txtWorkingOrder, "PO");
-                }
-                else
-                {
-                    string strBoxId = txtBoxID.Text;
-                    if (strBoxId.Length >= 3)
-                    {
-                        if (strBoxId.Substring(0, 3).ToUpper() != "F00")
-                        {
-                            Ultils.EditTextErrorMessage(txtBoxID, "BOX ID phải bắt đầu bằng F00");
-                            txtBoxID.SelectAll();
-                        }
-                        else
-                        {
-                            EnableTextControls(false);
-                            VisibleControlAddPCB(true);
-                            txtAddPCB.Focus();
-                        }
-                    }
-                    else
-                    {
-                        Ultils.EditTextErrorMessage(txtBoxID, "BOX ID ngắn quá!");
-                        txtBoxID.SelectAll();
-                    }
-
-                }
-            }
-
         }
 
         /// <summary>

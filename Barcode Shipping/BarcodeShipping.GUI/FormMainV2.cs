@@ -60,13 +60,22 @@ namespace BarcodeShipping.GUI
                             DateCheck = DateTime.Now.Date
                         };
 
-                        if (CheckModels(shipping.ProductID))
+                        if (_iqcService.GetShippingById(log.ProductionID) == null)
                         {
-                            _shippings.Add(shipping);
+                            if (CheckModels(shipping.ProductID))
+                            {
+                                _shippings.Add(shipping);
+                            }
+                            else
+                            {
+                                _pcbError.Add(shipping);
+                            }
                         }
                         else
                         {
-                            _pcbError.Add(shipping);
+                            MessageBoxHelper.ShowMessageBoxError($"{log.ProductionID} đã được xuất trước đó. Vui lòng kiểm tra lại!");
+                            txtBoxID.Focus();
+                            break;
                         }
                     }
                     if (_pcbError.Any())

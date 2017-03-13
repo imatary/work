@@ -417,7 +417,7 @@ namespace BarcodeShipping.Services
                 }
             };
 
-            return _context.Database.SqlQuery<tbl_test_result>("EXEC [sp_GetLogResultsById] @productionId, @operationId", param).FirstOrDefault();
+            return _context.Database.SqlQuery<tbl_test_result>("EXEC [sp_GetLogResultsById] @productionId, @operationId", param).SingleOrDefault();
 
         }
 
@@ -603,7 +603,7 @@ namespace BarcodeShipping.Services
                 }
             };
 
-            return _context.Database.SqlQuery<PackingPO>("EXEC [sp_GetPackingPoModelAndPoNo] @modelNo, @poNo", param).FirstOrDefault();
+            return _context.Database.SqlQuery<PackingPO>("EXEC [sp_GetPackingPoModelAndPoNo] @modelNo, @poNo", param).SingleOrDefault();
 
         }
 

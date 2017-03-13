@@ -31,12 +31,13 @@ namespace HondaLookSupports
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -68,6 +69,10 @@ namespace HondaLookSupports
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.lblPASS = new DevExpress.XtraEditors.LabelControl();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.gridLookUpEditModel = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.checkStartWatching = new DevExpress.XtraEditors.CheckEdit();
             this.hyperlinkConfigs = new DevExpress.XtraEditors.HyperlinkLabelControl();
             this.txtBarcode = new DevExpress.XtraEditors.ButtonEdit();
@@ -86,6 +91,8 @@ namespace HondaLookSupports
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditModel.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkStartWatching.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBarcode.Properties)).BeginInit();
             this.panel3.SuspendLayout();
@@ -100,7 +107,7 @@ namespace HondaLookSupports
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(483, 62);
+            this.panelControl1.Size = new System.Drawing.Size(496, 62);
             this.panelControl1.TabIndex = 0;
             // 
             // pictureEdit1
@@ -108,7 +115,7 @@ namespace HondaLookSupports
             this.pictureEdit1.Cursor = System.Windows.Forms.Cursors.Default;
             this.pictureEdit1.Dock = System.Windows.Forms.DockStyle.Right;
             this.pictureEdit1.EditValue = global::HondaLookSupports.Properties.Resources.logo;
-            this.pictureEdit1.Location = new System.Drawing.Point(383, 0);
+            this.pictureEdit1.Location = new System.Drawing.Point(396, 0);
             this.pictureEdit1.Name = "pictureEdit1";
             this.pictureEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
@@ -137,7 +144,7 @@ namespace HondaLookSupports
             this.panel1.ForeColor = System.Drawing.Color.Silver;
             this.panel1.Location = new System.Drawing.Point(0, 61);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(483, 1);
+            this.panel1.Size = new System.Drawing.Size(496, 1);
             this.panel1.TabIndex = 0;
             // 
             // statusStrip1
@@ -151,9 +158,9 @@ namespace HondaLookSupports
             this.toolStripStatusLabel5,
             this.lblVersion,
             this.toolStripStatusLabel6});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 298);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 324);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(483, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(496, 24);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -201,7 +208,7 @@ namespace HondaLookSupports
             // toolStripStatusLabel6
             // 
             this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(118, 15);
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(118, 19);
             this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
             // 
             // panel2
@@ -212,7 +219,7 @@ namespace HondaLookSupports
             this.panel2.Location = new System.Drawing.Point(0, 62);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(5);
-            this.panel2.Size = new System.Drawing.Size(483, 236);
+            this.panel2.Size = new System.Drawing.Size(496, 262);
             this.panel2.TabIndex = 3;
             // 
             // panel4
@@ -223,16 +230,16 @@ namespace HondaLookSupports
             this.panel4.Location = new System.Drawing.Point(5, 77);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel4.Size = new System.Drawing.Size(473, 154);
+            this.panel4.Size = new System.Drawing.Size(486, 180);
             this.panel4.TabIndex = 1;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(0, 69);
+            this.gridControl1.Location = new System.Drawing.Point(0, 107);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(473, 85);
+            this.gridControl1.Size = new System.Drawing.Size(486, 73);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -340,7 +347,7 @@ namespace HondaLookSupports
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(473, 64);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(486, 102);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -357,12 +364,12 @@ namespace HondaLookSupports
             this.tableLayoutPanel2.Controls.Add(this.labelControl6, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblPASS, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(294, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(301, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(176, 58);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(182, 96);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // lblTotal
@@ -376,9 +383,9 @@ namespace HondaLookSupports
             this.lblTotal.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblTotal.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.lblTotal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTotal.Location = new System.Drawing.Point(120, 32);
+            this.lblTotal.Location = new System.Drawing.Point(124, 51);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(52, 22);
+            this.lblTotal.Size = new System.Drawing.Size(54, 41);
             this.lblTotal.TabIndex = 5;
             this.lblTotal.Text = "0";
             // 
@@ -393,9 +400,9 @@ namespace HondaLookSupports
             this.lblNG.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblNG.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.lblNG.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNG.Location = new System.Drawing.Point(62, 32);
+            this.lblNG.Location = new System.Drawing.Point(64, 51);
             this.lblNG.Name = "lblNG";
-            this.lblNG.Size = new System.Drawing.Size(51, 22);
+            this.lblNG.Size = new System.Drawing.Size(53, 41);
             this.lblNG.TabIndex = 4;
             this.lblNG.Text = "0";
             // 
@@ -413,7 +420,7 @@ namespace HondaLookSupports
             this.labelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelControl4.Location = new System.Drawing.Point(4, 4);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(51, 21);
+            this.labelControl4.Size = new System.Drawing.Size(53, 40);
             this.labelControl4.TabIndex = 0;
             this.labelControl4.Text = "PASS";
             // 
@@ -428,9 +435,9 @@ namespace HondaLookSupports
             this.labelControl5.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl5.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.labelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl5.Location = new System.Drawing.Point(62, 4);
+            this.labelControl5.Location = new System.Drawing.Point(64, 4);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(51, 21);
+            this.labelControl5.Size = new System.Drawing.Size(53, 40);
             this.labelControl5.TabIndex = 1;
             this.labelControl5.Text = "NG";
             // 
@@ -444,9 +451,9 @@ namespace HondaLookSupports
             this.labelControl6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelControl6.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.labelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl6.Location = new System.Drawing.Point(120, 4);
+            this.labelControl6.Location = new System.Drawing.Point(124, 4);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(52, 21);
+            this.labelControl6.Size = new System.Drawing.Size(54, 40);
             this.labelControl6.TabIndex = 2;
             this.labelControl6.Text = "TOTAL";
             // 
@@ -461,42 +468,87 @@ namespace HondaLookSupports
             this.lblPASS.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblPASS.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.lblPASS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPASS.Location = new System.Drawing.Point(4, 32);
+            this.lblPASS.Location = new System.Drawing.Point(4, 51);
             this.lblPASS.Name = "lblPASS";
-            this.lblPASS.Size = new System.Drawing.Size(51, 22);
+            this.lblPASS.Size = new System.Drawing.Size(53, 41);
             this.lblPASS.TabIndex = 3;
             this.lblPASS.Text = "0";
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.gridLookUpEditModel);
             this.panel5.Controls.Add(this.checkStartWatching);
             this.panel5.Controls.Add(this.hyperlinkConfigs);
             this.panel5.Controls.Add(this.txtBarcode);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(3, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(285, 58);
+            this.panel5.Size = new System.Drawing.Size(292, 96);
             this.panel5.TabIndex = 1;
+            // 
+            // gridLookUpEditModel
+            // 
+            this.gridLookUpEditModel.Location = new System.Drawing.Point(3, 3);
+            this.gridLookUpEditModel.Name = "gridLookUpEditModel";
+            this.gridLookUpEditModel.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEditModel.Properties.Appearance.Options.UseFont = true;
+            this.gridLookUpEditModel.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.gridLookUpEditModel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("gridLookUpEditModel.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            this.gridLookUpEditModel.Properties.NullText = "";
+            this.gridLookUpEditModel.Properties.NullValuePrompt = "Select Model";
+            this.gridLookUpEditModel.Properties.NullValuePromptShowForEmptyValue = true;
+            this.gridLookUpEditModel.Properties.View = this.gridLookUpEdit1View;
+            this.gridLookUpEditModel.Size = new System.Drawing.Size(286, 28);
+            this.gridLookUpEditModel.TabIndex = 3;
+            this.gridLookUpEditModel.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.gridLookUpEditModel_ButtonPressed);
+            this.gridLookUpEditModel.EditValueChanged += new System.EventHandler(this.gridLookUpEditModel_EditValueChanged);
+            // 
+            // gridLookUpEdit1View
+            // 
+            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn7,
+            this.gridColumn8});
+            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "ID";
+            this.gridColumn7.FieldName = "ModelCode";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 0;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "Name";
+            this.gridColumn8.FieldName = "ModelName";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 1;
             // 
             // checkStartWatching
             // 
-            this.checkStartWatching.Dock = System.Windows.Forms.DockStyle.Left;
             this.checkStartWatching.EditValue = true;
-            this.checkStartWatching.Location = new System.Drawing.Point(0, 26);
+            this.checkStartWatching.Location = new System.Drawing.Point(4, 71);
             this.checkStartWatching.Name = "checkStartWatching";
             this.checkStartWatching.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkStartWatching.Properties.Appearance.ForeColor = System.Drawing.Color.Green;
             this.checkStartWatching.Properties.Appearance.Options.UseFont = true;
             this.checkStartWatching.Properties.Appearance.Options.UseForeColor = true;
             this.checkStartWatching.Properties.Caption = "Start watching";
-            this.checkStartWatching.Size = new System.Drawing.Size(127, 32);
+            this.checkStartWatching.Size = new System.Drawing.Size(128, 19);
             this.checkStartWatching.TabIndex = 2;
             this.checkStartWatching.CheckedChanged += new System.EventHandler(this.checkStartWatching_CheckedChanged);
             // 
             // hyperlinkConfigs
             // 
             this.hyperlinkConfigs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hyperlinkConfigs.Location = new System.Drawing.Point(133, 35);
+            this.hyperlinkConfigs.Location = new System.Drawing.Point(138, 77);
             this.hyperlinkConfigs.Name = "hyperlinkConfigs";
             this.hyperlinkConfigs.Size = new System.Drawing.Size(36, 13);
             this.hyperlinkConfigs.TabIndex = 1;
@@ -505,26 +557,25 @@ namespace HondaLookSupports
             // 
             // txtBarcode
             // 
-            this.txtBarcode.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtBarcode.Location = new System.Drawing.Point(0, 0);
+            this.txtBarcode.Location = new System.Drawing.Point(3, 37);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBarcode.Properties.Appearance.Options.UseFont = true;
             this.txtBarcode.Properties.AutoHeight = false;
             this.txtBarcode.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            serializableAppearanceObject7.BackColor = System.Drawing.Color.White;
-            serializableAppearanceObject7.BackColor2 = System.Drawing.Color.White;
-            serializableAppearanceObject7.BorderColor = System.Drawing.Color.White;
-            serializableAppearanceObject7.Options.UseBackColor = true;
-            serializableAppearanceObject7.Options.UseBorderColor = true;
+            serializableAppearanceObject3.BackColor = System.Drawing.Color.White;
+            serializableAppearanceObject3.BackColor2 = System.Drawing.Color.White;
+            serializableAppearanceObject3.BorderColor = System.Drawing.Color.White;
+            serializableAppearanceObject3.Options.UseBackColor = true;
+            serializableAppearanceObject3.Options.UseBorderColor = true;
             this.txtBarcode.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "|", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::HondaLookSupports.Properties.Resources._1479455547_barcode, "", new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, serializableAppearanceObject9, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBarcode.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject10, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "|", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::HondaLookSupports.Properties.Resources._1479455547_barcode, "", new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, serializableAppearanceObject5, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBarcode.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, "", null, null, true)});
             this.txtBarcode.Properties.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.txtBarcode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBarcode.Properties.NullValuePrompt = "Input barcode here";
             this.txtBarcode.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtBarcode.Size = new System.Drawing.Size(285, 26);
+            this.txtBarcode.Size = new System.Drawing.Size(286, 28);
             this.txtBarcode.TabIndex = 0;
             this.txtBarcode.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtBarcode_ButtonPressed);
             this.txtBarcode.EditValueChanged += new System.EventHandler(this.txtBarcode_EditValueChanged);
@@ -540,7 +591,7 @@ namespace HondaLookSupports
             this.panel3.Location = new System.Drawing.Point(5, 5);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(5);
-            this.panel3.Size = new System.Drawing.Size(473, 72);
+            this.panel3.Size = new System.Drawing.Size(486, 72);
             this.panel3.TabIndex = 0;
             // 
             // lblMessage
@@ -559,7 +610,7 @@ namespace HondaLookSupports
             this.lblMessage.Location = new System.Drawing.Point(81, 5);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Padding = new System.Windows.Forms.Padding(5, 0, 5, 5);
-            this.lblMessage.Size = new System.Drawing.Size(385, 60);
+            this.lblMessage.Size = new System.Drawing.Size(398, 60);
             this.lblMessage.TabIndex = 1;
             this.lblMessage.Text = "no results";
             // 
@@ -594,7 +645,7 @@ namespace HondaLookSupports
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 322);
+            this.ClientSize = new System.Drawing.Size(496, 348);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panelControl1);
@@ -620,6 +671,8 @@ namespace HondaLookSupports
             this.tableLayoutPanel2.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditModel.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkStartWatching.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBarcode.Properties)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -668,6 +721,10 @@ namespace HondaLookSupports
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel lblVersion;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private DevExpress.XtraEditors.GridLookUpEdit gridLookUpEditModel;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
     }
 }
 

@@ -1,0 +1,31 @@
+@{
+	var cardView = Html.DevExpress().CardView(settings => {
+        settings.Name = "CardNichicon";
+        settings.CallbackRouteValues = new { Controller = "Reports", Action = "NichiconPartial" };
+
+
+		settings.KeyFieldName = "ProductionID";
+
+		settings.SettingsPager.Visible = true;
+				settings.Settings.ShowHeaderPanel = true;
+		settings.Settings.ShowHeaderFilterButton = true;
+				settings.SettingsBehavior.AllowSelectByCardClick = true;
+
+				settings.Columns.Add("ProductionID");
+				settings.Columns.Add("LineID");
+				settings.Columns.Add("BoxID");
+				settings.Columns.Add("ModelName");
+				settings.Columns.Add("DateCheck");
+				settings.Columns.Add("OperatorCode");
+				settings.Columns.Add("JudgeResult");
+
+						settings.CardLayoutProperties.Items.Add("ProductionID");
+				settings.CardLayoutProperties.Items.Add("LineID");
+				settings.CardLayoutProperties.Items.Add("BoxID");
+				settings.CardLayoutProperties.Items.Add("ModelName");
+				settings.CardLayoutProperties.Items.Add("DateCheck");
+				settings.CardLayoutProperties.Items.Add("OperatorCode");
+				settings.CardLayoutProperties.Items.Add("JudgeResult");
+			});
+}
+@cardView.Bind(Model).GetHtml()
