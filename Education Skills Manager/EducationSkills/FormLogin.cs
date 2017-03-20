@@ -32,12 +32,15 @@ namespace EducationSkills
             }
             else
             {
+                splashScreenManager1.ShowWaitForm();
                 var user = context.PR_AdminEdu.SingleOrDefault(u => u.UserName == txtUsername.Text.Trim() && u.PassWord == txtPassword.Text.Trim());
                 if (user != null)
                 {
+                    
                     Program.CurrentUser = user;
                     new FormMain().Show();
                     this.Hide();
+                    splashScreenManager1.CloseWaitForm();
                 }
                 else
                 {

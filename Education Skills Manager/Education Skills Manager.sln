@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationSkills.Data", "Edu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umc.Web", "Umc.Web\Umc.Web.csproj", "{DA952C31-E9D8-4BD0-A2A9-919B0EA1E75E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UMC.GA", "UMC.GA\UMC.GA.csproj", "{F98F0F69-21E2-40ED-82F1-87F6424B9860}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXWebApplication1", "DXWebApplication1\DXWebApplication1.csproj", "{AEF936F5-5608-4C34-9243-6684EA21E05A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UMC.OQC", "UMC.OQC\UMC.OQC.csproj", "{E5A88243-A301-463D-AA86-0E4719AACDBD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PivotTable", "PivotTable\PivotTable.csproj", "{CB6956BF-FC93-4E33-8C5E-8330AF6DDBCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PivotTableForm", "PivotTableForm\PivotTableForm.csproj", "{5FE75533-276B-46BF-BF79-601AC9B35BDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,18 +33,18 @@ Global
 		{DA952C31-E9D8-4BD0-A2A9-919B0EA1E75E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA952C31-E9D8-4BD0-A2A9-919B0EA1E75E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA952C31-E9D8-4BD0-A2A9-919B0EA1E75E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F98F0F69-21E2-40ED-82F1-87F6424B9860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F98F0F69-21E2-40ED-82F1-87F6424B9860}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F98F0F69-21E2-40ED-82F1-87F6424B9860}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F98F0F69-21E2-40ED-82F1-87F6424B9860}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AEF936F5-5608-4C34-9243-6684EA21E05A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AEF936F5-5608-4C34-9243-6684EA21E05A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEF936F5-5608-4C34-9243-6684EA21E05A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEF936F5-5608-4C34-9243-6684EA21E05A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E5A88243-A301-463D-AA86-0E4719AACDBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5A88243-A301-463D-AA86-0E4719AACDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5A88243-A301-463D-AA86-0E4719AACDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5A88243-A301-463D-AA86-0E4719AACDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB6956BF-FC93-4E33-8C5E-8330AF6DDBCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB6956BF-FC93-4E33-8C5E-8330AF6DDBCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB6956BF-FC93-4E33-8C5E-8330AF6DDBCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB6956BF-FC93-4E33-8C5E-8330AF6DDBCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FE75533-276B-46BF-BF79-601AC9B35BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FE75533-276B-46BF-BF79-601AC9B35BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FE75533-276B-46BF-BF79-601AC9B35BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FE75533-276B-46BF-BF79-601AC9B35BDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

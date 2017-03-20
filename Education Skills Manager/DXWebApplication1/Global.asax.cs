@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using System.Web.Optimization;
 namespace DXWebApplication1
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -30,6 +31,7 @@ namespace DXWebApplication1
         {
             Exception exception = System.Web.HttpContext.Current.Server.GetLastError();
             //TODO: Handle Exception
-        }
+        	DevExtremeBundleConfig.RegisterBundles(BundleTable.Bundles);
+		}
     }
 }

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -41,25 +41,27 @@ new Script { ExtensionSuite = ExtensionSuite.Bootstrap }
     ) 
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/site.js")" type="text/javascript"></script>
+	@Styles.Render("~/Content/DevExtremeBundle")
+	@Scripts.Render("~/Scripts/DevExtremeBundle")
 </head>
 <body>
     <div class="wrapper">
         <header>
             <div class="container">
                 @Html.DevExpress().Panel(p => {
-                    p.Name = "TopPanel";
-                    p.Width = Unit.Percentage(100);
-                    p.Collapsible = true;
-                    p.SettingsAdaptivity.CollapseAtWindowInnerWidth = 680;
-                    p.SettingsCollapsing.ExpandButton.GlyphType = PanelExpandButtonGlyphType.Strips;
-                    p.Styles.ExpandBar.CssClass = "expandBar";
-                    p.Styles.ExpandedPanel.CssClass = "expandedPanel";
-                
-                    p.SetExpandBarTemplateContent(c => { 
-                        ViewContext.Writer.Write("<div class='title'><a href='" + Url.Action("Home", "Pages") + "'>DX BLOG</a><p class='small'>Mobile friendly</p></div>");
-                    });
-                    p.SetContent(() => { Html.RenderPartial("HeaderPanelContentPartial"); });
-                }).GetHtml()
+               p.Name = "TopPanel";
+               p.Width = Unit.Percentage(100);
+               p.Collapsible = true;
+               p.SettingsAdaptivity.CollapseAtWindowInnerWidth = 680;
+               p.SettingsCollapsing.ExpandButton.GlyphType = PanelExpandButtonGlyphType.Strips;
+               p.Styles.ExpandBar.CssClass = "expandBar";
+               p.Styles.ExpandedPanel.CssClass = "expandedPanel";
+
+               p.SetExpandBarTemplateContent(c => {
+                   ViewContext.Writer.Write("<div class='title'><a href='" + Url.Action("Home", "Pages") + "'>DX BLOG</a><p class='small'>Mobile friendly</p></div>");
+               });
+               p.SetContent(() => { Html.RenderPartial("HeaderPanelContentPartial"); });
+           }).GetHtml()
             </div>
         </header>
         <div class="content">

@@ -478,7 +478,8 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileName = "(*).csv";
+            this.openFileDialog1.Title = "Select file";
             // 
             // tmrEditNotify
             // 

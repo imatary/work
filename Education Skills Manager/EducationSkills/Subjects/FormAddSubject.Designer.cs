@@ -32,6 +32,7 @@
             this.lblTitle = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
@@ -39,7 +40,6 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.txtSubjectID = new DevExpress.XtraEditors.TextEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
@@ -82,12 +82,26 @@
             this.panelControl2.Size = new System.Drawing.Size(356, 37);
             this.panelControl2.TabIndex = 6;
             // 
+            // btnDel
+            // 
+            this.btnDel.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDel.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDel.Appearance.Options.UseFont = true;
+            this.btnDel.Appearance.Options.UseForeColor = true;
+            this.btnDel.Image = ((System.Drawing.Image)(resources.GetObject("btnDel.Image")));
+            this.btnDel.Location = new System.Drawing.Point(285, 5);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(59, 23);
+            this.btnDel.TabIndex = 1;
+            this.btnDel.Text = "Del";
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            // 
             // btnSave
             // 
             this.btnSave.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Appearance.Options.UseFont = true;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.Location = new System.Drawing.Point(270, 6);
+            this.btnSave.Location = new System.Drawing.Point(204, 5);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
@@ -145,7 +159,7 @@
             this.txtSubjectID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtSubjectID.Properties.NullValuePrompt = "Mã môn học";
             this.txtSubjectID.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtSubjectID.Size = new System.Drawing.Size(176, 26);
+            this.txtSubjectID.Size = new System.Drawing.Size(130, 26);
             this.txtSubjectID.TabIndex = 1;
             this.txtSubjectID.EditValueChanged += new System.EventHandler(this.txtSubjectID_EditValueChanged);
             this.txtSubjectID.Validating += new System.ComponentModel.CancelEventHandler(this.txtSubjectID_Validating);
@@ -157,20 +171,6 @@
             this.labelControl2.Size = new System.Drawing.Size(41, 13);
             this.labelControl2.TabIndex = 0;
             this.labelControl2.Text = "Mã Môn:";
-            // 
-            // btnDel
-            // 
-            this.btnDel.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnDel.Appearance.Options.UseFont = true;
-            this.btnDel.Appearance.Options.UseForeColor = true;
-            this.btnDel.Image = ((System.Drawing.Image)(resources.GetObject("btnDel.Image")));
-            this.btnDel.Location = new System.Drawing.Point(205, 6);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(59, 23);
-            this.btnDel.TabIndex = 1;
-            this.btnDel.Text = "Del";
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // FormAddSubject
             // 

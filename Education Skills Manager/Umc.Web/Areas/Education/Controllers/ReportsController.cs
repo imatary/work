@@ -101,15 +101,19 @@ namespace Umc.Web.Areas.Education.Controllers
         [ValidateInput(false)]
         public ActionResult CheckSolderPartial()
         {
-            var model = UMC.GA.GADataProvider.GetCheckSolders(null, null);
-            return PartialView("_CheckSolderPartial", model);
+            //var model = UMC.GA.GADataProvider.GetCheckSolders(null, null);
+            //return PartialView("_CheckSolderPartial", model);
+            return PartialView();
+
         }
 
         [ValidateInput(false)]
         public ActionResult CheckEyePartial()
         {
-            var model = UMC.GA.GADataProvider.GetCheckEyes();
-            return PartialView("_CheckEyePartial", model);
+            //var model = UMC.GA.GADataProvider.GetCheckEyes();
+            //return PartialView("_CheckEyePartial", model);
+
+            return PartialView();
         }
     }
 }

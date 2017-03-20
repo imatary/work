@@ -269,7 +269,6 @@ namespace FCT_HFT1024_DB
                 if (m_bIsWatching)
                 {
                     m_bIsWatching = false;
-                    //Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), m_bIsWatching);
                     m_Watcher.EnableRaisingEvents = false;
                     m_Watcher.Dispose();
                     btnWatchFile.Appearance.BackColor = Color.LightSkyBlue;
@@ -286,8 +285,6 @@ namespace FCT_HFT1024_DB
                         // Cấu hình COM PORT
                         ConfigSerialPorts();
                     }
-                    // Ẩn ứng dụng
-                    //Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), m_bIsWatching);
 
                     btnWatchFile.ForeColor = Color.White;
                     btnWatchFile.Appearance.BackColor = Color.DarkRed;
@@ -319,8 +316,6 @@ namespace FCT_HFT1024_DB
                                          | NotifyFilters.FileName | NotifyFilters.DirectoryName;
                     m_Watcher.Created += new FileSystemEventHandler(OnChanged);
                     m_Watcher.Changed += new FileSystemEventHandler(OnChanged);
-                    //m_Watcher.Deleted += new FileSystemEventHandler(OnChanged);
-                    m_Watcher.Renamed += new RenamedEventHandler(OnRenamed);
                     m_Watcher.EnableRaisingEvents = true;
                 }
             }
@@ -359,11 +354,10 @@ namespace FCT_HFT1024_DB
                         _status = "P";
                         boardState = "OK";
                         pass = pass + 1;
-
-                        if (checkEditSerialPort.Checked == true)
-                        {
-                            com.WriteData("O");
-                        }
+                        //if (checkEditSerialPort.Checked == true)
+                        //{
+                        //    com.WriteData("O");
+                        //}
                     }
                     else if (strStatus == "FAIL")
                     {
@@ -373,26 +367,36 @@ namespace FCT_HFT1024_DB
                     }
                     string stationNo = gridLookUpEditProcessID.EditValue.ToString();
                     Ultils.CreateFileLog(modelId, productionId, _status, stationNo, dateCheck);
-                    
+
+                    Thread.Sleep(600);
+
+                    // Kiểm tra lại bản mạch đã OK trên WIP chưa?
+                    // Nếu OK => Đóng dấu
+                    // Nếu FAIL => Bỏ qua không đóng dấu, thông báo lỗi
+                    //trạng thái bản mạch hiện tại
+                    var curentStationNo = _workOrderItemService.Get_WORK_ORDER_ITEMS_By_BoardNo(productionId);
+                    if (curentStationNo.BOARD_STATE == 1)
+                    {
+                        if (checkEditSerialPort.Checked == true)
+                        {
+                            com.WriteData("O");
+                            lblMarking.Visible = true;
+                        }
+                    }
+                    else if (curentStationNo.BOARD_STATE == 2)
+                    {
+                        messageError = $"Board '{productionId}' NG Wip. Vui lòng kiểm tra lại!";
+                        MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
+                        CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                        var errorForm = new FormError(messageError);
+                        errorForm.ShowDialog();
+                        txtBarcode.Focus();
+                    }
                     total = pass + ng;
                 }
                 m_bDirty = true;
             }
         }
-
-        private void OnRenamed(object sender, RenamedEventArgs e)
-        {
-            if (!m_bDirty)
-            {
-                m_bDirty = true;
-                if (rdbFile.Checked)
-                {
-                    m_Watcher.Filter = e.Name;
-                    m_Watcher.Path = e.FullPath.Substring(0, e.FullPath.Length - m_Watcher.Filter.Length);
-                }
-            }
-        }
-
         private void rdbFile_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbFile.Checked == true)
@@ -453,6 +457,7 @@ namespace FCT_HFT1024_DB
         {
             if (e.KeyCode == Keys.Enter)
             {
+                lblMarking.Visible = false;
                 string boardNo = txtBarcode.Text;
                 dateCheck = Ultils.GetNetworkDateTime().ToString("yyMMddHHmmss");
 
@@ -519,7 +524,7 @@ namespace FCT_HFT1024_DB
                                     //return;
                                     Excute(boardNo, boards.PRODUCT_ID);
                                 }
-                                // Nếu tên giống nhau, thì thông báo đã chạy qua công đoạn này rồi
+                                // Nếu tên trạm hiện tại giống vs tên cài đặt, thì thông báo đã chạy qua công đoạn này rồi
                                 else if (curentStationNo.STATION_NO == set_station_no && curentStationNo.BOARD_STATE == 1)
                                 {
                                     //messageError = $"Board '{boardNo}' is pass '{set_station_no}'!";
@@ -619,7 +624,6 @@ namespace FCT_HFT1024_DB
                 }
             }    
         }
-
         private void cboWindows_EditValueChanged(object sender, EventArgs e)
         {
             string processName = cboWindows.EditValue.ToString();
@@ -678,7 +682,7 @@ namespace FCT_HFT1024_DB
         {
             CheckTextBoxNullValue.SetColorDefaultTextControl(txtBarcode);
         }
-        private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
             GridView View = sender as GridView;
             if (e.Column.FieldName == "STATE")
@@ -731,7 +735,6 @@ namespace FCT_HFT1024_DB
                 else if (mboxResult == DialogResult.Yes)
                 {
                     e.Cancel = false;
-                    //Ultils.SuspendOrResumeCurentProcess(cboWindows.EditValue.ToString(), false);
                     Application.ExitThread();  
                 }
             }

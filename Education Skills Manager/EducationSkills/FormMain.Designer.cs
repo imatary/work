@@ -28,17 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItemEmployess = new DevExpress.XtraBars.BarButtonItem();
             this.btnReportSkillMap = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItemUsername = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItemCheckSolder = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemReportsEye = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemSubjects = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItemVersion = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItemOlympic = new DevExpress.XtraBars.BarButtonItem();
+            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
+            this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
             this.ribbonPageReport = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -51,7 +56,7 @@
             this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.btnReportCheckEye = new DevExpress.XtraBars.BarButtonItem();
             this.btnReportCheckSolder = new DevExpress.XtraBars.BarButtonItem();
             this.xtraTabControlMain = new DevExpress.XtraTab.XtraTabControl();
@@ -68,13 +73,17 @@
             this.btnReportSkillMap,
             this.barStaticItemUsername,
             this.barButtonItemCheckSolder,
-            this.barButtonItem2,
+            this.barButtonItemReportsEye,
             this.barButtonItemSubjects,
             this.barButtonItemChangePassword,
             this.barStaticItemVersion,
-            this.barButtonItemOlympic});
+            this.barButtonItemOlympic,
+            this.barHeaderItem1,
+            this.barStaticItem1,
+            this.barStaticItem2,
+            this.barStaticItem3});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 18;
+            this.ribbonControl1.MaxItemId = 22;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageReport,
@@ -119,21 +128,21 @@
             // 
             // barButtonItemCheckSolder
             // 
-            this.barButtonItemCheckSolder.Caption = "Báo cáo kiểm tra hàn";
+            this.barButtonItemCheckSolder.Caption = "Báo cáo kiểm tra Hàn";
             this.barButtonItemCheckSolder.Id = 10;
             this.barButtonItemCheckSolder.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemCheckSolder.ImageOptions.Image")));
             this.barButtonItemCheckSolder.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemCheckSolder.ImageOptions.LargeImage")));
             this.barButtonItemCheckSolder.Name = "barButtonItemCheckSolder";
             this.barButtonItemCheckSolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemCheckSolder_ItemClick);
             // 
-            // barButtonItem2
+            // barButtonItemReportsEye
             // 
-            this.barButtonItem2.Caption = "Báo cáo kiểm tra mắt";
-            this.barButtonItem2.Id = 11;
-            this.barButtonItem2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
-            this.barButtonItem2.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.LargeImage")));
-            this.barButtonItem2.Name = "barButtonItem2";
-            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            this.barButtonItemReportsEye.Caption = "Báo cáo kiểm tra Mắt";
+            this.barButtonItemReportsEye.Id = 11;
+            this.barButtonItemReportsEye.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemReportsEye.ImageOptions.Image")));
+            this.barButtonItemReportsEye.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemReportsEye.ImageOptions.LargeImage")));
+            this.barButtonItemReportsEye.Name = "barButtonItemReportsEye";
+            this.barButtonItemReportsEye.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemReportsEye_ItemClick);
             // 
             // barButtonItemSubjects
             // 
@@ -175,6 +184,37 @@
             this.barButtonItemOlympic.Name = "barButtonItemOlympic";
             this.barButtonItemOlympic.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemOlympic_ItemClick);
             // 
+            // barHeaderItem1
+            // 
+            this.barHeaderItem1.Caption = "|";
+            this.barHeaderItem1.Id = 18;
+            this.barHeaderItem1.Name = "barHeaderItem1";
+            // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Caption = "Supports: PE-IT";
+            this.barStaticItem1.Id = 19;
+            this.barStaticItem1.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barStaticItem1.ItemAppearance.Normal.Options.UseFont = true;
+            this.barStaticItem1.Name = "barStaticItem1";
+            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "|";
+            this.barStaticItem2.Id = 20;
+            this.barStaticItem2.Name = "barStaticItem2";
+            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barStaticItem3
+            // 
+            this.barStaticItem3.Caption = "by: Phạm Văn Cương";
+            this.barStaticItem3.Id = 21;
+            this.barStaticItem3.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barStaticItem3.ItemAppearance.Normal.Options.UseFont = true;
+            this.barStaticItem3.Name = "barStaticItem3";
+            this.barStaticItem3.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
             // ribbonPageReport
             // 
             this.ribbonPageReport.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -201,7 +241,7 @@
             // 
             // ribbonPageGroup5
             // 
-            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem2);
+            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItemReportsEye);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
             this.ribbonPageGroup5.ShowCaptionButton = false;
             // 
@@ -251,6 +291,10 @@
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.barStaticItemUsername);
             this.ribbonStatusBar1.ItemLinks.Add(this.barStaticItemVersion);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barHeaderItem1);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barStaticItem1);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barStaticItem2);
+            this.ribbonStatusBar1.ItemLinks.Add(this.barStaticItem3);
             this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 776);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
@@ -336,7 +380,7 @@
         private DevExpress.XtraBars.BarButtonItem btnReportCheckEye;
         private DevExpress.XtraBars.BarButtonItem btnReportCheckSolder;
         private DevExpress.XtraBars.BarButtonItem barButtonItemCheckSolder;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemReportsEye;
         private DevExpress.XtraBars.BarButtonItem barButtonItemSubjects;
         private DevExpress.XtraBars.BarButtonItem barButtonItemChangePassword;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
@@ -345,5 +389,9 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemOlympic;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
         private DevExpress.XtraTab.XtraTabControl xtraTabControlMain;
+        private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem3;
     }
 }

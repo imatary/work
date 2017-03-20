@@ -11,9 +11,18 @@
             <span class="info-box-icon"><i class="glyphicon glyphicon-blackboard"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">
-                    <a style="color:white;" href="@Url.Action("Index", "Reports", new { area="Education" })">
-                        Education Skills
-                    </a>
+                    @if (User.IsInRole("Edu") || User.IsInRole("Admin"))
+                    {
+                        <a style="color:white;" href="@Url.Action("Index", "Reports", new { area = "Education" })">
+                            Education Skills
+                        </a>
+                    }
+                    else
+                    {
+                        <a style="color:white;" href="javascript:0">
+                            Education Skills
+                        </a>
+                    }
                 </span>
                 <span class="info-box-number">3368</span>
                 <div class="progress">

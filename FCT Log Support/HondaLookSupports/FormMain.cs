@@ -138,6 +138,7 @@ namespace HondaLookSupports
         {
             if (!_mBDirty)
             {
+                // đường dẫn đến file LOG
                 _path = FilePath();
 
                 if (e.ChangeType == WatcherChangeTypes.Created || e.ChangeType == WatcherChangeTypes.Changed)
@@ -145,7 +146,10 @@ namespace HondaLookSupports
                     _productionId = txtBarcode.Text;
                     _modelId = gridLookUpEditModel.EditValue.ToString();
                     _sationNo = ConfigurationManager.AppSettings["StationNo"];
-                    _boardState = State(_path);
+
+                    // Working
+                    _boardState = StateWorking(_path);
+
                     _dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
 
                     if (_boardState == "P")
@@ -317,7 +321,7 @@ namespace HondaLookSupports
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private string State(string path)
+        private string StateWorking(string path)
         {
             //path = @"C:\Users\cuong\Desktop\Record\LOG_20170211.csv";
             string status = "";

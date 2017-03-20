@@ -48,6 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.CodeParser.v16.2, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.CodeParser.v16.2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.v16.2, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.RichEdit.v16.2.Core, Version=16.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -67,6 +71,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -184,12 +190,59 @@
     <Compile Include="Areas\Education\Controllers\SkillsController.cs" />
     <Compile Include="Areas\Education\Controllers\SubjectController.cs" />
     <Compile Include="Areas\Education\EducationAreaRegistration.cs" />
+    <Compile Include="Areas\Education\Models\EduDataContext.cs" />
+    <Compile Include="Areas\Education\Models\EduDataProvider.cs" />
     <Compile Include="Areas\Education\Models\Olympic.cs" />
+    <Compile Include="Areas\Education\Models\PR_Bomon.cs" />
+    <Compile Include="Areas\Education\Models\PR_Han.cs" />
+    <Compile Include="Areas\Education\Models\PR_Mat.cs" />
+    <Compile Include="Areas\Education\Models\PR_SkillMap.cs" />
+    <Compile Include="Areas\Education\Models\PR_Staff.cs" />
     <Compile Include="Areas\oqc\Controllers\HomeController.cs" />
-    <Compile Include="Areas\oqc\Controllers\ModelsController.cs" />
-    <Compile Include="Areas\oqc\Controllers\ReportsController.cs" />
-    <Compile Include="Areas\oqc\Controllers\UserController.cs" />
+    <Compile Include="Areas\oqc\Controllers\ModelController.cs" />
+    <Compile Include="Areas\oqc\Models\Model.cs" />
+    <Compile Include="Areas\oqc\Models\mst_operator.cs" />
+    <Compile Include="Areas\oqc\Models\Murata.cs" />
+    <Compile Include="Areas\oqc\Models\NICHICON.cs" />
+    <Compile Include="Areas\oqc\Models\OQCDataContext.cs" />
+    <Compile Include="Areas\oqc\Models\PackingPO.cs" />
+    <Compile Include="Areas\oqc\Models\QACheck.cs" />
+    <Compile Include="Areas\oqc\Models\Shipping.cs" />
+    <Compile Include="Areas\oqc\Models\tbl_test_log.cs" />
+    <Compile Include="Areas\oqc\Models\tbl_test_result.cs" />
     <Compile Include="Areas\oqc\oqcAreaRegistration.cs" />
+    <Compile Include="Code\CodeFormatter.cs" />
+    <Compile Include="Code\DatabaseGenerator.cs" />
+    <Compile Include="Code\DemoGroupModel.cs" />
+    <Compile Include="Code\DemoHtmlHelper.cs" />
+    <Compile Include="Code\DemoModel.cs" />
+    <Compile Include="Code\DemoModelBase.cs" />
+    <Compile Include="Code\DemosModel.cs" />
+    <Compile Include="Code\EmailDataGenerator.cs" />
+    <Compile Include="Code\ExternalDemoModel.cs" />
+    <Compile Include="Code\FullScreenModeUtils.cs" />
+    <Compile Include="Code\Helpers\BatchEditingHelper.cs" />
+    <Compile Include="Code\Helpers\ColumnMovingHelper.cs" />
+    <Compile Include="Code\Helpers\ColumnResizingHelper.cs" />
+    <Compile Include="Code\Helpers\FilterBuilderHelper.cs" />
+    <Compile Include="Code\Helpers\GridViewAccessibilityHelper.cs" />
+    <Compile Include="Code\Helpers\GridViewEditingHelper.cs" />
+    <Compile Include="Code\Helpers\GridViewExportHelper.cs" />
+    <Compile Include="Code\Helpers\GridViewRowsHelper.cs" />
+    <Compile Include="Code\Helpers\GridViewSelectionHelper.cs" />
+    <Compile Include="Code\Helpers\GridViewTemplatesHelper.cs" />
+    <Compile Include="Code\Helpers\PatientsDataGenerator.cs" />
+    <Compile Include="Code\HiddenHtmlFormAdapter.cs" />
+    <Compile Include="Code\IntroFeatureModel.cs" />
+    <Compile Include="Code\IntroPageModel.cs" />
+    <Compile Include="Code\OverviewPageModel.cs" />
+    <Compile Include="Code\PersonDataGenerator.cs" />
+    <Compile Include="Code\PhotoUtils.cs" />
+    <Compile Include="Code\ThemeGroupModel.cs" />
+    <Compile Include="Code\ThemeModel.cs" />
+    <Compile Include="Code\ThemeModelBase.cs" />
+    <Compile Include="Code\ThemesModel.cs" />
+    <Compile Include="Code\Utils.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -197,6 +250,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="Migrations\201703060257403_Initial.cs" />
     <Compile Include="Migrations\201703060257403_Initial.Designer.cs">
       <DependentUpon>201703060257403_Initial.cs</DependentUpon>
@@ -211,8 +265,13 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ContextBase.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Options\BatchEditingOptions.cs" />
+    <Compile Include="Models\Options\ColumnMovingOptions.cs" />
+    <Compile Include="Models\Options\ColumnResizingOptions.cs" />
+    <Compile Include="Models\Options\FilterBuilderOptions.cs" />
     <Compile Include="Models\PR_Bomon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1060,20 +1119,15 @@
     <Content Include="AdminLTE\plugins\ionicons\fonts\ionicons.eot" />
     <Content Include="AdminLTE\plugins\ionicons\fonts\ionicons.ttf" />
     <Content Include="AdminLTE\plugins\ionicons\fonts\ionicons.woff" />
-    <Content Include="Areas\Education\Views\Subject\_SubjectPartial.cshtml" />
     <Content Include="Areas\Education\Views\Employee\_EmployeePartial.cshtml" />
     <Content Include="Areas\Education\Views\Reports\_OlympicPartial.cshtml" />
     <Content Include="Areas\Education\Views\Reports\_CheckSolderPartial.cshtml" />
     <Content Include="Areas\Education\Views\Reports\_CheckEyePartial.cshtml" />
     <Content Include="Areas\oqc\Views\web.config" />
     <Content Include="Areas\oqc\Views\Home\Index.cshtml" />
-    <Content Include="Areas\oqc\Views\Models\Index.cshtml" />
-    <Content Include="Areas\oqc\Views\Models\_ModelsPartial.cshtml" />
-    <Content Include="Areas\oqc\Views\User\Index.cshtml" />
-    <Content Include="Areas\oqc\Views\User\_UsersPartial.cshtml" />
-    <Content Include="Areas\oqc\Views\Reports\Index.cshtml" />
-    <Content Include="Areas\oqc\Views\Reports\_NichiconPartial.cshtml" />
-    <Content Include="Areas\oqc\Views\Reports\_MurataPartial.cshtml" />
+    <Content Include="Areas\Education\Views\Subject\_SubjectPartial.cshtml" />
+    <Content Include="Areas\oqc\Views\Model\Index.cshtml" />
+    <Content Include="Areas\oqc\Views\Model\_ModelPartial.cshtml" />
     <None Include="Properties\PublishProfiles\umc.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\Account\Login.js" />
@@ -1181,13 +1235,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutNotSidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Education\Views\Shared\" />
-    <Folder Include="Areas\oqc\Models\" />
     <Folder Include="Areas\oqc\Views\Shared\" />
+    <Folder Include="Models\DataContextExtensions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1208,16 +1261,6 @@
     <EmbeddedResource Include="Migrations\201703070957043_Olympic_change.resx">
       <DependentUpon>201703070957043_Olympic_change.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UMC.GA\UMC.GA.csproj">
-      <Project>{f98f0f69-21e2-40ed-82f1-87f6424b9860}</Project>
-      <Name>UMC.GA</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UMC.OQC\UMC.OQC.csproj">
-      <Project>{e5a88243-a301-463d-aa86-0e4719aacdbd}</Project>
-      <Name>UMC.OQC</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

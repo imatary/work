@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using UMC.GA;
 
 namespace Umc.Web.Areas.Education.Controllers
 {
@@ -16,8 +15,10 @@ namespace Umc.Web.Areas.Education.Controllers
         [ValidateInput(false)]
         public ActionResult EmployeePartial()
         {
-            var employees = UMC.GA.GADataProvider.GetAllStaff;
-            return PartialView("_EmployeePartial", employees);
+            //var employees = UMC.GA.GADataProvider.GetAllStaff;
+            //return PartialView("_EmployeePartial", employees);
+
+            return PartialView();
         }
     }
 }

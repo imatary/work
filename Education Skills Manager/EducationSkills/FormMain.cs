@@ -1,7 +1,11 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
+using DevExpress.XtraEditors;
 using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
+using EducationSkills.Modules;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -36,36 +40,43 @@ namespace EducationSkills
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="frm"></param>
-        /// <param name="xTabControl"></param>
-        private void OpenForm(XtraForm frm, XtraTabControl xTabControl)
+        public void AddTabPage(object userControl, string text, ActionType tabPageType, Bitmap smallimage)
         {
-            foreach (XtraTabPage page in xtraTabControlMain.TabPages)
+            try
             {
-                if (page.Text == frm.Text)
+                var formShow = ((UserControl)userControl);
+                XtraTabPage tabPage = new XtraTabPage();
+                tabPage.Text = text;
+                tabPage.Name = formShow.Name;
+
+                tabPage.Tag = tabPageType;
+                if (smallimage != null)
+                    tabPage.Image = smallimage;
+
+                formShow.Dock = DockStyle.Fill;
+                tabPage.Controls.Add(formShow);
+
+                var check = xtraTabControlMain.TabPages.SingleOrDefault(f => f.Name == formShow.Name);
+
+                if (check == null)
                 {
-                    xtraTabControlMain.SelectedTabPage = page;
+                    xtraTabControlMain.TabPages.Add(tabPage);
+                }
+                else
+                {
+                    xtraTabControlMain.SelectedTabPage = check;
                     return;
                 }
-            }
-            XtraTabPage page2 = new XtraTabPage
-            {
-                Text = frm.Text,
-            };
+                xtraTabControlMain.TabPages.Add(tabPage);
+                xtraTabControlMain.SelectedTabPage = tabPage;
+                xtraTabControlMain.SelectedTabPage.AutoScroll = true;
 
-            xTabControl.TabPages.Add(page2);
-            xTabControl.SelectedTabPage = page2;
-            frm.WindowState = FormWindowState.Maximized;
-            //frm.FormBorderStyle = FormBorderStyle.None;
-            frm.Dock = DockStyle.Fill;
-            frm.TopLevel = false;
-            frm.Parent = page2;
-            frm.Show();
-            
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
+
 
         /// <summary>
         /// 
@@ -98,32 +109,30 @@ namespace EducationSkills
 
         private void btnReportSkillMap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OpenForm(new FormReportSkillMap(), this.xtraTabControlMain);
+            AddTabPage(new UserControlSkillMap(), "Báo cáo Skills Map", ActionType.Default, null);
         }
 
         private void barButtonItemCheckSolder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OpenForm(new FormReportSolder(), this.xtraTabControlMain);
+            AddTabPage(new UserControlReportsSolder(), "Báo cáo kiểm tra Hàn", ActionType.Default, null);
         }
-
-        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void barButtonItemReportsEye_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OpenForm(new FormReportEye(), this.xtraTabControlMain);
+            AddTabPage(new UserControlReportsEye(), "Báo cáo kiểm tra Mắt", ActionType.Default, null);
         }
-
         private void barButtonItemOlympic_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OpenForm(new FormOlympic(), this.xtraTabControlMain);
+            
         }
 
         private void barButtonItemSubjects_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OpenForm(new FormSubjects(), this.xtraTabControlMain);
+            AddTabPage(new UserControlSubjects(), "Môn học", ActionType.Default, null);
         }
 
         private void barButtonItemEmployess_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OpenForm(new FormEmployess(), this.xtraTabControlMain);
+            AddTabPage(new UserControlEmployees(), "Danh sách Nhân viên", ActionType.Default, null);
         }
 
         private void xtraTabControlMain_CloseButtonClick(object sender, System.EventArgs e)
@@ -156,5 +165,7 @@ namespace EducationSkills
             //    xtraTabControlMain.SelectedTabPage.ShowCloseButton = DevExpress.Utils.DefaultBoolean.False;
             //} 
         }
+
+        
     }
 }

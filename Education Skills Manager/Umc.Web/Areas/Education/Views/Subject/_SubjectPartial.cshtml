@@ -1,43 +1,21 @@
 @{
-    Html.EnableClientValidation();
-    Html.EnableUnobtrusiveJavaScript();
-
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView";
-
+        settings.Name = "SubjectGrid";
         settings.CallbackRouteValues = new { Controller = "Subject", Action = "SubjectPartial" };
 
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Subject", Action = "SubjectPartialAddNew" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Subject", Action = "SubjectPartialUpdate" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Subject", Action = "SubjectPartialDelete" };
-        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-
-        settings.SettingsBehavior.ConfirmDelete = true;
-
-        settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButtonInHeader = true;
-        settings.CommandColumn.ShowDeleteButton = true;
-        settings.CommandColumn.ShowEditButton = true;
-        settings.CommandColumn.ShowClearFilterButton = true;
 
         settings.EnableRowsCache = false;
-
-        //Menu
-        settings.SettingsContextMenu.Enabled = true;
+        settings.Width = Unit.Percentage(100);
 
         settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
-        settings.Settings.VerticalScrollableHeight = 400;
+        settings.Settings.VerticalScrollableHeight = 500;
 
-        // Filter
-        settings.Settings.ShowFilterRow = true;
-        settings.Settings.ShowFilterRowMenu = true;
 
-        // Page
-        settings.SettingsPager.FirstPageButton.Visible = true;
-        settings.SettingsPager.LastPageButton.Visible = true;
-        settings.SettingsPager.PageSizeItemSettings.Visible = true;
-        settings.SettingsPager.PageSizeItemSettings.Items = new string[] { "10", "20", "50" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
 
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = true;
@@ -45,42 +23,35 @@
         settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 600;
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditForm;
-
-        settings.SettingsSearchPanel.Visible = true;
-
-        settings.CommandColumn.Width = System.Web.UI.WebControls.Unit.Pixel(100);
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        //settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.Width = Unit.Pixel(80);
+        settings.SettingsCommandButton.NewButton.Image.IconID = IconID.ActionsAdd16x16office2013;
+        settings.SettingsCommandButton.DeleteButton.Image.IconID = IconID.DataDeletedatasource16x16office2013;
 
         settings.KeyFieldName = "MaBoMon";
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = true;
         settings.Settings.ShowFilterRow = true;
-        //settings.Settings.ShowHeaderFilterButton = true;
-        //settings.SettingsPopup.HeaderFilter.Height = 200;
-
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
-        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
-        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
-        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
-        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
-        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.SettingsPager.PageSize = 30;
+        settings.SettingsPager.NumericButtonCount = 6;
+        settings.Styles.Cell.Wrap = DefaultBoolean.False;
 
-        settings.Columns.Add(column =>
-        {
+        settings.Columns.Add(column => {
             column.FieldName = "MaBoMon";
             column.Caption = "ID";
-            column.Width = 150;
+            column.Width = Unit.Pixel(100);
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "TenBoMon";
             column.Caption = "Name";
         });
-
-        settings.SettingsPager.PageSize = 20;
-        settings.SettingsPager.NumericButtonCount = 6;
-        settings.Styles.Cell.Wrap = DefaultBoolean.False;
     });
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);

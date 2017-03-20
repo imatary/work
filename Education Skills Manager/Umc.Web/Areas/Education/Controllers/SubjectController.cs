@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Umc.Web.Areas.Education.Models;
 
 namespace Umc.Web.Areas.Education.Controllers
 {
@@ -16,7 +17,8 @@ namespace Umc.Web.Areas.Education.Controllers
             return View();
         }
 
-        UMC.GA.GADbContext db = new UMC.GA.GADbContext();
+
+        Umc.Web.Areas.Education.Models.EduDataContext db = new Umc.Web.Areas.Education.Models.EduDataContext();
 
         [ValidateInput(false)]
         public ActionResult SubjectPartial()
@@ -26,7 +28,7 @@ namespace Umc.Web.Areas.Education.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult SubjectPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] UMC.GA.PR_Bomon item)
+        public ActionResult SubjectPartialAddNew(Umc.Web.Areas.Education.Models.PR_Bomon item)
         {
             var model = db.PR_Bomon;
             if (ModelState.IsValid)
@@ -46,7 +48,7 @@ namespace Umc.Web.Areas.Education.Controllers
             return PartialView("_SubjectPartial", model.ToList());
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult SubjectPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] UMC.GA.PR_Bomon item)
+        public ActionResult SubjectPartialUpdate(Umc.Web.Areas.Education.Models.PR_Bomon item)
         {
             var model = db.PR_Bomon;
             if (ModelState.IsValid)
