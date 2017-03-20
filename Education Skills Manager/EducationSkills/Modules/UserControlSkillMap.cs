@@ -36,10 +36,7 @@ namespace EducationSkills.Modules
             }
             
             GetReportSkillsMap(selectDate, selectDept);
-            if (gridControl1.DataSource != null)
-            {
-                btnExportToExel.Enabled = true;
-            }
+            
         }
 
         /// <summary>
@@ -144,6 +141,12 @@ namespace EducationSkills.Modules
             {
                 throw new Exception(ex.Message);
             }
+
+            if (gridControl1.DataSource != null)
+            {
+                btnExportToExel.Enabled = true;
+            }
+
             splashScreenManager1.CloseWaitForm();
 
         }
@@ -181,6 +184,14 @@ namespace EducationSkills.Modules
             if (saveFileDialog1.FileName != "")
             {
                 gridControl1.ExportToXls(saveFileDialog1.FileName);
+            }
+        }
+
+        private void txtDept_EditValueChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtDept.Text))
+            {
+                GetReportSkillsMap(null, txtDept.EditValue.ToString());
             }
         }
     }

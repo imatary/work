@@ -20,15 +20,7 @@ namespace EducationSkills
             }
         }
 
-        //object[] param =
-        //{
-        //    new SqlParameter() { ParameterName = "@MaBoMon", Value = txtSubjectID.Text.Trim(), SqlDbType = SqlDbType.NChar},
-        //    new SqlParameter() { ParameterName = "@TenBoMon", Value = txtSubjectName.Text.Trim(), SqlDbType = SqlDbType.NVarChar},
-        //    new SqlParameter("@Out_Parameter", SqlDbType.Int)
-        //    {
-        //        Direction = ParameterDirection.Output
-        //    }
-        //};
+        
 
         //try
         //{

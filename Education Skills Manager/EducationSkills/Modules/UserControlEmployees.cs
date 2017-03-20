@@ -17,6 +17,7 @@ namespace EducationSkills.Modules
     public partial class UserControlEmployees : UserControl
     {
         private EducationSkillsDbContext context;
+        List<string> staffCodes = new List<string>();
         public UserControlEmployees()
         {
             InitializeComponent();
@@ -89,6 +90,51 @@ namespace EducationSkills.Modules
                 string subjectId = (string)gridView1.GetRowCellValue(e.RowHandle, "StaffCode");
                 new UserRegisterSubjects(subjectId).ShowDialog();
             }
+        }
+
+        private void txtDept_EditValueChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtDept.Text))
+            {
+                LoadEmployees(txtDept.EditValue.ToString());
+            }
+        }
+
+        private void btnImports_Click(object sender, EventArgs e)
+        {
+
+            staffCodes = GetSelectedValues(gridView1, "StaffCode");
+
+            if (staffCodes.Any())
+            {
+                new FormImports(staffCodes).ShowDialog();
+                staffCodes = new List<string>();
+            }
+            else
+            {
+                MessageHelper.ErrorMessageBox("Vui lòng chọn ít nhất một Nhân viên để Imports");
+                return;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        private List<string> GetSelectedValues(DevExpress.XtraGrid.Views.Grid.GridView view, string fieldName)
+        {
+            int[] selectedRows = view.GetSelectedRows();
+            List<string> results = new List<string>();
+            for (int i = 0; i < selectedRows.Length; i++)
+            {
+                int rowHandle = selectedRows[i];
+                if (!view.IsGroupRow(rowHandle))
+                {
+                    results.Add(view.GetRowCellValue(rowHandle, fieldName).ToString());
+                }
+            }
+            return results;
         }
     }
 }

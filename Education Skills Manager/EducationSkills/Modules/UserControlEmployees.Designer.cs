@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlEmployees));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnImports = new DevExpress.XtraEditors.SimpleButton();
             this.btnRefesh = new DevExpress.XtraEditors.SimpleButton();
             this.btnFind = new DevExpress.XtraEditors.SimpleButton();
             this.txtDept = new DevExpress.XtraEditors.GridLookUpEdit();
@@ -54,6 +55,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnImports);
             this.groupBox1.Controls.Add(this.btnRefesh);
             this.groupBox1.Controls.Add(this.btnFind);
             this.groupBox1.Controls.Add(this.txtDept);
@@ -65,6 +67,18 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search Options";
+            // 
+            // btnImports
+            // 
+            this.btnImports.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImports.Appearance.Options.UseFont = true;
+            this.btnImports.Image = ((System.Drawing.Image)(resources.GetObject("btnImports.Image")));
+            this.btnImports.Location = new System.Drawing.Point(16, 36);
+            this.btnImports.Name = "btnImports";
+            this.btnImports.Size = new System.Drawing.Size(75, 28);
+            this.btnImports.TabIndex = 8;
+            this.btnImports.Text = "Imports";
+            this.btnImports.Click += new System.EventHandler(this.btnImports_Click);
             // 
             // btnRefesh
             // 
@@ -107,6 +121,7 @@
             this.txtDept.Properties.View = this.gridLookUpEdit1View;
             this.txtDept.Size = new System.Drawing.Size(271, 28);
             this.txtDept.TabIndex = 5;
+            this.txtDept.EditValueChanged += new System.EventHandler(this.txtDept_EditValueChanged);
             // 
             // gridLookUpEdit1View
             // 
@@ -160,8 +175,10 @@
             this.gridView1.OptionsSelection.InvertSelection = true;
             this.gridView1.OptionsSelection.MultiSelect = true;
             this.gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            this.gridView1.OptionsSelection.ResetSelectionClickOutsideCheckboxSelector = true;
             this.gridView1.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView1_RowCellClick);
             // 
             // gridStaffCode
@@ -302,5 +319,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridEntryDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridDeptCode;
         private DevExpress.XtraGrid.Columns.GridColumn gridPosName;
+        private DevExpress.XtraEditors.SimpleButton btnImports;
     }
 }

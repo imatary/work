@@ -27,10 +27,7 @@ namespace EducationSkills.Modules
             {
                 LoadReportsEye(txtDept.EditValue.ToString());
             }
-            if (gridControl1.DataSource != null)
-            {
-                btnExportToExel.Enabled = true;
-            }
+            
         }
 
         private void btnExportToExel_Click(object sender, EventArgs e)
@@ -95,8 +92,11 @@ namespace EducationSkills.Modules
             {
                 MessageHelper.ErrorMessageBox(ex.Message);
             }
-            
 
+            if (gridControl1.DataSource != null)
+            {
+                btnExportToExel.Enabled = true;
+            }
             splashScreenManager1.CloseWaitForm();
         }
 
@@ -109,6 +109,14 @@ namespace EducationSkills.Modules
             var departments = context.Database.SqlQuery<Department>("EXEC [dbo].[sp_Get_All_Departments]").ToList();
             txtDept.Properties.DataSource = departments;
 
+        }
+
+        private void txtDept_EditValueChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtDept.Text))
+            {
+                LoadReportsEye(txtDept.EditValue.ToString());
+            }
         }
     }
 }

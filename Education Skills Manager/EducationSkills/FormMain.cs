@@ -1,10 +1,8 @@
 ﻿using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
-using DevExpress.XtraEditors;
 using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
 using EducationSkills.Modules;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -40,6 +38,13 @@ namespace EducationSkills
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userControl"></param>
+        /// <param name="text"></param>
+        /// <param name="tabPageType"></param>
+        /// <param name="smallimage"></param>
         public void AddTabPage(object userControl, string text, ActionType tabPageType, Bitmap smallimage)
         {
             try
@@ -77,36 +82,6 @@ namespace EducationSkills
             }
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parent"></param>
-        public static void CloseCurrentForm(XtraTabControl parent)
-        {
-            //if (parent.TabPages.Any())
-            //{
-
-            //}
-            //    XtraTabControl control = page.Parent as XtraTabControl;
-            //    if (control != null)
-            //    {
-            //        control.TabPages.Remove(page);
-            //    }
-            
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void CloseAllForm()
-        {
-            foreach (XtraTabPage page in xtraTabControlMain.TabPages.ToList())
-            {
-                this.xtraTabControlMain.TabPages.Remove(page);
-            }
-        }
-
         private void btnReportSkillMap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             AddTabPage(new UserControlSkillMap(), "Báo cáo Skills Map", ActionType.Default, null);
@@ -135,12 +110,6 @@ namespace EducationSkills
             AddTabPage(new UserControlEmployees(), "Danh sách Nhân viên", ActionType.Default, null);
         }
 
-        private void xtraTabControlMain_CloseButtonClick(object sender, System.EventArgs e)
-        {
-            //CloseAllForm();
-            CloseCurrentForm(this.xtraTabControlMain);
-        }
-
         private void xtraTabControlMain_MouseMove(object sender, MouseEventArgs e)
         {
             //XtraTabControl tabControl = sender as XtraTabControl;
@@ -166,6 +135,12 @@ namespace EducationSkills
             //} 
         }
 
-        
+        private void xtraTabControlMain_CloseButtonClick(object sender, EventArgs e)
+        {
+            // Removes the selected tab:  
+            xtraTabControlMain.TabPages.Remove(xtraTabControlMain.SelectedTabPage);
+            // Removes all the tabs:  
+            //xtraTabControlMain.TabPages.Clear();
+        }
     }
 }

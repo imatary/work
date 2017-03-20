@@ -38,29 +38,29 @@
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::EducationSkills.ShowWait), true, true, typeof(System.Windows.Forms.UserControl));
+            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridStaffCode = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridFullName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridDeptCode = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridCapDo = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridLevelDateI = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridLevelII = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridLevelDateII = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridLevelIII = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridLevelDateIII = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridCertifiedTrainer = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridTrainingDate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridTestDate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridTestDateActual = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridCapDo = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridLevelDateI = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridLevelII = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridLevelDateII = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridLevelIII = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridLevelDateIII = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridTestDate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridTestResult = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridNumberTest = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::EducationSkills.ShowWait), true, true, typeof(System.Windows.Forms.UserControl));
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDept.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
@@ -137,6 +137,7 @@
             this.txtDept.Properties.View = this.gridLookUpEdit1View;
             this.txtDept.Size = new System.Drawing.Size(271, 28);
             this.txtDept.TabIndex = 5;
+            this.txtDept.EditValueChanged += new System.EventHandler(this.txtDept_EditValueChanged);
             // 
             // gridLookUpEdit1View
             // 
@@ -174,9 +175,59 @@
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bandedGridView1});
             // 
-            // splashScreenManager1
+            // bandedGridView1
             // 
-            this.splashScreenManager1.ClosingDelay = 500;
+            this.bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand2,
+            this.gridBand3,
+            this.gridBand1,
+            this.gridBand5,
+            this.gridBand4,
+            this.gridBand6});
+            this.bandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+            this.gridStaffCode,
+            this.gridFullName,
+            this.gridDeptCode,
+            this.gridCapDo,
+            this.gridLevelDateI,
+            this.gridLevelII,
+            this.gridLevelDateII,
+            this.gridLevelIII,
+            this.gridLevelDateIII,
+            this.gridCertifiedTrainer,
+            this.gridTrainingDate,
+            this.gridTestDate,
+            this.gridTestDateActual,
+            this.gridTestResult,
+            this.gridNumberTest});
+            this.bandedGridView1.GridControl = this.gridControl1;
+            this.bandedGridView1.Name = "bandedGridView1";
+            this.bandedGridView1.OptionsBehavior.AllowIncrementalSearch = true;
+            this.bandedGridView1.OptionsDetail.EnableDetailToolTip = true;
+            this.bandedGridView1.OptionsFind.AlwaysVisible = true;
+            this.bandedGridView1.OptionsFind.FindDelay = 10000;
+            this.bandedGridView1.OptionsFind.FindNullPrompt = "Nhập từ khóa cần tìm kiếm...";
+            this.bandedGridView1.OptionsFind.SearchInPreview = true;
+            this.bandedGridView1.OptionsSelection.InvertSelection = true;
+            this.bandedGridView1.OptionsView.ColumnAutoWidth = false;
+            this.bandedGridView1.OptionsView.ShowAutoFilterRow = true;
+            this.bandedGridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridStaffCode, DevExpress.Data.ColumnSortOrder.Ascending)});
+            // 
+            // gridBand2
+            // 
+            this.gridBand2.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridBand2.AppearanceHeader.Options.UseFont = true;
+            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand2.Caption = "Thông tin";
+            this.gridBand2.Columns.Add(this.gridStaffCode);
+            this.gridBand2.Columns.Add(this.gridFullName);
+            this.gridBand2.Columns.Add(this.gridDeptCode);
+            this.gridBand2.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            this.gridBand2.Name = "gridBand2";
+            this.gridBand2.VisibleIndex = 0;
+            this.gridBand2.Width = 310;
             // 
             // gridStaffCode
             // 
@@ -217,82 +268,19 @@
             this.gridDeptCode.Visible = true;
             this.gridDeptCode.Width = 80;
             // 
-            // gridCapDo
+            // gridBand3
             // 
-            this.gridCapDo.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.gridCapDo.AppearanceHeader.Options.UseFont = true;
-            this.gridCapDo.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridCapDo.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridCapDo.Caption = "Cấp độ";
-            this.gridCapDo.FieldName = "CapDo";
-            this.gridCapDo.MinWidth = 100;
-            this.gridCapDo.Name = "gridCapDo";
-            this.gridCapDo.Visible = true;
-            this.gridCapDo.Width = 100;
-            // 
-            // gridLevelDateI
-            // 
-            this.gridLevelDateI.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.gridLevelDateI.AppearanceHeader.Options.UseFont = true;
-            this.gridLevelDateI.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridLevelDateI.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridLevelDateI.Caption = "Ngày cấp";
-            this.gridLevelDateI.FieldName = "NgayCap";
-            this.gridLevelDateI.MinWidth = 100;
-            this.gridLevelDateI.Name = "gridLevelDateI";
-            this.gridLevelDateI.Visible = true;
-            this.gridLevelDateI.Width = 100;
-            // 
-            // gridLevelII
-            // 
-            this.gridLevelII.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.gridLevelII.AppearanceHeader.Options.UseFont = true;
-            this.gridLevelII.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridLevelII.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridLevelII.Caption = "Cấp độ";
-            this.gridLevelII.FieldName = "NangCap";
-            this.gridLevelII.MinWidth = 100;
-            this.gridLevelII.Name = "gridLevelII";
-            this.gridLevelII.Visible = true;
-            this.gridLevelII.Width = 100;
-            // 
-            // gridLevelDateII
-            // 
-            this.gridLevelDateII.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.gridLevelDateII.AppearanceHeader.Options.UseFont = true;
-            this.gridLevelDateII.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridLevelDateII.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridLevelDateII.Caption = "Ngày cấp";
-            this.gridLevelDateII.FieldName = "NgayNangCap";
-            this.gridLevelDateII.MinWidth = 100;
-            this.gridLevelDateII.Name = "gridLevelDateII";
-            this.gridLevelDateII.Visible = true;
-            this.gridLevelDateII.Width = 100;
-            // 
-            // gridLevelIII
-            // 
-            this.gridLevelIII.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.gridLevelIII.AppearanceHeader.Options.UseFont = true;
-            this.gridLevelIII.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridLevelIII.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridLevelIII.Caption = "Cấp độ";
-            this.gridLevelIII.FieldName = "LoaiChuyenDoi";
-            this.gridLevelIII.MinWidth = 100;
-            this.gridLevelIII.Name = "gridLevelIII";
-            this.gridLevelIII.Visible = true;
-            this.gridLevelIII.Width = 100;
-            // 
-            // gridLevelDateIII
-            // 
-            this.gridLevelDateIII.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.gridLevelDateIII.AppearanceHeader.Options.UseFont = true;
-            this.gridLevelDateIII.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridLevelDateIII.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridLevelDateIII.Caption = "Ngày cấp";
-            this.gridLevelDateIII.FieldName = "NgayChuyenDoi";
-            this.gridLevelDateIII.Name = "gridLevelDateIII";
-            this.gridLevelDateIII.Visible = true;
-            this.gridLevelDateIII.Width = 100;
+            this.gridBand3.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridBand3.AppearanceHeader.Options.UseFont = true;
+            this.gridBand3.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand3.Caption = "Cấp độ hiện tại";
+            this.gridBand3.Columns.Add(this.gridCertifiedTrainer);
+            this.gridBand3.Columns.Add(this.gridTrainingDate);
+            this.gridBand3.Columns.Add(this.gridTestDateActual);
+            this.gridBand3.Name = "gridBand3";
+            this.gridBand3.VisibleIndex = 1;
+            this.gridBand3.Width = 333;
             // 
             // gridCertifiedTrainer
             // 
@@ -320,19 +308,6 @@
             this.gridTrainingDate.Visible = true;
             this.gridTrainingDate.Width = 113;
             // 
-            // gridTestDate
-            // 
-            this.gridTestDate.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.gridTestDate.AppearanceHeader.Options.UseFont = true;
-            this.gridTestDate.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridTestDate.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridTestDate.Caption = "Ngày thi";
-            this.gridTestDate.FieldName = "NgayThi";
-            this.gridTestDate.MinWidth = 100;
-            this.gridTestDate.Name = "gridTestDate";
-            this.gridTestDate.Visible = true;
-            this.gridTestDate.Width = 100;
-            // 
             // gridTestDateActual
             // 
             this.gridTestDateActual.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
@@ -345,6 +320,149 @@
             this.gridTestDateActual.Name = "gridTestDateActual";
             this.gridTestDateActual.Visible = true;
             this.gridTestDateActual.Width = 111;
+            // 
+            // gridBand1
+            // 
+            this.gridBand1.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridBand1.AppearanceHeader.Options.UseFont = true;
+            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand1.Caption = "Cấp độ I";
+            this.gridBand1.Columns.Add(this.gridCapDo);
+            this.gridBand1.Columns.Add(this.gridLevelDateI);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 2;
+            this.gridBand1.Width = 200;
+            // 
+            // gridCapDo
+            // 
+            this.gridCapDo.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridCapDo.AppearanceHeader.Options.UseFont = true;
+            this.gridCapDo.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridCapDo.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridCapDo.Caption = "Cấp độ";
+            this.gridCapDo.FieldName = "CapDo";
+            this.gridCapDo.MinWidth = 100;
+            this.gridCapDo.Name = "gridCapDo";
+            this.gridCapDo.Visible = true;
+            this.gridCapDo.Width = 100;
+            // 
+            // gridLevelDateI
+            // 
+            this.gridLevelDateI.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridLevelDateI.AppearanceHeader.Options.UseFont = true;
+            this.gridLevelDateI.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridLevelDateI.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridLevelDateI.Caption = "Ngày cấp";
+            this.gridLevelDateI.FieldName = "NgayCap";
+            this.gridLevelDateI.MinWidth = 100;
+            this.gridLevelDateI.Name = "gridLevelDateI";
+            this.gridLevelDateI.Visible = true;
+            this.gridLevelDateI.Width = 100;
+            // 
+            // gridBand5
+            // 
+            this.gridBand5.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridBand5.AppearanceHeader.Options.UseFont = true;
+            this.gridBand5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand5.Caption = "Cấp độ II";
+            this.gridBand5.Columns.Add(this.gridLevelII);
+            this.gridBand5.Columns.Add(this.gridLevelDateII);
+            this.gridBand5.Name = "gridBand5";
+            this.gridBand5.VisibleIndex = 3;
+            this.gridBand5.Width = 200;
+            // 
+            // gridLevelII
+            // 
+            this.gridLevelII.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridLevelII.AppearanceHeader.Options.UseFont = true;
+            this.gridLevelII.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridLevelII.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridLevelII.Caption = "Cấp độ";
+            this.gridLevelII.FieldName = "NangCap";
+            this.gridLevelII.MinWidth = 100;
+            this.gridLevelII.Name = "gridLevelII";
+            this.gridLevelII.Visible = true;
+            this.gridLevelII.Width = 100;
+            // 
+            // gridLevelDateII
+            // 
+            this.gridLevelDateII.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridLevelDateII.AppearanceHeader.Options.UseFont = true;
+            this.gridLevelDateII.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridLevelDateII.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridLevelDateII.Caption = "Ngày cấp";
+            this.gridLevelDateII.FieldName = "NgayNangCap";
+            this.gridLevelDateII.MinWidth = 100;
+            this.gridLevelDateII.Name = "gridLevelDateII";
+            this.gridLevelDateII.Visible = true;
+            this.gridLevelDateII.Width = 100;
+            // 
+            // gridBand4
+            // 
+            this.gridBand4.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridBand4.AppearanceHeader.Options.UseFont = true;
+            this.gridBand4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand4.Caption = "Cấp độ III";
+            this.gridBand4.Columns.Add(this.gridLevelIII);
+            this.gridBand4.Columns.Add(this.gridLevelDateIII);
+            this.gridBand4.Name = "gridBand4";
+            this.gridBand4.VisibleIndex = 4;
+            this.gridBand4.Width = 200;
+            // 
+            // gridLevelIII
+            // 
+            this.gridLevelIII.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridLevelIII.AppearanceHeader.Options.UseFont = true;
+            this.gridLevelIII.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridLevelIII.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridLevelIII.Caption = "Cấp độ";
+            this.gridLevelIII.FieldName = "LoaiChuyenDoi";
+            this.gridLevelIII.MinWidth = 100;
+            this.gridLevelIII.Name = "gridLevelIII";
+            this.gridLevelIII.Visible = true;
+            this.gridLevelIII.Width = 100;
+            // 
+            // gridLevelDateIII
+            // 
+            this.gridLevelDateIII.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridLevelDateIII.AppearanceHeader.Options.UseFont = true;
+            this.gridLevelDateIII.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridLevelDateIII.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridLevelDateIII.Caption = "Ngày cấp";
+            this.gridLevelDateIII.FieldName = "NgayChuyenDoi";
+            this.gridLevelDateIII.Name = "gridLevelDateIII";
+            this.gridLevelDateIII.Visible = true;
+            this.gridLevelDateIII.Width = 100;
+            // 
+            // gridBand6
+            // 
+            this.gridBand6.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridBand6.AppearanceHeader.Options.UseFont = true;
+            this.gridBand6.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand6.Caption = "Kết quả";
+            this.gridBand6.Columns.Add(this.gridTestDate);
+            this.gridBand6.Columns.Add(this.gridTestResult);
+            this.gridBand6.Columns.Add(this.gridNumberTest);
+            this.gridBand6.Name = "gridBand6";
+            this.gridBand6.VisibleIndex = 5;
+            this.gridBand6.Width = 300;
+            // 
+            // gridTestDate
+            // 
+            this.gridTestDate.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridTestDate.AppearanceHeader.Options.UseFont = true;
+            this.gridTestDate.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridTestDate.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridTestDate.Caption = "Ngày thi";
+            this.gridTestDate.FieldName = "NgayThi";
+            this.gridTestDate.MinWidth = 100;
+            this.gridTestDate.Name = "gridTestDate";
+            this.gridTestDate.Visible = true;
+            this.gridTestDate.Width = 100;
             // 
             // gridTestResult
             // 
@@ -372,126 +490,9 @@
             this.gridNumberTest.Visible = true;
             this.gridNumberTest.Width = 100;
             // 
-            // gridBand6
+            // splashScreenManager1
             // 
-            this.gridBand6.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridBand6.AppearanceHeader.Options.UseFont = true;
-            this.gridBand6.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand6.Caption = "Kết quả";
-            this.gridBand6.Columns.Add(this.gridTestDate);
-            this.gridBand6.Columns.Add(this.gridTestResult);
-            this.gridBand6.Columns.Add(this.gridNumberTest);
-            this.gridBand6.Name = "gridBand6";
-            this.gridBand6.VisibleIndex = 5;
-            this.gridBand6.Width = 300;
-            // 
-            // gridBand4
-            // 
-            this.gridBand4.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridBand4.AppearanceHeader.Options.UseFont = true;
-            this.gridBand4.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand4.Caption = "Cấp độ III";
-            this.gridBand4.Columns.Add(this.gridLevelIII);
-            this.gridBand4.Columns.Add(this.gridLevelDateIII);
-            this.gridBand4.Name = "gridBand4";
-            this.gridBand4.VisibleIndex = 4;
-            this.gridBand4.Width = 200;
-            // 
-            // gridBand5
-            // 
-            this.gridBand5.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridBand5.AppearanceHeader.Options.UseFont = true;
-            this.gridBand5.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand5.Caption = "Cấp độ II";
-            this.gridBand5.Columns.Add(this.gridLevelII);
-            this.gridBand5.Columns.Add(this.gridLevelDateII);
-            this.gridBand5.Name = "gridBand5";
-            this.gridBand5.VisibleIndex = 3;
-            this.gridBand5.Width = 200;
-            // 
-            // gridBand1
-            // 
-            this.gridBand1.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridBand1.AppearanceHeader.Options.UseFont = true;
-            this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand1.Caption = "Cấp độ I";
-            this.gridBand1.Columns.Add(this.gridCapDo);
-            this.gridBand1.Columns.Add(this.gridLevelDateI);
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.VisibleIndex = 2;
-            this.gridBand1.Width = 200;
-            // 
-            // gridBand3
-            // 
-            this.gridBand3.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridBand3.AppearanceHeader.Options.UseFont = true;
-            this.gridBand3.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand3.Caption = "Cấp độ hiện tại";
-            this.gridBand3.Columns.Add(this.gridCertifiedTrainer);
-            this.gridBand3.Columns.Add(this.gridTrainingDate);
-            this.gridBand3.Columns.Add(this.gridTestDateActual);
-            this.gridBand3.Name = "gridBand3";
-            this.gridBand3.VisibleIndex = 1;
-            this.gridBand3.Width = 333;
-            // 
-            // gridBand2
-            // 
-            this.gridBand2.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridBand2.AppearanceHeader.Options.UseFont = true;
-            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand2.Caption = "Thông tin";
-            this.gridBand2.Columns.Add(this.gridStaffCode);
-            this.gridBand2.Columns.Add(this.gridFullName);
-            this.gridBand2.Columns.Add(this.gridDeptCode);
-            this.gridBand2.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-            this.gridBand2.Name = "gridBand2";
-            this.gridBand2.VisibleIndex = 0;
-            this.gridBand2.Width = 310;
-            // 
-            // bandedGridView1
-            // 
-            this.bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBand2,
-            this.gridBand3,
-            this.gridBand1,
-            this.gridBand5,
-            this.gridBand4,
-            this.gridBand6});
-            this.bandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
-            this.gridStaffCode,
-            this.gridFullName,
-            this.gridDeptCode,
-            this.gridCapDo,
-            this.gridLevelDateI,
-            this.gridLevelII,
-            this.gridLevelDateII,
-            this.gridLevelIII,
-            this.gridLevelDateIII,
-            this.gridCertifiedTrainer,
-            this.gridTrainingDate,
-            this.gridTestDate,
-            this.gridTestDateActual,
-            this.gridTestResult,
-            this.gridNumberTest});
-            this.bandedGridView1.GridControl = this.gridControl1;
-            this.bandedGridView1.Name = "bandedGridView1";
-            this.bandedGridView1.OptionsBehavior.AllowIncrementalSearch = true;
-            this.bandedGridView1.OptionsDetail.EnableDetailToolTip = true;
-            this.bandedGridView1.OptionsFind.AlwaysVisible = true;
-            this.bandedGridView1.OptionsFind.FindDelay = 10000;
-            this.bandedGridView1.OptionsFind.FindNullPrompt = "Nhập từ khóa cần tìm kiếm...";
-            this.bandedGridView1.OptionsFind.SearchInPreview = true;
-            this.bandedGridView1.OptionsSelection.InvertSelection = true;
-            this.bandedGridView1.OptionsView.ColumnAutoWidth = false;
-            this.bandedGridView1.OptionsView.ShowAutoFilterRow = true;
-            this.bandedGridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridStaffCode, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.splashScreenManager1.ClosingDelay = 500;
             // 
             // UserControlReportsEye
             // 

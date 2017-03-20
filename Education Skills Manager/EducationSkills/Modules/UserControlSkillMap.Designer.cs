@@ -122,6 +122,7 @@
             this.txtDept.Properties.View = this.gridLookUpEdit1View;
             this.txtDept.Size = new System.Drawing.Size(271, 28);
             this.txtDept.TabIndex = 1;
+            this.txtDept.EditValueChanged += new System.EventHandler(this.txtDept_EditValueChanged);
             // 
             // gridLookUpEdit1View
             // 
