@@ -51,8 +51,6 @@ namespace EducationSkills.Modules
             {
                 bandedGridView1.ExportToXlsx(saveFileDialog1.FileName);
             }
-            //ExportToExcel(bandedGridView1);
-
         }
 
         private void ExportToExcel(GridView view)
@@ -192,7 +190,7 @@ namespace EducationSkills.Modules
         /// </summary>
         private void GetCertificates()
         {
-            var certificates = context.EDU_Certificates.ToList();
+            var certificates = context.EDU_Certificates.OrderBy(c => c.DisplayMember).ToList();
             repositoryItemGridLookUpEdit1.DisplayMember = "DisplayMember";
             repositoryItemGridLookUpEdit1.ValueMember = "DisplayMember";
             repositoryItemGridLookUpEdit1.DataSource = certificates;

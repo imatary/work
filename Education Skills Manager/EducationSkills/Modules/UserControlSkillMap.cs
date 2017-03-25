@@ -177,10 +177,10 @@ namespace EducationSkills.Modules
         {
             var saveFileDialog1 = new SaveFileDialog
             {
-                Filter = @"Exel|*.xls",
+                Filter = @"Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*",
                 Title = @"Save exel file",
                 OverwritePrompt = true,
-                FileName = DateTime.Now.ToString("dd-MM-yyyy")
+                FileName = $"reports-skill-map-{DateTime.Now.ToString("dd-MM-yyyy")}"
             };
             saveFileDialog1.ShowDialog();
             if (saveFileDialog1.FileName != "")

@@ -161,7 +161,7 @@ namespace EducationSkills
         private void GetCertificates()
         {
             context = new EducationSkillsDbContext();
-            var certificates = context.EDU_Certificates.ToList();
+            var certificates = context.EDU_Certificates.OrderBy(c => c.DisplayMember).ToList();
             txtCertificate.Properties.DisplayMember = "DisplayMember";
             txtCertificate.Properties.ValueMember = "ValueMember";
             txtCertificate.Properties.DataSource = certificates;

@@ -38,13 +38,14 @@ namespace EducationSkills.Modules
             btnFind.Focus();
             btnExportToExel.Enabled = false;
             LoadReportsSolder(null);
+            GetCertificates();
         }
 
         private void btnExportToExel_Click(object sender, EventArgs e)
         {
             var saveFileDialog1 = new SaveFileDialog
             {
-                Filter = @"Exel|*.xls",
+                Filter = @"Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*",
                 Title = @"Save exel file",
                 OverwritePrompt = true,
                 FileName = $"bao-cao-kiem-tra-han-{DateTime.Now.ToString("dd-MM-yyyy")}",
@@ -112,7 +113,7 @@ namespace EducationSkills.Modules
         /// </summary>
         private void GetCertificates()
         {
-            var certificates = context.EDU_Certificates.ToList();
+            var certificates = context.EDU_Certificates.OrderBy(c => c.DisplayMember).ToList();
             repositoryItemGridLookUpEdit1.DisplayMember = "DisplayMember";
             repositoryItemGridLookUpEdit1.ValueMember = "DisplayMember";
             repositoryItemGridLookUpEdit1.DataSource = certificates;
