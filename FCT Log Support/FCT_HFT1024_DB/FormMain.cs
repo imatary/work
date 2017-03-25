@@ -354,10 +354,10 @@ namespace FCT_HFT1024_DB
                         _status = "P";
                         boardState = "OK";
                         pass = pass + 1;
-                        //if (checkEditSerialPort.Checked == true)
-                        //{
-                        //    com.WriteData("O");
-                        //}
+                        if (checkEditSerialPort.Checked == true)
+                        {
+                            com.WriteData("O");
+                        }
                     }
                     else if (strStatus == "FAIL")
                     {
@@ -367,31 +367,28 @@ namespace FCT_HFT1024_DB
                     }
                     string stationNo = gridLookUpEditProcessID.EditValue.ToString();
                     Ultils.CreateFileLog(modelId, productionId, _status, stationNo, dateCheck);
-
-                    Thread.Sleep(600);
-
                     // Kiểm tra lại bản mạch đã OK trên WIP chưa?
                     // Nếu OK => Đóng dấu
                     // Nếu FAIL => Bỏ qua không đóng dấu, thông báo lỗi
                     //trạng thái bản mạch hiện tại
-                    var curentStationNo = _workOrderItemService.Get_WORK_ORDER_ITEMS_By_BoardNo(productionId);
-                    if (curentStationNo.BOARD_STATE == 1)
-                    {
-                        if (checkEditSerialPort.Checked == true)
-                        {
-                            com.WriteData("O");
-                            lblMarking.Visible = true;
-                        }
-                    }
-                    else if (curentStationNo.BOARD_STATE == 2)
-                    {
-                        messageError = $"Board '{productionId}' NG Wip. Vui lòng kiểm tra lại!";
-                        MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
-                        CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                        var errorForm = new FormError(messageError);
-                        errorForm.ShowDialog();
-                        txtBarcode.Focus();
-                    }
+                    //var checkAgain = _workOrderItemService.Get_WORK_ORDER_ITEMS_By_BoardNo(productionId);
+                    //if (checkAgain.BOARD_STATE == 1)
+                    //{
+                    //    if (checkEditSerialPort.Checked == true)
+                    //    {
+                    //        com.WriteData("O");
+                    //        lblMarking.Visible = true;
+                    //    }
+                    //}
+                    //else if (checkAgain.BOARD_STATE == 2)
+                    //{
+                    //    messageError = $"Board '{productionId}' NG Wip. Vui lòng kiểm tra lại!";
+                    //    MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
+                    //    CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
+                    //    var errorForm = new FormError(messageError);
+                    //    errorForm.ShowDialog();
+                    //    txtBarcode.Focus();
+                    //}
                     total = pass + ng;
                 }
                 m_bDirty = true;

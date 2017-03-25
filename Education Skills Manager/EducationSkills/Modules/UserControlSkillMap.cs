@@ -25,18 +25,18 @@ namespace EducationSkills.Modules
 
         private void btnFind_Click(object sender, EventArgs e)
         {
-            string selectDate=null, selectDept=null;
-            if (txtDate.Text != "")
+            string selectDate = null, selectDept = null;
+            if (FormDate.Text != "")
             {
-                selectDate = txtDate.DateTime.ToString();
+                selectDate = FormDate.DateTime.ToString();
             }
-            if(txtDept.Text != "")
+            if (txtDept.Text != "")
             {
                 selectDept = txtDept.EditValue.ToString();
             }
-            
+
             GetReportSkillsMap(selectDate, selectDept);
-            
+
         }
 
         /// <summary>
@@ -62,17 +62,20 @@ namespace EducationSkills.Modules
             {
                 parmDate.Value = DBNull.Value;
             }
-
-
+            //SqlParameter parmDateTo = new SqlParameter() { ParameterName = "@dateTo", Value = date, SqlDbType = SqlDbType.DateTime };
+            //if (date == null)
+            //{
+            //    parmDate.Value = DBNull.Value;
+            //}
             try
             {
                 var subjects = context.Database.SqlQuery<Subject>("EXEC [dbo].[sp_GetSubjectCodes]").ToList();
 
                 List<Staff> staffs = context.Database.SqlQuery<Staff>("EXEC [dbo].[sp_GetStaffs] @deptCode, @date", parmDept, parmDate).ToList();
 
-            var d = (from f in staffs
+                var data = (from f in staffs
                          group f by new { f.StaffCode, f.FullName, f.DeptCode }
-                into myGroup
+                    into myGroup
                          where myGroup.Count() > 0
                          select new
                          {
@@ -88,13 +91,12 @@ namespace EducationSkills.Modules
                                 })
                          }).ToList();
 
-                
+
                 //Creating array for adding dynamic columns
                 ArrayList objDataColumn = new ArrayList();
 
                 if (staffs.Count() > 0)
                 {
-                    //Three column are fix "rank","pupil","Total".
                     objDataColumn.Add("Code");
                     objDataColumn.Add("FullName");
                     objDataColumn.Add("Dept");
@@ -112,14 +114,14 @@ namespace EducationSkills.Modules
                 }
 
                 //Add data into datatable with respect to dynamic columns and dynamic data
-                for (int i = 0; i < d.Count; i++)
+                for (int i = 0; i < data.Count; i++)
                 {
                     List<string> tempList = new List<string>();
-                    tempList.Add(d[i].StaffCode.ToString());
-                    tempList.Add(d[i].FullName.ToString());
-                    tempList.Add(d[i].DeptCode.ToString());
+                    tempList.Add(data[i].StaffCode.ToString());
+                    tempList.Add(data[i].FullName.ToString());
+                    tempList.Add(data[i].DeptCode.ToString());
 
-                    var res = d[i].Subs.ToList();
+                    var res = data[i].Subs.ToList();
                     for (int j = 0; j < res.Count; j++)
                     {
                         tempList.Add(string.Format("{0:dd/MM/yyyy}", res[j].Date));
@@ -163,7 +165,7 @@ namespace EducationSkills.Modules
 
         private void btnRefesh_Click(object sender, EventArgs e)
         {
-            txtDate.Text = string.Empty;
+            FormDate.Text = string.Empty;
             txtDept.Text = string.Empty;
             gridControl1.DataSource = null;
             gridControl1.RefreshDataSource();
@@ -178,12 +180,12 @@ namespace EducationSkills.Modules
                 Filter = @"Exel|*.xls",
                 Title = @"Save exel file",
                 OverwritePrompt = true,
-                FileName=DateTime.Now.ToString("dd-MM-yyyy")
+                FileName = DateTime.Now.ToString("dd-MM-yyyy")
             };
             saveFileDialog1.ShowDialog();
             if (saveFileDialog1.FileName != "")
             {
-                gridControl1.ExportToXls(saveFileDialog1.FileName);
+               gridView1.ExportToXlsx(saveFileDialog1.FileName);
             }
         }
 

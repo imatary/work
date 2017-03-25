@@ -22,5 +22,38 @@ namespace EducationSkills.Models
         public DateTime? NgayThiThucTe { get; set; }
         public string KetQuaThiXacNhan { get; set; }
         public int? Solanthi { get; set; }
+        public string LevelCurrent
+        {
+            get
+            {
+                string level = "";
+                // Cả 3 cùng có thì lấy Level III
+                if (Ultils.IsNull(CNNguoiDaoTao) && Ultils.IsNull(NangCapDo) && Ultils.IsNull(CapDoHan))
+                {
+                    level = CNNguoiDaoTao;
+                }
+
+                // Level III = null thì lấy Level II
+                else if (!Ultils.IsNull(CNNguoiDaoTao) && Ultils.IsNull(NangCapDo) && Ultils.IsNull(CapDoHan))
+                {
+                    level = NangCapDo;
+                }
+
+                // Level III & II = null thì lấy Level I
+                else if (!Ultils.IsNull(CNNguoiDaoTao) && !Ultils.IsNull(NangCapDo) && Ultils.IsNull(CapDoHan))
+                {
+                    level = CapDoHan;
+                }
+
+                // Level III & I = null thì lấy Level II
+                else if (!Ultils.IsNull(CNNguoiDaoTao) && Ultils.IsNull(NangCapDo) && !Ultils.IsNull(CapDoHan))
+                {
+                    level = NangCapDo;
+                }
+
+                return level;
+            }
+        }
+        public DateTime? LevelDateCurrent { get; set; }
     }
 }

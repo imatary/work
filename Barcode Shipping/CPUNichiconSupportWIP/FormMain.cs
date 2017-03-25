@@ -64,10 +64,10 @@ namespace CPUNichiconSupportWIP
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            DialogResult open = openFileDialog1.ShowDialog();
+            DialogResult open = folderBrowserDialog1.ShowDialog();
             if (open == DialogResult.OK)
             {
-                txtPath.Text = openFileDialog1.FileName;
+                txtPath.Text = folderBrowserDialog1.SelectedPath;
                 if (string.IsNullOrEmpty(txtStationNO.Text))
                 {
                     txtStationNO.Focus();
@@ -111,13 +111,17 @@ namespace CPUNichiconSupportWIP
                     m_bIsWatching = false;
                     m_Watcher.EnableRaisingEvents = false;
                     m_Watcher.Dispose();
-
+                    txtStationNO.Enabled = true;
+                    panel4.Enabled = true;
                     btnStartWatch.BackColor = Color.Green;
                     btnStartWatch.Text = "Start Watching";
                 }
                 else
                 {
                     m_bIsWatching = true;
+                    txtStationNO.Enabled = false;
+                    panel4.Enabled = false;
+
                     btnStartWatch.BackColor = Color.Red;
                     btnStartWatch.Text = "Stop Watching";
 

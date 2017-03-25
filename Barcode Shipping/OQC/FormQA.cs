@@ -196,7 +196,6 @@ namespace OQC
         }
         private void txtBoxID_EditValueChanged(object sender, EventArgs e)
         {
-            
             if (!string.IsNullOrEmpty(txtBoxID.Text))
             {
                 Ultils.SetColorDefaultTextControl(txtBoxID);
@@ -283,7 +282,6 @@ namespace OQC
                                             _iqcService.UpdateResult(productionId, operationId, judge, operatorId);
                                         }
                                         Ultils.CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
-                                        //Ultils.CreateFileLogDirModelName(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
                                         logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                                         gridControlData.Refresh();
                                         gridControlData.DataSource = logs;
@@ -292,6 +290,15 @@ namespace OQC
                                         SetSuccessStatus("PASS", $"Thành công!\nPCB [{txtProductionID.Text}]");
                                         txtProductionID.ResetText();
                                         txtProductionID.Focus();
+
+                                        if (logs.Count == quantity)
+                                        {
+                                            SetSuccessStatus("OK", $"Box [{txtBoxID.Text}] đã đủ số lượng!");
+                                            Ultils.EditTextErrorNoMessage(txtBoxID);
+                                            txtBoxID.Enabled = true;
+                                            txtBoxID.Focus();
+                                            txtBoxID.ResetText();
+                                        }
                                     }
                                     catch (Exception ex)
                                     {
@@ -342,7 +349,6 @@ namespace OQC
                                 _iqcService.UpdateResult(productionId, operationId, judge, operatorId);
                             }
                             Ultils.CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
-                            //Ultils.CreateFileLogDirModelName(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
                             logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                             gridControlData.Refresh();
                             gridControlData.DataSource = logs;
@@ -356,7 +362,6 @@ namespace OQC
                         catch (Exception ex)
                         {
                             SetErrorStatus("NG", "Error Insert! \n" + ex.Message);
-                            //ResetControls();
                             txtProductionID.ResetText();
                             txtProductionID.Focus();
                         }
@@ -490,14 +495,12 @@ namespace OQC
                 }
             }
         }
-
         private void btnSearchPCB_Click(object sender, EventArgs e)
         {
             var search = new FormSearchPCB();
             search.ShowDialog();
             btnReset.PerformClick();
         }
-
         private void txtProductionID_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (e.Button.Index == 0)
@@ -514,7 +517,6 @@ namespace OQC
                 txtBoxID.ResetText();
             }
         }
-
         private void btnReset_Click(object sender, EventArgs e)
         {
             txtBoxID.Enabled = true;
@@ -537,7 +539,6 @@ namespace OQC
             Ultils.SetColorDefaultTextControl(txtBoxID);
             Ultils.SetColorDefaultTextControl(txtProductionID);
         }
-
         private void checkPASS_CheckedChanged(object sender, EventArgs e)
         {
             if (checkPASS.Checked == true)
@@ -560,7 +561,6 @@ namespace OQC
                 txtProductionID.Focus();
             }
         }
-
         private void checkNG_CheckedChanged(object sender, EventArgs e)
         {
             if (checkNG.Checked == true)
@@ -582,13 +582,5 @@ namespace OQC
                 txtProductionID.Focus();
             }  
         }
-
-        //private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
-        //{
-        //    if (e.Column.Caption == "#")
-        //    {
-        //        e.DisplayText = (e.ListSourceRowIndex + 1).ToString(CultureInfo.InvariantCulture);
-        //    }
-        //}
     }
 }

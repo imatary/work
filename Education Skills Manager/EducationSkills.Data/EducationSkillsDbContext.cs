@@ -16,6 +16,7 @@ namespace EducationSkills.Data
         public virtual DbSet<PR_Bomon> PR_Bomon { get; set; }
         public virtual DbSet<PR_Han> PR_Han { get; set; }
         public virtual DbSet<PR_Mat> PR_Mat { get; set; }
+        public virtual DbSet<EDU_Certificates> EDU_Certificates { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -54,6 +55,10 @@ namespace EducationSkills.Data
             modelBuilder.Entity<PR_Mat>()
                 .Property(e => e.KetQuaThi)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<EDU_Certificates>()
+                .Property(e => e.ValueMember);
+                
         }
     }
 }

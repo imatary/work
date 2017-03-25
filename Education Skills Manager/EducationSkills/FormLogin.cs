@@ -1,11 +1,12 @@
-﻿using EducationSkills.Data;
+﻿using DevExpress.XtraEditors;
+using EducationSkills.Data;
 using System;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace EducationSkills
 {
-    public partial class FormLogin : Form
+    public partial class FormLogin : XtraForm
     {
         private readonly EducationSkillsDbContext context; 
         public FormLogin()
@@ -44,6 +45,7 @@ namespace EducationSkills
                 }
                 else
                 {
+                    splashScreenManager1.CloseWaitForm();
                     MessageHelper.ErrorMessageBox("Tên đăng nhập hoặc mật khẩu không chính xác. Vui lòng kiểm tra lại!");
                     txtUsername.SelectAll();
                     txtUsername.Focus();

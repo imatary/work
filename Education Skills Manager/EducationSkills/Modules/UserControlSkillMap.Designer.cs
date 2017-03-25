@@ -30,13 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlSkillMap));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.btnExportToExel = new DevExpress.XtraEditors.SimpleButton();
             this.btnRefesh = new DevExpress.XtraEditors.SimpleButton();
             this.btnFind = new DevExpress.XtraEditors.SimpleButton();
             this.txtDept = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.txtDate = new DevExpress.XtraEditors.DateEdit();
+            this.ToDate = new DevExpress.XtraEditors.DateEdit();
+            this.FormDate = new DevExpress.XtraEditors.DateEdit();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.entityServerModeSource1 = new DevExpress.Data.Linq.EntityServerModeSource();
@@ -45,8 +47,10 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDept.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ToDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ToDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FormDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FormDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entityServerModeSource1)).BeginInit();
@@ -54,11 +58,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelControl1);
             this.groupBox1.Controls.Add(this.btnExportToExel);
             this.groupBox1.Controls.Add(this.btnRefesh);
             this.groupBox1.Controls.Add(this.btnFind);
             this.groupBox1.Controls.Add(this.txtDept);
-            this.groupBox1.Controls.Add(this.txtDate);
+            this.groupBox1.Controls.Add(this.ToDate);
+            this.groupBox1.Controls.Add(this.FormDate);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
@@ -67,6 +73,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search options";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Location = new System.Drawing.Point(344, 25);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(14, 19);
+            this.labelControl1.TabIndex = 5;
+            this.labelControl1.Text = "to";
+            this.labelControl1.Visible = false;
             // 
             // btnExportToExel
             // 
@@ -90,7 +107,7 @@
             this.btnRefesh.Name = "btnRefesh";
             this.btnRefesh.Size = new System.Drawing.Size(79, 27);
             this.btnRefesh.TabIndex = 3;
-            this.btnRefesh.Text = "Refesh";
+            this.btnRefesh.Text = "Tải lại";
             this.btnRefesh.Click += new System.EventHandler(this.btnRefesh_Click);
             // 
             // btnFind
@@ -102,7 +119,7 @@
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(70, 28);
             this.btnFind.TabIndex = 2;
-            this.btnFind.Text = "Find";
+            this.btnFind.Text = "Tìm";
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // txtDept
@@ -120,7 +137,7 @@
             this.txtDept.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtDept.Properties.ValueMember = "DeptCode";
             this.txtDept.Properties.View = this.gridLookUpEdit1View;
-            this.txtDept.Size = new System.Drawing.Size(271, 28);
+            this.txtDept.Size = new System.Drawing.Size(338, 28);
             this.txtDept.TabIndex = 1;
             this.txtDept.EditValueChanged += new System.EventHandler(this.txtDept_EditValueChanged);
             // 
@@ -139,28 +156,47 @@
             this.gridColumn1.AppearanceHeader.Options.UseFont = true;
             this.gridColumn1.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn1.Caption = "gridDeptCode";
+            this.gridColumn1.Caption = "Dept";
             this.gridColumn1.FieldName = "DeptCode";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
             // 
-            // txtDate
+            // ToDate
             // 
-            this.txtDate.EditValue = null;
-            this.txtDate.Location = new System.Drawing.Point(182, 21);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDate.Properties.Appearance.Options.UseFont = true;
-            this.txtDate.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.ToDate.EditValue = null;
+            this.ToDate.Location = new System.Drawing.Point(364, 21);
+            this.ToDate.Name = "ToDate";
+            this.ToDate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ToDate.Properties.Appearance.Options.UseFont = true;
+            this.ToDate.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.ToDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.ToDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.NullValuePrompt = "Select Date";
-            this.txtDate.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtDate.Size = new System.Drawing.Size(271, 28);
-            this.txtDate.TabIndex = 0;
+            this.ToDate.Properties.NullValuePrompt = "Select Date";
+            this.ToDate.Properties.NullValuePromptShowForEmptyValue = true;
+            this.ToDate.Size = new System.Drawing.Size(156, 28);
+            this.ToDate.TabIndex = 0;
+            this.ToDate.Visible = false;
+            // 
+            // FormDate
+            // 
+            this.FormDate.EditValue = null;
+            this.FormDate.Location = new System.Drawing.Point(182, 21);
+            this.FormDate.Name = "FormDate";
+            this.FormDate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormDate.Properties.Appearance.Options.UseFont = true;
+            this.FormDate.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.FormDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.FormDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.FormDate.Properties.NullValuePrompt = "Select Date";
+            this.FormDate.Properties.NullValuePromptShowForEmptyValue = true;
+            this.FormDate.Size = new System.Drawing.Size(156, 28);
+            this.FormDate.TabIndex = 0;
+            this.FormDate.Visible = false;
             // 
             // gridControl1
             // 
@@ -181,9 +217,12 @@
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.AllowIncrementalSearch = true;
-            this.gridView1.OptionsFind.AlwaysVisible = true;
             this.gridView1.OptionsFind.FindDelay = 100000;
+            this.gridView1.OptionsFind.FindMode = DevExpress.XtraEditors.FindMode.Always;
+            this.gridView1.OptionsFind.FindNullPrompt = "Nhập tên người cần tìm...";
             this.gridView1.OptionsFind.SearchInPreview = true;
+            this.gridView1.OptionsFind.ShowClearButton = false;
+            this.gridView1.OptionsFind.ShowFindButton = false;
             this.gridView1.OptionsImageLoad.AsyncLoad = true;
             this.gridView1.OptionsLayout.Columns.AddNewColumns = false;
             this.gridView1.OptionsView.ColumnAutoWidth = false;
@@ -213,10 +252,13 @@
             this.Size = new System.Drawing.Size(850, 618);
             this.Load += new System.EventHandler(this.UserControlSkillMap_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDept.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ToDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ToDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FormDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FormDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.entityServerModeSource1)).EndInit();
@@ -227,7 +269,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private DevExpress.XtraEditors.DateEdit txtDate;
+        private DevExpress.XtraEditors.DateEdit FormDate;
         private DevExpress.XtraEditors.GridLookUpEdit txtDept;
         private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
         private DevExpress.XtraEditors.SimpleButton btnFind;
@@ -239,5 +281,7 @@
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
         private DevExpress.XtraEditors.SimpleButton btnRefesh;
         private DevExpress.XtraEditors.SimpleButton btnExportToExel;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.DateEdit ToDate;
     }
 }
