@@ -89,7 +89,7 @@ namespace EducationSkills
 
         private void barButtonItemCheckSolder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            AddTabPage(new UserControlReportsSolder(), "Báo cáo kiểm tra Hàn", ActionType.Default, null);
+            AddTabPage(new UserControlReportsSolder(), "Báo cáo Hàn", ActionType.Default, null);
         }
         private void barButtonItemReportsEye_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

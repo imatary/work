@@ -128,7 +128,7 @@
             // 
             // barButtonItemCheckSolder
             // 
-            this.barButtonItemCheckSolder.Caption = "Báo cáo kiểm tra Hàn";
+            this.barButtonItemCheckSolder.Caption = "Báo cáo Hàn";
             this.barButtonItemCheckSolder.Id = 10;
             this.barButtonItemCheckSolder.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemCheckSolder.ImageOptions.Image")));
             this.barButtonItemCheckSolder.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemCheckSolder.ImageOptions.LargeImage")));

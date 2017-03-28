@@ -56,7 +56,6 @@ namespace HondaLookSupports
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -135,7 +134,7 @@ namespace HondaLookSupports
             this.labelControl1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.labelControl1.Size = new System.Drawing.Size(307, 61);
             this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "HondaLook Supports MES";
+            this.labelControl1.Text = "Supports MES";
             // 
             // panel1
             // 
@@ -249,7 +248,6 @@ namespace HondaLookSupports
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
             this.gridColumn2,
-            this.gridColumn3,
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn6});
@@ -283,19 +281,6 @@ namespace HondaLookSupports
             this.gridColumn2.VisibleIndex = 1;
             this.gridColumn2.Width = 80;
             // 
-            // gridColumn3
-            // 
-            this.gridColumn3.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn3.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn3.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn3.Caption = "STATION NO";
-            this.gridColumn3.FieldName = "STATION_NO";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
-            this.gridColumn3.Width = 70;
-            // 
             // gridColumn4
             // 
             this.gridColumn4.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -306,7 +291,7 @@ namespace HondaLookSupports
             this.gridColumn4.FieldName = "DATE_CHECK";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.VisibleIndex = 2;
             this.gridColumn4.Width = 50;
             // 
             // gridColumn5
@@ -319,7 +304,7 @@ namespace HondaLookSupports
             this.gridColumn5.FieldName = "TIME_CHECK";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 3;
             this.gridColumn5.Width = 50;
             // 
             // gridColumn6
@@ -332,7 +317,7 @@ namespace HondaLookSupports
             this.gridColumn6.FieldName = "STATE";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gridColumn6.VisibleIndex = 4;
             this.gridColumn6.Width = 55;
             // 
             // tableLayoutPanel1
@@ -655,7 +640,7 @@ namespace HondaLookSupports
             this.MinimumSize = new System.Drawing.Size(499, 361);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "HondaLook Supports MES";
+            this.Text = "Supports MES";
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
@@ -706,7 +691,6 @@ namespace HondaLookSupports
         private DevExpress.XtraEditors.CheckEdit checkStartWatching;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;

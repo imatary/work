@@ -26,7 +26,7 @@ namespace EducationSkills
         {
             return Context.PR_Han.SingleOrDefault(e => e.StaffCode == staffCode);
         }
-        public static void UpdateSolder(string staffCode, string levelI, string dateLevelI, string levelII, string dateLevelII, string levelIII, string dateLevelIII, string dateConfirm)
+        public static void UpdateSolder(string staffCode, string levelI, string dateLevelI, string levelII, string dateLevelII, string levelIII, string dateLevelIII, string dateConfirm, string dateTestActual)
         {
             var solder = GetSolderByID(staffCode);
             if (solder != null)
@@ -50,6 +50,10 @@ namespace EducationSkills
                 if (Ultils.IsNull(dateConfirm))
                 {
                     solder.NgayThiXacNhan = DateTime.Parse(dateConfirm);
+                }
+                if (Ultils.IsNull(dateTestActual))
+                {
+                    solder.NgayThiThucTe = DateTime.Parse(dateTestActual);
                 }
                 try
                 {
@@ -104,7 +108,7 @@ namespace EducationSkills
         /// <param name="levelIII"></param>
         /// <param name="dateLevelIII"></param>
         /// <param name="dateConfirm"></param>
-        public static void UpdateEye(string staffCode, string levelI, string dateLevelI, string levelII, string dateLevelII, string levelIII, string dateLevelIII, string dateConfirm)
+        public static void UpdateEye(string staffCode, string levelI, string dateLevelI, string levelII, string dateLevelII, string levelIII, string dateLevelIII, string dateConfirm, string dateTestActual)
         {
             var eye = GetEyeByID(staffCode);
             if (eye != null)
@@ -125,13 +129,14 @@ namespace EducationSkills
                 if (Ultils.IsNull(dateLevelIII))
                 {
                     eye.NgayCNNguoiDaoTao = DateTime.Parse(dateLevelIII);
-                }else
-                {
-
                 }
                 if(Ultils.IsNull(dateConfirm))
                 {
                     eye.NgayThi = DateTime.Parse(dateConfirm);
+                }
+                if (Ultils.IsNull(dateTestActual))
+                {
+                    eye.NgayThiThucTe = DateTime.Parse(dateTestActual);
                 }
                 try
                 {

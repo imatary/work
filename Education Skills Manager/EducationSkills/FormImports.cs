@@ -1,14 +1,9 @@
-﻿using CsvHelper;
-using EducationSkills.Data;
-using EducationSkills.Models;
+﻿using EducationSkills.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EducationSkills
@@ -48,22 +43,22 @@ namespace EducationSkills
                     // Mắt = no check
                     if (checkEditSolder.CheckState == CheckState.Checked && checkEditEye.CheckState == CheckState.Unchecked)
                     {
-                        InsertSolder(item, txtCertificate.SelectedText, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
+                        InsertSolder(item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
                     }
                     // Hàn = no check
                     // Mắt = check
                     else if (checkEditSolder.CheckState == CheckState.Unchecked && checkEditEye.CheckState == CheckState.Checked)
                     {
-                        InsertEye(item, txtCertificate.SelectedText, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
+                        InsertEye(item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
                     }
                     // Cả hai cùng Check
                     else if (checkEditSolder.CheckState == CheckState.Checked && checkEditEye.CheckState == CheckState.Checked)
                     {
                         // Hàn
-                        InsertSolder(item, txtCertificate.SelectedText, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
+                        InsertSolder(item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
 
                         // Mắt
-                        InsertEye(item, txtCertificate.SelectedText, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
+                        InsertEye(item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
 
                     }
                 }

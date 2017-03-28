@@ -48,7 +48,7 @@ namespace EducationSkills.Modules
                 Filter = @"Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*",
                 Title = @"Save exel file",
                 OverwritePrompt = true,
-                FileName = $"bao-cao-kiem-tra-han-{DateTime.Now.ToString("dd-MM-yyyy")}",
+                FileName = $"bao-cao-han-{DateTime.Now.ToString("dd-MM-yyyy")}",
             };
             saveFileDialog1.ShowDialog();
             if (saveFileDialog1.FileName != "")
@@ -158,6 +158,14 @@ namespace EducationSkills.Modules
                 view.SetRowCellValue(e.RowHandle, view.Columns[8], str);
             }
 
+            if (e.Column == gridTestDateActual)
+            {
+                string cellValue = e.Value.ToString();
+                DateTime changeValue = DateTime.Parse(cellValue).AddDays(365);
+                string str = changeValue.ToString();
+                view.SetRowCellValue(e.RowHandle, view.Columns[8], str);
+            }
+
             if (e.Column == gridCapDo)
             {
                 string cellValue = e.Value.ToString();
@@ -179,7 +187,7 @@ namespace EducationSkills.Modules
         private void btnSaveChanged_Click(object sender, EventArgs e)
         {
             string staffCode = "", levelI = "", levelII = "", levelIII = "";
-            string dateLevelI = "", dateLevelII = "", dateLevelIII = "", dateConfirm = "";
+            string dateLevelI = "", dateLevelII = "", dateLevelIII = "", dateConfirm = "", dateTestActual = "";
             for (int i = 0; i < bandedGridView1.DataRowCount; i++)
             {
                 if (bandedGridView1.GetRowCellValue(i, "StaffCode") != null)
@@ -215,10 +223,13 @@ namespace EducationSkills.Modules
                 {
                     dateConfirm = bandedGridView1.GetRowCellValue(i, "NgayThiXacNhan").ToString();
                 }
-
+                if (bandedGridView1.GetRowCellValue(i, "NgayThiThucTe") != null)
+                {
+                    dateTestActual = bandedGridView1.GetRowCellValue(i, "NgayThiThucTe").ToString();
+                }
                 try
                 {
-                    EducationSkillDataProviders.UpdateSolder(staffCode, levelI, dateLevelI, levelII, dateLevelII, levelIII, dateLevelIII, dateConfirm);
+                    EducationSkillDataProviders.UpdateSolder(staffCode, levelI, dateLevelI, levelII, dateLevelII, levelIII, dateLevelIII, dateConfirm, dateTestActual);
                     MessageHelper.SuccessMessageBox("Cập nhật thành công!");
                 }
                 catch (Exception ex)

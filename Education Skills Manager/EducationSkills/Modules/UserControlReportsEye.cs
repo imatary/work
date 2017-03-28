@@ -246,8 +246,15 @@ namespace EducationSkills.Modules
                     view.SetRowCellValue(e.RowHandle, view.Columns[10], str);
                 }
             }
+            if (e.Column == gridTestDateActual)
+            {
+                string cellValue = e.Value.ToString();
+                DateTime changeValue = DateTime.Parse(cellValue).AddDays(365);
+                string str = changeValue.ToString();
+                view.SetRowCellValue(e.RowHandle, view.Columns[10], str);
+            }
 
-            if(e.Column == gridLevelI)
+            if (e.Column == gridLevelI)
             {
                 string cellValue = e.Value.ToString();
                 view.SetRowCellValue(e.RowHandle, view.Columns[9], cellValue);
@@ -280,7 +287,7 @@ namespace EducationSkills.Modules
         private void btnSaveChanged_Click(object sender, EventArgs e)
         {
             string staffCode="", levelI="", levelII="", levelIII="";
-            string dateLevelI = "", dateLevelII = "", dateLevelIII = "", dateConfirm = "";
+            string dateLevelI = "", dateLevelII = "", dateLevelIII = "", dateConfirm = "", dateTestActual = "";
             for (int i = 0; i < bandedGridView1.DataRowCount; i++)
             {
                 if(bandedGridView1.GetRowCellValue(i, "StaffCode") != null)
@@ -312,14 +319,17 @@ namespace EducationSkills.Modules
                 {
                     dateLevelIII = bandedGridView1.GetRowCellValue(i, "NgayCNNguoiDaoTao").ToString();
                 }
-                if(bandedGridView1.GetRowCellValue(i, "NgayThiThucTe") != null)
+                if(bandedGridView1.GetRowCellValue(i, "NgayThi") != null)
                 {
-                    dateConfirm = bandedGridView1.GetRowCellValue(i, "NgayThiThucTe").ToString();
+                    dateConfirm = bandedGridView1.GetRowCellValue(i, "NgayThi").ToString();
                 }
-                
+                if (bandedGridView1.GetRowCellValue(i, "NgayThiThucTe") != null)
+                {
+                    dateTestActual = bandedGridView1.GetRowCellValue(i, "NgayThiThucTe").ToString();
+                }
                 try
                 {
-                    EducationSkillDataProviders.UpdateEye(staffCode, levelI, dateLevelI, levelII, dateLevelII, levelIII, dateLevelIII, dateConfirm);
+                    EducationSkillDataProviders.UpdateEye(staffCode, levelI, dateLevelI, levelII, dateLevelII, levelIII, dateLevelIII, dateConfirm, dateTestActual);
                     MessageHelper.SuccessMessageBox("Cập nhật thành công!");
                 }
                 catch (Exception ex)

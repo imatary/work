@@ -178,10 +178,10 @@ namespace CPUNichiconSupportWIP
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private OleDbConnection GetConnection()
-        {
-            return null;
-        }
+        //private OleDbConnection GetConnection()
+        //{
+        //    return null;
+        //}
         int pass = 0, total = 0, ng = 0;
 
         private void txtPath_TextChanged(object sender, EventArgs e)
