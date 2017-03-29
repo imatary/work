@@ -345,7 +345,7 @@
             this.gridBand1.AppearanceHeader.Options.UseFont = true;
             this.gridBand1.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand1.Caption = "Cấp độ Hàn";
+            this.gridBand1.Caption = "Cấp độ I";
             this.gridBand1.Columns.Add(this.gridCapDo);
             this.gridBand1.Columns.Add(this.gridLevelDateI);
             this.gridBand1.Name = "gridBand1";
@@ -358,7 +358,7 @@
             this.gridBand5.AppearanceHeader.Options.UseFont = true;
             this.gridBand5.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand5.Caption = "Nâng cấp độ Hàn";
+            this.gridBand5.Caption = "Nâng cấp II";
             this.gridBand5.Columns.Add(this.gridLevelII);
             this.gridBand5.Columns.Add(this.gridLevelDateII);
             this.gridBand5.Name = "gridBand5";
@@ -371,7 +371,7 @@
             this.gridBand4.AppearanceHeader.Options.UseFont = true;
             this.gridBand4.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand4.Caption = "Người đào tạo";
+            this.gridBand4.Caption = "Cấp độ III";
             this.gridBand4.Columns.Add(this.gridLevelIII);
             this.gridBand4.Columns.Add(this.gridDateLevelIII);
             this.gridBand4.Name = "gridBand4";
@@ -578,11 +578,6 @@
         private DevExpress.XtraEditors.GridLookUpEdit txtDept;
         private System.Windows.Forms.GroupBox groupBox1;
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridLevelIII;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridDateLevelIII;
         private DevExpress.XtraEditors.SimpleButton btnSaveChanged;
@@ -593,5 +588,10 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit repositoryItemGridLookUpEdit2;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit2View;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
     }
 }

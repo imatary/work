@@ -128,7 +128,7 @@
             // 
             // barButtonItemCheckSolder
             // 
-            this.barButtonItemCheckSolder.Caption = "Báo cáo Hàn";
+            this.barButtonItemCheckSolder.Caption = "Kỹ năng Hàn";
             this.barButtonItemCheckSolder.Id = 10;
             this.barButtonItemCheckSolder.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemCheckSolder.ImageOptions.Image")));
             this.barButtonItemCheckSolder.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemCheckSolder.ImageOptions.LargeImage")));
@@ -137,7 +137,7 @@
             // 
             // barButtonItemReportsEye
             // 
-            this.barButtonItemReportsEye.Caption = "Báo cáo kiểm tra Mắt";
+            this.barButtonItemReportsEye.Caption = "Kỹ năng kiểm tra Mắt";
             this.barButtonItemReportsEye.Id = 11;
             this.barButtonItemReportsEye.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemReportsEye.ImageOptions.Image")));
             this.barButtonItemReportsEye.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemReportsEye.ImageOptions.LargeImage")));

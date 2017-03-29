@@ -1,6 +1,5 @@
 ﻿using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraTab;
-using DevExpress.XtraTab.ViewInfo;
 using EducationSkills.Modules;
 using System;
 using System.Drawing;
@@ -89,11 +88,11 @@ namespace EducationSkills
 
         private void barButtonItemCheckSolder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            AddTabPage(new UserControlReportsSolder(), "Báo cáo Hàn", ActionType.Default, null);
+            AddTabPage(new UserControlReportsSolder(), "Kỹ năng Hàn", ActionType.Default, null);
         }
         private void barButtonItemReportsEye_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            AddTabPage(new UserControlReportsEye(), "Báo cáo kiểm tra Mắt", ActionType.Default, null);
+            AddTabPage(new UserControlReportsEye(), "Kỹ năng kiểm tra Mắt", ActionType.Default, null);
         }
         private void barButtonItemOlympic_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

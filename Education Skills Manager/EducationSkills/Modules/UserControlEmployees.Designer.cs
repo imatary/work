@@ -253,6 +253,8 @@
             // 
             // gridEntryDate
             // 
+            this.gridEntryDate.AppearanceCell.Options.UseTextOptions = true;
+            this.gridEntryDate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.gridEntryDate.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridEntryDate.AppearanceHeader.Options.UseFont = true;
             this.gridEntryDate.AppearanceHeader.Options.UseTextOptions = true;
@@ -266,6 +268,8 @@
             // 
             // gridDeptCode
             // 
+            this.gridDeptCode.AppearanceCell.Options.UseTextOptions = true;
+            this.gridDeptCode.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridDeptCode.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridDeptCode.AppearanceHeader.Options.UseFont = true;
             this.gridDeptCode.AppearanceHeader.Options.UseTextOptions = true;
