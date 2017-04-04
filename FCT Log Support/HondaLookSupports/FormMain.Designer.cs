@@ -30,7 +30,6 @@ namespace HondaLookSupports
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -78,7 +77,7 @@ namespace HondaLookSupports
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblMessage = new DevExpress.XtraEditors.LabelControl();
             this.lblState = new DevExpress.XtraEditors.LabelControl();
-            this.tmrEditNotify = new System.Windows.Forms.Timer(this.components);
+            this.tmrEditNotify = new System.Windows.Forms.Timer();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();

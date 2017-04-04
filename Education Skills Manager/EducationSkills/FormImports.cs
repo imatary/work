@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -22,18 +21,25 @@ namespace EducationSkills
         private void btnSave_Click(object sender, EventArgs e)
         {
             context = new EducationSkillsDbContext();
-
-            if(checkEditEye.Checked==false && checkEditSolder.Checked == false)
+            if (!ValidationHelper.IsNullOrEmptyControl(cboLevel))
+            {
+                MessageHelper.ErrorMessageBox("Vui lòng chọn cấp độ!");
+            }
+            else if(checkEditEye.Checked==false && checkEditSolder.Checked == false)
             {
                 MessageHelper.ErrorMessageBox("Vui lòng nhập đầy đủ thông tin!");
             }
-            else if (string.IsNullOrEmpty(txtCertificate.Text))
+            else if (!ValidationHelper.IsNullOrEmptyControl(txtCertificate))
             {
                 MessageHelper.ErrorMessageBox("Vui lòng chọn một chứng chỉ!");
             }
-            else if (string.IsNullOrEmpty(dateEditTestDate.Text) || string.IsNullOrEmpty(dateEditDateConfirmed.Text))
+            else if (!ValidationHelper.IsNullOrEmptyControl(dateEditTestDate))
             {
-                MessageHelper.ErrorMessageBox("Vui lòng nhập đầy đủ thông tin!");
+                MessageHelper.ErrorMessageBox("Vui lòng nhập vào Ngày cấp!");
+            }
+            else if (!ValidationHelper.IsNullOrEmptyControl(dateEditDateConfirmed))
+            {
+                MessageHelper.ErrorMessageBox("Vui lòng nhập vào Ngày xác thực!");
             }
             else
             {
@@ -43,22 +49,22 @@ namespace EducationSkills
                     // Mắt = no check
                     if (checkEditSolder.CheckState == CheckState.Checked && checkEditEye.CheckState == CheckState.Unchecked)
                     {
-                        InsertSolder(item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
+                        EducationSkillDataProviders.InsertSolder(cboLevel.SelectedIndex, item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
                     }
                     // Hàn = no check
                     // Mắt = check
                     else if (checkEditSolder.CheckState == CheckState.Unchecked && checkEditEye.CheckState == CheckState.Checked)
                     {
-                        InsertEye(item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
+                        EducationSkillDataProviders.InsertEye(cboLevel.SelectedIndex, item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
                     }
                     // Cả hai cùng Check
                     else if (checkEditSolder.CheckState == CheckState.Checked && checkEditEye.CheckState == CheckState.Checked)
                     {
                         // Hàn
-                        InsertSolder(item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
+                        EducationSkillDataProviders.InsertSolder(cboLevel.SelectedIndex, item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
 
                         // Mắt
-                        InsertEye(item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
+                        EducationSkillDataProviders.InsertEye(cboLevel.SelectedIndex, item, txtCertificate.Text, (DateTime)dateEditTestDate.EditValue, (DateTime)dateEditDateConfirmed.EditValue, 1);
 
                     }
                 }
@@ -80,76 +86,7 @@ namespace EducationSkills
             GetCertificates();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="staffCode"></param>
-        /// <param name="level"></param>
-        /// <param name="testDate"></param>
-        /// <param name="dateConfirmed"></param>
-        /// <param name="solanthi"></param>
-        private void InsertEye(string staffCode, string level, DateTime testDate, DateTime dateConfirmed, int solanthi)
-        {
-            object[] param =
-            {
-                new SqlParameter() { ParameterName = "@StaffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar },
-                new SqlParameter() { ParameterName = "@CapDo", Value = level, SqlDbType = SqlDbType.VarChar },
-                new SqlParameter() { ParameterName = "@NgayCap", Value = testDate, SqlDbType = SqlDbType.DateTime },
-                new SqlParameter() { ParameterName = "@NgayThiXacNhan", Value = dateConfirmed, SqlDbType = SqlDbType.DateTime },
-                new SqlParameter() { ParameterName = "@Solanthi", Value = solanthi, SqlDbType = SqlDbType.Int },
-
-                new SqlParameter("@Out_Parameter", SqlDbType.Int)
-                {
-                    Direction = ParameterDirection.Output
-                }
-            };
-
-            try
-            {
-                context.Database.ExecuteSqlCommand("EXEC [dbo].[InSertKTMat] @StaffCode, @CapDo, @NgayCap, @NgayThiXacNhan, @Solanthi", param);
-            }
-            catch (Exception ex)
-            {
-                MessageHelper.ErrorMessageBox(ex.Message);
-                return;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="staffCode"></param>
-        /// <param name="level"></param>
-        /// <param name="testDate"></param>
-        /// <param name="dateConfirmed"></param>
-        /// <param name="solanthi"></param>
-        private void InsertSolder(string staffCode, string level, DateTime testDate, DateTime dateConfirmed, int solanthi)
-        {
-            object[] param =
-            {
-                new SqlParameter() { ParameterName = "@StaffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar },
-                new SqlParameter() { ParameterName = "@CapDoHan", Value = level, SqlDbType = SqlDbType.VarChar },
-                new SqlParameter() { ParameterName = "@NgayCap", Value = testDate, SqlDbType = SqlDbType.DateTime },
-                new SqlParameter() { ParameterName = "@NgayThiXacNhan", Value = dateConfirmed, SqlDbType = SqlDbType.DateTime },
-                new SqlParameter() { ParameterName = "@Solanthi", Value = solanthi, SqlDbType = SqlDbType.Int },
-
-                new SqlParameter("@Out_Parameter", SqlDbType.Int)
-                {
-                    Direction = ParameterDirection.Output
-                }
-            };
-
-            try
-            {
-                context.Database.ExecuteSqlCommand("EXEC [dbo].[InsertKTHan] @StaffCode, @CapDoHan, @NgayCap, @NgayThiXacNhan, @Solanthi", param);
-            }
-            catch (Exception ex)
-            {
-                MessageHelper.ErrorMessageBox(ex.Message);
-                return;
-            }
-        }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -176,6 +113,14 @@ namespace EducationSkills
             {
                 dateEditDateConfirmed.DateTime = dateEditTestDate.DateTime.AddDays(365);
             }
+        }
+
+        private void cboLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (Ultils.IsNull(cboLevel.EditValue.ToString()))
+            //{
+            //    MessageBox.Show(cboLevel.SelectedIndex.ToString());
+            //}
         }
     }
 }

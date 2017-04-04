@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlEmployees));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnExportToExel = new DevExpress.XtraEditors.SimpleButton();
             this.btnTranfers = new DevExpress.XtraEditors.SimpleButton();
             this.btnImports = new DevExpress.XtraEditors.SimpleButton();
             this.btnRefesh = new DevExpress.XtraEditors.SimpleButton();
@@ -56,6 +57,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnExportToExel);
             this.groupBox1.Controls.Add(this.btnTranfers);
             this.groupBox1.Controls.Add(this.btnImports);
             this.groupBox1.Controls.Add(this.btnRefesh);
@@ -69,6 +71,18 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search Options";
+            // 
+            // btnExportToExel
+            // 
+            this.btnExportToExel.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportToExel.Appearance.Options.UseFont = true;
+            this.btnExportToExel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.Image")));
+            this.btnExportToExel.Location = new System.Drawing.Point(676, 36);
+            this.btnExportToExel.Name = "btnExportToExel";
+            this.btnExportToExel.Size = new System.Drawing.Size(115, 26);
+            this.btnExportToExel.TabIndex = 10;
+            this.btnExportToExel.Text = "Export to Exel";
+            this.btnExportToExel.Click += new System.EventHandler(this.btnExportToExel_Click);
             // 
             // btnTranfers
             // 
@@ -100,9 +114,9 @@
             this.btnRefesh.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefesh.Appearance.Options.UseFont = true;
             this.btnRefesh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.Image")));
-            this.btnRefesh.Location = new System.Drawing.Point(649, 35);
+            this.btnRefesh.Location = new System.Drawing.Point(606, 35);
             this.btnRefesh.Name = "btnRefesh";
-            this.btnRefesh.Size = new System.Drawing.Size(79, 27);
+            this.btnRefesh.Size = new System.Drawing.Size(64, 27);
             this.btnRefesh.TabIndex = 7;
             this.btnRefesh.Text = "Tải lại";
             this.btnRefesh.Click += new System.EventHandler(this.btnRefesh_Click);
@@ -112,16 +126,16 @@
             this.btnFind.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFind.Appearance.Options.UseFont = true;
             this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
-            this.btnFind.Location = new System.Drawing.Point(573, 34);
+            this.btnFind.Location = new System.Drawing.Point(550, 34);
             this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(70, 28);
+            this.btnFind.Size = new System.Drawing.Size(50, 28);
             this.btnFind.TabIndex = 6;
             this.btnFind.Text = "Tìm";
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // txtDept
             // 
-            this.txtDept.Location = new System.Drawing.Point(348, 34);
+            this.txtDept.Location = new System.Drawing.Point(325, 34);
             this.txtDept.Name = "txtDept";
             this.txtDept.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDept.Properties.Appearance.Options.UseFont = true;
@@ -191,6 +205,8 @@
             this.gridView1.OptionsSelection.ResetSelectionClickOutsideCheckboxSelector = true;
             this.gridView1.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
+            this.gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridStaffCode, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gridView1.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView1_RowCellClick);
             // 
             // gridStaffCode
@@ -203,6 +219,7 @@
             this.gridStaffCode.FieldName = "StaffCode";
             this.gridStaffCode.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gridStaffCode.Name = "gridStaffCode";
+            this.gridStaffCode.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.gridStaffCode.Visible = true;
             this.gridStaffCode.VisibleIndex = 1;
             this.gridStaffCode.Width = 74;
@@ -337,5 +354,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridPosName;
         private DevExpress.XtraEditors.SimpleButton btnImports;
         private DevExpress.XtraEditors.SimpleButton btnTranfers;
+        private DevExpress.XtraEditors.SimpleButton btnExportToExel;
     }
 }

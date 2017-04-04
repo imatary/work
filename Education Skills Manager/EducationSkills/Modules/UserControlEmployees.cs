@@ -7,6 +7,7 @@ using EducationSkills.Data;
 using System.Data.SqlClient;
 using EducationSkills.Models;
 using EducationSkills.Subjects;
+using DevExpress.Utils.Menu;
 
 namespace EducationSkills.Modules
 {
@@ -34,6 +35,8 @@ namespace EducationSkills.Modules
             LoadEmployees(null);
             GetDepartments();
         }
+
+        
 
         /// <summary>
         /// 
@@ -216,6 +219,22 @@ namespace EducationSkills.Modules
             {
                 MessageHelper.ErrorMessageBox("Vui lòng chọn ít nhất một Nhân viên để Imports");
                 return;
+            }
+        }
+
+        private void btnExportToExel_Click(object sender, EventArgs e)
+        {
+            var saveFileDialog1 = new SaveFileDialog
+            {
+                Filter = @"Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*",
+                Title = @"Save exel file",
+                OverwritePrompt = true,
+                FileName = $"Export-Employees-{DateTime.Now.ToString("dd-MM-yyyy")}",
+            };
+            saveFileDialog1.ShowDialog();
+            if (saveFileDialog1.FileName != "")
+            {
+                gridView1.ExportToXlsx(saveFileDialog1.FileName);
             }
         }
     }

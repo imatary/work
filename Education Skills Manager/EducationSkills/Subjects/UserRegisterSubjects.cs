@@ -23,58 +23,75 @@ namespace EducationSkills.Subjects
             int record = 0;
             for (int i = 0; i < gridView1.DataRowCount; i++)
             {
+                string strDate = null;
+                if (gridView1.GetRowCellValue(i, "NgayThamGia") != null)
+                {
+                    strDate = gridView1.GetRowCellValue(i, "NgayThamGia").ToString();
+                }
+                string note = (string)gridView1.GetRowCellValue(i, "GhiChu");
+                string subjectId = (string)gridView1.GetRowCellValue(i, "MaBoMon");
+
+                // Mã bộ môn
+                SqlParameter mabomon = new SqlParameter() { ParameterName = "@MaBoMon", Value = subjectId, SqlDbType = SqlDbType.NChar };
+                if (subjectId == null)
+                {
+                    mabomon.Value = DBNull.Value;
+                }
+
+                // StaffCode
+                SqlParameter parmstaffCode = new SqlParameter() { ParameterName = "@StaffCode", Value = lblCode.Text, SqlDbType = SqlDbType.NChar };
+                if (lblCode.Text == null)
+                {
+                    parmstaffCode.Value = DBNull.Value;
+                }
+                // Ngày tham gia
+                SqlParameter parmNgayThamGia = new SqlParameter
+                {
+                    ParameterName = "@NgayThamGia",
+                    SqlDbType = SqlDbType.DateTime
+                };
                 if(gridView1.GetRowCellValue(i, "NgayThamGia") != null)
                 {
-                    DateTime date = (DateTime) gridView1.GetRowCellValue(i, "NgayThamGia");
-                    string note = (string) gridView1.GetRowCellValue(i, "GhiChu");
-                    string subjectId = (string)gridView1.GetRowCellValue(i, "MaBoMon");
+                    parmNgayThamGia.Value = DateTime.Parse(strDate);
+                    parmNgayThamGia.SqlDbType = SqlDbType.DateTime;
+                }
+                else
+                {
+                    parmNgayThamGia.Value = DBNull.Value;
+                }
 
-                    // Mã bộ môn
-                    SqlParameter mabomon = new SqlParameter() { ParameterName = "@MaBoMon", Value = subjectId, SqlDbType = SqlDbType.NChar };
-                    if (subjectId == null)
+                SqlParameter parmNote = new SqlParameter() { ParameterName = "@GhiChu", Value = note, SqlDbType = SqlDbType.NVarChar };
+                if (note == null)
+                {
+                    parmNote.Value = DBNull.Value;
+                }
+                try
+                {
+                    if(gridView1.GetRowCellValue(i, "NgayThamGia") != null)
                     {
-                        mabomon.Value = DBNull.Value;
-                    }
-
-                    // StaffCode
-                    SqlParameter parmstaffCode = new SqlParameter() { ParameterName = "@StaffCode", Value = lblCode.Text, SqlDbType = SqlDbType.NChar };
-                    if (lblCode.Text == null)
-                    {
-                        parmstaffCode.Value = DBNull.Value;
-                    }
-                    // Ngày tham gia
-                    SqlParameter parmNgayThamGia = new SqlParameter() { ParameterName = "@NgayThamGia", Value = date, SqlDbType = SqlDbType.DateTime };
-                    if (date == null)
-                    {
-                        parmNgayThamGia.Value = DBNull.Value;
-                    }
-
-                    SqlParameter parmNote = new SqlParameter() { ParameterName = "@GhiChu", Value = note, SqlDbType = SqlDbType.NVarChar };
-                    if (lblCode.Text == null)
-                    {
-                        parmNote.Value = DBNull.Value;
-                    }
-                    try
-                    {
-                        if(date > DateTime.Now)
+                        if (DateTime.Parse(strDate) > DateTime.Now)
                         {
                             MessageHelper.ErrorMessageBox("Ngày tham gia không được lớn hơn ngày hiện tại. Vui lòng kiểm tra lại!");
                             return;
                         }
-                        if(date < DateTime.Parse(lblEntryDate.Text))
+                        if (DateTime.Parse(strDate) < DateTime.Parse(lblEntryDate.Text))
                         {
                             MessageHelper.ErrorMessageBox("Ngày tham gia không được nhỏ hơn ngày vào làm. Vui lòng kiểm tra lại!");
                             return;
                         }
-
-                        context.Database.ExecuteSqlCommand("EXEC [dbo].[UpdateSkillMap] @StaffCode,@MaBoMon,@NgayThamGia,@GhiChu ", parmstaffCode, mabomon,  parmNgayThamGia, parmNote);
-                        record++;
                     }
-                    catch (Exception ex)
+                    
+                    using (var dbcontext = new EducationSkillsDbContext())
                     {
-                        MessageHelper.ErrorMessageBox(ex.Message);
+                        dbcontext.Database.ExecuteSqlCommand("EXEC [dbo].[UpdateSkillMap] @StaffCode,@MaBoMon,@NgayThamGia,@GhiChu", parmstaffCode, mabomon, parmNgayThamGia, parmNote);
                     }
+                    record++;
                 }
+                catch (Exception ex)
+                {
+                    MessageHelper.ErrorMessageBox(ex.Message);
+                }
+                //}
             }
 
             MessageHelper.SuccessMessageBox($"Lưu thành công {record}!");
@@ -90,44 +107,98 @@ namespace EducationSkills.Subjects
             splashScreenManager1.ShowWaitForm();
             context = new EducationSkillsDbContext();
 
-            SqlParameter parmstaffCode = new SqlParameter() { ParameterName = "@staffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar };
+            SqlParameter parmstaffCode = new SqlParameter() { ParameterName = "@staffCode", SqlDbType = SqlDbType.VarChar };
             if (staffCode == null)
             {
                 parmstaffCode.Value = DBNull.Value;
             }
-
+            else
+            {
+                parmstaffCode.Value = staffCode;
+            }
             try
             {
                 var employees = context.Database.SqlQuery<Employees>("EXEC [dbo].[sp_GetStaffByCode] @staffCode", parmstaffCode).SingleOrDefault();
-                lblCode.Text = employees.StaffCode;
-                lblFullName.Text = employees.FullName;
-                lblBirthDate.Text = string.Format("{0:dd-MM-yyyy}", employees.BirthDate);
-                lblSex.Text = employees.Sex;
-                lblDeptCode.Text = employees.DeptCode;
-                lblEntryDate.Text = string.Format("{0:dd-MM-yyyy}", employees.EntryDate);
-                lblPosName.Text = employees.PosName;
+                if (employees != null)
+                {
+                    lblCode.Text = employees.StaffCode;
+                    lblFullName.Text = employees.FullName;
+                    lblBirthDate.Text = string.Format("{0:dd-MM-yyyy}", employees.BirthDate);
+                    lblSex.Text = employees.Sex;
+                    lblDeptCode.Text = employees.DeptCode;
+                    lblEntryDate.Text = string.Format("{0:MM/dd/yyyy}", employees.EntryDate);
+                    lblPosName.Text = employees.PosName;
+
+                    var subjects = context.Database.SqlQuery<PR_Bomon>("EXEC [dbo].[ShowBoMon]").ToList();
+                    foreach (var sub in subjects)
+                    {
+                        object[] param =
+                        {
+                            new SqlParameter() { ParameterName = "@staffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar },
+                            new SqlParameter() { ParameterName = "@MaBoMon", Value=sub.MaBoMon, SqlDbType = SqlDbType.VarChar },
+                            new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                            {
+                                Direction = ParameterDirection.Output
+                            }
+                        };
+                        var checkExits = context.Database.SqlQuery<SkillMap>("EXEC [dbo].[CheckStaffCodeExitsSkillMap] @staffCode,@MaBoMon", param).SingleOrDefault();
+                        if (checkExits == null)
+                        {
+                            object[] param2 =
+                            {
+                                new SqlParameter() { ParameterName = "@StaffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar },
+                                new SqlParameter() { ParameterName = "@MaMon", Value=sub.MaBoMon, SqlDbType = SqlDbType.VarChar },
+                                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                                {
+                                    Direction = ParameterDirection.Output
+                                }
+                            };
+                            try
+                            {
+                                context.Database.ExecuteSqlCommand("EXEC [dbo].[InsertSkillMap] @StaffCode,@MaMon", param2);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageHelper.ErrorMessageBox(ex.Message);
+                            }
+                            
+                        } 
+                    }
+
+                    SqlParameter subject = new SqlParameter() { ParameterName = "@staffCode", SqlDbType = SqlDbType.VarChar };
+                    if (staffCode == null)
+                    {
+                        subject.Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        subject.Value = staffCode;
+                    }
+                    try
+                    {
+                        var reports = context.Database.SqlQuery<SkillMap>("EXEC [dbo].[sp_Get_Subjects_Of_StaffCode] @staffCode", subject).ToList();
+
+                        gridControl1.DataSource = reports;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageHelper.ErrorMessageBox(ex.Message);
+                    }
+                    splashScreenManager1.CloseWaitForm();
+                }
+                else
+                {
+                    splashScreenManager1.CloseWaitForm();
+                    MessageHelper.ErrorMessageBox($"Không tìm thấy nhân viên với code: [{staffCode}]. Vui lòng kiểm tra lại!");
+                }
             }
             catch (Exception ex)
             {
+                splashScreenManager1.CloseWaitForm();
                 MessageHelper.ErrorMessageBox(ex.Message);
             }
 
-            SqlParameter subject = new SqlParameter() { ParameterName = "@staffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar };
-            if (staffCode == null)
-            {
-                parmstaffCode.Value = DBNull.Value;
-            }
-            try
-            {
-                var reports = context.Database.SqlQuery<SkillMap>("EXEC [dbo].[sp_Get_Subjects_Of_StaffCode] @staffCode", subject).ToList();
-
-                gridControl1.DataSource = reports;
-            }
-            catch (Exception ex)
-            {
-                MessageHelper.ErrorMessageBox(ex.Message);
-            }
-            splashScreenManager1.CloseWaitForm();
+            
         }
 
         private void gridControl1_EmbeddedNavigator_ButtonClick(object sender, DevExpress.XtraEditors.NavigatorButtonClickEventArgs e)
@@ -145,6 +216,30 @@ namespace EducationSkills.Subjects
                 }
                 else
                     e.Handled = true;
+            }
+        }
+
+        private void txtSearchKey_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 0)
+            {
+                string staffCode = txtSearchKey.Text;
+                if (Ultils.IsNull(staffCode))
+                {
+                    LoadData(staffCode);
+                }
+            }
+        }
+
+        private void txtSearchKey_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)Keys.Enter)
+            {
+                string staffCode = txtSearchKey.Text;
+                if (Ultils.IsNull(staffCode))
+                {
+                    LoadData(staffCode);
+                }
             }
         }
     }

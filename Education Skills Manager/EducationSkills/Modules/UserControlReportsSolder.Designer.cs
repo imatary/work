@@ -274,6 +274,7 @@
             this.gridStaffCode.FieldName = "StaffCode";
             this.gridStaffCode.MinWidth = 80;
             this.gridStaffCode.Name = "gridStaffCode";
+            this.gridStaffCode.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
             this.gridStaffCode.Visible = true;
             this.gridStaffCode.Width = 80;
             // 
@@ -308,6 +309,7 @@
             this.bandedGridView1.OptionsView.ShowAutoFilterRow = true;
             this.bandedGridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridStaffCode, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.bandedGridView1.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.bandedGridView1_PopupMenuShowing);
             this.bandedGridView1.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.bandedGridView1_CellValueChanged);
             // 
             // gridBand2
@@ -428,7 +430,7 @@
             this.gridColumn1.AppearanceHeader.Options.UseFont = true;
             this.gridColumn1.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn1.Caption = "gridDeptCode";
+            this.gridColumn1.Caption = "Dept";
             this.gridColumn1.FieldName = "DeptCode";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -491,7 +493,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDept.Properties.DisplayMember = "DeptCode";
             this.txtDept.Properties.NullText = "";
-            this.txtDept.Properties.NullValuePrompt = "Select Dept";
+            this.txtDept.Properties.NullValuePrompt = "Chọn một bộ phận";
             this.txtDept.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtDept.Properties.ValueMember = "DeptCode";
             this.txtDept.Properties.View = this.gridLookUpEdit1View;

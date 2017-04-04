@@ -1,10 +1,9 @@
 ﻿using EducationSkills.Data;
 using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EducationSkills
 {
@@ -26,14 +25,35 @@ namespace EducationSkills
         {
             return Context.PR_Han.SingleOrDefault(e => e.StaffCode == staffCode);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="staffCode"></param>
+        /// <param name="levelI"></param>
+        /// <param name="dateLevelI"></param>
+        /// <param name="levelII"></param>
+        /// <param name="dateLevelII"></param>
+        /// <param name="levelIII"></param>
+        /// <param name="dateLevelIII"></param>
+        /// <param name="dateConfirm"></param>
+        /// <param name="dateTestActual"></param>
         public static void UpdateSolder(string staffCode, string levelI, string dateLevelI, string levelII, string dateLevelII, string levelIII, string dateLevelIII, string dateConfirm, string dateTestActual)
         {
             var solder = GetSolderByID(staffCode);
             if (solder != null)
             {
-                solder.CapDoHan = levelI;
-                solder.NangCapDo = levelII;
-                solder.CNNguoiDaoTao = levelIII;
+                if (Ultils.IsNull(levelI))
+                {
+                    solder.CapDoHan = levelI;
+                }
+                if (Ultils.IsNull(levelII))
+                {
+                    solder.NangCapDo = levelII;
+                }
+                if (Ultils.IsNull(levelIII))
+                {
+                    solder.CNNguoiDaoTao = levelIII;
+                }
 
                 if (Ultils.IsNull(dateLevelI))
                 {
@@ -75,6 +95,72 @@ namespace EducationSkills
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="staffCode"></param>
+        /// <param name="level"></param>
+        /// <param name="testDate"></param>
+        /// <param name="dateConfirmed"></param>
+        /// <param name="solanthi"></param>
+        public static void InsertSolder(int index, string staffCode, string level, DateTime testDate, DateTime dateConfirmed, int solanthi)
+        {
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@Level", Value = index, SqlDbType = SqlDbType.Int },
+                new SqlParameter() { ParameterName = "@StaffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar },
+                new SqlParameter() { ParameterName = "@CapDoHan", Value = level, SqlDbType = SqlDbType.NVarChar },
+                new SqlParameter() { ParameterName = "@NgayCap", Value = testDate, SqlDbType = SqlDbType.DateTime },
+                new SqlParameter() { ParameterName = "@NgayThiXacNhan", Value = dateConfirmed, SqlDbType = SqlDbType.DateTime },
+                new SqlParameter() { ParameterName = "@Solanthi", Value = solanthi, SqlDbType = SqlDbType.Int },
+
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            try
+            {
+                Context.Database.ExecuteSqlCommand("EXEC [dbo].[InsertKTHan] @Level, @StaffCode, @CapDoHan, @NgayCap, @NgayThiXacNhan, @Solanthi", param);
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ErrorMessageBox(ex.Message);
+                return;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="staffCode"></param>
+        public static void DeleteSolder(string staffCode)
+        {
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@StaffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar },
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            try
+            {
+                using (var context = new EducationSkillsDbContext())
+                {
+                    context.Database.ExecuteSqlCommand("EXEC [dbo].[DeleteHan] @StaffCode", param);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ErrorMessageBox(ex.Message);
+                return;
+            }
+        }
+
         #endregion
 
         #region Kiểm tra mắt
@@ -92,9 +178,70 @@ namespace EducationSkills
         /// 
         /// </summary>
         /// <param name="staffCode"></param>
-        public static void InsertEye(string staffCode)
+        /// <param name="level"></param>
+        /// <param name="testDate"></param>
+        /// <param name="dateConfirmed"></param>
+        /// <param name="solanthi"></param>
+        public static void InsertEye(int index, string staffCode, string level, DateTime testDate, DateTime dateConfirmed, int solanthi)
         {
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@Level", Value = index, SqlDbType = SqlDbType.Int },
+                new SqlParameter() { ParameterName = "@StaffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar },
+                new SqlParameter() { ParameterName = "@CapDo", Value = level, SqlDbType = SqlDbType.NVarChar },
+                new SqlParameter() { ParameterName = "@NgayCap", Value = testDate, SqlDbType = SqlDbType.DateTime },
+                new SqlParameter() { ParameterName = "@NgayThiXacNhan", Value = dateConfirmed, SqlDbType = SqlDbType.DateTime },
+                new SqlParameter() { ParameterName = "@Solanthi", Value = solanthi, SqlDbType = SqlDbType.Int },
 
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            try
+            { 
+                using(var context = new EducationSkillsDbContext())
+                {
+                    context.Database.ExecuteSqlCommand("EXEC [dbo].[InSertKTMat] @Level, @StaffCode, @CapDo, @NgayCap, @NgayThiXacNhan, @Solanthi", param);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ErrorMessageBox(ex.Message);
+                return;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="staffCode"></param>
+        public static void DeleteEye(string staffCode)
+        {
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@StaffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar },
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
+
+            try
+            {
+                using (var context = new EducationSkillsDbContext())
+                {
+                    context.Database.ExecuteSqlCommand("EXEC [dbo].[DeleteMat] @StaffCode", param);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ErrorMessageBox(ex.Message);
+                return;
+            }
         }
 
         /// <summary>
@@ -113,11 +260,18 @@ namespace EducationSkills
             var eye = GetEyeByID(staffCode);
             if (eye != null)
             {
-
-                eye.CapDo = levelI;
-                eye.NangCap = levelII;
-                eye.CNNguoiDaoTao = levelIII;
-                
+                if (Ultils.IsNull(levelI))
+                {
+                    eye.CapDo = levelI;
+                }
+                if (Ultils.IsNull(levelII))
+                {
+                    eye.NangCap = levelII;
+                };
+                if (Ultils.IsNull(levelIII))
+                {
+                    eye.CNNguoiDaoTao = levelIII;
+                };
                 if (Ultils.IsNull(dateLevelI))
                 {
                     eye.NgayCap = DateTime.Parse(dateLevelI);
