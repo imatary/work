@@ -46,15 +46,18 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.txtBarcodeLength = new DevExpress.XtraEditors.SpinEdit();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.txtExtensionInputLog = new DevExpress.XtraEditors.TextEdit();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            this.txtStationNo = new DevExpress.XtraEditors.TextEdit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtProcessName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInputLog.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOutputLog.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBarcodeLength.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExtensionInputLog.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStationNo.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControl1
@@ -89,6 +92,7 @@
             this.btnSave.Size = new System.Drawing.Size(114, 32);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save Changed";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // panel1
             // 
@@ -133,13 +137,15 @@
             this.txtProcessName.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtProcessName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("gridLookUpEdit1.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtProcessName.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.txtProcessName.Properties.NullText = "";
             this.txtProcessName.Properties.NullValuePrompt = "ex: TS18000";
             this.txtProcessName.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtProcessName.Properties.View = this.gridLookUpEdit1View;
             this.txtProcessName.Size = new System.Drawing.Size(222, 28);
             this.txtProcessName.TabIndex = 7;
+            this.txtProcessName.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtProcessName_ButtonPressed);
+            this.txtProcessName.EditValueChanged += new System.EventHandler(this.txtProcessName_EditValueChanged);
             // 
             // gridLookUpEdit1View
             // 
@@ -156,11 +162,12 @@
             this.txtInputLog.Properties.Appearance.Options.UseFont = true;
             this.txtInputLog.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtInputLog.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("buttonEdit1.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtInputLog.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
             this.txtInputLog.Properties.NullValuePrompt = "ex: C:\\LOG_REPORT";
             this.txtInputLog.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtInputLog.Size = new System.Drawing.Size(221, 28);
             this.txtInputLog.TabIndex = 8;
+            this.txtInputLog.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtInputLog_ButtonPressed);
             // 
             // txtOutputLog
             // 
@@ -170,11 +177,12 @@
             this.txtOutputLog.Properties.Appearance.Options.UseFont = true;
             this.txtOutputLog.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtOutputLog.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("buttonEdit1.Properties.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtOutputLog.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
             this.txtOutputLog.Properties.NullValuePrompt = "ex: C:\\LOGPROCESS";
             this.txtOutputLog.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtOutputLog.Size = new System.Drawing.Size(221, 28);
             this.txtOutputLog.TabIndex = 8;
+            this.txtOutputLog.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtOutputLog_ButtonPressed);
             // 
             // labelControl4
             // 
@@ -186,7 +194,7 @@
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(47, 210);
+            this.labelControl5.Location = new System.Drawing.Point(47, 211);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(79, 13);
             this.labelControl5.TabIndex = 6;
@@ -216,15 +224,18 @@
             this.txtBarcodeLength.Size = new System.Drawing.Size(119, 28);
             this.txtBarcodeLength.TabIndex = 9;
             // 
-            // textEdit1
+            // txtExtensionInputLog
             // 
-            this.textEdit1.Location = new System.Drawing.Point(132, 134);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEdit1.Properties.Appearance.Options.UseFont = true;
-            this.textEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.textEdit1.Size = new System.Drawing.Size(119, 28);
-            this.textEdit1.TabIndex = 10;
+            this.txtExtensionInputLog.Location = new System.Drawing.Point(132, 134);
+            this.txtExtensionInputLog.Name = "txtExtensionInputLog";
+            this.txtExtensionInputLog.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExtensionInputLog.Properties.Appearance.Options.UseFont = true;
+            this.txtExtensionInputLog.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtExtensionInputLog.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtExtensionInputLog.Properties.NullValuePrompt = "ex: *.txt, *.csv, *.LOG";
+            this.txtExtensionInputLog.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtExtensionInputLog.Size = new System.Drawing.Size(119, 28);
+            this.txtExtensionInputLog.TabIndex = 10;
             // 
             // labelControl6
             // 
@@ -234,16 +245,39 @@
             this.labelControl6.TabIndex = 6;
             this.labelControl6.Text = "Input Log Extention:";
             // 
+            // labelControl7
+            // 
+            this.labelControl7.Location = new System.Drawing.Point(88, 245);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(38, 13);
+            this.labelControl7.TabIndex = 6;
+            this.labelControl7.Text = "Station:";
+            // 
+            // txtStationNo
+            // 
+            this.txtStationNo.Location = new System.Drawing.Point(132, 236);
+            this.txtStationNo.Name = "txtStationNo";
+            this.txtStationNo.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStationNo.Properties.Appearance.Options.UseFont = true;
+            this.txtStationNo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.txtStationNo.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtStationNo.Properties.NullValuePrompt = "ex: ICT, FCT";
+            this.txtStationNo.Properties.NullValuePromptShowForEmptyValue = true;
+            this.txtStationNo.Size = new System.Drawing.Size(119, 28);
+            this.txtStationNo.TabIndex = 10;
+            // 
             // FormConfigs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(476, 324);
-            this.Controls.Add(this.textEdit1);
+            this.Controls.Add(this.txtStationNo);
+            this.Controls.Add(this.txtExtensionInputLog);
             this.Controls.Add(this.txtOutputLog);
             this.Controls.Add(this.txtInputLog);
             this.Controls.Add(this.txtProcessName);
+            this.Controls.Add(this.labelControl7);
             this.Controls.Add(this.labelControl5);
             this.Controls.Add(this.labelControl4);
             this.Controls.Add(this.labelControl6);
@@ -257,14 +291,17 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormConfigs";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form Configs";
+            this.Load += new System.EventHandler(this.FormConfigs_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtProcessName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInputLog.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOutputLog.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBarcodeLength.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExtensionInputLog.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStationNo.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,7 +322,9 @@
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.SpinEdit txtBarcodeLength;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.TextEdit txtExtensionInputLog;
         private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
+        private DevExpress.XtraEditors.TextEdit txtStationNo;
     }
 }

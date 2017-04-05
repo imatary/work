@@ -9,9 +9,24 @@ namespace Lib.Form.Controls
 {
     public static class CheckTextBoxNullValue
     {
+        public static bool CheckEditValueWithShowMessageError(BaseEdit control, string message)
+        {
+            if (string.IsNullOrEmpty(control.Text) || control.Text == "" || control.Text.Length == 0)
+            {
+                control.Properties.Appearance.BorderColor = Color.DarkRed;
+                control.Focus();
+                XtraMessageBox.Show(message,"Error Message!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                control.SelectAll();
+
+                return false;
+            }
+
+            return true;
+        }
+
         public static bool ValidationTextEditNullValue(BaseEdit control)
         {
-            if (string.IsNullOrEmpty(control.Text))
+            if (string.IsNullOrEmpty(control.Text) || control.Text=="" || control.Text.Length == 0)
             {
                 control.Properties.Appearance.BorderColor = Color.DarkRed;
                 control.Focus();

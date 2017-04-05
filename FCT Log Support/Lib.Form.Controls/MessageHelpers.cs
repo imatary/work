@@ -45,6 +45,27 @@ namespace Lib.Form.Controls
             lblStatus.Text = status;
             lblMessage.Text = messageInfo;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="visible"></param>
+        /// <param name="status"></param>
+        /// <param name="messageInfo"></param>
+        /// <param name="lblStatus"></param>
+        /// <param name="lblMessage"></param>
+        public static void SetDefaultStatusColorOrange(bool visible, string status, string messageInfo, LabelControl lblStatus, LabelControl lblMessage)
+        {
+            lblStatus.Visible = visible;
+            lblMessage.Visible = visible;
+
+            lblStatus.Appearance.ForeColor = Color.White;
+            lblStatus.Appearance.BackColor = Color.FromArgb(255, 128, 0);
+
+            lblMessage.Appearance.ForeColor = Color.White;
+            lblMessage.Appearance.BackColor = Color.FromArgb(255, 128, 0);
+            lblStatus.Text = status;
+            lblMessage.Text = messageInfo;
+        }
 
         /// <summary>
         /// 

@@ -20,7 +20,7 @@ namespace FCT_HFT1024_DB
     public partial class FormMain : Form
     {
         private StringBuilder m_Sb;
-        private bool m_bDirty;
+        private bool m_bDirtys;
         private FileSystemWatcher m_Watcher;
         private bool m_bIsWatching;
         private string fileName = null;
@@ -43,7 +43,7 @@ namespace FCT_HFT1024_DB
         {
             InitializeComponent();
             m_Sb = new StringBuilder();
-            m_bDirty = false;
+            m_bDirtys = false;
             m_bIsWatching = false;
             lblVersion.Text = StringHelper.GetRunningVersion();
             Ultils.RegisterInStartup(true, Application.ExecutablePath);
@@ -323,7 +323,7 @@ namespace FCT_HFT1024_DB
 
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
-            if (!m_bDirty)
+            if (!m_bDirtys)
             {
                 string[] strSpit;
                 fileName = Path.GetFileNameWithoutExtension(e.FullPath);
@@ -370,7 +370,7 @@ namespace FCT_HFT1024_DB
                     
                     total = pass + ng;
                 }
-                m_bDirty = true;
+                m_bDirtys = true;
             }
         }
         private void rdbFile_CheckedChanged(object sender, EventArgs e)
@@ -416,7 +416,7 @@ namespace FCT_HFT1024_DB
 
         private void tmrEditNotify_Tick(object sender, EventArgs e)
         {
-            if (m_bDirty)
+            if (m_bDirtys)
             {
                 // Kiểm tra lại bản mạch đã OK trên WIP chưa?
                 // Nếu OK => Đóng dấu
@@ -446,7 +446,7 @@ namespace FCT_HFT1024_DB
                 lblNG.Text = ng.ToString();
                 lblTotal.Text = total.ToString();
                 LoadData(productionId, modelId, gridLookUpEditProcessID.EditValue.ToString(), boardState);
-                m_bDirty = false;
+                m_bDirtys = false;
             }
         }  
         private void txtBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

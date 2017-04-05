@@ -319,16 +319,34 @@ namespace Lib.Core
             }
         }
 
-        public static string GetLine(string fileName, int line)
+        public static string GetLine(string path, int line)
+        {
+            ////string line = fileName..Skip(14).Take(1).First();
+            string value;
+            using (var sr = new StreamReader(path))
+            {
+                for (int i = 1; i < line; i++)
+                {
+                    sr.ReadLine();
+                }
+                value = sr.ReadLine();
+                sr.Dispose();
+                return value;
+            }
+        }
+        public static void SetLine(string path, int line, string value)
         {
             ////string line = fileName..Skip(14).Take(1).First();
 
-            using (var sr = new StreamReader(fileName))
-            {
-                for (int i = 1; i < line; i++)
-                    sr.ReadLine();
-                return sr.ReadLine();
-            }
+            //using (var sr = new StreamWriter(path))
+            //{
+            //    for (int i = 1; i < line; i++)
+            //        sr.WriteLine(value);
+            //}
+
+            string[] arrLine = File.ReadAllLines(path);
+            arrLine[line - 1] = value;
+            File.WriteAllLines(path, arrLine);
         }
     }
 }

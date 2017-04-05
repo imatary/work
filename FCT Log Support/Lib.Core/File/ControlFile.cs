@@ -50,7 +50,7 @@ namespace Lib.Core
             }
             using (TextReader reader = new StreamReader(i_Fullpath))
             {
-                return (str + reader.ReadLine());
+                return (str + reader.ReadToEnd());
             }
         }
 

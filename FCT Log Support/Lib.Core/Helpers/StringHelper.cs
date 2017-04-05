@@ -38,5 +38,19 @@ namespace Lib.Core.Helpers
                 return Assembly.GetExecutingAssembly().GetName().Version;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsEmptyOrNull(string value)
+        {
+            if(string.IsNullOrEmpty(value) || value == "" || value.Length == 0)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
