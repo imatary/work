@@ -96,7 +96,7 @@ namespace EducationSkills
         }
         private void barButtonItemOlympic_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            
+            AddTabPage(new UserControlOlympicMeister(), "Olympic && Meister", ActionType.Default, null);
         }
 
         private void barButtonItemSubjects_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
