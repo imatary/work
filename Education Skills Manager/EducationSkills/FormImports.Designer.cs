@@ -39,6 +39,7 @@
             this.checkEditEye = new DevExpress.XtraEditors.CheckEdit();
             this.txtCertificate = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridDisplayMember = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dateEditTestDate = new DevExpress.XtraEditors.DateEdit();
             this.dateEditDateConfirmed = new DevExpress.XtraEditors.DateEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -47,7 +48,6 @@
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.cboLevel = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.gridDisplayMember = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
@@ -126,6 +126,7 @@
             this.checkEditSolder.Properties.Caption = "Hàn";
             this.checkEditSolder.Size = new System.Drawing.Size(75, 23);
             this.checkEditSolder.TabIndex = 4;
+            this.checkEditSolder.CheckedChanged += new System.EventHandler(this.checkEditSolder_CheckedChanged);
             // 
             // checkEditEye
             // 
@@ -166,6 +167,14 @@
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridDisplayMember
+            // 
+            this.gridDisplayMember.Caption = "Name";
+            this.gridDisplayMember.FieldName = "DisplayMember";
+            this.gridDisplayMember.Name = "gridDisplayMember";
+            this.gridDisplayMember.Visible = true;
+            this.gridDisplayMember.VisibleIndex = 0;
             // 
             // dateEditTestDate
             // 
@@ -260,14 +269,6 @@
             this.cboLevel.Size = new System.Drawing.Size(232, 28);
             this.cboLevel.TabIndex = 10;
             this.cboLevel.SelectedIndexChanged += new System.EventHandler(this.cboLevel_SelectedIndexChanged);
-            // 
-            // gridDisplayMember
-            // 
-            this.gridDisplayMember.Caption = "Name";
-            this.gridDisplayMember.FieldName = "DisplayMember";
-            this.gridDisplayMember.Name = "gridDisplayMember";
-            this.gridDisplayMember.Visible = true;
-            this.gridDisplayMember.VisibleIndex = 0;
             // 
             // FormImports
             // 

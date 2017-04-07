@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlReportsEye));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSaveChanged = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -98,7 +98,7 @@
             this.groupBox1.Size = new System.Drawing.Size(876, 143);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search Options";
+            this.groupBox1.Text = "Tùy chọn tìm kiếm";
             // 
             // btnSaveChanged
             // 
@@ -110,13 +110,13 @@
             this.btnSaveChanged.Name = "btnSaveChanged";
             this.btnSaveChanged.Size = new System.Drawing.Size(118, 29);
             this.btnSaveChanged.TabIndex = 12;
-            this.btnSaveChanged.Text = "Save Changed";
+            this.btnSaveChanged.Text = "Lưu thay đổi";
             this.btnSaveChanged.Visible = false;
             this.btnSaveChanged.Click += new System.EventHandler(this.btnSaveChanged_Click);
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(136, 65);
+            this.labelControl2.Location = new System.Drawing.Point(191, 77);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(68, 13);
             this.labelControl2.TabIndex = 11;
@@ -124,7 +124,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(161, 31);
+            this.labelControl1.Location = new System.Drawing.Point(216, 43);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(43, 13);
             this.labelControl1.TabIndex = 10;
@@ -136,7 +136,7 @@
             this.btnExportToExel.Appearance.Options.UseFont = true;
             this.btnExportToExel.Enabled = false;
             this.btnExportToExel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.Image")));
-            this.btnExportToExel.Location = new System.Drawing.Point(403, 105);
+            this.btnExportToExel.Location = new System.Drawing.Point(459, 104);
             this.btnExportToExel.Name = "btnExportToExel";
             this.btnExportToExel.Size = new System.Drawing.Size(109, 27);
             this.btnExportToExel.TabIndex = 8;
@@ -148,7 +148,7 @@
             this.btnRefesh.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefesh.Appearance.Options.UseFont = true;
             this.btnRefesh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.Image")));
-            this.btnRefesh.Location = new System.Drawing.Point(288, 105);
+            this.btnRefesh.Location = new System.Drawing.Point(344, 104);
             this.btnRefesh.Name = "btnRefesh";
             this.btnRefesh.Size = new System.Drawing.Size(109, 27);
             this.btnRefesh.TabIndex = 7;
@@ -160,7 +160,7 @@
             this.btnFind.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFind.Appearance.Options.UseFont = true;
             this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
-            this.btnFind.Location = new System.Drawing.Point(209, 104);
+            this.btnFind.Location = new System.Drawing.Point(265, 103);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(73, 28);
             this.btnFind.TabIndex = 6;
@@ -169,36 +169,36 @@
             // 
             // txtKey
             // 
-            this.txtKey.Location = new System.Drawing.Point(210, 56);
+            this.txtKey.Location = new System.Drawing.Point(265, 68);
             this.txtKey.Name = "txtKey";
             this.txtKey.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtKey.Properties.Appearance.Options.UseFont = true;
             this.txtKey.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            serializableAppearanceObject1.BackColor = System.Drawing.Color.Transparent;
-            serializableAppearanceObject1.BackColor2 = System.Drawing.Color.Transparent;
-            serializableAppearanceObject1.BorderColor = System.Drawing.Color.Transparent;
-            serializableAppearanceObject1.Options.UseBackColor = true;
-            serializableAppearanceObject1.Options.UseBorderColor = true;
-            serializableAppearanceObject2.BackColor = System.Drawing.Color.Transparent;
-            serializableAppearanceObject2.BackColor2 = System.Drawing.Color.Transparent;
-            serializableAppearanceObject2.BorderColor = System.Drawing.Color.Transparent;
-            serializableAppearanceObject2.Options.UseBackColor = true;
-            serializableAppearanceObject2.Options.UseBorderColor = true;
-            serializableAppearanceObject3.BackColor = System.Drawing.Color.Transparent;
-            serializableAppearanceObject3.BackColor2 = System.Drawing.Color.Transparent;
-            serializableAppearanceObject3.BorderColor = System.Drawing.Color.Transparent;
-            serializableAppearanceObject3.Options.UseBackColor = true;
-            serializableAppearanceObject3.Options.UseBorderColor = true;
+            serializableAppearanceObject5.BackColor = System.Drawing.Color.Transparent;
+            serializableAppearanceObject5.BackColor2 = System.Drawing.Color.Transparent;
+            serializableAppearanceObject5.BorderColor = System.Drawing.Color.Transparent;
+            serializableAppearanceObject5.Options.UseBackColor = true;
+            serializableAppearanceObject5.Options.UseBorderColor = true;
+            serializableAppearanceObject6.BackColor = System.Drawing.Color.Transparent;
+            serializableAppearanceObject6.BackColor2 = System.Drawing.Color.Transparent;
+            serializableAppearanceObject6.BorderColor = System.Drawing.Color.Transparent;
+            serializableAppearanceObject6.Options.UseBackColor = true;
+            serializableAppearanceObject6.Options.UseBorderColor = true;
+            serializableAppearanceObject7.BackColor = System.Drawing.Color.Transparent;
+            serializableAppearanceObject7.BackColor2 = System.Drawing.Color.Transparent;
+            serializableAppearanceObject7.BorderColor = System.Drawing.Color.Transparent;
+            serializableAppearanceObject7.Options.UseBackColor = true;
+            serializableAppearanceObject7.Options.UseBorderColor = true;
             this.txtKey.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtKey.Properties.Buttons"))), "", new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtKey.Properties.Buttons"))), "", new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, true)});
             this.txtKey.Properties.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtKey_Properties_ButtonPressed);
-            this.txtKey.Size = new System.Drawing.Size(192, 28);
+            this.txtKey.Size = new System.Drawing.Size(271, 28);
             this.txtKey.TabIndex = 9;
             this.txtKey.EditValueChanged += new System.EventHandler(this.txtKey_EditValueChanged);
             // 
             // txtDept
             // 
-            this.txtDept.Location = new System.Drawing.Point(210, 22);
+            this.txtDept.Location = new System.Drawing.Point(265, 34);
             this.txtDept.Name = "txtDept";
             this.txtDept.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDept.Properties.Appearance.Options.UseFont = true;
@@ -209,7 +209,7 @@
             this.txtDept.Properties.NullValuePrompt = "Chọn một bộ phận";
             this.txtDept.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtDept.Properties.View = this.gridLookUpEdit1View;
-            this.txtDept.Size = new System.Drawing.Size(192, 28);
+            this.txtDept.Size = new System.Drawing.Size(271, 28);
             this.txtDept.TabIndex = 5;
             this.txtDept.EditValueChanged += new System.EventHandler(this.txtDept_EditValueChanged);
             // 
@@ -237,9 +237,9 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridLevelNode1.RelationName = "Level1";
+            gridLevelNode2.RelationName = "Level1";
             this.gridControl1.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode2});
             this.gridControl1.Location = new System.Drawing.Point(10, 153);
             this.gridControl1.MainView = this.bandedGridView1;
             this.gridControl1.Name = "gridControl1";

@@ -13,6 +13,7 @@ using EducationSkills.Models;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraGrid.Views.Grid;
+using System.Diagnostics;
 
 namespace EducationSkills.Modules
 {
@@ -58,6 +59,8 @@ namespace EducationSkills.Modules
             {
                 bandedGridView1.ExportToXlsx(saveFileDialog1.FileName);
             }
+
+            Process.Start(saveFileDialog1.FileName);
         }
 
         private void UserControlReportsSolder_Load(object sender, EventArgs e)

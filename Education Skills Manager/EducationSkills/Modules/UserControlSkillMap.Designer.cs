@@ -69,16 +69,16 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(830, 130);
+            this.groupBox1.Size = new System.Drawing.Size(830, 141);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search options";
+            this.groupBox1.Text = "Tùy chọn tìm kiếm";
             // 
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(344, 25);
+            this.labelControl1.Location = new System.Drawing.Point(420, 39);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(14, 19);
             this.labelControl1.TabIndex = 5;
@@ -91,7 +91,7 @@
             this.btnExportToExel.Appearance.Options.UseFont = true;
             this.btnExportToExel.Enabled = false;
             this.btnExportToExel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.Image")));
-            this.btnExportToExel.Location = new System.Drawing.Point(344, 86);
+            this.btnExportToExel.Location = new System.Drawing.Point(419, 103);
             this.btnExportToExel.Name = "btnExportToExel";
             this.btnExportToExel.Size = new System.Drawing.Size(109, 27);
             this.btnExportToExel.TabIndex = 4;
@@ -103,7 +103,7 @@
             this.btnRefesh.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefesh.Appearance.Options.UseFont = true;
             this.btnRefesh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.Image")));
-            this.btnRefesh.Location = new System.Drawing.Point(259, 86);
+            this.btnRefesh.Location = new System.Drawing.Point(334, 103);
             this.btnRefesh.Name = "btnRefesh";
             this.btnRefesh.Size = new System.Drawing.Size(79, 27);
             this.btnRefesh.TabIndex = 3;
@@ -115,7 +115,7 @@
             this.btnFind.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFind.Appearance.Options.UseFont = true;
             this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
-            this.btnFind.Location = new System.Drawing.Point(182, 85);
+            this.btnFind.Location = new System.Drawing.Point(258, 103);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(70, 28);
             this.btnFind.TabIndex = 2;
@@ -124,7 +124,7 @@
             // 
             // txtDept
             // 
-            this.txtDept.Location = new System.Drawing.Point(182, 53);
+            this.txtDept.Location = new System.Drawing.Point(258, 69);
             this.txtDept.Name = "txtDept";
             this.txtDept.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDept.Properties.Appearance.Options.UseFont = true;
@@ -133,7 +133,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDept.Properties.DisplayMember = "DeptCode";
             this.txtDept.Properties.NullText = "";
-            this.txtDept.Properties.NullValuePrompt = "Select Dept";
+            this.txtDept.Properties.NullValuePrompt = "Chọn bộ phận cần xem";
             this.txtDept.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtDept.Properties.ValueMember = "DeptCode";
             this.txtDept.Properties.View = this.gridLookUpEdit1View;
@@ -165,7 +165,7 @@
             // ToDate
             // 
             this.ToDate.EditValue = null;
-            this.ToDate.Location = new System.Drawing.Point(364, 21);
+            this.ToDate.Location = new System.Drawing.Point(440, 35);
             this.ToDate.Name = "ToDate";
             this.ToDate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToDate.Properties.Appearance.Options.UseFont = true;
@@ -183,7 +183,7 @@
             // FormDate
             // 
             this.FormDate.EditValue = null;
-            this.FormDate.Location = new System.Drawing.Point(182, 21);
+            this.FormDate.Location = new System.Drawing.Point(258, 35);
             this.FormDate.Name = "FormDate";
             this.FormDate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormDate.Properties.Appearance.Options.UseFont = true;
@@ -201,10 +201,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(10, 140);
+            this.gridControl1.Location = new System.Drawing.Point(10, 151);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(830, 468);
+            this.gridControl1.Size = new System.Drawing.Size(830, 457);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.UseEmbeddedNavigator = true;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {

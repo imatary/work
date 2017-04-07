@@ -74,10 +74,7 @@ namespace EducationSkills
             }
         }
 
-        private void checkEditEye_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void FormImports_Load(object sender, EventArgs e)
         {
@@ -86,18 +83,35 @@ namespace EducationSkills
             GetCertificates();
         }
 
-        
         /// <summary>
         /// 
         /// </summary>
         private void GetCertificates()
         {
             context = new EducationSkillsDbContext();
-            var certificates = context.EDU_Certificates.OrderBy(c => c.DisplayMember).ToList();
+            List<EDU_Certificates> certificates = new List<EDU_Certificates>();
+            if (checkEditEye.Checked == false && checkEditSolder.Checked==false)
+            {
+                certificates = context.EDU_Certificates.OrderBy(c => c.DisplayMember).ToList();
+            }
+            if (checkEditEye.Checked == true && checkEditSolder.Checked == false)
+            {
+                certificates = context.EDU_Certificates.Where(m => m.Type == "Eye").OrderBy(c => c.DisplayMember).ToList();
+            }
+            if (checkEditEye.Checked == false && checkEditSolder.Checked == true)
+            {
+                certificates = context.EDU_Certificates.Where(m => m.Type == "Solder").OrderBy(c => c.DisplayMember).ToList();
+            }
+            if (checkEditEye.Checked == true && checkEditSolder.Checked == true)
+            {
+                certificates = context.EDU_Certificates.OrderBy(c => c.DisplayMember).ToList();
+            }
+
             txtCertificate.Properties.DisplayMember = "DisplayMember";
             txtCertificate.Properties.ValueMember = "ValueMember";
             txtCertificate.Properties.DataSource = certificates;
         }
+
         private void txtCertificate_Properties_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if(e.Button.Index == 1)
@@ -121,6 +135,16 @@ namespace EducationSkills
             //{
             //    MessageBox.Show(cboLevel.SelectedIndex.ToString());
             //}
+        }
+
+        private void checkEditSolder_CheckedChanged(object sender, EventArgs e)
+        {
+            GetCertificates();
+        }
+
+        private void checkEditEye_CheckedChanged(object sender, EventArgs e)
+        {
+            GetCertificates();
         }
     }
 }

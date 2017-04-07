@@ -412,13 +412,13 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(10, 130);
+            this.gridControl1.Location = new System.Drawing.Point(10, 111);
             this.gridControl1.MainView = this.bandedGridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemGridLookUpEdit1,
             this.repositoryItemGridLookUpEdit2});
-            this.gridControl1.Size = new System.Drawing.Size(885, 423);
+            this.gridControl1.Size = new System.Drawing.Size(885, 442);
             this.gridControl1.TabIndex = 3;
             this.gridControl1.UseEmbeddedNavigator = true;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -512,10 +512,10 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(885, 120);
+            this.groupBox1.Size = new System.Drawing.Size(885, 101);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search Options";
+            this.groupBox1.Text = "Tùy chọn tìm kiếm";
             // 
             // btnSaveChanged
             // 
@@ -527,7 +527,7 @@
             this.btnSaveChanged.Name = "btnSaveChanged";
             this.btnSaveChanged.Size = new System.Drawing.Size(118, 29);
             this.btnSaveChanged.TabIndex = 13;
-            this.btnSaveChanged.Text = "Save Changed";
+            this.btnSaveChanged.Text = "Lưu thay đổi";
             this.btnSaveChanged.Visible = false;
             this.btnSaveChanged.Click += new System.EventHandler(this.btnSaveChanged_Click);
             // 

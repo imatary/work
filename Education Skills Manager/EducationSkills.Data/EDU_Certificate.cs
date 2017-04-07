@@ -12,5 +12,6 @@ namespace EducationSkills.Data
         [Key]
         public int ValueMember { get; set; }
         public string DisplayMember { get; set; }
+        public string Type { get; set; }
     }
 }
