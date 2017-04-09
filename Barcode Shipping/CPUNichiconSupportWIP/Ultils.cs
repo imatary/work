@@ -283,5 +283,39 @@ namespace CPUNichiconSupportWIP
                 return sr.ReadLine();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stationNo"></param>
+        /// <param name="path"></param>
+        public static void WriteRegistryKey(string stationNo, string path)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES");
+            if (!string.IsNullOrEmpty(path) || !string.IsNullOrEmpty(stationNo))
+            {
+                //storing the values  
+                key.SetValue("STATION_NO", stationNo);
+                key.SetValue("PATH", path);
+                key.Close();
+            }
+        }
+
+        public static string GetValueRegistryKey(string keyName)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES");
+            string value = null;
+            if (key!=null)
+            {
+                if(key.GetValue(keyName) != null)
+                {
+                    value = key.GetValue(keyName).ToString();
+                    key.Close();
+                    return value;
+                }
+            }
+
+            return null;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -17,6 +18,7 @@ namespace CPUNichiconSupportWIP
         private FileSystemWatcher m_Watcher;
         string path = null;
         string stationNo = null;
+        string pathDb = "";
         public FormMain()
         {
             InitializeComponent();
@@ -28,10 +30,10 @@ namespace CPUNichiconSupportWIP
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            path = ConfigurationManager.AppSettings["PathInput"];
-            stationNo = ConfigurationManager.AppSettings["StationNo"];
+            path = Ultils.GetValueRegistryKey("PATH");
+            stationNo = Ultils.GetValueRegistryKey("STATION_NO");
 
-            if(path == "" || stationNo == "")
+            if(string.IsNullOrEmpty(path) || string.IsNullOrEmpty(stationNo))
             {
                 txtStationNO.Enabled = true;
                 panel4.Enabled = true;
@@ -98,13 +100,12 @@ namespace CPUNichiconSupportWIP
             }
             else if (isVaild == true)
             {
-                if (path == "" || stationNo == "")
+                if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(stationNo))
                 {
-                    SettingConfiguration.F_UpdateKey("PathInput", txtPath.Text);
-                    SettingConfiguration.F_UpdateKey("StationNo", txtStationNO.Text);
+                    Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
                 }
 
-                string pathInput = ConfigurationManager.AppSettings["PathInput"];
+                string pathInput = Ultils.GetValueRegistryKey("PATH");
 
                 if (m_bIsWatching)
                 {
@@ -126,9 +127,11 @@ namespace CPUNichiconSupportWIP
                     btnStartWatch.Text = "Stop Watching";
 
                     m_Watcher = new FileSystemWatcher();
-                    
-                    m_Watcher.Filter = pathInput.Substring(pathInput.LastIndexOf('\\') + 1);
-                    m_Watcher.Path = pathInput.Substring(0, pathInput.Length - m_Watcher.Filter.Length);
+                    m_Watcher.IncludeSubdirectories = true;
+                    m_Watcher.Filter = "*.mdb";
+                    //m_Watcher.Filter = pathInput.Substring(pathInput.LastIndexOf('\\') + 1);
+                    //m_Watcher.Path = pathInput.Substring(0, pathInput.Length - m_Watcher.Filter.Length);
+                    m_Watcher.Path = pathInput + "\\";
 
                     m_Watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
                                      | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastAccess;
@@ -143,8 +146,9 @@ namespace CPUNichiconSupportWIP
         {
             if (!m_bDirty)
             {
-                if (e.ChangeType == WatcherChangeTypes.Changed)
+                if (e.ChangeType == WatcherChangeTypes.Changed || e.ChangeType==WatcherChangeTypes.Created)
                 {
+                    pathDb = e.FullPath;
                     m_bDirty = true;
                 }
             }
@@ -178,17 +182,13 @@ namespace CPUNichiconSupportWIP
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        //private OleDbConnection GetConnection()
-        //{
-        //    return null;
-        //}
         int pass = 0, total = 0, ng = 0;
 
         private void txtPath_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtPath.Text))
             {
-                SettingConfiguration.F_UpdateKey("PathInput", txtPath.Text);
+                Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
             }
         }
 
@@ -196,7 +196,7 @@ namespace CPUNichiconSupportWIP
         {
             if (!string.IsNullOrEmpty(txtStationNO.Text))
             {
-                SettingConfiguration.F_UpdateKey("StationNo", txtStationNO.Text);
+                Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
             }
         }
 
@@ -204,7 +204,7 @@ namespace CPUNichiconSupportWIP
         {
             if (m_bDirty)
             {
-                string strDSN = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = {path}";
+                string strDSN = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = {pathDb}";
                 //string strSQL = $"SELECT TOP 1 *  FROM PTS_HEADER  WHERE EndDateTime >= #1/7/2017# ORDER BY EndDateTime DESC";
                 string strSQL = $"SELECT TOP 1 *  FROM PTS_HEADER  WHERE EndDateTime >= #{DateTime.Now.Date}# ORDER BY EndDateTime DESC";
                 // create Objects of ADOConnection and ADOCommand  
@@ -248,11 +248,13 @@ namespace CPUNichiconSupportWIP
                 else
                 {
                     lblStatusMessage.Visible = true;
-                    lblStatusMessage.Text = "Check local time";
+                    lblStatusMessage.Text = "Check local format time!";
                 }
                 myConn.Close();
                 m_bDirty = false;
             }
         }
+
+
     }
 }

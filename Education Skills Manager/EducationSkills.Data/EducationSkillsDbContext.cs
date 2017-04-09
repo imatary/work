@@ -17,6 +17,7 @@ namespace EducationSkills.Data
         public virtual DbSet<PR_Han> PR_Han { get; set; }
         public virtual DbSet<PR_Mat> PR_Mat { get; set; }
         public virtual DbSet<EDU_Certificates> EDU_Certificates { get; set; }
+        public virtual DbSet<EDU_Olympics> EDU_Olympics { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -58,6 +59,7 @@ namespace EducationSkills.Data
 
             modelBuilder.Entity<EDU_Certificates>()
                 .Property(e => e.ValueMember);
+
                 
         }
     }

@@ -227,7 +227,10 @@ namespace EducationSkills.Subjects
                 if (Ultils.IsNull(staffCode))
                 {
                     LoadData(staffCode);
+                    
                 }
+
+
             }
         }
 
