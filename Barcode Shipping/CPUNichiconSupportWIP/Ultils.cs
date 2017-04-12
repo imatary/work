@@ -248,6 +248,36 @@ namespace CPUNichiconSupportWIP
                 }
         }
 
+        //public static void WriteText(string fileName, string content)
+        //{
+        //    string folderRoot = @"C:\CPU-Nichicon\";
+
+        //    bool exists = Directory.Exists(folderRoot);
+        //    if (!exists)
+        //        Directory.CreateDirectory(folderRoot);
+
+        //    string path = folderRoot + fileName;
+
+        //    using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+        //        if (!File.Exists(path))
+        //        {
+        //            File.Create(path).Dispose();
+        //            using (StreamWriter tw = new StreamWriter(fs))
+        //            {
+        //                tw.WriteLine(content);
+        //                tw.Close();
+        //            }
+        //        }
+        //        else if (File.Exists(path))
+        //        {
+        //            using (StreamWriter tw = new StreamWriter(fs))
+        //            {
+        //                tw.WriteLine(content);
+        //                tw.Close();
+        //            }
+        //        }
+        //}
+
         /// <summary>
         /// 
         /// </summary>
@@ -297,6 +327,25 @@ namespace CPUNichiconSupportWIP
                 //storing the values  
                 key.SetValue("STATION_NO", stationNo);
                 key.SetValue("PATH", path);
+                key.Close();
+            }
+        }
+
+        public static void WriteRegistry(string keyName, string content)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES");
+            if (!string.IsNullOrEmpty(keyName) && !string.IsNullOrEmpty(content))
+            {
+                string exitsValue = GetValueRegistryKey(keyName);
+                if (exitsValue != null)
+                {
+                    exitsValue += content +";";
+                    key.SetValue(keyName, exitsValue);
+                }
+                else
+                {
+                    key.SetValue(keyName, content+";");
+                }
                 key.Close();
             }
         }

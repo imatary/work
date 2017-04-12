@@ -53,6 +53,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.lblAdd = new System.Windows.Forms.LinkLabel();
+            this.cboModel = new System.Windows.Forms.ComboBox();
             this.txtStationNO = new System.Windows.Forms.TextBox();
             this.btnStartWatch = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -73,6 +75,7 @@
             this.lblStatusMessage = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.lblConnected = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -95,13 +98,13 @@
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.panel1.Size = new System.Drawing.Size(570, 90);
+            this.panel1.Size = new System.Drawing.Size(571, 90);
             this.panel1.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(109, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(282, 80);
@@ -128,7 +131,7 @@
             this.panel2.Location = new System.Drawing.Point(10, 100);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.panel2.Size = new System.Drawing.Size(570, 244);
+            this.panel2.Size = new System.Drawing.Size(571, 236);
             this.panel2.TabIndex = 2;
             // 
             // dataGridView1
@@ -152,10 +155,10 @@
             this.colTime,
             this.colState});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 154);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 178);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(570, 90);
+            this.dataGridView1.Size = new System.Drawing.Size(571, 58);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
@@ -216,7 +219,7 @@
             this.groupBox1.Location = new System.Drawing.Point(0, 15);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(570, 139);
+            this.groupBox1.Size = new System.Drawing.Size(571, 163);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mode";
@@ -240,7 +243,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.56436F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.43564F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(287, 105);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(288, 129);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // lblTotal
@@ -248,9 +251,9 @@
             this.lblTotal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotal.Location = new System.Drawing.Point(195, 47);
+            this.lblTotal.Location = new System.Drawing.Point(195, 57);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(87, 56);
+            this.lblTotal.Size = new System.Drawing.Size(88, 70);
             this.lblTotal.TabIndex = 5;
             this.lblTotal.Text = "0";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -260,9 +263,9 @@
             this.lblNG.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNG.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNG.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblNG.Location = new System.Drawing.Point(100, 47);
+            this.lblNG.Location = new System.Drawing.Point(100, 57);
             this.lblNG.Name = "lblNG";
-            this.lblNG.Size = new System.Drawing.Size(87, 56);
+            this.lblNG.Size = new System.Drawing.Size(87, 70);
             this.lblNG.TabIndex = 4;
             this.lblNG.Text = "0";
             this.lblNG.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -272,9 +275,9 @@
             this.lblPASS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPASS.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPASS.ForeColor = System.Drawing.Color.Green;
-            this.lblPASS.Location = new System.Drawing.Point(5, 47);
+            this.lblPASS.Location = new System.Drawing.Point(5, 57);
             this.lblPASS.Name = "lblPASS";
-            this.lblPASS.Size = new System.Drawing.Size(87, 56);
+            this.lblPASS.Size = new System.Drawing.Size(87, 70);
             this.lblPASS.TabIndex = 3;
             this.lblPASS.Text = "0";
             this.lblPASS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -286,7 +289,7 @@
             this.label5.ForeColor = System.Drawing.Color.Blue;
             this.label5.Location = new System.Drawing.Point(195, 2);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 43);
+            this.label5.Size = new System.Drawing.Size(88, 53);
             this.label5.TabIndex = 2;
             this.label5.Text = "TOTAL";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -298,7 +301,7 @@
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label4.Location = new System.Drawing.Point(100, 2);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 43);
+            this.label4.Size = new System.Drawing.Size(87, 53);
             this.label4.TabIndex = 1;
             this.label4.Text = "NG";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -310,30 +313,51 @@
             this.label3.ForeColor = System.Drawing.Color.Green;
             this.label3.Location = new System.Drawing.Point(5, 2);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 43);
+            this.label3.Size = new System.Drawing.Size(87, 53);
             this.label3.TabIndex = 0;
             this.label3.Text = "PASS";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.lblAdd);
+            this.panel6.Controls.Add(this.cboModel);
             this.panel6.Controls.Add(this.txtStationNO);
             this.panel6.Controls.Add(this.btnStartWatch);
             this.panel6.Controls.Add(this.panel4);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(10, 24);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(263, 105);
+            this.panel6.Size = new System.Drawing.Size(263, 129);
             this.panel6.TabIndex = 3;
+            // 
+            // lblAdd
+            // 
+            this.lblAdd.AutoSize = true;
+            this.lblAdd.Location = new System.Drawing.Point(229, 67);
+            this.lblAdd.Name = "lblAdd";
+            this.lblAdd.Size = new System.Drawing.Size(28, 15);
+            this.lblAdd.TabIndex = 4;
+            this.lblAdd.TabStop = true;
+            this.lblAdd.Text = "Add";
+            this.lblAdd.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAdd_LinkClicked);
+            // 
+            // cboModel
+            // 
+            this.cboModel.FormattingEnabled = true;
+            this.cboModel.Location = new System.Drawing.Point(18, 64);
+            this.cboModel.Name = "cboModel";
+            this.cboModel.Size = new System.Drawing.Size(195, 23);
+            this.cboModel.TabIndex = 3;
+            this.cboModel.SelectedIndexChanged += new System.EventHandler(this.cboModel_SelectedIndexChanged);
             // 
             // txtStationNO
             // 
             this.txtStationNO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtStationNO.Enabled = false;
             this.txtStationNO.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStationNO.Location = new System.Drawing.Point(18, 3);
             this.txtStationNO.Name = "txtStationNO";
-            this.txtStationNO.Size = new System.Drawing.Size(230, 24);
+            this.txtStationNO.Size = new System.Drawing.Size(239, 24);
             this.txtStationNO.TabIndex = 1;
             this.txtStationNO.TextChanged += new System.EventHandler(this.txtStationNO_TextChanged);
             // 
@@ -344,7 +368,7 @@
             this.btnStartWatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStartWatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartWatch.ForeColor = System.Drawing.Color.White;
-            this.btnStartWatch.Location = new System.Drawing.Point(18, 64);
+            this.btnStartWatch.Location = new System.Drawing.Point(18, 93);
             this.btnStartWatch.Name = "btnStartWatch";
             this.btnStartWatch.Size = new System.Drawing.Size(122, 30);
             this.btnStartWatch.TabIndex = 2;
@@ -357,10 +381,9 @@
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Controls.Add(this.btnBrowse);
-            this.panel4.Enabled = false;
             this.panel4.Location = new System.Drawing.Point(18, 33);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(230, 25);
+            this.panel4.Size = new System.Drawing.Size(239, 25);
             this.panel4.TabIndex = 1;
             // 
             // panel5
@@ -370,7 +393,7 @@
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(2);
-            this.panel5.Size = new System.Drawing.Size(189, 23);
+            this.panel5.Size = new System.Drawing.Size(194, 23);
             this.panel5.TabIndex = 1;
             // 
             // txtPath
@@ -380,7 +403,8 @@
             this.txtPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPath.Location = new System.Drawing.Point(2, 2);
             this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(185, 17);
+            this.txtPath.ReadOnly = true;
+            this.txtPath.Size = new System.Drawing.Size(190, 17);
             this.txtPath.TabIndex = 0;
             this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged);
             // 
@@ -393,9 +417,9 @@
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowse.Image = global::CPUNichiconSupportWIP.Properties.Resources._698827_icon_101_folder_search_32;
-            this.btnBrowse.Location = new System.Drawing.Point(189, 0);
+            this.btnBrowse.Location = new System.Drawing.Point(194, 0);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(39, 23);
+            this.btnBrowse.Size = new System.Drawing.Size(43, 23);
             this.btnBrowse.TabIndex = 0;
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
@@ -408,10 +432,11 @@
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel5,
-            this.lblVersion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 354);
+            this.lblVersion,
+            this.lblConnected});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 346);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(590, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(591, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -465,7 +490,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(10);
-            this.panel3.Size = new System.Drawing.Size(590, 354);
+            this.panel3.Size = new System.Drawing.Size(591, 346);
             this.panel3.TabIndex = 4;
             // 
             // label2
@@ -474,7 +499,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
             this.label2.Location = new System.Drawing.Point(10, 100);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(570, 1);
+            this.label2.Size = new System.Drawing.Size(571, 1);
             this.label2.TabIndex = 3;
             // 
             // openFileDialog1
@@ -491,7 +516,7 @@
             this.lblStatusMessage.AutoSize = true;
             this.lblStatusMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatusMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lblStatusMessage.Location = new System.Drawing.Point(449, 357);
+            this.lblStatusMessage.Location = new System.Drawing.Point(423, 463);
             this.lblStatusMessage.Name = "lblStatusMessage";
             this.lblStatusMessage.Size = new System.Drawing.Size(47, 15);
             this.lblStatusMessage.TabIndex = 5;
@@ -502,18 +527,23 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // lblConnected
+            // 
+            this.lblConnected.Name = "lblConnected";
+            this.lblConnected.Size = new System.Drawing.Size(71, 17);
+            this.lblConnected.Text = "| Connected";
+            this.lblConnected.Visible = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(590, 376);
+            this.ClientSize = new System.Drawing.Size(591, 368);
             this.Controls.Add(this.lblStatusMessage);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(606, 415);
-            this.MinimumSize = new System.Drawing.Size(606, 415);
             this.Name = "FormMain";
             this.Text = "CPU-Nichicon";
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -577,6 +607,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.ComboBox cboModel;
+        private System.Windows.Forms.LinkLabel lblAdd;
+        private System.Windows.Forms.ToolStripStatusLabel lblConnected;
     }
 }
 

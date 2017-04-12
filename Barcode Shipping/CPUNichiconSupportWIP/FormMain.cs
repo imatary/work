@@ -1,12 +1,9 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace CPUNichiconSupportWIP
@@ -18,7 +15,7 @@ namespace CPUNichiconSupportWIP
         private FileSystemWatcher m_Watcher;
         string path = null;
         string stationNo = null;
-        string pathDb = "";
+        string fullPath = "";
         public FormMain()
         {
             InitializeComponent();
@@ -26,6 +23,7 @@ namespace CPUNichiconSupportWIP
             lblVersion.Text = Ultils.GetRunningVersion();
             m_bDirty = false;
             m_bIsWatching = false;
+            LoadModels();
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -33,16 +31,31 @@ namespace CPUNichiconSupportWIP
             path = Ultils.GetValueRegistryKey("PATH");
             stationNo = Ultils.GetValueRegistryKey("STATION_NO");
 
-            if(string.IsNullOrEmpty(path) || string.IsNullOrEmpty(stationNo))
+            if(string.IsNullOrEmpty(path))
             {
-                txtStationNO.Enabled = true;
-                panel4.Enabled = true;
+                errorProvider1.Clear();
+                errorProvider1.SetError(txtPath, "Field required!");
+                txtPath.Focus();
+            }
+            else
+            {
+                txtPath.Text = path;
+            }
+            if (string.IsNullOrEmpty(stationNo))
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(txtStationNO, "Field required!");
+                txtStationNO.Focus();
             }
             else
             {
                 txtStationNO.Text = stationNo;
-                txtPath.Text = path;
-                btnStartWatch.PerformClick();
+            }
+            if (string.IsNullOrEmpty(cboModel.SelectedText))
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(cboModel, "Field required!");
+                cboModel.Focus();
             }
         }
 
@@ -98,14 +111,17 @@ namespace CPUNichiconSupportWIP
                 txtPath.Focus();
                 isVaild = false;
             }
+            else if (string.IsNullOrEmpty(cboModel.Text))
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(cboModel, "Field required!");
+                cboModel.Focus();
+                isVaild = false;
+            }
             else if (isVaild == true)
             {
-                if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(stationNo))
-                {
-                    Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
-                }
-
-                string pathInput = Ultils.GetValueRegistryKey("PATH");
+                
+                Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
 
                 if (m_bIsWatching)
                 {
@@ -114,30 +130,49 @@ namespace CPUNichiconSupportWIP
                     m_Watcher.Dispose();
                     txtStationNO.Enabled = true;
                     panel4.Enabled = true;
+                    cboModel.Enabled = true;
                     btnStartWatch.BackColor = Color.Green;
                     btnStartWatch.Text = "Start Watching";
+                    lblConnected.Visible = false;
+
+                    CloseConnection(fullPath);
                 }
                 else
                 {
-                    m_bIsWatching = true;
-                    txtStationNO.Enabled = false;
-                    panel4.Enabled = false;
+                    if (CheckConnection(fullPath) == true)
+                    {
+                        m_bIsWatching = true;
+                        txtStationNO.Enabled = false;
+                        panel4.Enabled = false;
+                        cboModel.Enabled = false;
 
-                    btnStartWatch.BackColor = Color.Red;
-                    btnStartWatch.Text = "Stop Watching";
+                        btnStartWatch.BackColor = Color.Red;
+                        btnStartWatch.Text = "Stop Watching";
 
-                    m_Watcher = new FileSystemWatcher();
-                    m_Watcher.IncludeSubdirectories = true;
-                    m_Watcher.Filter = "*.mdb";
-                    //m_Watcher.Filter = pathInput.Substring(pathInput.LastIndexOf('\\') + 1);
-                    //m_Watcher.Path = pathInput.Substring(0, pathInput.Length - m_Watcher.Filter.Length);
-                    m_Watcher.Path = pathInput + "\\";
+                        m_Watcher = new FileSystemWatcher();
+                        m_Watcher.IncludeSubdirectories = true;
 
-                    m_Watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
-                                     | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastAccess;
-                    m_Watcher.Changed += new FileSystemEventHandler(OnChanged);
-                    m_Watcher.Created += new FileSystemEventHandler(OnChanged);
-                    m_Watcher.EnableRaisingEvents = true;
+                        string path = Ultils.GetValueRegistryKey("PATH").ToString() + "\\";
+
+                        m_Watcher.Filter = cboModel.Text + ".mdb";
+                        m_Watcher.Path = path;
+
+
+                        m_Watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
+                                         | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastAccess;
+                        m_Watcher.Changed += new FileSystemEventHandler(OnChanged);
+                        m_Watcher.Created += new FileSystemEventHandler(OnChanged);
+                        m_Watcher.EnableRaisingEvents = true;
+                    }
+                    else
+                    {
+                        string message = "Kết nối đến database thất bại. Vui lòng kiểm tra lại đường dẫn và thử lại.\nNếu vẫn không được, liên hệ với phòng IT để được hỗ trợ!";
+                        errorProvider1.Clear();
+                        errorProvider1.SetError(panel4, message);
+                        txtPath.Focus();
+                        MessageBox.Show(message);
+                        return;
+                    }  
                 }
             }
         }
@@ -148,7 +183,7 @@ namespace CPUNichiconSupportWIP
             {
                 if (e.ChangeType == WatcherChangeTypes.Changed || e.ChangeType==WatcherChangeTypes.Created)
                 {
-                    pathDb = e.FullPath;
+                    //fullPath = e.FullPath;
                     m_bDirty = true;
                 }
             }
@@ -189,6 +224,7 @@ namespace CPUNichiconSupportWIP
             if (!string.IsNullOrEmpty(txtPath.Text))
             {
                 Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
+                errorProvider1.Clear();
             }
         }
 
@@ -197,64 +233,175 @@ namespace CPUNichiconSupportWIP
             if (!string.IsNullOrEmpty(txtStationNO.Text))
             {
                 Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
+                errorProvider1.Clear();
             }
         }
 
+        private void cboModel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboModel.SelectedIndex > 0)
+            {
+                fullPath = path + "\\" + cboModel.Text + ".mdb";
+                errorProvider1.Clear();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void RunWorkingDatabase(string fullPath)
+        {
+            
+            //string strSQL = $"SELECT TOP 1 *  FROM PTS_HEADER  WHERE EndDateTime >= #1/7/2017# ORDER BY EndDateTime DESC";
+            string strSQL = $"SELECT TOP 1 *  FROM PTS_HEADER  WHERE EndDateTime >= #{DateTime.Now.Date}# ORDER BY EndDateTime DESC";
+
+            OleDbConnection myConn = OpenConnection(fullPath);
+            OleDbDataAdapter myCmd = new OleDbDataAdapter(strSQL, myConn);
+            DataSet dtSet = new DataSet();
+            myCmd.Fill(dtSet, "PTS_HEADER");
+            DataTable dTable = dtSet.Tables[0];
+            List<Item> items = new List<Item>();
+            if (dTable.Rows.Count > 0)
+            {
+                var item = new Item()
+                {
+                    BoardNo = dTable.Rows[0]["Serial"].ToString(),
+                    Model = dTable.Rows[0]["Model"].ToString(),
+                    Result = int.Parse(dTable.Rows[0]["Result"].ToString()),
+                    EndDateTime = DateTime.Parse(dTable.Rows[0]["EndDateTime"].ToString())
+                };
+
+                if (item != null)
+                {
+                    items.Add(item);
+                    dataGridView1.AutoGenerateColumns = false;
+                    dataGridView1.DataSource = items;
+
+                    if (item.State == "PASS")
+                    {
+                        pass = pass + 1;
+                        lblPASS.Text = pass.ToString();
+                    }
+                    else if (item.State == "FAIL")
+                    {
+                        ng = ng + 1;
+                        lblNG.Text = ng.ToString();
+                    }
+                    total = pass + ng;
+                    lblTotal.Text = total.ToString();
+                }
+                Ultils.CreateFileLog(item.Model, item.BoardNo, item.Status, stationNo, DateTime.Now.ToString("yyMMddHHmmss"));
+            }
+            else
+            {
+                lblStatusMessage.Visible = true;
+                lblStatusMessage.Text = "Check local format time!";
+            }
+            CloseConnection(fullPath);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void LoadModels()
+        {
+            string[] models = Ultils.GetValueRegistryKey("Models").Split(';');
+            foreach (var item in models)
+            {
+                cboModel.Items.Add(item);
+            }
+        }
+
+        private void lblAdd_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LoadModels();
+        }
+
+        /// <summary>
+        /// Kiểm tra kết nối
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckConnection(string pathFile)
+        {
+            
+            try
+            {
+                string strDSN = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = {pathFile}";
+                OleDbConnection myConn = new OleDbConnection(strDSN);
+
+                if (myConn.State == ConnectionState.Closed)
+                {
+                    myConn.Open();
+                    lblConnected.Visible = true;
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
+        }
+
+        /// <summary>
+        /// Mở kết nối đến database
+        /// </summary>
+        /// <param name="pathDb"></param>
+        /// <returns></returns>
+        private OleDbConnection OpenConnection(string pathDb)
+        {
+            try
+            {
+                string strDSN = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = {pathDb}";
+                OleDbConnection myConn = new OleDbConnection(strDSN);
+
+                if (myConn.State == ConnectionState.Closed)
+                {
+                    myConn.Open();
+                    return myConn;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Đóng kết nối
+        /// </summary>
+        /// <param name="pathDb"></param>
+        /// <returns></returns>
+        private void CloseConnection(string pathDb)
+        {
+            try
+            {
+                string strDSN = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = {pathDb}";
+                OleDbConnection myConn = new OleDbConnection(strDSN);
+
+                if (myConn.State == ConnectionState.Open)
+                {
+                    myConn.Dispose();
+                    myConn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         private void tmrEditNotify_Tick(object sender, EventArgs e)
         {
             if (m_bDirty)
             {
-                string strDSN = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = {pathDb}";
-                //string strSQL = $"SELECT TOP 1 *  FROM PTS_HEADER  WHERE EndDateTime >= #1/7/2017# ORDER BY EndDateTime DESC";
-                string strSQL = $"SELECT TOP 1 *  FROM PTS_HEADER  WHERE EndDateTime >= #{DateTime.Now.Date}# ORDER BY EndDateTime DESC";
-                // create Objects of ADOConnection and ADOCommand  
-                OleDbConnection myConn = new OleDbConnection(strDSN);
-                OleDbDataAdapter myCmd = new OleDbDataAdapter(strSQL, myConn);
-                myConn.Open();
-                DataSet dtSet = new DataSet();
-                myCmd.Fill(dtSet, "PTS_HEADER");
-                DataTable dTable = dtSet.Tables[0];
-                List<Item> items = new List<Item>();
-                if (dTable.Rows.Count > 0)
-                {
-                    var item = new Item()
-                    {
-                            BoardNo = dTable.Rows[0]["Serial"].ToString(),
-                            Result = int.Parse(dTable.Rows[0]["Result"].ToString()),
-                            EndDateTime = DateTime.Parse(dTable.Rows[0]["EndDateTime"].ToString())
-                    };
-
-                    items.Add(item);
-                    if (items.Any())
-                    {
-                        dataGridView1.AutoGenerateColumns = false;
-                        dataGridView1.DataSource = items;
-
-                        if (item.State == "PASS")
-                        {
-                            pass = pass + 1;
-                            lblPASS.Text = pass.ToString();
-                        }
-                        else if (item.State == "FAIL")
-                        {
-                            ng = ng + 1;
-                            lblNG.Text = ng.ToString();
-                        }
-                        total = pass + ng;
-                        lblTotal.Text = total.ToString();
-                    }
-                    Ultils.CreateFileLog(item.Model, item.BoardNo, item.Status, stationNo, DateTime.Now.ToString("yyMMddHHmmss"));
-                }
-                else
-                {
-                    lblStatusMessage.Visible = true;
-                    lblStatusMessage.Text = "Check local format time!";
-                }
-                myConn.Close();
+                RunWorkingDatabase(fullPath);
                 m_bDirty = false;
             }
         }
-
 
     }
 }
