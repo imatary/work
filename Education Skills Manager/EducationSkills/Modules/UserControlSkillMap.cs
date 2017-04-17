@@ -8,6 +8,7 @@ using System.Collections;
 using System.Data.SqlClient;
 using DevExpress.XtraGrid.Columns;
 using System.Diagnostics;
+using DevExpress.Utils;
 
 namespace EducationSkills.Modules
 {
@@ -26,17 +27,13 @@ namespace EducationSkills.Modules
 
         private void btnFind_Click(object sender, EventArgs e)
         {
-            string selectDate = null, selectDept = null;
-            if (FormDate.Text != "")
-            {
-                selectDate = FormDate.DateTime.ToString();
-            }
+            string selectDept = null;
             if (txtDept.Text != "")
             {
                 selectDept = txtDept.EditValue.ToString();
             }
 
-            GetReportSkillsMap(selectDate, selectDept);
+            GetReportSkillsMap(selectDept);
 
         }
 
@@ -45,7 +42,7 @@ namespace EducationSkills.Modules
         /// </summary>
         /// <param name="date"></param>
         /// <param name="dept"></param>
-        private void GetReportSkillsMap(string date, string dept)
+        private void GetReportSkillsMap(string dept)
         {
             splashScreenManager1.ShowWaitForm();
             DataTable dt = new DataTable();
@@ -56,38 +53,30 @@ namespace EducationSkills.Modules
             {
                 parmDept.Value = DBNull.Value;
             }
-            SqlParameter parmDate = new SqlParameter() { ParameterName = "@date", Value = date, SqlDbType = SqlDbType.DateTime };
-            if (date == null)
-            {
-                parmDate.Value = DBNull.Value;
-            }
             try
             {
                 var subjects = context.Database.SqlQuery<Subject>("EXEC [dbo].[sp_GetSubjectCodes]").ToList();
 
-                List<Staff> staffs = context.Database.SqlQuery<Staff>("EXEC [dbo].[sp_GetStaffs] @deptCode, @date", parmDept, parmDate).ToList();
+                List<Staff> staffs = context.Database.SqlQuery<Staff>("EXEC [dbo].[sp_GetStaffs] @deptCode", parmDept).ToList();
 
                 var data = (from f in staffs
-                         group f by new { f.StaffCode, f.FullName, f.DeptCode, f.TenBoMon }
+                            group f by new { f.StaffCode, f.FullName, f.DeptCode }
                     into myGroup
-                         where myGroup.Count() > 0
-                         select new
-                         {
-                             myGroup.Key.StaffCode,
-                             myGroup.Key.FullName,
-                             myGroup.Key.DeptCode,
-                             myGroup.Key.TenBoMon,
-                             Subs = myGroup.GroupBy(f => f.MaBoMon)
-                             .Select
-                             (m =>
-                                new
-                                {
-                                    Date = m.SingleOrDefault(c => c.StaffCode == myGroup.Key.StaffCode).NgayThamGia
-                                })
-                         }).ToList();
+                            where myGroup.Count() > 0
+                            select new
+                            {
+                                myGroup.Key.StaffCode,
+                                myGroup.Key.FullName,
+                                myGroup.Key.DeptCode,
+                                SubjectIDs = myGroup.GroupBy(f => f.MaBoMon)
+                                .Select
+                                (m =>
+                                   new
+                                   {
+                                       Date = m.SingleOrDefault(c => c.StaffCode == myGroup.Key.StaffCode).NgayThamGia
+                                   })
+                            }).ToList();
 
-
-                //Creating array for adding dynamic columns
                 ArrayList objDataColumn = new ArrayList();
 
                 if (staffs.Count() > 0)
@@ -96,33 +85,34 @@ namespace EducationSkills.Modules
                     objDataColumn.Add("FullName");
                     objDataColumn.Add("Dept");
 
-                    //Add Subject Name as column in Datatable
                     for (int i = 0; i < subjects.Count; i++)
                     {
-                        objDataColumn.Add(subjects[i].MaBoMon);
+                        objDataColumn.Add(subjects[i].MaBoMon.Replace(" ", ""));
                     }
                 }
-                //Add dynamic columns name to datatable dt
                 for (int i = 0; i < objDataColumn.Count; i++)
                 {
                     dt.Columns.Add(objDataColumn[i].ToString());
                 }
 
-                //Add data into datatable with respect to dynamic columns and dynamic data
                 for (int i = 0; i < data.Count; i++)
                 {
-                    List<string> tempList = new List<string>();
-                    tempList.Add(data[i].StaffCode.ToString());
-                    tempList.Add(data[i].FullName.ToString());
-                    tempList.Add(data[i].DeptCode.ToString());
+                    List<string> rowItem = new List<string>();
+                    rowItem.Add(data[i].StaffCode.ToString());
+                    rowItem.Add(data[i].FullName.ToString());
+                    rowItem.Add(data[i].DeptCode.ToString());
 
-                    var res = data[i].Subs.ToList();
-                    for (int j = 0; j < res.Count; j++)
+                    var IDs = data[i].SubjectIDs.ToList();
+                    if (IDs.Any())
                     {
-                        tempList.Add(string.Format("{0:dd/MM/yyyy}", res[j].Date));
+                        for (int j = 0; j < IDs.Count; j++)
+                        {
+                            rowItem.Add(string.Format("{0:dd/MM/yyyy}", IDs[j].Date));
+                        }
                     }
-                    
-                    dt.Rows.Add(tempList.ToArray<string>());
+
+
+                    dt.Rows.Add(rowItem.ToArray<string>());
                 }
                 gridControl1.DataSource = dt;
 
@@ -133,21 +123,10 @@ namespace EducationSkills.Modules
                 gridView1.Columns[0].Fixed = FixedStyle.Left;
                 gridView1.Columns[1].Fixed = FixedStyle.Left;
                 gridView1.Columns[2].Fixed = FixedStyle.Left;
-
-                // Tooltip Column Title
-                foreach (var item in gridView1.Columns)
-                {
-                    string columnName = item.ToString();
-                    if (columnName.StartsWith("EDU"))
-                    {
-                        var SubjectName = context.PR_Bomon.SingleOrDefault(m => m.MaBoMon == columnName).TenBoMon;
-                        gridView1.Columns[columnName].ToolTip = SubjectName;
-                    }
-                }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                MessageBox.Show(ex.Message);
             }
 
             if (gridControl1.DataSource != null)
@@ -155,18 +134,39 @@ namespace EducationSkills.Modules
                 btnExportToExel.Enabled = true;
             }
 
-            splashScreenManager1.CloseWaitForm();
+            // Tooltip Column Title
+            foreach (var item in gridView1.Columns)
+            {
+                string columnName = item.ToString();
+                if (columnName.StartsWith("EDU-"))
+                {
+                    var SubjectName = context.PR_Bomon.SingleOrDefault(m => m.MaBoMon == columnName).TenBoMon;
+                    gridView1.Columns[columnName].ToolTip = SubjectName;
 
+                    //if (gridView1.Columns[columnName] != "")
+                    //{
+                    //    gridView1.Columns[columnName].ColumnEdit.DisplayFormat.FormatType = FormatType.DateTime;
+                    //}
+
+                    //for (int i = 0; i < gridView1.RowCount; i++)
+                    //{
+                    //    string value = gridView1.GetRowCellValue(i, columnName).ToString();
+                    //    if (value != null || value.Length > 1)
+                    //    {
+                    //        gridView1.Columns[columnName].ColumnEdit.DisplayFormat.FormatType = FormatType.DateTime;
+                    //    }
+                    //}
+                    gridView1.Columns[columnName].AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
+                    gridView1.Columns[columnName].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Far;
+                }
+            }
+            splashScreenManager1.CloseWaitForm();
         }
         /// <summary>
         /// 
         /// </summary>
         private void GetDepartments()
         {
-            //context = new EducationSkillsDbContext();
-            //var departments = context.Database.SqlQuery<Department>("EXEC [dbo].[sp_Get_All_Departments]").ToList();
-            //txtDept.Properties.DataSource = departments;
-
             context = new EducationSkillsDbContext();
             var dept = new Department { DeptCode = "Tất cả" };
             List<Department> departments = null;
@@ -188,6 +188,7 @@ namespace EducationSkills.Modules
             gridControl1.RefreshDataSource();
             btnFind.Focus();
             btnExportToExel.Enabled = false;
+            GetReportSkillsMap(null);
         }
 
         private void btnExportToExel_Click(object sender, EventArgs e)
@@ -202,10 +203,9 @@ namespace EducationSkills.Modules
             saveFileDialog1.ShowDialog();
             if (saveFileDialog1.FileName != "")
             {
-               gridView1.ExportToXlsx(saveFileDialog1.FileName);
+                gridView1.ExportToXlsx(saveFileDialog1.FileName);
+                Process.Start(saveFileDialog1.FileName);
             }
-
-            Process.Start(saveFileDialog1.FileName);
         }
 
         private void txtDept_EditValueChanged(object sender, EventArgs e)
@@ -214,11 +214,11 @@ namespace EducationSkills.Modules
             {
                 if (txtDept.Text == "Tất cả")
                 {
-                    GetReportSkillsMap(null, null);
+                    GetReportSkillsMap(null);
                 }
                 else
                 {
-                    GetReportSkillsMap(null, txtDept.EditValue.ToString());
+                    GetReportSkillsMap(txtDept.EditValue.ToString());
                 }
             }
         }

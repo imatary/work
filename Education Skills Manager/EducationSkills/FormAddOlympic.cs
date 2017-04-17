@@ -51,23 +51,23 @@ namespace EducationSkills
                     lblEntryDate.Text = string.Format("{0:MM/dd/yyyy}", employees.EntryDate);
                     lblPosName.Text = employees.PosName;
 
-                    var olympic = context.EDU_Olympics.SingleOrDefault(m => m.StaffCode == staffCode);
-                    if (olympic != null)
-                    {
-                        txtTestContent.EditValue = olympic.TestContent;
-                        txtTestNumber.Text = olympic.TestNumber.ToString();
-                        txtTestDate.DateTime = olympic.TestDate;
-                        txtTestResults.EditValue = olympic.TestResults;
-                    }
-                    else
-                    {
+                    //var olympic = context.EDU_Olympics.SingleOrDefault(m => m.StaffCode == staffCode);
+                    //if (olympic != null)
+                    //{
+                    //    txtTestContent.EditValue = olympic.TestContent;
+                    //    txtTestNumber.Text = olympic.TestNumber.ToString();
+                    //    txtTestDate.DateTime = olympic.TestDate;
+                    //    txtTestResults.EditValue = olympic.TestResults;
+                    //}
+                    //else
+                    //{
                         txtTestContent.EditValue = null;
                         txtTestContent.ResetText();
                         txtTestNumber.ResetText();
                         txtTestDate.ResetText();
                         txtTestResults.EditValue = null;
                         txtTestResults.ResetText();
-                    }
+                    //}
 
                     splashScreenManager1.CloseWaitForm();
                 }
@@ -126,9 +126,9 @@ namespace EducationSkills
             }
             else
             {
-                var olympic = context.EDU_Olympics.SingleOrDefault(m => m.StaffCode == lblCode.Text);
-                if(olympic == null)
-                {
+                //var olympic = context.EDU_Olympics.SingleOrDefault(m => m.StaffCode == lblCode.Text);
+                //if(olympic == null)
+                //{
                     var addOlympic = new EDU_Olympics()
                     {
                         StaffCode = lblCode.Text,
@@ -148,30 +148,30 @@ namespace EducationSkills
                     {
                         MessageHelper.ErrorMessageBox(ex.Message);
                     }
-                }
-                else
-                {
-                    olympic.TestContent = txtTestContent.Text;
-                    olympic.TestNumber = int.Parse(txtTestNumber.Text);
-                    olympic.TestDate = txtTestDate.DateTime;
-                    olympic.TestResults = txtTestResults.Text;
+                //}
+                //else
+                //{
+                //    olympic.TestContent = txtTestContent.Text;
+                //    olympic.TestNumber = int.Parse(txtTestNumber.Text);
+                //    olympic.TestDate = txtTestDate.DateTime;
+                //    olympic.TestResults = txtTestResults.Text;
 
-                    try
-                    {
-                        using (var context = new EducationSkillsDbContext())
-                        {
-                            context.EDU_Olympics.Attach(olympic);
-                            context.Entry(olympic).State = EntityState.Modified;
-                            context.SaveChanges();
-                        }
-                        MessageHelper.SuccessMessageBox("Lưu thành công!");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageHelper.ErrorMessageBox(ex.Message);
-                    }
+                //    try
+                //    {
+                //        using (var context = new EducationSkillsDbContext())
+                //        {
+                //            context.EDU_Olympics.Attach(olympic);
+                //            context.Entry(olympic).State = EntityState.Modified;
+                //            context.SaveChanges();
+                //        }
+                //        MessageHelper.SuccessMessageBox("Lưu thành công!");
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        MessageHelper.ErrorMessageBox(ex.Message);
+                //    }
                     
-                }
+                //}
                 ResetTextControls();
             }
             

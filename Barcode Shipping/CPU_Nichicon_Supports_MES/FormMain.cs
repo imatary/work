@@ -6,7 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace CPUNichiconSupportWIP
+namespace CPU_Nichicon_Supports_MES
 {
     public partial class FormMain : Form
     {
@@ -305,10 +305,38 @@ namespace CPUNichiconSupportWIP
         /// </summary>
         private void LoadModels()
         {
-            string[] models = Ultils.GetValueRegistryKey("Models").Split(';');
-            foreach (var item in models)
+            if (Ultils.GetValueRegistryKey("Models") != null)
             {
-                cboModel.Items.Add(item);
+                string[] models = Ultils.GetValueRegistryKey("Models").Split(';');
+
+                foreach (var item in models)
+                {
+                    cboModel.Items.Add(item);
+                }
+            }
+            else
+            {
+                string[] models = {
+                "ZSFLA18GA",
+                "ZSFLA18HA",
+                "ZSFLA18ZA",
+                "ZSFLA32GA",
+                "ZSFLA32HA",
+                "ZSFLB06GA",
+                "ZSFLB06HA",
+                "ZSFLC15GA",
+                "ZSFLC15HA",
+                "ZSFLD22_REV5",
+                "ZSFLD22IO",
+                "ZSSFE08",
+                "ZSSFE09"
+                };
+
+                foreach (var item in models)
+                {
+                    cboModel.Items.Add(item);
+                    Ultils.WriteRegistry("Models", item);
+                }
             }
         }
 

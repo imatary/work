@@ -1,17 +1,39 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Deployment.Application;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 
-namespace Lib.Core
+namespace CPU_Nichicon_Supports_MES
 {
     public static class Ultils
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static string GetRunningVersion()
+        {
+            try
+            {
+                return ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            catch
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isChecked"></param>
+        /// <param name="executablePath"></param>
         public static void RegisterInStartup(bool isChecked, string executablePath)
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -26,6 +48,14 @@ namespace Lib.Core
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="model"></param>
+        /// <param name="productId"></param>
+        /// <param name="status"></param>
+        /// <param name="process"></param>
         public static void CreateFolderBackupLog(string fileName,string model, string productId, string status, string process)
         {
             string backup_log_folder = @"C:\backup_log\";
@@ -81,100 +111,6 @@ namespace Lib.Core
         public static bool IsRunning(string name)
         {
             return Process.GetProcessesByName(name).Length > 0 ? true : false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="processName"></param>
-        /// <param name="isOk"></param>
-        public static void SuspendOrResumeCurentProcess(string processName, bool isOk=false)
-        {
-            var id = Process.GetProcessesByName(processName).FirstOrDefault();
-            var process = Process.GetProcessById(id.Id);
-            
-
-            if (isOk == true)
-            {
-                process.Suspend();
-            }
-            else if (isOk == false)
-            {
-                process.Resume();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static IEnumerable<string[]> ReadCsv(string path)
-        {
-            char[] separator = new[] { ',' };
-            string currentLine;
-
-            using (var stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite))
-            {
-                using (var reader = new StreamReader(stream, Encoding.Default, true, 1024))
-                {
-                    while ((currentLine = reader.ReadLine()) != null)
-                    {
-                        yield return currentLine.Split(separator, StringSplitOptions.None);
-                    }
-                    reader.Dispose();
-                    reader.Close();
-                }
-                stream.Dispose();
-                stream.Close();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static List<string> ReadLogTxt(string path)
-        {
-            List<string> data = new List<string>();
-            var lines = File.ReadAllLines(path);
-            foreach (var line in lines)
-            {
-                if (line.Contains("PASS"))
-                {
-                    data.Add("PASS");
-                }
-                else if (line.Contains("FAIL"))
-                {
-                    data.Add("FAIL");
-                }
-            }
-            return data;
-        }
-
-        public static List<string> ReadStringBuilder(StringBuilder stringBuilder)
-        {
-            List<string> data = new List<string>();
-            var lines = new StringReader(stringBuilder.ToString());
-            string result;
-            
-            while ((result = lines.ReadLine()) != null)
-            {
-                if (result.Contains("FAIL"))
-                {
-                    data.Add(result);
-                }
-                else if(result.Contains("PASS"))
-                {
-                    data.Add(result);
-                }
-            }
-
-            lines.Dispose();
-            lines.Close();
-
-            return data;
         }
 
         /// <summary>
@@ -275,6 +211,11 @@ namespace Lib.Core
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="content"></param>
         public static void WriteFile(string fileName, string content)
         {
             string dateTime = DateTime.Now.ToString("yyMMddHHmmss");
@@ -307,6 +248,42 @@ namespace Lib.Core
                 }
         }
 
+        //public static void WriteText(string fileName, string content)
+        //{
+        //    string folderRoot = @"C:\CPU-Nichicon\";
+
+        //    bool exists = Directory.Exists(folderRoot);
+        //    if (!exists)
+        //        Directory.CreateDirectory(folderRoot);
+
+        //    string path = folderRoot + fileName;
+
+        //    using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+        //        if (!File.Exists(path))
+        //        {
+        //            File.Create(path).Dispose();
+        //            using (StreamWriter tw = new StreamWriter(fs))
+        //            {
+        //                tw.WriteLine(content);
+        //                tw.Close();
+        //            }
+        //        }
+        //        else if (File.Exists(path))
+        //        {
+        //            using (StreamWriter tw = new StreamWriter(fs))
+        //            {
+        //                tw.WriteLine(content);
+        //                tw.Close();
+        //            }
+        //        }
+        //}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public static string GetLine(StringBuilder fileName, int line)
         {
             //string line = fileName..Skip(14).Take(1).First();
@@ -319,49 +296,75 @@ namespace Lib.Core
             }
         }
 
-        public static string GetLine(string path, int line)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        public static string GetLine(string fileName, int line)
         {
             ////string line = fileName..Skip(14).Take(1).First();
-            string value;
-            using (var sr = new StreamReader(path))
+
+            using (var sr = new StreamReader(fileName))
             {
                 for (int i = 1; i < line; i++)
-                {
                     sr.ReadLine();
-                }
-                value = sr.ReadLine();
-                sr.Dispose();
-                return value;
+                return sr.ReadLine();
             }
         }
-        public static void SetLine(string path, int line, string value)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stationNo"></param>
+        /// <param name="path"></param>
+        public static void WriteRegistryKey(string stationNo, string path)
         {
-            ////string line = fileName..Skip(14).Take(1).First();
-
-            //using (var sr = new StreamWriter(path))
-            //{
-            //    for (int i = 1; i < line; i++)
-            //        sr.WriteLine(value);
-            //}
-
-            string[] arrLine = File.ReadAllLines(path);
-            arrLine[line - 1] = value;
-            File.WriteAllLines(path, arrLine);
-        }
-
-        public static string GetIP()
-        {
-            String strHostName = Dns.GetHostName();
-            // Find host by name
-            IPHostEntry iphostentry = Dns.GetHostByName(strHostName);
-            // Grab the first IP addresses
-            String IPStr = "";
-            foreach (IPAddress ipaddress in iphostentry.AddressList)
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES");
+            if (!string.IsNullOrEmpty(path) || !string.IsNullOrEmpty(stationNo))
             {
-                IPStr = ipaddress.ToString();
-                return IPStr;
+                //storing the values  
+                key.SetValue("STATION_NO", stationNo);
+                key.SetValue("PATH", path);
+                key.Close();
             }
-            return IPStr;
+        }
+
+        public static void WriteRegistry(string keyName, string content)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES");
+            if (!string.IsNullOrEmpty(keyName) && !string.IsNullOrEmpty(content))
+            {
+                string exitsValue = GetValueRegistryKey(keyName);
+                if (exitsValue != null)
+                {
+                    exitsValue += content +";";
+                    key.SetValue(keyName, exitsValue);
+                }
+                else
+                {
+                    key.SetValue(keyName, content+";");
+                }
+                key.Close();
+            }
+        }
+
+        public static string GetValueRegistryKey(string keyName)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES");
+            string value = null;
+            if (key!=null)
+            {
+                if(key.GetValue(keyName) != null)
+                {
+                    value = key.GetValue(keyName).ToString();
+                    key.Close();
+                    return value;
+                }
+            }
+
+            return null;
         }
     }
 }

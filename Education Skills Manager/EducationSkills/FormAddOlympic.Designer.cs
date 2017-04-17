@@ -34,6 +34,7 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtSearchKey = new DevExpress.XtraEditors.ButtonEdit();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -51,7 +52,6 @@
             this.lblDeptCode = new DevExpress.XtraEditors.LabelControl();
             this.lblPosName = new DevExpress.XtraEditors.LabelControl();
             this.lblEntryDate = new DevExpress.XtraEditors.LabelControl();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.txtTestContent = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtTestNumber = new DevExpress.XtraEditors.SpinEdit();
             this.txtTestDate = new DevExpress.XtraEditors.DateEdit();
@@ -60,8 +60,8 @@
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::EducationSkills.ShowWait), true, true);
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSearchKey.Properties)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -83,6 +83,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tìm kiếm mã nhân viên";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(125, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(336, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Note: Nhập vào mã nhân viên, sau đó gõ ENTER hoặc nhấn nút Tìm";
             // 
             // txtSearchKey
             // 
@@ -334,18 +345,6 @@
             this.lblEntryDate.TabIndex = 8;
             this.lblEntryDate.Text = "[N/A]";
             // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.simpleButton1.Appearance.Options.UseFont = true;
-            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(137, 413);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(96, 28);
-            this.simpleButton1.TabIndex = 2;
-            this.simpleButton1.Text = "Lưu";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
-            // 
             // txtTestContent
             // 
             this.txtTestContent.Dock = System.Windows.Forms.DockStyle.Left;
@@ -380,8 +379,9 @@
             this.txtTestNumber.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.txtTestNumber.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtTestNumber.Properties.Mask.EditMask = "d";
             this.txtTestNumber.Properties.MaxValue = new decimal(new int[] {
-            10,
+            100,
             0,
             0,
             0});
@@ -480,20 +480,21 @@
             this.labelControl11.TabIndex = 7;
             this.labelControl11.Text = "Thành tích:";
             // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleButton1.Appearance.Options.UseFont = true;
+            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
+            this.simpleButton1.Location = new System.Drawing.Point(137, 413);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(96, 28);
+            this.simpleButton1.TabIndex = 2;
+            this.simpleButton1.Text = "Lưu";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
             // splashScreenManager1
             // 
             this.splashScreenManager1.ClosingDelay = 500;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(125, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(336, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Note: Nhập vào mã nhân viên, sau đó gõ ENTER hoặc nhấn nút Tìm";
             // 
             // FormAddOlympic
             // 

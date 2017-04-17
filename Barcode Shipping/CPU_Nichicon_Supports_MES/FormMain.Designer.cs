@@ -1,4 +1,4 @@
-﻿namespace CPUNichiconSupportWIP
+﻿namespace CPU_Nichicon_Supports_MES
 {
     partial class FormMain
     {
@@ -116,11 +116,11 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Image = global::CPUNichiconSupportWIP.Properties.Resources.umc;
+            this.pictureBox1.Image = global::CPU_Nichicon_Supports_MES.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(109, 80);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -420,12 +420,13 @@
             // btnBrowse
             // 
             this.btnBrowse.BackColor = System.Drawing.Color.White;
-            this.btnBrowse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnBrowse.BackgroundImage = global::CPU_Nichicon_Supports_MES.Properties.Resources._698827_icon_101_folder_search_32;
+            this.btnBrowse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBrowse.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBrowse.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnBrowse.FlatAppearance.BorderSize = 0;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowse.Image = global::CPUNichiconSupportWIP.Properties.Resources._698827_icon_101_folder_search_32;
             this.btnBrowse.Location = new System.Drawing.Point(194, 0);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(43, 23);
@@ -556,6 +557,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CPU-Nichicon";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.panel1.ResumeLayout(false);

@@ -149,28 +149,27 @@ namespace EducationSkills.Modules
             SqlParameter parmDept = new SqlParameter() { ParameterName = "@deptCode", Value = DBNull.Value, SqlDbType = SqlDbType.VarChar };
             var reports = context.Database.SqlQuery<Employees>("EXEC [dbo].[sp_Get_All_Staff] @deptCode", parmDept).ToList();
             var subjects = context.Database.SqlQuery<Subject>("EXEC [dbo].[sp_GetSubjectCodes]").ToList();
-            var isStaffs = reports.Where(c => c.PosName.Contains("Staff"));
-
-            if (isStaffs.Any())
+            
+            if (reports.Any())
             {
-                foreach (var staff in isStaffs)
+                foreach (var staff in reports)
                 {
-                    SqlParameter parm = new SqlParameter() { ParameterName = "@staffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NVarChar };
-                    SqlParameter parmSub = new SqlParameter() { ParameterName = "@MaBoMon", Value = DBNull.Value, SqlDbType = SqlDbType.VarChar };
-                    var checkExits = context.Database.SqlQuery<CheckExitsSkillMap>("EXEC [dbo].[CheckStaffCodeExitsSkillMap] @staffCode, @MaBoMon", parm, parmSub).SingleOrDefault();
-
-                    if (checkExits == null)
+                    foreach (var sub in subjects)
                     {
-                        foreach (var sub in subjects)
+                        SqlParameter parm = new SqlParameter() { ParameterName = "@staffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NVarChar };
+                        SqlParameter parmSub = new SqlParameter() { ParameterName = "@MaBoMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.VarChar };
+                        var checkExits = context.Database.SqlQuery<CheckExitsSkillMap>("EXEC [dbo].[CheckStaffCodeExitsSkillMap] @staffCode, @MaBoMon", parm, parmSub).SingleOrDefault();
+
+                        if (checkExits == null)
                         {
                             object[] parms = {
-                                new SqlParameter() { ParameterName = "@StaffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NChar },
-                                new SqlParameter() { ParameterName = "@MaMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.NVarChar },
-                                new SqlParameter("@Out_Parameter", SqlDbType.Int)
-                                {
-                                    Direction = ParameterDirection.Output
-                                }
-                            };
+                                    new SqlParameter() { ParameterName = "@StaffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NChar },
+                                    new SqlParameter() { ParameterName = "@MaMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.NVarChar },
+                                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                                    {
+                                        Direction = ParameterDirection.Output
+                                    }
+                                };
 
                             try
                             {
