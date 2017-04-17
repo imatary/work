@@ -41,22 +41,24 @@
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtIPAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnConnected = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtPort = new System.Windows.Forms.MaskedTextBox();
             this.btnDisConnected = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.cboProcess = new System.Windows.Forms.ComboBox();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblConfigServer = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblIPAddress = new System.Windows.Forms.Label();
+            this.lblPort = new System.Windows.Forms.Label();
+            this.lblProcessName = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -106,7 +108,7 @@
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel5,
             this.lblVersion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 301);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 305);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(453, 24);
             this.statusStrip1.TabIndex = 4;
@@ -164,14 +166,6 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
-            // txtIPAddress
-            // 
-            this.txtIPAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIPAddress.Location = new System.Drawing.Point(133, 19);
-            this.txtIPAddress.Name = "txtIPAddress";
-            this.txtIPAddress.Size = new System.Drawing.Size(241, 22);
-            this.txtIPAddress.TabIndex = 6;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -197,7 +191,7 @@
             this.btnConnected.ForeColor = System.Drawing.Color.White;
             this.btnConnected.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConnected.ImageIndex = 1;
-            this.btnConnected.Location = new System.Drawing.Point(145, 261);
+            this.btnConnected.Location = new System.Drawing.Point(145, 264);
             this.btnConnected.Name = "btnConnected";
             this.btnConnected.Size = new System.Drawing.Size(80, 38);
             this.btnConnected.TabIndex = 9;
@@ -217,21 +211,12 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // txtPort
-            // 
-            this.txtPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPort.Location = new System.Drawing.Point(133, 48);
-            this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(100, 22);
-            this.txtPort.TabIndex = 11;
-            this.txtPort.Text = "8000";
-            // 
             // btnDisConnected
             // 
             this.btnDisConnected.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnDisConnected.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDisConnected.ForeColor = System.Drawing.Color.White;
-            this.btnDisConnected.Location = new System.Drawing.Point(231, 261);
+            this.btnDisConnected.Location = new System.Drawing.Point(231, 264);
             this.btnDisConnected.Name = "btnDisConnected";
             this.btnDisConnected.Size = new System.Drawing.Size(86, 38);
             this.btnDisConnected.TabIndex = 12;
@@ -244,7 +229,7 @@
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.ForeColor = System.Drawing.Color.Teal;
-            this.lblStatus.Location = new System.Drawing.Point(130, 82);
+            this.lblStatus.Location = new System.Drawing.Point(129, 82);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(37, 13);
             this.lblStatus.TabIndex = 13;
@@ -253,7 +238,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(50, 53);
+            this.label5.Location = new System.Drawing.Point(50, 27);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(76, 13);
             this.label5.TabIndex = 14;
@@ -271,64 +256,103 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(78, 20);
+            this.label4.Location = new System.Drawing.Point(79, 110);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 15;
             this.label4.Text = "Process:";
             // 
-            // cboProcess
-            // 
-            this.cboProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboProcess.FormattingEnabled = true;
-            this.cboProcess.Location = new System.Drawing.Point(132, 15);
-            this.cboProcess.Name = "cboProcess";
-            this.cboProcess.Size = new System.Drawing.Size(240, 24);
-            this.cboProcess.TabIndex = 16;
-            // 
             // txtBarcode
             // 
             this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBarcode.Location = new System.Drawing.Point(132, 45);
+            this.txtBarcode.Location = new System.Drawing.Point(132, 19);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.ReadOnly = true;
-            this.txtBarcode.Size = new System.Drawing.Size(241, 26);
+            this.txtBarcode.Size = new System.Drawing.Size(269, 26);
             this.txtBarcode.TabIndex = 17;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.txtIPAddress);
+            this.groupBox2.Controls.Add(this.lblConfigServer);
+            this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.txtPort);
+            this.groupBox2.Controls.Add(this.lblPort);
+            this.groupBox2.Controls.Add(this.lblProcessName);
+            this.groupBox2.Controls.Add(this.lblIPAddress);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.lblStatus);
             this.groupBox2.Location = new System.Drawing.Point(12, 62);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(430, 102);
+            this.groupBox2.Size = new System.Drawing.Size(430, 138);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Server config";
             // 
+            // lblConfigServer
+            // 
+            this.lblConfigServer.Image = global::Nichicon_ICT_Client_Supports_MES.Properties.Resources.tools_16;
+            this.lblConfigServer.Location = new System.Drawing.Point(403, 10);
+            this.lblConfigServer.Name = "lblConfigServer";
+            this.lblConfigServer.Size = new System.Drawing.Size(26, 23);
+            this.lblConfigServer.TabIndex = 17;
+            this.lblConfigServer.Click += new System.EventHandler(this.lblConfigServer_Click);
+            // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.cboProcess);
-            this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.txtBarcode);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(13, 171);
+            this.groupBox3.Location = new System.Drawing.Point(12, 203);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(428, 84);
+            this.groupBox3.Size = new System.Drawing.Size(430, 55);
             this.groupBox3.TabIndex = 19;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Info value";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lblIPAddress
+            // 
+            this.lblIPAddress.AutoSize = true;
+            this.lblIPAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIPAddress.ForeColor = System.Drawing.Color.Teal;
+            this.lblIPAddress.Location = new System.Drawing.Point(129, 24);
+            this.lblIPAddress.Name = "lblIPAddress";
+            this.lblIPAddress.Size = new System.Drawing.Size(37, 13);
+            this.lblIPAddress.TabIndex = 13;
+            this.lblIPAddress.Text = "None";
+            // 
+            // lblPort
+            // 
+            this.lblPort.AutoSize = true;
+            this.lblPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPort.ForeColor = System.Drawing.Color.Teal;
+            this.lblPort.Location = new System.Drawing.Point(129, 53);
+            this.lblPort.Name = "lblPort";
+            this.lblPort.Size = new System.Drawing.Size(37, 13);
+            this.lblPort.TabIndex = 13;
+            this.lblPort.Text = "None";
+            // 
+            // lblProcessName
+            // 
+            this.lblProcessName.AutoSize = true;
+            this.lblProcessName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProcessName.ForeColor = System.Drawing.Color.Teal;
+            this.lblProcessName.Location = new System.Drawing.Point(129, 110);
+            this.lblProcessName.Name = "lblProcessName";
+            this.lblProcessName.Size = new System.Drawing.Size(37, 13);
+            this.lblProcessName.TabIndex = 13;
+            this.lblProcessName.Text = "None";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(453, 325);
+            this.ClientSize = new System.Drawing.Size(453, 329);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnDisConnected);
@@ -338,6 +362,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormMain";
@@ -370,22 +395,24 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtIPAddress;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnConnected;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.MaskedTextBox txtPort;
         private System.Windows.Forms.Button btnDisConnected;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cboProcess;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblConfigServer;
+        private System.Windows.Forms.Label lblPort;
+        private System.Windows.Forms.Label lblProcessName;
+        private System.Windows.Forms.Label lblIPAddress;
     }
 }
 

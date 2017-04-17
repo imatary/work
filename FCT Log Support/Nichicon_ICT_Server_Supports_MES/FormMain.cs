@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Nichicon_ICT_Server_Supports_MES
@@ -13,11 +17,19 @@ namespace Nichicon_ICT_Server_Supports_MES
         private Socket[] m_workerSocket = new Socket[10];
         private int m_clientCount = 0;
         delegate void SetTextCallback(string text);
+        string stationNo = "", fileExtension = "", inputLog = "", outputLog = "";
+        string fileLastWriteTime = "", dateCheck = "", boardNo = "", productId = "", boardState = "";
+
+        bool startWatching = false, RunTaks = false;
+        int pass = 0, ng = 0, total = 0;
+        FileSystemWatcher fileWatcher;
 
         public FormMain()
         {
             InitializeComponent();
-            txtIPAddress.Text = Ultils.GetIP();
+            BinDataToControls();
+            LoadModels();
+            Ultils.RegisterInStartup(true, Application.ExecutablePath);
         }
         public bool ControlInvokeRequired(Control c, Action a)
         {
@@ -72,7 +84,7 @@ namespace Nichicon_ICT_Server_Supports_MES
         }
         public class SocketPacket
         {
-            public System.Net.Sockets.Socket m_currentSocket;
+            public Socket m_currentSocket;
             public byte[] dataBuffer = new byte[1];
         }
         // Start waiting for data from the client
@@ -152,26 +164,192 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void BinDataToControls()
+        {
+            if (Ultils.GetValueRegistryKey("IPAddress") != null)
+            {
+                lblIPAddress.Text = Ultils.GetValueRegistryKey("IPAddress").ToString();
+            }
+
+            if (Ultils.GetValueRegistryKey("Port") != null)
+            {
+                lblPort.Text = Ultils.GetValueRegistryKey("Port").ToString();
+            }
+            if (Ultils.GetValueRegistryKey("Process") != null)
+            {
+                lblProcessName.Text = Ultils.GetValueRegistryKey("Process").ToString();
+            }
+            if (Ultils.GetValueRegistryKey("StationNO") != null)
+            {
+                stationNo = Ultils.GetValueRegistryKey("StationNO").ToString();
+            }
+            if (Ultils.GetValueRegistryKey("FileExtension") != null)
+            {
+                fileExtension = Ultils.GetValueRegistryKey("FileExtension").ToString();
+            }
+            if (Ultils.GetValueRegistryKey("InputLog") != null)
+            {
+                inputLog = Ultils.GetValueRegistryKey("InputLog").ToString();
+            }
+            if (Ultils.GetValueRegistryKey("OutputLog") != null)
+            {
+                outputLog = Ultils.GetValueRegistryKey("OutputLog").ToString();
+            }
+        }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
-            txtIPAddress.Text = Ultils.GetIP();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private string GetState(string path)
+        {
+            string state = "";
+            string content = Ultils.GetLine(path, 1);
+            string[] array = content.Split(',');
+            string value = array[9];
+            if (value == "CP=OK")
+            {
+                state = "P";
+            }
+            else if (value == "CP=NG")
+            {
+                state = "F";
+            }
+            return state;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private string ModelName(string path)
+        {
+            string value = "";
+            string content = Ultils.GetLine(path, 1);
+            string[] array = content.Split(',');
+            value = array[1];
+            if(value != "")
+                return value;
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnFileChanged(object sender, FileSystemEventArgs e)
+        {
+            if (!RunTaks)
+            {
+                if (e.ChangeType == WatcherChangeTypes.Created || e.ChangeType == WatcherChangeTypes.Changed)
+                {
+                    fileLastWriteTime = e.FullPath;
+                    RunTaks = true;
+                }
+            }
+        }
+
+        private void txtBarcode_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtBarcode.Text))
+            {
+                DefaultMessage();
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (RunTaks)
+            {
+                if(ModelName(fileLastWriteTime) == productId)
+                {
+                    boardState = GetState(fileLastWriteTime);
+                    List<Item> items = new List<Item>();
+                    if (boardState == "P")
+                    {
+                        ActiveWindows(this.Text);
+                        pass = pass + 1;
+                        total = pass + ng;
+
+                        Ultils.CreateFileLog(productId, boardNo, boardState, stationNo, dateCheck);
+
+                        lblPASS.Text = pass.ToString();
+                        lblNG.Text = ng.ToString();
+                        lblTOTAL.Text = total.ToString();
+
+                        Item item = new Item()
+                        {
+                            BoardNo = boardNo,
+                            ProductId = productId,
+                            Date = DateTime.Now.ToShortDateString(),
+                            Time = DateTime.Now.ToShortTimeString(),
+                            State = boardState,
+                        };
+                        items.Add(item);
+                        dataGridView1.AutoGenerateColumns = false;
+                        dataGridView1.DataSource = items;
+
+                        txtBarcode.ResetText();
+                        txtBarcode.Focus();
+                    }
+                }
+                else
+                {
+                    ActiveWindows(this.Text);
+                    ErrorMessage("NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác!" +
+                        $"\nModel: {ModelName(fileLastWriteTime)}" +
+                        $"\nBoard No: {boardNo}");
+
+                    txtBarcode.ResetText();
+                    txtBarcode.Focus();
+                }
+                
+                RunTaks = false;
+            }
+        }
+
+        private void cboModels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            productId = cboModels.Text;
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtIPAddress.Text))
+            if (string.IsNullOrEmpty(lblIPAddress.Text) || lblIPAddress.Text == "None")
             {
-                txtIPAddress.Focus();
+                MessageBox.Show("Vui lòng nhập vào Server IP Address!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else if (string.IsNullOrEmpty(txtPort.Text))
+            else if (string.IsNullOrEmpty(lblPort.Text) || lblPort.Text == "None")
             {
-                txtPort.Focus();
+                MessageBox.Show("Vui lòng nhập vào Server port!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (string.IsNullOrEmpty(lblProcessName.Text) || lblProcessName.Text == "None")
+            {
+                MessageBox.Show("Vui lòng chọn Process!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (string.IsNullOrEmpty(cboModels.Text))
+            {
+                MessageBox.Show("Vui lòng chọn một Model!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboModels.Focus();
             }
             else
             {
                 try
                 {
-                    string portStr = txtPort.Text;
+                    string portStr = lblPort.Text;
                     int port = System.Convert.ToInt32(portStr);
                     // Create the listening socket...
                     m_mainSocket = new Socket(AddressFamily.InterNetwork,
@@ -186,6 +364,37 @@ namespace Nichicon_ICT_Server_Supports_MES
                     m_mainSocket.BeginAccept(new AsyncCallback(OnClientConnect), null);
 
                     UpdateControls(true);
+                    panelBarcode.Visible = true;
+                    txtBarcode.Focus();
+                    cboModels.Enabled = false;
+                    lblReload.Enabled = false;
+                    lblAddModel.Enabled = false;
+
+                    lblRefesh.Enabled = false;
+
+                    if (startWatching == false)
+                    {
+                        startWatching = true;
+                        // Config file watching
+                        fileWatcher = new FileSystemWatcher();
+                        fileWatcher.IncludeSubdirectories = true;
+                        if (fileExtension.Contains("*"))
+                        {
+                            fileWatcher.Filter = fileExtension;
+                        }
+                        else
+                        {
+                            fileWatcher.Filter = "*" + fileExtension;
+                        }
+
+                        fileWatcher.Path = inputLog + "\\";
+
+                        fileWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.CreationTime
+                                             | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+                        fileWatcher.Created += new FileSystemEventHandler(OnFileChanged);
+                        fileWatcher.Changed += new FileSystemEventHandler(OnFileChanged);
+                        fileWatcher.EnableRaisingEvents = true;
+                    }
 
                 }
                 catch (SocketException se)
@@ -194,13 +403,23 @@ namespace Nichicon_ICT_Server_Supports_MES
                 }
             }
         }
-
-        
-
         private void btnStop_Click(object sender, EventArgs e)
         {
+            if (startWatching == true)
+            {
+                startWatching = false;
+                fileWatcher.EnableRaisingEvents = false;
+                fileWatcher.Dispose();
+            }
+            
+            DefaultMessage();
             CloseSockets();
             UpdateControls(false);
+            panelBarcode.Visible = false;
+            cboModels.Enabled = true;
+            lblReload.Enabled = true;
+            lblAddModel.Enabled = true;
+            lblRefesh.Enabled = true;
         }
 
         private void txtBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -209,6 +428,12 @@ namespace Nichicon_ICT_Server_Supports_MES
             {
                 try
                 {
+                    boardNo = txtBarcode.Text.Trim();
+                    productId = cboModels.Text;
+                    dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
+
+                    ActiveWindows(lblProcessName.Text);
+
                     Object objData = txtBarcode.Text;
                     byte[] byData = System.Text.Encoding.ASCII.GetBytes(objData.ToString());
                     for (int i = 0; i < m_clientCount; i++)
@@ -228,6 +453,93 @@ namespace Nichicon_ICT_Server_Supports_MES
                     MessageBox.Show(se.Message);
                 }
             }
+        }
+
+        /// <summary>
+        /// Active Windows Title
+        /// </summary>
+        /// <param name="title"></param>
+        private void ActiveWindows(string title)
+        {
+            int iHandle2 = NativeWin32.FindWindow(null, title);
+            NativeWin32.SetForegroundWindow(iHandle2);
+        }
+        
+        private void lblRefesh_Click(object sender, EventArgs e)
+        {
+            new FormConfig().ShowDialog();
+            BinDataToControls();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void LoadModels()
+        {
+            if (Ultils.GetValueRegistryKey("Models") != null)
+            {
+                string[] models = Ultils.GetValueRegistryKey("Models").Split(';');
+
+                foreach (var item in models)
+                {
+                    cboModels.Items.Add(item);
+                }
+            }
+            else
+            {
+                string[] models = {
+                "ZSFLA18GA",
+                "ZSFLA18HA",
+                "ZSFLA18ZA",
+                "ZSFLA32GA",
+                "ZSFLA32HA",
+                "ZSFLB06GA",
+                "ZSFLB06HA",
+                "ZSFLC15GA",
+                "ZSFLC15HA",
+                "ZSFLD22IA",
+                "ZSFLE08IA",
+                "ZSFLE09IA"
+                };
+
+                foreach (var item in models)
+                {
+                    cboModels.Items.Add(item);
+                    Ultils.WriteRegistryArray("Models", item);
+                }
+            }
+        }
+        private void lblReload_Click(object sender, EventArgs e)
+        {
+            LoadModels();
+        }
+
+        private void lblAddModel_Click(object sender, EventArgs e)
+        {
+            new FormAddModel().ShowDialog();
+            LoadModels();
+        }
+        
+        private void ErrorMessage(string str_status, string str_message)
+        {
+            lblStatus.Text = str_status;
+            lblStatus.BackColor = Color.DarkRed;
+
+            lblMessage.Text = str_message;
+            lblMessage.BackColor = Color.DarkRed;
+        }
+        private void DefaultMessage()
+        {
+            lblStatus.Text = @"[N\A]";
+            lblStatus.BackColor = Color.FromArgb(255, 128, 0);
+
+            lblMessage.Text = "no results";
+            lblMessage.BackColor = Color.FromArgb(255, 128, 0);
+
+            fileLastWriteTime = "";
+            dateCheck = "";
+            boardNo = "";
+            productId = "";
+            boardState = "";
         }
     }
 }

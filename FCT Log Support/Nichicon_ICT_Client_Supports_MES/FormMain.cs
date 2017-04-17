@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Nichicon_ICT_Client_Supports_MES
@@ -17,12 +18,13 @@ namespace Nichicon_ICT_Client_Supports_MES
         IAsyncResult m_result;
         public AsyncCallback m_pfnCallBack;
         public Socket m_clientSocket;
+        private bool IsRun = false;
         delegate void SetTextCallback(string text);
 
         public FormMain()
         {
             InitializeComponent();
-            txtIPAddress.Text = Ultils.GetIP();
+            BinDataToControls();
         }
 
         public bool ControlInvokeRequired(Control c, Action a)
@@ -87,6 +89,10 @@ namespace Nichicon_ICT_Client_Supports_MES
                 int charLen = d.GetChars(theSockId.dataBuffer, 0, iRx, chars, 0);
                 System.String szData = new System.String(chars);
                 UpdateBarcode(txtBarcode.Text + szData);
+                
+                ActiveWindows(lblProcessName.Text);
+                IsRun = true;
+
                 WaitForData();
             }
             catch (ObjectDisposedException)
@@ -106,20 +112,47 @@ namespace Nichicon_ICT_Client_Supports_MES
             lblStatus.Text = connectStatus;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void BinDataToControls()
+        {
+            if (Ultils.GetValueRegistryKey("IPAddress") != null)
+            {
+                lblIPAddress.Text = Ultils.GetValueRegistryKey("IPAddress").ToString();
+            }
+
+            if (Ultils.GetValueRegistryKey("Port") != null)
+            {
+                lblPort.Text = Ultils.GetValueRegistryKey("Port").ToString();
+            }
+            if (Ultils.GetValueRegistryKey("Process") != null)
+            {
+                lblProcessName.Text = Ultils.GetValueRegistryKey("Process").ToString();
+            }
+        }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
-            txtIPAddress.Text = Ultils.GetIP();
+            
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtIPAddress.Text))
+            if (string.IsNullOrEmpty(lblIPAddress.Text) || lblIPAddress.Text == "None")
             {
-                txtIPAddress.Focus();
+                MessageBox.Show("Vui lòng nhập vào Server IP Address!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblIPAddress.Focus();
             }
-            else if (string.IsNullOrEmpty(txtPort.Text))
+            else if (string.IsNullOrEmpty(lblPort.Text) || lblPort.Text == "None")
             {
-                txtPort.Focus();
+                MessageBox.Show("Vui lòng nhập vào Server port!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblPort.Focus();
+            }
+            else if (string.IsNullOrEmpty(lblProcessName.Text) || lblProcessName.Text == "None")
+            {
+                MessageBox.Show("Vui lòng chọn Process!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblProcessName.Focus();
             }
             else
             {
@@ -130,15 +163,14 @@ namespace Nichicon_ICT_Client_Supports_MES
                     m_clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
                     // Cet the remote IP address
-                    IPAddress ip = IPAddress.Parse(txtIPAddress.Text);
-                    int iPortNo = System.Convert.ToInt16(txtPort.Text);
+                    IPAddress ip = IPAddress.Parse(lblIPAddress.Text);
+                    int iPortNo = System.Convert.ToInt16(lblPort.Text);
                     // Create the end point 
                     IPEndPoint ipEnd = new IPEndPoint(ip, iPortNo);
                     // Connect to the remote host
                     m_clientSocket.Connect(ipEnd);
                     if (m_clientSocket.Connected)
                     {
-
                         UpdateControls(true);
                         //Wait for data asynchronously 
                         WaitForData();
@@ -162,6 +194,33 @@ namespace Nichicon_ICT_Client_Supports_MES
                 m_clientSocket = null;
                 UpdateControls(false);
             }
+        }
+
+        /// <summary>
+        /// Active Windows Title
+        /// </summary>
+        /// <param name="title"></param>
+        private void ActiveWindows(string title)
+        {
+            int iHandle2 = NativeWin32.FindWindow(null, title);
+            NativeWin32.SetForegroundWindow(iHandle2);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (IsRun)
+            {
+                SendKeys.Send(txtBarcode.Text);
+                SendKeys.Send("{ENTER}");
+                txtBarcode.ResetText();
+                IsRun = false;
+            }
+        }
+
+        private void lblConfigServer_Click(object sender, EventArgs e)
+        {
+            new FormConfig().ShowDialog();
+            BinDataToControls();
         }
     }
 }

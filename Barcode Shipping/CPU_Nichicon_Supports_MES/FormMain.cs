@@ -183,7 +183,6 @@ namespace CPU_Nichicon_Supports_MES
             {
                 if (e.ChangeType == WatcherChangeTypes.Changed || e.ChangeType==WatcherChangeTypes.Created)
                 {
-                    //fullPath = e.FullPath;
                     m_bDirty = true;
                 }
             }
