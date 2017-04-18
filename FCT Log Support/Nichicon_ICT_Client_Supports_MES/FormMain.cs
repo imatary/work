@@ -89,11 +89,9 @@ namespace Nichicon_ICT_Client_Supports_MES
                 int charLen = d.GetChars(theSockId.dataBuffer, 0, iRx, chars, 0);
                 System.String szData = new System.String(chars);
                 UpdateBarcode(txtBarcode.Text + szData);
-                
                 ActiveWindows(lblProcessName.Text);
-                IsRun = true;
-
                 WaitForData();
+                IsRun = true;
             }
             catch (ObjectDisposedException)
             {
@@ -211,6 +209,7 @@ namespace Nichicon_ICT_Client_Supports_MES
             if (IsRun)
             {
                 SendKeys.Send(txtBarcode.Text);
+                Thread.Sleep(150);
                 SendKeys.Send("{ENTER}");
                 txtBarcode.ResetText();
                 IsRun = false;

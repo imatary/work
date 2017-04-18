@@ -16,7 +16,8 @@ namespace Nichicon_ICT_Server_Supports_MES
         private Socket m_mainSocket;
         private Socket[] m_workerSocket = new Socket[10];
         private int m_clientCount = 0;
-        delegate void SetTextCallback(string text);
+        //delegate void SetTextCallback(string text);
+        //delegate void SetTextCallback(Form f, Control ctrl, string text);
         string stationNo = "", fileExtension = "", inputLog = "", outputLog = "";
         string fileLastWriteTime = "", dateCheck = "", boardNo = "", productId = "", boardState = "";
 
@@ -33,8 +34,10 @@ namespace Nichicon_ICT_Server_Supports_MES
         }
         public bool ControlInvokeRequired(Control c, Action a)
         {
-            if (c.InvokeRequired) c.Invoke(new MethodInvoker(delegate { a(); }));
-            else return false;
+            if (c.InvokeRequired)
+                c.Invoke(new MethodInvoker(delegate { a(); }));
+            else
+                return false;
 
             return true;
         }
@@ -46,6 +49,22 @@ namespace Nichicon_ICT_Server_Supports_MES
             txtClientConnect.Text = valuess;
             //txtBarcode.BackColor = c;
         }
+        //public static void SetText(Form form, Control ctrl, string text)
+        //{
+        //    // InvokeRequired required compares the thread ID of the 
+        //    // calling thread to the thread ID of the creating thread. 
+        //    // If these threads are different, it returns true. 
+        //    if (ctrl.InvokeRequired)
+        //    {
+        //        SetTextCallback d = new SetTextCallback(SetText);
+        //        form.Invoke(d, new object[] { form, ctrl, text });
+        //    }
+        //    else
+        //    {
+        //        ctrl.Text = text;
+        //    }
+        //}
+
         private void UpdateControls(bool listening)
         {
             btnStart.Enabled = !listening;
@@ -79,7 +98,9 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
             catch (SocketException se)
             {
-                MessageBox.Show(se.Message);
+                //ThreadHelper.SetText(this, textBox1, "This text was set safely.");
+
+                ErrorMessage("NG", se.Message);
             }
         }
         public class SocketPacket
@@ -111,7 +132,7 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
             catch (SocketException se)
             {
-                MessageBox.Show(se.Message);
+                ErrorMessage("NG", se.Message);
             }
 
         }
@@ -144,7 +165,7 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
             catch (SocketException se)
             {
-                MessageBox.Show(se.Message);
+                ErrorMessage("NG", se.Message);
             }
         }
 
