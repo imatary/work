@@ -54,13 +54,21 @@ namespace EducationSkills.Modules
                 OverwritePrompt = true,
                 FileName = $"bao-cao-han-{DateTime.Now.ToString("dd-MM-yyyy")}",
             };
-            saveFileDialog1.ShowDialog();
-            if (saveFileDialog1.FileName != "")
+            var show = saveFileDialog1.ShowDialog();
+            if (show == DialogResult.Cancel)
             {
-                bandedGridView1.ExportToXlsx(saveFileDialog1.FileName);
+                saveFileDialog1.Dispose();
             }
+            if (show == DialogResult.OK)
+            {
+                if (saveFileDialog1.FileName != "")
+                {
+                    bandedGridView1.ExportToXlsx(saveFileDialog1.FileName);
 
-            Process.Start(saveFileDialog1.FileName);
+                }
+
+                Process.Start(saveFileDialog1.FileName);
+            }
         }
 
         private void UserControlReportsSolder_Load(object sender, EventArgs e)

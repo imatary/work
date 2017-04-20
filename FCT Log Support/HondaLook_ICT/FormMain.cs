@@ -83,6 +83,22 @@ namespace HondaLook_ICT
             }
         }
 
+        private void lblReset_Click(object sender, EventArgs e)
+        {
+            barcode_no = "";
+            txtBarcode.Enabled = true;
+            txtBarcode.ResetText();
+            txtBarcode.Focus();
+        }
+
+        private void lblReset_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            barcode_no = "";
+            txtBarcode.Enabled = true;
+            txtBarcode.ResetText();
+            txtBarcode.Focus();
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -125,6 +141,24 @@ namespace HondaLook_ICT
 
             return state;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private string ModelName(string path)
+        {
+            string value = "";
+            string content = Ultils.GetLine(path, 2);
+            string[] array = content.Split(',');
+            value = Regex.Replace(array[0], "[^A-Za-z0-9 -]", "").Replace(" ", "");
+            //value = array[0];
+            if (value != "")
+                return value;
+            return null;
+        }
+
 
         /// <summary>
         /// Active form
@@ -229,37 +263,64 @@ namespace HondaLook_ICT
         {
             if (RunTaks)
             {
-                boardState = GetState(pathFileChanged);
-                itemDetails = new List<ItemDetail>();
-                foreach (var item in scanningLogs)
+                if(barcode_no!=null || barcode_no != "")
                 {
-                    // Create Log
-                    Ultils.CreateFileLog(product_id, item.BOARD_NO, boardState, stationNo, dateFormat);
-
-                    ItemDetail itemCheck = new ItemDetail()
+                    if (product_id.Contains(ModelName(pathFileChanged)))
                     {
-                        BOARD_NO = item.BOARD_NO,
-                        ProductID = product_id,
-                        STATION_NO = stationNo,
-                        DATE_CHECK = DateTime.Now.ToShortDateString(),
-                        TIME_CHECK = DateTime.Now.ToShortTimeString(),
-                        STATE = boardState,
-                    };
-                    itemDetails.Add(itemCheck);
+                        boardState = GetState(pathFileChanged);
+                        itemDetails = new List<ItemDetail>();
+                        Ultils.CreateFileLog(product_id, barcode_no, boardState, stationNo, dateFormat);
+
+                        ItemDetail itemCheck = new ItemDetail()
+                        {
+                            BOARD_NO = barcode_no,
+                            ProductID = product_id,
+                            STATION_NO = stationNo,
+                            DATE_CHECK = DateTime.Now.ToShortDateString(),
+                            TIME_CHECK = DateTime.Now.ToShortTimeString(),
+                            STATE = boardState,
+                        };
+                        itemDetails.Add(itemCheck);
+                        ActiveFormByWindowsTitle(Text);
+                        gridControl1.DataSource = itemDetails;
+
+                        // Show
+                        lblPASS.Text = pass.ToString();
+                        lblNG.Text = ng.ToString();
+                        lblTotal.Text = total.ToString();
+
+                        if (boardState == "P")
+                        {
+                            // Reset TextBarcode
+                            MessageHelpers.SetSuccessStatus(true, "OK", $"Board [{barcode_no}] OK!", lblStatus, lblMessageInfo);
+                            barcode_no = "";
+                            txtBarcode.Enabled = true;
+                            txtBarcode.ResetText();
+                            txtBarcode.Focus();
+                        }
+                        if (boardState == "F")
+                        {
+                            MessageHelpers.SetErrorStatus(true, "NG", $"Board [{barcode_no}] NG. Please check again", lblStatus, lblMessageInfo);
+                        }
+                    }
+                    else
+                    {
+                        ActiveFormByWindowsTitle(Text);
+                        MessageHelpers.SetErrorStatus(true, "NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác!" +
+                            $"\nModel: {ModelName(pathFileChanged)}" +
+                            $"\nBoard No: {barcode_no}", lblStatus, lblMessageInfo);
+                        barcode_no = "";
+                        txtBarcode.Enabled = true;
+                        txtBarcode.ResetText();
+                        txtBarcode.Focus();
+                    }
                 }
-                ActiveFormByWindowsTitle(Text);
-                gridControl1.DataSource = itemDetails;
-
-                // Show
-                lblPASS.Text = pass.ToString();
-                lblNG.Text = ng.ToString();
-                lblTotal.Text = total.ToString();
-
-                MessageHelpers.SetSuccessStatus(true, "OK", $"Board [{barcode_no}] OK!", lblStatus, lblMessageInfo);
-
-                // Reset TextBarcode
-                txtBarcode.ResetText();
-                txtBarcode.Focus();
+                else
+                {
+                    ActiveFormByWindowsTitle(Text);
+                    MessageHelpers.SetErrorStatus(true, "NG", $"Vui lòng bắn vào Serial trước khi chạy!", lblStatus, lblMessageInfo);
+                    txtBarcode.Focus();
+                }
 
                 RunTaks = false;
             }
@@ -313,14 +374,13 @@ namespace HondaLook_ICT
         {
             if (e.KeyCode == Keys.Enter)
             {
-
                 barcode_no = txtBarcode.Text.Trim();
-                if(barcode_no.Contains("-"))
-                {
-                    string[] array = barcode_no.Split('-');
-                    barcode_no = array[0];
-                    txtBarcode.Text = barcode_no;
-                }
+                //if(barcode_no.Contains("-"))
+                //{
+                //    string[] array = barcode_no.Split('-');
+                //    barcode_no = array[0];
+                //    txtBarcode.Text = barcode_no;
+                //}
                 product_id = txtModels.EditValue.ToString();
                 dateFormat = DateTime.Now.ToString("yyMMddHHmmss");
 
@@ -333,14 +393,15 @@ namespace HondaLook_ICT
                         if(barcode_no.Length >= lengthSerial)
                         {
                             ActiveFormByWindowsTitle(processNo);
-                            try
-                            {
-                                scanningLogs = new SCANNING_LOGS_Service().Get_SCANNING_LOGS(barcode_no, product_id);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageHelpers.SetErrorStatus(true, "NG", ex.Message, lblStatus, lblMessageInfo);
-                            }
+                            txtBarcode.Enabled = false;
+                            //try
+                            //{
+                            //    scanningLogs = new SCANNING_LOGS_Service().Get_SCANNING_LOGS(barcode_no, product_id);
+                            //}
+                            //catch (Exception ex)
+                            //{
+                            //    MessageHelpers.SetErrorStatus(true, "NG", ex.Message, lblStatus, lblMessageInfo);
+                            //}
                         }
                         else
                         {

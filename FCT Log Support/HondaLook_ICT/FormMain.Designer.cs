@@ -64,6 +64,8 @@
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.lblPASS = new DevExpress.XtraEditors.LabelControl();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblReset = new System.Windows.Forms.LinkLabel();
+            this.lblConfigs = new DevExpress.XtraEditors.HyperlinkLabelControl();
             this.btnStart = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.txtModels = new DevExpress.XtraEditors.GridLookUpEdit();
@@ -73,7 +75,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblMessageInfo = new DevExpress.XtraEditors.LabelControl();
             this.lblStatus = new DevExpress.XtraEditors.LabelControl();
-            this.lblConfigs = new DevExpress.XtraEditors.HyperlinkLabelControl();
             this.timerEditNotify = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -150,7 +151,7 @@
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel5,
             this.lblVersion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 405);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 348);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(568, 24);
             this.statusStrip1.TabIndex = 3;
@@ -209,7 +210,7 @@
             this.panelControl3.Location = new System.Drawing.Point(0, 60);
             this.panelControl3.Name = "panelControl3";
             this.panelControl3.Padding = new System.Windows.Forms.Padding(5);
-            this.panelControl3.Size = new System.Drawing.Size(568, 345);
+            this.panelControl3.Size = new System.Drawing.Size(568, 288);
             this.panelControl3.TabIndex = 4;
             // 
             // gridControl1
@@ -218,7 +219,7 @@
             this.gridControl1.Location = new System.Drawing.Point(5, 203);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(558, 137);
+            this.gridControl1.Size = new System.Drawing.Size(558, 80);
             this.gridControl1.TabIndex = 2;
             this.gridControl1.UseEmbeddedNavigator = true;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -471,6 +472,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblReset);
+            this.panel2.Controls.Add(this.lblConfigs);
             this.panel2.Controls.Add(this.btnStart);
             this.panel2.Controls.Add(this.labelControl3);
             this.panel2.Controls.Add(this.txtModels);
@@ -480,6 +483,30 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(309, 120);
             this.panel2.TabIndex = 2;
+            // 
+            // lblReset
+            // 
+            this.lblReset.AutoSize = true;
+            this.lblReset.Location = new System.Drawing.Point(108, 63);
+            this.lblReset.Name = "lblReset";
+            this.lblReset.Size = new System.Drawing.Size(77, 13);
+            this.lblReset.TabIndex = 9;
+            this.lblReset.TabStop = true;
+            this.lblReset.Text = "Reset barcode";
+            this.lblReset.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblReset_LinkClicked);
+            this.lblReset.Click += new System.EventHandler(this.lblReset_Click);
+            // 
+            // lblConfigs
+            // 
+            this.lblConfigs.Appearance.ForeColor = System.Drawing.Color.Gray;
+            this.lblConfigs.Appearance.Options.UseForeColor = true;
+            this.lblConfigs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblConfigs.Location = new System.Drawing.Point(270, 63);
+            this.lblConfigs.Name = "lblConfigs";
+            this.lblConfigs.Size = new System.Drawing.Size(36, 13);
+            this.lblConfigs.TabIndex = 8;
+            this.lblConfigs.Text = "Configs";
+            this.lblConfigs.Click += new System.EventHandler(this.lblConfigs_Click);
             // 
             // btnStart
             // 
@@ -627,18 +654,6 @@
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "N/A";
             // 
-            // lblConfigs
-            // 
-            this.lblConfigs.Appearance.ForeColor = System.Drawing.Color.Gray;
-            this.lblConfigs.Appearance.Options.UseForeColor = true;
-            this.lblConfigs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblConfigs.Location = new System.Drawing.Point(510, 411);
-            this.lblConfigs.Name = "lblConfigs";
-            this.lblConfigs.Size = new System.Drawing.Size(36, 13);
-            this.lblConfigs.TabIndex = 8;
-            this.lblConfigs.Text = "Configs";
-            this.lblConfigs.Click += new System.EventHandler(this.lblConfigs_Click);
-            // 
             // timerEditNotify
             // 
             this.timerEditNotify.Enabled = true;
@@ -649,8 +664,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(568, 429);
-            this.Controls.Add(this.lblConfigs);
+            this.ClientSize = new System.Drawing.Size(568, 372);
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panelControl2);
@@ -728,6 +742,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridTimeCheck;
         private DevExpress.XtraGrid.Columns.GridColumn gridSate;
         private System.Windows.Forms.Timer timerEditNotify;
+        private System.Windows.Forms.LinkLabel lblReset;
     }
 }
 

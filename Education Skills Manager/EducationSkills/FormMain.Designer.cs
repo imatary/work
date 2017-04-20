@@ -60,6 +60,7 @@
             this.btnReportCheckEye = new DevExpress.XtraBars.BarButtonItem();
             this.btnReportCheckSolder = new DevExpress.XtraBars.BarButtonItem();
             this.xtraTabControlMain = new DevExpress.XtraTab.XtraTabControl();
+            this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).BeginInit();
             this.SuspendLayout();
@@ -99,7 +100,7 @@
             // 
             // barButtonItemEmployess
             // 
-            this.barButtonItemEmployess.Caption = "Danh sách nhân viên";
+            this.barButtonItemEmployess.Caption = "Nhân Viên";
             this.barButtonItemEmployess.Id = 5;
             this.barButtonItemEmployess.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemEmployess.ImageOptions.Image")));
             this.barButtonItemEmployess.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemEmployess.ImageOptions.LargeImage")));
@@ -146,7 +147,7 @@
             // 
             // barButtonItemSubjects
             // 
-            this.barButtonItemSubjects.Caption = "Danh sách môn học";
+            this.barButtonItemSubjects.Caption = "Môn Học";
             this.barButtonItemSubjects.Id = 12;
             this.barButtonItemSubjects.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemSubjects.ImageOptions.Image")));
             this.barButtonItemSubjects.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemSubjects.ImageOptions.LargeImage")));
@@ -255,7 +256,8 @@
             // 
             this.ribbonPageLists.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup4,
-            this.ribbonPageGroup2});
+            this.ribbonPageGroup2,
+            this.ribbonPageGroup8});
             this.ribbonPageLists.Image = ((System.Drawing.Image)(resources.GetObject("ribbonPageLists.Image")));
             this.ribbonPageLists.ImageToTextIndent = 2;
             this.ribbonPageLists.Name = "ribbonPageLists";
@@ -339,6 +341,11 @@
             this.xtraTabControlMain.MouseLeave += new System.EventHandler(this.xtraTabControlMain_MouseLeave);
             this.xtraTabControlMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.xtraTabControlMain_MouseMove);
             // 
+            // ribbonPageGroup8
+            // 
+            this.ribbonPageGroup8.Name = "ribbonPageGroup8";
+            this.ribbonPageGroup8.Text = "ribbonPageGroup8";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,5 +401,6 @@
         private DevExpress.XtraBars.BarStaticItem barStaticItem1;
         private DevExpress.XtraBars.BarStaticItem barStaticItem2;
         private DevExpress.XtraBars.BarStaticItem barStaticItem3;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
     }
 }
