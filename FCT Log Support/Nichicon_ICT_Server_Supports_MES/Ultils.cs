@@ -1,10 +1,9 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
+using System.Deployment.Application;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
+using System.Reflection;
 
 namespace Nichicon_ICT_Server_Supports_MES
 {
@@ -23,6 +22,18 @@ namespace Nichicon_ICT_Server_Supports_MES
                 return IPStr;
             }
             return IPStr;
+        }
+
+        public static string GetRunningVersion()
+        {
+            try
+            {
+                return ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            catch
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
         }
 
         public static void RegisterInStartup(bool isChecked, string executablePath)

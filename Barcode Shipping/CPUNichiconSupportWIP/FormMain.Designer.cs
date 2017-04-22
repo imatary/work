@@ -45,6 +45,9 @@
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.lblMessage = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -81,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel7.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -99,7 +103,7 @@
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.panel1.Size = new System.Drawing.Size(571, 90);
+            this.panel1.Size = new System.Drawing.Size(580, 90);
             this.panel1.TabIndex = 1;
             // 
             // label1
@@ -127,12 +131,13 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.dataGridView1);
+            this.panel2.Controls.Add(this.panel7);
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(10, 100);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.panel2.Size = new System.Drawing.Size(571, 236);
+            this.panel2.Size = new System.Drawing.Size(580, 341);
             this.panel2.TabIndex = 2;
             // 
             // dataGridView1
@@ -163,13 +168,12 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 178);
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 248);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(571, 58);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            this.dataGridView1.Size = new System.Drawing.Size(580, 93);
+            this.dataGridView1.TabIndex = 18;
             // 
             // colBoardNo
             // 
@@ -218,18 +222,56 @@
             this.colState.ReadOnly = true;
             this.colState.Width = 80;
             // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.Silver;
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.lblMessage);
+            this.panel7.Controls.Add(this.lblStatus);
+            this.panel7.Location = new System.Drawing.Point(0, 5);
+            this.panel7.Name = "panel7";
+            this.panel7.Padding = new System.Windows.Forms.Padding(3);
+            this.panel7.Size = new System.Drawing.Size(580, 77);
+            this.panel7.TabIndex = 17;
+            // 
+            // lblMessage
+            // 
+            this.lblMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.ForeColor = System.Drawing.Color.White;
+            this.lblMessage.Location = new System.Drawing.Point(103, 3);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(472, 69);
+            this.lblMessage.TabIndex = 1;
+            this.lblMessage.Text = "no results";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lblStatus.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.ForeColor = System.Drawing.Color.White;
+            this.lblStatus.Location = new System.Drawing.Point(3, 3);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(100, 69);
+            this.lblStatus.TabIndex = 0;
+            this.lblStatus.Text = "[N\\A]";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.Controls.Add(this.panel6);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(0, 15);
+            this.groupBox1.Location = new System.Drawing.Point(0, 80);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(571, 163);
-            this.groupBox1.TabIndex = 1;
+            this.groupBox1.Size = new System.Drawing.Size(578, 162);
+            this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mode";
             // 
@@ -252,7 +294,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.56436F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.43564F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(288, 129);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(295, 128);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // lblTotal
@@ -260,9 +302,9 @@
             this.lblTotal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotal.Location = new System.Drawing.Point(195, 57);
+            this.lblTotal.Location = new System.Drawing.Point(199, 57);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(88, 70);
+            this.lblTotal.Size = new System.Drawing.Size(91, 69);
             this.lblTotal.TabIndex = 5;
             this.lblTotal.Text = "0";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -272,9 +314,9 @@
             this.lblNG.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNG.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNG.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblNG.Location = new System.Drawing.Point(100, 57);
+            this.lblNG.Location = new System.Drawing.Point(102, 57);
             this.lblNG.Name = "lblNG";
-            this.lblNG.Size = new System.Drawing.Size(87, 70);
+            this.lblNG.Size = new System.Drawing.Size(89, 69);
             this.lblNG.TabIndex = 4;
             this.lblNG.Text = "0";
             this.lblNG.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -286,7 +328,7 @@
             this.lblPASS.ForeColor = System.Drawing.Color.Green;
             this.lblPASS.Location = new System.Drawing.Point(5, 57);
             this.lblPASS.Name = "lblPASS";
-            this.lblPASS.Size = new System.Drawing.Size(87, 70);
+            this.lblPASS.Size = new System.Drawing.Size(89, 69);
             this.lblPASS.TabIndex = 3;
             this.lblPASS.Text = "0";
             this.lblPASS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -296,9 +338,9 @@
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Blue;
-            this.label5.Location = new System.Drawing.Point(195, 2);
+            this.label5.Location = new System.Drawing.Point(199, 2);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 53);
+            this.label5.Size = new System.Drawing.Size(91, 53);
             this.label5.TabIndex = 2;
             this.label5.Text = "TOTAL";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -308,9 +350,9 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label4.Location = new System.Drawing.Point(100, 2);
+            this.label4.Location = new System.Drawing.Point(102, 2);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 53);
+            this.label4.Size = new System.Drawing.Size(89, 53);
             this.label4.TabIndex = 1;
             this.label4.Text = "NG";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -322,7 +364,7 @@
             this.label3.ForeColor = System.Drawing.Color.Green;
             this.label3.Location = new System.Drawing.Point(5, 2);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 53);
+            this.label3.Size = new System.Drawing.Size(89, 53);
             this.label3.TabIndex = 0;
             this.label3.Text = "PASS";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -337,7 +379,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(10, 24);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(263, 129);
+            this.panel6.Size = new System.Drawing.Size(263, 128);
             this.panel6.TabIndex = 3;
             // 
             // lblAdd
@@ -354,9 +396,9 @@
             // cboModel
             // 
             this.cboModel.FormattingEnabled = true;
-            this.cboModel.Location = new System.Drawing.Point(18, 64);
+            this.cboModel.Location = new System.Drawing.Point(3, 64);
             this.cboModel.Name = "cboModel";
-            this.cboModel.Size = new System.Drawing.Size(195, 23);
+            this.cboModel.Size = new System.Drawing.Size(210, 23);
             this.cboModel.TabIndex = 3;
             this.cboModel.SelectedIndexChanged += new System.EventHandler(this.cboModel_SelectedIndexChanged);
             // 
@@ -364,9 +406,9 @@
             // 
             this.txtStationNO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtStationNO.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStationNO.Location = new System.Drawing.Point(18, 3);
+            this.txtStationNO.Location = new System.Drawing.Point(3, 3);
             this.txtStationNO.Name = "txtStationNO";
-            this.txtStationNO.Size = new System.Drawing.Size(239, 24);
+            this.txtStationNO.Size = new System.Drawing.Size(242, 24);
             this.txtStationNO.TabIndex = 1;
             this.txtStationNO.TextChanged += new System.EventHandler(this.txtStationNO_TextChanged);
             // 
@@ -377,7 +419,7 @@
             this.btnStartWatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStartWatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartWatch.ForeColor = System.Drawing.Color.White;
-            this.btnStartWatch.Location = new System.Drawing.Point(18, 93);
+            this.btnStartWatch.Location = new System.Drawing.Point(4, 93);
             this.btnStartWatch.Name = "btnStartWatch";
             this.btnStartWatch.Size = new System.Drawing.Size(122, 30);
             this.btnStartWatch.TabIndex = 2;
@@ -390,9 +432,9 @@
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Controls.Add(this.btnBrowse);
-            this.panel4.Location = new System.Drawing.Point(18, 33);
+            this.panel4.Location = new System.Drawing.Point(3, 33);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(239, 25);
+            this.panel4.Size = new System.Drawing.Size(242, 25);
             this.panel4.TabIndex = 1;
             // 
             // panel5
@@ -402,7 +444,7 @@
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(2);
-            this.panel5.Size = new System.Drawing.Size(194, 23);
+            this.panel5.Size = new System.Drawing.Size(197, 23);
             this.panel5.TabIndex = 1;
             // 
             // txtPath
@@ -413,7 +455,7 @@
             this.txtPath.Location = new System.Drawing.Point(2, 2);
             this.txtPath.Name = "txtPath";
             this.txtPath.ReadOnly = true;
-            this.txtPath.Size = new System.Drawing.Size(190, 17);
+            this.txtPath.Size = new System.Drawing.Size(193, 17);
             this.txtPath.TabIndex = 0;
             this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged);
             // 
@@ -426,7 +468,7 @@
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowse.Image = global::CPUNichiconSupportWIP.Properties.Resources._698827_icon_101_folder_search_32;
-            this.btnBrowse.Location = new System.Drawing.Point(194, 0);
+            this.btnBrowse.Location = new System.Drawing.Point(197, 0);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(43, 23);
             this.btnBrowse.TabIndex = 0;
@@ -443,9 +485,9 @@
             this.toolStripStatusLabel5,
             this.lblVersion,
             this.lblConnected});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 346);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 451);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(591, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(600, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -506,7 +548,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(10);
-            this.panel3.Size = new System.Drawing.Size(591, 346);
+            this.panel3.Size = new System.Drawing.Size(600, 451);
             this.panel3.TabIndex = 4;
             // 
             // label2
@@ -515,7 +557,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
             this.label2.Location = new System.Drawing.Point(10, 100);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(571, 1);
+            this.label2.Size = new System.Drawing.Size(580, 1);
             this.label2.TabIndex = 3;
             // 
             // openFileDialog1
@@ -548,7 +590,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(591, 368);
+            this.ClientSize = new System.Drawing.Size(600, 473);
             this.Controls.Add(this.lblStatusMessage);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.statusStrip1);
@@ -562,6 +604,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel7.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
@@ -606,21 +649,24 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox txtStationNO;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Timer tmrEditNotify;
         private System.Windows.Forms.Label lblStatusMessage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBoardNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ComboBox cboModel;
         private System.Windows.Forms.LinkLabel lblAdd;
         private System.Windows.Forms.ToolStripStatusLabel lblConnected;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBoardNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colState;
     }
 }
 

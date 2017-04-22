@@ -137,7 +137,7 @@ namespace Nichicon_ICT_Server_Supports_MES
             {
                 Ultils.WriteRegistry("IPAddress", txtIPAddress.Text);
                 Ultils.WriteRegistry("Port", txtPort.Text);
-                Ultils.WriteRegistry("Process", cboWindows.Text);
+                Ultils.WriteRegistry("Process", cboWindows.Text.Substring(0, 7));
                 Ultils.WriteRegistry("StationNO", txtStationNO.Text);
                 Ultils.WriteRegistry("FileExtension", txtFileExtension.Text);
                 Ultils.WriteRegistry("InputLog", txtInputLog.Text);

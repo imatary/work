@@ -43,11 +43,11 @@ namespace CPUNichiconSupportWIP
             get
             {
                 string _status = null;
-                if (Result==0)
+                if (Result==1)
                 {
                     _status = "P";
                 }
-                else if (Result == 1)
+                if (Result == 0)
                 {
                     _status = "F";
                 }
@@ -58,11 +58,11 @@ namespace CPUNichiconSupportWIP
             get
             {
                 string _status = null;
-                if (Result == 0)
+                if (Result == 1)
                 {
                     _status = "PASS";
                 }
-                else if (Result == 1)
+                if (Result == 0)
                 {
                     _status = "FAIL";
                 }

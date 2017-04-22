@@ -120,9 +120,7 @@ namespace CPUNichiconSupportWIP
             }
             else if (isVaild == true)
             {
-                
                 Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
-
                 if (m_bIsWatching)
                 {
                     m_bIsWatching = false;
@@ -134,13 +132,17 @@ namespace CPUNichiconSupportWIP
                     btnStartWatch.BackColor = Color.Green;
                     btnStartWatch.Text = "Start Watching";
                     lblConnected.Visible = false;
-
+                    lblAdd.Enabled = true;
                     CloseConnection(fullPath);
+                    DefaultMessage();
                 }
                 else
                 {
                     if (CheckConnection(fullPath) == true)
                     {
+                        DefaultMessage();
+
+                        lblAdd.Enabled = false;
                         m_bIsWatching = true;
                         txtStationNO.Enabled = false;
                         panel4.Enabled = false;
@@ -166,12 +168,13 @@ namespace CPUNichiconSupportWIP
                     }
                     else
                     {
+                        fullPath = "";
                         string message = "Kết nối đến database thất bại. Vui lòng kiểm tra lại đường dẫn và thử lại.\nNếu vẫn không được, liên hệ với phòng IT để được hỗ trợ!";
+                        ErrorMessage("NG", message);
                         errorProvider1.Clear();
                         errorProvider1.SetError(panel4, message);
                         txtPath.Focus();
-                        MessageBox.Show(message);
-                        return;
+                        CloseConnection(fullPath);
                     }  
                 }
             }
@@ -239,11 +242,8 @@ namespace CPUNichiconSupportWIP
 
         private void cboModel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboModel.SelectedIndex > 0)
-            {
-                fullPath = path + "\\" + cboModel.Text + ".mdb";
-                errorProvider1.Clear();
-            }
+            fullPath = path + "\\" + cboModel.SelectedValue + ".mdb";
+            errorProvider1.Clear();
         }
 
         /// <summary>
@@ -273,29 +273,45 @@ namespace CPUNichiconSupportWIP
 
                 if (item != null)
                 {
-                    items.Add(item);
-                    dataGridView1.AutoGenerateColumns = false;
-                    dataGridView1.DataSource = items;
+                    if(item.Model == cboModel.SelectedValue.ToString())
+                    {
+                        items.Add(item);
+                        dataGridView1.AutoGenerateColumns = false;
+                        dataGridView1.DataSource = items;
 
-                    if (item.State == "PASS")
-                    {
-                        pass = pass + 1;
-                        lblPASS.Text = pass.ToString();
+                        if (item.Result == 1)
+                        {
+                            pass = pass + 1;
+                            lblPASS.Text = pass.ToString();
+                            SuccessMessage("OK", $"Board [{item.BoardNo}] OK!");
+                        }
+                        if (item.Result == 0)
+                        {
+                            ng = ng + 1;
+                            lblNG.Text = ng.ToString();
+                            ErrorMessage("NG", $"Board [{item.BoardNo}] NG!");
+                        }
+                        total = pass + ng;
+                        lblTotal.Text = total.ToString();
+
+                        lblAdd.Enabled = true;
+                        
+                        Ultils.CreateFileLog(item.Model, item.BoardNo, item.Status, stationNo, DateTime.Now.ToString("yyMMddHHmmss"));
                     }
-                    else if (item.State == "FAIL")
+                    else
                     {
-                        ng = ng + 1;
-                        lblNG.Text = ng.ToString();
+                        ErrorMessage("NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác." +
+                            $"\nBoard [{item.BoardNo}] NG!" +
+                            $"\nModel: {item.Model}");
                     }
-                    total = pass + ng;
-                    lblTotal.Text = total.ToString();
                 }
-                Ultils.CreateFileLog(item.Model, item.BoardNo, item.Status, stationNo, DateTime.Now.ToString("yyMMddHHmmss"));
+                
             }
             else
             {
                 lblStatusMessage.Visible = true;
                 lblStatusMessage.Text = "Check local format time!";
+                ErrorMessage("NG", "Check local format time!");
             }
             CloseConnection(fullPath);
         }
@@ -305,15 +321,48 @@ namespace CPUNichiconSupportWIP
         /// </summary>
         private void LoadModels()
         {
-            string[] models = Ultils.GetValueRegistryKey("Models").Split(';');
-            foreach (var item in models)
+            List<string> listModels = new List<string>();
+            if (Ultils.GetValueRegistryKey("Models") != null)
             {
-                cboModel.Items.Add(item);
+                string[] models = Ultils.GetValueRegistryKey("Models").Split(';');
+
+                foreach (var item in models)
+                {
+                    listModels.Add(item);
+                }
+                cboModel.DataSource = listModels;
+            }
+            else
+            {
+                string[] models = {
+                "ZSFLA18GA",
+                "ZSFLA18HA",
+                "ZSFLA18ZA",
+                "ZSFLA32GA",
+                "ZSFLA32HA",
+                "ZSFLB06GA",
+                "ZSFLB06HA",
+                "ZSFLC15GA",
+                "ZSFLC15HA",
+                "ZSFLD22_REV5",
+                "ZSFLD22IO",
+                "ZSSFE08",
+                "ZSSFE09"
+                };
+
+                foreach (var item in models)
+                {
+                    Ultils.WriteRegistry("Models", item);
+                    listModels.Add(item);
+                }
+                cboModel.DataSource = listModels;
             }
         }
 
         private void lblAdd_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            new FormAddModel().ShowDialog();
+
             LoadModels();
         }
 
@@ -323,7 +372,6 @@ namespace CPUNichiconSupportWIP
         /// <returns></returns>
         private bool CheckConnection(string pathFile)
         {
-            
             try
             {
                 string strConnection = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={pathFile};Locale Identifier=1033;Jet OLEDB:Engine Type=5;Persist Security Info=True";
@@ -340,7 +388,7 @@ namespace CPUNichiconSupportWIP
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return false;
             }
             
         }
@@ -367,7 +415,8 @@ namespace CPUNichiconSupportWIP
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                MessageBox.Show(ex.Message);
+                return null;
             }
         }
 
@@ -387,11 +436,12 @@ namespace CPUNichiconSupportWIP
                 {
                     myConn.Dispose();
                     myConn.Close();
+                    fullPath = "";
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
         private void tmrEditNotify_Tick(object sender, EventArgs e)
@@ -401,6 +451,30 @@ namespace CPUNichiconSupportWIP
                 RunWorkingDatabase(fullPath);
                 m_bDirty = false;
             }
+        }
+        private void SuccessMessage(string str_status, string str_message)
+        {
+            lblStatus.Text = str_status;
+            lblStatus.BackColor = Color.DarkGreen;
+
+            lblMessage.Text = str_message;
+            lblMessage.BackColor = Color.DarkGreen;
+        }
+        private void ErrorMessage(string str_status, string str_message)
+        {
+            lblStatus.Text = str_status;
+            lblStatus.BackColor = Color.DarkRed;
+
+            lblMessage.Text = str_message;
+            lblMessage.BackColor = Color.DarkRed;
+        }
+        private void DefaultMessage()
+        {
+            lblStatus.Text = @"[N\A]";
+            lblStatus.BackColor = Color.FromArgb(255, 128, 0);
+
+            lblMessage.Text = "no results";
+            lblMessage.BackColor = Color.FromArgb(255, 128, 0);
         }
 
     }

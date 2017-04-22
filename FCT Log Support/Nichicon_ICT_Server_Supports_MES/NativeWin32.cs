@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Nichicon_ICT_Server_Supports_MES
@@ -38,6 +39,11 @@ namespace Nichicon_ICT_Server_Supports_MES
         [DllImport("user32.dll")]
         public static extern int SetForegroundWindow(
             int hWnd // handle to window
+            );
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetForegroundWindow(
+            IntPtr hWnd // handle to window
             );
 
         private const int GWL_EXSTYLE = (-20);

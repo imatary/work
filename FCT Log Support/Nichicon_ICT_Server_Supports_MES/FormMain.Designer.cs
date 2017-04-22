@@ -55,11 +55,17 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtClientConnect = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblReset = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
             this.lblAddModel = new System.Windows.Forms.Label();
             this.lblReload = new System.Windows.Forms.Label();
             this.cboModels = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.colBoardNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDateCheck = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTimeCheck = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -75,11 +81,6 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblRefesh = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.colBoardNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDateCheck = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTimeCheck = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -218,7 +219,7 @@
             this.btnStart.ImageIndex = 1;
             this.btnStart.Location = new System.Drawing.Point(60, 130);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(118, 38);
+            this.btnStart.Size = new System.Drawing.Size(100, 38);
             this.btnStart.TabIndex = 9;
             this.btnStart.Text = "Start Listening";
             this.btnStart.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -241,9 +242,9 @@
             this.btnStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStop.ForeColor = System.Drawing.Color.White;
-            this.btnStop.Location = new System.Drawing.Point(184, 130);
+            this.btnStop.Location = new System.Drawing.Point(166, 130);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(117, 38);
+            this.btnStop.Size = new System.Drawing.Size(104, 38);
             this.btnStop.TabIndex = 12;
             this.btnStop.Text = "Stop Listening";
             this.btnStop.UseVisualStyleBackColor = false;
@@ -335,6 +336,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lblReset);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.lblAddModel);
             this.groupBox3.Controls.Add(this.lblReload);
@@ -351,6 +353,17 @@
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Results";
+            // 
+            // lblReset
+            // 
+            this.lblReset.AutoSize = true;
+            this.lblReset.Location = new System.Drawing.Point(277, 188);
+            this.lblReset.Name = "lblReset";
+            this.lblReset.Size = new System.Drawing.Size(35, 13);
+            this.lblReset.TabIndex = 23;
+            this.lblReset.TabStop = true;
+            this.lblReset.Text = "Reset";
+            this.lblReset.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblReset_LinkClicked);
             // 
             // label8
             // 
@@ -409,6 +422,42 @@
             this.dataGridView1.RowHeadersWidth = 5;
             this.dataGridView1.Size = new System.Drawing.Size(555, 66);
             this.dataGridView1.TabIndex = 18;
+            // 
+            // colBoardNo
+            // 
+            this.colBoardNo.DataPropertyName = "BoardNo";
+            this.colBoardNo.HeaderText = "BOARD NO";
+            this.colBoardNo.Name = "colBoardNo";
+            this.colBoardNo.ReadOnly = true;
+            this.colBoardNo.Width = 150;
+            // 
+            // colProductID
+            // 
+            this.colProductID.DataPropertyName = "ProductId";
+            this.colProductID.HeaderText = "PRODUCT ID";
+            this.colProductID.Name = "colProductID";
+            this.colProductID.ReadOnly = true;
+            // 
+            // colDateCheck
+            // 
+            this.colDateCheck.DataPropertyName = "Date";
+            this.colDateCheck.HeaderText = "DATE";
+            this.colDateCheck.Name = "colDateCheck";
+            this.colDateCheck.ReadOnly = true;
+            // 
+            // colTimeCheck
+            // 
+            this.colTimeCheck.DataPropertyName = "Time";
+            this.colTimeCheck.HeaderText = "TIME";
+            this.colTimeCheck.Name = "colTimeCheck";
+            this.colTimeCheck.ReadOnly = true;
+            // 
+            // colSate
+            // 
+            this.colSate.DataPropertyName = "State";
+            this.colSate.HeaderText = "SATE";
+            this.colSate.Name = "colSate";
+            this.colSate.ReadOnly = true;
             // 
             // tableLayoutPanel1
             // 
@@ -508,10 +557,10 @@
             this.panelBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelBarcode.Controls.Add(this.txtBarcode);
             this.panelBarcode.Controls.Add(this.pictureBox2);
-            this.panelBarcode.Location = new System.Drawing.Point(10, 174);
+            this.panelBarcode.Location = new System.Drawing.Point(6, 174);
             this.panelBarcode.Name = "panelBarcode";
             this.panelBarcode.Padding = new System.Windows.Forms.Padding(2);
-            this.panelBarcode.Size = new System.Drawing.Size(303, 31);
+            this.panelBarcode.Size = new System.Drawing.Size(264, 31);
             this.panelBarcode.TabIndex = 16;
             this.panelBarcode.Visible = false;
             // 
@@ -523,7 +572,7 @@
             this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBarcode.Location = new System.Drawing.Point(37, 2);
             this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(262, 24);
+            this.txtBarcode.Size = new System.Drawing.Size(223, 24);
             this.txtBarcode.TabIndex = 16;
             this.txtBarcode.TextChanged += new System.EventHandler(this.txtBarcode_TextChanged);
             this.txtBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBarcode_PreviewKeyDown);
@@ -596,42 +645,6 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // colBoardNo
-            // 
-            this.colBoardNo.DataPropertyName = "BoardNo";
-            this.colBoardNo.HeaderText = "BOARD NO";
-            this.colBoardNo.Name = "colBoardNo";
-            this.colBoardNo.ReadOnly = true;
-            this.colBoardNo.Width = 150;
-            // 
-            // colProductID
-            // 
-            this.colProductID.DataPropertyName = "ProductId";
-            this.colProductID.HeaderText = "PRODUCT ID";
-            this.colProductID.Name = "colProductID";
-            this.colProductID.ReadOnly = true;
-            // 
-            // colDateCheck
-            // 
-            this.colDateCheck.DataPropertyName = "Date";
-            this.colDateCheck.HeaderText = "DATE";
-            this.colDateCheck.Name = "colDateCheck";
-            this.colDateCheck.ReadOnly = true;
-            // 
-            // colTimeCheck
-            // 
-            this.colTimeCheck.DataPropertyName = "Time";
-            this.colTimeCheck.HeaderText = "TIME";
-            this.colTimeCheck.Name = "colTimeCheck";
-            this.colTimeCheck.ReadOnly = true;
-            // 
-            // colSate
-            // 
-            this.colSate.DataPropertyName = "State";
-            this.colSate.HeaderText = "SATE";
-            this.colSate.Name = "colSate";
-            this.colSate.ReadOnly = true;
             // 
             // FormMain
             // 
@@ -726,6 +739,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDateCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTimeCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSate;
+        private System.Windows.Forms.LinkLabel lblReset;
     }
 }
 

@@ -276,12 +276,12 @@ namespace CPU_Nichicon_Supports_MES
                     dataGridView1.AutoGenerateColumns = false;
                     dataGridView1.DataSource = items;
 
-                    if (item.State == "PASS")
+                    if (item.Result==1)
                     {
                         pass = pass + 1;
                         lblPASS.Text = pass.ToString();
                     }
-                    else if (item.State == "FAIL")
+                    if (item.Result == 0)
                     {
                         ng = ng + 1;
                         lblNG.Text = ng.ToString();

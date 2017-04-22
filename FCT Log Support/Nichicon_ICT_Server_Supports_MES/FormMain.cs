@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -16,8 +17,6 @@ namespace Nichicon_ICT_Server_Supports_MES
         private Socket m_mainSocket;
         private Socket[] m_workerSocket = new Socket[10];
         private int m_clientCount = 0;
-        //delegate void SetTextCallback(string text);
-        //delegate void SetTextCallback(Form f, Control ctrl, string text);
         string stationNo = "", fileExtension = "", inputLog = "", outputLog = "";
         string fileLastWriteTime = "", dateCheck = "", boardNo = "", productId = "", boardState = "";
 
@@ -31,6 +30,8 @@ namespace Nichicon_ICT_Server_Supports_MES
             BinDataToControls();
             LoadModels();
             Ultils.RegisterInStartup(true, Application.ExecutablePath);
+            lblVersion.Text = Ultils.GetRunningVersion();
+            lblReset.Enabled = false;
         }
         public bool ControlInvokeRequired(Control c, Action a)
         {
@@ -49,22 +50,6 @@ namespace Nichicon_ICT_Server_Supports_MES
             txtClientConnect.Text = valuess;
             //txtBarcode.BackColor = c;
         }
-        //public static void SetText(Form form, Control ctrl, string text)
-        //{
-        //    // InvokeRequired required compares the thread ID of the 
-        //    // calling thread to the thread ID of the creating thread. 
-        //    // If these threads are different, it returns true. 
-        //    if (ctrl.InvokeRequired)
-        //    {
-        //        SetTextCallback d = new SetTextCallback(SetText);
-        //        form.Invoke(d, new object[] { form, ctrl, text });
-        //    }
-        //    else
-        //    {
-        //        ctrl.Text = text;
-        //    }
-        //}
-
         private void UpdateControls(bool listening)
         {
             btnStart.Enabled = !listening;
@@ -258,8 +243,15 @@ namespace Nichicon_ICT_Server_Supports_MES
             string content = Ultils.GetLine(path, 1);
             string[] array = content.Split(',');
             value = array[1];
-            if(value != "")
+            value = Regex.Replace(value, "[^A-Za-z0-9]", "");
+            if (value != "")
+            {
+                if (value.Contains("-"))
+                {
+                    value = value.Replace("-", "").Replace(" ", "");
+                }
                 return value;
+            }
             return null;
         }
 
@@ -292,49 +284,59 @@ namespace Nichicon_ICT_Server_Supports_MES
         {
             if (RunTaks)
             {
-                if(ModelName(fileLastWriteTime) == productId)
+                if (ModelName(fileLastWriteTime) == productId)
                 {
                     boardState = GetState(fileLastWriteTime);
                     List<Item> items = new List<Item>();
+                    Ultils.CreateFileLog(productId, boardNo, boardState, stationNo, dateCheck);
+                    Item item = new Item()
+                    {
+                        BoardNo = boardNo,
+                        ProductId = productId,
+                        Date = DateTime.Now.ToShortDateString(),
+                        Time = DateTime.Now.ToShortTimeString(),
+                        State = boardState,
+                    };
+
+                    items.Add(item);
+                    dataGridView1.AutoGenerateColumns = false;
+                    dataGridView1.DataSource = items;
                     if (boardState == "P")
                     {
                         ActiveWindows(this.Text);
                         pass = pass + 1;
-                        total = pass + ng;
 
-                        Ultils.CreateFileLog(productId, boardNo, boardState, stationNo, dateCheck);
+                        SuccessMessage("OK", $"Board [{boardNo}] OK!");
 
-                        lblPASS.Text = pass.ToString();
-                        lblNG.Text = ng.ToString();
-                        lblTOTAL.Text = total.ToString();
-
-                        Item item = new Item()
-                        {
-                            BoardNo = boardNo,
-                            ProductId = productId,
-                            Date = DateTime.Now.ToShortDateString(),
-                            Time = DateTime.Now.ToShortTimeString(),
-                            State = boardState,
-                        };
-                        items.Add(item);
-                        dataGridView1.AutoGenerateColumns = false;
-                        dataGridView1.DataSource = items;
-
+                        txtBarcode.Enabled = true;
+                        lblReset.Enabled = true;
                         txtBarcode.ResetText();
                         txtBarcode.Focus();
                     }
+                    if (boardState == "F")
+                    {
+                        ActiveWindows(this.Text);
+                        ErrorMessage("NG", $"Board [{boardNo}] NG!");
+                        lblReset.Enabled = true;
+                        ng = ng + 1;
+                    }
+
+                    total = pass + ng;
+                    lblPASS.Text = pass.ToString();
+                    lblNG.Text = ng.ToString();
+                    lblTOTAL.Text = total.ToString();
                 }
                 else
                 {
-                    ActiveWindows(this.Text);
+                    ActiveWindows(Text);
                     ErrorMessage("NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác!" +
                         $"\nModel: {ModelName(fileLastWriteTime)}" +
                         $"\nBoard No: {boardNo}");
 
+                    txtBarcode.Enabled = true;
                     txtBarcode.ResetText();
                     txtBarcode.Focus();
                 }
-                
                 RunTaks = false;
             }
         }
@@ -342,6 +344,14 @@ namespace Nichicon_ICT_Server_Supports_MES
         private void cboModels_SelectedIndexChanged(object sender, EventArgs e)
         {
             productId = cboModels.Text;
+        }
+
+        private void lblReset_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            boardNo = "";
+            txtBarcode.Enabled = true;
+            txtBarcode.ResetText();
+            txtBarcode.Focus();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -392,6 +402,7 @@ namespace Nichicon_ICT_Server_Supports_MES
                     lblAddModel.Enabled = false;
 
                     lblRefesh.Enabled = false;
+                    lblReset.Enabled = true;
 
                     if (startWatching == false)
                     {
@@ -432,7 +443,7 @@ namespace Nichicon_ICT_Server_Supports_MES
                 fileWatcher.EnableRaisingEvents = false;
                 fileWatcher.Dispose();
             }
-            
+
             DefaultMessage();
             CloseSockets();
             UpdateControls(false);
@@ -441,6 +452,8 @@ namespace Nichicon_ICT_Server_Supports_MES
             lblReload.Enabled = true;
             lblAddModel.Enabled = true;
             lblRefesh.Enabled = true;
+            lblReset.Enabled = false;
+            txtBarcode.ResetText();
         }
 
         private void txtBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -450,22 +463,31 @@ namespace Nichicon_ICT_Server_Supports_MES
                 try
                 {
                     boardNo = txtBarcode.Text.Trim();
-                    productId = cboModels.Text;
-                    dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
-
-                    ActiveWindows(lblProcessName.Text);
-
-                    Object objData = txtBarcode.Text;
-                    byte[] byData = System.Text.Encoding.ASCII.GetBytes(objData.ToString());
-                    for (int i = 0; i < m_clientCount; i++)
+                    if(boardNo != null || boardNo != "")
                     {
-                        if (m_workerSocket[i] != null)
+                        productId = cboModels.Text;
+                        dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
+                        txtBarcode.Enabled = false;
+                        lblReset.Enabled = true;
+                        ActiveProcess(lblProcessName.Text);
+
+                        Object objData = txtBarcode.Text;
+                        byte[] byData = System.Text.Encoding.ASCII.GetBytes(objData.ToString());
+                        for (int i = 0; i < m_clientCount; i++)
                         {
-                            if (m_workerSocket[i].Connected)
+                            if (m_workerSocket[i] != null)
                             {
-                                m_workerSocket[i].Send(byData);
+                                if (m_workerSocket[i].Connected)
+                                {
+                                    m_workerSocket[i].Send(byData);
+                                }
                             }
                         }
+                    }
+                    else
+                    {
+                        ErrorMessage("NG", "Vui lòng bắn vào barcode");
+                        txtBarcode.Focus();
                     }
 
                 }
@@ -480,12 +502,26 @@ namespace Nichicon_ICT_Server_Supports_MES
         /// Active Windows Title
         /// </summary>
         /// <param name="title"></param>
+        private void ActiveProcess(string title)
+        {
+            Process[] processes = Process.GetProcesses();
+            int windowHandle = 0;
+            foreach (Process p in processes)
+            {
+                if (p.MainWindowTitle.Contains(title))
+                {
+                    windowHandle = (int)p.MainWindowHandle;
+                    break;
+                }
+                
+            }
+            NativeWin32.SetForegroundWindow(windowHandle);
+        }
         private void ActiveWindows(string title)
         {
-            int iHandle2 = NativeWin32.FindWindow(null, title);
-            NativeWin32.SetForegroundWindow(iHandle2);
+            int windowHandle = NativeWin32.FindWindow(null, title);
+            NativeWin32.SetForegroundWindow(windowHandle);
         }
-        
         private void lblRefesh_Click(object sender, EventArgs e)
         {
             new FormConfig().ShowDialog();
@@ -539,7 +575,14 @@ namespace Nichicon_ICT_Server_Supports_MES
             new FormAddModel().ShowDialog();
             LoadModels();
         }
-        
+        private void SuccessMessage(string str_status, string str_message)
+        {
+            lblStatus.Text = str_status;
+            lblStatus.BackColor = Color.DarkGreen;
+
+            lblMessage.Text = str_message;
+            lblMessage.BackColor = Color.DarkGreen;
+        }
         private void ErrorMessage(string str_status, string str_message)
         {
             lblStatus.Text = str_status;

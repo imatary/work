@@ -25,6 +25,7 @@ namespace Nichicon_ICT_Client_Supports_MES
         {
             InitializeComponent();
             BinDataToControls();
+            lblVersion.Text = Ultils.GetRunningVersion();
         }
 
         public bool ControlInvokeRequired(Control c, Action a)
@@ -208,9 +209,13 @@ namespace Nichicon_ICT_Client_Supports_MES
         {
             if (IsRun)
             {
-                SendKeys.Send(txtBarcode.Text);
-                Thread.Sleep(150);
-                SendKeys.Send("{ENTER}");
+                string barcode = txtBarcode.Text;
+                if(barcode.Length > 10)
+                {
+                    SendKeys.Send(barcode);
+                    Thread.Sleep(500);
+                    SendKeys.Send("{ENTER}");
+                }
                 txtBarcode.ResetText();
                 IsRun = false;
             }

@@ -62,7 +62,7 @@ namespace CPU_Nichicon_Supports_MES
                 {
                     _status = "PASS";
                 }
-                else if (Result == 0)
+                if (Result == 0)
                 {
                     _status = "FAIL";
                 }

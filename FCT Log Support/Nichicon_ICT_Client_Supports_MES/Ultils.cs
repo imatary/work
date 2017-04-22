@@ -1,8 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Deployment.Application;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 
 namespace Nichicon_ICT_Client_Supports_MES
@@ -23,7 +25,17 @@ namespace Nichicon_ICT_Client_Supports_MES
             }
             return IPStr;
         }
-
+        public static string GetRunningVersion()
+        {
+            try
+            {
+                return ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            catch
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
+        }
         public static void RegisterInStartup(bool isChecked, string executablePath)
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
