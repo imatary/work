@@ -129,7 +129,19 @@ namespace EducationSkills.Subjects
                     lblEntryDate.Text = string.Format("{0:MM/dd/yyyy}", employees.EntryDate);
                     lblPosName.Text = employees.PosName;
 
-                    var subjects = context.Database.SqlQuery<PR_Bomon>("EXEC [dbo].[ShowBoMon]").ToList();
+                    string type = "Đào tạo toàn công ty";
+                    object[] paramSubjects =
+                    {
+                        new SqlParameter() { ParameterName = "@type", Value = type, SqlDbType = SqlDbType.NVarChar},
+                        new SqlParameter() { ParameterName = "@dept", Value = DBNull.Value, SqlDbType = SqlDbType.NVarChar},
+                        new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        }
+                    };
+
+                    var subjects = context.Database.SqlQuery<PR_Bomon>("EXEC [dbo].[ShowBoMon] @type, @dept", paramSubjects).ToList();
+
                     foreach (var sub in subjects)
                     {
                         object[] param =
@@ -165,18 +177,17 @@ namespace EducationSkills.Subjects
                         } 
                     }
 
-                    SqlParameter subject = new SqlParameter() { ParameterName = "@staffCode", SqlDbType = SqlDbType.VarChar };
-                    if (staffCode == null)
-                    {
-                        subject.Value = DBNull.Value;
-                    }
-                    else
-                    {
-                        subject.Value = staffCode;
-                    }
+                    object[] paramOffStaffCode =
+                        {
+                            new SqlParameter() { ParameterName = "@staffCode", Value = staffCode, SqlDbType = SqlDbType.VarChar },
+                            new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                            {
+                                Direction = ParameterDirection.Output
+                            }
+                        };
                     try
                     {
-                        var reports = context.Database.SqlQuery<SkillMap>("EXEC [dbo].[sp_Get_Subjects_Of_StaffCode] @staffCode", subject).ToList();
+                        var reports = context.Database.SqlQuery<SkillMap>("EXEC [dbo].[sp_Get_Subjects_Of_StaffCode] @staffCode", paramOffStaffCode).ToList();
 
                         gridControl1.DataSource = reports;
                     }

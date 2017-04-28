@@ -19,5 +19,7 @@ namespace EducationSkills.Data
 
         public DateTime? ModifyDate { get; set; }
 
+        public string Dept { get; set; }
+
     }
 }

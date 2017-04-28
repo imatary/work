@@ -73,6 +73,10 @@ namespace Nichicon_ICT_Client_Supports_MES
             {
                 cboWindows.Text = Ultils.GetValueRegistryKey("Process").ToString();
             }
+            if (Ultils.GetValueRegistryKey("BarcodeLength") != null)
+            {
+                txtBarcodeLength.Text = Ultils.GetValueRegistryKey("BarcodeLength").ToString();
+            }
         }
 
         private void FormConfig_Load(object sender, EventArgs e)
@@ -97,12 +101,17 @@ namespace Nichicon_ICT_Client_Supports_MES
                 MessageBox.Show("Vui lòng chọn Process!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboWindows.Focus();
             }
+            else if (string.IsNullOrEmpty(txtBarcodeLength.Text))
+            {
+                MessageBox.Show("Vui lòng nhập vào độ dài barcode!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtBarcodeLength.Focus();
+            }
             else
             {
                 Ultils.WriteRegistry("IPAddress", txtIPAddress.Text);
                 Ultils.WriteRegistry("Port", txtPort.Text);
                 Ultils.WriteRegistry("Process", cboWindows.Text);
-
+                Ultils.WriteRegistry("BarcodeLength", txtBarcodeLength.Text);
                 MessageBox.Show("Save success!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
          }

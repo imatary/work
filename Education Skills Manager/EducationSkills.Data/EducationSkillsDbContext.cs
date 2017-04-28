@@ -18,6 +18,7 @@ namespace EducationSkills.Data
         public virtual DbSet<PR_Mat> PR_Mat { get; set; }
         public virtual DbSet<EDU_Certificates> EDU_Certificates { get; set; }
         public virtual DbSet<EDU_Olympics> EDU_Olympics { get; set; }
+        public virtual DbSet<EDU_ManageCertificates> EDU_ManageCertificates { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -45,15 +45,20 @@ namespace EducationSkills
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        public static void InsertSubject(string id, string name)
+        public static void InsertSubject(string id, string name, string type, string dept)
         {
             var subject = new PR_Bomon()
             {
                 MaBoMon = id,
                 TenBoMon = name,
+                CreateBy = type,
                 CreateDate = DateTime.Now,
                 ModifyDate = DateTime.Now,
             };
+            if (dept != null)
+            {
+                subject.Dept = dept;
+            }
             try
             {
                 using (var context = new EducationSkillsDbContext())

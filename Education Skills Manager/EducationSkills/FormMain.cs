@@ -83,7 +83,7 @@ namespace EducationSkills
 
         private void btnReportSkillMap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            AddTabPage(new UserControlSkillMap(), "Báo cáo Skills Map", ActionType.Default, null);
+            //AddTabPage(new UserControlSkillMap(), "Báo cáo Skills Map", ActionType.Default, null);
         }
 
         private void barButtonItemCheckSolder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -140,6 +140,31 @@ namespace EducationSkills
             xtraTabControlMain.TabPages.Remove(xtraTabControlMain.SelectedTabPage);
             // Removes all the tabs:  
             //xtraTabControlMain.TabPages.Clear();
+        }
+
+        private void barDaoTaoToanCongTy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddTabPage(new UserControlSubjects(), "Đào tạo toàn công ty", ActionType.Default, null);
+        }
+
+        private void barDaoTaoTaiBoPhan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddTabPage(new UserControlSubjectsDept(), "Đào tạo tại bộ phận", ActionType.Default, null);
+        }
+
+        private void barQuanLyChungChi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddTabPage(new UserControlManagerCertificates(), "Quản lý chứng chỉ", ActionType.Default, null);
+        }
+
+        private void btnSkillMaps_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddTabPage(new UserControlSkillMap(), "Skills Map - Đào tạo toàn công ty", ActionType.Default, null);
+        }
+
+        private void btnSkillsMapDept_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            AddTabPage(new UserControlSkillMap(), "Skills Map - Đào tạo tại bộ phận", ActionType.Default, null);
         }
     }
 }

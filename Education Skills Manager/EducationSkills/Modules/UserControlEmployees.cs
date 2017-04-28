@@ -58,15 +58,27 @@ namespace EducationSkills.Modules
             splashScreenManager1.ShowWaitForm();
             context = new EducationSkillsDbContext();
 
-            SqlParameter parmDept = new SqlParameter() { ParameterName = "@deptCode", Value = key, SqlDbType = SqlDbType.VarChar };
+            object deptCode;
             if (key == null)
             {
-                parmDept.Value = DBNull.Value;
+                deptCode = DBNull.Value;
             }
+            else
+            {
+                deptCode = key;
+            }
+            object[] param =
+            {
+                new SqlParameter() { ParameterName = "@deptCode", Value = deptCode, SqlDbType = SqlDbType.NVarChar},
+                new SqlParameter("@Out_Parameter", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                }
+            };
 
             try
             {
-                var reports = context.Database.SqlQuery<Employees>("EXEC [dbo].[sp_Get_All_Staff] @deptCode", parmDept).ToList();
+                var reports = context.Database.SqlQuery<Employees>("EXEC [dbo].[sp_Get_All_Staff] @deptCode", param).ToList();
 
                 gridControl1.DataSource = reports;
 
@@ -144,81 +156,81 @@ namespace EducationSkills.Modules
 
         private void btnTranfers_Click(object sender, EventArgs e)
         {
-            splashScreenManager1.ShowWaitForm();
+            //splashScreenManager1.ShowWaitForm();
 
-            SqlParameter parmDept = new SqlParameter() { ParameterName = "@deptCode", Value = DBNull.Value, SqlDbType = SqlDbType.VarChar };
-            var reports = context.Database.SqlQuery<Employees>("EXEC [dbo].[sp_Get_All_Staff] @deptCode", parmDept).ToList();
-            var subjects = context.Database.SqlQuery<Subject>("EXEC [dbo].[sp_GetSubjectCodes]").ToList();
+            //SqlParameter parmDept = new SqlParameter() { ParameterName = "@deptCode", Value = DBNull.Value, SqlDbType = SqlDbType.VarChar };
+            //var reports = context.Database.SqlQuery<Employees>("EXEC [dbo].[sp_Get_All_Staff] @deptCode", parmDept).ToList();
+            //var subjects = context.Database.SqlQuery<Subject>("EXEC [dbo].[sp_GetSubjectCodes]").ToList();
             
-            if (reports.Any())
-            {
-                foreach (var staff in reports)
-                {
-                    foreach (var sub in subjects)
-                    {
-                        SqlParameter parm = new SqlParameter() { ParameterName = "@staffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NVarChar };
-                        SqlParameter parmSub = new SqlParameter() { ParameterName = "@MaBoMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.VarChar };
-                        var checkExits = context.Database.SqlQuery<CheckExitsSkillMap>("EXEC [dbo].[CheckStaffCodeExitsSkillMap] @staffCode, @MaBoMon", parm, parmSub).SingleOrDefault();
+            //if (reports.Any())
+            //{
+            //    foreach (var staff in reports)
+            //    {
+            //        foreach (var sub in subjects)
+            //        {
+            //            SqlParameter parm = new SqlParameter() { ParameterName = "@staffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NVarChar };
+            //            SqlParameter parmSub = new SqlParameter() { ParameterName = "@MaBoMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.VarChar };
+            //            var checkExits = context.Database.SqlQuery<CheckExitsSkillMap>("EXEC [dbo].[CheckStaffCodeExitsSkillMap] @staffCode, @MaBoMon", parm, parmSub).SingleOrDefault();
 
-                        if (checkExits == null)
-                        {
-                            object[] parms = {
-                                    new SqlParameter() { ParameterName = "@StaffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NChar },
-                                    new SqlParameter() { ParameterName = "@MaMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.NVarChar },
-                                    new SqlParameter("@Out_Parameter", SqlDbType.Int)
-                                    {
-                                        Direction = ParameterDirection.Output
-                                    }
-                                };
+            //            if (checkExits == null)
+            //            {
+            //                object[] parms = {
+            //                        new SqlParameter() { ParameterName = "@StaffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NChar },
+            //                        new SqlParameter() { ParameterName = "@MaMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.NVarChar },
+            //                        new SqlParameter("@Out_Parameter", SqlDbType.Int)
+            //                        {
+            //                            Direction = ParameterDirection.Output
+            //                        }
+            //                    };
 
-                            try
-                            {
-                                context.Database.ExecuteSqlCommand("EXEC [dbo].[InsertSkillMap] @StaffCode,@MaMon", parms);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageHelper.ErrorMessageBox(ex.Message);
-                            }
-                        }
-                    }
-                    //else
-                    //{
-                    //    foreach (var sub in subjects)
-                    //    {
-                    //        SqlParameter parm2 = new SqlParameter() { ParameterName = "@staffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NVarChar };
-                    //        SqlParameter parm2Sub = new SqlParameter() { ParameterName = "@MaBoMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.VarChar };
-                    //        var checkExits2 = context.Database.SqlQuery<CheckExitsSkillMap>("EXEC [dbo].[CheckStaffCodeExitsSkillMap] @staffCode, @MaBoMon", parm2, parm2Sub).SingleOrDefault();
-                    //        if (checkExits2 == null)
-                    //        {
-                    //            object[] parms = {
-                    //            new SqlParameter() { ParameterName = "@StaffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NChar },
-                    //            new SqlParameter() { ParameterName = "@MaMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.NVarChar },
-                    //            new SqlParameter("@Out_Parameter", SqlDbType.Int)
-                    //            {
-                    //                Direction = ParameterDirection.Output
-                    //            }
-                    //        };
+            //                try
+            //                {
+            //                    context.Database.ExecuteSqlCommand("EXEC [dbo].[InsertSkillMap] @StaffCode,@MaMon", parms);
+            //                }
+            //                catch (Exception ex)
+            //                {
+            //                    MessageHelper.ErrorMessageBox(ex.Message);
+            //                }
+            //            }
+            //        }
+            //        //else
+            //        //{
+            //        //    foreach (var sub in subjects)
+            //        //    {
+            //        //        SqlParameter parm2 = new SqlParameter() { ParameterName = "@staffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NVarChar };
+            //        //        SqlParameter parm2Sub = new SqlParameter() { ParameterName = "@MaBoMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.VarChar };
+            //        //        var checkExits2 = context.Database.SqlQuery<CheckExitsSkillMap>("EXEC [dbo].[CheckStaffCodeExitsSkillMap] @staffCode, @MaBoMon", parm2, parm2Sub).SingleOrDefault();
+            //        //        if (checkExits2 == null)
+            //        //        {
+            //        //            object[] parms = {
+            //        //            new SqlParameter() { ParameterName = "@StaffCode", Value = staff.StaffCode, SqlDbType = SqlDbType.NChar },
+            //        //            new SqlParameter() { ParameterName = "@MaMon", Value = sub.MaBoMon, SqlDbType = SqlDbType.NVarChar },
+            //        //            new SqlParameter("@Out_Parameter", SqlDbType.Int)
+            //        //            {
+            //        //                Direction = ParameterDirection.Output
+            //        //            }
+            //        //        };
 
-                    //            try
-                    //            {
-                    //                context.Database.ExecuteSqlCommand("EXEC [dbo].[InsertSkillMap] @StaffCode,@MaMon", parms);
-                    //            }
-                    //            catch (Exception ex)
-                    //            {
-                    //                MessageHelper.ErrorMessageBox(ex.Message);
-                    //            }
-                    //        }
-                    //    }
-                    //}
-                }
-                splashScreenManager1.CloseWaitForm();
-                MessageHelper.SuccessMessageBox("Tranfer success!");
-            }
-            else
-            {
-                MessageHelper.ErrorMessageBox("Vui lòng chọn ít nhất một Nhân viên để Imports");
-                return;
-            }
+            //        //            try
+            //        //            {
+            //        //                context.Database.ExecuteSqlCommand("EXEC [dbo].[InsertSkillMap] @StaffCode,@MaMon", parms);
+            //        //            }
+            //        //            catch (Exception ex)
+            //        //            {
+            //        //                MessageHelper.ErrorMessageBox(ex.Message);
+            //        //            }
+            //        //        }
+            //        //    }
+            //        //}
+            //    }
+            //    splashScreenManager1.CloseWaitForm();
+            //    MessageHelper.SuccessMessageBox("Tranfer success!");
+            //}
+            //else
+            //{
+            //    MessageHelper.ErrorMessageBox("Vui lòng chọn ít nhất một Nhân viên để Imports");
+            //    return;
+            //}
         }
 
         private void btnExportToExel_Click(object sender, EventArgs e)

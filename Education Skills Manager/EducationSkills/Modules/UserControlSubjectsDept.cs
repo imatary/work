@@ -1,6 +1,7 @@
 ﻿using EducationSkills.Data;
 using EducationSkills.Subjects;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -9,43 +10,70 @@ using System.Windows.Forms;
 
 namespace EducationSkills.Modules
 {
-    public partial class UserControlSubjects : UserControl
+    public partial class UserControlSubjectsDept : UserControl
     {
         private EducationSkillsDbContext context;
-        public UserControlSubjects()
+        public UserControlSubjectsDept()
         {
             InitializeComponent();
+            GetDepartments();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             new FormAddSubject("").ShowDialog();
-            LoadSubjects();
+            LoadSubjects(null);
         }
 
         private void btlRefesh_Click(object sender, EventArgs e)
         {
-            LoadSubjects();
+            LoadSubjects(null);
         }
 
         private void UserControlSubjects_Load(object sender, EventArgs e)
         {
-            LoadSubjects();
+            LoadSubjects(null);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void GetDepartments()
+        {
+            context = new EducationSkillsDbContext();
+            var dept = new Department { DeptCode = "Tất cả" };
+            List<Department> departments = null;
+
+            departments = context.Database.SqlQuery<Department>("EXEC [dbo].[sp_Get_All_Departments]").ToList();
+            departments.Add(dept);
+
+            cboDept.ComboBox.DataSource = departments;
+            cboDept.ComboBox.DisplayMember = "DeptCode";
+            cboDept.ComboBox.ValueMember = "DeptCode";
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="key"></param>
-        private void LoadSubjects()
+        private void LoadSubjects(string dept)
         {
             splashScreenManager1.ShowWaitForm();
             context = new EducationSkillsDbContext();
-            string type = "Đào tạo toàn công ty";
+            object key = null;
+            if (dept != null)
+            {
+                key = dept;
+            }
+            else
+            {
+                key = DBNull.Value;
+            }
+            string type = "Đào tạo tại bộ phận";
             object[] param =
             {
                 new SqlParameter() { ParameterName = "@type", Value = type, SqlDbType = SqlDbType.NVarChar},
-                new SqlParameter() { ParameterName = "@dept", Value = DBNull.Value, SqlDbType = SqlDbType.NVarChar},
+                new SqlParameter() { ParameterName = "@dept", Value = key, SqlDbType = SqlDbType.NVarChar},
                 new SqlParameter("@Out_Parameter", SqlDbType.Int)
                 {
                     Direction = ParameterDirection.Output
@@ -80,7 +108,16 @@ namespace EducationSkills.Modules
             {
                 string subjectId = (string)gridView1.GetRowCellValue(e.RowHandle, "MaBoMon");
                 new FormAddSubject(subjectId).ShowDialog();
-                LoadSubjects();
+                LoadSubjects(null);
+            }
+        }
+
+        private void cboDept_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string dept = cboDept.ComboBox.SelectedValue.ToString();
+            if (!string.IsNullOrEmpty(dept))
+            {
+                LoadSubjects(dept);
             }
         }
     }

@@ -32,7 +32,7 @@
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -79,7 +79,10 @@
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Sparkline.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -87,6 +90,7 @@
     <Reference Include="DevExpress.XtraGrid.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraRichEdit.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -125,6 +129,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormManageCertificates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageCertificates.Designer.cs">
+      <DependentUpon>FormManageCertificates.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAddOlympic.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +170,7 @@
     <Compile Include="Models\CheckExitsSkillmap.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Employees.cs" />
+    <Compile Include="Models\ManageCertificates.cs" />
     <Compile Include="Models\Olympic.cs" />
     <Compile Include="Models\ReportsEye.cs" />
     <Compile Include="Models\ReportsSolder.cs" />
@@ -177,6 +188,12 @@
     </Compile>
     <Compile Include="Modules\UserControlEmployees.Designer.cs">
       <DependentUpon>UserControlEmployees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\UserControlManagerCertificates.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\UserControlManagerCertificates.Designer.cs">
+      <DependentUpon>UserControlManagerCertificates.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\UserControlOlympicMeister.cs">
       <SubType>UserControl</SubType>
@@ -201,6 +218,12 @@
     </Compile>
     <Compile Include="Modules\UserControlSkillMap.Designer.cs">
       <DependentUpon>UserControlSkillMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\UserControlSubjectsDept.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\UserControlSubjectsDept.Designer.cs">
+      <DependentUpon>UserControlSubjectsDept.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\UserControlSubjects.cs">
       <SubType>UserControl</SubType>
@@ -235,6 +258,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormManageCertificates.resx">
+      <DependentUpon>FormManageCertificates.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAddOlympic.resx">
       <DependentUpon>FormAddOlympic.cs</DependentUpon>
     </EmbeddedResource>
@@ -256,6 +282,9 @@
     <EmbeddedResource Include="Modules\UserControlEmployees.resx">
       <DependentUpon>UserControlEmployees.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\UserControlManagerCertificates.resx">
+      <DependentUpon>UserControlManagerCertificates.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\UserControlOlympicMeister.resx">
       <DependentUpon>UserControlOlympicMeister.cs</DependentUpon>
     </EmbeddedResource>
@@ -267,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\UserControlSkillMap.resx">
       <DependentUpon>UserControlSkillMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\UserControlSubjectsDept.resx">
+      <DependentUpon>UserControlSubjectsDept.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\UserControlSubjects.resx">
       <DependentUpon>UserControlSubjects.cs</DependentUpon>

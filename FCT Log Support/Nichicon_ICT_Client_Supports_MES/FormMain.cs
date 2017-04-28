@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -14,13 +9,15 @@ namespace Nichicon_ICT_Client_Supports_MES
 {
     public partial class FormMain : Form
     {
-        byte[] m_dataBuffer = new byte[1000];
+        byte[] m_dataBuffer = new byte[1024];
         IAsyncResult m_result;
         public AsyncCallback m_pfnCallBack;
         public Socket m_clientSocket;
         private bool IsRun = false;
         delegate void SetTextCallback(string text);
-
+        string IPServer = "", processName = "";
+        int port = 0, barcodeLength = 0;
+        string serial = "";
         public FormMain()
         {
             InitializeComponent();
@@ -30,18 +27,17 @@ namespace Nichicon_ICT_Client_Supports_MES
 
         public bool ControlInvokeRequired(Control c, Action a)
         {
-            if (c.InvokeRequired) c.Invoke(new MethodInvoker(delegate { a(); }));
-            else return false;
-
+            if (c.InvokeRequired)
+                c.Invoke(new MethodInvoker(delegate { a(); }));
+            else
+                return false;
             return true;
         }
-        public void UpdateBarcode(string valuess)
+        public void UpdateBarcode(string values)
         {
-            //Check if invoke requied if so return - as i will be recalled in correct thread
-            if (ControlInvokeRequired(txtBarcode, () => UpdateBarcode(valuess)))
+            if (ControlInvokeRequired(txtBarcode, () => UpdateBarcode(values)))
                 return;
-            txtBarcode.Text = valuess;
-            //txtBarcode.BackColor = c;
+            txtBarcode.Text = values;
         }
 
         /// <summary>
@@ -76,7 +72,7 @@ namespace Nichicon_ICT_Client_Supports_MES
         public class SocketPacket
         {
             public Socket thisSocket;
-            public byte[] dataBuffer = new byte[1];
+            public byte[] dataBuffer = new byte[1024];
         }
 
         public void OnDataReceived(IAsyncResult asyn)
@@ -86,11 +82,11 @@ namespace Nichicon_ICT_Client_Supports_MES
                 SocketPacket theSockId = (SocketPacket)asyn.AsyncState;
                 int iRx = theSockId.thisSocket.EndReceive(asyn);
                 char[] chars = new char[iRx + 1];
-                System.Text.Decoder d = System.Text.Encoding.UTF8.GetDecoder();
+                Decoder d = Encoding.UTF8.GetDecoder();
                 int charLen = d.GetChars(theSockId.dataBuffer, 0, iRx, chars, 0);
                 System.String szData = new System.String(chars);
-                UpdateBarcode(txtBarcode.Text + szData);
-                ActiveWindows(lblProcessName.Text);
+                serial = serial + szData;
+                UpdateBarcode(serial);
                 WaitForData();
                 IsRun = true;
             }
@@ -119,15 +115,22 @@ namespace Nichicon_ICT_Client_Supports_MES
             if (Ultils.GetValueRegistryKey("IPAddress") != null)
             {
                 lblIPAddress.Text = Ultils.GetValueRegistryKey("IPAddress").ToString();
+                IPServer = Ultils.GetValueRegistryKey("IPAddress").ToString();
             }
-
             if (Ultils.GetValueRegistryKey("Port") != null)
             {
                 lblPort.Text = Ultils.GetValueRegistryKey("Port").ToString();
+                port = int.Parse(Ultils.GetValueRegistryKey("Port"));
             }
             if (Ultils.GetValueRegistryKey("Process") != null)
             {
                 lblProcessName.Text = Ultils.GetValueRegistryKey("Process").ToString();
+                processName = Ultils.GetValueRegistryKey("Process").ToString();
+            }
+            if (Ultils.GetValueRegistryKey("BarcodeLength") != null)
+            {
+                lblBarcodeLength.Text = Ultils.GetValueRegistryKey("BarcodeLength").ToString();
+                barcodeLength = int.Parse(Ultils.GetValueRegistryKey("BarcodeLength"));
             }
         }
 
@@ -162,16 +165,15 @@ namespace Nichicon_ICT_Client_Supports_MES
                     m_clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
                     // Cet the remote IP address
-                    IPAddress ip = IPAddress.Parse(lblIPAddress.Text);
-                    int iPortNo = System.Convert.ToInt16(lblPort.Text);
+                    IPAddress ip = IPAddress.Parse(IPServer);
+
                     // Create the end point 
-                    IPEndPoint ipEnd = new IPEndPoint(ip, iPortNo);
+                    IPEndPoint ipEnd = new IPEndPoint(ip, port);
                     // Connect to the remote host
                     m_clientSocket.Connect(ipEnd);
                     if (m_clientSocket.Connected)
                     {
                         UpdateControls(true);
-                        //Wait for data asynchronously 
                         WaitForData();
                     }
                 }
@@ -192,6 +194,7 @@ namespace Nichicon_ICT_Client_Supports_MES
                 m_clientSocket.Close();
                 m_clientSocket = null;
                 UpdateControls(false);
+                lblMessage.Text = "";
             }
         }
 
@@ -204,23 +207,46 @@ namespace Nichicon_ICT_Client_Supports_MES
             int iHandle2 = NativeWin32.FindWindow(null, title);
             NativeWin32.SetForegroundWindow(iHandle2);
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (IsRun)
             {
                 string barcode = txtBarcode.Text;
-                if(barcode.Length > 10)
+                ActiveWindows(lblProcessName.Text);
+
+                if (barcode.Length == barcodeLength)
                 {
-                    SendKeys.Send(barcode);
-                    Thread.Sleep(500);
+                    SendKeys.Send(txtBarcode.Text);
+                    Thread.Sleep(150);
                     SendKeys.Send("{ENTER}");
+                    serial = "";
+                    txtBarcode.ResetText();
+                    lblMessage.Text = "";
                 }
-                txtBarcode.ResetText();
+                else
+                {
+                    lblMessage.Text = "Vui lòng bắn lại. Serial không đúng!";
+                    txtBarcode.ResetText();
+                    txtBarcode.Text = "";
+                    ActiveWindows(Text);
+                    serial = "";
+                    try
+                    {
+                        byte[] byData = System.Text.Encoding.ASCII.GetBytes("Missing");
+                        if (m_clientSocket != null)
+                        {
+                            m_clientSocket.Send(byData);
+                        }
+                    }
+                    catch (SocketException se)
+                    {
+                        MessageBox.Show(se.Message);
+                    }
+                }
+
                 IsRun = false;
             }
         }
-
         private void lblConfigServer_Click(object sender, EventArgs e)
         {
             new FormConfig().ShowDialog();

@@ -30,13 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
+            this.ribbonControlChungChi = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItemEmployess = new DevExpress.XtraBars.BarButtonItem();
-            this.btnReportSkillMap = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItemUsername = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItemCheckSolder = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemReportsEye = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemSubjects = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItemVersion = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItemOlympic = new DevExpress.XtraBars.BarButtonItem();
@@ -44,14 +42,19 @@
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
+            this.barDaoTaoToanCongTy = new DevExpress.XtraBars.BarButtonItem();
+            this.barDaoTaoTaiBoPhan = new DevExpress.XtraBars.BarButtonItem();
+            this.barQuanLyChungChi = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageReport = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageLists = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup9 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -60,61 +63,61 @@
             this.btnReportCheckEye = new DevExpress.XtraBars.BarButtonItem();
             this.btnReportCheckSolder = new DevExpress.XtraBars.BarButtonItem();
             this.xtraTabControlMain = new DevExpress.XtraTab.XtraTabControl();
-            this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
+            this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.btnSkillMaps = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.btnSkillsMapDept = new DevExpress.XtraBars.BarButtonItem();
+            ((System.ComponentModel.ISupportInitialize)(this.ribbonControlChungChi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).BeginInit();
             this.SuspendLayout();
             // 
-            // ribbonControl1
+            // ribbonControlChungChi
             // 
-            this.ribbonControl1.ExpandCollapseItem.Id = 0;
-            this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.ribbonControl1.ExpandCollapseItem,
+            this.ribbonControlChungChi.ExpandCollapseItem.Id = 0;
+            this.ribbonControlChungChi.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.ribbonControlChungChi.ExpandCollapseItem,
             this.barButtonItemEmployess,
-            this.btnReportSkillMap,
             this.barStaticItemUsername,
             this.barButtonItemCheckSolder,
             this.barButtonItemReportsEye,
-            this.barButtonItemSubjects,
             this.barButtonItemChangePassword,
             this.barStaticItemVersion,
             this.barButtonItemOlympic,
             this.barHeaderItem1,
             this.barStaticItem1,
             this.barStaticItem2,
-            this.barStaticItem3});
-            this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 22;
-            this.ribbonControl1.Name = "ribbonControl1";
-            this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
+            this.barStaticItem3,
+            this.barDaoTaoToanCongTy,
+            this.barDaoTaoTaiBoPhan,
+            this.barQuanLyChungChi,
+            this.btnSkillMaps,
+            this.btnSkillsMapDept});
+            this.ribbonControlChungChi.Location = new System.Drawing.Point(0, 0);
+            this.ribbonControlChungChi.MaxItemId = 27;
+            this.ribbonControlChungChi.Name = "ribbonControlChungChi";
+            this.ribbonControlChungChi.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageReport,
+            this.ribbonPage4,
             this.ribbonPageLists,
+            this.ribbonPage3,
             this.ribbonPage1});
-            this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
-            this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.True;
-            this.ribbonControl1.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
-            this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(998, 150);
-            this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
-            this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
+            this.ribbonControlChungChi.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
+            this.ribbonControlChungChi.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.True;
+            this.ribbonControlChungChi.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
+            this.ribbonControlChungChi.ShowToolbarCustomizeItem = false;
+            this.ribbonControlChungChi.Size = new System.Drawing.Size(998, 150);
+            this.ribbonControlChungChi.StatusBar = this.ribbonStatusBar1;
+            this.ribbonControlChungChi.Toolbar.ShowCustomizeItem = false;
             // 
             // barButtonItemEmployess
             // 
-            this.barButtonItemEmployess.Caption = "Nhân Viên";
+            this.barButtonItemEmployess.Caption = "Danh sách Nhân viên";
             this.barButtonItemEmployess.Id = 5;
             this.barButtonItemEmployess.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemEmployess.ImageOptions.Image")));
             this.barButtonItemEmployess.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemEmployess.ImageOptions.LargeImage")));
             this.barButtonItemEmployess.Name = "barButtonItemEmployess";
             this.barButtonItemEmployess.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemEmployess_ItemClick);
-            // 
-            // btnReportSkillMap
-            // 
-            this.btnReportSkillMap.Caption = "Báo cáo Skills Map";
-            this.btnReportSkillMap.Id = 7;
-            this.btnReportSkillMap.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnReportSkillMap.ImageOptions.Image")));
-            this.btnReportSkillMap.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnReportSkillMap.ImageOptions.LargeImage")));
-            this.btnReportSkillMap.Name = "btnReportSkillMap";
-            this.btnReportSkillMap.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReportSkillMap_ItemClick);
             // 
             // barStaticItemUsername
             // 
@@ -144,15 +147,6 @@
             this.barButtonItemReportsEye.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemReportsEye.ImageOptions.LargeImage")));
             this.barButtonItemReportsEye.Name = "barButtonItemReportsEye";
             this.barButtonItemReportsEye.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemReportsEye_ItemClick);
-            // 
-            // barButtonItemSubjects
-            // 
-            this.barButtonItemSubjects.Caption = "Môn Học";
-            this.barButtonItemSubjects.Id = 12;
-            this.barButtonItemSubjects.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemSubjects.ImageOptions.Image")));
-            this.barButtonItemSubjects.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemSubjects.ImageOptions.LargeImage")));
-            this.barButtonItemSubjects.Name = "barButtonItemSubjects";
-            this.barButtonItemSubjects.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSubjects_ItemClick);
             // 
             // barButtonItemChangePassword
             // 
@@ -216,23 +210,42 @@
             this.barStaticItem3.Name = "barStaticItem3";
             this.barStaticItem3.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
+            // barDaoTaoToanCongTy
+            // 
+            this.barDaoTaoToanCongTy.Caption = "Đào tạo tại công ty";
+            this.barDaoTaoToanCongTy.Id = 22;
+            this.barDaoTaoToanCongTy.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barDaoTaoToanCongTy.ImageOptions.Image")));
+            this.barDaoTaoToanCongTy.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barDaoTaoToanCongTy.ImageOptions.LargeImage")));
+            this.barDaoTaoToanCongTy.Name = "barDaoTaoToanCongTy";
+            this.barDaoTaoToanCongTy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barDaoTaoToanCongTy_ItemClick);
+            // 
+            // barDaoTaoTaiBoPhan
+            // 
+            this.barDaoTaoTaiBoPhan.Caption = "Đào tạo tại bộ phận";
+            this.barDaoTaoTaiBoPhan.Id = 23;
+            this.barDaoTaoTaiBoPhan.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barDaoTaoTaiBoPhan.ImageOptions.Image")));
+            this.barDaoTaoTaiBoPhan.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barDaoTaoTaiBoPhan.ImageOptions.LargeImage")));
+            this.barDaoTaoTaiBoPhan.Name = "barDaoTaoTaiBoPhan";
+            this.barDaoTaoTaiBoPhan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barDaoTaoTaiBoPhan_ItemClick);
+            // 
+            // barQuanLyChungChi
+            // 
+            this.barQuanLyChungChi.Caption = "Quản lý chứng chỉ";
+            this.barQuanLyChungChi.Id = 24;
+            this.barQuanLyChungChi.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barQuanLyChungChi.ImageOptions.Image")));
+            this.barQuanLyChungChi.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barQuanLyChungChi.ImageOptions.LargeImage")));
+            this.barQuanLyChungChi.Name = "barQuanLyChungChi";
+            this.barQuanLyChungChi.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barQuanLyChungChi_ItemClick);
+            // 
             // ribbonPageReport
             // 
             this.ribbonPageReport.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup1,
             this.ribbonPageGroup3,
             this.ribbonPageGroup5,
             this.ribbonPageGroup7});
             this.ribbonPageReport.Image = ((System.Drawing.Image)(resources.GetObject("ribbonPageReport.Image")));
             this.ribbonPageReport.Name = "ribbonPageReport";
             this.ribbonPageReport.Text = "Báo cáo";
-            // 
-            // ribbonPageGroup1
-            // 
-            this.ribbonPageGroup1.Glyph = ((System.Drawing.Image)(resources.GetObject("ribbonPageGroup1.Glyph")));
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnReportSkillMap);
-            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.ShowCaptionButton = false;
             // 
             // ribbonPageGroup3
             // 
@@ -255,13 +268,11 @@
             // ribbonPageLists
             // 
             this.ribbonPageLists.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup4,
-            this.ribbonPageGroup2,
-            this.ribbonPageGroup8});
+            this.ribbonPageGroup4});
             this.ribbonPageLists.Image = ((System.Drawing.Image)(resources.GetObject("ribbonPageLists.Image")));
             this.ribbonPageLists.ImageToTextIndent = 2;
             this.ribbonPageLists.Name = "ribbonPageLists";
-            this.ribbonPageLists.Text = "Danh sách";
+            this.ribbonPageLists.Text = "Nhân viên";
             // 
             // ribbonPageGroup4
             // 
@@ -269,11 +280,33 @@
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.ShowCaptionButton = false;
             // 
+            // ribbonPage3
+            // 
+            this.ribbonPage3.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup9,
+            this.ribbonPageGroup2,
+            this.ribbonPageGroup8});
+            this.ribbonPage3.Image = ((System.Drawing.Image)(resources.GetObject("ribbonPage3.Image")));
+            this.ribbonPage3.Name = "ribbonPage3";
+            this.ribbonPage3.Text = "Môn Học";
+            // 
+            // ribbonPageGroup9
+            // 
+            this.ribbonPageGroup9.ItemLinks.Add(this.barDaoTaoToanCongTy);
+            this.ribbonPageGroup9.Name = "ribbonPageGroup9";
+            this.ribbonPageGroup9.ShowCaptionButton = false;
+            // 
             // ribbonPageGroup2
             // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemSubjects);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barDaoTaoTaiBoPhan);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.ShowCaptionButton = false;
+            // 
+            // ribbonPageGroup8
+            // 
+            this.ribbonPageGroup8.ItemLinks.Add(this.barQuanLyChungChi);
+            this.ribbonPageGroup8.Name = "ribbonPageGroup8";
+            this.ribbonPageGroup8.ShowCaptionButton = false;
             // 
             // ribbonPage1
             // 
@@ -299,7 +332,7 @@
             this.ribbonStatusBar1.ItemLinks.Add(this.barStaticItem3);
             this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 776);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
-            this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
+            this.ribbonStatusBar1.Ribbon = this.ribbonControlChungChi;
             this.ribbonStatusBar1.Size = new System.Drawing.Size(998, 23);
             // 
             // ribbonPage2
@@ -341,10 +374,44 @@
             this.xtraTabControlMain.MouseLeave += new System.EventHandler(this.xtraTabControlMain_MouseLeave);
             this.xtraTabControlMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.xtraTabControlMain_MouseMove);
             // 
-            // ribbonPageGroup8
+            // ribbonPage4
             // 
-            this.ribbonPageGroup8.Name = "ribbonPageGroup8";
-            this.ribbonPageGroup8.Text = "ribbonPageGroup8";
+            this.ribbonPage4.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup10,
+            this.ribbonPageGroup11});
+            this.ribbonPage4.Image = ((System.Drawing.Image)(resources.GetObject("ribbonPage4.Image")));
+            this.ribbonPage4.Name = "ribbonPage4";
+            this.ribbonPage4.Text = "Skills Map";
+            // 
+            // ribbonPageGroup10
+            // 
+            this.ribbonPageGroup10.ItemLinks.Add(this.btnSkillMaps);
+            this.ribbonPageGroup10.Name = "ribbonPageGroup10";
+            this.ribbonPageGroup10.ShowCaptionButton = false;
+            // 
+            // btnSkillMaps
+            // 
+            this.btnSkillMaps.Caption = "Skills Map\r\nĐào tạo toàn công ty";
+            this.btnSkillMaps.Id = 25;
+            this.btnSkillMaps.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
+            this.btnSkillMaps.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.btnSkillMaps.Name = "btnSkillMaps";
+            this.btnSkillMaps.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSkillMaps_ItemClick);
+            // 
+            // ribbonPageGroup11
+            // 
+            this.ribbonPageGroup11.ItemLinks.Add(this.btnSkillsMapDept);
+            this.ribbonPageGroup11.Name = "ribbonPageGroup11";
+            this.ribbonPageGroup11.ShowCaptionButton = false;
+            // 
+            // btnSkillsMapDept
+            // 
+            this.btnSkillsMapDept.Caption = "Skills Map\r\nĐào tạo tại bộ phận\r\n";
+            this.btnSkillsMapDept.Id = 26;
+            this.btnSkillsMapDept.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
+            this.btnSkillsMapDept.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.LargeImage")));
+            this.btnSkillsMapDept.Name = "btnSkillsMapDept";
+            this.btnSkillsMapDept.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSkillsMapDept_ItemClick);
             // 
             // FormMain
             // 
@@ -353,16 +420,16 @@
             this.ClientSize = new System.Drawing.Size(998, 799);
             this.Controls.Add(this.xtraTabControlMain);
             this.Controls.Add(this.ribbonStatusBar1);
-            this.Controls.Add(this.ribbonControl1);
+            this.Controls.Add(this.ribbonControlChungChi);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1000, 800);
             this.Name = "FormMain";
-            this.Ribbon = this.ribbonControl1;
+            this.Ribbon = this.ribbonControlChungChi;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar1;
             this.Text = "Education Skills";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ribbonControlChungChi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -371,25 +438,21 @@
 
         #endregion
 
-        private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
+        private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControlChungChi;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageReport;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageLists;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private DevExpress.XtraBars.BarButtonItem barButtonItemEmployess;
-        private DevExpress.XtraBars.BarButtonItem btnReportSkillMap;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.BarStaticItem barStaticItemUsername;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
         private DevExpress.XtraBars.BarButtonItem btnReportCheckEye;
         private DevExpress.XtraBars.BarButtonItem btnReportCheckSolder;
         private DevExpress.XtraBars.BarButtonItem barButtonItemCheckSolder;
         private DevExpress.XtraBars.BarButtonItem barButtonItemReportsEye;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemSubjects;
         private DevExpress.XtraBars.BarButtonItem barButtonItemChangePassword;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
@@ -401,6 +464,17 @@
         private DevExpress.XtraBars.BarStaticItem barStaticItem1;
         private DevExpress.XtraBars.BarStaticItem barStaticItem2;
         private DevExpress.XtraBars.BarStaticItem barStaticItem3;
+        private DevExpress.XtraBars.BarButtonItem barDaoTaoToanCongTy;
+        private DevExpress.XtraBars.BarButtonItem barDaoTaoTaiBoPhan;
+        private DevExpress.XtraBars.BarButtonItem barQuanLyChungChi;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage3;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup9;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
+        private DevExpress.XtraBars.BarButtonItem btnSkillMaps;
+        private DevExpress.XtraBars.BarButtonItem btnSkillsMapDept;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup10;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup11;
     }
 }

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -17,10 +18,10 @@ namespace Nichicon_ICT_Server_Supports_MES
         private Socket m_mainSocket;
         private Socket[] m_workerSocket = new Socket[10];
         private int m_clientCount = 0;
-        string stationNo = "", fileExtension = "", inputLog = "", outputLog = "";
+        string stationNo = "", fileExtension = "", inputLog = "", outputLog = "", serial = "";
         string fileLastWriteTime = "", dateCheck = "", boardNo = "", productId = "", boardState = "";
 
-        bool startWatching = false, RunTaks = false;
+        bool startWatching = false, RunTaks = false, checkLength = false;
         int pass = 0, ng = 0, total = 0;
         FileSystemWatcher fileWatcher;
 
@@ -135,18 +136,22 @@ namespace Nichicon_ICT_Server_Supports_MES
                 // by the client
                 iRx = socketData.m_currentSocket.EndReceive(asyn);
                 char[] chars = new char[iRx + 1];
-                System.Text.Decoder d = System.Text.Encoding.UTF8.GetDecoder();
-                int charLen = d.GetChars(socketData.dataBuffer,
-                                         0, iRx, chars, 0);
+                Decoder d = Encoding.UTF8.GetDecoder();
+                int charLen = d.GetChars(socketData.dataBuffer, 0, iRx, chars, 0);
                 System.String szData = new System.String(chars);
-                //lblBarcode.Text = szData;
+                serial = serial + szData;
+
+                if (serial != null)
+                {
+                    checkLength = true;
+                }
 
                 // Continue the waiting for data on the Socket
                 WaitForData(socketData.m_currentSocket);
             }
             catch (ObjectDisposedException)
             {
-                System.Diagnostics.Debugger.Log(0, "1", "\nOnDataReceived: Socket has been closed\n");
+                Debugger.Log(0, "1", "\nOnDataReceived: Socket has been closed\n");
             }
             catch (SocketException se)
             {
@@ -282,62 +287,89 @@ namespace Nichicon_ICT_Server_Supports_MES
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (RunTaks)
+            if (checkLength == true)
             {
-                if (ModelName(fileLastWriteTime) == productId)
+                ActiveWindows(this.Text);
+                txtBarcode.Enabled = true;
+                txtBarcode.ResetText();
+                txtBarcode.Focus();
+                serial = "";
+                checkLength = false;
+            }
+            else
+            {
+                if (RunTaks)
                 {
-                    boardState = GetState(fileLastWriteTime);
-                    List<Item> items = new List<Item>();
-                    Ultils.CreateFileLog(productId, boardNo, boardState, stationNo, dateCheck);
-                    Item item = new Item()
+                    if(boardNo!=null || boardNo != "")
                     {
-                        BoardNo = boardNo,
-                        ProductId = productId,
-                        Date = DateTime.Now.ToShortDateString(),
-                        Time = DateTime.Now.ToShortTimeString(),
-                        State = boardState,
-                    };
+                        if (ModelName(fileLastWriteTime) == productId)
+                        {
+                            boardState = GetState(fileLastWriteTime);
+                            List<Item> items = new List<Item>();
+                            Ultils.CreateFileLog(productId, boardNo, boardState, stationNo, dateCheck);
+                            Item item = new Item()
+                            {
+                                BoardNo = boardNo,
+                                ProductId = productId,
+                                Date = DateTime.Now.ToShortDateString(),
+                                Time = DateTime.Now.ToShortTimeString(),
+                                State = boardState,
+                            };
 
-                    items.Add(item);
-                    dataGridView1.AutoGenerateColumns = false;
-                    dataGridView1.DataSource = items;
-                    if (boardState == "P")
+                            items.Add(item);
+                            dataGridView1.AutoGenerateColumns = false;
+                            dataGridView1.DataSource = items;
+                            if (boardState == "P")
+                            {
+                                ActiveWindows(this.Text);
+                                pass = pass + 1;
+
+                                SuccessMessage("OK", $"Board [{boardNo}] OK!");
+
+                                txtBarcode.Enabled = true;
+                                lblReset.Enabled = true;
+                                txtBarcode.ResetText();
+                                txtBarcode.Focus();
+                            }
+                            if (boardState == "F")
+                            {
+                                ActiveWindows(this.Text);
+                                ErrorMessage("NG", $"Board [{boardNo}] NG!");
+                                lblReset.Enabled = true;
+                                ng = ng + 1;
+                            }
+
+                            total = pass + ng;
+                            lblPASS.Text = pass.ToString();
+                            lblNG.Text = ng.ToString();
+                            lblTOTAL.Text = total.ToString();
+                        }
+                        else
+                        {
+                            ActiveWindows(Text);
+                            ErrorMessage("NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác!" +
+                                $"\nModel: {ModelName(fileLastWriteTime)}" +
+                                $"\nBoard No: {boardNo}");
+
+                            txtBarcode.Enabled = true;
+                            txtBarcode.ResetText();
+                            txtBarcode.Focus();
+                            checkLength = false;
+                            serial = "";
+                        }
+                    }
+                    else
                     {
-                        ActiveWindows(this.Text);
-                        pass = pass + 1;
-
-                        SuccessMessage("OK", $"Board [{boardNo}] OK!");
+                        ActiveWindows(Text);
+                        ErrorMessage("NG", $" Vui lòng bắn vào Serial!");
 
                         txtBarcode.Enabled = true;
-                        lblReset.Enabled = true;
-                        txtBarcode.ResetText();
                         txtBarcode.Focus();
+                        checkLength = false;
+                        serial = "";
                     }
-                    if (boardState == "F")
-                    {
-                        ActiveWindows(this.Text);
-                        ErrorMessage("NG", $"Board [{boardNo}] NG!");
-                        lblReset.Enabled = true;
-                        ng = ng + 1;
-                    }
-
-                    total = pass + ng;
-                    lblPASS.Text = pass.ToString();
-                    lblNG.Text = ng.ToString();
-                    lblTOTAL.Text = total.ToString();
+                    RunTaks = false;
                 }
-                else
-                {
-                    ActiveWindows(Text);
-                    ErrorMessage("NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác!" +
-                        $"\nModel: {ModelName(fileLastWriteTime)}" +
-                        $"\nBoard No: {boardNo}");
-
-                    txtBarcode.Enabled = true;
-                    txtBarcode.ResetText();
-                    txtBarcode.Focus();
-                }
-                RunTaks = false;
             }
         }
 
@@ -471,8 +503,7 @@ namespace Nichicon_ICT_Server_Supports_MES
                         lblReset.Enabled = true;
                         ActiveProcess(lblProcessName.Text);
 
-                        Object objData = txtBarcode.Text;
-                        byte[] byData = System.Text.Encoding.ASCII.GetBytes(objData.ToString());
+                        byte[] byData = Encoding.ASCII.GetBytes(boardNo);
                         for (int i = 0; i < m_clientCount; i++)
                         {
                             if (m_workerSocket[i] != null)

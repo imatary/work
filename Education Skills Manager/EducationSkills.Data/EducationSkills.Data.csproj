@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="EDU_Certificate.cs" />
     <Compile Include="EducationSkillsDbContext.cs" />
+    <Compile Include="EDU_ManageCertificates.cs" />
     <Compile Include="EDU_Olympics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PR_AdminEdu.cs" />

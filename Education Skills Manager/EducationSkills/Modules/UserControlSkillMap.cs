@@ -9,6 +9,9 @@ using DevExpress.XtraGrid.Columns;
 using System.Diagnostics;
 using DevExpress.Utils;
 using DevExpress.XtraPrinting;
+using DevExpress.Data;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid;
 
 namespace EducationSkills.Modules
 {
@@ -85,11 +88,13 @@ namespace EducationSkills.Modules
                 {
                     dt.Columns.Add(subjects[i].MaBoMon.Replace(" ", ""), typeof(DateTime));
                 }
-
+                dt.Columns.Add("TOTAL", typeof(int));
                 // Add Rows
+                
                 for (int i = 0; i < data.Count; i++)
                 {
                     List<object> rowItem = new List<object>();
+                    
                     rowItem.Add(data[i].StaffCode);
                     rowItem.Add(data[i].FullName);
                     rowItem.Add(data[i].DeptCode);
@@ -97,20 +102,39 @@ namespace EducationSkills.Modules
                     var IDs = data[i].SubjectIDs.ToList();
                     if (IDs.Any())
                     {
+                        int count = 0;
+
                         for (int j = 0; j < IDs.Count; j++)
                         {
                             DateTime date;
-                            if(IDs[j].Date != null)
+                            if (IDs[j].Date != null)
                             {
                                 date = (DateTime)IDs[j].Date;
                                 rowItem.Add(date);
+                                count = count + 1;
                             }
                             else
                             {
                                 rowItem.Add(IDs[j].Date);
                             }
                         }
+
+                        int tmp = subjects.Count - IDs.Count;
+                        for (int iy = 0; iy < tmp; iy++)
+                        {
+                            rowItem.Add(null);
+                        }
+
+                        if (count > 0)
+                        {
+                            rowItem.Add(count);
+                        }
+                        //else
+                        //{
+                        //    rowItem.Add(null);
+                        //}
                     }
+
 
                     dt.Rows.Add(rowItem.ToArray<object>());
                 }
@@ -124,7 +148,7 @@ namespace EducationSkills.Modules
                 gridView1.Columns[0].Fixed = FixedStyle.Left;
                 gridView1.Columns[1].Fixed = FixedStyle.Left;
                 gridView1.Columns[2].Fixed = FixedStyle.Left;
-
+                
                 // Tooltip Column Title
                 foreach (var item in gridView1.Columns)
                 {
@@ -133,10 +157,19 @@ namespace EducationSkills.Modules
                     {
                         var SubjectName = context.PR_Bomon.SingleOrDefault(m => m.MaBoMon == columnName).TenBoMon;
                         gridView1.Columns[columnName].ToolTip = SubjectName;
+                        //gridView1.Columns[columnName].Summary.Add(DevExpress.Data.SummaryItemType.Count, columnName, "{0}");
+                        gridView1.Columns[columnName].SummaryItem.SetSummary(SummaryItemType.Count,"{0}");
+                        //gridView1.Columns[columnName].SummaryItem.SummaryType = SummaryItemType.Count;
+
                         gridView1.Columns[columnName].AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
                         gridView1.Columns[columnName].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Far;
                     }
-                }
+                    if (columnName.StartsWith("TOTAL"))
+                    {
+                        gridView1.Columns[columnName].AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
+                        gridView1.Columns[columnName].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+                    }
+                 }
             }
             catch (Exception ex)
             {
@@ -327,6 +360,18 @@ namespace EducationSkills.Modules
                     }
                 }
                 
+            }
+        }
+
+        private void gridView1_CustomSummaryCalculate(object sender, CustomSummaryEventArgs e)
+        {
+
+            GridColumnSummaryItem item = e.Item as GridColumnSummaryItem;
+
+            if (Equals("EDU-01", item.Tag))
+            {
+                if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Finalize)
+                    e.TotalValue = 10;
             }
         }
     }

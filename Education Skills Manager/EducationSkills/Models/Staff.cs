@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EducationSkills
 {
@@ -13,5 +9,19 @@ namespace EducationSkills
         public string DeptCode { get; set; }
         public string MaBoMon { get; set; }
         public DateTime? NgayThamGia { get; set; }
+        //public int Count {
+        //    get {
+        //        int count = 0;
+        //        if (NgayThamGia != null)
+        //        {
+        //            return count = count + 1;
+        //        }
+        //        else
+        //        {
+        //            return count;
+        //        }
+
+        //    }
+        //}
     }
 }

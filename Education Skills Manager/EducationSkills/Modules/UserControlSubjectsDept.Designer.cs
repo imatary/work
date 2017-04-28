@@ -1,6 +1,6 @@
 ﻿namespace EducationSkills.Modules
 {
-    partial class UserControlSubjects
+    partial class UserControlSubjectsDept
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlSubjects));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlSubjectsDept));
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
@@ -40,12 +40,15 @@
             this.gridColumnCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMaBoMon = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTenBoMon = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridTypeSubject = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.btnMaximize = new DevExpress.XtraEditors.SimpleButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::EducationSkills.ShowWait), true, true, typeof(System.Windows.Forms.UserControl));
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.gridTypeSubject = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cboDept = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -74,7 +77,10 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.toolStripSeparator1,
-            this.btnRefesh});
+            this.btnRefesh,
+            this.toolStripSeparator2,
+            this.toolStripLabel1,
+            this.cboDept});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -203,6 +209,19 @@
             this.colTenBoMon.VisibleIndex = 3;
             this.colTenBoMon.Width = 324;
             // 
+            // gridTypeSubject
+            // 
+            this.gridTypeSubject.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridTypeSubject.AppearanceHeader.Options.UseFont = true;
+            this.gridTypeSubject.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridTypeSubject.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridTypeSubject.Caption = "Loại hình đào tạo";
+            this.gridTypeSubject.FieldName = "CreateBy";
+            this.gridTypeSubject.Name = "gridTypeSubject";
+            this.gridTypeSubject.Visible = true;
+            this.gridTypeSubject.VisibleIndex = 4;
+            this.gridTypeSubject.Width = 265;
+            // 
             // panelControl3
             // 
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -248,22 +267,27 @@
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(774, 44);
             this.labelControl1.TabIndex = 9;
-            this.labelControl1.Text = "Môn học đào tạo toàn công ty";
+            this.labelControl1.Text = "Môn học đào tạo tại bộ phận";
             // 
-            // gridTypeSubject
+            // toolStripSeparator2
             // 
-            this.gridTypeSubject.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridTypeSubject.AppearanceHeader.Options.UseFont = true;
-            this.gridTypeSubject.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridTypeSubject.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridTypeSubject.Caption = "Loại hình đào tạo";
-            this.gridTypeSubject.FieldName = "CreateBy";
-            this.gridTypeSubject.Name = "gridTypeSubject";
-            this.gridTypeSubject.Visible = true;
-            this.gridTypeSubject.VisibleIndex = 4;
-            this.gridTypeSubject.Width = 265;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
-            // UserControlSubjects
+            // cboDept
+            // 
+            this.cboDept.Name = "cboDept";
+            this.cboDept.Size = new System.Drawing.Size(200, 39);
+            this.cboDept.SelectedIndexChanged += new System.EventHandler(this.cboDept_SelectedIndexChanged);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(39, 36);
+            this.toolStripLabel1.Text = "Dept:";
+            // 
+            // UserControlSubjectsDept
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -274,7 +298,7 @@
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.btnMaximize);
-            this.Name = "UserControlSubjects";
+            this.Name = "UserControlSubjectsDept";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Size = new System.Drawing.Size(794, 500);
             this.Load += new System.EventHandler(this.UserControlSubjects_Load);
@@ -309,5 +333,8 @@
         private System.Windows.Forms.ToolStripButton btnRefesh;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraGrid.Columns.GridColumn gridTypeSubject;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripComboBox cboDept;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
     }
 }

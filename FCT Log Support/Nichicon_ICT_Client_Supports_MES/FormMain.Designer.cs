@@ -54,11 +54,13 @@
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblConfigServer = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lblIPAddress = new System.Windows.Forms.Label();
             this.lblPort = new System.Windows.Forms.Label();
             this.lblProcessName = new System.Windows.Forms.Label();
+            this.lblIPAddress = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblBarcodeLength = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblMessage = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -74,7 +76,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(453, 56);
+            this.panel1.Size = new System.Drawing.Size(455, 56);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -91,7 +93,7 @@
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.pictureBox1.Image = global::Nichicon_ICT_Client_Supports_MES.Properties.Resources.umc;
-            this.pictureBox1.Location = new System.Drawing.Point(363, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(365, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(90, 56);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -108,9 +110,9 @@
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel5,
             this.lblVersion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 305);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 331);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(453, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(455, 24);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -162,7 +164,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 56);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(453, 2);
+            this.groupBox1.Size = new System.Drawing.Size(455, 2);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
@@ -191,7 +193,7 @@
             this.btnConnected.ForeColor = System.Drawing.Color.White;
             this.btnConnected.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConnected.ImageIndex = 1;
-            this.btnConnected.Location = new System.Drawing.Point(145, 264);
+            this.btnConnected.Location = new System.Drawing.Point(144, 290);
             this.btnConnected.Name = "btnConnected";
             this.btnConnected.Size = new System.Drawing.Size(80, 38);
             this.btnConnected.TabIndex = 9;
@@ -216,7 +218,7 @@
             this.btnDisConnected.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnDisConnected.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDisConnected.ForeColor = System.Drawing.Color.White;
-            this.btnDisConnected.Location = new System.Drawing.Point(231, 264);
+            this.btnDisConnected.Location = new System.Drawing.Point(230, 290);
             this.btnDisConnected.Name = "btnDisConnected";
             this.btnDisConnected.Size = new System.Drawing.Size(86, 38);
             this.btnDisConnected.TabIndex = 12;
@@ -268,7 +270,7 @@
             this.txtBarcode.Location = new System.Drawing.Point(132, 19);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.ReadOnly = true;
-            this.txtBarcode.Size = new System.Drawing.Size(269, 26);
+            this.txtBarcode.Size = new System.Drawing.Size(250, 26);
             this.txtBarcode.TabIndex = 17;
             // 
             // groupBox2
@@ -298,33 +300,6 @@
             this.lblConfigServer.TabIndex = 17;
             this.lblConfigServer.Click += new System.EventHandler(this.lblConfigServer_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.txtBarcode);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(12, 203);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(430, 55);
-            this.groupBox3.TabIndex = 19;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Info value";
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // lblIPAddress
-            // 
-            this.lblIPAddress.AutoSize = true;
-            this.lblIPAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIPAddress.ForeColor = System.Drawing.Color.Teal;
-            this.lblIPAddress.Location = new System.Drawing.Point(129, 24);
-            this.lblIPAddress.Name = "lblIPAddress";
-            this.lblIPAddress.Size = new System.Drawing.Size(37, 13);
-            this.lblIPAddress.TabIndex = 13;
-            this.lblIPAddress.Text = "None";
-            // 
             // lblPort
             // 
             this.lblPort.AutoSize = true;
@@ -347,12 +322,61 @@
             this.lblProcessName.TabIndex = 13;
             this.lblProcessName.Text = "None";
             // 
+            // lblIPAddress
+            // 
+            this.lblIPAddress.AutoSize = true;
+            this.lblIPAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIPAddress.ForeColor = System.Drawing.Color.Teal;
+            this.lblIPAddress.Location = new System.Drawing.Point(129, 24);
+            this.lblIPAddress.Name = "lblIPAddress";
+            this.lblIPAddress.Size = new System.Drawing.Size(37, 13);
+            this.lblIPAddress.TabIndex = 13;
+            this.lblIPAddress.Text = "None";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.lblMessage);
+            this.groupBox3.Controls.Add(this.lblBarcodeLength);
+            this.groupBox3.Controls.Add(this.txtBarcode);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Location = new System.Drawing.Point(12, 203);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(430, 81);
+            this.groupBox3.TabIndex = 19;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Info value";
+            // 
+            // lblBarcodeLength
+            // 
+            this.lblBarcodeLength.AutoSize = true;
+            this.lblBarcodeLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBarcodeLength.Location = new System.Drawing.Point(388, 26);
+            this.lblBarcodeLength.Name = "lblBarcodeLength";
+            this.lblBarcodeLength.Size = new System.Drawing.Size(14, 13);
+            this.lblBarcodeLength.TabIndex = 18;
+            this.lblBarcodeLength.Text = "0";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lblMessage
+            // 
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblMessage.Location = new System.Drawing.Point(48, 53);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(0, 25);
+            this.lblMessage.TabIndex = 19;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(453, 329);
+            this.ClientSize = new System.Drawing.Size(455, 355);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnDisConnected);
@@ -413,6 +437,8 @@
         private System.Windows.Forms.Label lblPort;
         private System.Windows.Forms.Label lblProcessName;
         private System.Windows.Forms.Label lblIPAddress;
+        private System.Windows.Forms.Label lblBarcodeLength;
+        private System.Windows.Forms.Label lblMessage;
     }
 }
 
