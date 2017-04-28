@@ -7,6 +7,7 @@ namespace EducationSkills.Models
 {
     public class ManageCertificates
     {
+        public int ID { get; set; }
         public string StaffCode { get; set; }
         public string FullName { get; set; }
         public string DeptCode { get; set; }

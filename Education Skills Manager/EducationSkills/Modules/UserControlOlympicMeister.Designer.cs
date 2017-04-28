@@ -52,6 +52,7 @@
             this.gridTestDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridTestResults = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::EducationSkills.ShowWait), true, true, typeof(System.Windows.Forms.UserControl));
+            this.gridID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDept.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
@@ -192,7 +193,8 @@
             this.gridTestContent,
             this.gridTestNumber,
             this.gridTestDate,
-            this.gridTestResults});
+            this.gridTestResults,
+            this.gridID});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsFind.FindNullPrompt = "Nhập vào tên nhân viên cần tìm...";
@@ -205,6 +207,7 @@
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
             this.gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridStaffCode, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.gridView1.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gridView1_PopupMenuShowing);
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // gridSTT
@@ -401,6 +404,12 @@
             // 
             this.splashScreenManager1.ClosingDelay = 500;
             // 
+            // gridID
+            // 
+            this.gridID.Caption = "ID";
+            this.gridID.FieldName = "ID";
+            this.gridID.Name = "gridID";
+            // 
             // UserControlOlympicMeister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,5 +454,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridSTT;
         private DevExpress.XtraEditors.SimpleButton btnAdd;
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridID;
     }
 }

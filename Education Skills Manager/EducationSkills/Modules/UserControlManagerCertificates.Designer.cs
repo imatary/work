@@ -51,10 +51,11 @@
             this.gridTrainingType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridStartDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridEndDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::EducationSkills.ShowWait), true, true, typeof(System.Windows.Forms.UserControl));
             this.gridCertificate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridDeadlineCertificate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridNote = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::EducationSkills.ShowWait), true, true, typeof(System.Windows.Forms.UserControl));
+            this.gridID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDept.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
@@ -198,7 +199,8 @@
             this.gridEndDate,
             this.gridCertificate,
             this.gridDeadlineCertificate,
-            this.gridNote});
+            this.gridNote,
+            this.gridID});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsFind.FindNullPrompt = "Nhập vào tên nhân viên cần tìm...";
@@ -211,6 +213,7 @@
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
             this.gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridStaffCode, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.gridView1.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gridView1_PopupMenuShowing);
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // gridSTT
@@ -349,7 +352,7 @@
             this.gridTrainingContent.AppearanceHeader.Options.UseFont = true;
             this.gridTrainingContent.AppearanceHeader.Options.UseTextOptions = true;
             this.gridTrainingContent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridTrainingContent.Caption = "Nội dung thi Olympic";
+            this.gridTrainingContent.Caption = "Nội dung đào tạo";
             this.gridTrainingContent.FieldName = "TrainingContent";
             this.gridTrainingContent.MinWidth = 150;
             this.gridTrainingContent.Name = "gridTrainingContent";
@@ -403,10 +406,6 @@
             this.gridEndDate.VisibleIndex = 11;
             this.gridEndDate.Width = 100;
             // 
-            // splashScreenManager1
-            // 
-            this.splashScreenManager1.ClosingDelay = 500;
-            // 
             // gridCertificate
             // 
             this.gridCertificate.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -450,6 +449,16 @@
             this.gridNote.Visible = true;
             this.gridNote.VisibleIndex = 14;
             this.gridNote.Width = 100;
+            // 
+            // splashScreenManager1
+            // 
+            this.splashScreenManager1.ClosingDelay = 500;
+            // 
+            // gridID
+            // 
+            this.gridID.Caption = "ID";
+            this.gridID.FieldName = "ID";
+            this.gridID.Name = "gridID";
             // 
             // UserControlManagerCertificates
             // 
@@ -498,5 +507,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridCertificate;
         private DevExpress.XtraGrid.Columns.GridColumn gridDeadlineCertificate;
         private DevExpress.XtraGrid.Columns.GridColumn gridNote;
+        private DevExpress.XtraGrid.Columns.GridColumn gridID;
     }
 }

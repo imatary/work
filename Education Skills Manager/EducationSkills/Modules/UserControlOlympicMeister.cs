@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 using EducationSkills.Models;
 using System.Globalization;
 using System.Diagnostics;
+using DevExpress.Utils.Menu;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace EducationSkills.Modules
 {
@@ -17,6 +19,7 @@ namespace EducationSkills.Modules
         public UserControlOlympicMeister()
         {
             InitializeComponent();
+            InitializeMenuItems();
         }
         /// <summary>
         /// 
@@ -64,6 +67,39 @@ namespace EducationSkills.Modules
             }
             splashScreenManager1.CloseWaitForm();
         }
+
+        DXMenuItem[] menuItems;
+        void InitializeMenuItems()
+        {
+            //DXMenuItem itemEdit = new DXMenuItem ("Sửa", ItemEdit_Click);
+            DXMenuItem itemDelete = new DXMenuItem("Xóa", ItemDelete_Click);
+            menuItems = new DXMenuItem[] { itemDelete };
+        }
+
+        private void ItemDelete_Click(object sender, System.EventArgs e)
+        {
+            string id = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ID").ToString();
+            try
+            {
+                dynamic mboxResult = MessageBox.Show("Bạn có chắc muốn xóa hay không?",
+                    @"THÔNG BÁO",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (mboxResult == DialogResult.Yes)
+                {
+                    EducationSkillDataProviders.DeleteOlympic(id);
+                    gridView1.DeleteRow(gridView1.FocusedRowHandle);
+                    GetOlympics(null);
+                }
+
+                //MessageBox.Show(staffCode);
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ErrorMessageBox(ex.Message);
+            }
+        }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -142,6 +178,19 @@ namespace EducationSkills.Modules
                 {
                     GetOlympics(txtDept.EditValue.ToString());
                 }
+
+            }
+        }
+
+        private void gridView1_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRow)
+            {
+                GridView view = sender as GridView;
+                view.FocusedRowHandle = e.HitInfo.RowHandle;
+
+                foreach (DXMenuItem item in menuItems)
+                    e.Menu.Items.Add(item);
 
             }
         }

@@ -244,6 +244,40 @@ namespace EducationSkills
             }
         }
 
+        public static void DeleteOlympic(string id)
+        {
+            try
+            {
+                using (var context = new EducationSkillsDbContext())
+                {
+                    context.Database.ExecuteSqlCommand($"DELETE  FROM [GA_UMC].[dbo].[EDU_Olympics] WHERE ID={id}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ErrorMessageBox(ex.Message);
+                return;
+            }
+        }
+
+        public static void DeleteManagerCertificates(string id)
+        {
+            try
+            {
+                using (var context = new EducationSkillsDbContext())
+                {
+                    context.Database.ExecuteSqlCommand($"DELETE  FROM [GA_UMC].[dbo].[EDU_ManageCertificates] WHERE ID={id}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ErrorMessageBox(ex.Message);
+                return;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>

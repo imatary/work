@@ -370,7 +370,7 @@ namespace EducationSkills.Modules
 
             if (Equals("EDU-01", item.Tag))
             {
-                if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Finalize)
+                if (e.SummaryProcess == CustomSummaryProcess.Finalize)
                     e.TotalValue = 10;
             }
         }
