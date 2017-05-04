@@ -215,7 +215,7 @@ namespace EducationSkills
         }
 
         /// <summary>
-        /// 
+        /// Xóa KTV mắt
         /// </summary>
         /// <param name="staffCode"></param>
         public static void DeleteEye(string staffCode)
@@ -244,6 +244,10 @@ namespace EducationSkills
             }
         }
 
+        /// <summary>
+        /// Xóa Olympic
+        /// </summary>
+        /// <param name="id"></param>
         public static void DeleteOlympic(string id)
         {
             try
@@ -261,6 +265,10 @@ namespace EducationSkills
             }
         }
 
+        /// <summary>
+        /// Xóa chứng chỉ
+        /// </summary>
+        /// <param name="id"></param>
         public static void DeleteManagerCertificates(string id)
         {
             try

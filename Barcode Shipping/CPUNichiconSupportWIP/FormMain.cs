@@ -51,7 +51,7 @@ namespace CPUNichiconSupportWIP
             {
                 txtStationNO.Text = stationNo;
             }
-            if (string.IsNullOrEmpty(cboModel.SelectedText))
+            if (string.IsNullOrEmpty(cboModel.SelectedValue.ToString()))
             {
                 errorProvider1.Clear();
                 errorProvider1.SetError(cboModel, "Field required!");

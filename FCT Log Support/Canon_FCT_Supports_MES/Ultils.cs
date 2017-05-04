@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 
-namespace Nichicon_ICT_Server_Supports_MES
+namespace Canon_FCT_Supports_MES
 {
     public static class Ultils
     {
@@ -87,6 +87,23 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
         }
 
+        public static string GetLastLine(string path)
+        {
+            string value = "";
+            var enumerator = File.ReadAllLines(path).GetEnumerator();
+            try
+            {
+                value = File.ReadAllLines(path).Last();
+            }
+            finally
+            {
+                IDisposable disposable = enumerator as IDisposable;
+                if (disposable != null)
+                    disposable.Dispose();
+            }
+
+            return value;
+        }
         public static string GetLine(string path, int line)
         {
             string value;
@@ -102,8 +119,6 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
         }
 
-        
-
         /// <summary>
         /// 
         /// </summary>
@@ -111,7 +126,7 @@ namespace Nichicon_ICT_Server_Supports_MES
         /// <param name="content"></param>
         public static void WriteRegistry(string keyName, string content)
         {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ICT-NICHICON-SUPPORTS-MES\ServerConfig");
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\FCT-CANON-SUPPORTS-MES\Configs");
             if (!string.IsNullOrEmpty(keyName) && !string.IsNullOrEmpty(content))
             {
                 key.SetValue(keyName, content);
@@ -125,7 +140,7 @@ namespace Nichicon_ICT_Server_Supports_MES
         /// <param name="content"></param>
         public static void WriteRegistryArray(string keyName, string content)
         {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ICT-NICHICON-SUPPORTS-MES\ServerConfig");
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\FCT-CANON-SUPPORTS-MES\Configs");
             if (!string.IsNullOrEmpty(keyName) && !string.IsNullOrEmpty(content))
             {
                 string exitsValue = GetValueRegistryKey(keyName);
@@ -149,7 +164,7 @@ namespace Nichicon_ICT_Server_Supports_MES
         /// <returns></returns>
         public static string GetValueRegistryKey(string keyName)
         {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ICT-NICHICON-SUPPORTS-MES\ServerConfig");
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\FCT-CANON-SUPPORTS-MES\Configs");
             string value = null;
             if (key != null)
             {
