@@ -57,12 +57,12 @@ namespace CPUNichiconSupportWIP
             string value = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
             if (value != null)
             {
-                if (value == "PASS")
+                if (value == "P")
                 {
                     dataGridView1.Columns[e.ColumnIndex].DefaultCellStyle.BackColor = Color.Green;
                     dataGridView1.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.White;
                 }
-                else if (value == "FAIL")
+                else if (value == "F")
                 {
                     dataGridView1.Columns[e.ColumnIndex].DefaultCellStyle.BackColor = Color.Red;
                     dataGridView1.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = Color.White;
@@ -170,7 +170,13 @@ namespace CPUNichiconSupportWIP
 
                 if (item != null)
                 {
-                    if(item.Model == cboModel.SelectedValue.ToString())
+                    string currentModel = cboModel.SelectedValue.ToString();
+                    if (currentModel == "ZSFLD22_REV5")
+                    {
+                        currentModel = "ZSFLD22IA";
+                    }
+
+                    if (item.Model == currentModel)
                     {
                         items.Add(item);
                         dataGridView1.AutoGenerateColumns = false;

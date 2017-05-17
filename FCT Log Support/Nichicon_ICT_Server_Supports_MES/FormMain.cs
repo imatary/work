@@ -413,7 +413,7 @@ namespace Nichicon_ICT_Server_Supports_MES
                 try
                 {
                     string portStr = lblPort.Text;
-                    int port = System.Convert.ToInt32(portStr);
+                    int port = Convert.ToInt32(portStr);
                     // Create the listening socket...
                     m_mainSocket = new Socket(AddressFamily.InterNetwork,
                                               SocketType.Stream,

@@ -13,18 +13,17 @@ namespace FCT_Canon_Supports_MES
     {
         string processName = "";
         string stationNo = "", fileExtension = "", inputLog = "", outputLog = "", serial = "", fullPath = "";
-        string fileLastWriteTime = "", dateCheck = "", boardNo = "", productId = "", boardState = "";
+        string dateCheck = "", boardNo = "", productId = "", boardState = "";
 
-        bool startWatching = false, RunTaks = false, checkLength = false;
+        bool startWatching = false, RunTaks = false, checkLength = false, runTimer1 = false, runTimer2 = false;
         int pass = 0, ng = 0, total = 0, columnCount = 0, barcodeLength = 0, countLine=0;
-        FileSystemWatcher fileWatcher;
 
         public FormMain()
         {
             InitializeComponent();
             BinDataToControls();
             LoadModels();
-            //Ultils.RegisterInStartup(true, Application.ExecutablePath);
+            Ultils.RegisterInStartup(true, Application.ExecutablePath);
             lblVersion.Text = Ultils.GetRunningVersion();
         }
         /// <summary>
@@ -144,24 +143,6 @@ namespace FCT_Canon_Supports_MES
             return value;
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void OnFileChanged(object sender, FileSystemEventArgs e)
-        //{
-        //    if (!RunTaks)
-        //    {
-        //        if (e.ChangeType == WatcherChangeTypes.Created || e.ChangeType == WatcherChangeTypes.Changed)
-        //        {
-        //            //fileLastWriteTime = e.FullPath;
-        //            RunTaks = true;
-        //        }
-        //    }
-        //}
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (checkLength == true)
@@ -240,17 +221,16 @@ namespace FCT_Canon_Supports_MES
                         if (fullPath.Length > 10)
                         {
                             int current = int.Parse(lblCount.Text);
-                            int actual = 0;
-                            //if (actual > current)
-                            //{
+                            int actual = actual = Ultils.CountLine(fullPath); ;
+                            if (actual > current)
+                            {
                                 lblCount.Text = actual.ToString();
-                                //if (countLine > 0)
-                                //{
-                                    actual = Ultils.CountLine(fullPath);
-                                    countLine++;
+                                countLine++;
+                                if (countLine > 1)
+                                {
                                     RunTaks = true;
-                                //}
-                            //}
+                                }
+                            }
                         }
                     }
                 }
@@ -486,7 +466,6 @@ namespace FCT_Canon_Supports_MES
             lblMessage.Text = "no results";
             lblMessage.BackColor = Color.FromArgb(255, 128, 0);
 
-            fileLastWriteTime = "";
             dateCheck = "";
             boardNo = "";
             productId = "";
