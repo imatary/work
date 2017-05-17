@@ -248,36 +248,6 @@ namespace CPUNichiconSupportWIP
                 }
         }
 
-        //public static void WriteText(string fileName, string content)
-        //{
-        //    string folderRoot = @"C:\CPU-Nichicon\";
-
-        //    bool exists = Directory.Exists(folderRoot);
-        //    if (!exists)
-        //        Directory.CreateDirectory(folderRoot);
-
-        //    string path = folderRoot + fileName;
-
-        //    using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
-        //        if (!File.Exists(path))
-        //        {
-        //            File.Create(path).Dispose();
-        //            using (StreamWriter tw = new StreamWriter(fs))
-        //            {
-        //                tw.WriteLine(content);
-        //                tw.Close();
-        //            }
-        //        }
-        //        else if (File.Exists(path))
-        //        {
-        //            using (StreamWriter tw = new StreamWriter(fs))
-        //            {
-        //                tw.WriteLine(content);
-        //                tw.Close();
-        //            }
-        //        }
-        //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -304,8 +274,6 @@ namespace CPUNichiconSupportWIP
         /// <returns></returns>
         public static string GetLine(string fileName, int line)
         {
-            ////string line = fileName..Skip(14).Take(1).First();
-
             using (var sr = new StreamReader(fileName))
             {
                 for (int i = 1; i < line; i++)
@@ -314,49 +282,57 @@ namespace CPUNichiconSupportWIP
             }
         }
 
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="stationNo"></param>
-        /// <param name="path"></param>
-        public static void WriteRegistryKey(string stationNo, string path)
+        /// <param name="keyName"></param>
+        /// <param name="content"></param>
+        public static void WriteRegistry(string keyName, string content)
         {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES");
-            if (!string.IsNullOrEmpty(path) || !string.IsNullOrEmpty(stationNo))
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES\Configs");
+            if (!string.IsNullOrEmpty(keyName) && !string.IsNullOrEmpty(content))
             {
-                //storing the values  
-                key.SetValue("STATION_NO", stationNo);
-                key.SetValue("PATH", path);
+                key.SetValue(keyName, content);
                 key.Close();
             }
         }
-
-        public static void WriteRegistry(string keyName, string content)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <param name="content"></param>
+        public static void WriteRegistryArray(string keyName, string content)
         {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES");
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES\Configs");
             if (!string.IsNullOrEmpty(keyName) && !string.IsNullOrEmpty(content))
             {
                 string exitsValue = GetValueRegistryKey(keyName);
                 if (exitsValue != null)
                 {
-                    exitsValue += content +";";
+                    exitsValue += content + ";";
                     key.SetValue(keyName, exitsValue);
                 }
                 else
                 {
-                    key.SetValue(keyName, content+";");
+                    key.SetValue(keyName, content + ";");
                 }
                 key.Close();
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
         public static string GetValueRegistryKey(string keyName)
         {
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES");
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\CPU-NICHICON-SUPPORTS-MES\Configs");
             string value = null;
-            if (key!=null)
+            if (key != null)
             {
-                if(key.GetValue(keyName) != null)
+                if (key.GetValue(keyName) != null)
                 {
                     value = key.GetValue(keyName).ToString();
                     key.Close();

@@ -13,9 +13,7 @@ namespace CPUNichiconSupportWIP
         private bool m_bIsWatching;
         public bool m_bDirty;
         private FileSystemWatcher m_Watcher;
-        string path = null;
-        string stationNo = null;
-        string fullPath = "";
+        string fullPath = "", stationNo="", fileExtension="", inputLog="", outputLog="";
         public FormMain()
         {
             InitializeComponent();
@@ -28,34 +26,29 @@ namespace CPUNichiconSupportWIP
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            path = Ultils.GetValueRegistryKey("PATH");
-            stationNo = Ultils.GetValueRegistryKey("STATION_NO");
+            BinDataToControls();
+        }
 
-            if(string.IsNullOrEmpty(path))
+        /// <summary>
+        /// 
+        /// </summary>
+        private void BinDataToControls()
+        {
+            if (Ultils.GetValueRegistryKey("StationNO") != null)
             {
-                errorProvider1.Clear();
-                errorProvider1.SetError(txtPath, "Field required!");
-                txtPath.Focus();
+                stationNo = Ultils.GetValueRegistryKey("StationNO").ToString();
             }
-            else
+            if (Ultils.GetValueRegistryKey("FileExtension") != null)
             {
-                txtPath.Text = path;
+                fileExtension = Ultils.GetValueRegistryKey("FileExtension").ToString();
             }
-            if (string.IsNullOrEmpty(stationNo))
+            if (Ultils.GetValueRegistryKey("InputLog") != null)
             {
-                errorProvider1.Clear();
-                errorProvider1.SetError(txtStationNO, "Field required!");
-                txtStationNO.Focus();
+                inputLog = Ultils.GetValueRegistryKey("InputLog").ToString();
             }
-            else
+            if (Ultils.GetValueRegistryKey("OutputLog") != null)
             {
-                txtStationNO.Text = stationNo;
-            }
-            if (string.IsNullOrEmpty(cboModel.SelectedValue.ToString()))
-            {
-                errorProvider1.Clear();
-                errorProvider1.SetError(cboModel, "Field required!");
-                cboModel.Focus();
+                outputLog = Ultils.GetValueRegistryKey("OutputLog").ToString();
             }
         }
 
@@ -77,107 +70,57 @@ namespace CPUNichiconSupportWIP
             }
         }
 
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            DialogResult open = folderBrowserDialog1.ShowDialog();
-            if (open == DialogResult.OK)
-            {
-                txtPath.Text = folderBrowserDialog1.SelectedPath;
-                if (string.IsNullOrEmpty(txtStationNO.Text))
-                {
-                    txtStationNO.Focus();
-                }
-                else
-                {
-                    btnBrowse.Focus();
-                }
-            }
-        }
-
         private void btnStartWatch_Click(object sender, EventArgs e)
         {
-            bool isVaild = true;
-            if (string.IsNullOrEmpty(txtStationNO.Text))
+            if (m_bIsWatching)
             {
-                errorProvider1.Clear();
-                errorProvider1.SetError(txtStationNO, "Field required!");
-                txtStationNO.Focus();
-                isVaild = false;
+                m_bIsWatching = false;
+                m_Watcher.EnableRaisingEvents = false;
+                m_Watcher.Dispose();
+                cboModel.Enabled = true;
+                btnStartWatch.BackColor = Color.Green;
+                btnStartWatch.Text = "Start Watching";
+                lblConnected.Visible = false;
+                lblConfig.Enabled = true;
+                lblAdd.Enabled = true;
+                CloseConnection(fullPath);
+                DefaultMessage();
             }
-            else if (string.IsNullOrEmpty(txtPath.Text))
+            else
             {
-                errorProvider1.Clear();
-                errorProvider1.SetError(panel4, "Field required!");
-                txtPath.Focus();
-                isVaild = false;
-            }
-            else if (string.IsNullOrEmpty(cboModel.Text))
-            {
-                errorProvider1.Clear();
-                errorProvider1.SetError(cboModel, "Field required!");
-                cboModel.Focus();
-                isVaild = false;
-            }
-            else if (isVaild == true)
-            {
-                Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
-                if (m_bIsWatching)
+                if (CheckConnection(fullPath) == true)
                 {
-                    m_bIsWatching = false;
-                    m_Watcher.EnableRaisingEvents = false;
-                    m_Watcher.Dispose();
-                    txtStationNO.Enabled = true;
-                    panel4.Enabled = true;
-                    cboModel.Enabled = true;
-                    btnStartWatch.BackColor = Color.Green;
-                    btnStartWatch.Text = "Start Watching";
-                    lblConnected.Visible = false;
-                    lblAdd.Enabled = true;
-                    CloseConnection(fullPath);
                     DefaultMessage();
+                    lblConfig.Enabled = false;
+                    lblAdd.Enabled = false;
+                    m_bIsWatching = true;
+                    cboModel.Enabled = false;
+
+                    btnStartWatch.BackColor = Color.Red;
+                    btnStartWatch.Text = "Stop Watching";
+
+                    m_Watcher = new FileSystemWatcher();
+                    m_Watcher.IncludeSubdirectories = true;
+
+                    m_Watcher.Filter = fileExtension;
+                    m_Watcher.Path = inputLog + "\\";
+
+
+                    m_Watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
+                                     | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastAccess;
+                    m_Watcher.Changed += new FileSystemEventHandler(OnChanged);
+                    m_Watcher.Created += new FileSystemEventHandler(OnChanged);
+                    m_Watcher.EnableRaisingEvents = true;
                 }
                 else
                 {
-                    if (CheckConnection(fullPath) == true)
-                    {
-                        DefaultMessage();
-
-                        lblAdd.Enabled = false;
-                        m_bIsWatching = true;
-                        txtStationNO.Enabled = false;
-                        panel4.Enabled = false;
-                        cboModel.Enabled = false;
-
-                        btnStartWatch.BackColor = Color.Red;
-                        btnStartWatch.Text = "Stop Watching";
-
-                        m_Watcher = new FileSystemWatcher();
-                        m_Watcher.IncludeSubdirectories = true;
-
-                        string path = Ultils.GetValueRegistryKey("PATH").ToString() + "\\";
-
-                        m_Watcher.Filter = cboModel.Text + ".mdb";
-                        m_Watcher.Path = path;
-
-
-                        m_Watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
-                                         | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastAccess;
-                        m_Watcher.Changed += new FileSystemEventHandler(OnChanged);
-                        m_Watcher.Created += new FileSystemEventHandler(OnChanged);
-                        m_Watcher.EnableRaisingEvents = true;
-                    }
-                    else
-                    {
-                        fullPath = "";
-                        string message = "Kết nối đến database thất bại. Vui lòng kiểm tra lại đường dẫn và thử lại.\nNếu vẫn không được, liên hệ với phòng IT để được hỗ trợ!";
-                        ErrorMessage("NG", message);
-                        errorProvider1.Clear();
-                        errorProvider1.SetError(panel4, message);
-                        txtPath.Focus();
-                        CloseConnection(fullPath);
-                    }  
+                    fullPath = "";
+                    string message = "Kết nối đến database thất bại. Vui lòng kiểm tra lại đường dẫn và thử lại.\nNếu vẫn không được, liên hệ với phòng IT để được hỗ trợ!";
+                    ErrorMessage("NG", message);
+                    CloseConnection(fullPath);
                 }
             }
+
         }
 
         private void OnChanged(object sender, FileSystemEventArgs e)
@@ -186,63 +129,17 @@ namespace CPUNichiconSupportWIP
             {
                 if (e.ChangeType == WatcherChangeTypes.Changed || e.ChangeType==WatcherChangeTypes.Created)
                 {
-                    //fullPath = e.FullPath;
+                    fullPath = e.FullPath;
                     m_bDirty = true;
                 }
             }
         }
 
-        /// <summary>
-        /// Hot key
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="keyData"></param>
-        /// <returns></returns>
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            switch (keyData)
-            {
-                case Keys.Shift | Keys.F2:
-                    {
-                        panel4.Enabled = true;
-                        txtStationNO.Enabled = true;
-                        
-                        return true;
-                    }
-                case Keys.Shift | Keys.F3:
-                    {
-                        panel4.Enabled = false;
-                        txtStationNO.Enabled = false;
-
-                        return true;
-                    }
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
         int pass = 0, total = 0, ng = 0;
-
-        private void txtPath_TextChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtPath.Text))
-            {
-                Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
-                errorProvider1.Clear();
-            }
-        }
-
-        private void txtStationNO_TextChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtStationNO.Text))
-            {
-                Ultils.WriteRegistryKey(txtStationNO.Text, txtPath.Text);
-                errorProvider1.Clear();
-            }
-        }
 
         private void cboModel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            fullPath = path + "\\" + cboModel.SelectedValue + ".mdb";
+            fullPath = inputLog + "\\" + cboModel.SelectedValue + ".mdb";
             errorProvider1.Clear();
         }
 
@@ -330,7 +227,6 @@ namespace CPUNichiconSupportWIP
                 {
                     listModels.Add(item);
                 }
-                cboModel.DataSource = listModels;
             }
             else
             {
@@ -352,11 +248,13 @@ namespace CPUNichiconSupportWIP
 
                 foreach (var item in models)
                 {
-                    Ultils.WriteRegistry("Models", item);
+                    Ultils.WriteRegistryArray("Models", item);
                     listModels.Add(item);
                 }
-                cboModel.DataSource = listModels;
+                
             }
+
+            cboModel.DataSource = listModels;
         }
 
         private void lblAdd_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -420,6 +318,39 @@ namespace CPUNichiconSupportWIP
             }
         }
 
+        private void txtBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (txtBarcode.Text != null)
+                {
+                    Ultils.CreateFileLog(cboModel.Text, txtBarcode.Text, "P", stationNo, DateTime.Now.ToString("yyMMddHHmmss"));
+                    txtBarcode.ResetText();
+                    txtBarcode.Focus();
+                }
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Shift | Keys.F2:
+                    {
+                        txtBarcode.Visible = true;
+                        txtBarcode.Focus();
+                        return true;
+                    }
+                case Keys.Shift | Keys.F3:
+                    {
+                        txtBarcode.Visible = false;
+                        return true;
+                    }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);    
+        }
+
         /// <summary>
         /// Đóng kết nối
         /// </summary>
@@ -460,6 +391,13 @@ namespace CPUNichiconSupportWIP
             lblMessage.Text = str_message;
             lblMessage.BackColor = Color.DarkGreen;
         }
+
+        private void lblConfig_Click(object sender, EventArgs e)
+        {
+            new FormConfig().ShowDialog();
+            BinDataToControls();
+        }
+
         private void ErrorMessage(string str_status, string str_message)
         {
             lblStatus.Text = str_status;

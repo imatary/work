@@ -62,7 +62,7 @@ namespace Nichicon_ICT_Client_Supports_MES
             }
             catch (SocketException se)
             {
-                MessageBox.Show(se.Message);
+                
             }
 
         }
@@ -96,7 +96,7 @@ namespace Nichicon_ICT_Client_Supports_MES
             }
             catch (SocketException se)
             {
-                MessageBox.Show(se.Message);
+                
             }
         }
         private void UpdateControls(bool connected)
@@ -232,7 +232,7 @@ namespace Nichicon_ICT_Client_Supports_MES
                     serial = "";
                     try
                     {
-                        byte[] byData = System.Text.Encoding.ASCII.GetBytes("Missing");
+                        byte[] byData = Encoding.ASCII.GetBytes("Missing");
                         if (m_clientSocket != null)
                         {
                             m_clientSocket.Send(byData);
@@ -240,7 +240,7 @@ namespace Nichicon_ICT_Client_Supports_MES
                     }
                     catch (SocketException se)
                     {
-                        MessageBox.Show(se.Message);
+                        
                     }
                 }
 

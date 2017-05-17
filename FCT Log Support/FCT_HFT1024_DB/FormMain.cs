@@ -455,7 +455,7 @@ namespace FCT_HFT1024_DB
             {
                 lblMarking.Visible = false;
                 string boardNo = txtBarcode.Text;
-                dateCheck = Ultils.GetNetworkDateTime().ToString("yyMMddHHmmss");
+                dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
 
                 if (boardNo.Contains("="))
                 {

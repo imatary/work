@@ -1,4 +1,4 @@
-﻿namespace Canon_FCT_Supports_MES
+﻿namespace FCT_Canon_Supports_MES
 {
     partial class FormMain
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,9 +42,10 @@
             this.lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnStart = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblCount = new System.Windows.Forms.Label();
             this.lblConfigs = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
             this.lblAddModel = new System.Windows.Forms.Label();
@@ -66,7 +68,9 @@
             this.lblMessage = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblRefesh = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -100,7 +104,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox1.Image = global::Canon_FCT_Supports_MES.Properties.Resources.umc;
+            this.pictureBox1.Image = global::FCT_Canon_Supports_MES.Properties.Resources.umc;
             this.pictureBox1.Location = new System.Drawing.Point(488, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(90, 56);
@@ -140,15 +144,17 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel1.Image = global::FCT_Canon_Supports_MES.Properties.Resources._1471519853_malecostume;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(136, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(152, 19);
             this.toolStripStatusLabel1.Text = "Phạm Văn Cương | ";
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel2.Image = global::FCT_Canon_Supports_MES.Properties.Resources._09_32;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(54, 19);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(70, 19);
             this.toolStripStatusLabel2.Text = "2998 | ";
             // 
             // toolStripStatusLabel5
@@ -203,6 +209,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.lblCount);
             this.groupBox3.Controls.Add(this.lblConfigs);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.lblAddModel);
@@ -219,10 +227,20 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Results";
             // 
+            // lblCount
+            // 
+            this.lblCount.AutoSize = true;
+            this.lblCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCount.Location = new System.Drawing.Point(101, 171);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(14, 13);
+            this.lblCount.TabIndex = 24;
+            this.lblCount.Text = "0";
+            // 
             // lblConfigs
             // 
             this.lblConfigs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblConfigs.Image = global::Canon_FCT_Supports_MES.Properties.Resources.tools_16;
+            this.lblConfigs.Image = global::FCT_Canon_Supports_MES.Properties.Resources.tools_16;
             this.lblConfigs.Location = new System.Drawing.Point(185, 142);
             this.lblConfigs.Name = "lblConfigs";
             this.lblConfigs.Size = new System.Drawing.Size(25, 26);
@@ -242,7 +260,6 @@
             // lblAddModel
             // 
             this.lblAddModel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblAddModel.Image = global::Canon_FCT_Supports_MES.Properties.Resources.plus_16;
             this.lblAddModel.Location = new System.Drawing.Point(286, 101);
             this.lblAddModel.Name = "lblAddModel";
             this.lblAddModel.Size = new System.Drawing.Size(16, 23);
@@ -252,7 +269,6 @@
             // lblReload
             // 
             this.lblReload.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblReload.Image = global::Canon_FCT_Supports_MES.Properties.Resources.refresh_16;
             this.lblReload.Location = new System.Drawing.Point(262, 101);
             this.lblReload.Name = "lblReload";
             this.lblReload.Size = new System.Drawing.Size(18, 23);
@@ -280,7 +296,7 @@
             this.colDateCheck,
             this.colTimeCheck,
             this.colSate});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 192);
+            this.dataGridView1.Location = new System.Drawing.Point(2, 187);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
@@ -473,6 +489,19 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(49, 171);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 25;
+            this.label2.Text = "Count log:";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -546,6 +575,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTimeCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSate;
         private System.Windows.Forms.LinkLabel lblConfigs;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label lblCount;
+        private System.Windows.Forms.Label label2;
     }
 }
 

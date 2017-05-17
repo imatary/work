@@ -80,7 +80,7 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
             catch (ObjectDisposedException)
             {
-                System.Diagnostics.Debugger.Log(0, "1", "\n OnClientConnection: Socket has been closed\n");
+                Debugger.Log(0, "1", "\n OnClientConnection: Socket has been closed\n");
             }
             catch (SocketException se)
             {

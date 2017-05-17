@@ -5,20 +5,18 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
 
-namespace Canon_FCT_Supports_MES
+namespace FCT_Canon_Supports_MES
 {
     public partial class FormMain : Form
     {
         string processName = "";
-        string stationNo = "", fileExtension = "", inputLog = "", outputLog = "", serial = "";
+        string stationNo = "", fileExtension = "", inputLog = "", outputLog = "", serial = "", fullPath = "";
         string fileLastWriteTime = "", dateCheck = "", boardNo = "", productId = "", boardState = "";
 
         bool startWatching = false, RunTaks = false, checkLength = false;
-        int pass = 0, ng = 0, total = 0, columnCount = 0, barcodeLength = 0;
+        int pass = 0, ng = 0, total = 0, columnCount = 0, barcodeLength = 0, countLine=0;
         FileSystemWatcher fileWatcher;
 
         public FormMain()
@@ -26,7 +24,7 @@ namespace Canon_FCT_Supports_MES
             InitializeComponent();
             BinDataToControls();
             LoadModels();
-            Ultils.RegisterInStartup(true, Application.ExecutablePath);
+            //Ultils.RegisterInStartup(true, Application.ExecutablePath);
             lblVersion.Text = Ultils.GetRunningVersion();
         }
         /// <summary>
@@ -152,17 +150,17 @@ namespace Canon_FCT_Supports_MES
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnFileChanged(object sender, FileSystemEventArgs e)
-        {
-            if (!RunTaks)
-            {
-                if (e.ChangeType == WatcherChangeTypes.Created || e.ChangeType == WatcherChangeTypes.Changed)
-                {
-                    fileLastWriteTime = e.FullPath;
-                    RunTaks = true;
-                }
-            }
-        }
+        //private void OnFileChanged(object sender, FileSystemEventArgs e)
+        //{
+        //    if (!RunTaks)
+        //    {
+        //        if (e.ChangeType == WatcherChangeTypes.Created || e.ChangeType == WatcherChangeTypes.Changed)
+        //        {
+        //            //fileLastWriteTime = e.FullPath;
+        //            RunTaks = true;
+        //        }
+        //    }
+        //}
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -177,8 +175,8 @@ namespace Canon_FCT_Supports_MES
                 if (RunTaks)
                 {
                     ActiveProcess(this.Text);
-                    boardNo = GetBoardNoLastLine(fileLastWriteTime);
-                    boardState = GetState(fileLastWriteTime);
+                    boardNo = GetBoardNoLastLine(fullPath);
+                    boardState = GetState(fullPath);
                     if (boardNo.Length == barcodeLength)
                     {
                         dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
@@ -229,6 +227,41 @@ namespace Canon_FCT_Supports_MES
             }
         }
 
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (RunTaks == false)
+            {
+                try
+                {
+                    if (cboModels.Text != "")
+                    {
+                        fullPath = Ultils.FullPath(cboModels.Text);
+
+                        if (fullPath.Length > 10)
+                        {
+                            int current = int.Parse(lblCount.Text);
+                            int actual = 0;
+                            //if (actual > current)
+                            //{
+                                lblCount.Text = actual.ToString();
+                                //if (countLine > 0)
+                                //{
+                                    actual = Ultils.CountLine(fullPath);
+                                    countLine++;
+                                    RunTaks = true;
+                                //}
+                            //}
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                
+            }
+        }
+
         private void cboModels_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboModels.SelectedValue != null)
@@ -268,12 +301,12 @@ namespace Canon_FCT_Supports_MES
                 {
                     btnStart.BackColor = Color.Green;
                     btnStart.Text = "Start Read Log";
-
+                    timer2.Enabled = false;
                     if (startWatching == true)
                     {
                         startWatching = false;
-                        fileWatcher.EnableRaisingEvents = false;
-                        fileWatcher.Dispose();
+                        //    fileWatcher.EnableRaisingEvents = false;
+                        //    fileWatcher.Dispose();
                     }
 
                     DefaultMessage();
@@ -295,27 +328,31 @@ namespace Canon_FCT_Supports_MES
                         lblConfigs.Enabled = false;
 
                         lblRefesh.Enabled = false;
+
+                        timer2.Enabled = true;
+
                         if (startWatching == false)
                         {
                             startWatching = true;
-                            // Config file watching
-                            fileWatcher = new FileSystemWatcher();
-                            fileWatcher.IncludeSubdirectories = true;
-                            if (fileExtension.Contains("*"))
-                            {
-                                fileWatcher.Filter = fileExtension;
-                            }
-                            else
-                            {
-                                fileWatcher.Filter = "*" + fileExtension;
-                            }
 
-                            fileWatcher.Path = inputLog + "\\";
-                            fileWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.CreationTime
-                                                 | NotifyFilters.FileName | NotifyFilters.DirectoryName;
-                            fileWatcher.Created += new FileSystemEventHandler(OnFileChanged);
-                            fileWatcher.Changed += new FileSystemEventHandler(OnFileChanged);
-                            fileWatcher.EnableRaisingEvents = true;
+                            //    // Config file watching
+                            //    fileWatcher = new FileSystemWatcher();
+                            //    fileWatcher.IncludeSubdirectories = true;
+                            //    if (fileExtension.Contains("*"))
+                            //    {
+                            //        fileWatcher.Filter = fileExtension;
+                            //    }
+                            //    else
+                            //    {
+                            //        fileWatcher.Filter = "*" + fileExtension;
+                            //    }
+
+                            //    fileWatcher.Path = inputLog + "\\";
+                            //    fileWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.CreationTime
+                            //                         | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+                            //    fileWatcher.Created += new FileSystemEventHandler(OnFileChanged);
+                            //    fileWatcher.Changed += new FileSystemEventHandler(OnFileChanged);
+                            //    fileWatcher.EnableRaisingEvents = true;
                         }
 
                         ActiveProcessContains(processName);

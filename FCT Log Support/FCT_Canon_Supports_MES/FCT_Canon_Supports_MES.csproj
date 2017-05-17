@@ -4,35 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{15F2CF5A-F9A8-48EA-A16C-3931E304BD47}</ProjectGuid>
+    <ProjectGuid>{38AC5999-5D89-44C2-B036-2BC83ECF58CA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Canon_FCT_Supports_MES</RootNamespace>
-    <AssemblyName>Canon_FCT_Supports_MES</AssemblyName>
+    <RootNamespace>FCT_Canon_Supports_MES</RootNamespace>
+    <AssemblyName>FCT_Canon_Supports_MES</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\FCT_Canon\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Unc</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\FCT_Canon\</UpdateUrl>
-    <ProductName>FCT Canon Supports MES</ProductName>
-    <PublisherName>cuongpham%40umcvn.com</PublisherName>
-    <SuiteName>UMC Electronics VietNam Ltd%27s</SuiteName>
-    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>7</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>true</UseApplicationTrust>
-    <CreateDesktopShortcut>true</CreateDesktopShortcut>
-    <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,31 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>logo.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <TargetZone>LocalIntranet</TargetZone>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>false</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>06253EA0898BDE076C47403B7D843193146DFBCA</ManifestCertificateThumbprint>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DMSkin">
-      <HintPath>D:\Dev\AngelVPN\DMSkin.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -129,7 +84,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -141,16 +95,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\09-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1471519853_malecostume.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\umc.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1479455547_barcode.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\refresh-16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\plus_16.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tools-16.png" />
@@ -159,17 +110,7 @@
     <None Include="Resources\Save.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\folder-saved-search-16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
+    <None Include="Resources\Save1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

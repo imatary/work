@@ -37,7 +37,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colBoardNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,14 +56,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.lblAdd = new System.Windows.Forms.LinkLabel();
             this.cboModel = new System.Windows.Forms.ComboBox();
-            this.txtStationNO = new System.Windows.Forms.TextBox();
             this.btnStartWatch = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.txtPath = new System.Windows.Forms.TextBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -80,19 +73,21 @@
             this.lblStatusMessage = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.lblConfig = new System.Windows.Forms.Label();
+            this.lblAdd = new System.Windows.Forms.LinkLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtBarcode = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel7.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -117,17 +112,6 @@
             this.label1.Text = "CPU-Nichicon";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Image = global::CPUNichiconSupportWIP.Properties.Resources.umc;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(109, 80);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.dataGridView1);
@@ -137,7 +121,7 @@
             this.panel2.Location = new System.Drawing.Point(10, 100);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.panel2.Size = new System.Drawing.Size(580, 341);
+            this.panel2.Size = new System.Drawing.Size(580, 285);
             this.panel2.TabIndex = 2;
             // 
             // dataGridView1
@@ -169,10 +153,10 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 248);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 229);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(580, 93);
+            this.dataGridView1.Size = new System.Drawing.Size(580, 56);
             this.dataGridView1.TabIndex = 18;
             // 
             // colBoardNo
@@ -270,7 +254,7 @@
             this.groupBox1.Location = new System.Drawing.Point(0, 80);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(578, 162);
+            this.groupBox1.Size = new System.Drawing.Size(578, 143);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mode";
@@ -294,7 +278,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.56436F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.43564F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(295, 128);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(295, 109);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // lblTotal
@@ -302,9 +286,9 @@
             this.lblTotal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotal.Location = new System.Drawing.Point(199, 57);
+            this.lblTotal.Location = new System.Drawing.Point(199, 48);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(91, 69);
+            this.lblTotal.Size = new System.Drawing.Size(91, 59);
             this.lblTotal.TabIndex = 5;
             this.lblTotal.Text = "0";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -314,9 +298,9 @@
             this.lblNG.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNG.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNG.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblNG.Location = new System.Drawing.Point(102, 57);
+            this.lblNG.Location = new System.Drawing.Point(102, 48);
             this.lblNG.Name = "lblNG";
-            this.lblNG.Size = new System.Drawing.Size(89, 69);
+            this.lblNG.Size = new System.Drawing.Size(89, 59);
             this.lblNG.TabIndex = 4;
             this.lblNG.Text = "0";
             this.lblNG.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -326,9 +310,9 @@
             this.lblPASS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPASS.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPASS.ForeColor = System.Drawing.Color.Green;
-            this.lblPASS.Location = new System.Drawing.Point(5, 57);
+            this.lblPASS.Location = new System.Drawing.Point(5, 48);
             this.lblPASS.Name = "lblPASS";
-            this.lblPASS.Size = new System.Drawing.Size(89, 69);
+            this.lblPASS.Size = new System.Drawing.Size(89, 59);
             this.lblPASS.TabIndex = 3;
             this.lblPASS.Text = "0";
             this.lblPASS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -340,7 +324,7 @@
             this.label5.ForeColor = System.Drawing.Color.Blue;
             this.label5.Location = new System.Drawing.Point(199, 2);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 53);
+            this.label5.Size = new System.Drawing.Size(91, 44);
             this.label5.TabIndex = 2;
             this.label5.Text = "TOTAL";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -352,7 +336,7 @@
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label4.Location = new System.Drawing.Point(102, 2);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 53);
+            this.label4.Size = new System.Drawing.Size(89, 44);
             this.label4.TabIndex = 1;
             this.label4.Text = "NG";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -364,53 +348,32 @@
             this.label3.ForeColor = System.Drawing.Color.Green;
             this.label3.Location = new System.Drawing.Point(5, 2);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 53);
+            this.label3.Size = new System.Drawing.Size(89, 44);
             this.label3.TabIndex = 0;
             this.label3.Text = "PASS";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.txtBarcode);
+            this.panel6.Controls.Add(this.lblConfig);
             this.panel6.Controls.Add(this.lblAdd);
             this.panel6.Controls.Add(this.cboModel);
-            this.panel6.Controls.Add(this.txtStationNO);
             this.panel6.Controls.Add(this.btnStartWatch);
-            this.panel6.Controls.Add(this.panel4);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(10, 24);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(263, 128);
+            this.panel6.Size = new System.Drawing.Size(263, 109);
             this.panel6.TabIndex = 3;
-            // 
-            // lblAdd
-            // 
-            this.lblAdd.AutoSize = true;
-            this.lblAdd.Location = new System.Drawing.Point(229, 67);
-            this.lblAdd.Name = "lblAdd";
-            this.lblAdd.Size = new System.Drawing.Size(28, 15);
-            this.lblAdd.TabIndex = 4;
-            this.lblAdd.TabStop = true;
-            this.lblAdd.Text = "Add";
-            this.lblAdd.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAdd_LinkClicked);
             // 
             // cboModel
             // 
             this.cboModel.FormattingEnabled = true;
-            this.cboModel.Location = new System.Drawing.Point(3, 64);
+            this.cboModel.Location = new System.Drawing.Point(0, 12);
             this.cboModel.Name = "cboModel";
             this.cboModel.Size = new System.Drawing.Size(210, 23);
             this.cboModel.TabIndex = 3;
             this.cboModel.SelectedIndexChanged += new System.EventHandler(this.cboModel_SelectedIndexChanged);
-            // 
-            // txtStationNO
-            // 
-            this.txtStationNO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtStationNO.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStationNO.Location = new System.Drawing.Point(3, 3);
-            this.txtStationNO.Name = "txtStationNO";
-            this.txtStationNO.Size = new System.Drawing.Size(242, 24);
-            this.txtStationNO.TabIndex = 1;
-            this.txtStationNO.TextChanged += new System.EventHandler(this.txtStationNO_TextChanged);
             // 
             // btnStartWatch
             // 
@@ -419,61 +382,13 @@
             this.btnStartWatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStartWatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartWatch.ForeColor = System.Drawing.Color.White;
-            this.btnStartWatch.Location = new System.Drawing.Point(4, 93);
+            this.btnStartWatch.Location = new System.Drawing.Point(0, 41);
             this.btnStartWatch.Name = "btnStartWatch";
             this.btnStartWatch.Size = new System.Drawing.Size(122, 30);
             this.btnStartWatch.TabIndex = 2;
             this.btnStartWatch.Text = "Start Watching";
             this.btnStartWatch.UseVisualStyleBackColor = false;
             this.btnStartWatch.Click += new System.EventHandler(this.btnStartWatch_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.panel5);
-            this.panel4.Controls.Add(this.btnBrowse);
-            this.panel4.Location = new System.Drawing.Point(3, 33);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(242, 25);
-            this.panel4.TabIndex = 1;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.txtPath);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Padding = new System.Windows.Forms.Padding(2);
-            this.panel5.Size = new System.Drawing.Size(197, 23);
-            this.panel5.TabIndex = 1;
-            // 
-            // txtPath
-            // 
-            this.txtPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPath.Location = new System.Drawing.Point(2, 2);
-            this.txtPath.Name = "txtPath";
-            this.txtPath.ReadOnly = true;
-            this.txtPath.Size = new System.Drawing.Size(193, 17);
-            this.txtPath.TabIndex = 0;
-            this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged);
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.BackColor = System.Drawing.Color.White;
-            this.btnBrowse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnBrowse.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnBrowse.FlatAppearance.BorderSize = 0;
-            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowse.Image = global::CPUNichiconSupportWIP.Properties.Resources._698827_icon_101_folder_search_32;
-            this.btnBrowse.Location = new System.Drawing.Point(197, 0);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(43, 23);
-            this.btnBrowse.TabIndex = 0;
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // statusStrip1
             // 
@@ -485,7 +400,7 @@
             this.toolStripStatusLabel5,
             this.lblVersion,
             this.lblConnected});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 451);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 395);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(600, 22);
             this.statusStrip1.TabIndex = 3;
@@ -548,7 +463,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(10);
-            this.panel3.Size = new System.Drawing.Size(600, 451);
+            this.panel3.Size = new System.Drawing.Size(600, 395);
             this.panel3.TabIndex = 4;
             // 
             // label2
@@ -585,12 +500,51 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // lblConfig
+            // 
+            this.lblConfig.Image = global::CPUNichiconSupportWIP.Properties.Resources.tools_16;
+            this.lblConfig.Location = new System.Drawing.Point(128, 45);
+            this.lblConfig.Name = "lblConfig";
+            this.lblConfig.Size = new System.Drawing.Size(27, 26);
+            this.lblConfig.TabIndex = 5;
+            this.lblConfig.Click += new System.EventHandler(this.lblConfig_Click);
+            // 
+            // lblAdd
+            // 
+            this.lblAdd.Image = global::CPUNichiconSupportWIP.Properties.Resources.plus_16;
+            this.lblAdd.Location = new System.Drawing.Point(212, 10);
+            this.lblAdd.Name = "lblAdd";
+            this.lblAdd.Size = new System.Drawing.Size(28, 26);
+            this.lblAdd.TabIndex = 4;
+            this.lblAdd.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAdd_LinkClicked);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox1.Image = global::CPUNichiconSupportWIP.Properties.Resources.umc;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(109, 80);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // txtBarcode
+            // 
+            this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBarcode.Location = new System.Drawing.Point(0, 78);
+            this.txtBarcode.Name = "txtBarcode";
+            this.txtBarcode.Size = new System.Drawing.Size(240, 22);
+            this.txtBarcode.TabIndex = 6;
+            this.txtBarcode.Visible = false;
+            this.txtBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBarcode_PreviewKeyDown);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(600, 473);
+            this.ClientSize = new System.Drawing.Size(600, 417);
             this.Controls.Add(this.lblStatusMessage);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.statusStrip1);
@@ -601,7 +555,6 @@
             this.Text = "CPU-Nichicon";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel7.ResumeLayout(false);
@@ -609,13 +562,11 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -636,10 +587,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel lblVersion;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Button btnStartWatch;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -649,7 +596,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtStationNO;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Timer tmrEditNotify;
         private System.Windows.Forms.Label lblStatusMessage;
@@ -667,6 +613,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
+        private System.Windows.Forms.Label lblConfig;
+        private System.Windows.Forms.TextBox txtBarcode;
     }
 }
 
