@@ -85,9 +85,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(8, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(243, 31);
+            this.label1.Size = new System.Drawing.Size(223, 31);
             this.label1.TabIndex = 1;
-            this.label1.Text = "INPUT-NICHICON";
+            this.label1.Text = "STATION INPUT";
             // 
             // pictureBox1
             // 
@@ -390,7 +390,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormMain";
-            this.Text = "NICHICON-INPUT";
+            this.Text = "STATION-INPUT";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

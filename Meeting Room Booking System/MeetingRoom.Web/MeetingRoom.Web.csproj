@@ -44,9 +44,8 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DHTMLX, Version=3.3.6250.28766, Culture=neutral, PublicKeyToken=53f24791214eb8ac, processorArchitecture=MSIL">
-      <HintPath>..\packages\DHTMLX.Scheduler.NET.3.3.24.0\lib\DHTMLX.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="DHTMLX, Version=3.3.6344.35683, Culture=neutral, PublicKeyToken=53f24791214eb8ac, processorArchitecture=MSIL">
+      <HintPath>..\packages\DHTMLX.Scheduler.NET.3.3.27.0\lib\DHTMLX.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -360,6 +359,7 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\meetingRoom.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -442,6 +442,8 @@
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.css" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler_classic.css" />
+    <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler_contrast_black.css" />
+    <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler_contrast_white.css" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler_custom_lightbox.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler_flat.css" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler_glossy.css" />
@@ -451,6 +453,7 @@
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_collision.js" />
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_container_autoresize.js" />
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_cookie.js" />
+    <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_csp.js" />
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_daytimeline.js" />
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_drag_between.js" />
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_editors.js" />
@@ -498,6 +501,35 @@
     <Content Include="Scripts\dhtmlxScheduler\imgs\images.png" />
     <Content Include="Scripts\dhtmlxScheduler\imgs\loading.gif" />
     <Content Include="Scripts\dhtmlxScheduler\imgs\resize_dots.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\arrow_left.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\arrow_right.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\but_repeat.gif" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\calendar.gif" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\clock_big.gif" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\clock_small.gif" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\close_icon.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\collapse_expand_icon.gif" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\controls.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\databg.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\export_ical.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\export_pdf.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\resize_dots.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_black\resizing.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\arrow_left.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\arrow_right.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\but_repeat.gif" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\calendar.gif" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\clock_big.gif" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\clock_small.gif" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\close_icon.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\collapse_expand_icon.gif" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\controls.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\databg.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\export_ical.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\export_pdf.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\quick_info_edit.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\resize_dots.png" />
+    <Content Include="Scripts\dhtmlxScheduler\imgs_contrast_white\resizing.png" />
     <Content Include="Scripts\dhtmlxScheduler\imgs_dhx_terrace\arrow_left.png" />
     <Content Include="Scripts\dhtmlxScheduler\imgs_dhx_terrace\arrow_right.png" />
     <Content Include="Scripts\dhtmlxScheduler\imgs_dhx_terrace\but_repeat.gif" />
@@ -688,6 +720,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

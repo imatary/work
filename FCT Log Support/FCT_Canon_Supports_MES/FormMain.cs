@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Text;
 using System.Windows.Forms;
 
 namespace FCT_Canon_Supports_MES
@@ -12,10 +13,10 @@ namespace FCT_Canon_Supports_MES
     public partial class FormMain : Form
     {
         string processName = "";
-        string stationNo = "", fileExtension = "", inputLog = "", outputLog = "", serial = "", fullPath = "";
+        string stationNo = "", fileExtension = "", inputLog = "", outputLog = "", fullPath = "";
         string dateCheck = "", boardNo = "", productId = "", boardState = "";
 
-        bool startWatching = false, RunTaks = false, checkLength = false, runTimer1 = false, runTimer2 = false;
+        bool startWatching = false, RunTaks = false, checkLength = false;
         int pass = 0, ng = 0, total = 0, columnCount = 0, barcodeLength = 0, countLine=0;
 
         public FormMain()
@@ -23,7 +24,7 @@ namespace FCT_Canon_Supports_MES
             InitializeComponent();
             BinDataToControls();
             LoadModels();
-            Ultils.RegisterInStartup(true, Application.ExecutablePath);
+            //Ultils.RegisterInStartup(true, Application.ExecutablePath);
             lblVersion.Text = Ultils.GetRunningVersion();
         }
         /// <summary>
@@ -102,43 +103,25 @@ namespace FCT_Canon_Supports_MES
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        private string GetState(string path)
-        {
-            string value = "";
-            var lastLine = Ultils.GetLastLine(path);
-            string[] array = lastLine.Split(',');
-            if (array.Count() == columnCount)
-            {
-                string strTmp = array.Last();
-                if (strTmp == "1")
-                {
-                    value = "P";
-                }
-                if(strTmp==""|| strTmp == null)
-                {
-                    value = "F";
-                }
-            }
-
-
-            return value;
-        }
-
         private string GetBoardNoLastLine(string path)
         {
             string value = "";
-            var lastLine = Ultils.GetLastLine(path);
+            var lastLine = Ultils.ReadLastLine(path, Encoding.ASCII, "\n");
             string[] array = lastLine.Split(',');
             if(array.Count() == columnCount)
             {
                 value = array[1];
+
+                string strTmp = array.Last();
+                if (strTmp == "1")
+                {
+                    boardState = "P";
+                }
+                if (strTmp == "" || strTmp == null)
+                {
+                    boardState = "F";
+                }
             }
-            
 
             return value;
         }
@@ -148,16 +131,14 @@ namespace FCT_Canon_Supports_MES
             if (checkLength == true)
             {
                 ActiveProcess(this.Text);
-                serial = "";
                 checkLength = false;
             }
             else
             {
                 if (RunTaks)
                 {
-                    ActiveProcess(this.Text);
+                    //ActiveProcess(this.Text);
                     boardNo = GetBoardNoLastLine(fullPath);
-                    boardState = GetState(fullPath);
                     if (boardNo.Length == barcodeLength)
                     {
                         dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
@@ -179,21 +160,17 @@ namespace FCT_Canon_Supports_MES
                         dataGridView1.DataSource = items;
                         if (boardState == "P")
                         {
-                            ActiveProcess(this.Text);
                             pass = pass + 1;
-
                             SuccessMessage("OK", $"Board [{boardNo}] OK!");
                         }
                         if (boardState == "F")
                         {
-                            ActiveProcess(this.Text);
                             ErrorMessage("NG", $"Board [{boardNo}] NG!");
                             ng = ng + 1;
                         }
                     }
                     else
                     {
-                        ActiveProcess(this.Text);
                         ErrorMessage("NG", $"Board length [{boardNo}] NG!");
                     }
 
@@ -217,14 +194,32 @@ namespace FCT_Canon_Supports_MES
                     if (cboModels.Text != "")
                     {
                         fullPath = Ultils.FullPath(cboModels.Text);
-
                         if (fullPath.Length > 10)
                         {
+                            if(lblFullPath.Text == "NULL")
+                            {
+                                lblFullPath.Text = fullPath;
+                            }
+                            if (lblLock.Text == "None")
+                            {
+                                if (Ultils.CanReadFile(fullPath))
+                                {
+                                    lblLock.Text = "UnLocked";
+                                }
+                                else
+                                {
+                                    lblLock.Text = "Locked";
+                                }
+                            }
                             int current = int.Parse(lblCount.Text);
-                            int actual = actual = Ultils.CountLine(fullPath); ;
+                            int actual = Ultils.CountLine(fullPath);
                             if (actual > current)
                             {
                                 lblCount.Text = actual.ToString();
+                                if (lblRunTasks.Text == "Stop")
+                                {
+                                    lblRunTasks.Text = "Watting...";
+                                }
                                 countLine++;
                                 if (countLine > 1)
                                 {
@@ -234,9 +229,9 @@ namespace FCT_Canon_Supports_MES
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    lblMessage.Text = ex.Message;
                 }
                 
             }
@@ -285,10 +280,12 @@ namespace FCT_Canon_Supports_MES
                     if (startWatching == true)
                     {
                         startWatching = false;
-                        //    fileWatcher.EnableRaisingEvents = false;
-                        //    fileWatcher.Dispose();
                     }
-
+                    countLine = 0;
+                    lblLock.Text = "None";
+                    lblCount.Text = "0";
+                    lblFullPath.Text = "NULL";
+                    lblRunTasks.Text = "Stop";
                     DefaultMessage();
                     cboModels.Enabled = true;
                     lblReload.Enabled = true;
@@ -314,25 +311,6 @@ namespace FCT_Canon_Supports_MES
                         if (startWatching == false)
                         {
                             startWatching = true;
-
-                            //    // Config file watching
-                            //    fileWatcher = new FileSystemWatcher();
-                            //    fileWatcher.IncludeSubdirectories = true;
-                            //    if (fileExtension.Contains("*"))
-                            //    {
-                            //        fileWatcher.Filter = fileExtension;
-                            //    }
-                            //    else
-                            //    {
-                            //        fileWatcher.Filter = "*" + fileExtension;
-                            //    }
-
-                            //    fileWatcher.Path = inputLog + "\\";
-                            //    fileWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.CreationTime
-                            //                         | NotifyFilters.FileName | NotifyFilters.DirectoryName;
-                            //    fileWatcher.Created += new FileSystemEventHandler(OnFileChanged);
-                            //    fileWatcher.Changed += new FileSystemEventHandler(OnFileChanged);
-                            //    fileWatcher.EnableRaisingEvents = true;
                         }
 
                         ActiveProcessContains(processName);
@@ -343,32 +321,6 @@ namespace FCT_Canon_Supports_MES
                     }
                 }
                 
-            }
-        }
-
-        private void txtBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                try
-                {
-                    if (boardNo != null || boardNo != "")
-                    {
-                        productId = cboModels.Text;
-                        dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
-                        ActiveProcess(processName);
-
-                    }
-                    else
-                    {
-                        ErrorMessage("NG", "Vui lòng bắn vào barcode");
-                    }
-
-                }
-                catch (SocketException se)
-                {
-                    MessageBox.Show(se.Message);
-                }
             }
         }
 
@@ -419,8 +371,8 @@ namespace FCT_Canon_Supports_MES
             else
             {
                 string[] models = {
-                "RM2-8419",
-                "RM2-8420"
+                "Rm2-8419",
+                "Rm2-8420"
                 };
 
                 foreach (var item in models)

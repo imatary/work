@@ -8,7 +8,9 @@ using DevExpress.XtraEditors;
 using Lib.Core.Helper;
 using BarcodeShipping.Data;
 using DevExpress.XtraGrid.Views.Grid;
-
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 namespace MurataSystem
 {
     public partial class FormMain : Form
@@ -23,6 +25,7 @@ namespace MurataSystem
         string modelID = "";
         string codeMurata = "";
         string serialNo = "";
+        //string URI = "http://172.28.10.25:8888/api/Values";
         public FormMain()
         {
             _oqcService = new OQCService();
@@ -31,6 +34,23 @@ namespace MurataSystem
             _mesService = new MESService();
             InitializeComponent();
         }
+
+        //private async void GetAllProducts()
+        //{
+        //    using (var client = new HttpClient())
+        //    {
+        //        using (var response = await client.GetAsync(URI))
+        //        {
+        //            if (response.IsSuccessStatusCode)
+        //            {
+        //                var productJsonString = await response.Content.ReadAsStringAsync();
+
+        //                //dataGridView1.DataSource = JsonConvert.DeserializeObject<Product[]>(productJsonString).ToList();
+
+        //            }
+        //        }
+        //    }
+        //}
 
         private void FormQA_Load(object sender, EventArgs e)
         {

@@ -35,7 +35,6 @@
             this.txtColumnClount = new System.Windows.Forms.MaskedTextBox();
             this.txtBarcodeLength = new System.Windows.Forms.MaskedTextBox();
             this.lblOutputLog = new System.Windows.Forms.Label();
-            this.lblInputLog = new System.Windows.Forms.Label();
             this.txtOutputLog = new System.Windows.Forms.TextBox();
             this.txtInputLog = new System.Windows.Forms.TextBox();
             this.txtFileExtension = new System.Windows.Forms.TextBox();
@@ -46,6 +45,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblInputLog = new System.Windows.Forms.Label();
             this.btnSaveChanged = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -111,20 +111,12 @@
             // lblOutputLog
             // 
             this.lblOutputLog.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblOutputLog.Image = global::FCT_Canon_Supports_MES.Properties.Resources.Open_16;
             this.lblOutputLog.Location = new System.Drawing.Point(329, 128);
             this.lblOutputLog.Name = "lblOutputLog";
             this.lblOutputLog.Size = new System.Drawing.Size(18, 23);
             this.lblOutputLog.TabIndex = 25;
             this.lblOutputLog.Click += new System.EventHandler(this.lblOutputLog_Click);
-            // 
-            // lblInputLog
-            // 
-            this.lblInputLog.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblInputLog.Location = new System.Drawing.Point(329, 99);
-            this.lblInputLog.Name = "lblInputLog";
-            this.lblInputLog.Size = new System.Drawing.Size(18, 23);
-            this.lblInputLog.TabIndex = 25;
-            this.lblInputLog.Click += new System.EventHandler(this.lblInputLog_Click);
             // 
             // txtOutputLog
             // 
@@ -214,6 +206,16 @@
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 21;
             this.label1.Text = "Station NO:";
+            // 
+            // lblInputLog
+            // 
+            this.lblInputLog.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblInputLog.Image = global::FCT_Canon_Supports_MES.Properties.Resources.Open_16;
+            this.lblInputLog.Location = new System.Drawing.Point(329, 99);
+            this.lblInputLog.Name = "lblInputLog";
+            this.lblInputLog.Size = new System.Drawing.Size(18, 23);
+            this.lblInputLog.TabIndex = 25;
+            this.lblInputLog.Click += new System.EventHandler(this.lblInputLog_Click);
             // 
             // btnSaveChanged
             // 

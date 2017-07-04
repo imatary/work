@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,8 +44,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnStop = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblProcessName = new System.Windows.Forms.Label();
@@ -79,7 +80,7 @@
             this.lblMessage = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblRefesh = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();

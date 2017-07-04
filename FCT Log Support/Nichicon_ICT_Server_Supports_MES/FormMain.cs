@@ -21,7 +21,7 @@ namespace Nichicon_ICT_Server_Supports_MES
         string stationNo = "", fileExtension = "", inputLog = "", outputLog = "", serial = "";
         string fileLastWriteTime = "", dateCheck = "", boardNo = "", productId = "", boardState = "";
 
-        bool startWatching = false, RunTaks = false, checkLength = false;
+        bool startWatching = false, RunTaks = false, checkLength = false, skipWaitLogs = false;
         int pass = 0, ng = 0, total = 0;
         FileSystemWatcher fileWatcher;
 
@@ -209,6 +209,10 @@ namespace Nichicon_ICT_Server_Supports_MES
             {
                 outputLog = Ultils.GetValueRegistryKey("OutputLog").ToString();
             }
+            if (Ultils.GetValueRegistryKey("SkipWaitLogs") != null)
+            {
+                skipWaitLogs = bool.Parse(Ultils.GetValueRegistryKey("SkipWaitLogs"));
+            }
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -321,7 +325,8 @@ namespace Nichicon_ICT_Server_Supports_MES
                             dataGridView1.DataSource = items;
                             if (boardState == "P")
                             {
-                                ActiveWindows(this.Text);
+                                ActiveWindows(Text);
+                                //this.TopMost = true;
                                 pass = pass + 1;
 
                                 SuccessMessage("OK", $"Board [{boardNo}] OK!");
@@ -333,12 +338,11 @@ namespace Nichicon_ICT_Server_Supports_MES
                             }
                             if (boardState == "F")
                             {
-                                ActiveWindows(this.Text);
                                 ErrorMessage("NG", $"Board [{boardNo}] NG!");
                                 lblReset.Enabled = true;
                                 ng = ng + 1;
                             }
-
+                            //
                             total = pass + ng;
                             lblPASS.Text = pass.ToString();
                             lblNG.Text = ng.ToString();
@@ -347,6 +351,7 @@ namespace Nichicon_ICT_Server_Supports_MES
                         else
                         {
                             ActiveWindows(Text);
+                            //this.TopMost = true;
                             ErrorMessage("NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác!" +
                                 $"\nModel: {ModelName(fileLastWriteTime)}" +
                                 $"\nBoard No: {boardNo}");
@@ -361,6 +366,7 @@ namespace Nichicon_ICT_Server_Supports_MES
                     else
                     {
                         ActiveWindows(Text);
+                        //this.TopMost = true;
                         ErrorMessage("NG", $" Vui lòng bắn vào Serial!");
 
                         txtBarcode.Enabled = true;
@@ -492,40 +498,58 @@ namespace Nichicon_ICT_Server_Supports_MES
         {
             if (e.KeyCode == Keys.Enter)
             {
-                try
+                // nếu = false thì làm việc như bình thường, test log
+                if (skipWaitLogs == false)
                 {
-                    boardNo = txtBarcode.Text.Trim();
-                    if(boardNo != null || boardNo != "")
+                    try
                     {
-                        productId = cboModels.Text;
-                        dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
-                        txtBarcode.Enabled = false;
-                        lblReset.Enabled = true;
-                        ActiveProcess(lblProcessName.Text);
-
-                        byte[] byData = Encoding.ASCII.GetBytes(boardNo);
-                        for (int i = 0; i < m_clientCount; i++)
+                        boardNo = txtBarcode.Text.Trim();
+                        if (boardNo != null || boardNo != "")
                         {
-                            if (m_workerSocket[i] != null)
+                            productId = cboModels.Text;
+                            dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
+                            txtBarcode.Enabled = false;
+                            lblReset.Enabled = true;
+
+                            //this.TopMost = false;
+                            ActiveProcess(lblProcessName.Text);
+                            dataGridView1.DataSource = null;
+
+                            byte[] byData = Encoding.ASCII.GetBytes(boardNo);
+                            for (int i = 0; i < m_clientCount; i++)
                             {
-                                if (m_workerSocket[i].Connected)
+                                if (m_workerSocket[i] != null)
                                 {
-                                    m_workerSocket[i].Send(byData);
+                                    if (m_workerSocket[i].Connected)
+                                    {
+                                        m_workerSocket[i].Send(byData);
+                                    }
                                 }
                             }
                         }
+                        else
+                        {
+                            ErrorMessage("NG", "Vui lòng bắn vào barcode");
+                            txtBarcode.Focus();
+                        }
+
                     }
-                    else
+                    catch (SocketException se)
                     {
-                        ErrorMessage("NG", "Vui lòng bắn vào barcode");
+                        MessageBox.Show(se.Message);
+                    }
+                }
+                // nếu = true, thì tạo log luôn không cần chờ Log máy nữa
+                else
+                {
+                    if (txtBarcode.Text != null)
+                    {
+                        Ultils.CreateFileLog(cboModels.Text, txtBarcode.Text, "P", stationNo, DateTime.Now.ToString("yyMMddHHmmss"));
+                        txtBarcode.ResetText();
                         txtBarcode.Focus();
                     }
-
                 }
-                catch (SocketException se)
-                {
-                    MessageBox.Show(se.Message);
-                }
+                
             }
         }
 

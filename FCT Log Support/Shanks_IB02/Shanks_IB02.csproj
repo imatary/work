@@ -57,10 +57,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>59DF474894314BB9894E17374D0F3B92F7C38FFB</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>CA8729E328E56CDFD2B713B542464361C0B70B59</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Shanks_IB02_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>

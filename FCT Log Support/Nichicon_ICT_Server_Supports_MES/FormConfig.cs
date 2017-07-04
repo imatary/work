@@ -89,6 +89,10 @@ namespace Nichicon_ICT_Server_Supports_MES
             {
                 txtOutputLog.Text = Ultils.GetValueRegistryKey("OutputLog").ToString();
             }
+            if (Ultils.GetValueRegistryKey("SkipWaitLogs") != null)
+            {
+                checkBox1.Checked = bool.Parse(Ultils.GetValueRegistryKey("SkipWaitLogs"));
+            }
         }
 
         private void FormConfig_Load(object sender, EventArgs e)
@@ -137,12 +141,20 @@ namespace Nichicon_ICT_Server_Supports_MES
             {
                 Ultils.WriteRegistry("IPAddress", txtIPAddress.Text);
                 Ultils.WriteRegistry("Port", txtPort.Text);
-                Ultils.WriteRegistry("Process", cboWindows.Text.Substring(0, 7));
+                if(cboWindows.Text.Length > 7)
+                {
+                    Ultils.WriteRegistry("Process", cboWindows.Text.Substring(0, 7));
+                }
+                else
+                {
+                    Ultils.WriteRegistry("Process", cboWindows.Text);
+                }
+                
                 Ultils.WriteRegistry("StationNO", txtStationNO.Text);
                 Ultils.WriteRegistry("FileExtension", txtFileExtension.Text);
                 Ultils.WriteRegistry("InputLog", txtInputLog.Text);
                 Ultils.WriteRegistry("OutputLog", txtOutputLog.Text);
-
+                Ultils.WriteRegistry("SkipWaitLogs", checkBox1.Checked.ToString());
                 MessageBox.Show("Save success!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
          }

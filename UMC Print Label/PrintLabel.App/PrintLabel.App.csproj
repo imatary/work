@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ED4924AE-E9EF-47C2-A002-FBDD430AC108}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PrintLabel.App</RootNamespace>
+    <AssemblyName>PrintLabel.App</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Kyocera Label\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\Kyocera Label\</UpdateUrl>
+    <ProductName>Kyocera Label</ProductName>
+    <PublisherName>cuongpham%40umcvn.com</PublisherName>
+    <SuiteName>UMC Electronics VietNam Ltd%27s</SuiteName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <TrustUrlParameters>true</TrustUrlParameters>
+    <ApplicationRevision>36</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>D49ED1BFC2F0B2A0DCA6B040C7DFA8A93621F61A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>PrintLabel.App_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.16.3.0\lib\net35\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\usMebiusPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\usMebiusPanel.Designer.cs">
+      <DependentUpon>usMebiusPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\usLibraOEM.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\usLibraOEM.Designer.cs">
+      <DependentUpon>usLibraOEM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenericListOutput.cs" />
+    <Compile Include="LibraOEM\FormModelLibraOEM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LibraOEM\FormModelLibraOEM.Designer.cs">
+      <DependentUpon>FormModelLibraOEM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LibraOEM\LibraOEM.cs" />
+    <Compile Include="MebiusPanel\FormModelMebiusPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MebiusPanel\FormModelMebiusPanel.Designer.cs">
+      <DependentUpon>FormModelMebiusPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MebiusPanel\MebiusPanel.cs" />
+    <Compile Include="MebiusPanel\ModelMebiusPanel.cs" />
+    <Compile Include="LibraOEM\ModelLibraOEM.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ultils.cs" />
+    <Compile Include="User.cs" />
+    <None Include="Resources\folder-saved-search-16.png" />
+    <None Include="Resources\trash-16.png" />
+    <None Include="Resources\edit.png" />
+    <None Include="Resources\Save.png" />
+    <EmbeddedResource Include="Controls\usMebiusPanel.resx">
+      <DependentUpon>usMebiusPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\usLibraOEM.resx">
+      <DependentUpon>usLibraOEM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LibraOEM\FormModelLibraOEM.resx">
+      <DependentUpon>FormModelLibraOEM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MebiusPanel\FormModelMebiusPanel.resx">
+      <DependentUpon>FormModelMebiusPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Content Include="Configs\Models.txt" />
+    <Content Include="Configs\ModelsLibraOEM.txt" />
+    <Content Include="Configs\Users.txt" />
+    <None Include="Logs\HistoryBarcodeGenrator.ini" />
+    <None Include="packages.config" />
+    <None Include="PrintLabel.App_TemporaryKey.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1471519853_malecostume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kyocera_logo.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1479456864_Streamline-75.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file_formats3_csv-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configs\README.txt" />
+    <Content Include="History\README.txt" />
+    <Content Include="logo.ico" />
+    <Content Include="Logs\README.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

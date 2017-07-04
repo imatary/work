@@ -1,10 +1,15 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Deployment.Application;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace FCT_Canon_Supports_MES
 {
@@ -98,23 +103,32 @@ namespace FCT_Canon_Supports_MES
             return genratePath;
         }
 
-        public static string GetLastLine(string path)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="encoding"></param>
+        /// <param name="newline"></param>
+        /// <returns></returns>
+        public static string ReadLastLine(string path, Encoding encoding, string newline)
         {
-            string value = "";
-            var enumerator = File.ReadAllLines(path).GetEnumerator();
-            try
+            string line = null;
+            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var reader = new StreamReader(stream))
             {
-                value = File.ReadAllLines(path).Last();
+                while (!reader.EndOfStream)
+                {
+                    line = reader.ReadLine();
+                    if (reader.Peek() == -1)
+                    {
+                        return line;
+                    } 
+                }
+                reader.Close();
             }
-            finally
-            {
-                IDisposable disposable = enumerator as IDisposable;
-                if (disposable != null)
-                    disposable.Dispose();
-            }
-
-            return value;
+            return null;
         }
+
 
         /// <summary>
         /// 
@@ -123,15 +137,16 @@ namespace FCT_Canon_Supports_MES
         /// <returns></returns>
         public static int CountLine(string path)
         {
-            try
+            int count = 0;
+            using (var file = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var reader = new StreamReader(file))
             {
-                var count = File.ReadAllLines(path).Count();
-
+                while (reader.ReadLine() != null)
+                {
+                    count++;
+                }
+                reader.Close();
                 return count;
-            }
-            catch (Exception ex)
-            {
-                return 0;
             }
         }
         public static string GetLine(string path, int line)
@@ -207,6 +222,122 @@ namespace FCT_Canon_Supports_MES
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static string GetFileProcessName(string filePath)
+        {
+            Process[] procs = Process.GetProcesses();
+            string fileName = Path.GetFileName(filePath);
+
+            foreach (Process proc in procs)
+            {
+                if (proc.MainWindowHandle != new IntPtr(0) && !proc.HasExited)
+                {
+                    ProcessModule[] arr = new ProcessModule[proc.Modules.Count];
+
+                    foreach (ProcessModule pm in proc.Modules)
+                    {
+                        if (pm.ModuleName == fileName)
+                            return proc.ProcessName;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static bool IsFileLocked(string filePath)
+        {
+            try
+            {
+                using (File.Open(filePath, FileMode.Open)) { }
+                return false;
+            }
+            catch (IOException e)
+            {
+                var errorCode = Marshal.GetHRForException(e) & ((1 << 16) - 1);
+
+                return errorCode == 32 || errorCode == 33;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static bool IsFileLocked(FileInfo file)
+        {
+            FileStream stream = null;
+
+            try
+            {
+                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
+            }
+            catch (IOException)
+            {
+                //the file is unavailable because it is:
+                //still being written to
+                //or being processed by another thread
+                //or does not exist (has already been processed)
+                return true;
+            }
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
+
+            //file is not locked
+            return false;
+        }
+
+
+        const int ERROR_SHARING_VIOLATION = 32;
+        const int ERROR_LOCK_VIOLATION = 33;
+        private static bool IsFileLocked(Exception exception)
+        {
+            int errorCode = Marshal.GetHRForException(exception) & ((1 << 16) - 1);
+            return errorCode == ERROR_SHARING_VIOLATION || errorCode == ERROR_LOCK_VIOLATION;
+        }
+
+        public static bool CanReadFile(string filePath)
+        {
+            //Try-Catch so we dont crash the program and can check the exception
+            try
+            {
+                //The "using" is important because FileStream implements IDisposable and
+                //"using" will avoid a heap exhaustion situation when too many handles  
+                //are left undisposed.
+                using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                {
+                    if (fileStream != null)
+                        fileStream.Close();  //This line is me being overly cautious, fileStream will never be null unless an exception occurs... and I know the "using" does it but its helpful to be explicit - especially when we encounter errors - at least for me anyway!
+                }
+            }
+            catch (IOException ex)
+            {
+                //THE FUNKY MAGIC - TO SEE IF THIS FILE REALLY IS LOCKED!!!
+                if (IsFileLocked(ex))
+                {
+                    // do something, eg File.Copy or present the user with a MsgBox - I do not recommend Killing the process that is locking the file
+                    return false;
+                }
+            }
+            finally
+            {
+            }
+            return true;
         }
     }
 }

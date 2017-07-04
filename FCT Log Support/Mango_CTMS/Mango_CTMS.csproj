@@ -60,10 +60,11 @@
     <ApplicationIcon>1473324578_icon-113-document-file-txt.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>C4DD0D63DD7B2667A525BB20A7F96514BFBB4BB2</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>CA8729E328E56CDFD2B713B542464361C0B70B59</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Mango_CTMS_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>

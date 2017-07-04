@@ -14,19 +14,20 @@
     <PublishUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\FCT_Canon\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>\\vn-file2\Share\18 IT\U16354 %28cuongpv%29\Dev\FCT_Canon\</UpdateUrl>
     <ProductName>FCT-Canon-Supports-MES</ProductName>
     <PublisherName>cuongpham%40umcvn.com</PublisherName>
     <SuiteName>UMC Electronics VietNam Ltd%27s</SuiteName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>18</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -80,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DigitalDisplay.cs" />
     <Compile Include="FormAddModel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +104,7 @@
     <Compile Include="NativeWin32.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReverseLineReader.cs" />
     <Compile Include="Ultils.cs" />
     <EmbeddedResource Include="FormAddModel.resx">
       <DependentUpon>FormAddModel.cs</DependentUpon>
@@ -160,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <None Include="Resources\Open-16.png" />
     <None Include="Resources\plus_16.png" />
     <None Include="Resources\refresh-16.png" />
   </ItemGroup>
