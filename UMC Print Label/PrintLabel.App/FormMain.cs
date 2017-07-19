@@ -143,5 +143,10 @@ namespace PrintLabel.App
             }
             
         }
+
+        private void btnAssyMainA3_Click(object sender, EventArgs e)
+        {
+            AddTabPage(new usAssyMainA3(), "Assy Main A3");
+        }
     }
 }

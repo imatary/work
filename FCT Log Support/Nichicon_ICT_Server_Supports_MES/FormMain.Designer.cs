@@ -40,21 +40,17 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblClientConnected = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnStop = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblProcessName = new System.Windows.Forms.Label();
-            this.lblPort = new System.Windows.Forms.Label();
-            this.lblIPAddress = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.txtClientConnect = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cboCheckSheet = new System.Windows.Forms.CheckBox();
+            this.panelBarcode2 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblReset = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
             this.lblAddModel = new System.Windows.Forms.Label();
@@ -85,9 +81,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.panelBarcode2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelBarcode.SuspendLayout();
@@ -135,8 +131,9 @@
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel5,
-            this.lblVersion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 451);
+            this.lblVersion,
+            this.lblClientConnected});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 380);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(585, 24);
             this.statusStrip1.TabIndex = 4;
@@ -183,6 +180,14 @@
             this.lblVersion.Size = new System.Drawing.Size(16, 19);
             this.lblVersion.Text = "0";
             // 
+            // lblClientConnected
+            // 
+            this.lblClientConnected.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lblClientConnected.ForeColor = System.Drawing.Color.Green;
+            this.lblClientConnected.Name = "lblClientConnected";
+            this.lblClientConnected.Size = new System.Drawing.Size(110, 19);
+            this.lblClientConnected.Text = "| no client connect";
+            // 
             // groupBox1
             // 
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -191,24 +196,6 @@
             this.groupBox1.Size = new System.Drawing.Size(585, 2);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Server IP Address:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(39, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Server Port:";
             // 
             // btnStart
             // 
@@ -250,92 +237,10 @@
             this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.lblProcessName);
-            this.groupBox2.Controls.Add(this.lblPort);
-            this.groupBox2.Controls.Add(this.lblIPAddress);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.panel4);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(10, 64);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(567, 104);
-            this.groupBox2.TabIndex = 15;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Server Config";
-            // 
-            // lblProcessName
-            // 
-            this.lblProcessName.AutoSize = true;
-            this.lblProcessName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProcessName.ForeColor = System.Drawing.Color.Teal;
-            this.lblProcessName.Location = new System.Drawing.Point(99, 80);
-            this.lblProcessName.Name = "lblProcessName";
-            this.lblProcessName.Size = new System.Drawing.Size(37, 13);
-            this.lblProcessName.TabIndex = 16;
-            this.lblProcessName.Text = "None";
-            // 
-            // lblPort
-            // 
-            this.lblPort.AutoSize = true;
-            this.lblPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPort.ForeColor = System.Drawing.Color.Teal;
-            this.lblPort.Location = new System.Drawing.Point(99, 53);
-            this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(37, 13);
-            this.lblPort.TabIndex = 16;
-            this.lblPort.Text = "None";
-            // 
-            // lblIPAddress
-            // 
-            this.lblIPAddress.AutoSize = true;
-            this.lblIPAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIPAddress.ForeColor = System.Drawing.Color.Teal;
-            this.lblIPAddress.Location = new System.Drawing.Point(99, 24);
-            this.lblIPAddress.Name = "lblIPAddress";
-            this.lblIPAddress.Size = new System.Drawing.Size(37, 13);
-            this.lblIPAddress.TabIndex = 16;
-            this.lblIPAddress.Text = "None";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(54, 80);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 13);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Process:";
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.txtClientConnect);
-            this.panel4.Location = new System.Drawing.Point(364, 12);
-            this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(3);
-            this.panel4.Size = new System.Drawing.Size(197, 86);
-            this.panel4.TabIndex = 13;
-            // 
-            // txtClientConnect
-            // 
-            this.txtClientConnect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtClientConnect.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtClientConnect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtClientConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClientConnect.ForeColor = System.Drawing.Color.Teal;
-            this.txtClientConnect.Location = new System.Drawing.Point(3, 3);
-            this.txtClientConnect.Multiline = true;
-            this.txtClientConnect.Name = "txtClientConnect";
-            this.txtClientConnect.ReadOnly = true;
-            this.txtClientConnect.Size = new System.Drawing.Size(187, 76);
-            this.txtClientConnect.TabIndex = 12;
-            this.txtClientConnect.Text = "No client";
-            // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cboCheckSheet);
+            this.groupBox3.Controls.Add(this.panelBarcode2);
             this.groupBox3.Controls.Add(this.lblReset);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.lblAddModel);
@@ -347,12 +252,60 @@
             this.groupBox3.Controls.Add(this.panel2);
             this.groupBox3.Controls.Add(this.btnStart);
             this.groupBox3.Controls.Add(this.btnStop);
-            this.groupBox3.Location = new System.Drawing.Point(10, 168);
+            this.groupBox3.Location = new System.Drawing.Point(9, 59);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(567, 283);
+            this.groupBox3.Size = new System.Drawing.Size(567, 318);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Results";
+            // 
+            // cboCheckSheet
+            // 
+            this.cboCheckSheet.AutoSize = true;
+            this.cboCheckSheet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboCheckSheet.Location = new System.Drawing.Point(319, 221);
+            this.cboCheckSheet.Name = "cboCheckSheet";
+            this.cboCheckSheet.Size = new System.Drawing.Size(97, 17);
+            this.cboCheckSheet.TabIndex = 24;
+            this.cboCheckSheet.Text = "Check sheet";
+            this.cboCheckSheet.UseVisualStyleBackColor = true;
+            this.cboCheckSheet.Visible = false;
+            this.cboCheckSheet.CheckedChanged += new System.EventHandler(this.cboCheckSheet_CheckedChanged);
+            // 
+            // panelBarcode2
+            // 
+            this.panelBarcode2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBarcode2.Controls.Add(this.textBox2);
+            this.panelBarcode2.Controls.Add(this.pictureBox3);
+            this.panelBarcode2.Location = new System.Drawing.Point(6, 211);
+            this.panelBarcode2.Name = "panelBarcode2";
+            this.panelBarcode2.Padding = new System.Windows.Forms.Padding(2);
+            this.panelBarcode2.Size = new System.Drawing.Size(264, 31);
+            this.panelBarcode2.TabIndex = 17;
+            this.panelBarcode2.Visible = false;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(37, 2);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(223, 24);
+            this.textBox2.TabIndex = 16;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox3.Image = global::Nichicon_ICT_Server_Supports_MES.Properties.Resources._1479455547_barcode;
+            this.pictureBox3.Location = new System.Drawing.Point(2, 2);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(35, 25);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 15;
+            this.pictureBox3.TabStop = false;
             // 
             // lblReset
             // 
@@ -415,7 +368,7 @@
             this.colDateCheck,
             this.colTimeCheck,
             this.colSate});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 211);
+            this.dataGridView1.Location = new System.Drawing.Point(7, 247);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
@@ -651,10 +604,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(585, 475);
+            this.ClientSize = new System.Drawing.Size(585, 404);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lblRefesh);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
@@ -670,12 +622,11 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panelBarcode2.ResumeLayout(false);
+            this.panelBarcode2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panelBarcode.ResumeLayout(false);
@@ -700,13 +651,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblStatus;
@@ -716,16 +664,10 @@
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox txtClientConnect;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblRefesh;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblProcessName;
-        private System.Windows.Forms.Label lblPort;
-        private System.Windows.Forms.Label lblIPAddress;
         private System.Windows.Forms.ComboBox cboModels;
         private System.Windows.Forms.Label lblAddModel;
         private System.Windows.Forms.Label lblReload;
@@ -740,6 +682,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTimeCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSate;
         private System.Windows.Forms.LinkLabel lblReset;
+        private System.Windows.Forms.ToolStripStatusLabel lblClientConnected;
+        private System.Windows.Forms.Panel panelBarcode2;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.CheckBox cboCheckSheet;
     }
 }
 

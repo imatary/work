@@ -47,6 +47,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageDasborad = new System.Windows.Forms.TabPage();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.btnAssyMainA3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -122,6 +123,7 @@
             // panelSidebarLeft
             // 
             this.panelSidebarLeft.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelSidebarLeft.Controls.Add(this.btnAssyMainA3);
             this.panelSidebarLeft.Controls.Add(this.button2);
             this.panelSidebarLeft.Controls.Add(this.btnMebiusPanel);
             this.panelSidebarLeft.Controls.Add(this.groupBox1);
@@ -268,6 +270,21 @@
             this.panelMain.Size = new System.Drawing.Size(702, 525);
             this.panelMain.TabIndex = 4;
             // 
+            // btnAssyMainA3
+            // 
+            this.btnAssyMainA3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnAssyMainA3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAssyMainA3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAssyMainA3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAssyMainA3.ForeColor = System.Drawing.Color.White;
+            this.btnAssyMainA3.Location = new System.Drawing.Point(0, 153);
+            this.btnAssyMainA3.Name = "btnAssyMainA3";
+            this.btnAssyMainA3.Size = new System.Drawing.Size(171, 61);
+            this.btnAssyMainA3.TabIndex = 4;
+            this.btnAssyMainA3.Text = "Assy Main A3 (Kyocera)";
+            this.btnAssyMainA3.UseVisualStyleBackColor = false;
+            this.btnAssyMainA3.Click += new System.EventHandler(this.btnAssyMainA3_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,6 +337,7 @@
         private System.Windows.Forms.Button btnMebiusPanel;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.Button btnAssyMainA3;
     }
 }
 

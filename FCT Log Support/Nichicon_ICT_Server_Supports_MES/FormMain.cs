@@ -20,7 +20,7 @@ namespace Nichicon_ICT_Server_Supports_MES
         private int m_clientCount = 0;
         string stationNo = "", fileExtension = "", inputLog = "", outputLog = "", serial = "";
         string fileLastWriteTime = "", dateCheck = "", boardNo = "", productId = "", boardState = "";
-
+        string strIP = "", strPort = "", processName = "";
         bool startWatching = false, RunTaks = false, checkLength = false, skipWaitLogs = false;
         int pass = 0, ng = 0, total = 0;
         FileSystemWatcher fileWatcher;
@@ -34,23 +34,16 @@ namespace Nichicon_ICT_Server_Supports_MES
             lblVersion.Text = Ultils.GetRunningVersion();
             lblReset.Enabled = false;
         }
-        public bool ControlInvokeRequired(Control c, Action a)
-        {
-            if (c.InvokeRequired)
-                c.Invoke(new MethodInvoker(delegate { a(); }));
-            else
-                return false;
+        //public bool ControlInvokeRequired(Control c, Action a)
+        //{
+        //    if (c.InvokeRequired)
+        //        c.Invoke(new MethodInvoker(delegate { a(); }));
+        //    else
+        //        return false;
 
-            return true;
-        }
-        public void UpdateClientConnect(string valuess)
-        {
-            //Check if invoke requied if so return - as i will be recalled in correct thread
-            if (ControlInvokeRequired(txtClientConnect, () => UpdateClientConnect(valuess)))
-                return;
-            txtClientConnect.Text = valuess;
-            //txtBarcode.BackColor = c;
-        }
+        //    return true;
+        //}
+
         private void UpdateControls(bool listening)
         {
             btnStart.Enabled = !listening;
@@ -72,7 +65,7 @@ namespace Nichicon_ICT_Server_Supports_MES
                 ++m_clientCount;
                 // Display this client connection as a status message on the GUI	
                 String client = String.Format("Client # {0} connected", m_clientCount);
-                UpdateClientConnect(client);
+                lblClientConnected.Text = client;
 
                 // Since the main Socket is now free, it can go back and wait for
                 // other clients who are attempting to connect
@@ -182,16 +175,16 @@ namespace Nichicon_ICT_Server_Supports_MES
         {
             if (Ultils.GetValueRegistryKey("IPAddress") != null)
             {
-                lblIPAddress.Text = Ultils.GetValueRegistryKey("IPAddress").ToString();
+                strIP= Ultils.GetValueRegistryKey("IPAddress").ToString();
             }
 
             if (Ultils.GetValueRegistryKey("Port") != null)
             {
-                lblPort.Text = Ultils.GetValueRegistryKey("Port").ToString();
+                strPort = Ultils.GetValueRegistryKey("Port").ToString();
             }
             if (Ultils.GetValueRegistryKey("Process") != null)
             {
-                lblProcessName.Text = Ultils.GetValueRegistryKey("Process").ToString();
+                processName = Ultils.GetValueRegistryKey("Process").ToString();
             }
             if (Ultils.GetValueRegistryKey("StationNO") != null)
             {
@@ -289,6 +282,20 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
         }
 
+        private void cboCheckSheet_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cboCheckSheet.Checked == true)
+            {
+                panelBarcode2.Visible = true;
+                txtBarcode.ResetText();
+                txtBarcode.Focus();
+            }
+            else
+            {
+                panelBarcode2.Visible = false;
+            }
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (checkLength == true)
@@ -382,6 +389,15 @@ namespace Nichicon_ICT_Server_Supports_MES
         private void cboModels_SelectedIndexChanged(object sender, EventArgs e)
         {
             productId = cboModels.Text;
+            lblReload_Click(sender, e);
+            if (cboCheckSheet.Visible == true)
+            {
+                cboCheckSheet.Visible = false;
+            }
+            else
+            {
+                cboCheckSheet.Visible = true;
+            }
         }
 
         private void lblReset_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -394,17 +410,17 @@ namespace Nichicon_ICT_Server_Supports_MES
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(lblIPAddress.Text) || lblIPAddress.Text == "None")
+            if (string.IsNullOrEmpty(strIP) || strIP == "")
             {
                 MessageBox.Show("Vui lòng nhập vào Server IP Address!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(lblPort.Text) || lblPort.Text == "None")
+            else if (string.IsNullOrEmpty(strPort) || strPort == "")
             {
                 MessageBox.Show("Vui lòng nhập vào Server port!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(lblProcessName.Text) || lblProcessName.Text == "None")
+            else if (string.IsNullOrEmpty(processName) || processName == "")
             {
                 MessageBox.Show("Vui lòng chọn Process!", "THÔNG BÁO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -418,8 +434,7 @@ namespace Nichicon_ICT_Server_Supports_MES
             {
                 try
                 {
-                    string portStr = lblPort.Text;
-                    int port = Convert.ToInt32(portStr);
+                    int port = Convert.ToInt32(strPort);
                     // Create the listening socket...
                     m_mainSocket = new Socket(AddressFamily.InterNetwork,
                                               SocketType.Stream,
@@ -486,6 +501,8 @@ namespace Nichicon_ICT_Server_Supports_MES
             CloseSockets();
             UpdateControls(false);
             panelBarcode.Visible = false;
+            panelBarcode2.Visible = false;
+
             cboModels.Enabled = true;
             lblReload.Enabled = true;
             lblAddModel.Enabled = true;
@@ -512,7 +529,7 @@ namespace Nichicon_ICT_Server_Supports_MES
                             lblReset.Enabled = true;
 
                             //this.TopMost = false;
-                            ActiveProcess(lblProcessName.Text);
+                            ActiveProcess(processName);
                             dataGridView1.DataSource = null;
 
                             byte[] byData = Encoding.ASCII.GetBytes(boardNo);
