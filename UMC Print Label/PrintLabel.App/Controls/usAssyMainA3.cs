@@ -10,7 +10,7 @@ namespace PrintLabel.App.Controls
     public partial class usAssyMainA3 : UserControl
     {
         private string path = AppDomain.CurrentDomain.BaseDirectory + @"Configs\AssyMainA3.txt";
-        private string pathLog = @"C:\Logs\AssyMainA3";
+        private string pathLog = null;
         List<ViewAssyMainA3> lists = new List<ViewAssyMainA3>();
         private ModelAssyMainA3 _model = new ModelAssyMainA3(); 
         public usAssyMainA3()
@@ -61,6 +61,7 @@ namespace PrintLabel.App.Controls
             if (path != null)
             {
                 txtPathLog.Text = path;
+                pathLog = path;
             }
         }
 
@@ -142,6 +143,14 @@ namespace PrintLabel.App.Controls
         /// <param name="e"></param>
         private void btnExportToCSV_Click(object sender, EventArgs e)
         {
+
+            if(pathLog == null || pathLog == "")
+            {
+                MessageBox.Show("Please select the path to save the log file!", "Error path logs", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FieldError(txtPathLog);
+                return;
+            }
+
             bool exists = Directory.Exists(pathLog);
             if (!exists)
             {
@@ -149,9 +158,8 @@ namespace PrintLabel.App.Controls
             }
 
             // Log Print system
-            string logPrint = txtPathLog.Text;
-            bool logPrintExists = Directory.Exists(logPrint);
-            if (!exists)
+            string logPrint = pathLog;
+            if (!Directory.Exists(logPrint))
             {
                 Directory.CreateDirectory(logPrint);
             }
@@ -161,7 +169,8 @@ namespace PrintLabel.App.Controls
             {
                 Directory.CreateDirectory(folderModel);
             }
-            string fileName = $@"{folderModel}.csv";
+
+            string fileName = $@"{folderModel}\{_model.Model}.csv";
             //string fileName = $@"{pathLog}\{_model.Name + year + month}.csv";
             if (!File.Exists(fileName))
             {

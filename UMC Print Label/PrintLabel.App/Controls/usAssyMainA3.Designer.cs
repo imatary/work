@@ -87,18 +87,18 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(17, 29);
+            this.label7.Location = new System.Drawing.Point(6, 29);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.Size = new System.Drawing.Size(64, 13);
             this.label7.TabIndex = 16;
-            this.label7.Text = "Path log:";
+            this.label7.Text = "Output logs:";
             // 
             // txtPathLog
             // 
             this.txtPathLog.Enabled = false;
             this.txtPathLog.Location = new System.Drawing.Point(72, 26);
             this.txtPathLog.Name = "txtPathLog";
-            this.txtPathLog.Size = new System.Drawing.Size(160, 20);
+            this.txtPathLog.Size = new System.Drawing.Size(159, 20);
             this.txtPathLog.TabIndex = 15;
             // 
             // lblAddModel

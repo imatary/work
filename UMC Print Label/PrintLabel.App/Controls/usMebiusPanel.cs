@@ -207,8 +207,7 @@ namespace PrintLabel.App.Controls
             // Log system
             // Log Print system
             string logPrint = txtPathLog.Text;
-            bool logPrintExists = Directory.Exists(logPrint);
-            if (!exists)
+            if (!Directory.Exists(logPrint))
             {
                 Directory.CreateDirectory(logPrint);
             }
