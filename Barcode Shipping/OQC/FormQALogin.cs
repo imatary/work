@@ -16,7 +16,6 @@ namespace OQC
         {
             InitializeComponent();
             _oqcService = new OQCService();
-            LoadRegistry();
             RegisterInStartup(true);
         }
 
@@ -74,14 +73,8 @@ namespace OQC
                     }
                     else
                     {
-                        if (string.IsNullOrEmpty(txtProcess.Text.Trim()))
-                        {
-                            txtProcess.Focus();
-                        }
-                        else
-                        {
-                            btnLogin.Focus();
-                        }
+                        btnLogin.Focus();
+                        btnLogin.PerformClick();
                     }
                 }
             }
@@ -175,18 +168,13 @@ namespace OQC
                     }
                     else
                     {
-                        txtProcess.Focus();
+                        btnLogin.Focus();
+                        btnLogin.PerformClick();
                     }
                 }
             }
         }
-        private void txtProcess_Validating(object sender, CancelEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtProcess.Text))
-            {
-                btnLogin.PerformClick();
-            }
-        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtOperatorID.Text))
@@ -209,9 +197,8 @@ namespace OQC
                     OperatorName = _operator.OperatorName,
                     LineID = int.Parse(txtLineID.EditValue.ToString()),
                     OperationID = int.Parse(txtOperationID.EditValue.ToString()),
-                    ProcessID = txtProcess.Text,
+                    ProcessID = "VI_FUJ",
                 };
-                SaveRegistry();
                 Program.CurrentUser = user;
                 Hide();
                 if (Program.CurrentUser != null)
@@ -223,38 +210,10 @@ namespace OQC
             }
         }
 
-
         /// <summary>
-        /// Lưu Mật Khẩu Và Tên Đăng nhập
+        /// 
         /// </summary>
-        private void SaveRegistry()
-        {
-            Registry.SetValue(@"HKEY_CURRENT_USER\Software\BarcodeSystem\ProcessValue", "ProcessName", txtProcess.Text);
-        }
-
-        private void LoadRegistry()
-        {
-            txtProcess.Text = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\BarcodeSystem\ProcessValue", "ProcessName", null);
-        }
-
-        private void txtProcess_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (string.IsNullOrEmpty(txtProcess.Text))
-                {
-                    dxErrorProvider1.SetError(txtProcess, "Error! Process value required.");
-                    Ultils.EditTextErrorNoMessage(txtProcess);
-                }
-                else
-                {
-                    btnLogin.PerformClick();
-                }
-            }
-        }
-
-        
-
+        /// <param name="isChecked"></param>
         private void RegisterInStartup(bool isChecked)
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
@@ -269,20 +228,6 @@ namespace OQC
             }
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            switch (keyData)
-            {
-                case Keys.F6:
-                    txtProcess.Enabled = true;
-                    break;
-                case Keys.F7:
-                    txtProcess.Enabled = false;
-                    break;
-
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
 
         private void txtOperatorID_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -309,11 +254,6 @@ namespace OQC
                 txtOperationID.ResetText();
                 txtOperationID.Properties.Buttons[0].Visible = false;
             }
-        }
-
-        private void txtProcess_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-
         }
     }
 }

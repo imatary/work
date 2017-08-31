@@ -7,7 +7,7 @@ using BarcodeShipping.Data;
 using BarcodeShipping.Services;
 using DevExpress.XtraEditors;
 using Lib.Core.Helper;
-using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace BarcodeShipping.GUI
 {
@@ -42,6 +42,24 @@ namespace BarcodeShipping.GUI
             if (!_iqcService.CheckBoxExits(boxId))
             {
                 splashScreenManager1.ShowWaitForm();
+                int quantity = 0;
+                if (checkFujiHP.Checked == true)
+                {
+                    if ((_currentModel.ModelName == "105K 33480") || (_currentModel.ModelName == "105K 33470"))
+                    {
+                        quantity = _currentModel.QuantityHP;
+                    }
+                    else
+                    {
+                        MessageBoxHelper.ShowMessageBoxError("Vui lòng kiểm tra lại Models!");
+                        checkFujiHP.Checked = false;
+                    }
+                }
+                else
+                {
+                    quantity = _currentModel.Quantity;
+                }
+
                 var logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                 if (logs.Any())
                 { 
@@ -85,8 +103,6 @@ namespace BarcodeShipping.GUI
                         MessageBoxHelper.ShowMessageBoxError($"Box [{boxId}] có {logs.Count} PCB\n" +
                                                              $"Có {_pcbError.Count} PCB không dành cho Model [{txtModel.Text}].\n" +
                                                              "Vui lòng kiểm tra lại!");
-                        //EnableTextControls(false);
-                        //VisibleControlAddPcb(true);
                         txtBoxID.SelectAll();
                         txtBoxID.Focus();
                     }
@@ -95,9 +111,9 @@ namespace BarcodeShipping.GUI
                         GetQtyPoAndRemainsByWorkingOderAndPoNo(_currentModel.ModelID, txtPO.EditValue.ToString());
                         lblCountPCB.Text = _shippings.Count.ToString(CultureInfo.InvariantCulture);
                         lblRemains.Text = (_currentPo.QuantityRemain - _shippings.Count).ToString(CultureInfo.InvariantCulture);
-                        Thread.Sleep(200);
+
                         // Nếu số lượng đủ thì thực hiện lưu vào csdl
-                        if (_shippings.Count == _currentModel.Quantity)
+                        if (_shippings.Count == quantity)
                         {
                             gridControlData.DataSource = _shippings;
                             splashScreenManager1.CloseWaitForm();
@@ -118,9 +134,9 @@ namespace BarcodeShipping.GUI
                         }
                         else
                         {
-                            if (_shippings.Count > _currentModel.Quantity)
+                            if (_shippings.Count > quantity)
                             {
-                                int count = _shippings.Count - _currentModel.Quantity;
+                                int count = _shippings.Count - quantity;
                                 gridControlData.Refresh();
                                 gridControlData.DataSource = _shippings;
                                 splashScreenManager1.CloseWaitForm();
@@ -140,7 +156,6 @@ namespace BarcodeShipping.GUI
                             }
                         } 
                     }
-
                 }
                 else
                 {
@@ -419,7 +434,59 @@ namespace BarcodeShipping.GUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                EditTextPO_PreviewKeyDown();
+                if (string.IsNullOrEmpty(txtPO.Text))
+                {
+                    Ultils.TextControlNotNull(txtPO, "PO");
+                }
+                else
+                {
+                    string strPo = txtPO.Text;
+                    int index = strPo.IndexOf(' ');
+                    string removePo = index >= 0 ? strPo.Remove(index) : txtPO.Text;
+                    if (strPo.Contains(" "))
+                    {
+                        string[] input = strPo.Split(' ');
+
+                        string po_no = input[0];
+                        string remains = null;
+                        if (input.Count() > 2)
+                        {
+                             remains = input[2];
+                        }
+                        else
+                        {
+                            remains = input[1];
+                        }
+                          
+
+                        //remains = Regex.Replace(remains, "[^A-Za-z0-9]", "");
+
+                        if (po_no.Length >= 3)
+                        {
+                            if (po_no.Substring(0, 3).ToUpper() != "3N3")
+                            {
+                                Ultils.EditTextErrorMessage(txtPO, "PO phải bắt đầu bằng 3N3");
+                                txtPO.SelectAll();
+                            }
+                            else
+                            {
+                                txtPO.Text = po_no;
+                                lblQtyPO.Text = remains;
+                                quantityPO = Convert.ToInt32(remains);
+                                txtModel.Focus();
+                            }
+                        }
+                        else
+                        {
+                            Ultils.EditTextErrorMessage(txtPO, "PO NO không đúng!");
+                        }
+                    }
+                    else
+                    {
+                        Ultils.EditTextErrorMessage(txtPO, "PO NO không đúng định dạng!");
+                    }
+
+                }
             }
         }
         private void txtBoxID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -456,7 +523,26 @@ namespace BarcodeShipping.GUI
 
                         if (_currentModel != null)
                         {
-                            lblQuantityModel.Text = $"/{_currentModel.Quantity}";
+                            int quantity = 0;
+                            if (checkFujiHP.Checked == true)
+                            {
+                                if ((_currentModel.ModelName == "105K 33480") || (_currentModel.ModelName == "105K 33470"))
+                                {
+                                    quantity = _currentModel.QuantityHP;
+                                }
+                                else
+                                {
+                                    MessageBoxHelper.ShowMessageBoxError("Vui lòng kiểm tra lại Models!");
+                                    checkFujiHP.Checked = false;
+                                }
+                            }
+                            else
+                            {
+                                quantity = _currentModel.Quantity;
+                            }
+
+
+                            lblQuantityModel.Text = $"/{quantity}";
 
                             if (!string.IsNullOrEmpty(po_no))
                             {
@@ -682,55 +768,7 @@ namespace BarcodeShipping.GUI
             }
         }
         #region Control validate
-        
-
-        /// <summary>
-        /// PO
-        /// </summary>
-        private void EditTextPO_PreviewKeyDown()
-        {
-            if (string.IsNullOrEmpty(txtPO.Text))
-            {
-                Ultils.TextControlNotNull(txtPO, "PO");
-            }
-            else
-            {
-                string strPo = txtPO.Text;
-                int index = strPo.IndexOf(' ');
-                string removePo = index >= 0 ? strPo.Remove(index) : txtPO.Text;
-                if(strPo.Contains(" "))
-                {
-                    string[] input = strPo.Split(separator: new[] { " " }, count: 4, options: StringSplitOptions.None);
-                    string po_no = input[0];
-                    string remains = input[1];
-
-                    if (po_no.Length >= 3)
-                    {
-                        if (po_no.Substring(0, 3).ToUpper() != "3N3")
-                        {
-                            Ultils.EditTextErrorMessage(txtPO, "PO phải bắt đầu bằng 3N3");
-                            txtPO.SelectAll();
-                        }
-                        else
-                        {
-                            txtPO.Text = po_no;
-                            lblQtyPO.Text = remains;
-                            quantityPO = Convert.ToInt32(remains);
-                            txtModel.Focus();
-                        }
-                    }
-                    else
-                    {
-                        Ultils.EditTextErrorMessage(txtPO, "PO NO không đúng!");
-                    }
-                }
-                else
-                {
-                    Ultils.EditTextErrorMessage(txtPO, "PO NO không đúng định dạng!");
-                }
-                
-            }
-        }
+       
 
         /// <summary>
         /// BOX

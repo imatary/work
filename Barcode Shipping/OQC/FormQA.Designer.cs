@@ -30,8 +30,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormQA));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.tableLayoutPanelModel = new System.Windows.Forms.TableLayoutPanel();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -42,19 +42,20 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
-            this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
-            this.checkNG = new DevExpress.XtraEditors.CheckEdit();
-            this.checkPASS = new DevExpress.XtraEditors.CheckEdit();
-            this.lblJudge = new DevExpress.XtraEditors.LabelControl();
             this.lblOperatorName = new DevExpress.XtraEditors.LabelControl();
             this.lblLineID = new DevExpress.XtraEditors.LabelControl();
-            this.lblProductionID = new DevExpress.XtraEditors.LabelControl();
             this.txtMacAddress = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.lblBoxID = new DevExpress.XtraEditors.LabelControl();
             this.txtProductionID = new DevExpress.XtraEditors.ButtonEdit();
+            this.lblProductionID = new DevExpress.XtraEditors.LabelControl();
+            this.lblJudge = new DevExpress.XtraEditors.LabelControl();
+            this.lblBoxID = new DevExpress.XtraEditors.LabelControl();
             this.txtBoxID = new DevExpress.XtraEditors.ButtonEdit();
+            this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
+            this.checkNG = new DevExpress.XtraEditors.CheckEdit();
+            this.checkPASS = new DevExpress.XtraEditors.CheckEdit();
+            this.checkFujiHP = new DevExpress.XtraEditors.CheckEdit();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -93,14 +94,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
-            this.panelControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkNG.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkPASS.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
+            this.panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkNG.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkPASS.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkFujiHP.Properties)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -247,17 +249,17 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.29491F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.70509F));
-            this.tableLayoutPanel2.Controls.Add(this.checkEdit1, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.panelControl4, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.lblJudge, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.lblOperatorName, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblLineID, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblProductionID, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.txtMacAddress, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.labelControl1, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblBoxID, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.txtProductionID, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.txtProductionID, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.lblProductionID, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.lblJudge, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.lblBoxID, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.panelControl4, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.checkFujiHP, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -271,78 +273,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(373, 230);
             this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // checkEdit1
-            // 
-            this.checkEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkEdit1.EditValue = true;
-            this.checkEdit1.Location = new System.Drawing.Point(116, 195);
-            this.checkEdit1.Name = "checkEdit1";
-            this.checkEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.checkEdit1.Properties.Appearance.Options.UseFont = true;
-            this.checkEdit1.Properties.Appearance.Options.UseForeColor = true;
-            this.checkEdit1.Properties.Caption = "Check Label on MES";
-            this.checkEdit1.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Style15;
-            this.checkEdit1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
-            this.checkEdit1.Size = new System.Drawing.Size(254, 32);
-            this.checkEdit1.TabIndex = 9;
-            // 
-            // panelControl4
-            // 
-            this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl4.Controls.Add(this.checkNG);
-            this.panelControl4.Controls.Add(this.checkPASS);
-            this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl4.Location = new System.Drawing.Point(116, 131);
-            this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(254, 26);
-            this.panelControl4.TabIndex = 23;
-            // 
-            // checkNG
-            // 
-            this.checkNG.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkNG.Dock = System.Windows.Forms.DockStyle.Left;
-            this.checkNG.Location = new System.Drawing.Point(116, 0);
-            this.checkNG.Name = "checkNG";
-            this.checkNG.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkNG.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.checkNG.Properties.Appearance.Options.UseFont = true;
-            this.checkNG.Properties.Appearance.Options.UseForeColor = true;
-            this.checkNG.Properties.Caption = "NG";
-            this.checkNG.Size = new System.Drawing.Size(138, 26);
-            this.checkNG.TabIndex = 1;
-            this.checkNG.CheckedChanged += new System.EventHandler(this.checkNG_CheckedChanged);
-            // 
-            // checkPASS
-            // 
-            this.checkPASS.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkPASS.Dock = System.Windows.Forms.DockStyle.Left;
-            this.checkPASS.EditValue = true;
-            this.checkPASS.Location = new System.Drawing.Point(0, 0);
-            this.checkPASS.Name = "checkPASS";
-            this.checkPASS.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkPASS.Properties.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkPASS.Properties.Appearance.Options.UseFont = true;
-            this.checkPASS.Properties.Appearance.Options.UseForeColor = true;
-            this.checkPASS.Properties.Caption = "OK";
-            this.checkPASS.Size = new System.Drawing.Size(116, 26);
-            this.checkPASS.TabIndex = 0;
-            this.checkPASS.CheckedChanged += new System.EventHandler(this.checkPASS_CheckedChanged);
-            // 
-            // lblJudge
-            // 
-            this.lblJudge.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJudge.Appearance.Options.UseFont = true;
-            this.lblJudge.Appearance.Options.UseTextOptions = true;
-            this.lblJudge.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblJudge.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblJudge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJudge.Location = new System.Drawing.Point(3, 131);
-            this.lblJudge.Name = "lblJudge";
-            this.lblJudge.Size = new System.Drawing.Size(107, 26);
-            this.lblJudge.TabIndex = 2;
-            this.lblJudge.Text = "Judge:";
             // 
             // lblOperatorName
             // 
@@ -369,20 +299,6 @@
             this.lblLineID.Size = new System.Drawing.Size(254, 26);
             this.lblLineID.TabIndex = 15;
             this.lblLineID.Text = "Line ID";
-            // 
-            // lblProductionID
-            // 
-            this.lblProductionID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductionID.Appearance.Options.UseFont = true;
-            this.lblProductionID.Appearance.Options.UseTextOptions = true;
-            this.lblProductionID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblProductionID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblProductionID.Location = new System.Drawing.Point(3, 163);
-            this.lblProductionID.Name = "lblProductionID";
-            this.lblProductionID.Size = new System.Drawing.Size(107, 26);
-            this.lblProductionID.TabIndex = 12;
-            this.lblProductionID.Text = "Label ID:";
             // 
             // txtMacAddress
             // 
@@ -416,30 +332,17 @@
             this.labelControl1.TabIndex = 16;
             this.labelControl1.Text = "MAC Address:";
             // 
-            // lblBoxID
-            // 
-            this.lblBoxID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBoxID.Appearance.Options.UseFont = true;
-            this.lblBoxID.Appearance.Options.UseTextOptions = true;
-            this.lblBoxID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblBoxID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblBoxID.Location = new System.Drawing.Point(3, 99);
-            this.lblBoxID.Name = "lblBoxID";
-            this.lblBoxID.Size = new System.Drawing.Size(107, 26);
-            this.lblBoxID.TabIndex = 4;
-            this.lblBoxID.Text = "Box ID:";
-            // 
             // txtProductionID
             // 
             this.txtProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProductionID.Location = new System.Drawing.Point(116, 163);
+            this.txtProductionID.Location = new System.Drawing.Point(116, 195);
             this.txtProductionID.Name = "txtProductionID";
             this.txtProductionID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.txtProductionID.Properties.Appearance.Options.UseFont = true;
             this.txtProductionID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions1.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions1.Image")));
             this.txtProductionID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtProductionID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, editorButtonImageOptions1)});
             this.txtProductionID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtProductionID.Properties.NullValuePrompt = "Production ID";
             this.txtProductionID.Properties.NullValuePromptShowForEmptyValue = true;
@@ -449,16 +352,61 @@
             this.txtProductionID.EditValueChanged += new System.EventHandler(this.txtProductionID_EditValueChanged);
             this.txtProductionID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtProductionID_PreviewKeyDown);
             // 
+            // lblProductionID
+            // 
+            this.lblProductionID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductionID.Appearance.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblProductionID.Appearance.Options.UseFont = true;
+            this.lblProductionID.Appearance.Options.UseImageAlign = true;
+            this.lblProductionID.Appearance.Options.UseTextOptions = true;
+            this.lblProductionID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblProductionID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblProductionID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblProductionID.Location = new System.Drawing.Point(3, 195);
+            this.lblProductionID.Name = "lblProductionID";
+            this.lblProductionID.Size = new System.Drawing.Size(107, 32);
+            this.lblProductionID.TabIndex = 12;
+            this.lblProductionID.Text = "Barcode:";
+            // 
+            // lblJudge
+            // 
+            this.lblJudge.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJudge.Appearance.Options.UseFont = true;
+            this.lblJudge.Appearance.Options.UseTextOptions = true;
+            this.lblJudge.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblJudge.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblJudge.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJudge.Location = new System.Drawing.Point(3, 163);
+            this.lblJudge.Name = "lblJudge";
+            this.lblJudge.Size = new System.Drawing.Size(107, 26);
+            this.lblJudge.TabIndex = 2;
+            this.lblJudge.Text = "Judge:";
+            // 
+            // lblBoxID
+            // 
+            this.lblBoxID.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBoxID.Appearance.Options.UseFont = true;
+            this.lblBoxID.Appearance.Options.UseTextOptions = true;
+            this.lblBoxID.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblBoxID.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBoxID.Location = new System.Drawing.Point(3, 131);
+            this.lblBoxID.Name = "lblBoxID";
+            this.lblBoxID.Size = new System.Drawing.Size(107, 26);
+            this.lblBoxID.TabIndex = 4;
+            this.lblBoxID.Text = "Box ID:";
+            // 
             // txtBoxID
             // 
             this.txtBoxID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBoxID.Location = new System.Drawing.Point(116, 99);
+            this.txtBoxID.Location = new System.Drawing.Point(116, 131);
             this.txtBoxID.Name = "txtBoxID";
             this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxID.Properties.Appearance.Options.UseFont = true;
             this.txtBoxID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions2.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions2.Image")));
             this.txtBoxID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBoxID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, editorButtonImageOptions2)});
             this.txtBoxID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBoxID.Properties.NullValuePrompt = "Box ID";
             this.txtBoxID.Properties.NullValuePromptShowForEmptyValue = true;
@@ -467,6 +415,79 @@
             this.txtBoxID.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtBoxID_ButtonPressed);
             this.txtBoxID.EditValueChanged += new System.EventHandler(this.txtBoxID_EditValueChanged);
             this.txtBoxID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBoxID_PreviewKeyDown);
+            // 
+            // panelControl4
+            // 
+            this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl4.Controls.Add(this.checkEdit1);
+            this.panelControl4.Controls.Add(this.checkNG);
+            this.panelControl4.Controls.Add(this.checkPASS);
+            this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl4.Location = new System.Drawing.Point(116, 163);
+            this.panelControl4.Name = "panelControl4";
+            this.panelControl4.Size = new System.Drawing.Size(254, 26);
+            this.panelControl4.TabIndex = 23;
+            // 
+            // checkEdit1
+            // 
+            this.checkEdit1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkEdit1.EditValue = true;
+            this.checkEdit1.Location = new System.Drawing.Point(101, 0);
+            this.checkEdit1.Name = "checkEdit1";
+            this.checkEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.checkEdit1.Properties.Appearance.Options.UseFont = true;
+            this.checkEdit1.Properties.Appearance.Options.UseForeColor = true;
+            this.checkEdit1.Properties.Caption = "Check Label on MES";
+            this.checkEdit1.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Style15;
+            this.checkEdit1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
+            this.checkEdit1.Size = new System.Drawing.Size(153, 26);
+            this.checkEdit1.TabIndex = 9;
+            // 
+            // checkNG
+            // 
+            this.checkNG.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkNG.Dock = System.Windows.Forms.DockStyle.Left;
+            this.checkNG.Location = new System.Drawing.Point(51, 0);
+            this.checkNG.Name = "checkNG";
+            this.checkNG.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkNG.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.checkNG.Properties.Appearance.Options.UseFont = true;
+            this.checkNG.Properties.Appearance.Options.UseForeColor = true;
+            this.checkNG.Properties.Caption = "NG";
+            this.checkNG.Size = new System.Drawing.Size(50, 26);
+            this.checkNG.TabIndex = 1;
+            this.checkNG.CheckedChanged += new System.EventHandler(this.checkNG_CheckedChanged);
+            // 
+            // checkPASS
+            // 
+            this.checkPASS.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkPASS.Dock = System.Windows.Forms.DockStyle.Left;
+            this.checkPASS.EditValue = true;
+            this.checkPASS.Location = new System.Drawing.Point(0, 0);
+            this.checkPASS.Name = "checkPASS";
+            this.checkPASS.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkPASS.Properties.Appearance.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkPASS.Properties.Appearance.Options.UseFont = true;
+            this.checkPASS.Properties.Appearance.Options.UseForeColor = true;
+            this.checkPASS.Properties.Caption = "OK";
+            this.checkPASS.Size = new System.Drawing.Size(51, 26);
+            this.checkPASS.TabIndex = 0;
+            this.checkPASS.CheckedChanged += new System.EventHandler(this.checkPASS_CheckedChanged);
+            // 
+            // checkFujiHP
+            // 
+            this.checkFujiHP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkFujiHP.Location = new System.Drawing.Point(116, 99);
+            this.checkFujiHP.Name = "checkFujiHP";
+            this.checkFujiHP.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.checkFujiHP.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.checkFujiHP.Properties.Appearance.Options.UseFont = true;
+            this.checkFujiHP.Properties.Appearance.Options.UseForeColor = true;
+            this.checkFujiHP.Properties.Caption = "Xuất hàng FujiXerox Hải Phòng";
+            this.checkFujiHP.Size = new System.Drawing.Size(254, 26);
+            this.checkFujiHP.TabIndex = 24;
+            this.checkFujiHP.CheckedChanged += new System.EventHandler(this.checkFujiHP_CheckedChanged);
             // 
             // tableLayoutPanel3
             // 
@@ -699,7 +720,7 @@
             // 
             this.btnReset.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReset.Appearance.Options.UseFont = true;
-            this.btnReset.Image = ((System.Drawing.Image)(resources.GetObject("btnReset.Image")));
+            this.btnReset.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnReset.ImageOptions.Image")));
             this.btnReset.Location = new System.Drawing.Point(454, 5);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 31);
@@ -711,7 +732,7 @@
             // 
             this.btnSearchPCB.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearchPCB.Appearance.Options.UseFont = true;
-            this.btnSearchPCB.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchPCB.Image")));
+            this.btnSearchPCB.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchPCB.ImageOptions.Image")));
             this.btnSearchPCB.Location = new System.Drawing.Point(349, 6);
             this.btnSearchPCB.Name = "btnSearchPCB";
             this.btnSearchPCB.Size = new System.Drawing.Size(99, 30);
@@ -723,7 +744,7 @@
             // 
             this.btnLogOut.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogOut.Appearance.Options.UseFont = true;
-            this.btnLogOut.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.Image")));
+            this.btnLogOut.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.ImageOptions.Image")));
             this.btnLogOut.Location = new System.Drawing.Point(258, 6);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(85, 30);
@@ -883,14 +904,15 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
-            this.panelControl4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.checkNG.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkPASS.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMacAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
+            this.panelControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkNG.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkPASS.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkFujiHP.Properties)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -965,5 +987,6 @@
         private DevExpress.XtraEditors.LabelControl lblStatusMessage;
         private DevExpress.XtraEditors.LabelControl lblStatus;
         private DevExpress.XtraEditors.SimpleButton btnReset;
+        private DevExpress.XtraEditors.CheckEdit checkFujiHP;
     }
 }

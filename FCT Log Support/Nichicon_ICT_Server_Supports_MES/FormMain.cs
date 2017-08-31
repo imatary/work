@@ -21,8 +21,9 @@ namespace Nichicon_ICT_Server_Supports_MES
         string stationNo = "", fileExtension = "", inputLog = "", outputLog = "", serial = "";
         string fileLastWriteTime = "", dateCheck = "", boardNo = "", productId = "", boardState = "";
         string strIP = "", strPort = "", processName = "";
+        string[] messageOK = null, messageNG = null;
         bool startWatching = false, RunTaks = false, checkLength = false, skipWaitLogs = false;
-        int pass = 0, ng = 0, total = 0;
+        int pass = 0, ng = 0, total = 0, barcodeLength = 10;
         FileSystemWatcher fileWatcher;
 
         public FormMain()
@@ -34,41 +35,21 @@ namespace Nichicon_ICT_Server_Supports_MES
             lblVersion.Text = Ultils.GetRunningVersion();
             lblReset.Enabled = false;
         }
-        //public bool ControlInvokeRequired(Control c, Action a)
-        //{
-        //    if (c.InvokeRequired)
-        //        c.Invoke(new MethodInvoker(delegate { a(); }));
-        //    else
-        //        return false;
-
-        //    return true;
-        //}
 
         private void UpdateControls(bool listening)
         {
             btnStart.Enabled = !listening;
             btnStop.Enabled = listening;
         }
-        // This is the call back function, which will be invoked when a client is connected
         public void OnClientConnect(IAsyncResult asyn)
         {
             try
             {
-                // Here we complete/end the BeginAccept() asynchronous call
-                // by calling EndAccept() - which returns the reference to
-                // a new Socket object
                 m_workerSocket[m_clientCount] = m_mainSocket.EndAccept(asyn);
-                // Let the worker Socket do the further processing for the 
-                // just connected client
                 WaitForData(m_workerSocket[m_clientCount]);
-                // Now increment the client count
                 ++m_clientCount;
-                // Display this client connection as a status message on the GUI	
                 String client = String.Format("Client # {0} connected", m_clientCount);
                 lblClientConnected.Text = client;
-
-                // Since the main Socket is now free, it can go back and wait for
-                // other clients who are attempting to connect
                 m_mainSocket.BeginAccept(new AsyncCallback(OnClientConnect), null);
             }
             catch (ObjectDisposedException)
@@ -77,8 +58,6 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
             catch (SocketException se)
             {
-                //ThreadHelper.SetText(this, textBox1, "This text was set safely.");
-
                 ErrorMessage("NG", se.Message);
             }
         }
@@ -88,21 +67,20 @@ namespace Nichicon_ICT_Server_Supports_MES
             public byte[] dataBuffer = new byte[1];
         }
         // Start waiting for data from the client
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="soc"></param>
         public void WaitForData(Socket soc)
         {
             try
             {
                 if (pfnWorkerCallBack == null)
                 {
-                    // Specify the call back function which is to be 
-                    // invoked when there is any write activity by the 
-                    // connected client
                     pfnWorkerCallBack = new AsyncCallback(OnDataReceived);
                 }
                 SocketPacket theSocPkt = new SocketPacket();
                 theSocPkt.m_currentSocket = soc;
-                // Start receiving any data written by the connected client
-                // asynchronously
                 soc.BeginReceive(theSocPkt.dataBuffer, 0,
                                    theSocPkt.dataBuffer.Length,
                                    SocketFlags.None,
@@ -117,6 +95,10 @@ namespace Nichicon_ICT_Server_Supports_MES
         }
         // This the call back function which will be invoked when the socket
         // detects any client writing of data on the stream
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="asyn"></param>
         public void OnDataReceived(IAsyncResult asyn)
         {
             try
@@ -124,9 +106,6 @@ namespace Nichicon_ICT_Server_Supports_MES
                 SocketPacket socketData = (SocketPacket)asyn.AsyncState;
 
                 int iRx = 0;
-                // Complete the BeginReceive() asynchronous call by EndReceive() method
-                // which will return the number of characters written to the stream 
-                // by the client
                 iRx = socketData.m_currentSocket.EndReceive(asyn);
                 char[] chars = new char[iRx + 1];
                 Decoder d = Encoding.UTF8.GetDecoder();
@@ -138,8 +117,6 @@ namespace Nichicon_ICT_Server_Supports_MES
                 {
                     checkLength = true;
                 }
-
-                // Continue the waiting for data on the Socket
                 WaitForData(socketData.m_currentSocket);
             }
             catch (ObjectDisposedException)
@@ -152,6 +129,9 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         void CloseSockets()
         {
             if (m_mainSocket != null)
@@ -166,6 +146,7 @@ namespace Nichicon_ICT_Server_Supports_MES
                     m_workerSocket[i] = null;
                 }
             }
+            m_clientCount = 0;
         }
 
         /// <summary>
@@ -210,6 +191,7 @@ namespace Nichicon_ICT_Server_Supports_MES
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            
         }
 
         /// <summary>
@@ -217,19 +199,83 @@ namespace Nichicon_ICT_Server_Supports_MES
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private string GetState(string path)
+        private string GetStateBoardOne(string path)
         {
             string state = "";
-            string content = Ultils.GetLine(path, 1);
-            string[] array = content.Split(',');
-            string value = array[9];
-            if (value == "CP=OK")
+            string content = null;
+            string value = "";
+            if (fileExtension == "*.LOG")
             {
-                state = "P";
+                content = Ultils.GetLine(path, 2);
+                string[] array = content.Split(',');
+                value = array[1];
+                value = Regex.Replace(value, "[^A-Za-z0-9]", "");
+
+                if (value == "GO")
+                {
+                    state = "P";
+                }
+                if (value == "NG")
+                {
+                    state = "F";
+                }
             }
-            else if (value == "CP=NG")
+            if (fileExtension == "*.DAT")
             {
-                state = "F";
+                content = Ultils.GetLine(path, 1);
+                string[] array = content.Split(',');
+                value = array[9];
+                if (value == "CP=OK")
+                {
+                    state = "P";
+                }
+                if (value == "CP=NG")
+                {
+                    state = "F";
+                }
+            }
+            return state;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private string GetStateBoardTwo(string path)
+        {
+            string state = "";
+            string content = null;
+            string value = "";
+            if (fileExtension == "*.LOG")
+            {
+                content = Ultils.GetLine(path, 2);
+                string[] array = content.Split(',');
+                value = array[1];
+                value = Regex.Replace(value, "[^A-Za-z0-9]", "");
+
+                if (value == "GO")
+                {
+                    state = "P";
+                }
+                if (value == "NG")
+                {
+                    state = "F";
+                }
+            }
+            if (fileExtension == "*.DAT")
+            {
+                content = Ultils.GetLine(path, 199);
+                string[] array = content.Split(',');
+                value = array[9];
+                if (value == "CP=OK")
+                {
+                    state = "P";
+                }
+                if (value == "CP=NG")
+                {
+                    state = "F";
+                }
             }
             return state;
         }
@@ -242,10 +288,22 @@ namespace Nichicon_ICT_Server_Supports_MES
         private string ModelName(string path)
         {
             string value = "";
-            string content = Ultils.GetLine(path, 1);
-            string[] array = content.Split(',');
-            value = array[1];
-            value = Regex.Replace(value, "[^A-Za-z0-9]", "");
+            string content = null;
+            if(fileExtension == "*.LOG")
+            {
+                content = Ultils.GetLine(path, 2);
+                string[] array = content.Split(',');
+                value = array[0];
+                value = Regex.Replace(value, "[^A-Za-z0-9]", "");
+            }
+            if(fileExtension == "*.DAT")
+            {
+                content = Ultils.GetLine(path, 1);
+                string[] array = content.Split(',');
+                value = array[1];
+                value = Regex.Replace(value, "[^A-Za-z0-9]", "");
+            }
+            
             if (value != "")
             {
                 if (value.Contains("-"))
@@ -284,15 +342,61 @@ namespace Nichicon_ICT_Server_Supports_MES
 
         private void cboCheckSheet_CheckedChanged(object sender, EventArgs e)
         {
-            if (cboCheckSheet.Checked == true)
+            //if(panelBarcode2.Visible == true)
+            //{
+            //    if (cboCheckTwoPcs.Checked == true)
+            //    {
+            //        panelBarcode2.Visible = true;
+            //    }
+            //    else
+            //    {
+            //        panelBarcode2.Visible = false;
+
+            //    }
+            //    txtBarcode.ResetText();
+            //    txtBarcode.Focus();
+            //}
+        }
+
+        private void lblConfigs_Click(object sender, EventArgs e)
+        {
+            new FormConfig().ShowDialog();
+            BinDataToControls();
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string data = string.Empty;
+            int indexOfYourColumn = 4;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                panelBarcode2.Visible = true;
-                txtBarcode.ResetText();
-                txtBarcode.Focus();
+                data = row.Cells[indexOfYourColumn].Value.ToString();
+                if (data == "F")
+                {
+                    row.DefaultCellStyle.BackColor = Color.Red;
+                    row.DefaultCellStyle.ForeColor = Color.White;
+                    row.Selected = true;
+                }
+                if(data== "P")
+                {
+                    row.DefaultCellStyle.BackColor = Color.Green;
+                    row.DefaultCellStyle.ForeColor = Color.White;
+                }
             }
-            else
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            byte[] byData = Encoding.ASCII.GetBytes("StopWork");
+            for (int i = 0; i < m_clientCount; i++)
             {
-                panelBarcode2.Visible = false;
+                if (m_workerSocket[i] != null)
+                {
+                    if (m_workerSocket[i].Connected)
+                    {
+                        m_workerSocket[i].Send(byData);
+                    }
+                }
             }
         }
 
@@ -311,76 +415,94 @@ namespace Nichicon_ICT_Server_Supports_MES
             {
                 if (RunTaks)
                 {
-                    if(boardNo!=null || boardNo != "")
+                    if (ModelName(fileLastWriteTime).Substring(0, productId.Length) == productId)
                     {
-                        if (ModelName(fileLastWriteTime) == productId)
+                        boardState = GetStateBoardOne(fileLastWriteTime);
+                        List<Item> items = new List<Item>();
+
+                        Item item = new Item()
                         {
-                            boardState = GetState(fileLastWriteTime);
-                            List<Item> items = new List<Item>();
-                            Ultils.CreateFileLog(productId, boardNo, boardState, stationNo, dateCheck);
-                            Item item = new Item()
+                            BoardNo = boardNo,
+                            ProductId = productId,
+                            Date = DateTime.Now.ToShortDateString(),
+                            Time = DateTime.Now.ToShortTimeString(),
+                            State = boardState,
+                        };
+                        items.Add(item);
+
+                        if (cboCheckTwoPcs.Checked == true)
+                        {
+                            string boardState2 = GetStateBoardTwo(fileLastWriteTime);
+                            Item item2 = new Item()
                             {
-                                BoardNo = boardNo,
+                                BoardNo = txtBarcode2.Text,
                                 ProductId = productId,
                                 Date = DateTime.Now.ToShortDateString(),
                                 Time = DateTime.Now.ToShortTimeString(),
-                                State = boardState,
+                                State = boardState2,
                             };
 
-                            items.Add(item);
-                            dataGridView1.AutoGenerateColumns = false;
-                            dataGridView1.DataSource = items;
-                            if (boardState == "P")
-                            {
-                                ActiveWindows(Text);
-                                //this.TopMost = true;
-                                pass = pass + 1;
+                            items.Add(item2);
+                        }
 
-                                SuccessMessage("OK", $"Board [{boardNo}] OK!");
+                        dataGridView1.DataSource = items;
+
+                        string strOK = "", strNG = "";
+
+                        foreach (var itemW in items)
+                        {
+                            Ultils.CreateFileLog(itemW.ProductId, itemW.BoardNo, itemW.State, stationNo, dateCheck);
+                            if (itemW.State == "P")
+                            {
+                                pass = pass + 1;
+                                strOK += $"Board [{itemW.BoardNo}] OK! \n";
 
                                 txtBarcode.Enabled = true;
-                                lblReset.Enabled = true;
                                 txtBarcode.ResetText();
+
+                                if (cboCheckTwoPcs.Checked == true)
+                                {
+                                    txtBarcode2.ResetText();
+                                    txtBarcode2.Enabled = true;
+                                }
                                 txtBarcode.Focus();
                             }
-                            if (boardState == "F")
+                            if (itemW.State == "F")
                             {
-                                ErrorMessage("NG", $"Board [{boardNo}] NG!");
-                                lblReset.Enabled = true;
                                 ng = ng + 1;
+                                strNG += $"Board [{itemW.BoardNo}] NG! \n";
                             }
-                            //
-                            total = pass + ng;
-                            lblPASS.Text = pass.ToString();
-                            lblNG.Text = ng.ToString();
-                            lblTOTAL.Text = total.ToString();
                         }
-                        else
-                        {
-                            ActiveWindows(Text);
-                            //this.TopMost = true;
-                            ErrorMessage("NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác!" +
-                                $"\nModel: {ModelName(fileLastWriteTime)}" +
-                                $"\nBoard No: {boardNo}");
 
-                            txtBarcode.Enabled = true;
-                            txtBarcode.ResetText();
-                            txtBarcode.Focus();
-                            checkLength = false;
-                            serial = "";
-                        }
+                        if (strOK != "")
+                            SuccessMessage("OK", strOK);
+
+                        if (strNG != "")
+                            ErrorMessage("NG", strNG);
+
+                        
+
+                        lblReset.Enabled = true;
+                        total = pass + ng;
+                        lblPASS.Text = pass.ToString();
+                        lblNG.Text = ng.ToString();
+                        lblTOTAL.Text = total.ToString(); 
                     }
                     else
                     {
-                        ActiveWindows(Text);
-                        //this.TopMost = true;
-                        ErrorMessage("NG", $" Vui lòng bắn vào Serial!");
+                        ErrorMessage("NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác!" +
+                            $"\nModel: {ModelName(fileLastWriteTime)}" +
+                            $"\nBoard No: {boardNo}");
 
                         txtBarcode.Enabled = true;
+                        txtBarcode.ResetText();
                         txtBarcode.Focus();
                         checkLength = false;
                         serial = "";
                     }
+
+                    // TopMode this form
+                    ActiveWindows(Text);
                     RunTaks = false;
                 }
             }
@@ -389,22 +511,37 @@ namespace Nichicon_ICT_Server_Supports_MES
         private void cboModels_SelectedIndexChanged(object sender, EventArgs e)
         {
             productId = cboModels.Text;
-            lblReload_Click(sender, e);
-            if (cboCheckSheet.Visible == true)
+
+            if(productId == "ZSBAF19IA")
             {
-                cboCheckSheet.Visible = false;
-            }
-            else
-            {
-                cboCheckSheet.Visible = true;
-            }
+                if (cboCheckTwoPcs.Enabled == true)
+                {
+                    cboCheckTwoPcs.Enabled = false;
+                }
+                else
+                {
+                    cboCheckTwoPcs.Checked = true;
+                    cboCheckTwoPcs.Enabled = true;
+                }
+            } 
         }
 
         private void lblReset_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             boardNo = "";
-            txtBarcode.Enabled = true;
-            txtBarcode.ResetText();
+            if (cboCheckTwoPcs.Checked == false)
+            {
+                txtBarcode.Enabled = true;
+                txtBarcode.ResetText();
+                
+            }
+            else
+            {
+                txtBarcode.ResetText();
+                txtBarcode2.ResetText();
+                txtBarcode.Enabled = true;
+                txtBarcode2.Enabled = true;
+            }
             txtBarcode.Focus();
         }
 
@@ -448,15 +585,25 @@ namespace Nichicon_ICT_Server_Supports_MES
                     m_mainSocket.BeginAccept(new AsyncCallback(OnClientConnect), null);
 
                     UpdateControls(true);
-                    panelBarcode.Visible = true;
                     txtBarcode.Focus();
                     cboModels.Enabled = false;
                     lblReload.Enabled = false;
                     lblAddModel.Enabled = false;
-
+                    lblConfigs.Enabled = false;
                     lblRefesh.Enabled = false;
+
                     lblReset.Enabled = true;
 
+                    if(cboCheckTwoPcs.Checked == true)
+                    {
+                        panelBarcode.Visible = true;
+                        panelBarcode2.Visible = true;
+                        txtBarcode.Focus();
+                    }
+                    else
+                    {
+                        panelBarcode.Visible = true;
+                    }
                     if (startWatching == false)
                     {
                         startWatching = true;
@@ -490,11 +637,30 @@ namespace Nichicon_ICT_Server_Supports_MES
         }
         private void btnStop_Click(object sender, EventArgs e)
         {
+            // Gửi sang client trạng thái Stop
+            byte[] byData = Encoding.ASCII.GetBytes("StopWork");
+            for (int i = 0; i < m_clientCount; i++)
+            {
+                if (m_workerSocket[i] != null)
+                {
+                    if (m_workerSocket[i].Connected)
+                    {
+                        m_workerSocket[i].Send(byData);
+                    }
+                }
+            }
+
             if (startWatching == true)
             {
                 startWatching = false;
                 fileWatcher.EnableRaisingEvents = false;
                 fileWatcher.Dispose();
+            }
+
+            if (cboCheckTwoPcs.Checked == true)
+            {
+                cboCheckTwoPcs.Checked = false;
+                cboCheckTwoPcs.Enabled = false;
             }
 
             DefaultMessage();
@@ -503,11 +669,22 @@ namespace Nichicon_ICT_Server_Supports_MES
             panelBarcode.Visible = false;
             panelBarcode2.Visible = false;
 
+            lblConfigs.Enabled = true;
             cboModels.Enabled = true;
             lblReload.Enabled = true;
             lblAddModel.Enabled = true;
             lblRefesh.Enabled = true;
             lblReset.Enabled = false;
+            
+
+            cboModels.SelectedIndex = -1;
+
+            lblClientConnected.Text = "| no client connect";
+
+            txtBarcode2.Enabled = true;
+            txtBarcode2.ResetText();
+
+            txtBarcode.Enabled = true;
             txtBarcode.ResetText();
         }
 
@@ -521,17 +698,13 @@ namespace Nichicon_ICT_Server_Supports_MES
                     try
                     {
                         boardNo = txtBarcode.Text.Trim();
-                        if (boardNo != null || boardNo != "")
+                        if (boardNo != null && boardNo.Length >= 10)
                         {
                             productId = cboModels.Text;
                             dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
                             txtBarcode.Enabled = false;
                             lblReset.Enabled = true;
-
-                            //this.TopMost = false;
-                            ActiveProcess(processName);
-                            dataGridView1.DataSource = null;
-
+                            //dataGridView1.DataSource = null;
                             byte[] byData = Encoding.ASCII.GetBytes(boardNo);
                             for (int i = 0; i < m_clientCount; i++)
                             {
@@ -543,6 +716,19 @@ namespace Nichicon_ICT_Server_Supports_MES
                                     }
                                 }
                             }
+
+                            if (cboCheckTwoPcs.Checked == false)
+                            {
+                                ActiveProcess(processName);
+                            }
+                            else
+                            {
+                                txtBarcode.Enabled = false;
+
+                                txtBarcode2.ResetText();
+                                txtBarcode2.Focus();
+                            }
+                            
                         }
                         else
                         {
@@ -566,8 +752,40 @@ namespace Nichicon_ICT_Server_Supports_MES
                         txtBarcode.Focus();
                     }
                 }
-                
             }
+        }
+
+        private void txtBarcode2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (cboCheckTwoPcs.Checked == true)
+                {
+                    string barcode2 = txtBarcode2.Text.Trim();
+                    if(barcode2 != "" && barcode2.Length >= barcodeLength)
+                    {
+                        byte[] byData = Encoding.ASCII.GetBytes(barcode2);
+                        for (int i = 0; i < m_clientCount; i++)
+                        {
+                            if (m_workerSocket[i] != null)
+                            {
+                                if (m_workerSocket[i].Connected)
+                                {
+                                    m_workerSocket[i].Send(byData);
+                                }
+                            }
+                        }
+                        txtBarcode2.Enabled = false;
+                        ActiveProcess(processName);
+                    }
+                    else
+                    {
+                        ErrorMessage("NG", "Vui lòng bắn vào barcode");
+                        txtBarcode2.Focus();
+                    }
+                }
+            }
+            
         }
 
         /// <summary>
@@ -604,13 +822,14 @@ namespace Nichicon_ICT_Server_Supports_MES
         /// </summary>
         private void LoadModels()
         {
+            List<string> data = new List<string>();
             if (Ultils.GetValueRegistryKey("Models") != null)
             {
                 string[] models = Ultils.GetValueRegistryKey("Models").Split(';');
 
                 foreach (var item in models)
                 {
-                    cboModels.Items.Add(item);
+                    data.Add(item);
                 }
             }
             else
@@ -627,15 +846,18 @@ namespace Nichicon_ICT_Server_Supports_MES
                 "ZSFLC15HA",
                 "ZSFLD22IA",
                 "ZSFLE08IA",
-                "ZSFLE09IA"
+                "ZSFLE09IA",
+                "ZSBAF19IA"
                 };
 
                 foreach (var item in models)
                 {
-                    cboModels.Items.Add(item);
+                    data.Add(item);
                     Ultils.WriteRegistryArray("Models", item);
                 }
             }
+
+            cboModels.DataSource = data;
         }
         private void lblReload_Click(object sender, EventArgs e)
         {

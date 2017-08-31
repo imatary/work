@@ -39,7 +39,10 @@ namespace BarcodeShipping.Data
 
         public bool? CheckWidthModelCus { get; set; }
 
-        public string CodeMurata { get; set; }  
+        public string CodeMurata { get; set; }
+
+        public bool FujiHP { get; set; }
+        public int QuantityHP { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PackingPO> PackingPOes { get; set; }

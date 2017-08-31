@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -47,9 +50,10 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnStop = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cboCheckSheet = new System.Windows.Forms.CheckBox();
+            this.lblConfigs = new System.Windows.Forms.Label();
+            this.cboCheckTwoPcs = new System.Windows.Forms.CheckBox();
             this.panelBarcode2 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtBarcode2 = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblReset = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
@@ -75,8 +79,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblMessage = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.lblRefesh = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblRefesh = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -155,15 +159,17 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel1.Image = global::Nichicon_ICT_Server_Supports_MES.Properties.Resources._1471519853_malecostume;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(136, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(152, 19);
             this.toolStripStatusLabel1.Text = "Phạm Văn Cương | ";
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel2.Image = global::Nichicon_ICT_Server_Supports_MES.Properties.Resources._09_32;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(54, 19);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(70, 19);
             this.toolStripStatusLabel2.Text = "2998 | ";
             // 
             // toolStripStatusLabel5
@@ -239,7 +245,8 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.cboCheckSheet);
+            this.groupBox3.Controls.Add(this.lblConfigs);
+            this.groupBox3.Controls.Add(this.cboCheckTwoPcs);
             this.groupBox3.Controls.Add(this.panelBarcode2);
             this.groupBox3.Controls.Add(this.lblReset);
             this.groupBox3.Controls.Add(this.label8);
@@ -259,23 +266,35 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Results";
             // 
-            // cboCheckSheet
+            // lblConfigs
             // 
-            this.cboCheckSheet.AutoSize = true;
-            this.cboCheckSheet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboCheckSheet.Location = new System.Drawing.Point(319, 221);
-            this.cboCheckSheet.Name = "cboCheckSheet";
-            this.cboCheckSheet.Size = new System.Drawing.Size(97, 17);
-            this.cboCheckSheet.TabIndex = 24;
-            this.cboCheckSheet.Text = "Check sheet";
-            this.cboCheckSheet.UseVisualStyleBackColor = true;
-            this.cboCheckSheet.Visible = false;
-            this.cboCheckSheet.CheckedChanged += new System.EventHandler(this.cboCheckSheet_CheckedChanged);
+            this.lblConfigs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblConfigs.Image = global::Nichicon_ICT_Server_Supports_MES.Properties.Resources.tools_16;
+            this.lblConfigs.Location = new System.Drawing.Point(277, 137);
+            this.lblConfigs.Name = "lblConfigs";
+            this.lblConfigs.Size = new System.Drawing.Size(22, 23);
+            this.lblConfigs.TabIndex = 25;
+            this.lblConfigs.Click += new System.EventHandler(this.lblConfigs_Click);
+            // 
+            // cboCheckTwoPcs
+            // 
+            this.cboCheckTwoPcs.AutoCheck = false;
+            this.cboCheckTwoPcs.AutoSize = true;
+            this.cboCheckTwoPcs.Enabled = false;
+            this.cboCheckTwoPcs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboCheckTwoPcs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cboCheckTwoPcs.Location = new System.Drawing.Point(319, 221);
+            this.cboCheckTwoPcs.Name = "cboCheckTwoPcs";
+            this.cboCheckTwoPcs.Size = new System.Drawing.Size(118, 17);
+            this.cboCheckTwoPcs.TabIndex = 24;
+            this.cboCheckTwoPcs.Text = "Check log 2 pcs";
+            this.cboCheckTwoPcs.UseVisualStyleBackColor = true;
+            this.cboCheckTwoPcs.CheckedChanged += new System.EventHandler(this.cboCheckSheet_CheckedChanged);
             // 
             // panelBarcode2
             // 
             this.panelBarcode2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelBarcode2.Controls.Add(this.textBox2);
+            this.panelBarcode2.Controls.Add(this.txtBarcode2);
             this.panelBarcode2.Controls.Add(this.pictureBox3);
             this.panelBarcode2.Location = new System.Drawing.Point(6, 211);
             this.panelBarcode2.Name = "panelBarcode2";
@@ -284,16 +303,17 @@
             this.panelBarcode2.TabIndex = 17;
             this.panelBarcode2.Visible = false;
             // 
-            // textBox2
+            // txtBarcode2
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(37, 2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(223, 24);
-            this.textBox2.TabIndex = 16;
+            this.txtBarcode2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBarcode2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtBarcode2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBarcode2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBarcode2.Location = new System.Drawing.Point(37, 2);
+            this.txtBarcode2.Name = "txtBarcode2";
+            this.txtBarcode2.Size = new System.Drawing.Size(223, 24);
+            this.txtBarcode2.TabIndex = 16;
+            this.txtBarcode2.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBarcode2_PreviewKeyDown);
             // 
             // pictureBox3
             // 
@@ -361,6 +381,16 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.Silver;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colBoardNo,
@@ -368,13 +398,25 @@
             this.colDateCheck,
             this.colTimeCheck,
             this.colSate});
-            this.dataGridView1.Location = new System.Drawing.Point(7, 247);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 249);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 5;
-            this.dataGridView1.Size = new System.Drawing.Size(555, 66);
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(561, 66);
             this.dataGridView1.TabIndex = 18;
+            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
             // colBoardNo
             // 
@@ -407,7 +449,11 @@
             // 
             // colSate
             // 
+            this.colSate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colSate.DataPropertyName = "State";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colSate.DefaultCellStyle = dataGridViewCellStyle2;
             this.colSate.HeaderText = "SATE";
             this.colSate.Name = "colSate";
             this.colSate.ReadOnly = true;
@@ -583,6 +629,11 @@
             this.lblStatus.Text = "[N\\A]";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // lblRefesh
             // 
             this.lblRefesh.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -593,11 +644,6 @@
             this.lblRefesh.TabIndex = 16;
             this.lblRefesh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblRefesh.Click += new System.EventHandler(this.lblRefesh_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FormMain
             // 
@@ -616,6 +662,7 @@
             this.MinimizeBox = false;
             this.Name = "FormMain";
             this.Text = "ICT-Server";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -663,7 +710,6 @@
         private System.Windows.Forms.Panel panelBarcode;
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label lblRefesh;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -676,17 +722,19 @@
         private System.Windows.Forms.Label lblNG;
         private System.Windows.Forms.Label lblTOTAL;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.LinkLabel lblReset;
+        private System.Windows.Forms.ToolStripStatusLabel lblClientConnected;
+        private System.Windows.Forms.Panel panelBarcode2;
+        private System.Windows.Forms.TextBox txtBarcode2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.CheckBox cboCheckTwoPcs;
+        private System.Windows.Forms.Label lblConfigs;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBoardNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDateCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTimeCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSate;
-        private System.Windows.Forms.LinkLabel lblReset;
-        private System.Windows.Forms.ToolStripStatusLabel lblClientConnected;
-        private System.Windows.Forms.Panel panelBarcode2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.CheckBox cboCheckSheet;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

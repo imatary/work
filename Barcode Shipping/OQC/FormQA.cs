@@ -15,7 +15,10 @@ namespace OQC
         private readonly OQCService _oqcService;
         private readonly ModelService _modelService;
         private DateTime _dateTimeCheck;
+        int quantity = 0;
         string modelID = null;
+        private string FujiXerox = "FujiXerox";
+
         public FormQA()
         {
             _oqcService = new OQCService();
@@ -122,7 +125,6 @@ namespace OQC
                 }
                 else
                 {
-                    
                     if (productionId.Length <= 10)
                     {
                         SetErrorStatus("NG", $"Error!\nPCB không đúng định dạng!");
@@ -131,13 +133,31 @@ namespace OQC
                     }
                     else
                     {
-                        //var curentModel=_modelService.GetModelLikeName()
-                        foreach (var item in _modelService.GetModels())
+                        var models = _modelService.GetModels().Where(c => c.CustomerName == FujiXerox);
+
+                        foreach (var item in models)
                         {
                             if (productionId.Contains(item.ModelName.ToUpper()))
                             {
+                                if (checkFujiHP.Checked == true)
+                                {
+                                    if ((item.ModelName == "105K 33480") || (item.ModelName == "105K 33470"))
+                                    {
+                                        quantity = item.QuantityHP;
+                                    }
+                                    else
+                                    {
+                                        SetErrorStatus("NG", $"Vui lòng kiểm tra lại");
+                                        checkFujiHP.Checked = false;
+                                    } 
+                                }
+                                else
+                                {
+                                    quantity = item.Quantity;
+                                }
+                                
                                 lblQuantityModel.Visible = true;
-                                lblQuantityModel.Text = $"/{item.Quantity}";
+                                lblQuantityModel.Text = $"/{quantity}";
                                 tableLayoutPanelModel.Visible = true;
                                 lblCurentModel.Text = item.ModelName;
                                 lblSerialNo.Text = item.SerialNo;
@@ -263,6 +283,7 @@ namespace OQC
                                 {
                                     SetErrorStatus("NG", $"Box [{txtBoxID.Text}] đã đủ số lượng. Vui lòng kiểm tra lại!");
                                     Ultils.EditTextErrorNoMessage(txtBoxID);
+                                    checkFujiHP.Checked = false;
                                     txtBoxID.Enabled = true;
                                     txtBoxID.Focus();
                                     txtBoxID.ResetText();
@@ -357,7 +378,6 @@ namespace OQC
                             SetSuccessStatus("PASS", string.Format("Thêm thành công!\nPCB [{0}]", productionId));
                             txtProductionID.ResetText();
                             txtProductionID.Focus();
-                            //ResetControls();
                         }
                         catch (Exception ex)
                         {
@@ -581,6 +601,16 @@ namespace OQC
                 txtProductionID.ResetText();
                 txtProductionID.Focus();
             }  
+        }
+
+        private void checkFujiHP_CheckedChanged(object sender, EventArgs e)
+        {
+            if (txtBoxID.Enabled == false)
+            {
+                txtBoxID.Enabled = true;
+            }
+            txtBoxID.ResetText();
+            txtBoxID.Focus();
         }
     }
 }

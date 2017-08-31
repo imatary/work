@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationSkills", "EducationSkills\EducationSkills.csproj", "{ACF17574-CF19-4D3A-B6A7-FDFCC459BB1B}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PivotTable", "PivotTable\PivotTable.csproj", "{CB6956BF-FC93-4E33-8C5E-8330AF6DDBCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PivotTableForm", "PivotTableForm\PivotTableForm.csproj", "{5FE75533-276B-46BF-BF79-601AC9B35BDC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{81D0B63D-25A5-49DB-B65C-E24B54C59B8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{5FE75533-276B-46BF-BF79-601AC9B35BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FE75533-276B-46BF-BF79-601AC9B35BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FE75533-276B-46BF-BF79-601AC9B35BDC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81D0B63D-25A5-49DB-B65C-E24B54C59B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81D0B63D-25A5-49DB-B65C-E24B54C59B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81D0B63D-25A5-49DB-B65C-E24B54C59B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81D0B63D-25A5-49DB-B65C-E24B54C59B8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

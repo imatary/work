@@ -28,30 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormQALogin));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblOperatorID = new DevExpress.XtraEditors.LabelControl();
             this.lblLineID = new DevExpress.XtraEditors.LabelControl();
             this.lblOperationID = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtOperatorID = new DevExpress.XtraEditors.ButtonEdit();
             this.txtLineID = new DevExpress.XtraEditors.ButtonEdit();
             this.txtOperationID = new DevExpress.XtraEditors.ButtonEdit();
-            this.txtProcess = new DevExpress.XtraEditors.ButtonEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
-            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperatorID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLineID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperationID.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProcess.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,11 +71,9 @@
             this.tableLayoutPanel1.Controls.Add(this.lblOperatorID, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblLineID, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblOperationID, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelControl2, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtOperatorID, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtLineID, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtOperationID, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtProcess, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 19);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -133,20 +128,6 @@
             this.lblOperationID.TabIndex = 0;
             this.lblOperationID.Text = "Operation ID:";
             // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Appearance.Options.UseTextOptions = true;
-            this.labelControl2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.labelControl2.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl2.Location = new System.Drawing.Point(3, 92);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(92, 26);
-            this.labelControl2.TabIndex = 4;
-            this.labelControl2.Text = "Process:";
-            // 
             // txtOperatorID
             // 
             this.txtOperatorID.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -155,8 +136,10 @@
             this.txtOperatorID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
             this.txtOperatorID.Properties.Appearance.Options.UseFont = true;
             this.txtOperatorID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions1.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions1.Image")));
+            editorButtonImageOptions1.Location = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.txtOperatorID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtOperatorID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions1, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
             this.txtOperatorID.Properties.NullValuePrompt = "Operator ID";
             this.txtOperatorID.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtOperatorID.Size = new System.Drawing.Size(225, 26);
@@ -174,8 +157,9 @@
             this.txtLineID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
             this.txtLineID.Properties.Appearance.Options.UseFont = true;
             this.txtLineID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions2.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions2.Image")));
             this.txtLineID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtLineID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions2, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
             this.txtLineID.Properties.Mask.BeepOnError = true;
             this.txtLineID.Properties.Mask.EditMask = "d";
             this.txtLineID.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -196,8 +180,9 @@
             this.txtOperationID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
             this.txtOperationID.Properties.Appearance.Options.UseFont = true;
             this.txtOperationID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions3.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions3.Image")));
             this.txtOperationID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtOperationID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions3, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
             this.txtOperationID.Properties.Mask.EditMask = "d";
             this.txtOperationID.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtOperationID.Properties.NullValuePrompt = "Operation ID";
@@ -208,25 +193,6 @@
             this.txtOperationID.EditValueChanged += new System.EventHandler(this.txtOperationID_EditValueChanged);
             this.txtOperationID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtOperationID_PreviewKeyDown);
             this.txtOperationID.Validating += new System.ComponentModel.CancelEventHandler(this.txtOperationID_Validating);
-            // 
-            // txtProcess
-            // 
-            this.txtProcess.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProcess.Enabled = false;
-            this.txtProcess.Location = new System.Drawing.Point(101, 92);
-            this.txtProcess.Name = "txtProcess";
-            this.txtProcess.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F);
-            this.txtProcess.Properties.Appearance.Options.UseFont = true;
-            this.txtProcess.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.txtProcess.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtProcess.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
-            this.txtProcess.Properties.NullValuePrompt = "Process";
-            this.txtProcess.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtProcess.Size = new System.Drawing.Size(225, 26);
-            this.txtProcess.TabIndex = 5;
-            this.txtProcess.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtProcess_ButtonPressed);
-            this.txtProcess.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtProcess_PreviewKeyDown);
-            this.txtProcess.Validating += new System.ComponentModel.CancelEventHandler(this.txtProcess_Validating);
             // 
             // labelControl1
             // 
@@ -242,7 +208,7 @@
             // 
             this.btnLogin.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnLogin.Appearance.Options.UseFont = true;
-            this.btnLogin.Image = ((System.Drawing.Image)(resources.GetObject("btnLogin.Image")));
+            this.btnLogin.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLogin.ImageOptions.Image")));
             this.btnLogin.Location = new System.Drawing.Point(235, 211);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(110, 31);
@@ -276,7 +242,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtOperatorID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLineID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperationID.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProcess.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -292,11 +257,9 @@
         private DevExpress.XtraEditors.LabelControl lblOperatorID;
         private DevExpress.XtraEditors.LabelControl lblLineID;
         private DevExpress.XtraEditors.LabelControl lblOperationID;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
         private DevExpress.XtraEditors.ButtonEdit txtOperatorID;
         private DevExpress.XtraEditors.ButtonEdit txtLineID;
         private DevExpress.XtraEditors.ButtonEdit txtOperationID;
-        private DevExpress.XtraEditors.ButtonEdit txtProcess;
     }
 }

@@ -59,7 +59,7 @@ namespace EducationSkills.Modules
             }
             try
             {
-                var subjects = context.Database.SqlQuery<Subject>("EXEC [dbo].[sp_GetSubjectCodes]").ToList();
+                var subjects = context.Database.SqlQuery<Subject>("EXEC [dbo].[sp_GetSubjectCodes]").Where(c=>c.MaBoMon.Contains("EDU-")).ToList();
 
                 List<Staff> staffs = context.Database.SqlQuery<Staff>("EXEC [dbo].[sp_GetStaffs] @deptCode", parmDept).ToList();
 

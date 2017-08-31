@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMainV2));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions4 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions5 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -51,6 +51,7 @@
             this.txtPO = new DevExpress.XtraEditors.ButtonEdit();
             this.txtModel = new DevExpress.XtraEditors.ButtonEdit();
             this.txtBoxID = new DevExpress.XtraEditors.ButtonEdit();
+            this.checkFujiHP = new DevExpress.XtraEditors.CheckEdit();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -78,8 +79,6 @@
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.btnXuatLe = new DevExpress.XtraEditors.SimpleButton();
             this.btnVersionOld = new DevExpress.XtraEditors.SimpleButton();
-            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitLoadData), true, true, true);
-            this.splashScreenManager2 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitFormSaveData), true, true);
             this.gridControlData = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnCounter = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -91,6 +90,8 @@
             this.gridColumnPO_NO = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnDateCheck = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitLoadData), true, true);
+            this.splashScreenManager2 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::BarcodeShipping.GUI.WaitFormSaveData), true, true);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -102,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPO.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModel.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkFujiHP.Properties)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -186,6 +188,7 @@
             this.tableLayoutPanel2.Controls.Add(this.txtPO, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.txtModel, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.txtBoxID, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.checkFujiHP, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -311,8 +314,9 @@
             this.txtOperatorCode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtOperatorCode.Properties.Appearance.Options.UseFont = true;
             this.txtOperatorCode.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions1.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions1.Image")));
             this.txtOperatorCode.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtOperatorCode.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions1, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
             this.txtOperatorCode.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtOperatorCode.Properties.NullValuePrompt = "Enter the operator code";
             this.txtOperatorCode.Properties.NullValuePromptShowForEmptyValue = true;
@@ -329,8 +333,9 @@
             this.txtWorkingOrder.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtWorkingOrder.Properties.Appearance.Options.UseFont = true;
             this.txtWorkingOrder.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions2.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions2.Image")));
             this.txtWorkingOrder.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtWorkingOrder.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions2, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
             this.txtWorkingOrder.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtWorkingOrder.Properties.NullValuePrompt = "Enter the Working oder";
             this.txtWorkingOrder.Properties.NullValuePromptShowForEmptyValue = true;
@@ -347,8 +352,9 @@
             this.txtPO.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPO.Properties.Appearance.Options.UseFont = true;
             this.txtPO.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions3.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions3.Image")));
             this.txtPO.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtPO.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions3, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
             this.txtPO.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPO.Properties.NullValuePrompt = "Bắn vào PO";
             this.txtPO.Properties.NullValuePromptShowForEmptyValue = true;
@@ -366,8 +372,9 @@
             this.txtModel.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F);
             this.txtModel.Properties.Appearance.Options.UseFont = true;
             this.txtModel.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions4.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions4.Image")));
             this.txtModel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtModel.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions4, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
             this.txtModel.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtModel.Properties.NullValuePrompt = "Bắn vào Model";
             this.txtModel.Properties.NullValuePromptShowForEmptyValue = true;
@@ -385,8 +392,9 @@
             this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxID.Properties.Appearance.Options.UseFont = true;
             this.txtBoxID.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions5.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions5.Image")));
             this.txtBoxID.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtBoxID.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions5, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
             this.txtBoxID.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBoxID.Properties.NullValuePrompt = "Enter the Box id";
             this.txtBoxID.Properties.NullValuePromptShowForEmptyValue = true;
@@ -395,6 +403,19 @@
             this.txtBoxID.EditValueChanged += new System.EventHandler(this.txtBoxID_EditValueChanged);
             this.txtBoxID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtBoxID_PreviewKeyDown);
             this.txtBoxID.Validating += new System.ComponentModel.CancelEventHandler(this.txtBoxID_Validating);
+            // 
+            // checkFujiHP
+            // 
+            this.checkFujiHP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkFujiHP.Location = new System.Drawing.Point(156, 3);
+            this.checkFujiHP.Name = "checkFujiHP";
+            this.checkFujiHP.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.checkFujiHP.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.checkFujiHP.Properties.Appearance.Options.UseFont = true;
+            this.checkFujiHP.Properties.Appearance.Options.UseForeColor = true;
+            this.checkFujiHP.Properties.Caption = "Xuất hàng FujiXerox Hải Phòng";
+            this.checkFujiHP.Size = new System.Drawing.Size(268, 25);
+            this.checkFujiHP.TabIndex = 13;
             // 
             // tableLayoutPanel3
             // 
@@ -668,7 +689,7 @@
             this.btnSearch.Appearance.Font = new System.Drawing.Font("Tahoma", 8.5F, System.Drawing.FontStyle.Bold);
             this.btnSearch.Appearance.Options.UseFont = true;
             this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.ImageOptions.Image")));
             this.btnSearch.Location = new System.Drawing.Point(566, 3);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(134, 29);
@@ -681,7 +702,7 @@
             this.btnExportToExel.Appearance.Font = new System.Drawing.Font("Tahoma", 8.5F, System.Drawing.FontStyle.Bold);
             this.btnExportToExel.Appearance.Options.UseFont = true;
             this.btnExportToExel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExportToExel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.Image")));
+            this.btnExportToExel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.ImageOptions.Image")));
             this.btnExportToExel.Location = new System.Drawing.Point(447, 3);
             this.btnExportToExel.Name = "btnExportToExel";
             this.btnExportToExel.Size = new System.Drawing.Size(113, 29);
@@ -694,7 +715,7 @@
             this.btnExportCurrentBox.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnExportCurrentBox.Appearance.Options.UseFont = true;
             this.btnExportCurrentBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExportCurrentBox.Image = ((System.Drawing.Image)(resources.GetObject("btnExportCurrentBox.Image")));
+            this.btnExportCurrentBox.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportCurrentBox.ImageOptions.Image")));
             this.btnExportCurrentBox.Location = new System.Drawing.Point(304, 3);
             this.btnExportCurrentBox.Name = "btnExportCurrentBox";
             this.btnExportCurrentBox.Size = new System.Drawing.Size(137, 29);
@@ -707,7 +728,7 @@
             this.btnClear.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnClear.Appearance.Options.UseFont = true;
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
+            this.btnClear.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.ImageOptions.Image")));
             this.btnClear.Location = new System.Drawing.Point(226, 3);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(72, 29);
@@ -720,7 +741,7 @@
             this.btnXuatLe.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnXuatLe.Appearance.Options.UseFont = true;
             this.btnXuatLe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnXuatLe.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatLe.Image")));
+            this.btnXuatLe.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatLe.ImageOptions.Image")));
             this.btnXuatLe.Location = new System.Drawing.Point(120, 3);
             this.btnXuatLe.Name = "btnXuatLe";
             this.btnXuatLe.Size = new System.Drawing.Size(100, 29);
@@ -735,21 +756,13 @@
             this.btnVersionOld.Appearance.Options.UseFont = true;
             this.btnVersionOld.Appearance.Options.UseForeColor = true;
             this.btnVersionOld.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnVersionOld.Image = ((System.Drawing.Image)(resources.GetObject("btnVersionOld.Image")));
+            this.btnVersionOld.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnVersionOld.ImageOptions.Image")));
             this.btnVersionOld.Location = new System.Drawing.Point(3, 3);
             this.btnVersionOld.Name = "btnVersionOld";
             this.btnVersionOld.Size = new System.Drawing.Size(111, 29);
             this.btnVersionOld.TabIndex = 4;
             this.btnVersionOld.Text = "Form Cũ";
             this.btnVersionOld.Click += new System.EventHandler(this.btnVersionOld_Click);
-            // 
-            // splashScreenManager1
-            // 
-            this.splashScreenManager1.ClosingDelay = 500;
-            // 
-            // splashScreenManager2
-            // 
-            this.splashScreenManager2.ClosingDelay = 500;
             // 
             // gridControlData
             // 
@@ -911,6 +924,14 @@
             this.gridColumnDateCheck.VisibleIndex = 8;
             this.gridColumnDateCheck.Width = 100;
             // 
+            // splashScreenManager1
+            // 
+            this.splashScreenManager1.ClosingDelay = 500;
+            // 
+            // splashScreenManager2
+            // 
+            this.splashScreenManager2.ClosingDelay = 500;
+            // 
             // FormMainV2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -942,6 +963,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPO.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModel.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkFujiHP.Properties)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -1004,8 +1026,6 @@
         private DevExpress.XtraEditors.SimpleButton btnExportCurrentBox;
         private DevExpress.XtraEditors.SimpleButton btnXuatLe;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
-        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPO_NO;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnDateCheck;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnQuantity;
@@ -1023,6 +1043,9 @@
         private DevExpress.XtraEditors.ButtonEdit txtPO;
         private DevExpress.XtraEditors.ButtonEdit txtModel;
         private DevExpress.XtraEditors.ButtonEdit txtBoxID;
+        private DevExpress.XtraEditors.CheckEdit checkFujiHP;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager2;
     }
 }
 

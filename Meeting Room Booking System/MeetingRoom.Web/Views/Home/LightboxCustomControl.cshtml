@@ -80,7 +80,7 @@
                                 <td class="td-width-120">@Html.LabelFor(m => m.start_date, new {@class = "control-label float-right"})</td>
                                 <td>
                                     <div class="col-sm-12">
-                                        <div class="input-group form-group">
+                                        <div class="input-group form-group" id='datetimepicker2'>
                                             @Html.TextBoxFor(m => m.start_date, new {@class = "form-control", @placeholder = "Form"})
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-calendar"></i>
@@ -173,7 +173,17 @@
     <script language="javascript">
         function setFocusToTextBox() {
             document.getElementById("text").focus();
+
+            scheduler.config.lightbox.sections = [
+                { name: "description", height: 200, map_to: "text", type: "textarea", focus: true },
+                { name: "time", height: 72, type: "start_date", map_to: "auto" }
+            ];
         }
+        $(function () {
+            $('#datetimepicker2').datetimepicker({
+                locale: 'ru'
+            });
+        });
     </script>
 </body>
 </html>

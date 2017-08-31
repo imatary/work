@@ -43,10 +43,10 @@ namespace Lib.Core
         /// <param name="productionId"></param>
         /// <param name="status"></param>
         /// <param name="process"></param>
-        public static void CreateFileLog(string model, string productId, string status, string process, string dateCheck)
+        public static void CreateFileLog(string model, string productId, string status, string process, DateTime dateCheck)
         {
-            
-            string fileName = $"{dateCheck}_{productId}.txt";
+            string dateTime = dateCheck.ToString("yyMMddHHmmss");
+            string fileName = $"{dateTime}_{productId}.txt";
             string folderRoot = @"C:\LOGPROCESS\";
 
             bool exists = Directory.Exists(folderRoot);
@@ -59,7 +59,7 @@ namespace Lib.Core
                 File.Create(path).Dispose();
                 using (TextWriter tw = new StreamWriter(path))
                 {
-                    tw.WriteLine($"{model}|{productId}|{dateCheck}|{status}|{process}");
+                    tw.WriteLine($"{model}|{productId}|{dateTime}|{status}|{process}");
                     tw.Close();
                 }
             }
@@ -67,7 +67,7 @@ namespace Lib.Core
             {
                 using (TextWriter tw = new StreamWriter(path))
                 {
-                    tw.WriteLine($"{model}|{productId}|{dateCheck}|{status}|{process}");
+                    tw.WriteLine($"{model}|{productId}|{dateTime}|{status}|{process}");
                     tw.Close();
                 }
             }
@@ -362,6 +362,128 @@ namespace Lib.Core
                 return IPStr;
             }
             return IPStr;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        public static string GetValueInLine(string path, int line)
+        {
+            string value;
+            using (var sr = new StreamReader(path))
+            {
+                for (int i = 1; i < line; i++)
+                {
+                    sr.ReadLine();
+                }
+                value = sr.ReadLine();
+                sr.Dispose();
+                return value;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <param name="content"></param>
+        public static void WriteRegistry(string keyName, string content)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ICT-NICHICON-SUPPORTS-MES\ServerConfig");
+            if (!string.IsNullOrEmpty(keyName) && !string.IsNullOrEmpty(content))
+            {
+                key.SetValue(keyName, content);
+                key.Close();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rootKey"></param>
+        /// <param name="keyName"></param>
+        /// <param name="content"></param>
+        public static void WriteRegistry(string rootKey, string keyName, string content)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey($@"SOFTWARE\{rootKey}");
+            if (!string.IsNullOrEmpty(keyName) && !string.IsNullOrEmpty(content))
+            {
+                key.SetValue(keyName, content);
+                key.Close();
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <param name="content"></param>
+        public static void WriteRegistryArray(string keyName, string content)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ICT-NICHICON-SUPPORTS-MES\ServerConfig");
+            if (!string.IsNullOrEmpty(keyName) && !string.IsNullOrEmpty(content))
+            {
+                string exitsValue = GetValueRegistryKey(keyName);
+                if (exitsValue != null)
+                {
+                    exitsValue += content + ";";
+                    key.SetValue(keyName, exitsValue);
+                }
+                else
+                {
+                    key.SetValue(keyName, content + ";");
+                }
+                key.Close();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
+        public static string GetValueRegistryKey(string keyName)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ICT-NICHICON-SUPPORTS-MES\ServerConfig");
+            string value = null;
+            if (key != null)
+            {
+                if (key.GetValue(keyName) != null)
+                {
+                    value = key.GetValue(keyName).ToString();
+                    key.Close();
+                    return value;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rootkey"></param>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
+        public static string GetValueRegistryKey(string rootkey, string keyName)
+        {
+            RegistryKey key = Registry.CurrentUser.CreateSubKey($@"SOFTWARE\{rootkey}");
+            string value = null;
+            if (key != null)
+            {
+                if (key.GetValue(keyName) != null)
+                {
+                    value = key.GetValue(keyName).ToString();
+                    key.Close();
+                    return value;
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -17,7 +12,6 @@ namespace Nichicon_ICT_Server_Supports_MES
             GetTaskWindows();
             txtIPAddress.Text = Ultils.GetIP();
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -54,7 +48,6 @@ namespace Nichicon_ICT_Server_Supports_MES
             }
 
         }
-
         /// <summary>
         /// 
         /// </summary>

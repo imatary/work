@@ -140,7 +140,7 @@ namespace EducationSkills.Subjects
                         }
                     };
 
-                    var subjects = context.Database.SqlQuery<PR_Bomon>("EXEC [dbo].[ShowBoMon] @type, @dept", paramSubjects).ToList();
+                    var subjects = context.Database.SqlQuery<PR_Bomon>("EXEC [dbo].[ShowBoMon] @type, @dept", paramSubjects).Where(c=>c.MaBoMon.Contains("EDU-")).ToList();
 
                     foreach (var sub in subjects)
                     {
@@ -187,7 +187,7 @@ namespace EducationSkills.Subjects
                         };
                     try
                     {
-                        var reports = context.Database.SqlQuery<SkillMap>("EXEC [dbo].[sp_Get_Subjects_Of_StaffCode] @staffCode", paramOffStaffCode).ToList();
+                        var reports = context.Database.SqlQuery<SkillMap>("EXEC [dbo].[sp_Get_Subjects_Of_StaffCode] @staffCode", paramOffStaffCode).Where(c=>c.MaBoMon.Contains("EDU-")).ToList();
 
                         gridControl1.DataSource = reports;
                     }

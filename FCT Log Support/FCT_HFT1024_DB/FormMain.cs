@@ -250,7 +250,6 @@ namespace FCT_HFT1024_DB
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-
         private void btnWatchFile_Click(object sender, EventArgs e)
         {
             bool isVaild = true;

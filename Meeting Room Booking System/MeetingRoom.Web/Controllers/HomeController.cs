@@ -182,7 +182,7 @@ namespace MeetingRoom.Web.Controllers
             _scheduler.Views.Add(new MonthView()); // adds a tab with the Month view
             _scheduler.InitialView = units.Name; // makes the units view selected initially
             _scheduler.Config.active_link_view = units.Name;
-            string viewName = "meetingRoom/Home/LightboxCustomControl";
+            string viewName = "Home/LightboxCustomControl";
             //string viewName = "Home/LightboxCustomControl";
             var box = _scheduler.Lightbox.SetExternalLightbox(viewName, 730, 530);
             box.ClassName = "custom_lightbox";

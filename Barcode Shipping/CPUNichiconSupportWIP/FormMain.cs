@@ -170,14 +170,14 @@ namespace CPUNichiconSupportWIP
 
                 if (item != null)
                 {
-                    string currentModel = cboModel.SelectedValue.ToString();
-                    if (currentModel == "ZSFLD22_REV5")
-                    {
-                        currentModel = "ZSFLD22IA";
-                    }
+                    //string currentModel = cboModel.SelectedValue.ToString();
+                    //if (currentModel == "ZSFLD22_REV5")
+                    //{
+                    //    currentModel = "ZSFLD22IA";
+                    //}
 
-                    if (item.Model == currentModel)
-                    {
+                    //if (item.Model == currentModel)
+                    //{
                         items.Add(item);
                         dataGridView1.AutoGenerateColumns = false;
                         dataGridView1.DataSource = items;
@@ -200,13 +200,13 @@ namespace CPUNichiconSupportWIP
                         lblAdd.Enabled = true;
                         
                         Ultils.CreateFileLog(item.Model, item.BoardNo, item.Status, stationNo, DateTime.Now.ToString("yyMMddHHmmss"));
-                    }
-                    else
-                    {
-                        ErrorMessage("NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác." +
-                            $"\nBoard [{item.BoardNo}] NG!" +
-                            $"\nModel: {item.Model}");
-                    }
+                    //}
+                    //else
+                    //{
+                    //    ErrorMessage("NG", $"Sai Model. Vui lòng chọn lại Model cho chính xác." +
+                    //        $"\nBoard [{item.BoardNo}] NG!" +
+                    //        $"\nModel: {item.Model}");
+                    //}
                 }
                 
             }

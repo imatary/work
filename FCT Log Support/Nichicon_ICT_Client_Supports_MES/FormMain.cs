@@ -176,6 +176,7 @@ namespace Nichicon_ICT_Client_Supports_MES
                         UpdateControls(true);
                         WaitForData();
                     }
+                    lblMessage.Text = "";
                 }
                 catch (SocketException se)
                 {
@@ -194,7 +195,9 @@ namespace Nichicon_ICT_Client_Supports_MES
                 m_clientSocket.Close();
                 m_clientSocket = null;
                 UpdateControls(false);
-                lblMessage.Text = "";
+                lblMessage.Text = "Đã ngắt kết nối đến ICT!";
+                serial = "";
+                txtBarcode.ResetText();
             }
         }
 
@@ -212,37 +215,46 @@ namespace Nichicon_ICT_Client_Supports_MES
             if (IsRun)
             {
                 string barcode = txtBarcode.Text;
-                ActiveWindows(lblProcessName.Text);
-
-                if (barcode.Length == barcodeLength)
+                if (barcode == "StopWork")
                 {
-                    SendKeys.Send(txtBarcode.Text);
-                    Thread.Sleep(150);
-                    SendKeys.Send("{ENTER}");
-                    serial = "";
-                    txtBarcode.ResetText();
-                    lblMessage.Text = "";
+                    btnDisConnected_Click(sender, e);
                 }
                 else
                 {
-                    lblMessage.Text = "Vui lòng bắn lại. Serial không đúng!";
-                    txtBarcode.ResetText();
-                    txtBarcode.Text = "";
-                    ActiveWindows(Text);
-                    serial = "";
-                    try
+                    ActiveWindows(lblProcessName.Text);
+
+                    if (barcode.Length == barcodeLength)
                     {
-                        byte[] byData = Encoding.ASCII.GetBytes("Missing");
-                        if (m_clientSocket != null)
+                        SendKeys.Send(txtBarcode.Text);
+                        Thread.Sleep(150);
+                        SendKeys.Send("{ENTER}");
+                        serial = "";
+                        txtBarcode.ResetText();
+                        lblMessage.Text = "";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Vui lòng bắn lại. Serial không đúng!";
+                        txtBarcode.ResetText();
+                        txtBarcode.Text = "";
+                        ActiveWindows(Text);
+                        serial = "";
+                        try
                         {
-                            m_clientSocket.Send(byData);
+                            byte[] byData = Encoding.ASCII.GetBytes("Missing");
+                            if (m_clientSocket != null)
+                            {
+                                m_clientSocket.Send(byData);
+                            }
+                        }
+                        catch (SocketException se)
+                        {
+
                         }
                     }
-                    catch (SocketException se)
-                    {
-                        
-                    }
                 }
+
+                
 
                 IsRun = false;
             }

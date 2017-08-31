@@ -37,6 +37,7 @@
             this.cboWindows = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.lblOutputLog = new System.Windows.Forms.Label();
             this.lblInputLog = new System.Windows.Forms.Label();
             this.txtOutputLog = new System.Windows.Forms.TextBox();
@@ -48,7 +49,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSaveChanged = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -140,6 +140,16 @@
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Input Configs";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(107, 154);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(138, 17);
+            this.checkBox1.TabIndex = 26;
+            this.checkBox1.Text = "Skip wait logs - Test log";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // lblOutputLog
             // 
@@ -244,16 +254,6 @@
             this.btnSaveChanged.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveChanged.UseVisualStyleBackColor = true;
             this.btnSaveChanged.Click += new System.EventHandler(this.btnSaveChanged_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(107, 154);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(91, 17);
-            this.checkBox1.TabIndex = 26;
-            this.checkBox1.Text = "Skip wait logs";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // FormConfig
             // 
