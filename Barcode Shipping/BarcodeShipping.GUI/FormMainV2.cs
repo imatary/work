@@ -449,15 +449,15 @@ namespace BarcodeShipping.GUI
 
                         string po_no = input[0];
                         string remains = null;
-                        if (input.Count() > 2)
-                        {
-                             remains = input[2];
-                        }
-                        else
-                        {
+                        //if (input.Count() > 2)
+                        //{
+                        //    remains = input[2];
+                        //}
+                        //if(input.Count()==2)
+                        //{
                             remains = input[1];
-                        }
-                          
+                        //}
+
 
                         //remains = Regex.Replace(remains, "[^A-Za-z0-9]", "");
 
@@ -680,7 +680,25 @@ namespace BarcodeShipping.GUI
 
                     if (_currentModel != null)
                     {
-                        lblQuantityModel.Text = $"/{_currentModel.Quantity}";
+                        int quantity = 0;
+                        if (checkFujiHP.Checked == true)
+                        {
+                            if ((_currentModel.ModelName == "105K 33480") || (_currentModel.ModelName == "105K 33470"))
+                            {
+                                quantity = _currentModel.QuantityHP;
+                            }
+                            else
+                            {
+                                MessageBoxHelper.ShowMessageBoxError("Vui lòng kiểm tra lại Models!");
+                                checkFujiHP.Checked = false;
+                            }
+                        }
+                        else
+                        {
+                            quantity = _currentModel.Quantity;
+                        }
+
+                        lblQuantityModel.Text = $"/{quantity}";
 
                         if (!string.IsNullOrEmpty(po_no))
                         {

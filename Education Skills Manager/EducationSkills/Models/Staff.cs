@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace EducationSkills
 {
@@ -8,6 +9,7 @@ namespace EducationSkills
         public string FullName { get; set; }
         public string DeptCode { get; set; }
         public string MaBoMon { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? NgayThamGia { get; set; }
         //public int Count {
         //    get {

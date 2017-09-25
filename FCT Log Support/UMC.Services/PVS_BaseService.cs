@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -18,6 +19,21 @@ namespace UMC.Services
                 connection.Open();
             }
             return connection;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public DateTime GetDatabaseTime()
+        {
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                var cmd = new SqlCommand("SELECT GETDATE()", conn);
+                conn.Open();
+
+                return (DateTime)cmd.ExecuteScalar();
+            }
         }
     }
 }

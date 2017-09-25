@@ -21,7 +21,7 @@ namespace FCT_HFT1024_V2
         bool startWatching = false, RunTaks = false, checkLength = false, skipWaitLogs = false, allowWrite = false;
         int pass = 0, ng = 0, total = 0, barcodeLength = 0;
         FileSystemWatcher fileWatcher;
-
+        DateTime dateTime;
         private SCANNING_LOGS_Service scanningLogService;
         private WORK_ORDER_ITEMS_Service workOrderItemsService;
         public FormMain()
@@ -128,42 +128,6 @@ namespace FCT_HFT1024_V2
             }
             return state;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        //private string ModelName(string path)
-        //{
-        //    string value = "";
-        //    string content = null;
-        //    if(fileExtension == "*.LOG")
-        //    {
-        //        content = Ultils.GetValueInLine(path, 2);
-        //        string[] array = content.Split(',');
-        //        value = array[0];
-        //        value = Regex.Replace(value, "[^A-Za-z0-9]", "");
-        //    }
-        //    if(fileExtension == "*.DAT")
-        //    {
-        //        content = Ultils.GetValueInLine(path, 1);
-        //        string[] array = content.Split(',');
-        //        value = array[1];
-        //        value = Regex.Replace(value, "[^A-Za-z0-9]", "");
-        //    }
-            
-        //    if (value != "")
-        //    {
-        //        if (value.Contains("-"))
-        //        {
-        //            value = value.Replace("-", "").Replace(" ", "");
-        //        }
-        //        return value;
-        //    }
-        //    return null;
-        //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -235,15 +199,14 @@ namespace FCT_HFT1024_V2
             if (checkLength == true)
             {
                 ActiveWindows(this.Text);
-                txtBarcode.Enabled = true;
-                txtBarcode.ResetText();
-                txtBarcode.Focus();
+                ResetBarcode(true);
                 checkLength = false;
             }
             else
             {
                 if (RunTaks)
                 {
+                    dateTime = workOrderItemsService.GetDatabaseTime();
                     boardState = GetStateBoardOne(fileLastWriteTime);
                     List<Result> items = new List<Result>();
 
@@ -260,16 +223,13 @@ namespace FCT_HFT1024_V2
                     string strOK = "", strNG = "";
                     foreach (var itemW in items)
                     {
-                        Ultils.CreateFileLog(itemW.ProductId, itemW.BoardNo, itemW.State, stationNo, dateCheck);
+                        Ultils.CreateFileLog(itemW.ProductId, itemW.BoardNo, itemW.State, stationNo, dateTime);
                         if (itemW.State == "P")
                         {
                             pass = pass + 1;
                             strOK += $"Board [{itemW.BoardNo}] OK! \n";
 
-                            txtBarcode.Enabled = true;
-                            txtBarcode.ResetText();
-
-                            txtBarcode.Focus();
+                            ResetBarcode(true);
                         }
                         if (itemW.State == "F")
                         {
@@ -302,9 +262,9 @@ namespace FCT_HFT1024_V2
         private void lblReset_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             boardNo = "";
-            txtBarcode.Enabled = true;
-            txtBarcode.ResetText();
-            txtBarcode.Focus();
+            panelBarcode.Enabled = true;
+
+            ResetBarcode(true);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -336,7 +296,7 @@ namespace FCT_HFT1024_V2
                     lblRefesh.Enabled = false;
                     lblReset.Enabled = true;
                     panelBarcode.Visible = true;
-
+                    
                     if (startWatching == false)
                     {
                         startWatching = true;
@@ -361,7 +321,8 @@ namespace FCT_HFT1024_V2
                         fileWatcher.EnableRaisingEvents = true;
                     }
 
-                    txtBarcode.Focus();
+
+                    ResetBarcode(false);
                 }
                 catch (SocketException se)
                 {
@@ -380,23 +341,28 @@ namespace FCT_HFT1024_V2
             }
             btnStart.Enabled = true;
             DefaultMessage();
-            panelBarcode.Visible = false;
+            
             lblConfigs.Enabled = true;
             lblRefesh.Enabled = true;
             lblReset.Enabled = false;
-            txtBarcode.Enabled = true;
-            txtBarcode.ResetText();
+
+            panelBarcode.Visible = false;
+
+            ResetBarcode(true);
+
         }
 
         private void txtBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
+                dateTime = workOrderItemsService.GetDatabaseTime();
                 // nếu = false thì làm việc như bình thường, test log
                 if (skipWaitLogs == false)
                 {
                     try
                     {
+                       
                         boardNo = txtBarcode.Text.Trim();
                         if (boardNo != null && boardNo.Length >= barcodeLength)
                         {
@@ -413,12 +379,11 @@ namespace FCT_HFT1024_V2
                                 new FormError(message).ShowDialog();
                                 ErrorMessage("NG", message);
 
-                                ResetBarcode();
+                                ResetBarcode(true);
                             }
                             // Nếu được khởi tạo rồi thì thực hiện các công việc tiếp theo
                             else
                             {
-                                SuccessMessage("OK", scanningLog.BOARD_NO);
                                 var workOrderItems = workOrderItemsService.GetSingle(scanningLog.BOARD_NO);
                                 if (workOrderItems != null)
                                 {
@@ -426,20 +391,19 @@ namespace FCT_HFT1024_V2
                                     {
                                         message = $"Board [{boardNo}] đã FINISHED trên WIP. Vui lòng kiểm tra lại!";
                                         ErrorMessage("NG", message);
-                                        ResetBarcode();
+                                        ResetBarcode(false);
                                         return;
                                     }
                                 }
 
-
+                                //SuccessMessage("OK", scanningLog.BOARD_NO);
                                 ActiveWindows(processName);
                             }
                         }
                         else
                         {
                             ErrorMessage("NG", "Vui lòng bắn lại barcode");
-                            txtBarcode.SelectAll();
-                            txtBarcode.Focus();
+                            ResetBarcode(false);
                         }
 
                     }
@@ -453,10 +417,9 @@ namespace FCT_HFT1024_V2
                 {
                     if (txtBarcode.Text != null)
                     {
-                        Ultils.CreateFileLog(null, txtBarcode.Text, "P", stationNo, DateTime.Now.ToString("yyMMddHHmmss"));
+                        Ultils.CreateFileLog(null, txtBarcode.Text, "P", stationNo, dateTime);
                         SuccessMessage("OK", "Create log success!");
-                        txtBarcode.ResetText();
-                        txtBarcode.Focus();
+                        ResetBarcode(false);
                     }
                 }
             }
@@ -466,9 +429,11 @@ namespace FCT_HFT1024_V2
         /// <summary>
         /// 
         /// </summary>
-        private void ResetBarcode()
+        private void ResetBarcode(bool enable)
         {
-            panelBarcode.Enabled = true;
+            if (enable == true)
+                panelBarcode.Enabled = enable;
+
             txtBarcode.ResetText();
             txtBarcode.Focus();
         }

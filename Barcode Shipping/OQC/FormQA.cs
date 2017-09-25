@@ -82,7 +82,7 @@ namespace OQC
                     string strBoxId = txtBoxID.Text;
                     if (strBoxId.Length >= 3)
                     {
-                        if(strBoxId.Length > 10)
+                        if (strBoxId.Length > 10)
                         {
                             SetErrorStatus("NG", "BOX không được dài quá 10 ký tự!");
                             Ultils.EditTextErrorNoMessage(txtBoxID);
@@ -102,7 +102,7 @@ namespace OQC
                                 txtBoxID.Enabled = false;
                                 txtProductionID.Focus();
                             }
-                        } 
+                        }
                     }
                     else
                     {
@@ -133,39 +133,39 @@ namespace OQC
                     }
                     else
                     {
-                        var models = _modelService.GetModels().Where(c => c.CustomerName == FujiXerox);
-
-                        foreach (var item in models)
+                        string currentModel=null;
+                        if (productionId.Contains("_"))
                         {
-                            if (productionId.Contains(item.ModelName.ToUpper()))
+                            string[] model = productionId.Split('_');
+                            currentModel = model[1].Substring(0, 10);
+                        }
+
+                        var models = _modelService.GetModelLikeName(currentModel, FujiXerox);
+
+                        if (checkFujiHP.Checked == true)
+                        {
+                            if ((models.ModelName == "105K 33480") || (models.ModelName == "105K 33470"))
                             {
-                                if (checkFujiHP.Checked == true)
-                                {
-                                    if ((item.ModelName == "105K 33480") || (item.ModelName == "105K 33470"))
-                                    {
-                                        quantity = item.QuantityHP;
-                                    }
-                                    else
-                                    {
-                                        SetErrorStatus("NG", $"Vui lòng kiểm tra lại");
-                                        checkFujiHP.Checked = false;
-                                    } 
-                                }
-                                else
-                                {
-                                    quantity = item.Quantity;
-                                }
-                                
-                                lblQuantityModel.Visible = true;
-                                lblQuantityModel.Text = $"/{quantity}";
-                                tableLayoutPanelModel.Visible = true;
-                                lblCurentModel.Text = item.ModelName;
-                                lblSerialNo.Text = item.SerialNo;
-                                lblCustomerName.Text = $"Barcode {item.CustomerName}";
-                                modelID = item.ModelID;
-                                break;
+                                quantity = models.QuantityHP;
+                            }
+                            else
+                            {
+                                SetErrorStatus("NG", $"Vui lòng kiểm tra lại");
+                                checkFujiHP.Checked = false;
                             }
                         }
+                        else
+                        {
+                            quantity = models.Quantity;
+                        }
+
+                        lblQuantityModel.Visible = true;
+                        lblQuantityModel.Text = $"/{quantity}";
+                        tableLayoutPanelModel.Visible = true;
+                        lblCurentModel.Text = models.ModelName;
+                        lblSerialNo.Text = models.SerialNo;
+                        lblCustomerName.Text = $"Barcode {models.CustomerName}";
+                        modelID = models.ModelID;
 
                         if (Program.CurrentUser.OperationID == 1)
                         {
@@ -200,7 +200,7 @@ namespace OQC
                     Ultils.EditTextErrorNoMessage(txtProductionID);
                 }
             }
-        } 
+        }
         private void txtProductionID_EditValueChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtProductionID.Text))
@@ -262,145 +262,130 @@ namespace OQC
 
                 var logs = _oqcService.GetLogsByBoxId(boxId).ToList();
 
-                if (operationId == 1)
+                // Nếu Box có dữ liệu của PCB
+                if (logs.Any())
                 {
-                    // Nếu Box có dữ liệu của PCB
-                    if (logs.Any())
+                    var log = logs.SingleOrDefault(l => l.ProductionID == productionId);
+                    // Nếu PCB mới bắn vào chưa có trong Box
+                    if (log == null)
                     {
-                        var log = logs.SingleOrDefault(l => l.ProductionID == productionId);
-                        // Nếu PCB mới bắn vào chưa có trong Box
-                        if (log == null)
+                        var model = _modelService.GetModelById(logs.FirstOrDefault().ModelID);
+                        // Nếu Production ID, có Model giống với Model hiện tại
+                        if (productionId.Contains(model.ModelName) && productionId.Contains(model.SerialNo))
                         {
-                            var model = _modelService.GetModelById(logs.FirstOrDefault().ModelID);
-                            // Nếu Production ID, có Model giống với Model hiện tại
-                            if (productionId.Contains(model.ModelName) && productionId.Contains(model.SerialNo))
+                            string tmp = lblQuantityModel.Text.Replace("/", "");
+                            int countPcbInBox = int.Parse(lblCountPCB.Text);
+                            int quantity = int.Parse(tmp);
+
+                            if (logs.Count == quantity)
                             {
-                                string tmp = lblQuantityModel.Text.Replace("/", "");
-                                int countPcbInBox = int.Parse(lblCountPCB.Text);
-                                int quantity = int.Parse(tmp);
-
-                                if (logs.Count == quantity)
-                                {
-                                    SetErrorStatus("NG", $"Box [{txtBoxID.Text}] đã đủ số lượng. Vui lòng kiểm tra lại!");
-                                    Ultils.EditTextErrorNoMessage(txtBoxID);
-                                    checkFujiHP.Checked = false;
-                                    txtBoxID.Enabled = true;
-                                    txtBoxID.Focus();
-                                    txtBoxID.ResetText();
-                                }
-                                else
-                                {
-                                    try
-                                    {
-                                        _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo(), "tmp");
-
-                                        if (!_iqcService.CheckResultExits(productionId, operationId))
-                                        {
-                                            _iqcService.InsertResult(productionId, operationId, judge, operatorId, _dateTimeCheck);
-                                        }
-                                        else
-                                        {
-                                            _iqcService.UpdateResult(productionId, operationId, judge, operatorId);
-                                        }
-                                        Ultils.CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
-                                        logs = _oqcService.GetLogsByBoxId(boxId).ToList();
-                                        gridControlData.Refresh();
-                                        gridControlData.DataSource = logs;
-                                        lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
-
-                                        SetSuccessStatus("PASS", $"Thành công!\nPCB [{txtProductionID.Text}]");
-                                        txtProductionID.ResetText();
-                                        txtProductionID.Focus();
-
-                                        if (logs.Count == quantity)
-                                        {
-                                            SetSuccessStatus("OK", $"Box [{txtBoxID.Text}] đã đủ số lượng!");
-                                            Ultils.EditTextErrorNoMessage(txtBoxID);
-                                            txtBoxID.Enabled = true;
-                                            txtBoxID.Focus();
-                                            txtBoxID.ResetText();
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        SetErrorStatus("NG", "Model chưa có trong hệ thống!\nVui lòng nhập model này vào, và thử lại. \n" + ex.Message);
-                                        txtProductionID.ResetText();
-                                        txtProductionID.Focus();
-                                    }
-                                }
+                                SetErrorStatus("NG", $"Box [{txtBoxID.Text}] đã đủ số lượng. Vui lòng kiểm tra lại!");
+                                Ultils.EditTextErrorNoMessage(txtBoxID);
+                                checkFujiHP.Checked = false;
+                                txtBoxID.Enabled = true;
+                                txtBoxID.Focus();
+                                txtBoxID.ResetText();
                             }
                             else
                             {
-                                SetErrorStatus("NG", $"Sai Model: {lblCurentModel.Text} !\nPCB [{productionId}] này khác với các PCB trong Box [{boxId}].\nVui lòng kiểm tra lại!");
-                                txtProductionID.ResetText();
-                                txtProductionID.Focus();
-                                Ultils.EditTextErrorNoMessage(txtProductionID);
+                                try
+                                {
+                                    _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo(), "tmp");
 
-                                logs = _oqcService.GetLogsByBoxId(boxId).ToList();
-                                gridControlData.Refresh();
-                                gridControlData.DataSource = logs;
-                                lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
-                                
+                                    if (!_iqcService.CheckResultExits(productionId, operationId))
+                                    {
+                                        _iqcService.InsertResult(productionId, operationId, judge, operatorId, _dateTimeCheck);
+                                    }
+                                    else
+                                    {
+                                        _iqcService.UpdateResult(productionId, operationId, judge, operatorId);
+                                    }
+                                    Ultils.CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
+                                    logs = _oqcService.GetLogsByBoxId(boxId).ToList();
+                                    gridControlData.Refresh();
+                                    gridControlData.DataSource = logs;
+                                    lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
+
+                                    SetSuccessStatus("PASS", $"Thành công!\nPCB [{txtProductionID.Text}]");
+                                    txtProductionID.ResetText();
+                                    txtProductionID.Focus();
+
+                                    if (logs.Count == quantity)
+                                    {
+                                        SetSuccessStatus("OK", $"Box [{txtBoxID.Text}] đã đủ số lượng!");
+                                        Ultils.EditTextErrorNoMessage(txtBoxID);
+                                        txtBoxID.Enabled = true;
+                                        txtBoxID.Focus();
+                                        txtBoxID.ResetText();
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    SetErrorStatus("NG", "Model chưa có trong hệ thống!\nVui lòng nhập model này vào, và thử lại. \n" + ex.Message);
+                                    txtProductionID.ResetText();
+                                    txtProductionID.Focus();
+                                }
                             }
                         }
-                        // Nếu có rồi thì thống báo lỗi
                         else
                         {
-                            SetErrorStatus("NG", $"PCB [{txtProductionID.Text}] này đã có trong Box rồi.\nVui lòng kiểm tra lại");
+                            SetErrorStatus("NG", $"Sai Model: {lblCurentModel.Text} !\nPCB [{productionId}] này khác với các PCB trong Box [{boxId}].\nVui lòng kiểm tra lại!");
                             txtProductionID.ResetText();
                             txtProductionID.Focus();
-                            gridControlData.Refresh();
-                            gridControlData.DataSource = logs;
-                            lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
-                        }
-                    }
-                    // Nếu Box chưa có dữ liệu gì, thực hiện insert
-                    else
-                    {
-                        try
-                        {
-                            _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo(), "tmp");
+                            Ultils.EditTextErrorNoMessage(txtProductionID);
 
-                            if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
-                            {
-                                _iqcService.InsertResult(productionId, operationId, judge, operatorId, _dateTimeCheck);
-                            }
-                            else
-                            {
-                                _iqcService.UpdateResult(productionId, operationId, judge, operatorId);
-                            }
-                            Ultils.CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
                             logs = _oqcService.GetLogsByBoxId(boxId).ToList();
                             gridControlData.Refresh();
                             gridControlData.DataSource = logs;
                             lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
 
-                            SetSuccessStatus("PASS", string.Format("Thêm thành công!\nPCB [{0}]", productionId));
-                            txtProductionID.ResetText();
-                            txtProductionID.Focus();
-                        }
-                        catch (Exception ex)
-                        {
-                            SetErrorStatus("NG", "Error Insert! \n" + ex.Message);
-                            txtProductionID.ResetText();
-                            txtProductionID.Focus();
                         }
                     }
+                    // Nếu có rồi thì thống báo lỗi
+                    else
+                    {
+                        SetErrorStatus("NG", $"PCB [{txtProductionID.Text}] này đã có trong Box rồi.\nVui lòng kiểm tra lại");
+                        txtProductionID.ResetText();
+                        txtProductionID.Focus();
+                        gridControlData.Refresh();
+                        gridControlData.DataSource = logs;
+                        lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
+                    }
                 }
-                else if (operationId >= 2)
+                // Nếu Box chưa có dữ liệu gì, thực hiện insert
+                else
                 {
-                    _iqcService.UpdateLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, null, operatorId, "tmp");
-                    _iqcService.InsertResult(productionId, operationId, judge, operatorId, _dateTimeCheck);
+                    try
+                    {
+                        _iqcService.InsertLogs(productionId, lineId, txtMacAddress.Text, boxId, modelID, "N/T", 1, operatorId, false, "IT", StringHelper.GetInfo(), "tmp");
 
-                    logs = _oqcService.GetLogsByBoxId(boxId).ToList();
-                    gridControlData.Refresh();
-                    gridControlData.DataSource = logs;
-                    lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
+                        if (!_iqcService.CheckResultExits(txtProductionID.Text, operationId))
+                        {
+                            _iqcService.InsertResult(productionId, operationId, judge, operatorId, _dateTimeCheck);
+                        }
+                        else
+                        {
+                            _iqcService.UpdateResult(productionId, operationId, judge, operatorId);
+                        }
+                        Ultils.CreateFileLog(lblCurentModel.Text, productionId, status, Program.CurrentUser.ProcessID, _dateTimeCheck);
+                        logs = _oqcService.GetLogsByBoxId(boxId).ToList();
+                        gridControlData.Refresh();
+                        gridControlData.DataSource = logs;
+                        lblCountPCB.Text = logs.Count.ToString(CultureInfo.InvariantCulture);
 
-                    SetSuccessStatus("PASS", string.Format("Thành công!\nPCB [{0}] vừa được bắn lại lần {1}", productionId, operationId));
-                    txtProductionID.ResetText();
-                    txtProductionID.Focus();
+                        SetSuccessStatus("PASS", string.Format("Thêm thành công!\nPCB [{0}]", productionId));
+                        txtProductionID.ResetText();
+                        txtProductionID.Focus();
+                    }
+                    catch (Exception ex)
+                    {
+                        SetErrorStatus("NG", "Error Insert! \n" + ex.Message);
+                        txtProductionID.ResetText();
+                        txtProductionID.Focus();
+                    }
                 }
+
+
             }
             else
             {
@@ -600,7 +585,7 @@ namespace OQC
                 txtBoxID.Enabled = false;
                 txtProductionID.ResetText();
                 txtProductionID.Focus();
-            }  
+            }
         }
 
         private void checkFujiHP_CheckedChanged(object sender, EventArgs e)

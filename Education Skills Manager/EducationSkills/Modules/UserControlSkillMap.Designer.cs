@@ -90,8 +90,8 @@
             this.btnExportToExel.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportToExel.Appearance.Options.UseFont = true;
             this.btnExportToExel.Enabled = false;
-            this.btnExportToExel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.Image")));
-            this.btnExportToExel.Location = new System.Drawing.Point(421, 70);
+            this.btnExportToExel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.ImageOptions.Image")));
+            this.btnExportToExel.Location = new System.Drawing.Point(442, 70);
             this.btnExportToExel.Name = "btnExportToExel";
             this.btnExportToExel.Size = new System.Drawing.Size(109, 27);
             this.btnExportToExel.TabIndex = 4;
@@ -102,19 +102,19 @@
             // 
             this.btnRefesh.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefesh.Appearance.Options.UseFont = true;
-            this.btnRefesh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.Image")));
+            this.btnRefesh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.ImageOptions.Image")));
             this.btnRefesh.Location = new System.Drawing.Point(336, 70);
             this.btnRefesh.Name = "btnRefesh";
-            this.btnRefesh.Size = new System.Drawing.Size(79, 27);
+            this.btnRefesh.Size = new System.Drawing.Size(100, 27);
             this.btnRefesh.TabIndex = 3;
-            this.btnRefesh.Text = "Tải lại";
+            this.btnRefesh.Text = "Xem tất cả";
             this.btnRefesh.Click += new System.EventHandler(this.btnRefesh_Click);
             // 
             // btnFind
             // 
             this.btnFind.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFind.Appearance.Options.UseFont = true;
-            this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
+            this.btnFind.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.ImageOptions.Image")));
             this.btnFind.Location = new System.Drawing.Point(260, 70);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(70, 28);
@@ -227,11 +227,7 @@
             this.gridView1.OptionsLayout.Columns.AddNewColumns = false;
             this.gridView1.OptionsView.ColumnAutoWidth = false;
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
-            this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
-            this.gridView1.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.gridView1_CustomRowCellEdit);
-            this.gridView1.CustomSummaryCalculate += new DevExpress.Data.CustomSummaryEventHandler(this.gridView1_CustomSummaryCalculate);
-            this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // gridColumn4
             // 
