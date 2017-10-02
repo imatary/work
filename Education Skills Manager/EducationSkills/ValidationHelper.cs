@@ -20,7 +20,6 @@ namespace EducationSkills
                 return false;
             }
 
-
             return true;
         }
 

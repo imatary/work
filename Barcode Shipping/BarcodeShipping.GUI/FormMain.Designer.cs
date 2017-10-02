@@ -683,7 +683,7 @@
             this.btnExportCurrentBox.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnExportCurrentBox.Appearance.Options.UseFont = true;
             this.btnExportCurrentBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExportCurrentBox.Image = ((System.Drawing.Image)(resources.GetObject("btnExportCurrentBox.Image")));
+            this.btnExportCurrentBox.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportCurrentBox.ImageOptions.Image")));
             this.btnExportCurrentBox.Location = new System.Drawing.Point(219, 3);
             this.btnExportCurrentBox.Name = "btnExportCurrentBox";
             this.btnExportCurrentBox.Size = new System.Drawing.Size(135, 29);
@@ -696,7 +696,7 @@
             this.btnExportToExel.Appearance.Font = new System.Drawing.Font("Tahoma", 8.5F, System.Drawing.FontStyle.Bold);
             this.btnExportToExel.Appearance.Options.UseFont = true;
             this.btnExportToExel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExportToExel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.Image")));
+            this.btnExportToExel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.ImageOptions.Image")));
             this.btnExportToExel.Location = new System.Drawing.Point(360, 3);
             this.btnExportToExel.Name = "btnExportToExel";
             this.btnExportToExel.Size = new System.Drawing.Size(136, 29);
@@ -709,7 +709,7 @@
             this.btnSearch.Appearance.Font = new System.Drawing.Font("Tahoma", 8.5F, System.Drawing.FontStyle.Bold);
             this.btnSearch.Appearance.Options.UseFont = true;
             this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.ImageOptions.Image")));
             this.btnSearch.Location = new System.Drawing.Point(502, 3);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(114, 29);
@@ -722,7 +722,7 @@
             this.btnClear.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnClear.Appearance.Options.UseFont = true;
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
+            this.btnClear.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.ImageOptions.Image")));
             this.btnClear.Location = new System.Drawing.Point(108, 3);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(105, 29);
@@ -735,7 +735,7 @@
             this.btnXuatLe.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnXuatLe.Appearance.Options.UseFont = true;
             this.btnXuatLe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnXuatLe.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatLe.Image")));
+            this.btnXuatLe.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatLe.ImageOptions.Image")));
             this.btnXuatLe.Location = new System.Drawing.Point(3, 3);
             this.btnXuatLe.Name = "btnXuatLe";
             this.btnXuatLe.Size = new System.Drawing.Size(99, 29);

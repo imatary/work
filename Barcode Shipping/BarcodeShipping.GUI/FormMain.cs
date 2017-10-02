@@ -814,14 +814,9 @@ namespace BarcodeShipping.GUI
                     @"THÔNG BÁO",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning);
-                if (mboxResult == DialogResult.No)
+                if (mboxResult == DialogResult.Yes)
                 {
-                    e.Cancel = true;
-                }
-                else if (mboxResult == DialogResult.Yes)
-                {
-                    e.Cancel = false;
-                    Application.ExitThread();
+                    this.Hide();
                 }
             }
         }

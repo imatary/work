@@ -11,7 +11,6 @@ using DevExpress.Utils;
 using DevExpress.XtraPrinting;
 using DevExpress.Data;
 using EducationSkills.Models;
-using DevExpress.XtraEditors.Repository;
 
 namespace EducationSkills.Modules
 {
@@ -142,7 +141,7 @@ namespace EducationSkills.Modules
             // Create the DataColumns for the table
             subjectTitles.ForEach(delegate (string title)
             {
-                dc = new DataColumn(title, typeof(string));
+                dc = new DataColumn(title, typeof(DateTime));
                 dataTable.Columns.Add(dc);
             });
 
@@ -170,14 +169,17 @@ namespace EducationSkills.Modules
                     string value = values[i].ToString();
                     if (value != "")
                     {
-                        value = value.Replace(" 00:00:00 AM", "");
-                        value = value.Replace(" 12:00:00 AM", "");
-                        dr[subs[i].ToString()] = value;
+                        //value = value.Replace(" 00:00:00 AM", "");
+                        //value = value.Replace(" 12:00:00 AM", "");
+
+                        DateTime date = DateTime.Parse(value); 
+
+                        dr[subs[i].ToString()] = date;
                         count = count + 1;
                     }
                     else
                     {
-                        dr[subs[i].ToString()] = value;
+                        dr[subs[i].ToString()] = DBNull.Value;
                     }
                 }
 
