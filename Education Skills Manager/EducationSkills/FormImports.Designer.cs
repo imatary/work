@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormImports));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
@@ -99,7 +99,7 @@
             // 
             this.btnSave.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
             this.btnSave.Location = new System.Drawing.Point(267, 10);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(106, 29);
@@ -127,6 +127,7 @@
             this.checkEditSolder.Size = new System.Drawing.Size(75, 23);
             this.checkEditSolder.TabIndex = 4;
             this.checkEditSolder.CheckedChanged += new System.EventHandler(this.checkEditSolder_CheckedChanged);
+            this.checkEditSolder.EditValueChanged += new System.EventHandler(this.checkEditSolder_EditValueChanged);
             // 
             // checkEditEye
             // 
@@ -140,6 +141,7 @@
             this.checkEditEye.Size = new System.Drawing.Size(75, 23);
             this.checkEditEye.TabIndex = 4;
             this.checkEditEye.CheckedChanged += new System.EventHandler(this.checkEditEye_CheckedChanged);
+            this.checkEditEye.EditValueChanged += new System.EventHandler(this.checkEditEye_EditValueChanged);
             // 
             // txtCertificate
             // 
@@ -148,9 +150,10 @@
             this.txtCertificate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCertificate.Properties.Appearance.Options.UseFont = true;
             this.txtCertificate.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions2.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions2.Image")));
             this.txtCertificate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtCertificate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions2, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
             this.txtCertificate.Properties.NullText = "";
             this.txtCertificate.Properties.NullValuePrompt = "Chọn chứng chỉ";
             this.txtCertificate.Properties.NullValuePromptShowForEmptyValue = true;

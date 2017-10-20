@@ -49,6 +49,7 @@
             this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridColumnCurrentGrantDate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
@@ -298,7 +299,8 @@
             this.gridTrainingDate,
             this.gridTestDateActual,
             this.gridLevelIII,
-            this.gridDateLevelIII});
+            this.gridDateLevelIII,
+            this.gridColumnCurrentGrantDate});
             this.bandedGridView1.GridControl = this.gridControl1;
             this.bandedGridView1.Name = "bandedGridView1";
             this.bandedGridView1.OptionsBehavior.AllowIncrementalSearch = true;
@@ -335,11 +337,26 @@
             this.gridBand3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridBand3.Caption = "Cấp độ hiện tại";
             this.gridBand3.Columns.Add(this.gridCertifiedTrainer);
+            this.gridBand3.Columns.Add(this.gridColumnCurrentGrantDate);
             this.gridBand3.Columns.Add(this.gridTrainingDate);
             this.gridBand3.Columns.Add(this.gridTestDateActual);
             this.gridBand3.Name = "gridBand3";
             this.gridBand3.VisibleIndex = 1;
-            this.gridBand3.Width = 333;
+            this.gridBand3.Width = 446;
+            // 
+            // gridColumnCurrentGrantDate
+            // 
+            this.gridColumnCurrentGrantDate.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumnCurrentGrantDate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumnCurrentGrantDate.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridColumnCurrentGrantDate.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnCurrentGrantDate.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnCurrentGrantDate.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnCurrentGrantDate.Caption = "Ngày cấp hiện tại";
+            this.gridColumnCurrentGrantDate.FieldName = "CurrentGrantDate";
+            this.gridColumnCurrentGrantDate.Name = "gridColumnCurrentGrantDate";
+            this.gridColumnCurrentGrantDate.Visible = true;
+            this.gridColumnCurrentGrantDate.Width = 113;
             // 
             // gridBand1
             // 
@@ -450,7 +467,7 @@
             this.btnExportToExel.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportToExel.Appearance.Options.UseFont = true;
             this.btnExportToExel.Enabled = false;
-            this.btnExportToExel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.Image")));
+            this.btnExportToExel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.ImageOptions.Image")));
             this.btnExportToExel.Location = new System.Drawing.Point(419, 65);
             this.btnExportToExel.Name = "btnExportToExel";
             this.btnExportToExel.Size = new System.Drawing.Size(109, 27);
@@ -462,7 +479,7 @@
             // 
             this.btnRefesh.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefesh.Appearance.Options.UseFont = true;
-            this.btnRefesh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.Image")));
+            this.btnRefesh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.ImageOptions.Image")));
             this.btnRefesh.Location = new System.Drawing.Point(334, 65);
             this.btnRefesh.Name = "btnRefesh";
             this.btnRefesh.Size = new System.Drawing.Size(79, 27);
@@ -474,7 +491,7 @@
             // 
             this.btnFind.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFind.Appearance.Options.UseFont = true;
-            this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
+            this.btnFind.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.ImageOptions.Image")));
             this.btnFind.Location = new System.Drawing.Point(257, 65);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(70, 28);
@@ -522,7 +539,7 @@
             this.btnSaveChanged.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveChanged.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveChanged.Appearance.Options.UseFont = true;
-            this.btnSaveChanged.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveChanged.Image")));
+            this.btnSaveChanged.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveChanged.ImageOptions.Image")));
             this.btnSaveChanged.Location = new System.Drawing.Point(749, 63);
             this.btnSaveChanged.Name = "btnSaveChanged";
             this.btnSaveChanged.Size = new System.Drawing.Size(118, 29);
@@ -592,6 +609,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnCurrentGrantDate;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;

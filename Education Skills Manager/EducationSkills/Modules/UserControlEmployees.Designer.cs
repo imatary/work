@@ -76,7 +76,7 @@
             // 
             this.btnExportToExel.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportToExel.Appearance.Options.UseFont = true;
-            this.btnExportToExel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.Image")));
+            this.btnExportToExel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.ImageOptions.Image")));
             this.btnExportToExel.Location = new System.Drawing.Point(676, 36);
             this.btnExportToExel.Name = "btnExportToExel";
             this.btnExportToExel.Size = new System.Drawing.Size(115, 26);
@@ -89,7 +89,7 @@
             this.btnTranfers.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTranfers.Appearance.Options.UseFont = true;
             this.btnTranfers.Enabled = false;
-            this.btnTranfers.Image = ((System.Drawing.Image)(resources.GetObject("btnTranfers.Image")));
+            this.btnTranfers.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnTranfers.ImageOptions.Image")));
             this.btnTranfers.Location = new System.Drawing.Point(98, 36);
             this.btnTranfers.Name = "btnTranfers";
             this.btnTranfers.Size = new System.Drawing.Size(146, 28);
@@ -101,7 +101,7 @@
             // 
             this.btnImports.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImports.Appearance.Options.UseFont = true;
-            this.btnImports.Image = ((System.Drawing.Image)(resources.GetObject("btnImports.Image")));
+            this.btnImports.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnImports.ImageOptions.Image")));
             this.btnImports.Location = new System.Drawing.Point(16, 36);
             this.btnImports.Name = "btnImports";
             this.btnImports.Size = new System.Drawing.Size(75, 28);
@@ -113,7 +113,7 @@
             // 
             this.btnRefesh.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefesh.Appearance.Options.UseFont = true;
-            this.btnRefesh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.Image")));
+            this.btnRefesh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.ImageOptions.Image")));
             this.btnRefesh.Location = new System.Drawing.Point(606, 35);
             this.btnRefesh.Name = "btnRefesh";
             this.btnRefesh.Size = new System.Drawing.Size(64, 27);
@@ -125,7 +125,7 @@
             // 
             this.btnFind.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFind.Appearance.Options.UseFont = true;
-            this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
+            this.btnFind.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.ImageOptions.Image")));
             this.btnFind.Location = new System.Drawing.Point(550, 34);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(50, 28);
@@ -190,10 +190,10 @@
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridStaffCode,
             this.gridFullName,
+            this.gridDeptCode,
             this.gridBirthDate,
             this.gridSex,
             this.gridEntryDate,
-            this.gridDeptCode,
             this.gridPosName});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
@@ -205,6 +205,7 @@
             this.gridView1.OptionsSelection.ResetSelectionClickOutsideCheckboxSelector = true;
             this.gridView1.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridStaffCode, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gridView1.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView1_RowCellClick);
@@ -295,7 +296,7 @@
             this.gridDeptCode.FieldName = "DeptCode";
             this.gridDeptCode.Name = "gridDeptCode";
             this.gridDeptCode.Visible = true;
-            this.gridDeptCode.VisibleIndex = 6;
+            this.gridDeptCode.VisibleIndex = 3;
             this.gridDeptCode.Width = 95;
             // 
             // gridPosName

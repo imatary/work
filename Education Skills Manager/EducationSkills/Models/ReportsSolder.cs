@@ -55,5 +55,34 @@ namespace EducationSkills.Models
             }
         }
         public DateTime? LevelDateCurrent { get; set; }
+
+        /// <summary>
+        /// Ngày cấp hiện tại
+        /// </summary>
+        public DateTime? CurrentGrantDate
+        {
+            get
+            {
+                DateTime current = new DateTime();
+                if ((NgayCNNguoiDaoTao != null) && (NgayNangCap != null) && (NgayCap != null))
+                {
+                    current = (DateTime)NgayCNNguoiDaoTao;
+                }
+                else if ((NgayCNNguoiDaoTao == null) && (NgayNangCap != null) && (NgayCap != null))
+                {
+                    current = (DateTime)NgayNangCap;
+                }
+
+                else if ((NgayCNNguoiDaoTao == null) && (NgayNangCap == null) && (NgayCap != null))
+                {
+                    current = (DateTime)NgayCap;
+                }
+                else if ((NgayCNNguoiDaoTao == null) && (NgayNangCap != null) && (NgayCap == null))
+                {
+                    current = (DateTime)NgayNangCap;
+                }
+                return current;
+            }
+        }
     }
 }

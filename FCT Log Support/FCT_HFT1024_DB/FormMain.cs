@@ -353,10 +353,10 @@ namespace FCT_HFT1024_DB
                         _status = "P";
                         boardState = "OK";
                         pass = pass + 1;
-                        //if (checkEditSerialPort.Checked == true)
-                        //{
-                        //    com.WriteData("O");
-                        //}
+                        if (checkEditSerialPort.Checked == true)
+                        {
+                            com.WriteData("O");
+                        }
                     }
                     else if (strStatus == "FAIL")
                     {
@@ -365,7 +365,7 @@ namespace FCT_HFT1024_DB
                         ng = ng + 1;
                     }
                     string stationNo = gridLookUpEditProcessID.EditValue.ToString();
-                    Ultils.CreateFileLog(modelId, productionId, _status, stationNo, dateCheck);
+                    Ultils.CreateFileLog(modelId, productionId, _status, stationNo, DateTime.Now);
                     
                     total = pass + ng;
                 }
@@ -426,7 +426,7 @@ namespace FCT_HFT1024_DB
                     var checkAgain = _workOrderItemService.Get_WORK_ORDER_ITEMS_By_BoardNo(productionId);
                     if (checkAgain.BOARD_STATE == 1)
                     {
-                        com.WriteData("O");
+                        //com.WriteData("O");
                         lblMarking.Visible = true; 
                     }
                     else if (checkAgain.BOARD_STATE == 2)
@@ -454,7 +454,6 @@ namespace FCT_HFT1024_DB
             {
                 lblMarking.Visible = false;
                 string boardNo = txtBarcode.Text;
-                dateCheck = DateTime.Now.ToString("yyMMddHHmmss");
 
                 if (boardNo.Contains("="))
                 {
@@ -564,14 +563,6 @@ namespace FCT_HFT1024_DB
                                         //// Nếu Index Board > Set Index 
                                         else if (curentStationNo.PROCEDURE_INDEX > process_by_station_no.INDEX)
                                         {
-                                            // transferred to the next station.
-                                            //messageError = $"Board '{boardNo}' đã PASS ở trạm này rồi. Chuyển đến công đoạn tiếp theo để kiểm tra!";
-                                            //MessageHelpers.SetErrorStatus(true, "NG", messageError, lblStatus, lblMessage);
-                                            //CheckTextBoxNullValue.SetColorErrorTextControl(txtBarcode);
-                                            //var errorForm = new FormError(messageError);
-                                            //errorForm.ShowDialog();
-                                            //txtBarcode.Focus();
-                                            //return;
                                             Excute(boardNo, boards.PRODUCT_ID);
                                         }
                                         else if (curentStationNo.PROCEDURE_INDEX == (process_by_station_no.INDEX - 1))

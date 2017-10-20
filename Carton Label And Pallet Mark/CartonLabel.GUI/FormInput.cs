@@ -8,8 +8,6 @@ using DevExpress.XtraEditors;
 using System;
 using System.Windows.Forms;
 using DevExpress.XtraReports.UI;
-using DevExpress.XtraPrinting;
-using DevExpress.XtraPrinting.Preview;
 namespace CartonLabel.GUI
 {
     public partial class FormInput : XtraForm

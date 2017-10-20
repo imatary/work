@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlReportsEye));
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -53,6 +54,7 @@
             this.gridDeptCode = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridCertifiedTrainer = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumnCurrentGrantDate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridTrainingDate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridTestDateActual = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
@@ -105,7 +107,7 @@
             this.btnSaveChanged.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveChanged.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveChanged.Appearance.Options.UseFont = true;
-            this.btnSaveChanged.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveChanged.Image")));
+            this.btnSaveChanged.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveChanged.ImageOptions.Image")));
             this.btnSaveChanged.Location = new System.Drawing.Point(741, 103);
             this.btnSaveChanged.Name = "btnSaveChanged";
             this.btnSaveChanged.Size = new System.Drawing.Size(118, 29);
@@ -135,7 +137,7 @@
             this.btnExportToExel.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportToExel.Appearance.Options.UseFont = true;
             this.btnExportToExel.Enabled = false;
-            this.btnExportToExel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.Image")));
+            this.btnExportToExel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportToExel.ImageOptions.Image")));
             this.btnExportToExel.Location = new System.Drawing.Point(459, 104);
             this.btnExportToExel.Name = "btnExportToExel";
             this.btnExportToExel.Size = new System.Drawing.Size(109, 27);
@@ -147,7 +149,7 @@
             // 
             this.btnRefesh.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefesh.Appearance.Options.UseFont = true;
-            this.btnRefesh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.Image")));
+            this.btnRefesh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRefesh.ImageOptions.Image")));
             this.btnRefesh.Location = new System.Drawing.Point(344, 104);
             this.btnRefesh.Name = "btnRefesh";
             this.btnRefesh.Size = new System.Drawing.Size(109, 27);
@@ -159,7 +161,7 @@
             // 
             this.btnFind.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFind.Appearance.Options.UseFont = true;
-            this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
+            this.btnFind.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.ImageOptions.Image")));
             this.btnFind.Location = new System.Drawing.Point(265, 103);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(73, 28);
@@ -174,6 +176,7 @@
             this.txtKey.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtKey.Properties.Appearance.Options.UseFont = true;
             this.txtKey.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            editorButtonImageOptions1.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions1.Image")));
             serializableAppearanceObject1.BackColor = System.Drawing.Color.Transparent;
             serializableAppearanceObject1.BackColor2 = System.Drawing.Color.Transparent;
             serializableAppearanceObject1.BorderColor = System.Drawing.Color.Transparent;
@@ -190,7 +193,7 @@
             serializableAppearanceObject3.Options.UseBackColor = true;
             serializableAppearanceObject3.Options.UseBorderColor = true;
             this.txtKey.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("txtKey.Properties.Buttons"))), "", new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null)});
             this.txtKey.Properties.ButtonPressed += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtKey_Properties_ButtonPressed);
             this.txtKey.Size = new System.Drawing.Size(271, 28);
             this.txtKey.TabIndex = 9;
@@ -272,7 +275,8 @@
             this.gridLevelDateIII,
             this.gridCertifiedTrainer,
             this.gridTrainingDate,
-            this.gridTestDateActual});
+            this.gridTestDateActual,
+            this.gridColumnCurrentGrantDate});
             this.bandedGridView1.GridControl = this.gridControl1;
             this.bandedGridView1.Name = "bandedGridView1";
             this.bandedGridView1.OptionsBehavior.AllowIncrementalSearch = true;
@@ -355,11 +359,12 @@
             this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridBand2.Caption = "Cấp độ hiện tại";
             this.gridBand2.Columns.Add(this.gridCertifiedTrainer);
+            this.gridBand2.Columns.Add(this.gridColumnCurrentGrantDate);
             this.gridBand2.Columns.Add(this.gridTrainingDate);
             this.gridBand2.Columns.Add(this.gridTestDateActual);
             this.gridBand2.Name = "gridBand2";
             this.gridBand2.VisibleIndex = 1;
-            this.gridBand2.Width = 333;
+            this.gridBand2.Width = 446;
             // 
             // gridCertifiedTrainer
             // 
@@ -373,6 +378,20 @@
             this.gridCertifiedTrainer.Name = "gridCertifiedTrainer";
             this.gridCertifiedTrainer.Visible = true;
             this.gridCertifiedTrainer.Width = 109;
+            // 
+            // gridColumnCurrentGrantDate
+            // 
+            this.gridColumnCurrentGrantDate.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumnCurrentGrantDate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumnCurrentGrantDate.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.gridColumnCurrentGrantDate.AppearanceHeader.Options.UseFont = true;
+            this.gridColumnCurrentGrantDate.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumnCurrentGrantDate.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumnCurrentGrantDate.Caption = "Ngày cấp hiện tại";
+            this.gridColumnCurrentGrantDate.FieldName = "CurrentGrantDate";
+            this.gridColumnCurrentGrantDate.Name = "gridColumnCurrentGrantDate";
+            this.gridColumnCurrentGrantDate.Visible = true;
+            this.gridColumnCurrentGrantDate.Width = 113;
             // 
             // gridTrainingDate
             // 
@@ -630,13 +649,14 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridLevelDateII;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridLevelIII;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridLevelDateIII;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
         private DevExpress.XtraEditors.GridLookUpEdit txtDept;
         private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnCurrentGrantDate;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand5;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand4;
     }
 }

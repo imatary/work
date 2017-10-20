@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeShipping.Data", "BarcodeShipping.Data\BarcodeShipping.Data.csproj", "{5583026A-91DF-4C3D-A3BB-15B9977DC8A6}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MurataSystem", "MurataSystem\MurataSystem.csproj", "{66A5E655-526B-4328-A7B4-E0A3F5A328B3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanonSystem", "CanonSystem\CanonSystem.csproj", "{51B3C9A2-72E3-4544-8B9E-75E0695B6FB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NichiconSystem", "NichiconSystem\NichiconSystem.csproj", "{A8E31D53-400E-40EA-8411-26BA2587E929}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -274,6 +276,36 @@ Global
 		{51B3C9A2-72E3-4544-8B9E-75E0695B6FB1}.SingleImage|Mixed Platforms.Build.0 = Release|Any CPU
 		{51B3C9A2-72E3-4544-8B9E-75E0695B6FB1}.SingleImage|x86.ActiveCfg = Release|Any CPU
 		{51B3C9A2-72E3-4544-8B9E-75E0695B6FB1}.SingleImage|x86.Build.0 = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.CD_ROM|Mixed Platforms.Build.0 = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.CD_ROM|x86.ActiveCfg = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.CD_ROM|x86.Build.0 = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Debug|x86.Build.0 = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.DVD-5|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.DVD-5|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.DVD-5|x86.Build.0 = Debug|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Release|x86.ActiveCfg = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.Release|x86.Build.0 = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.SingleImage|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.SingleImage|Mixed Platforms.Build.0 = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.SingleImage|x86.ActiveCfg = Release|Any CPU
+		{A8E31D53-400E-40EA-8411-26BA2587E929}.SingleImage|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

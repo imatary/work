@@ -131,10 +131,8 @@ namespace EducationSkills
 
         private void cboLevel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (Ultils.IsNull(cboLevel.EditValue.ToString()))
-            //{
-            //    MessageBox.Show(cboLevel.SelectedIndex.ToString());
-            //}
+            checkEditEye.Checked = false;
+            checkEditSolder.Checked = false;
         }
 
         private void checkEditSolder_CheckedChanged(object sender, EventArgs e)
@@ -145,6 +143,55 @@ namespace EducationSkills
         private void checkEditEye_CheckedChanged(object sender, EventArgs e)
         {
             GetCertificates();
+        }
+
+        private void checkEditSolder_EditValueChanged(object sender, EventArgs e)
+        {
+            if (checkEditSolder.Checked == true)
+            {
+                checkEditEye.Checked = false;
+                string value = cboLevel.SelectedText;
+                switch (value)
+                {
+                    case "Cấp độ I":
+                        txtCertificate.EditValue = "7";
+                        break;
+                    case "Cấp độ II":
+                        txtCertificate.EditValue = "15";
+                        break;
+                    case "Cấp độ III":
+                        txtCertificate.EditValue = "14";
+                        break;
+                    default:
+                        txtCertificate.EditValue = "7";
+                        break;
+                }
+            }
+        }
+
+        private void checkEditEye_EditValueChanged(object sender, EventArgs e)
+        {
+            if (checkEditEye.Checked == true)
+            {
+                checkEditSolder.Checked = false;
+
+                string value = cboLevel.SelectedText;
+                switch (value)
+                {
+                    case "Cấp độ I":
+                        txtCertificate.EditValue = "2";
+                        break;
+                    case "Cấp độ II":
+                        txtCertificate.EditValue = "1";
+                        break;
+                    case "Cấp độ III":
+                        txtCertificate.EditValue = "6";
+                        break;
+                    default:
+                        txtCertificate.EditValue = "2";
+                        break;
+                }
+            }
         }
     }
 }

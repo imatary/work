@@ -56,6 +56,7 @@
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Location = new System.Drawing.Point(12, 12);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(44, 13);
@@ -67,6 +68,7 @@
             this.textEditPartNo.Location = new System.Drawing.Point(12, 31);
             this.textEditPartNo.Name = "textEditPartNo";
             this.textEditPartNo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.textEditPartNo.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textEditPartNo.Properties.NullValuePrompt = "ex: 105K 32180 ";
             this.textEditPartNo.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditPartNo.Size = new System.Drawing.Size(119, 22);
@@ -75,6 +77,7 @@
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Location = new System.Drawing.Point(12, 59);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(52, 13);
@@ -84,6 +87,7 @@
             // labelControl3
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.labelControl3.Appearance.Options.UseFont = true;
             this.labelControl3.Location = new System.Drawing.Point(12, 106);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(31, 13);
@@ -95,6 +99,7 @@
             this.textEditQuantity.Location = new System.Drawing.Point(12, 78);
             this.textEditQuantity.Name = "textEditQuantity";
             this.textEditQuantity.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.textEditQuantity.Properties.Mask.EditMask = "n0";
             this.textEditQuantity.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEditQuantity.Properties.NullValuePrompt = "10";
             this.textEditQuantity.Properties.NullValuePromptShowForEmptyValue = true;
@@ -104,6 +109,7 @@
             // labelControl4
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.Location = new System.Drawing.Point(12, 153);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(43, 13);
@@ -115,6 +121,7 @@
             this.textEditPrice.Location = new System.Drawing.Point(12, 125);
             this.textEditPrice.Name = "textEditPrice";
             this.textEditPrice.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.textEditPrice.Properties.Mask.EditMask = "n0";
             this.textEditPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEditPrice.Properties.NullValuePrompt = "Price";
             this.textEditPrice.Properties.NullValuePromptShowForEmptyValue = true;
@@ -126,6 +133,7 @@
             this.textEditWeight.Location = new System.Drawing.Point(12, 172);
             this.textEditWeight.Name = "textEditWeight";
             this.textEditWeight.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.textEditWeight.Properties.Mask.EditMask = "n0";
             this.textEditWeight.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.textEditWeight.Properties.NullValuePrompt = "0.328";
             this.textEditWeight.Properties.NullValuePromptShowForEmptyValue = true;
@@ -135,7 +143,7 @@
             // btnClose
             // 
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.Image = global::CartonLabel.GUI.Properties.Resources.delete_16;
+            this.btnClose.ImageOptions.Image = global::CartonLabel.GUI.Properties.Resources.delete_16;
             this.btnClose.Location = new System.Drawing.Point(12, 234);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(118, 28);
@@ -146,8 +154,8 @@
             // btnSave
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Image = global::CartonLabel.GUI.Properties.Resources.database_save;
-            this.btnSave.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnSave.ImageOptions.Image = global::CartonLabel.GUI.Properties.Resources.database_save;
+            this.btnSave.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(12, 200);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(118, 28);
